@@ -4,23 +4,28 @@ namespace App\Form;
 
 use App\Entity\Account;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\EmailType;
+use Symfony\Component\Form\Extension\Core\Type\PasswordType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 
 class AccountType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('firstName')
-            ->add('lastName')
-            ->add('sex')
-            ->add('birthDate')
-            ->add('zipCode')
-            ->add('address')
-            ->add('email')
-            ->add('city')
-            ->add('password')
+            ->add('firstName', TextType::class)
+            ->add('lastName', TextType::class)
+            ->add('sex', TextType::class )
+            ->add('birthDate', TextType::class)
+            ->add('zipCode', TextType::class)
+            ->add('address', TextType::class)
+            ->add('email', EmailType::class)
+            ->add('city', TextType::class)
+            ->add('password', PasswordType::class)
+            ->add('valid', SubmitType::class)
         ;
     }
 

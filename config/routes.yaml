@@ -19,5 +19,5 @@ registration:
     controller: App\Controller\RegistrationController::index
 
 register_site_index:
-    path: /
-    controller: App\Controller\SiteRegisterController::index
+    path: /SiteInscription
+    controller: App\Controller\AccountController::index
