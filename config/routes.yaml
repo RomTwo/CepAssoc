@@ -17,3 +17,7 @@ connexion:
 registration:
     path: /Inscription
     controller: App\Controller\RegistrationController::index
+
+registration-add:
+    path: /Inscription/add
+    controller: App\Controller\RegistrationController::add

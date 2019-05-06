@@ -73,6 +73,11 @@ class Account
         $this->children = new ArrayCollection();
     }
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $typeRegistration;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -90,12 +95,12 @@ class Account
         return $this;
     }
 
-    public function getlastName(): ?string
+    public function getLastName(): ?string
     {
         return $this->lastName;
     }
 
-    public function setlastName(string $lastName): self
+    public function setLastName(string $lastName): self
     {
         $this->lastName = $lastName;
 
@@ -211,5 +216,17 @@ class Account
 
         return $this;
     }
+
+
+    public function getTypeRegistration()
+    {
+        return $this->typeRegistration;
+    }
+
+    public function setTypeRegistration($typeRegistration): void
+    {
+        $this->typeRegistration = $typeRegistration;
+    }
+
 
 }
