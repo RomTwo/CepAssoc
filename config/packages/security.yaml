@@ -8,6 +8,9 @@ security:
             security: false
         main:
             anonymous: true
+            guard:
+                authenticators:
+                    - App\Security\LoginFormAuthentificatorAuthenticator
 
             # activate different ways to authenticate
 

@@ -16,17 +16,35 @@ class AccountController extends AbstractController
         $form = $this->createForm(AccountType::class, $account);
         $form->handleRequest($request);
 
-        if($form->isSubmitted() && $form->isValid()){
+        if ($form->isSubmitted() && $form->isValid()) {
 
             $manager = $this->getDoctrine()->getManager();
-            $manager->persist($account);
-            $manager->flush();
 
-            return $this->render('home/index.html.twig');
+            if (!$this->findByEmail($account->getEmail())) {
+
+                $manager->persist($account);
+                $manager->flush();
+
+                return $this->render('home/index.html.twig');
+            }
         }
 
         return $this->render('account/index.html.twig', array(
             "form" => $form->createView()
         ));
     }
+
+
+    private function findByEmail(string $email)
+    {
+        $account = null;
+        $repo = $this->getDoctrine()->getRepository(Account::class);
+
+        $account = $repo->findBy(array(
+            'email' => $email
+        ));
+
+        return $account != null ? true : false;
+    }
+
 }
