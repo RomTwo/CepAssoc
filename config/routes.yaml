@@ -18,6 +18,6 @@ register_site_index:
     path: /SiteInscription
     controller: App\Controller\AccountController::index
 
-conexion_security:
+connexion_security:
   path: /Connexion
   controller: App\Controller\SecurityController::login

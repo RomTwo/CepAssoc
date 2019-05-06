@@ -20,7 +20,7 @@ class AccountController extends AbstractController
         if ($form->isSubmitted() && $form->isValid() && !$this->findByEmail($account->getEmail())) {
 
             $manager = $this->getDoctrine()->getManager();
-            $encoded = $encoder->encodePassword($account, $account->getSalt());
+            $encoded = $encoder->encodePassword($account, $account->getPassword());
             $account->setPassword($encoded);
             $manager->persist($account);
             $manager->flush();
