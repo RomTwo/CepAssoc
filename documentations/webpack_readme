@@ -1,0 +1,28 @@
+-- Utilisation du package Webpack Encore
+    Permet de gérer les ressources web de type css, js ou média (images, vidéos...)
+
+-- Utilisation
+    * Ouvrir un terminal
+    * se placer à la racine du projet
+    * taper la commande suivante : 
+        - yarn encore dev --watch (le --watch permet de mettre à jour les fichiers css et js du répertoire public/build automatiquement 
+                                   à chaque modification des fichier js et scss présent dans le répertoire asset.
+                                   Nul besoin de re-taper la commande après une modification d'un fichier js ou scss)
+
+-- Intégration des fichiers css ou js dans twig
+
+    -- CSS
+   {% block stylesheets %}
+            {{ encore_entry_link_tags('app') }}
+   {% endblock %}
+
+    -- JS
+   {% block javascripts %}
+            {{ encore_entry_script_tags('app') }}
+   {% endblock %}
+
+    -- 'app' désigne le nom du entrypoint définit dans le fichier webpack.config.js (fichier de configuration webpack)
+        Dans notre cas : .addEntry('app', './assets/js/app.js') 
+
+-- Lien externe
+    * documentation officiel : https://symfony.com/doc/current/frontend.html
