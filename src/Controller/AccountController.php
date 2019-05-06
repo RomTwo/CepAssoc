@@ -16,9 +16,13 @@ class AccountController extends AbstractController
         $form = $this->createForm(AccountType::class, $account);
         $form->handleRequest($request);
 
-        if($form->isSubmitted()){
+        if($form->isSubmitted() && $form->isValid()){
 
+            $manager = $this->getDoctrine()->getManager();
+            $manager->persist($account);
+            $manager->flush();
 
+            return $this->render('home/index.html.twig');
         }
 
         return $this->render('account/index.html.twig', array(
