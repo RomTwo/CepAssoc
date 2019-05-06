@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\AccountRepository")
@@ -18,46 +20,76 @@ class Account
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotNull
+     * @Assert\Regex(
+     *     pattern = "/^[a-zA-ZÀ-ú\-\s]*$/",
+     *     match = true
+     * )
      */
     private $firstName;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotNull
+     * @Assert\Regex(
+     *     pattern = "/^[a-zA-ZÀ-ú\-\s]*$/",
+     *     match = true
+     * )
      */
     private $lastName;
 
     /**
-     * @ORM\Column(type="string", length=10)
+     * @ORM\Column(type="string", length=1)
+     * @Assert\NotNull
+     * @Assert\Regex(
+     *     pattern = "/^M|F$/",
+     *     match = true
+     * )
      */
     private $sex;
 
     /**
      * @ORM\Column(type="date")
+     * @Assert\NotNull
      */
     private $birthDate;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="string", length=5)
+     * @Assert\NotNull
+     * @Assert\Regex(
+     *     pattern = "/^([0-9]{2}|(2A)|2B)[[0-9]{3}$/",
+     *     match = true
+     * )
      */
     private $zipCode;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="string", length=255)
+     * @Assert\NotNull
      */
     private $address;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotNull
+     * @Assert\Email
      */
     private $email;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotNull
      */
     private $city;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotNull
+     * @Assert\Regex(
+     *     pattern = "/^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[-+!*$@%_])([-+!*$@%_\w]{8,15})$/",
+     *     match = true
+     * )
      */
     private $password;
 
@@ -114,29 +146,28 @@ class Account
         return $this;
     }
 
-    public function getZipCode(): ?int
+    public function getZipCode()
     {
         return $this->zipCode;
     }
 
-    public function setZipCode(int $zipCode): self
+
+    public function setZipCode($zipCode)
     {
         $this->zipCode = $zipCode;
-
-        return $this;
     }
 
-    public function getAddress(): ?int
+
+    public function getAddress()
     {
         return $this->address;
     }
 
-    public function setAddress(int $address): self
+    public function setAddress($address)
     {
         $this->address = $address;
-
-        return $this;
     }
+
 
     public function getEmail(): ?string
     {
