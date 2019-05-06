@@ -1,3 +1,19 @@
 #index:
 #    path: /
 #    controller: App\Controller\DefaultController::index
+
+home:
+    path: /Accueil
+    controller: App\Controller\HomeController::index
+
+administration:
+    path: /Administration
+    controller: App\Controller\AdministrationController::index
+
+connexion:
+    path: /Connexion
+    controller: App\Controller\ConnexionController::index
+
+registration:
+    path: /Inscription
+    controller: App\Controller\RegistrationController::index
