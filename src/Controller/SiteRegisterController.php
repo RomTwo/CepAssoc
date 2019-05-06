@@ -8,6 +8,7 @@ class SiteRegisterController extends AbstractController
 {
     public function index()
     {
+        $account = new Account();
         return $this->render('site_register/index.html.twig');
     }
 }
