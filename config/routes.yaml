@@ -1,3 +1,3 @@
-#index:
-#    path: /
-#    controller: App\Controller\DefaultController::index
+index_register:
+    path: /inscription
+    controller: App\Controller\SiteRegisterController::index
