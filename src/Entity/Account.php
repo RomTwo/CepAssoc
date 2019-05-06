@@ -94,6 +94,20 @@ class Account implements UserInterface
      */
     private $password;
 
+    /**
+     * @ORM\Column(name = role, type="array")
+     */
+    private $role = array();
+
+    /**
+     * Account constructor.
+     */
+    public function __construct()
+    {
+        $this->role[0] = "ROLE_USER";
+    }
+
+
     public function getId(): ?int
     {
         return $this->id;
@@ -222,7 +236,7 @@ class Account implements UserInterface
      */
     public function getRoles()
     {
-        // TODO: Implement getRoles() method.
+        return $this->role === "ROLE_USER" ? ['ROLE_USER'] : ['ROLE_ADMIN'];
     }
 
     /**
@@ -234,7 +248,7 @@ class Account implements UserInterface
      */
     public function getSalt()
     {
-        // TODO: Implement getSalt() method.
+        return "GL2@2019Grp1";
     }
 
     /**

@@ -10,10 +10,6 @@ administration:
     path: /Administration
     controller: App\Controller\AdministrationController::index
 
-connexion:
-    path: /Connexion
-    controller: App\Controller\ConnexionController::index
-
 registration:
     path: /Inscription
     controller: App\Controller\RegistrationController::index
@@ -21,3 +17,7 @@ registration:
 register_site_index:
     path: /SiteInscription
     controller: App\Controller\AccountController::index
+
+conexion_security:
+  path: /Connexion
+  controller: App\Controller\SecurityController::login

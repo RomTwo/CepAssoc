@@ -2,6 +2,10 @@ security:
     # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
     providers:
         in_memory: { memory: ~ }
+
+    encoders:
+      App\Entity\Account: bcrypt
+
     firewalls:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
@@ -10,7 +14,7 @@ security:
             anonymous: true
             guard:
                 authenticators:
-                    - App\Security\LoginFormAuthentificatorAuthenticator
+                    - App\Security\LoginFormAuthentificator
 
             # activate different ways to authenticate
 
@@ -23,5 +27,5 @@ security:
     # Easy way to control access for large sections of your site
     # Note: Only the *first* access control that matches will be used
     access_control:
-        # - { path: ^/admin, roles: ROLE_ADMIN }
-        # - { path: ^/profile, roles: ROLE_USER }
+         - { path: ^/admin, roles: ROLE_ADMIN }
+         - { path: ^/profile, roles: ROLE_USER }
