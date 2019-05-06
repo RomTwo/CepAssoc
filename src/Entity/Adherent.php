@@ -138,6 +138,11 @@ class Adherent
      */
     private $parents;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Event", inversedBy="adherents")
+     */
+    private $event;
+
     public function __construct()
     {
         $this->parents = new ArrayCollection();
@@ -448,6 +453,18 @@ class Adherent
             $this->parents->removeElement($parents);
             $parents->removeChild($this);
         }
+
+        return $this;
+    }
+
+    public function getEvent(): ?Event
+    {
+        return $this->event;
+    }
+
+    public function setEvent(?Event $event): self
+    {
+        $this->event = $event;
 
         return $this;
     }
