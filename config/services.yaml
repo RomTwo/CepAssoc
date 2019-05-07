@@ -31,3 +31,9 @@ services:
 
     plugin.token_authenticator:
         class: App\Security\PluginAuthentificator
+
+    plugin.id_authentificator:
+        class: App\Security\LoginApiAuthentificator
+
+    app.id_authentificator:
+        class: App\Security\LoginFormAuthentificator

@@ -2,12 +2,6 @@ security:
     # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
     providers:
         in_memory: { memory: ~ }
-        in_database:
-            entity:
-                class: App\Services\UserProvider
-                property: email
-
-
         user:
             id: user_provider
 
@@ -25,7 +19,7 @@ security:
             provider: user
             guard:
                 authenticators:
-                    - App\Security\LoginApiAuthentificator
+                    - plugin.id_authentificator
 
         api:
             pattern: ^/api
@@ -43,7 +37,7 @@ security:
                 target: /login
             guard:
                 authenticators:
-                    - App\Security\LoginFormAuthentificator
+                    - app.id_authentificator
 
     # Easy way to control access for large sections of your site
     # Note: Only the *first* access control that matches will be used

@@ -18,4 +18,8 @@ class SecurityController extends AbstractController
     public function loginPlugin() {
     }
 
+    public function msg() {
+        return JsonResponse::create("Salut mec sa va ??", 202);
+    }
+
 }

@@ -25,3 +25,8 @@ connexion_api:
   path: /api/connexion
   controller: App\Controller\SecurityController::loginPlugin
   methods: [POST]
+
+message_api:
+  path: /api/msg
+  controller: App\Controller\SecurityController::msg
+  methods: [GET]
