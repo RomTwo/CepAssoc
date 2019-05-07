@@ -2,6 +2,11 @@ security:
     # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
     providers:
         in_memory: { memory: ~ }
+        in_database:
+            entity:
+                class: App\Services\UserProvider
+                property: email
+
 
         user:
             id: user_provider
@@ -13,20 +18,32 @@ security:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
-        main:
-            anonymous: ~
+
+        api_login:
+            pattern: ^/api/connexion
+            anonymous: true
             provider: user
             guard:
                 authenticators:
+                    - App\Security\LoginApiAuthentificator
+
+        api:
+            pattern: ^/api
+            anonymous: false
+            provider: user
+            guard:
+                authenticators:
+                    - plugin.token_authenticator
+
+        main:
+            anonymous: true
+            provider: user
+            logout:
+                path: /logout
+                target: /login
+            guard:
+                authenticators:
                     - App\Security\LoginFormAuthentificator
-
-            # activate different ways to authenticate
-
-            #http_basic: true
-            # https://symfony.com/doc/current/security.html#a-configuring-how-your-users-will-authenticate
-
-            #form_login: true
-            # https://symfony.com/doc/current/security/form_login_setup.html
 
     # Easy way to control access for large sections of your site
     # Note: Only the *first* access control that matches will be used

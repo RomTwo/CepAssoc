@@ -28,3 +28,6 @@ services:
     # please note that last definitions always *replace* previous ones
     user_provider:
         class: App\Services\UserProvider
+
+    plugin.token_authenticator:
+        class: App\Security\PluginAuthentificator

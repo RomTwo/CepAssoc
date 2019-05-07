@@ -100,6 +100,11 @@ class Account implements UserInterface
     private $roles;
 
     /**
+     * @ORM\Column(type="string", nullable=true)
+     */
+    private $tokenPlugin;
+
+    /**
      * Account constructor.
      */
     public function __construct()
@@ -219,6 +224,17 @@ class Account implements UserInterface
 
         return $this;
     }
+
+    public function getTokenPlugin()
+    {
+        return $this->tokenPlugin;
+    }
+
+    public function setTokenPlugin($tokenPlugin)
+    {
+        $this->tokenPlugin = $tokenPlugin;
+    }
+
 
     /**
      * Returns the roles granted to the user.
