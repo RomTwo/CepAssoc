@@ -23,7 +23,7 @@ class SecurityController extends AbstractController
 
     public function msg()
     {
-        return JsonResponse::create("Salut mec sa va ??", 202);
+        return JsonResponse::create("Liste des compétiteurs", 202);
     }
 
 }

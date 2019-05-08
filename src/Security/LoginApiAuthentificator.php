@@ -87,7 +87,7 @@ class LoginApiAuthentificator extends AbstractGuardAuthenticator
         $payload = array(
             'username' => $user->getUsername(),
             'iat' => time(),
-            'exp' => time() + 30
+            'exp' => time() + 3600
         );
         $token = JWT::encode($payload, $_ENV['PRIVATE_KEY'], $_ENV['ALG']);
 

@@ -6,23 +6,30 @@ use App\Entity\Account;
 use Doctrine\ORM\EntityManagerInterface;
 use Firebase\JWT\JWT;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Exception\AuthenticationException;
 use Symfony\Component\Security\Core\Exception\CustomUserMessageAuthenticationException;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\User\UserProviderInterface;
 use Symfony\Component\Security\Guard\AbstractGuardAuthenticator;
+use Symfony\Component\Security\Http\Util\TargetPathTrait;
 
 class PluginAuthentificator extends AbstractGuardAuthenticator
 {
 
-    private $entityManager;
+    use TargetPathTrait;
 
-    public function __construct(EntityManagerInterface $entityManager)
+    private $entityManager;
+    private $urlGenerator;
+
+    public function __construct(EntityManagerInterface $entityManager, UrlGeneratorInterface $urlGenerator)
     {
         $this->entityManager = $entityManager;
+        $this->urlGenerator = $urlGenerator;
     }
 
     public function start(Request $request, AuthenticationException $authException = null)
@@ -64,8 +71,8 @@ class PluginAuthentificator extends AbstractGuardAuthenticator
     public function checkCredentials($credentials, UserInterface $user)
     {
         $encodeToken = $credentials['token'];
-        try{
-            $decodeToken = JWT::decode($encodeToken, $_ENV['PRIVATE_KEY'], array($_ENV['ALG']));
+        try {
+            JWT::decode($encodeToken, $_ENV['PRIVATE_KEY'], array($_ENV['ALG']));
             return true;
         } catch (\Exception $e) {
             throw new CustomUserMessageAuthenticationException('Token is expired');
@@ -83,7 +90,7 @@ class PluginAuthentificator extends AbstractGuardAuthenticator
 
     public function onAuthenticationSuccess(Request $request, TokenInterface $token, $providerKey)
     {
-        return JsonResponse::create('You are connect', 201);
+
     }
 
     public function supportsRememberMe()
