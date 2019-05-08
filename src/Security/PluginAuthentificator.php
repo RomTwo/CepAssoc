@@ -4,11 +4,13 @@ namespace App\Security;
 
 use App\Entity\Account;
 use Doctrine\ORM\EntityManagerInterface;
+use Firebase\JWT\JWT;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Exception\AuthenticationException;
+use Symfony\Component\Security\Core\Exception\CustomUserMessageAuthenticationException;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\User\UserProviderInterface;
 use Symfony\Component\Security\Guard\AbstractGuardAuthenticator;
@@ -61,7 +63,14 @@ class PluginAuthentificator extends AbstractGuardAuthenticator
 
     public function checkCredentials($credentials, UserInterface $user)
     {
-        return true;
+        $encodeToken = $credentials['token'];
+        try{
+            $decodeToken = JWT::decode($encodeToken, $_ENV['PRIVATE_KEY'], array($_ENV['ALG']));
+            return true;
+        } catch (\Exception $e) {
+            throw new CustomUserMessageAuthenticationException('Token is expired');
+        }
+
     }
 
     public function onAuthenticationFailure(Request $request, AuthenticationException $exception)
@@ -74,7 +83,7 @@ class PluginAuthentificator extends AbstractGuardAuthenticator
 
     public function onAuthenticationSuccess(Request $request, TokenInterface $token, $providerKey)
     {
-        return JsonResponse::create("Vous êtes bel et bien connecté", 201);
+        return JsonResponse::create('You are connect', 201);
     }
 
     public function supportsRememberMe()

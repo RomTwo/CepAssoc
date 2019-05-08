@@ -1,25 +1,25 @@
 home:
-    path: /Accueil
+    path: /profile/Accueil
     controller: App\Controller\HomeController::index
 
 administration:
-    path: /Administration
+    path: /admin/Administration
     controller: App\Controller\AdministrationController::index
 
 registration:
-    path: /Inscription
+    path: /profile/Inscription
     controller: App\Controller\RegistrationController::index
 
 register_site_index:
-    path: /SiteInscription
+    path: /profile/siteInscription
     controller: App\Controller\AccountController::index
 
 connexion_security:
-  path: /login
+  path: /profile/login
   controller: App\Controller\SecurityController::login
 
 deconnexion_security:
-  path: /logout
+  path: /profile/logout
 
 connexion_api:
   path: /api/connexion

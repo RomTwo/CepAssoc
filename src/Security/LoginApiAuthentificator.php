@@ -22,7 +22,7 @@ class LoginApiAuthentificator extends AbstractGuardAuthenticator
     private $entityManager;
     private $passwordEncoder;
 
-    
+
     public function __construct(EntityManagerInterface $entityManager, UserPasswordEncoderInterface $passwordEncoder)
     {
         $this->entityManager = $entityManager;
@@ -56,7 +56,7 @@ class LoginApiAuthentificator extends AbstractGuardAuthenticator
         $user = $this->entityManager->getRepository(Account::class)->findOneBy(['email' => $credentials['email']]);
 
         if (!$user) {
-            throw new CustomUserMessageAuthenticationException('Les identifiants saisi sont incorrect');
+            throw new CustomUserMessageAuthenticationException('the identifiers are incorrect');
         }
 
         return $user;
@@ -87,9 +87,9 @@ class LoginApiAuthentificator extends AbstractGuardAuthenticator
         $payload = array(
             'username' => $user->getUsername(),
             'iat' => time(),
-            'exp' => time() + 3600
+            'exp' => time() + 30
         );
-        $token = JWT::encode($payload, "GL2CEP2@19", "HS256");
+        $token = JWT::encode($payload, $_ENV['PRIVATE_KEY'], $_ENV['ALG']);
 
         $user = $this->entityManager->getRepository(Account::class)->findOneBy(['email' => $user->getUsername()]);
         $user->setTokenPlugin($token);

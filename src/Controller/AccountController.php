@@ -8,11 +8,14 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
-
 class AccountController extends AbstractController
 {
     public function index(Request $request, UserPasswordEncoderInterface $encoder)
     {
+        if ($this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_FULLY')) {
+            return $this->redirectToRoute('home');
+        }
+
         $account = new Account();
         $form = $this->createForm(AccountType::class, $account);
         $form->handleRequest($request);
@@ -25,7 +28,7 @@ class AccountController extends AbstractController
             $manager->persist($account);
             $manager->flush();
 
-            return $this->render('home/index.html.twig');
+            return $this->redirectToRoute('connexion_security', array(), 301);
         }
 
         return $this->render('account/index.html.twig', array(
