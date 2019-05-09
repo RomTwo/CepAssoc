@@ -85,7 +85,6 @@ class Account implements UserInterface
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Assert\NotNull(message="Veuiller remplir le champ ville")
      */
     private $city;
 
@@ -99,6 +98,22 @@ class Account implements UserInterface
      * )
      */
     private $password;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\Adherent", inversedBy="parents")
+     */
+    private $children;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\EventManagement", mappedBy="account")
+     */
+    private $eventManagements;
+
+    public function __construct()
+    {
+        $this->children = new ArrayCollection();
+        $this->eventManagements = new ArrayCollection();
+    }
 
     /**
      * @ORM\Column(type="array")
@@ -136,12 +151,12 @@ class Account implements UserInterface
         return $this;
     }
 
-    public function getlastName(): ?string
+    public function getLastName(): ?string
     {
         return $this->lastName;
     }
 
-    public function setlastName(string $lastName): self
+    public function setLastName(string $lastName): self
     {
         $this->lastName = $lastName;
 
@@ -172,26 +187,28 @@ class Account implements UserInterface
         return $this;
     }
 
-    public function getZipCode()
+    public function getZipCode(): ?int
     {
         return $this->zipCode;
     }
 
-
-    public function setZipCode($zipCode)
+    public function setZipCode(int $zipCode): self
     {
         $this->zipCode = $zipCode;
+
+        return $this;
     }
 
-
-    public function getAddress()
+    public function getAddress(): ?int
     {
         return $this->address;
     }
 
-    public function setAddress($address)
+    public function setAddress(int $address): self
     {
         $this->address = $address;
+
+        return $this;
     }
 
 
@@ -230,6 +247,64 @@ class Account implements UserInterface
 
         return $this;
     }
+
+    /**
+     * @return Collection|Adherent[]
+     */
+    public function getChildren(): Collection
+    {
+        return $this->children;
+    }
+
+    public function addChild(Adherent $child): self
+    {
+        if (!$this->children->contains($child)) {
+            $this->children[] = $child;
+        }
+
+        return $this;
+    }
+
+    public function removeChild(Adherent $child): self
+    {
+        if ($this->children->contains($child)) {
+            $this->children->removeElement($child);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|EventManagement[]
+     */
+    public function getEventManagements(): Collection
+    {
+        return $this->eventManagements;
+    }
+
+    public function addEventManagement(EventManagement $eventManagement): self
+    {
+        if (!$this->eventManagements->contains($eventManagement)) {
+            $this->eventManagements[] = $eventManagement;
+            $eventManagement->setAccount($this);
+        }
+
+        return $this;
+    }
+
+    public function removeEventManagement(EventManagement $eventManagement): self
+    {
+        if ($this->eventManagements->contains($eventManagement)) {
+            $this->eventManagements->removeElement($eventManagement);
+            // set the owning side to null (unless already changed)
+            if ($eventManagement->getAccount() === $this) {
+                $eventManagement->setAccount(null);
+            }
+        }
+
+        return $this;
+    }
+
 
     public function getTokenPlugin()
     {
