@@ -185,24 +185,24 @@ class Account implements UserInterface
         return $this;
     }
 
-    public function getZipCode(): ?int
+    public function getZipCode(): ?string
     {
         return $this->zipCode;
     }
 
-    public function setZipCode(int $zipCode): self
+    public function setZipCode(string $zipCode): self
     {
         $this->zipCode = $zipCode;
 
         return $this;
     }
 
-    public function getAddress(): ?int
+    public function getAddress(): ?string
     {
         return $this->address;
     }
 
-    public function setAddress(int $address): self
+    public function setAddress(string $address): self
     {
         $this->address = $address;
 

@@ -21,11 +21,10 @@ class AdministrationController extends AbstractController
         $manager = $this->getDoctrine()->getManager();
         $competiteurs = $manager->getRepository(Adherent::class)->findAll();
 
-        if ($competiteurs) {
-            return JsonResponse::create($competiteurs, 202);
-        }
+        var_dump(json_encode(array_values($competiteurs)));
 
-        return JsonResponse::create("Aucuns compétiteurs pour le moment", 200);
+        return Response::create("ndf");
+
 
     }
 }
