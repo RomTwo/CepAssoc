@@ -95,7 +95,7 @@ class LoginApiAuthentificator extends AbstractGuardAuthenticator
         $user->setTokenPlugin($token);
         $this->entityManager->flush();
 
-        return JsonResponse::create(array('token' => $token), 202);
+        return JsonResponse::create(array('token' => $token), Response::HTTP_ACCEPTED);
     }
 
     public function supportsRememberMe()
