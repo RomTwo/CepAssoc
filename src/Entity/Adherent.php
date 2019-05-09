@@ -139,13 +139,14 @@ class Adherent
     private $parents;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Event", inversedBy="adherents")
+     * @ORM\ManyToMany(targetEntity="App\Entity\Activity")
      */
-    private $event;
+    private $activities;
 
     public function __construct()
     {
         $this->parents = new ArrayCollection();
+        $this->activities = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -309,24 +310,24 @@ class Adherent
         return $this;
     }
 
-    public function getteamGYMJudge(): ?bool
+    public function getTeamGYMJudge(): ?bool
     {
         return $this->teamGYMJudge;
     }
 
-    public function setteamGYMJudge(bool $teamGYMJudge): self
+    public function setTeamGYMJudge(bool $teamGYMJudge): self
     {
         $this->teamGYMJudge = $teamGYMJudge;
 
         return $this;
     }
 
-    public function getteamGYMJudgeLevel(): ?int
+    public function getTeamGYMJudgeLevel(): ?int
     {
         return $this->teamGYMJudgeLevel;
     }
 
-    public function setteamGYMJudgeLevel(int $teamGYMJudgeLevel): self
+    public function setTeamGYMJudgeLevel(int $teamGYMJudgeLevel): self
     {
         $this->teamGYMJudgeLevel = $teamGYMJudgeLevel;
 
@@ -430,42 +431,29 @@ class Adherent
     }
 
     /**
-     * @return Collection|Account[]
+     * @return Collection|Activity[]
      */
-    public function getParentszz(): Collection
+    public function getActivities(): Collection
     {
-        return $this->parents;
+        return $this->activities;
     }
 
-    public function addParentszz(Account $parents): self
+    public function addActivity(Activity $activity): self
     {
-        if (!$this->parents->contains($parents)) {
-            $this->parents[] = $parents;
-            $parents->addChild($this);
+        if (!$this->activities->contains($activity)) {
+            $this->activities[] = $activity;
         }
 
         return $this;
     }
 
-    public function removeParentszz(Account $parents): self
+    public function removeActivity(Activity $activity): self
     {
-        if ($this->parents->contains($parents)) {
-            $this->parents->removeElement($parents);
-            $parents->removeChild($this);
+        if ($this->activities->contains($activity)) {
+            $this->activities->removeElement($activity);
         }
 
         return $this;
     }
 
-    public function getEvent(): ?Event
-    {
-        return $this->event;
-    }
-
-    public function setEvent(?Event $event): self
-    {
-        $this->event = $event;
-
-        return $this;
-    }
 }

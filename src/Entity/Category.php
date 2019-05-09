@@ -7,9 +7,9 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass="App\Repository\GroupRepository")
+ * @ORM\Entity(repositoryClass="App\Repository\CategoryRepository")
  */
-class Group
+class Category
 {
     /**
      * @ORM\Id()
@@ -24,7 +24,7 @@ class Group
     private $name;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Activity", mappedBy="groupeId", orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity="App\Entity\Activity", mappedBy="category")
      */
     private $activities;
 
@@ -62,7 +62,7 @@ class Group
     {
         if (!$this->activities->contains($activity)) {
             $this->activities[] = $activity;
-            $activity->setGroupeId($this);
+            $activity->setCategory($this);
         }
 
         return $this;
@@ -73,8 +73,8 @@ class Group
         if ($this->activities->contains($activity)) {
             $this->activities->removeElement($activity);
             // set the owning side to null (unless already changed)
-            if ($activity->getGroupeId() === $this) {
-                $activity->setGroupeId(null);
+            if ($activity->getCategory() === $this) {
+                $activity->setCategory(null);
             }
         }
 

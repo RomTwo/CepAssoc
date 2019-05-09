@@ -37,10 +37,10 @@ class Activity
     private $type;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Group", inversedBy="activities")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Category", inversedBy="activities")
      * @ORM\JoinColumn(nullable=false)
      */
-    private $groupeId;
+    private $category;
 
     public function getId(): ?int
     {
@@ -95,15 +95,16 @@ class Activity
         return $this;
     }
 
-    public function getGroupeId(): ?Group
+    public function getCategory(): ?Category
     {
-        return $this->groupeId;
+        return $this->category;
     }
 
-    public function setGroupeId(?Group $groupeId): self
+    public function setCategory(?Category $category): self
     {
-        $this->groupeId = $groupeId;
+        $this->category = $category;
 
         return $this;
     }
+
 }

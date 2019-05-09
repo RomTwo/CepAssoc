@@ -44,13 +44,13 @@ class Event
     private $AuthorizationOfOrganization;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Adherent", mappedBy="event")
+     * @ORM\OneToMany(targetEntity="App\Entity\EventManagement", mappedBy="events")
      */
-    private $adherents;
+    private $eventManagements;
 
     public function __construct()
     {
-        $this->adherents = new ArrayCollection();
+        $this->eventManagements = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -119,33 +119,34 @@ class Event
     }
 
     /**
-     * @return Collection|Adherent[]
+     * @return Collection|EventManagement[]
      */
-    public function getAdherents(): Collection
+    public function getEventManagements(): Collection
     {
-        return $this->adherents;
+        return $this->eventManagements;
     }
 
-    public function addAdherent(Adherent $adherent): self
+    public function addEventManagement(EventManagement $eventManagement): self
     {
-        if (!$this->adherents->contains($adherent)) {
-            $this->adherents[] = $adherent;
-            $adherent->setEvent($this);
+        if (!$this->eventManagements->contains($eventManagement)) {
+            $this->eventManagements[] = $eventManagement;
+            $eventManagement->setEvents($this);
         }
 
         return $this;
     }
 
-    public function removeAdherent(Adherent $adherent): self
+    public function removeEventManagement(EventManagement $eventManagement): self
     {
-        if ($this->adherents->contains($adherent)) {
-            $this->adherents->removeElement($adherent);
+        if ($this->eventManagements->contains($eventManagement)) {
+            $this->eventManagements->removeElement($eventManagement);
             // set the owning side to null (unless already changed)
-            if ($adherent->getEvent() === $this) {
-                $adherent->setEvent(null);
+            if ($eventManagement->getEvents() === $this) {
+                $eventManagement->setEvents(null);
             }
         }
 
         return $this;
     }
+
 }
