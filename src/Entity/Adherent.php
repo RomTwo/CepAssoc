@@ -111,6 +111,11 @@ class Adherent
     private $paymentFeesArePaid;
 
     /**
+     * @ORM\Column(type="string")
+     */
+    private $paymentType;
+
+    /**
      * @ORM\Column(type="boolean")
      */
     private $isRegisteredInGestGym;
@@ -196,6 +201,11 @@ class Adherent
      * @ORM\Column(type="integer", length=10)
      */
     private $phoneRep2;
+
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $imageRight;
 
     /**
      * @ORM\ManyToMany(targetEntity="App\Entity\Activity")
@@ -721,6 +731,38 @@ class Adherent
     public function setZipCodeRep2($zipCodeRep2): void
     {
         $this->zipCodeRep2 = $zipCodeRep2;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPaymentType()
+    {
+        return $this->paymentType;
+    }
+
+    /**
+     * @param mixed $paymentType
+     */
+    public function setPaymentType($paymentType): void
+    {
+        $this->paymentType = $paymentType;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getImageRight()
+    {
+        return $this->imageRight;
+    }
+
+    /**
+     * @param mixed $imageRight
+     */
+    public function setImageRight($imageRight): void
+    {
+        $this->imageRight = $imageRight;
     }
 
 }

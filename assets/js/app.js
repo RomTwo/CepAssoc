@@ -13,12 +13,10 @@ $ = require('jquery');
 // Need jQuery? Install it with "yarn add jquery", then uncomment to require it.
 // const $ = require('jquery');
 
-console.log('Hello Webpack Encore! Edit me in assets/js/app.js');
 
-/*
 $('.next').click(function () {
     var value = parseInt(document.getElementById('next').value);
-    if(value<4){
+    if(value<5){
         $("#step"+(value+1)).show();
         $("#step"+(value)).hide();
         document.getElementById('next').value = value+1;
@@ -35,7 +33,7 @@ $('.previous').click(function () {
         document.getElementById('next').value = value-1;
     }
 });
-*/
+
 
 $('#juge').on('change', function () {
     var val = $(this).is(':checked') ? $("#judgeDiv").show() : $("#judgeDiv").hide();
@@ -55,3 +53,20 @@ $("input[name='selection']").on('change', function () {
     $("#test").text($test);
 });
 
+document.getElementById('registrationType').addEventListener('change', function(event) {
+    if (!event.target.validity.valid) {
+        alert("Test");
+    }
+}, false);
+
+function step1() {
+    var value = parseInt(document.getElementById('previous').value);
+    if(value>1){
+        $("#step"+(value-1)).show();
+        $("#step"+(value)).hide();
+        document.getElementById('previous').value = value-1;
+        document.getElementById('next').value = value-1;
+    }
+}
+
+//document.getElementById("next").addEventListener("click", step1);

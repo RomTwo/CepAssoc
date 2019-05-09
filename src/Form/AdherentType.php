@@ -113,6 +113,22 @@ class AdherentType extends AbstractType
             ->add('professionRep2')
             ->add('phoneRep1')
             ->add('phoneRep2')
+            ->add('paymentType', ChoiceType::class,[
+                'choices' => [
+                    'Espèces' => "especes",
+                    'Chèque' => "cheque",
+                ],
+                'multiple' => false,
+                'expanded' => true,
+            ])
+            ->add('imageRight', ChoiceType::class, [
+                'choices' => [
+                    'J\'autorise' => true,
+                    'Je n\'autorise pas' => false,
+                ],
+                'multiple' => false,
+                'expanded' => true,
+            ])
         ;
     }
 
