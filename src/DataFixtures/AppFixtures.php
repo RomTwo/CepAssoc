@@ -65,33 +65,45 @@ class AppFixtures extends Fixture
                 $adherent->setSex('M');
 
             $adherent->setBirthDate(new \DateTime("07-05-2019"));
-            $adherent->setZipCode(75000);
-            $adherent->setAddress($i."rue Castor");
-            $adherent->setEmail("adherent".$i."@gmail.com");
-            $adherent->setCity("Paris");
+            $adherent->setFirstNameRep1("dede");
+            $adherent->setFirstNameRep2("dede");
+            $adherent->setLastNameRep1("dede");
+            $adherent->setLastNameRep2("dede");
+            $adherent->setZipCodeRep1(75000);
+            $adherent->setZipCodeRep2(75000);
+            $adherent->setAddressRep1($i."rue Castor");
+            $adherent->setAddressRep2($i."rue Castor");
+            $adherent->setEmailRep1("adherent".$i."@gmail.com");
+            $adherent->setEmailRep2("adherent".$i."@gmail.com");
+            $adherent->setCityRep1("Paris");
+            $adherent->setCityRep2("Paris");
+            $adherent->setProfessionRep1("profession1");
+            $adherent->setProfessionRep2("profession2");
+            $adherent->setPhoneRep1("0000000000");
+            $adherent->setPhoneRep2("0000000000");
             if(($i % 2) == 0)
                 $adherent->setJudge(true);
             else
                 $adherent->setJudge(false);
 
             if(($i % 3) == 0)
-                $adherent->setGAFJudge(true);
+                $adherent->setIsGAFJudge(true);
             else
-                $adherent->setGAFJudge(false);
+                $adherent->setIsGAFJudge(false);
             
             $adherent->setGAFJudgeLevel($i);
             
             if(($i % 4) == 0)
-                $adherent->setGAMJudge(true);
+                $adherent->setIsGAMJudge(true);
             else
-                $adherent->setGAMJudge(false);
+                $adherent->setIsGAMJudge(false);
             
             $adherent->setGAMJudgeLevel($i);
 
             if(($i % 4) == 0)
-                $adherent->setTeamGYMJudge(true);
+                $adherent->setIsTeamGYMJudge(true);
             else
-                $adherent->setTeamGYMJudge(false);
+                $adherent->setIsTeamGYMJudge(false);
             
             $adherent->setTeamGYMJudgeLevel($i);
 
