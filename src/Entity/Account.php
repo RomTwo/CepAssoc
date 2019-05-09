@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -60,6 +62,22 @@ class Account
      * @ORM\Column(type="string", length=255)
      */
     private $password;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\Adherent", inversedBy="parents")
+     */
+    private $children;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\EventManagement", mappedBy="account")
+     */
+    private $eventManagements;
+
+    public function __construct()
+    {
+        $this->children = new ArrayCollection();
+        $this->eventManagements = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -173,4 +191,62 @@ class Account
 
         return $this;
     }
+
+    /**
+     * @return Collection|Adherent[]
+     */
+    public function getChildren(): Collection
+    {
+        return $this->children;
+    }
+
+    public function addChild(Adherent $child): self
+    {
+        if (!$this->children->contains($child)) {
+            $this->children[] = $child;
+        }
+
+        return $this;
+    }
+
+    public function removeChild(Adherent $child): self
+    {
+        if ($this->children->contains($child)) {
+            $this->children->removeElement($child);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|EventManagement[]
+     */
+    public function getEventManagements(): Collection
+    {
+        return $this->eventManagements;
+    }
+
+    public function addEventManagement(EventManagement $eventManagement): self
+    {
+        if (!$this->eventManagements->contains($eventManagement)) {
+            $this->eventManagements[] = $eventManagement;
+            $eventManagement->setAccount($this);
+        }
+
+        return $this;
+    }
+
+    public function removeEventManagement(EventManagement $eventManagement): self
+    {
+        if ($this->eventManagements->contains($eventManagement)) {
+            $this->eventManagements->removeElement($eventManagement);
+            // set the owning side to null (unless already changed)
+            if ($eventManagement->getAccount() === $this) {
+                $eventManagement->setAccount(null);
+            }
+        }
+
+        return $this;
+    }
+
 }
