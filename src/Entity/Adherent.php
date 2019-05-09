@@ -632,7 +632,6 @@ class Adherent
      */
     public function getActivities(): Collection
     {
-        return $this->zipCodeRep2;
         return $this->activities;
     }
 
@@ -660,6 +659,7 @@ class Adherent
             $this->activities->removeElement($activity);
         }
     }
+
     /**
      * @param mixed $professionRep1
      */

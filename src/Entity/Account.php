@@ -5,11 +5,14 @@ namespace App\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Validator\Constraints as Assert;
+
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\AccountRepository")
  */
-class Account
+class Account implements UserInterface
 {
     /**
      * @ORM\Id()
@@ -20,36 +23,65 @@ class Account
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotNull(message="Veuiller remplir le champ nom")
+     * @Assert\Regex(
+     *     pattern = "/^[a-zA-ZÀ-ú\-\s]*$/",
+     *     match = true,
+     *     message = "le nom n'est pas correct"
+     * )
      */
     private $firstName;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotNull(message="Veuiller remplir le champ prénom")
+     * @Assert\Regex(
+     *     pattern = "/^[a-zA-ZÀ-ú\-\s]*$/",
+     *     match = true,
+     *     message = "le prénom n'est pas correct"
+     * )
      */
     private $lastName;
 
     /**
-     * @ORM\Column(type="string", length=10)
+     * @ORM\Column(type="string", length=1)
+     * @Assert\NotNull(message="Veuiller remplir le champ sexe")
+     * @Assert\Regex(
+     *     pattern = "/^M|F$/",
+     *     match = true,
+     *     message = "le sexe n'est pas correct"
+     * )
      */
     private $sex;
 
     /**
      * @ORM\Column(type="date")
+     * @Assert\NotNull(message="Veuiller remplir le champ date de naissance")
+     * message = "la date de naissance n'est pas correct"
      */
     private $birthDate;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="string", length=5)
+     * @Assert\NotNull(message="Veuiller remplir le champ code postal")
+     * @Assert\Regex(
+     *     pattern = "/^([0-9]{2}|(2A)|2B)[[0-9]{3}$/",
+     *     match = true,
+     *     message = "le code postal n'est pas correct"
+     * )
      */
     private $zipCode;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="string", length=255)
+     * @Assert\NotNull(message="Veuiller remplir le champ adresse")
      */
     private $address;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotNull(message="Veuiller remplir le champ email")
+     * @Assert\Email(message = "l'adresse mail n'est pas correct")
      */
     private $email;
 
@@ -60,6 +92,12 @@ class Account
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotNull(message="Veuiller remplir le champ mot de passe")
+     * @Assert\Regex(
+     *     pattern = "/^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[-+!*$@%_])([-+!*$@%_\w]{8,15})$/",
+     *     match = true,
+     *     message = "le mot de passe n'est pas correct"
+     * )
      */
     private $password;
 
@@ -73,11 +111,26 @@ class Account
      */
     private $eventManagements;
 
+    /**
+     * @ORM\Column(type="array")
+     */
+    private $roles;
+
+    /**
+     * @ORM\Column(type="string", nullable=true)
+     */
+    private $tokenPlugin;
+
+    /**
+     * Account constructor.
+     */
     public function __construct()
     {
         $this->children = new ArrayCollection();
         $this->eventManagements = new ArrayCollection();
+        $this->roles = array('ROLE_USER');
     }
+
 
     public function getId(): ?int
     {
@@ -155,6 +208,7 @@ class Account
 
         return $this;
     }
+
 
     public function getEmail(): ?string
     {
@@ -249,4 +303,66 @@ class Account
         return $this;
     }
 
+
+    public function getTokenPlugin()
+    {
+        return $this->tokenPlugin;
+    }
+
+    public function setTokenPlugin($tokenPlugin)
+    {
+        $this->tokenPlugin = $tokenPlugin;
+    }
+
+
+    /**
+     * Returns the roles granted to the user.
+     *
+     *     public function getRoles()
+     *     {
+     *         return ['ROLE_USER'];
+     *     }
+     *
+     * Alternatively, the roles might be stored on a ``roles`` property,
+     * and populated in any number of different ways when the user object
+     * is created.
+     *
+     * @return (Role|string)[] The user roles
+     */
+    public function getRoles()
+    {
+        return $this->roles[0] === "ROLE_USER" ? ['ROLE_USER'] : ['ROLE_ADMIN'];
+    }
+
+    /**
+     * Returns the salt that was originally used to encode the password.
+     *
+     * This can return null if the password was not encoded using a salt.
+     *
+     * @return string|null The salt
+     */
+    public function getSalt()
+    {
+    }
+
+    /**
+     * Returns the username used to authenticate the user.
+     *
+     * @return string The username
+     */
+    public function getUsername()
+    {
+        return $this->getEmail();
+    }
+
+    /**
+     * Removes sensitive data from the user.
+     *
+     * This is important if, at any given point, sensitive information like
+     * the plain-text password is stored on this object.
+     */
+    public function eraseCredentials()
+    {
+        // TODO: Implement eraseCredentials() method.
+    }
 }

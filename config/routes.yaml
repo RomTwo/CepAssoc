@@ -1,23 +1,45 @@
-#index:
-#    path: /
-#    controller: App\Controller\DefaultController::index
-
-index:
-    path: /
-    controller: App\Controller\HomeController::index
-
 home:
-    path: /Accueil
+    path: /profile/Accueil
     controller: App\Controller\HomeController::index
-
-administration:
-    path: /Administration
-    controller: App\Controller\AdministrationController::index
-
-connexion:
-    path: /Connexion
-    controller: App\Controller\ConnexionController::index
 
 registration:
-    path: /Inscription
+    path: /profile/Inscription
     controller: App\Controller\RegistrationController::index
+
+
+### Account routing ###
+register_site_index:
+    path: /profile/siteInscription
+    controller: App\Controller\AccountController::index
+
+
+### Authentication routing ###
+connexion_security:
+  path: /profile/login
+  controller: App\Controller\SecurityController::login
+
+deconnexion_security:
+  path: /profile/logout
+
+
+### Plugin api routing ###
+connexion_api:
+  path: /api/connexion
+  controller: App\Controller\SecurityController::loginPlugin
+  methods: [POST]
+
+message_api:
+  path: /api/msg
+  controller: App\Controller\SecurityController::msg
+  methods: [GET]
+
+
+### Administration routing ###
+administration:
+    path: /admin/Administration
+    controller: App\Controller\AdministrationController::index
+
+adherent_competiteurs:
+  path: /admin/competiteurs
+  controller: App\Controller\AdministrationController::competiteurs
+  methods: [GET]

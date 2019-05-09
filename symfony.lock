@@ -53,7 +53,7 @@
             "ref": "fc52d86631a6dfd9fdf3381d0b7e3df2069e51b3"
         },
         "files": [
-            "./src/DataFixtures/AppFixtures.php"
+            "src/DataFixtures/AppFixtures.php"
         ]
     },
     "doctrine/doctrine-migrations-bundle": {
@@ -113,9 +113,6 @@
     },
     "fig/link-util": {
         "version": "1.0.0"
-    },
-    "fzaninotto/faker": {
-        "version": "v1.8.0"
     },
     "jdorn/sql-formatter": {
         "version": "v1.2.17"

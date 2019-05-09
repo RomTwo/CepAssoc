@@ -26,3 +26,14 @@ services:
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
+    user_provider:
+        class: App\Services\UserProvider
+
+    plugin.token_authenticator:
+        class: App\Security\PluginAuthentificator
+
+    plugin.id_authentificator:
+        class: App\Security\LoginApiAuthentificator
+
+    app.id_authentificator:
+        class: App\Security\LoginFormAuthentificator
