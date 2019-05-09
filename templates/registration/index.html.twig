@@ -11,7 +11,7 @@
             <div class="form-group">
                 <label for="">Type de renouvellement : </label>
                 <div>
-                    {{ form_widget(form.registrationType) }}
+                    {{ form_widget(form.registrationType, { 'id': 'registrationType' }) }}
                 </div>
 
             </div>
@@ -19,21 +19,22 @@
                 <label for="">Informations générales : </label>
                 <div class="row align-items-center">
                     <div class="col">
-                        {{ form_widget(form.firstName, {'attr': {'placeholder': "Prenom"}}) }}
+                        {{ form_widget(form.firstName, {'attr': {'placeholder': "Prenom"}, 'id': 'firstName'}) }}
                     </div>
                     <div class="col">
-                        {{ form_widget(form.lastName, {'attr': {'placeholder': "Nom de famille"}}) }}
+                        {{ form_widget(form.lastName, {'attr': {'placeholder': "Nom de famille"}, 'id': 'lastName'}) }}
                     </div>
                     <div class="col-6">
                         {{ form_label(form.birthDate, 'Date d\'anniversaire :') }}
-                        {{ form_widget(form.birthDate) }}
+                        {{ form_widget(form.birthDate, {'id': 'birthDate'}) }}
                     </div>
                     <div class="col">
-                        {{ form_row(form.sex) }}
+                        {{ form_row(form.sex, {'id': 'sex'}) }}
                     </div>
                 </div>
             </div>
         </div>
+
         <div id="step2">
             <div class="form-group">
                 <label for="">Type d'inscription (pas obligatoire) :</label>
@@ -168,17 +169,25 @@
                     </tr>
                     </tbody>
                 {% endfor %}
-
                 </table>
             </div>
         </div>
         <div id="step5">
-            <p id="test1">Prix de l'abonnement : <p id="test">dddd</p></p>
+            <p id="test1">Prix de l'abonnement : <p id="test">0</p></p>
+            Moyen de paiement : {{ form_widget(form.paymentType) }}
+            <div>
+                <h5>Droits d'image :</h5>
+                <p>{{ form_widget(form.imageRight) }} le club à prendre et à diffuser des photos me concernant pour enrichir
+                la photothèque et le site internet du club.</p>
+            </div>
             <button type="submit" class="btn btn-primary">Ajouter</button>
         </div>
     </div>
-
     {{ form_end(form) }}
+    <button id="previous" class="previous" value="1">Previous</button>
+    <button id="next" class="next" value="1">Next</button>
+
 {% endblock %}
+
 
 

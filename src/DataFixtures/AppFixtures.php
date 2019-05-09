@@ -119,6 +119,8 @@ class AppFixtures extends Fixture
             $adherent->setisRegisteredInGestGym(false);
             $adherent->setvolunteerForTrainingHelp(false);
             $adherent->setvolunteerForClubLife(false);
+            $adherent->setPaymentType("cheque");
+            $adherent->setImageRight(false);
 
             $manager->persist($adherents[$i]);
         }
