@@ -204,7 +204,6 @@ class Adherent
 
     public function __construct()
     {
-        $this->parents = new ArrayCollection();
         $this->activities = new ArrayCollection();
     }
 
