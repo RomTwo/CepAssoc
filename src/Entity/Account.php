@@ -68,9 +68,15 @@ class Account
      */
     private $children;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\EventManagement", mappedBy="account")
+     */
+    private $eventManagements;
+
     public function __construct()
     {
         $this->children = new ArrayCollection();
+        $this->eventManagements = new ArrayCollection();
     }
 
     public function getId(): ?int

@@ -196,6 +196,7 @@ class Adherent
      * @ORM\Column(type="integer", length=10)
      */
     private $phoneRep2;
+
     /**
      * @ORM\ManyToMany(targetEntity="App\Entity\Activity")
      */
@@ -722,6 +723,5 @@ class Adherent
     {
         $this->zipCodeRep2 = $zipCodeRep2;
     }
-
 
 }
