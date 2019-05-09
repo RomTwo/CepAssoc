@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -109,12 +111,6 @@ class Account implements UserInterface
      */
     private $eventManagements;
 
-    public function __construct()
-    {
-        $this->children = new ArrayCollection();
-        $this->eventManagements = new ArrayCollection();
-    }
-
     /**
      * @ORM\Column(type="array")
      */
@@ -130,6 +126,8 @@ class Account implements UserInterface
      */
     public function __construct()
     {
+        $this->children = new ArrayCollection();
+        $this->eventManagements = new ArrayCollection();
         $this->roles = array('ROLE_USER');
     }
 
