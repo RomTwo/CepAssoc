@@ -212,4 +212,35 @@ class Account
         return $this;
     }
 
+    /**
+     * @return Collection|EventManagement[]
+     */
+    public function getEventManagements(): Collection
+    {
+        return $this->eventManagements;
+    }
+
+    public function addEventManagement(EventManagement $eventManagement): self
+    {
+        if (!$this->eventManagements->contains($eventManagement)) {
+            $this->eventManagements[] = $eventManagement;
+            $eventManagement->setAccount($this);
+        }
+
+        return $this;
+    }
+
+    public function removeEventManagement(EventManagement $eventManagement): self
+    {
+        if ($this->eventManagements->contains($eventManagement)) {
+            $this->eventManagements->removeElement($eventManagement);
+            // set the owning side to null (unless already changed)
+            if ($eventManagement->getAccount() === $this) {
+                $eventManagement->setAccount(null);
+            }
+        }
+
+        return $this;
+    }
+
 }

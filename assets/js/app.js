@@ -37,10 +37,21 @@ $('.previous').click(function () {
 });
 */
 
-$('#juge').on('change',function(){
+$('#juge').on('change', function () {
     var val = $(this).is(':checked') ? $("#judgeDiv").show() : $("#judgeDiv").hide();
 });
 
-$('#volontaire').on('change',function(){
+$('#volontaire').on('change', function () {
     var val = $(this).is(':checked') ? $("#volunteerDiv").show() : $("#volunteerDiv").hide();
 });
+
+$("input[name='selection']").on('change', function () {
+    var $test = 0;
+
+    $.each($("input[name='selection']:checked"), function () {
+        var $id = $(this).val();
+        $test = $test + parseInt($("#price"+$id).text());
+    });
+    $("#test").text($test);
+});
+

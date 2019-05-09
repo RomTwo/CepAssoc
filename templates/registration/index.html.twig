@@ -154,31 +154,26 @@
                         <th>Selection</th>
                     </tr>
                     </thead>
+
+                {% for activity in activities %}
                     <tbody>
-                    <tr id="d1">
-                        <td>Baby Gym</td>
-                        <td id="f1">Samedi - De 10h à 12h</td>
-                        <td id="l1">160€</td>
-                        <td id="m1">15 sept</td>
+                    <tr id={{ activity.id }}>
+                        <td>{{ activity.name }}</td>
+                        <td>Samedi - De 10h à 12h</td>
+                        <td id="price{{ activity.id }}">{{ activity.price }}</td>
+                        <td>{{ activity.startDate|date('d/m/y') }}</td>
                         <td>
-                            <input type="checkbox" id="selection" name="selection">
-                        </td>
-                    </tr>
-                    <tr id="d2">
-                        <td>Baby Gym</td>
-                        <td id="f1">Samedi - De 10h à 12h</td>
-                        <td id="l1">160€</td>
-                        <td id="m1">15 sept</td>
-                        <td>
-                            <input type="checkbox" id="selection" name="selection">
+                            <input type="checkbox" id="checkbox{{ activity.id }}" name="selection" value="{{ activity.id }}">
                         </td>
                     </tr>
                     </tbody>
+                {% endfor %}
+
                 </table>
             </div>
         </div>
-
         <div id="step5">
+            <p id="test1">Prix de l'abonnement : <p id="test">dddd</p></p>
             <button type="submit" class="btn btn-primary">Ajouter</button>
         </div>
     </div>

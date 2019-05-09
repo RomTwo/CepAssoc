@@ -196,6 +196,16 @@ class Adherent
      * @ORM\Column(type="integer", length=10)
      */
     private $phoneRep2;
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\Activity")
+     */
+    private $activities;
+
+    public function __construct()
+    {
+        $this->parents = new ArrayCollection();
+        $this->activities = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -608,18 +618,22 @@ class Adherent
 
     /**
      * @return mixed
+     * @return Collection|Activity[]
      */
-    public function getZipCodeRep2()
+    public function getActivities(): Collection
     {
         return $this->zipCodeRep2;
+        return $this->activities;
     }
 
-    /**
-     * @param mixed $zipCodeRep2
-     */
-    public function setZipCodeRep2($zipCodeRep2): void
+
+    public function addActivity(Activity $activity): self
     {
-        $this->zipCodeRep2 = $zipCodeRep2;
+
+        if (!$this->activities->contains($activity)) {
+            $this->activities[] = $activity;
+        }
+        return $this;
     }
 
     /**
@@ -630,6 +644,12 @@ class Adherent
         return $this->professionRep1;
     }
 
+    public function removeActivity(Activity $activity): self
+    {
+        if ($this->activities->contains($activity)) {
+            $this->activities->removeElement($activity);
+        }
+    }
     /**
      * @param mixed $professionRep1
      */
@@ -645,6 +665,7 @@ class Adherent
     {
         return $this->professionRep2;
     }
+
 
     /**
      * @param mixed $professionRep2
@@ -684,6 +705,22 @@ class Adherent
     public function setPhoneRep2($phoneRep2): void
     {
         $this->phoneRep2 = $phoneRep2;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getZipCodeRep2()
+    {
+        return $this->zipCodeRep2;
+    }
+
+    /**
+     * @param mixed $zipCodeRep2
+     */
+    public function setZipCodeRep2($zipCodeRep2): void
+    {
+        $this->zipCodeRep2 = $zipCodeRep2;
     }
 
 

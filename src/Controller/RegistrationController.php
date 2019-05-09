@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Account;
+use App\Entity\Activity;
 use App\Entity\Adherent;
 use App\Form\AdherentType;
 use App\Repository\AccountRepository;
@@ -29,6 +30,7 @@ class RegistrationController extends AbstractController
     public function index(Request $request)
     {
         $adherent = new Adherent();
+        $activity = new Activity();
 
         $form = $this->createForm(AdherentType::class, $adherent);
 
@@ -50,6 +52,9 @@ class RegistrationController extends AbstractController
 
         return $this->render('registration/index.html.twig', [
             'form' => $form->createView(),
+            'activities' => $this->getDoctrine()
+                ->getRepository(Activity::class)
+                ->findAll(),
         ]);
     }
 
