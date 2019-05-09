@@ -5,6 +5,7 @@ namespace App\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\AdherentRepository")
@@ -20,6 +21,7 @@ class Adherent
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\Length(min=1, max=255)
      */
     private $firstName;
 
@@ -37,26 +39,6 @@ class Adherent
      * @ORM\Column(type="date")
      */
     private $birthDate;
-
-    /**
-     * @ORM\Column(type="integer")
-     */
-    private $zipCode;
-
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $address;
-
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $email;
-
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $city;
 
     /**
      * @ORM\Column(type="boolean")
@@ -86,7 +68,7 @@ class Adherent
     /**
      * @ORM\Column(type="boolean")
      */
-    private $teamGYMJudge;
+    private $isTeamGYMJudge;
 
     /**
      * @ORM\Column(type="integer")
@@ -134,14 +116,86 @@ class Adherent
     private $isRegisteredInGestGym;
 
     /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\Account", mappedBy="children")
+     * @ORM\Column(type="string", length=255)
+     * @Assert\Length(min=1, max=255)
      */
-    private $parents;
+    private $firstNameRep1;
 
-    public function __construct()
-    {
-        $this->parents = new ArrayCollection();
-    }
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $lastNameRep1;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     * @Assert\Length(min=1, max=255)
+     */
+    private $firstNameRep2;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $lastNameRep2;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $emailRep1;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $emailRep2;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $cityRep1;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $cityRep2;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $addressRep1;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $addressRep2;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $zipCodeRep1;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $zipCodeRep2;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $professionRep1;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $professionRep2;
+
+    /**
+     * @ORM\Column(type="integer", length=10)
+     */
+    private $phoneRep1;
+
+    /**
+     * @ORM\Column(type="integer", length=10)
+     */
+    private $phoneRep2;
 
     public function getId(): ?int
     {
@@ -196,54 +250,6 @@ class Adherent
         return $this;
     }
 
-    public function getZipCode(): ?int
-    {
-        return $this->zipCode;
-    }
-
-    public function setZipCode(int $zipCode): self
-    {
-        $this->zipCode = $zipCode;
-
-        return $this;
-    }
-
-    public function getAddress(): ?string
-    {
-        return $this->address;
-    }
-
-    public function setAddress(string $address): self
-    {
-        $this->address = $address;
-
-        return $this;
-    }
-
-    public function getEmail(): ?string
-    {
-        return $this->email;
-    }
-
-    public function setEmail(string $email): self
-    {
-        $this->email = $email;
-
-        return $this;
-    }
-
-    public function getCity(): ?string
-    {
-        return $this->city;
-    }
-
-    public function setCity(string $city): self
-    {
-        $this->city = $city;
-
-        return $this;
-    }
-
     public function getJudge(): ?bool
     {
         return $this->judge;
@@ -256,12 +262,12 @@ class Adherent
         return $this;
     }
 
-    public function getGAFjudge(): ?bool
+    public function getIsGAFJudge(): ?bool
     {
         return $this->isGAFJudge;
     }
 
-    public function setGAFjudge(bool $isGAFJudge): self
+    public function setIsGAFJudge(bool $isGAFJudge): self
     {
         $this->isGAFJudge = $isGAFJudge;
 
@@ -280,12 +286,12 @@ class Adherent
         return $this;
     }
 
-    public function getGAMJudge(): ?bool
+    public function getIsGAMJudge(): ?bool
     {
         return $this->isGAMJudge;
     }
 
-    public function setGAMJudge(bool $isGAMJudge): self
+    public function setIsGAMJudge(bool $isGAMJudge): self
     {
         $this->isGAMJudge = $isGAMJudge;
 
@@ -304,24 +310,24 @@ class Adherent
         return $this;
     }
 
-    public function getteamGYMJudge(): ?bool
+    public function getIsTeamGYMJudge(): ?bool
     {
-        return $this->teamGYMJudge;
+        return $this->isTeamGYMJudge;
     }
 
-    public function setteamGYMJudge(bool $teamGYMJudge): self
+    public function setIsTeamGYMJudge(bool $isTeamGYMJudge): self
     {
-        $this->teamGYMJudge = $teamGYMJudge;
+        $this->isTeamGYMJudge = $isTeamGYMJudge;
 
         return $this;
     }
 
-    public function getteamGYMJudgeLevel(): ?int
+    public function getTeamGYMJudgeLevel(): ?int
     {
         return $this->teamGYMJudgeLevel;
     }
 
-    public function setteamGYMJudgeLevel(int $teamGYMJudgeLevel): self
+    public function setTeamGYMJudgeLevel(int $teamGYMJudgeLevel): self
     {
         $this->teamGYMJudgeLevel = $teamGYMJudgeLevel;
 
@@ -340,12 +346,12 @@ class Adherent
         return $this;
     }
 
-    public function getvolunteerForTrainingHelp(): ?string
+    public function getVolunteerForTrainingHelp(): ?string
     {
         return $this->volunteerForTrainingHelp;
     }
 
-    public function setvolunteerForTrainingHelp(string $volunteerForTrainingHelp): self
+    public function setVolunteerForTrainingHelp(string $volunteerForTrainingHelp): self
     {
         $this->volunteerForTrainingHelp = $volunteerForTrainingHelp;
 
@@ -376,12 +382,12 @@ class Adherent
         return $this;
     }
 
-    public function getregistrationType(): ?string
+    public function getRegistrationType(): ?string
     {
         return $this->registrationType;
     }
 
-    public function setregistrationType(?string $registrationType): self
+    public function setRegistrationType(?string $registrationType): self
     {
         $this->registrationType = $registrationType;
 
@@ -400,24 +406,24 @@ class Adherent
         return $this;
     }
 
-    public function getpaymentFeesArePaid(): ?bool
+    public function getPaymentFeesArePaid(): ?bool
     {
         return $this->paymentFeesArePaid;
     }
 
-    public function setpaymentFeesArePaid(bool $paymentFeesArePaid): self
+    public function setPaymentFeesArePaid(bool $paymentFeesArePaid): self
     {
         $this->paymentFeesArePaid = $paymentFeesArePaid;
 
         return $this;
     }
 
-    public function getisRegisteredInGestGym(): ?bool
+    public function getIsRegisteredInGestGym(): ?bool
     {
         return $this->isRegisteredInGestGym;
     }
 
-    public function setisRegisteredInGestGym(bool $isRegisteredInGestGym): self
+    public function setIsRegisteredInGestGym(bool $isRegisteredInGestGym): self
     {
         $this->isRegisteredInGestGym = $isRegisteredInGestGym;
 
@@ -425,30 +431,260 @@ class Adherent
     }
 
     /**
-     * @return Collection|Account[]
+     * @return mixed
      */
-    public function getParentszz(): Collection
+    public function getFirstNameRep1()
     {
-        return $this->parents;
+        return $this->firstNameRep1;
     }
 
-    public function addParentszz(Account $parents): self
+    /**
+     * @param mixed $firstNameRep1
+     */
+    public function setFirstNameRep1($firstNameRep1): void
     {
-        if (!$this->parents->contains($parents)) {
-            $this->parents[] = $parents;
-            $parents->addChild($this);
-        }
-
-        return $this;
+        $this->firstNameRep1 = $firstNameRep1;
     }
 
-    public function removeParentszz(Account $parents): self
+    /**
+     * @return mixed
+     */
+    public function getLastNameRep1()
     {
-        if ($this->parents->contains($parents)) {
-            $this->parents->removeElement($parents);
-            $parents->removeChild($this);
-        }
-
-        return $this;
+        return $this->lastNameRep1;
     }
+
+    /**
+     * @param mixed $lastNameRep1
+     */
+    public function setLastNameRep1($lastNameRep1): void
+    {
+        $this->lastNameRep1 = $lastNameRep1;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getFirstNameRep2()
+    {
+        return $this->firstNameRep2;
+    }
+
+    /**
+     * @param mixed $firstNameRep2
+     */
+    public function setFirstNameRep2($firstNameRep2): void
+    {
+        $this->firstNameRep2 = $firstNameRep2;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getLastNameRep2()
+    {
+        return $this->lastNameRep2;
+    }
+
+    /**
+     * @param mixed $lastNameRep2
+     */
+    public function setLastNameRep2($lastNameRep2): void
+    {
+        $this->lastNameRep2 = $lastNameRep2;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getEmailRep1()
+    {
+        return $this->emailRep1;
+    }
+
+    /**
+     * @param mixed $emailRep1
+     */
+    public function setEmailRep1($emailRep1): void
+    {
+        $this->emailRep1 = $emailRep1;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getEmailRep2()
+    {
+        return $this->emailRep2;
+    }
+
+    /**
+     * @param mixed $emailRep2
+     */
+    public function setEmailRep2($emailRep2): void
+    {
+        $this->emailRep2 = $emailRep2;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCityRep1()
+    {
+        return $this->cityRep1;
+    }
+
+    /**
+     * @param mixed $cityRep1
+     */
+    public function setCityRep1($cityRep1): void
+    {
+        $this->cityRep1 = $cityRep1;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCityRep2()
+    {
+        return $this->cityRep2;
+    }
+
+    /**
+     * @param mixed $cityRep2
+     */
+    public function setCityRep2($cityRep2): void
+    {
+        $this->cityRep2 = $cityRep2;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getAddressRep1()
+    {
+        return $this->addressRep1;
+    }
+
+    /**
+     * @param mixed $addressRep1
+     */
+    public function setAddressRep1($addressRep1): void
+    {
+        $this->addressRep1 = $addressRep1;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getAddressRep2()
+    {
+        return $this->addressRep2;
+    }
+
+    /**
+     * @param mixed $addressRep2
+     */
+    public function setAddressRep2($addressRep2): void
+    {
+        $this->addressRep2 = $addressRep2;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getZipCodeRep1()
+    {
+        return $this->zipCodeRep1;
+    }
+
+    /**
+     * @param mixed $zipCodeRep1
+     */
+    public function setZipCodeRep1($zipCodeRep1): void
+    {
+        $this->zipCodeRep1 = $zipCodeRep1;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getZipCodeRep2()
+    {
+        return $this->zipCodeRep2;
+    }
+
+    /**
+     * @param mixed $zipCodeRep2
+     */
+    public function setZipCodeRep2($zipCodeRep2): void
+    {
+        $this->zipCodeRep2 = $zipCodeRep2;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getProfessionRep1()
+    {
+        return $this->professionRep1;
+    }
+
+    /**
+     * @param mixed $professionRep1
+     */
+    public function setProfessionRep1($professionRep1): void
+    {
+        $this->professionRep1 = $professionRep1;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getProfessionRep2()
+    {
+        return $this->professionRep2;
+    }
+
+    /**
+     * @param mixed $professionRep2
+     */
+    public function setProfessionRep2($professionRep2): void
+    {
+        $this->professionRep2 = $professionRep2;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPhoneRep1()
+    {
+        return $this->phoneRep1;
+    }
+
+    /**
+     * @param mixed $phoneRep1
+     */
+    public function setPhoneRep1($phoneRep1): void
+    {
+        $this->phoneRep1 = $phoneRep1;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPhoneRep2()
+    {
+        return $this->phoneRep2;
+    }
+
+    /**
+     * @param mixed $phoneRep2
+     */
+    public function setPhoneRep2($phoneRep2): void
+    {
+        $this->phoneRep2 = $phoneRep2;
+    }
+
+
 }

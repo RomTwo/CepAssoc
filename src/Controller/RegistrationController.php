@@ -3,10 +3,15 @@
 namespace App\Controller;
 
 use App\Entity\Account;
+use App\Entity\Adherent;
+use App\Form\AdherentType;
 use App\Repository\AccountRepository;
+use phpDocumentor\Reflection\Types\Parent_;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\RadioType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -23,72 +28,56 @@ class RegistrationController extends AbstractController
      */
     public function index(Request $request)
     {
-        $account = new Account();
+        $adherent = new Adherent();
 
-        $formBuilder = $this->get('form.factory')->createBuilder(FormType::class, $account);
+        $form = $this->createForm(AdherentType::class, $adherent);
 
-        $formBuilder
-            ->add('typeRegistration',  ChoiceType::class, array(
-                'choices' => array(
-                    'Renouvellement' => 'renouvellement',
-                    'Nouvelle inscription' => 'nouveau',
-                    'Transfert' => 'transfert',
-                ),
-                'expanded' => true,
-                'multiple' => false))
-            ->add('firstname', TextType::class)
-            ->add('lastname', TextType::class)
-            ->add('birthdate', DateTimeType::class)
-            ->add('sex', ChoiceType::class, array(
-                'choices' => array(
-                    'Homme' => 'H',
-                    'Femme' => 'F',
-                ),
-                'expanded' => true,
-                'multiple' => false
-            ))
-            ->add('save', SubmitType::class, ['label' => 'Create Post']);
+        $form->handleRequest($request);
 
-        $form = $formBuilder->getForm();
+        if ($form->isSubmitted() && $form->isValid()) {
+            $adherent->setRegistrationDate(new DateTime());
+            $adherent->setIsRegisteredInGestGym(false);
+            $adherent->setJudge(false);
+            $adherent->setPaymentFeesArePaid(false);
+            $adherent->setRegistrationCost(0);
 
-        if ($request->getMethod() == 'POST') {
-            $data = $request->request->get('form');
-            $this->add($data['firstname'],
-                       $data['lastname'],
-                       $data['sex'],
-                       $data['birthdate'],
-                       $data['zipcode'],
-                       $data['address'],
-                       $data['email'],
-                       $data['city'],
-                       $data['password'],
-                       $data['typeRegistration']);
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($adherent);
+            $entityManager->flush();
+
+            return $this->redirectToRoute('registration');
         }
 
-        return $this->render('registration/index.html.twig', array(
+        return $this->render('registration/index.html.twig', [
             'form' => $form->createView(),
-        ));
+        ]);
     }
 
-    public function add($firstname, $lastname, $sex, $birthdate, $zipcode, $address, $email, $city, $password, $typeRegistration){
+    /**
+     * @Route("/add", name="add", methods="POST")
+     */
+    public function add(Request $request){
+
         $entityManager = $this->getDoctrine()->getManager();
 
-        $account = new Account();
-        $account->setFirstName($firstname);
-        $account->setLastName($lastname);
-        $account->setSex($sex);
-        $account->setBirthDate($birthdate);
-        $account->setZipCode($zipcode);
-        $account->setAddress($address);
-        $account->setEmail($email);
-        $account->setCity($city);
-        $account->setPassword($password);
-        $account->setTypeRegistration($typeRegistration);
+        $adherent = new Adherent();
+        $adherent->setFirstName($request->request->get('firstname'));
+        $adherent->setLastName("test");
+        $adherent->setSex("test");
+        $adherent->setBirthDate(new DateTime());
+        $adherent->setZipCode(11111);
+        $adherent->setAddress("test");
+        $adherent->setEmail("test");
+        $adherent->setCity("test");
+        $adherent->setJudge(false);
+        $adherent->setGAFjudge(false);
+        $adherent->setregistrationType("test");
 
-        $entityManager->persist($account);
+
+        $entityManager->persist($adherent);
 
         // actually executes the queries (i.e. the INSERT query)
         $entityManager->flush();
-
+        return $this->redirectToRoute('registration');
     }
 }

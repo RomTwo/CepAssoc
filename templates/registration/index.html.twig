@@ -4,12 +4,186 @@
 
 {% block body %}
 
-    <div class="well">
-        {{ form(formOne) }}
-    </div>
-    <p>Second formulaire</p>
-    <div class="well">
-        {{ form(formTwo) }}
+    <h1>Création d'un adhérent</h1>
+    {{ form_start(form) }}
+    <div id="group">
+        <div id="step1">
+            <div class="form-group">
+                <label for="">Type de renouvellement : </label>
+                <div>
+                    {{ form_widget(form.registrationType) }}
+                </div>
+
+            </div>
+            <div class="form-group">
+                <label for="">Informations générales : </label>
+                <div class="row align-items-center">
+                    <div class="col">
+                        {{ form_widget(form.firstName, {'attr': {'placeholder': "Prenom"}}) }}
+                    </div>
+                    <div class="col">
+                        {{ form_widget(form.lastName, {'attr': {'placeholder': "Nom de famille"}}) }}
+                    </div>
+                    <div class="col-6">
+                        {{ form_label(form.birthDate, 'Date d\'anniversaire :') }}
+                        {{ form_widget(form.birthDate) }}
+                    </div>
+                    <div class="col">
+                        {{ form_row(form.sex) }}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="step2">
+            <div class="form-group">
+                <label for="">Type d'inscription (pas obligatoire) :</label>
+                <div>
+                    <input type="checkbox" id="juge" name="juge">
+                    <label for="juge">Juge</label>
+                    <input type="checkbox" id="volontaire" name="volontaire" onchange="doalert2(this)">
+                    <label for="volontaire">Volontaire</label>
+                </div>
+            </div>
+            <div id="judgeDiv" class="form-group">
+                <h1>Juges</h1>
+                <p>Si vous êtes juges et si vous souhaitez juger pour le CEP cette année, merci de cocher les cases
+                    ci-dessous</p>
+                <div>
+                    {{ form_widget(form.isGAFJudge) }} Juge
+                    GAF {{ form_widget(form.GAFJudgeLevel, {'attr': {'placeholder':"Niveau"}}) }}
+                </div>
+                <div>
+                    {{ form_widget(form.isGAMJudge) }} Juge
+                    GAM {{ form_widget(form.GAMJudgeLevel, {'attr': {'placeholder':"Niveau"}}) }}
+                </div>
+                <div>
+                    {{ form_widget(form.isTeamGYMJudge) }} Juge
+                    TEAMGYM {{ form_widget(form.teamGYMJudgeLevel, {'attr': {'placeholder':"Niveau"}}) }}
+                </div>
+                <div>
+                    <p>Souhaitez-vous suivre une formation juge ? {{ form_widget(form.wantsAJudgeTraining) }} </p>
+                </div>
+            </div>
+            <div id="volunteerDiv">
+                <h1>Volontaires</h1>
+                <p>Si vous souhaitez nous aider sur les activités et les actions mises en place par le club tout au long
+                    de l’année, merci de cocher les cases ci-dessous :</p>
+                <div>
+                    Aide à l'entrainement {{ form_widget(form.volunteerForTrainingHelp) }}
+                </div>
+                <div>
+                    Aide à la vie du club {{ form_widget(form.volunteerForClubLife) }}
+                </div>
+            </div>
+        </div>
+        <div id="step3">
+            <div class="form-group">
+                <h4>Membre ou représentant légal 1 pour le mineurs</h4>
+                <div class="row">
+                    <div class="col">
+                        {{ form_widget(form.firstNameRep1, {'attr': {'placeholder':"Prenom"}}) }}
+                    </div>
+                    <div class="col">
+                        {{ form_widget(form.lastNameRep1, {'attr': {'placeholder':"Nom de famille"}}) }}
+                    </div>
+                    <div class="col">
+                        {{ form_widget(form.emailRep1, {'attr': {'placeholder':"Email"}}) }}
+                    </div>
+                    <div class="col">
+                        {{ form_widget(form.professionRep1, {'attr': {'placeholder':"Profession"}}) }}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        {{ form_widget(form.cityRep1, {'attr': {'placeholder':"Ville"}}) }}
+                    </div>
+                    <div class="col">
+                        {{ form_widget(form.addressRep1, {'attr': {'placeholder':"Adresse"}}) }}
+                    </div>
+                    <div class="col">
+                        {{ form_widget(form.zipCodeRep1, {'attr': {'placeholder':"Code postal"}}) }}
+                    </div>
+                    <div class="col">
+                        {{ form_widget(form.phoneRep1, {'attr': {'placeholder':"Numéro de telephone"}}) }}
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <h4>Membre ou représentant légal 2</h4>
+                <div class="row">
+                    <div class="col">
+                        {{ form_widget(form.firstNameRep2, {'attr': {'placeholder':"Prenom"}}) }}
+                    </div>
+                    <div class="col">
+                        {{ form_widget(form.lastNameRep2, {'attr': {'placeholder':"Nom de famille"}}) }}
+                    </div>
+                    <div class="col">
+                        {{ form_widget(form.emailRep2, {'attr': {'placeholder':"Email"}}) }}
+                    </div>
+                    <div class="col">
+                        {{ form_widget(form.professionRep2, {'attr': {'placeholder':"Profession"}}) }}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        {{ form_widget(form.cityRep2, {'attr': {'placeholder':"Ville"}}) }}
+                    </div>
+                    <div class="col">
+                        {{ form_widget(form.addressRep2, {'attr': {'placeholder':"Adresse"}}) }}
+                    </div>
+                    <div class="col">
+                        {{ form_widget(form.zipCodeRep2, {'attr': {'placeholder':"Code postal"}}) }}
+                    </div>
+                    <div class="col">
+                        {{ form_widget(form.phoneRep2, {'attr': {'placeholder':"Numéro de telephone"}}) }}
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <div id="step4">
+            <h4>Activités disponibles :</h4>
+            <div class="row">
+                <table class="table table-hover table-responsive">
+                    <thead>
+                    <tr>
+                        <th>Nom</th>
+                        <th>Créneaux</th>
+                        <th>Prix</th>
+                        <th>Date</th>
+                        <th>Selection</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr id="d1">
+                        <td>Baby Gym</td>
+                        <td id="f1">Samedi - De 10h à 12h</td>
+                        <td id="l1">160€</td>
+                        <td id="m1">15 sept</td>
+                        <td>
+                            <input type="checkbox" id="selection" name="selection">
+                        </td>
+                    </tr>
+                    <tr id="d2">
+                        <td>Baby Gym</td>
+                        <td id="f1">Samedi - De 10h à 12h</td>
+                        <td id="l1">160€</td>
+                        <td id="m1">15 sept</td>
+                        <td>
+                            <input type="checkbox" id="selection" name="selection">
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div id="step5">
+            <button type="submit" class="btn btn-primary">Ajouter</button>
+        </div>
     </div>
 
+    {{ form_end(form) }}
 {% endblock %}
+
+
