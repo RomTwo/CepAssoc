@@ -5,6 +5,15 @@
 
 {% block body %}
     <div>
+        {{ form_errors(form.firstName) }}
+        {{ form_errors(form.lastName) }}
+        {{ form_errors(form.sex) }}
+        {{ form_errors(form.birthDate) }}
+        {{ form_errors(form.zipCode) }}
+        {{ form_errors(form.address) }}
+        {{ form_errors(form.email) }}
+        {{ form_errors(form.city) }}
+        {{ form_errors(form.password) }}
 
         {{ form_start(form) }}
 
@@ -36,7 +45,9 @@
         {{ form_label(form.password) }}
         {{ form_widget(form.password) }}
 
+
         {{ form_widget(form.valid) }}
+
 
         {{ form_end(form) }}
     </div>

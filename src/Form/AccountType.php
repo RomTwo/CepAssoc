@@ -18,22 +18,23 @@ class AccountType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('firstName', TextType::class)
-            ->add('lastName', TextType::class)
+            ->add('firstName', TextType::class, array('label' => 'Nom : '))
+            ->add('lastName', TextType::class, array('label' => 'Prénom : '))
             ->add('sex', ChoiceType::class, array(
                 'choices' => array(
                     'M' => 'M',
                     'F' => 'F'
                 ),
-                'expanded' => false
+                'expanded' => false,
+                'label' => 'Civilité : '
             ))
-            ->add('birthDate', DateType::class)
-            ->add('zipCode', TextType::class)
-            ->add('address', TextType::class)
-            ->add('email', EmailType::class)
-            ->add('city', TextType::class)
-            ->add('password', PasswordType::class)
-            ->add('valid', SubmitType::class)
+            ->add('birthDate', DateType::class, array('label' => 'Date de naissance : '))
+            ->add('address', TextType::class, array('label' => 'Adresse : '))
+            ->add('zipCode', TextType::class, array('label' => 'Code postal : '))
+            ->add('city', TextType::class, array('label' => 'Ville : '))
+            ->add('email', EmailType::class, array('label' => 'Adresse mail : '))
+            ->add('password', PasswordType::class, array('label' => 'Mot de passe : '))
+            ->add('valid', SubmitType::class, array('label' => 'S\'inscrire : '))
         ;
     }
 
@@ -41,6 +42,7 @@ class AccountType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => Account::class,
+            'cascade_calidation' => true,
         ]);
     }
 }
