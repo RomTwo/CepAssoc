@@ -1,19 +1,32 @@
-#index:
-#    path: /
-#    controller: App\Controller\DefaultController::index
-
 home:
-    path: /Accueil
+    path: /profile/Accueil
     controller: App\Controller\HomeController::index
 
 administration:
-    path: /Administration
+    path: /admin/Administration
     controller: App\Controller\AdministrationController::index
 
-connexion:
-    path: /Connexion
-    controller: App\Controller\ConnexionController::index
-
 registration:
-    path: /Inscription
+    path: /profile/Inscription
     controller: App\Controller\RegistrationController::index
+
+register_site_index:
+    path: /profile/siteInscription
+    controller: App\Controller\AccountController::index
+
+connexion_security:
+  path: /profile/login
+  controller: App\Controller\SecurityController::login
+
+deconnexion_security:
+  path: /profile/logout
+
+connexion_api:
+  path: /api/connexion
+  controller: App\Controller\SecurityController::loginPlugin
+  methods: [GET]
+
+message_api:
+  path: /api/msg
+  controller: App\Controller\SecurityController::msg
+  methods: [GET]
