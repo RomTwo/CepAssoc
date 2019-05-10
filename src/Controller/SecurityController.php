@@ -11,7 +11,7 @@ class SecurityController extends AbstractController
 {
 
     /**
-     * Authentification of the user
+     * Authentification of the user. Check if the user is not already connect. If he's already connect, he's redirect on the homepage
      *
      * @param AuthenticationUtils $authenticationUtils
      * @return Response

@@ -22,7 +22,7 @@ class AdministrationController extends AbstractController
     }
 
     /**
-     * Print a list of competitor (for the plugin)
+     * Return and Print a list of the competitors (for the plugin)
      *
      * @return \Symfony\Component\HttpFoundation\Response
      */

@@ -12,6 +12,11 @@ use Symfony\Component\Security\Http\Authorization\AccessDeniedHandlerInterface;
 class AccessDeniedHandler implements AccessDeniedHandlerInterface
 {
 
+    /**
+     * Permit to redirect the user on other route
+     *
+     * @var RouterInterface
+     */
     private $router;
 
     /**
@@ -23,7 +28,7 @@ class AccessDeniedHandler implements AccessDeniedHandlerInterface
     }
 
     /**
-     * Handles an access denied failure.
+     * Handles an access denied failure. Redirect the user on the custom error page
      *
      * @return Response may return null
      */

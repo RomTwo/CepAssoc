@@ -52,6 +52,12 @@ class AccountController extends AbstractController
         ));
     }
 
+    /**
+     * Generate token (save in database) and send and email at the user to change his password
+     *
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     */
     public function forgotPassword(Request $request)
     {
         if ($request->isMethod('POST') && $this->findByEmail($request->request->get('email'))) {
@@ -75,6 +81,14 @@ class AccountController extends AbstractController
         return $this->redirectToRoute('security_connexion', array(), 301);
     }
 
+    /**
+     * Reset the user password after click on link present in the email send by the previous function (forgotPassword)
+     *
+     * @param Request $request
+     * @param UserPasswordEncoderInterface $encoder
+     * @param $token
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|Response
+     */
     public function resetPassword(Request $request, UserPasswordEncoderInterface $encoder, $token)
     {
         try {
@@ -128,6 +142,11 @@ class AccountController extends AbstractController
         return $account != null ? true : false;
     }
 
+    /**
+     * Generate a JWT token
+     *
+     * @return string
+     */
     private function generateToken()
     {
         $payload = array(
@@ -138,6 +157,12 @@ class AccountController extends AbstractController
         return $token;
     }
 
+    /**
+     * Send an email to reset the user password. It contains a link for reset the user password
+     *
+     * @param $mail
+     * @param $token
+     */
     private function sendEmail($mail, $token)
     {
 
@@ -157,6 +182,12 @@ class AccountController extends AbstractController
         $result = $mailer->send($message);
     }
 
+    /**
+     * This is a body of the email (email for reset the user password)
+     *
+     * @param $token
+     * @return string
+     */
     private function msgHtml($token)
     {
         $msg = '<p>Réinitialisation de votre mot de passe en cliquant <a href="' . $_ENV['MAILER_URL'] . $token . '">ici</a></p>';
