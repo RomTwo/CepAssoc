@@ -14,6 +14,10 @@
         {{ form_errors(form.city) }}
         {{ form_errors(form.password) }}
 
+        {% if msg is defined and msg is not null %}
+            {{ msg }}
+        {% endif %}
+
         {{ form_start(form) }}
 
         {{ form_label(form.firstName) }}
@@ -50,5 +54,4 @@
 
         {{ form_end(form) }}
     </div>
-    <a href="{{ path('account_forgot_password') }}">Mot de passe oublié ?</a>
 {% endblock %}

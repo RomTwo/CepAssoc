@@ -4,8 +4,13 @@ namespace App\Controller;
 
 use App\Entity\Account;
 use App\Form\AccountType;
+use Firebase\JWT\JWT;
+use Swift_Mailer;
+use Swift_Message;
+use Swift_SmtpTransport;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class AccountController extends AbstractController
@@ -26,34 +31,82 @@ class AccountController extends AbstractController
         $account = new Account();
         $form = $this->createForm(AccountType::class, $account);
         $form->handleRequest($request);
+        $msg = null;
 
-        if ($form->isSubmitted() && $form->isValid() && !$this->findByEmail($account->getEmail())) {
+        if ($form->isSubmitted() && $form->isValid()) {
+            if (!$this->findByEmail($account->getEmail())) {
+                $manager = $this->getDoctrine()->getManager();
+                $encoded = $encoder->encodePassword($account, $account->getPassword());
+                $account->setPassword($encoded);
+                $manager->persist($account);
+                $manager->flush();
 
-            $manager = $this->getDoctrine()->getManager();
-            $encoded = $encoder->encodePassword($account, $account->getPassword());
-            $account->setPassword($encoded);
-            $manager->persist($account);
-            $manager->flush();
-
-            return $this->redirectToRoute('connexion_security', array(), 301);
+                return $this->redirectToRoute('connexion_security', array(), 301);
+            }
+            $msg = "Cet email a déjà un compte associé !";
         }
 
         return $this->render('account/index.html.twig', array(
-            "form" => $form->createView()
+            "form" => $form->createView(),
+            "msg" => $msg
         ));
     }
 
-    /**
-     * Print forgot password form
-     *
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
-     */
-    public function forgotPassword()
+    public function forgotPassword(Request $request)
     {
-        if ($this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_FULLY')) {
-            return $this->redirectToRoute('home');
+        if ($request->isMethod('POST') && $this->findByEmail($request->request->get('email'))) {
+            $manager = $this->getDoctrine()->getManager();
+            $account = $manager->getRepository(Account::class)->findOneBy(
+                array(
+                    'email' => $request->request->get('email')
+                )
+            );
+
+            $token = $this->generateToken();
+            $account->setTokenForgetPass($token);
+            $manager->flush();
+
+            $this->sendEmail($account->getEmail(), $token);
+            $this->addFlash("msg", "Un mail vient de vous être envoyé");
+        } else {
+            $this->addFlash("msg", "Une erreur s'est produite");
         }
-        return $this->render('account/forgotPassword.html.twig');
+
+        return $this->redirectToRoute('connexion_security', array(), 301);
+    }
+
+    public function resetPassword(Request $request, UserPasswordEncoderInterface $encoder, $token)
+    {
+        try {
+            JWT::decode($token, $_ENV['PRIVATE_KEY'], array($_ENV['ALG']));
+
+            $manager = $this->getDoctrine()->getManager();
+            $account = $manager->getRepository(Account::class)->findOneBy(['tokenForgetPass' => $token]);
+
+            if ($account !== null) {
+                if ($request->isMethod('POST')) {
+                    if ($request->request->get('password1') === $request->request->get('password2')
+                        && preg_match('/^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[-+!*$@%_])([-+!*$@%_\w]{8,15})$/', $request->request->get('password1'))) {
+
+                        $encoded = $encoder->encodePassword($account, $request->request->get('password1'));
+                        $account->setPassword($encoded);
+                        $account->setTokenForgetPass(null);
+                        $manager->flush();
+                        return $this->redirectToRoute('connexion_security', array(), 301);
+                    }
+                    return $this->render('account/resetPassword.html.twig', array(
+                            'token' => $token,
+                            'error' => 'Mot de passe incorrect',
+                        )
+                    );
+                }
+                return $this->render('account/resetPassword.html.twig', array('token' => $token));
+            }
+            return Response::create("error 404 : page not found");
+        } catch (\Exception $e) {
+            return Response::create("error 404 : page not found");
+        }
+
     }
 
 
@@ -63,7 +116,8 @@ class AccountController extends AbstractController
      * @param string $email
      * @return bool
      */
-    private function findByEmail(string $email)
+    private
+    function findByEmail(string $email)
     {
         $account = $this->getDoctrine()->getRepository(Account::class)->findBy(
             array(
@@ -72,6 +126,46 @@ class AccountController extends AbstractController
         );
 
         return $account != null ? true : false;
+    }
+
+    private
+    function generateToken()
+    {
+        $payload = array(
+            'iat' => time(),
+        );
+        $token = JWT::encode($payload, $_ENV['PRIVATE_KEY'], $_ENV['ALG']);
+
+        return $token;
+    }
+
+    private
+    function sendEmail($mail, $token)
+    {
+
+        $transport = (new Swift_SmtpTransport('smtp.gmail.com', 465, 'ssl'))
+            ->setUsername($_ENV['MAILER_MAIL'])
+            ->setPassword($_ENV['MAILER_PASSWORD']);
+
+        $mailer = new Swift_Mailer($transport);
+
+        $message = (new Swift_Message('Réinitialisation mot de passe Association Cep Poitiers Gymnastique'))
+            ->setFrom([$_ENV['MAILER_MAIL'] => 'Association Cep Poitiers Gymnastique'])
+            ->setTo([$mail])
+            ->setBody($this->msgHtml($token), 'text/html')
+            ->setCharset('UTF-8');
+
+
+        $result = $mailer->send($message);
+    }
+
+    private
+    function msgHtml($token)
+    {
+        $msg = '<p>Réinitialisation de votre mot de passe en cliquant <a href="' . $_ENV['MAILER_URL'] . $token . '">ici</a></p>';
+
+        return $msg;
+
     }
 
 }

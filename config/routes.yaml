@@ -16,6 +16,9 @@ account_forgot_password:
     path: /profile/forgotPassword
     controller: App\Controller\AccountController::forgotPassword
 
+account_reset_password:
+    path: /profile/resetPassword/{token}
+    controller: App\Controller\AccountController::resetPassword
 
 ### Authentication routing ###
 connexion_security:

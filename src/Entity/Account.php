@@ -234,17 +234,23 @@ class Account implements UserInterface
         return $this;
     }
 
-    public function getPassword(): ?string
+    /**
+     * @return mixed
+     */
+    public function getPassword()
     {
         return $this->password;
     }
 
-    public function setPassword(string $password): self
+    /**
+     * @param mixed $password
+     */
+    public function setPassword($password)
     {
         $this->password = $password;
-
-        return $this;
     }
+
+
 
     /**
      * @return Collection|Adherent[]
@@ -303,17 +309,11 @@ class Account implements UserInterface
         return $this;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getTokenForgetPass()
+    public function getTokenForgetPass(): ?string
     {
         return $this->tokenForgetPass;
     }
 
-    /**
-     * @param mixed $tokenForgetPass
-     */
     public function setTokenForgetPass($tokenForgetPass)
     {
         $this->tokenForgetPass = $tokenForgetPass;
