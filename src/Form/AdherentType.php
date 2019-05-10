@@ -102,21 +102,33 @@ class AdherentType extends AbstractType
                 'multiple' => false,
                 'expanded' => true,
             ])
-            ->add('firstNameRep1')
-            ->add('lastNameRep1')
+            ->add('firstNameRep1', TextType::class, array(
+                'data' => $options['firstNameRep1']
+            ))
+            ->add('lastNameRep1', TextType::class, array(
+                'data' => $options['lastNameRep1']
+            ))
             ->add('firstNameRep2')
             ->add('lastNameRep2')
-            ->add('emailRep1', EmailType::class)
+            ->add('emailRep1', EmailType::class, array(
+                'data' => $options['emailRep1']
+            ))
             ->add('emailRep2', EmailType::class)
-            ->add('cityRep1')
+            ->add('cityRep1', TextType::class, array(
+                'data' => $options['cityRep1']
+            ))
             ->add('cityRep2')
-            ->add('addressRep1')
+            ->add('addressRep1', TextType::class, array(
+                'data' => $options['addressRep1']
+            ))
             ->add('addressRep2')
-            ->add('zipCodeRep1')
+            ->add('zipCodeRep1', NumberType::class, array(
+                'data' => $options['zipCodeRep1']
+            ))
             ->add('zipCodeRep2')
             ->add('professionRep1')
             ->add('professionRep2')
-            ->add('phoneRep1')
+            ->add('phoneRep1', NumberType::class)
             ->add('phoneRep2')
             ->add('paymentType', ChoiceType::class,[
                 'choices' => [
@@ -142,5 +154,14 @@ class AdherentType extends AbstractType
         $resolver->setDefaults([
             'data_class' => Adherent::class,
         ]);
+
+        $resolver->setRequired(array(
+            'firstNameRep1',
+            'lastNameRep1',
+            'emailRep1',
+            'cityRep1',
+            'addressRep1',
+            'zipCodeRep1'
+        ));
     }
 }
