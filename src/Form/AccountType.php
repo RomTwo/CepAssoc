@@ -34,8 +34,7 @@ class AccountType extends AbstractType
             ->add('city', TextType::class, array('label' => 'Ville : '))
             ->add('email', EmailType::class, array('label' => 'Adresse mail : '))
             ->add('password', PasswordType::class, array('label' => 'Mot de passe : '))
-            ->add('valid', SubmitType::class, array('label' => 'S\'inscrire : '))
-        ;
+            ->add('valid', SubmitType::class, array('label' => 'S\'inscrire : '));
     }
 
     public function configureOptions(OptionsResolver $resolver)

@@ -31,7 +31,6 @@ class AdministrationController extends AbstractController
         $manager = $this->getDoctrine()->getManager();
         $competiteurs = $manager->getRepository(Adherent::class)->findAll();
 
-
         if ($competiteurs) {
             $classMetadataFactory = new ClassMetadataFactory(new AnnotationLoader(new AnnotationReader()));
 

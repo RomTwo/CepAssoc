@@ -62,7 +62,7 @@ class LoginFormAuthentificator extends AbstractFormLoginAuthenticator
     {
         $token = new CsrfToken('authenticate', $credentials['csrf_token']);
         if (!$this->csrfTokenManager->isTokenValid($token)) {
-            throw new InvalidCsrfTokenException();
+            throw new InvalidCsrfTokenException('Une erreur s\'est produit');
         }
 
         $user = $this->entityManager->getRepository(Account::class)->findOneBy(['email' => $credentials['email']]);
@@ -75,7 +75,10 @@ class LoginFormAuthentificator extends AbstractFormLoginAuthenticator
 
     public function checkCredentials($credentials, UserInterface $user)
     {
-        return $this->passwordEncoder->isPasswordValid($user, $credentials['password']);
+        if ($this->passwordEncoder->isPasswordValid($user, $credentials['password'])) {
+            return true;
+        }
+        throw new CustomUserMessageAuthenticationException('Erreur : Les identifiants saisis sont incorrects');
     }
 
     public function onAuthenticationSuccess(Request $request, TokenInterface $token, $providerKey)

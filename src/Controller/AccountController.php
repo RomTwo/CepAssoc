@@ -65,8 +65,8 @@ class AccountController extends AbstractController
             $token = $this->generateToken();
             $account->setTokenForgetPass($token);
             $manager->flush();
-
             $this->sendEmail($account->getEmail(), $token);
+
             $this->addFlash("msg", "Un mail vient de vous être envoyé");
         } else {
             $this->addFlash("msg", "Une erreur s'est produite");
@@ -92,6 +92,7 @@ class AccountController extends AbstractController
                         $account->setPassword($encoded);
                         $account->setTokenForgetPass(null);
                         $manager->flush();
+
                         return $this->redirectToRoute('connexion_security', array(), 301);
                     }
                     return $this->render('account/resetPassword.html.twig', array(
@@ -102,9 +103,9 @@ class AccountController extends AbstractController
                 }
                 return $this->render('account/resetPassword.html.twig', array('token' => $token));
             }
-            return Response::create("error 404 : page not found");
+            return $this->redirectToRoute('error_404');
         } catch (\Exception $e) {
-            return Response::create("error 404 : page not found");
+            return $this->redirectToRoute('error_404');
         }
 
     }

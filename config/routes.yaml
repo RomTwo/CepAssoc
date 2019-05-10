@@ -36,3 +36,22 @@ administration:
 adherent_competiteurs:
     path: /admin/competiteurs
     controller: App\Controller\AdministrationController::competiteurs
+
+### Errors routing ###
+
+error_404:
+    path: /error404
+    controller: App\Controller\ErrorController::error404
+
+error_403:
+    path: /error403
+    controller: App\Controller\ErrorController::error403
+
+error_404_unexist_route:
+    path: /{path}
+    defaults:
+        _controller: App\Controller\ErrorController::error404
+        requirements:
+            path: .*
+
+
