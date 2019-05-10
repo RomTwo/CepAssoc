@@ -39,9 +39,11 @@ class AccountController extends AbstractController
 
     private function findByEmail(string $email)
     {
-        $account = $this->getDoctrine()->getRepository(Account::class)->findBy(array(
-            'email' => $email
-        ));
+        $account = $this->getDoctrine()->getRepository(Account::class)->findBy(
+            array(
+                'email' => $email
+            )
+        );
 
         return $account != null ? true : false;
     }

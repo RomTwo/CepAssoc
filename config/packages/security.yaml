@@ -12,23 +12,6 @@ security:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
 
-        api_login:
-            pattern: ^/api/connexion
-            anonymous: true
-            stateless: true
-            provider: user
-            guard:
-                authenticators:
-                    - plugin.id_authentificator
-
-        api:
-            pattern: ^/api
-            anonymous: false
-            provider: user
-            guard:
-                authenticators:
-                    - plugin.token_authenticator
-
         main:
             pattern: ^/
             anonymous: ~

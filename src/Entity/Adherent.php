@@ -6,6 +6,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\AdherentRepository")
@@ -16,6 +17,7 @@ class Adherent
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
+     * @Groups({"competition"})
      */
     private $id;
 
@@ -24,6 +26,8 @@ class Adherent
      * @Assert\NotBlank
      * @Assert\NotNull
      * @Assert\Length(min=10, max=255, minMessage="Ce prenom n'est pas valide")
+     * @Assert\Length(min=1, max=255)
+     * @Groups({"competition"})
      */
     private $firstName;
 
@@ -32,149 +36,178 @@ class Adherent
      * @Assert\NotBlank
      * @Assert\NotNull
      * @Assert\Length(min=1, max=255)
+     * @Groups({"competition"})
      */
     private $lastName;
 
     /**
      * @ORM\Column(type="string", length=10)
      * @Assert\NotNull
+     * @Groups({"competition"})
      */
     private $sex;
 
     /**
      * @ORM\Column(type="date")
+     * @Groups({"competition"})
      */
     private $birthDate;
 
     /**
      * @ORM\Column(type="boolean")
+     * @Groups({"competition"})
      */
     private $judge;
 
     /**
      * @ORM\Column(type="boolean")
+     * @Groups({"competition"})
      */
     private $isGAFJudge;
 
     /**
      * @ORM\Column(type="integer")
+     * @Groups({"competition"})
      */
     private $GAFJudgeLevel;
 
     /**
      * @ORM\Column(type="boolean")
+     * @Groups({"competition"})
      */
     private $isGAMJudge;
 
     /**
      * @ORM\Column(type="integer")
+     * @Groups({"competition"})
      */
     private $GAMJudgeLevel;
 
     /**
      * @ORM\Column(type="boolean")
+     * @Groups({"competition"})
      */
     private $isTeamGYMJudge;
 
     /**
      * @ORM\Column(type="integer")
+     * @Groups({"competition"})
      */
     private $teamGYMJudgeLevel;
 
     /**
      * @ORM\Column(type="boolean")
+     * @Groups({"competition"})
      */
     private $wantsAJudgeTraining;
 
     /**
      * @ORM\Column(type="string", length=30)
+     * @Groups({"competition"})
      */
     private $volunteerForTrainingHelp;
 
     /**
      * @ORM\Column(type="string", length=30)
+     * @Groups({"competition"})
      */
     private $volunteerForClubLife;
 
     /**
      * @ORM\Column(type="float", nullable=true)
+     * @Groups({"competition"})
      */
     private $registrationCost;
 
     /**
      * @ORM\Column(type="string", length=50, nullable=true)
+     * @Groups({"competition"})
      */
     private $registrationType;
 
     /**
      * @ORM\Column(type="date")
+     * @Groups({"competition"})
      */
     private $registrationDate;
 
     /**
      * @ORM\Column(type="boolean")
+     * @Groups({"competition"})
      */
     private $paymentFeesArePaid;
 
     /**
      * @ORM\Column(type="string")
+     * @Groups({"competition"})
      */
     private $paymentType;
 
     /**
      * @ORM\Column(type="boolean")
+     * @Groups({"competition"})
      */
     private $isRegisteredInGestGym;
 
     /**
      * @ORM\Column(type="string", length=255)
      * @Assert\Length(min=1, max=255)
+     * @Groups({"competition"})
      */
     private $firstNameRep1;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"competition"})
      */
     private $lastNameRep1;
 
     /**
      * @ORM\Column(type="string", length=255)
      * @Assert\Length(min=1, max=255)
+     * @Groups({"competition"})
      */
     private $firstNameRep2;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"competition"})
      */
     private $lastNameRep2;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"competition"})
      */
     private $emailRep1;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"competition"})
      */
     private $emailRep2;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"competition"})
      */
     private $cityRep1;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"competition"})
      */
     private $cityRep2;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"competition"})
      */
     private $addressRep1;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"competition"})
      */
     private $addressRep2;
 
@@ -186,6 +219,7 @@ class Adherent
      *     match = true,
      *     message = "le code postal n'est pas correct"
      * )
+     * @Groups({"competition"})
      */
     private $zipCodeRep1;
 
@@ -202,26 +236,31 @@ class Adherent
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"competition"})
      */
     private $professionRep1;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"competition"})
      */
     private $professionRep2;
 
     /**
      * @ORM\Column(type="integer", length=10)
+     * @Groups({"competition"})
      */
     private $phoneRep1;
 
     /**
      * @ORM\Column(type="integer", length=10)
+     * @Groups({"competition"})
      */
     private $phoneRep2;
 
     /**
      * @ORM\Column(type="boolean")
+     * @Groups({"competition"})
      */
     private $imageRight;
 
@@ -272,6 +311,7 @@ class Adherent
 
     /**
      * @ORM\ManyToMany(targetEntity="App\Entity\Activity")
+     * @Groups({"competition"})
      */
     private $activities;
 

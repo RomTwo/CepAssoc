@@ -25,13 +25,4 @@ class SecurityController extends AbstractController
         );
     }
 
-    public function loginPlugin()
-    {
-    }
-
-    public function msg()
-    {
-        return JsonResponse::create("Liste des compétiteurs", 202);
-    }
-
 }
