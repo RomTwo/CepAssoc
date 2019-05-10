@@ -21,17 +21,23 @@ class Adherent
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Assert\Length(min=1, max=255)
+     * @Assert\NotBlank
+     * @Assert\NotNull
+     * @Assert\Length(min=10, max=255, minMessage="Ce prenom n'est pas valide")
      */
     private $firstName;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank
+     * @Assert\NotNull
+     * @Assert\Length(min=1, max=255)
      */
     private $lastName;
 
     /**
      * @ORM\Column(type="string", length=10)
+     * @Assert\NotNull
      */
     private $sex;
 
@@ -174,11 +180,23 @@ class Adherent
 
     /**
      * @ORM\Column(type="integer")
+     * @Assert\NotNull(message="Veuiller remplir le champ code postal")
+     * @Assert\Regex(
+     *     pattern = "/^([0-9]{2}|(2A)|2B)[[0-9]{3}$/",
+     *     match = true,
+     *     message = "le code postal n'est pas correct"
+     * )
      */
     private $zipCodeRep1;
 
     /**
      * @ORM\Column(type="integer")
+     * @Assert\NotNull(message="Veuiller remplir le champ code postal")
+     * @Assert\Regex(
+     *     pattern = "/^([0-9]{2}|(2A)|2B)[[0-9]{3}$/",
+     *     match = true,
+     *     message = "le code postal n'est pas correct"
+     * )
      */
     private $zipCodeRep2;
 
@@ -206,6 +224,51 @@ class Adherent
      * @ORM\Column(type="boolean")
      */
     private $imageRight;
+
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $isRegisteredInFFG;
+
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $isMedicalCertificate;
+
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $isValidateMedical;
+
+    /**
+     * @ORM\Column(type="date")
+     */
+    private $medicalCertificateDate;
+
+    /**
+     * @ORM\Column(type="string")
+     */
+    private $nationality;
+
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $isFFGInsurance;
+
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $isAllowEmail;
+
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $isLicenceHolderOtherClub;
+
+    /**
+     * @ORM\Column(type="string")
+     */
+    private $maidenName;
 
     /**
      * @ORM\ManyToMany(targetEntity="App\Entity\Activity")
@@ -765,4 +828,147 @@ class Adherent
         $this->imageRight = $imageRight;
     }
 
+    /**
+     * @return mixed
+     */
+    public function getIsRegisteredInFFG()
+    {
+        return $this->isRegisteredInFFG;
+    }
+
+    /**
+     * @param mixed $isRegisteredInFFG
+     */
+    public function setIsRegisteredInFFG($isRegisteredInFFG): void
+    {
+        $this->isRegisteredInFFG = $isRegisteredInFFG;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getIsMedicalCertificate()
+    {
+        return $this->isMedicalCertificate;
+    }
+
+    /**
+     * @param mixed $isMedicalCertificate
+     */
+    public function setIsMedicalCertificate($isMedicalCertificate): void
+    {
+        $this->isMedicalCertificate = $isMedicalCertificate;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getIsValidateMedical()
+    {
+        return $this->isValidateMedical;
+    }
+
+    /**
+     * @param mixed $isValidateMedical
+     */
+    public function setIsValidateMedical($isValidateMedical): void
+    {
+        $this->isValidateMedical = $isValidateMedical;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getMedicalCertificateDate()
+    {
+        return $this->medicalCertificateDate;
+    }
+
+    /**
+     * @param mixed $medicalCertificateDate
+     */
+    public function setMedicalCertificateDate($medicalCertificateDate): void
+    {
+        $this->medicalCertificateDate = $medicalCertificateDate;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getNationality()
+    {
+        return $this->nationality;
+    }
+
+    /**
+     * @param mixed $nationality
+     */
+    public function setNationality($nationality): void
+    {
+        $this->nationality = $nationality;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getIsFFGInsurance()
+    {
+        return $this->isFFGInsurance;
+    }
+
+    /**
+     * @param mixed $isFFGInsurance
+     */
+    public function setIsFFGInsurance($isFFGInsurance): void
+    {
+        $this->isFFGInsurance = $isFFGInsurance;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getIsAllowEmail()
+    {
+        return $this->isAllowEmail;
+    }
+
+    /**
+     * @param mixed $isAllowEmail
+     */
+    public function setIsAllowEmail($isAllowEmail): void
+    {
+        $this->isAllowEmail = $isAllowEmail;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getIsLicenceHolderOtherClub()
+    {
+        return $this->isLicenceHolderOtherClub;
+    }
+
+    /**
+     * @param mixed $isLicenceHolderOtherClub
+     */
+    public function setIsLicenceHolderOtherClub($isLicenceHolderOtherClub): void
+    {
+        $this->isLicenceHolderOtherClub = $isLicenceHolderOtherClub;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getMaidenName()
+    {
+        return $this->maidenName;
+    }
+
+    /**
+     * @param mixed $maidenName
+     */
+    public function setMaidenName($maidenName): void
+    {
+        $this->maidenName = $maidenName;
+    }
 }

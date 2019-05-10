@@ -2,6 +2,10 @@ body {
     background-color: lightcyan;
 }
 
-#step2, #step3, #step4, #step5, #judgeDiv, #volunteerDiv {
+#step2, #step3, #step4, #step5, #judgeDiv, #volunteerDiv, .helper {
     display: none;
+}
+
+small {
+    color: red;
 }

@@ -121,6 +121,15 @@ class AppFixtures extends Fixture
             $adherent->setvolunteerForClubLife(false);
             $adherent->setPaymentType("cheque");
             $adherent->setImageRight(false);
+            $adherent->setIsRegisteredInFFG(false);
+            $adherent->setIsMedicalCertificate(false);
+            $adherent->setIsValidateMedical(false);
+            $adherent->setMedicalCertificateDate(new \DateTime("01-09-2019"));
+            $adherent->setNationality("France");
+            $adherent->setIsFFGInsurance(false);
+            $adherent->setIsAllowEmail(false);
+            $adherent->setIsLicenceHolderOtherClub(false);
+            $adherent->setMaidenName("");
 
             $manager->persist($adherents[$i]);
         }
