@@ -117,11 +117,6 @@ class Account implements UserInterface
     private $roles;
 
     /**
-     * @ORM\Column(type="string", nullable=true)
-     */
-    private $tokenPlugin;
-
-    /**
      * Account constructor.
      */
     public function __construct()
@@ -185,24 +180,24 @@ class Account implements UserInterface
         return $this;
     }
 
-    public function getZipCode(): ?int
+    public function getZipCode(): ?string
     {
         return $this->zipCode;
     }
 
-    public function setZipCode(int $zipCode): self
+    public function setZipCode(string $zipCode): self
     {
         $this->zipCode = $zipCode;
 
         return $this;
     }
 
-    public function getAddress(): ?int
+    public function getAddress(): ?string
     {
         return $this->address;
     }
 
-    public function setAddress(int $address): self
+    public function setAddress(string $address): self
     {
         $this->address = $address;
 
@@ -302,18 +297,6 @@ class Account implements UserInterface
 
         return $this;
     }
-
-
-    public function getTokenPlugin()
-    {
-        return $this->tokenPlugin;
-    }
-
-    public function setTokenPlugin($tokenPlugin)
-    {
-        $this->tokenPlugin = $tokenPlugin;
-    }
-
 
     /**
      * Returns the roles granted to the user.

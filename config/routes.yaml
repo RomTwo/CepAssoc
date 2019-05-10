@@ -21,19 +21,6 @@ connexion_security:
 deconnexion_security:
   path: /profile/logout
 
-
-### Plugin api routing ###
-connexion_api:
-  path: /api/connexion
-  controller: App\Controller\SecurityController::loginPlugin
-  methods: [POST]
-
-message_api:
-  path: /api/msg
-  controller: App\Controller\SecurityController::msg
-  methods: [GET]
-
-
 ### Administration routing ###
 administration:
     path: /admin/Administration

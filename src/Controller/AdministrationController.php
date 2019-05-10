@@ -3,9 +3,13 @@
 namespace App\Controller;
 
 use App\Entity\Adherent;
+use Doctrine\Common\Annotations\AnnotationReader;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\JsonResponse;
-use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Serializer\Encoder\JsonEncoder;
+use Symfony\Component\Serializer\Mapping\Factory\ClassMetadataFactory;
+use Symfony\Component\Serializer\Mapping\Loader\AnnotationLoader;
+use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
+use Symfony\Component\Serializer\Serializer;
 
 class AdministrationController extends AbstractController
 {
@@ -21,11 +25,19 @@ class AdministrationController extends AbstractController
         $manager = $this->getDoctrine()->getManager();
         $competiteurs = $manager->getRepository(Adherent::class)->findAll();
 
+
         if ($competiteurs) {
-            return JsonResponse::create($competiteurs, 202);
+            $classMetadataFactory = new ClassMetadataFactory(new AnnotationLoader(new AnnotationReader()));
+
+            $normalizer = new ObjectNormalizer($classMetadataFactory);
+            $encoder = new JsonEncoder();
+            $serializer = new Serializer(array($normalizer), array($encoder));
+            $data = $serializer->serialize($competiteurs, 'json', ['groups' => 'competition']);
+
+            return $this->render('administration/competiteurs.html.twig', array(
+                "comp" => $data
+            ));
         }
-
-        return JsonResponse::create("Aucuns compétiteurs pour le moment", 200);
-
+        return $this->render('administration/competiteurs.html.twig');
     }
 }
