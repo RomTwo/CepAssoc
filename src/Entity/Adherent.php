@@ -804,4 +804,10 @@ class Adherent
         $this->imageRight = $imageRight;
     }
 
+    public function __toString()
+    {
+
+    }
+
+
 }

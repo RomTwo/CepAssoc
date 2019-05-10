@@ -1,4 +1,3 @@
-
 {% extends 'base.html.twig' %}
 
 {% block title %}Hello SiteRegisterController!{% endblock %}
@@ -51,4 +50,5 @@
 
         {{ form_end(form) }}
     </div>
+    <a href="{{ path('account_forgot_password') }}">Mot de passe oublié ?</a>
 {% endblock %}

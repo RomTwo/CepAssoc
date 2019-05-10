@@ -8,18 +8,22 @@ registration:
 
 
 ### Account routing ###
-register_site_index:
+account_add:
     path: /profile/siteInscription
     controller: App\Controller\AccountController::index
+
+account_forgot_password:
+    path: /profile/forgotPassword
+    controller: App\Controller\AccountController::forgotPassword
 
 
 ### Authentication routing ###
 connexion_security:
-  path: /profile/login
-  controller: App\Controller\SecurityController::login
+    path: /profile/login
+    controller: App\Controller\SecurityController::login
 
 deconnexion_security:
-  path: /profile/logout
+    path: /profile/logout
 
 ### Administration routing ###
 administration:
@@ -27,6 +31,5 @@ administration:
     controller: App\Controller\AdministrationController::index
 
 adherent_competiteurs:
-  path: /admin/competiteurs
-  controller: App\Controller\AdministrationController::competiteurs
-  methods: [GET]
+    path: /admin/competiteurs
+    controller: App\Controller\AdministrationController::competiteurs

@@ -10,6 +10,13 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class AccountController extends AbstractController
 {
+    /**
+     * Add user account
+     *
+     * @param Request $request
+     * @param UserPasswordEncoderInterface $encoder
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     */
     public function index(Request $request, UserPasswordEncoderInterface $encoder)
     {
         if ($this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_FULLY')) {
@@ -36,7 +43,26 @@ class AccountController extends AbstractController
         ));
     }
 
+    /**
+     * Print forgot password form
+     *
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     */
+    public function forgotPassword()
+    {
+        if ($this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_FULLY')) {
+            return $this->redirectToRoute('home');
+        }
+        return $this->render('account/forgotPassword.html.twig');
+    }
 
+
+    /**
+     * Check an existence of a user
+     *
+     * @param string $email
+     * @return bool
+     */
     private function findByEmail(string $email)
     {
         $account = $this->getDoctrine()->getRepository(Account::class)->findBy(
