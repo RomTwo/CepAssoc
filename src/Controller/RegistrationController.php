@@ -24,13 +24,13 @@ use \DateTime;
 
 class RegistrationController extends AbstractController
 {
-    /**
-     * @Route("/registration", name="registration")
-     */
     public function index(Request $request)
     {
         $adherent = new Adherent();
-        $activity = new Activity();
+
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+
+        $user = $this->getUser();
 
         $form = $this->createForm(AdherentType::class, $adherent);
 
@@ -42,6 +42,19 @@ class RegistrationController extends AbstractController
             $adherent->setJudge(false);
             $adherent->setPaymentFeesArePaid(false);
             $adherent->setRegistrationCost(0);
+            $adherent->setIsRegisteredInFFG(false);
+            $adherent->setIsMedicalCertificate(false);
+            $adherent->setIsValidateMedical(false);
+            $adherent->setMedicalCertificateDate(new \DateTime("01-09-2019"));
+            $adherent->setNationality("France");
+            $adherent->setIsFFGInsurance(false);
+            $adherent->setIsAllowEmail(false);
+            $adherent->setIsLicenceHolderOtherClub(false);
+            $adherent->setMaidenName("");
+
+            $account = $this->getDoctrine()->getRepository(Account::class)->find($user->getId());
+
+            $account->addChild($adherent);
 
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($adherent);
@@ -55,34 +68,8 @@ class RegistrationController extends AbstractController
             'activities' => $this->getDoctrine()
                 ->getRepository(Activity::class)
                 ->findAll(),
+            'user' => $user,
         ]);
-    }
 
-    /**
-     * @Route("/add", name="add", methods="POST")
-     */
-    public function add(Request $request){
-
-        $entityManager = $this->getDoctrine()->getManager();
-
-        $adherent = new Adherent();
-        $adherent->setFirstName($request->request->get('firstname'));
-        $adherent->setLastName("test");
-        $adherent->setSex("test");
-        $adherent->setBirthDate(new DateTime());
-        $adherent->setZipCode(11111);
-        $adherent->setAddress("test");
-        $adherent->setEmail("test");
-        $adherent->setCity("test");
-        $adherent->setJudge(false);
-        $adherent->setGAFjudge(false);
-        $adherent->setregistrationType("test");
-
-
-        $entityManager->persist($adherent);
-
-        // actually executes the queries (i.e. the INSERT query)
-        $entityManager->flush();
-        return $this->redirectToRoute('registration');
     }
 }

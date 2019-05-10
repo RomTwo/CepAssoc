@@ -6,7 +6,9 @@ use App\Entity\Adherent;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -15,8 +17,8 @@ class AdherentType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('firstName')
-            ->add('lastName')
+            ->add('firstName', TextType::class)
+            ->add('lastName', TextType::class)
             ->add('sex', ChoiceType::class, [
                 'choices' => [
                     'Homme' => 'H',
@@ -89,6 +91,9 @@ class AdherentType extends AbstractType
                 'data' => 'jamais'
             ])
             ->add('registrationType', ChoiceType::class, [
+                'attr' => [
+                    'id' => 'gender',
+                ],
                 'choices' => [
                     'Renouvellement' => 'renouvellement',
                     'Nouvelle inscription' => 'nouveau',
@@ -101,8 +106,8 @@ class AdherentType extends AbstractType
             ->add('lastNameRep1')
             ->add('firstNameRep2')
             ->add('lastNameRep2')
-            ->add('emailRep1')
-            ->add('emailRep2')
+            ->add('emailRep1', EmailType::class)
+            ->add('emailRep2', EmailType::class)
             ->add('cityRep1')
             ->add('cityRep2')
             ->add('addressRep1')
