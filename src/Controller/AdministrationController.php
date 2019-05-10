@@ -16,6 +16,7 @@ use App\Entity\Category;
 
 class AdministrationController extends AbstractController
 {
+
     public function index()
     {
         return $this->render('administration/index.html.twig', [
@@ -23,16 +24,25 @@ class AdministrationController extends AbstractController
         ]);
     }
 
+    /**
+     * Return and Print a list of the competitors (for the plugin)
+     *
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
     public function competiteurs()
     {
         $manager = $this->getDoctrine()->getManager();
         $competiteurs = $manager->getRepository(Adherent::class)->findAll();
 
-
         if ($competiteurs) {
             $classMetadataFactory = new ClassMetadataFactory(new AnnotationLoader(new AnnotationReader()));
 
+            $callback = function ($innerObject, $outerObject, string $attributeName, string $format = null, array $context = []) {
+                return $innerObject instanceof \DateTime ? $innerObject->format('d-m-Y') : '';
+            };
+
             $normalizer = new ObjectNormalizer($classMetadataFactory);
+            $normalizer->setCallbacks(array('birthDate' => $callback));
             $encoder = new JsonEncoder();
             $serializer = new Serializer(array($normalizer), array($encoder));
             $data = $serializer->serialize($competiteurs, 'json', ['groups' => 'competition']);

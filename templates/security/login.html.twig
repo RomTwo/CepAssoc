@@ -8,16 +8,35 @@
         <div>{{ errors.messageKey|trans(errors.messageData, 'security') }}</div>
     {% endif %}
 
-    <form action="{{ path('connexion_security') }}" method="post">
+    {% if msg is defined %}
+        <div>{{ msg }}</div>
+    {% endif %}
 
+
+    <form action="{{ path('security_connexion') }}" method="post">
+
+        <!-- Login form -->
         <h1 class="h3 mb-3 font-weight-normal">Se connecter</h1>
         <label for="inputEmail" class="sr-only">Adresse mail : </label>
         <input type="email" name="email" id="inputEmail" class="form-control" placeholder="Email" required autofocus>
         <label for="inputPassword" class="sr-only">Mot de passe : </label>
-        <input type="password" name="password" id="inputPassword" class="form-control" placeholder="mot de passe" required>
+        <input type="password" name="password" id="inputPassword" class="form-control" placeholder="mot de passe"
+               required>
 
         <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
 
         <button class="btn btn-lg btn-primary" type="submit">Connexion</button>
     </form>
+
+    <!-- Forgot password form -->
+    <div class=" row justify-content-between align-items-center pl-3 pr-3">
+        <a data-toggle="collapse" href="#collapseId" role="button" aria-expanded="false" aria-controls="collapseId">Mot
+            de passe oublié ?</a>
+    </div>
+    <div class="collapse" id="collapseId">
+        <form class="form-inline" action="{{ path('account_forgot_password') }}" method="post">
+            <input class="form-control" type="email" name="email" placeholder="Email" required>
+            <input class="btn btn-success" type="submit" value="Envoyer">
+        </form>
+    </div>
 {% endblock %}

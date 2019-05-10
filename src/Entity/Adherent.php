@@ -266,46 +266,55 @@ class Adherent
 
     /**
      * @ORM\Column(type="boolean")
+     * @Groups({"competition"})
      */
     private $isRegisteredInFFG;
 
     /**
      * @ORM\Column(type="boolean")
+     * @Groups({"competition"})
      */
     private $isMedicalCertificate;
 
     /**
      * @ORM\Column(type="boolean")
+     * @Groups({"competition"})
      */
     private $isValidateMedical;
 
     /**
      * @ORM\Column(type="date")
+     * @Groups({"competition"})
      */
     private $medicalCertificateDate;
 
     /**
      * @ORM\Column(type="string")
+     * @Groups({"competition"})
      */
     private $nationality;
 
     /**
      * @ORM\Column(type="boolean")
+     * @Groups({"competition"})
      */
     private $isFFGInsurance;
 
     /**
      * @ORM\Column(type="boolean")
+     * @Groups({"competition"})
      */
     private $isAllowEmail;
 
     /**
      * @ORM\Column(type="boolean")
+     * @Groups({"competition"})
      */
     private $isLicenceHolderOtherClub;
 
     /**
      * @ORM\Column(type="string")
+     * @Groups({"competition"})
      */
     private $maidenName;
 

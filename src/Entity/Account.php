@@ -117,6 +117,11 @@ class Account implements UserInterface
     private $roles;
 
     /**
+     * @ORM\Column(type="string", nullable=true)
+     */
+    private $tokenForgetPass;
+
+    /**
      * Account constructor.
      */
     public function __construct()
@@ -229,17 +234,23 @@ class Account implements UserInterface
         return $this;
     }
 
-    public function getPassword(): ?string
+    /**
+     * @return mixed
+     */
+    public function getPassword()
     {
         return $this->password;
     }
 
-    public function setPassword(string $password): self
+    /**
+     * @param mixed $password
+     */
+    public function setPassword($password)
     {
         $this->password = $password;
-
-        return $this;
     }
+
+
 
     /**
      * @return Collection|Adherent[]
@@ -297,6 +308,17 @@ class Account implements UserInterface
 
         return $this;
     }
+
+    public function getTokenForgetPass(): ?string
+    {
+        return $this->tokenForgetPass;
+    }
+
+    public function setTokenForgetPass($tokenForgetPass)
+    {
+        $this->tokenForgetPass = $tokenForgetPass;
+    }
+
 
     /**
      * Returns the roles granted to the user.
