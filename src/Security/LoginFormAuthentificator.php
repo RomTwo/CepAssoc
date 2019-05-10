@@ -39,7 +39,7 @@ class LoginFormAuthentificator extends AbstractFormLoginAuthenticator
 
     public function supports(Request $request)
     {
-        return 'connexion_security' === $request->attributes->get('_route')
+        return 'security_connexion' === $request->attributes->get('_route')
             && $request->isMethod('POST');
     }
 
@@ -94,12 +94,12 @@ class LoginFormAuthentificator extends AbstractFormLoginAuthenticator
     public function onAuthenticationFailure(Request $request, AuthenticationException $exception)
     {
         $request->getSession()->set(Security::AUTHENTICATION_ERROR, $exception);
-        $url = $this->urlGenerator->generate('connexion_security');
+        $url = $this->urlGenerator->generate('security_connexion');
         return new RedirectResponse($url);
     }
 
     protected function getLoginUrl()
     {
-        return $this->urlGenerator->generate('connexion_security');
+        return $this->urlGenerator->generate('security_connexion');
     }
 }

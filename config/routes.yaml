@@ -21,19 +21,19 @@ account_reset_password:
     controller: App\Controller\AccountController::resetPassword
 
 ### Authentication routing ###
-connexion_security:
+security_connexion:
     path: /profile/login
     controller: App\Controller\SecurityController::login
 
-deconnexion_security:
+security_deconnexion:
     path: /profile/logout
 
 ### Administration routing ###
-administration:
+admin_index:
     path: /admin/Administration
     controller: App\Controller\AdministrationController::index
 
-adherent_competiteurs:
+admin_adherent_competiteurs:
     path: /admin/competiteurs
     controller: App\Controller\AdministrationController::competiteurs
 

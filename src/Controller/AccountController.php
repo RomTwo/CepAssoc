@@ -41,7 +41,7 @@ class AccountController extends AbstractController
                 $manager->persist($account);
                 $manager->flush();
 
-                return $this->redirectToRoute('connexion_security', array(), 301);
+                return $this->redirectToRoute('security_connexion', array(), 301);
             }
             $msg = "Cet email a déjà un compte associé !";
         }
@@ -72,7 +72,7 @@ class AccountController extends AbstractController
             $this->addFlash("msg", "Une erreur s'est produite");
         }
 
-        return $this->redirectToRoute('connexion_security', array(), 301);
+        return $this->redirectToRoute('security_connexion', array(), 301);
     }
 
     public function resetPassword(Request $request, UserPasswordEncoderInterface $encoder, $token)
@@ -93,7 +93,7 @@ class AccountController extends AbstractController
                         $account->setTokenForgetPass(null);
                         $manager->flush();
 
-                        return $this->redirectToRoute('connexion_security', array(), 301);
+                        return $this->redirectToRoute('security_connexion', array(), 301);
                     }
                     return $this->render('account/resetPassword.html.twig', array(
                             'token' => $token,
@@ -117,8 +117,7 @@ class AccountController extends AbstractController
      * @param string $email
      * @return bool
      */
-    private
-    function findByEmail(string $email)
+    private function findByEmail(string $email)
     {
         $account = $this->getDoctrine()->getRepository(Account::class)->findBy(
             array(
@@ -129,8 +128,7 @@ class AccountController extends AbstractController
         return $account != null ? true : false;
     }
 
-    private
-    function generateToken()
+    private function generateToken()
     {
         $payload = array(
             'iat' => time(),
@@ -140,8 +138,7 @@ class AccountController extends AbstractController
         return $token;
     }
 
-    private
-    function sendEmail($mail, $token)
+    private function sendEmail($mail, $token)
     {
 
         $transport = (new Swift_SmtpTransport('smtp.gmail.com', 465, 'ssl'))
@@ -160,8 +157,7 @@ class AccountController extends AbstractController
         $result = $mailer->send($message);
     }
 
-    private
-    function msgHtml($token)
+    private function msgHtml($token)
     {
         $msg = '<p>Réinitialisation de votre mot de passe en cliquant <a href="' . $_ENV['MAILER_URL'] . $token . '">ici</a></p>';
 
