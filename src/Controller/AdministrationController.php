@@ -36,8 +36,12 @@ class AdministrationController extends AbstractController
             $serializer = new Serializer(array($normalizer), array($encoder));
             $data = $serializer->serialize($competiteurs, 'json', ['groups' => 'competition']);
 
-            return Response::create($data, Response::HTTP_ACCEPTED, array("Content-Type" => "application/json"));
+            //return Response::create($data, Response::HTTP_ACCEPTED, array("Content-Type" => "application/json"));
+            return $this->render('administration/competiteurs.html.twig', array(
+                "comp" => $data
+            ));
         }
-        return JsonResponse::create("Aucuns compétiteurs", Response::HTTP_OK);
+        //return JsonResponse::create("Aucuns compétiteurs", Response::HTTP_OK);
+        return $this->render('administration/competiteurs.html.twig');
     }
 }
