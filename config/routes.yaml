@@ -48,6 +48,8 @@ admin_adherentsEdit:
 admin_adherentsRegister:
     path: /adherentsRegister/{id}
     controller: App\Controller\AdherentsController::register
+    requirements:
+        id: ([0-9]*)
 
 ### Errors routing ###
 

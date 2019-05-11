@@ -3,7 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Adherent;
-use App\Form\AdherentType;
+use App\Form\AdminAdherentType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -24,14 +24,15 @@ class AdherentsController extends AbstractController
     {
         //$user = $this->getUser();
         
-        $form = $this->createForm(AdherentType::class, $adherent, array(
+        /*$form = $this->createForm(AdminAdherentType::class, $adherent, array(
             'firstNameRep1'=>$adherent->getFirstName(),
             'lastNameRep1'=>$adherent->getLastName(),
             'emailRep1'=>$adherent->getEmailRep1(),
             'cityRep1'=>$adherent->getCityRep1(),
             'addressRep1'=>$adherent->getAddressRep1(),
             'zipCodeRep1'=>$adherent->getZipCodeRep1(),
-        ));
+        ));*/
+        $form = $this->createForm(AdminAdherentType::class, $adherent);
 
         $form->handleRequest($request);
 
@@ -60,6 +61,11 @@ class AdherentsController extends AbstractController
         $repository = $this->getDoctrine()->getRepository(Adherent::class);
         $entityManager = $this->getDoctrine()->getManager();
         $adherent = $repository->findOneById($id);
+
+        if (!$adherent) {
+            return $this->redirectToRoute('error_404');
+        }
+
         $adherent->setIsRegisteredInFFG(true);
         $entityManager->persist($adherent);
         $entityManager->flush();

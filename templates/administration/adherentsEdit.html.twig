@@ -1,16 +1,345 @@
 {% extends 'administration/base.html.twig' %}
 
+{% form_theme form 'bootstrap_4_layout.html.twig' %}
+
 {% block title %}Adherents{% endblock %}
 
 {% block specification %}
-    Gestion des adhérents
+    Mise à jour de l'adhérent
 {% endblock %}
 
 {% block content %}
 
 {{ form_start(form) }}
+    <h6> ADMINISTRATION </h6>
+    
+    <div class="row">
+        <div class="form-group">
+            <div class="col">
+                <label for="">Certificat médical ou attestation </label>
+                {{ form_widget(form.isMedicalCertificate) }}
+            </div>
+            <br/>
+            <div class="col">
+                <label for="">Règlement cotisation </label>
+                {{ form_widget(form.paymentFeesArePaid) }}
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col">
+                <label for="">Bulletin N°2 Allianz </label>
+                {{ form_widget(form.isMedicalCertificate) }}
+            </div>
+            <div class="col">
+                <label for="">Engagement compétition </label>
+                {{ form_widget(form.paymentFeesArePaid) }}
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col">
+                <label for="">Mutation </label>
+                {{ form_widget(form.isMedicalCertificate) }}
+            </div>
+            <div class="col">
+                <label for="">Dossier traité par </label>
+                {{ form_widget(form.paymentFeesArePaid) }}
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col">
+                <label for="">Licence 2019 </label>
+                {{ form_widget(form.isMedicalCertificate) }}
+            </div>
+        </div>
+    </div>
+    <hr/>
+    
+    <h6> INFORMATIONS FOURNIES PAR L'ADHERENT </h6>
+
+    <h6> Type d'inscription </h6>
+    <div class="col">
+        <div class="row">
+            <div class="col-3">
+                <div class="row">
+                    {{ form_widget(form.registrationType) }}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <hr/>
+    <h6> Civilité </h6>
+    <div class="col">
+        <div class="row">
+            <div class="col-3">
+                <div class="row">
+                    <label for="">Nom </label>
+                    {{ form_widget(form.lastName) }}
+                </div>
+            </div>
+            <div class="col-3">
+                <div class="row">
+                    <label for="">Prénom </label>
+                    {{ form_widget(form.firstName) }}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col">
+        <div class="row">
+            <div class="col-3">
+                <div class="row">
+                    {{ form_row(form.sex) }}
+                </div>
+            </div>
+            
+        </div>
+    </div>
+
+    <div class="col">
+        <div class="row">
+            <div class="col-3">
+                <div class="row">
+                    <label for="">Date de naissance </label>
+                    {{ form_widget(form.birthDate) }}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <hr/>
+    <h6> Représentant légal ou adhérent </h6>
+    <div class="col">
+        <div class="row">
+            <div class="col-3">
+                <div class="row">
+                    <label for="">Nom </label>
+                    {{ form_widget(form.lastNameRep1) }}
+                </div>
+            </div>
+            <div class="col-3">
+                <div class="row">
+                    <label for="">Prénom </label>
+                    {{ form_widget(form.firstNameRep1) }}
+                </div>
+            </div>
+            <div class="col-3">
+                <div class="row">
+                    <label for="">Adresse mail </label>
+                    {{ form_widget(form.emailRep1) }}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <br/>
+    <div class="col">
+        <div class="row">
+            <div class="col-3">
+                <div class="row">
+                    <label for="">Ville </label>
+                    {{ form_widget(form.cityRep1) }}
+                </div>
+            </div>
+            <div class="col-3">
+                <div class="row">
+                    <label for="">Adresse </label>
+                    {{ form_widget(form.addressRep1) }}
+                </div>
+            </div>
+            <div class="col-3">
+                <div class="row">
+                    <label for="">Code postal </label>
+                    {{ form_widget(form.zipCodeRep1) }}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <br/>
+    <div class="col">
+        <div class="row">
+            <div class="col-3">
+                <div class="row">
+                    <label for="">Profession </label>
+                    {{ form_widget(form.professionRep1) }}
+                </div>
+            </div>
+            <div class="col-3">
+                <div class="row">
+                    <label for="">Numéro de téléphone </label>
+                    {{ form_widget(form.phoneRep1) }}
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <hr/>
+    <h6> Représentant légal 2 </h6>
+    <div class="col">
+        <div class="row">
+            <div class="col-3">
+                <div class="row">
+                    <label for="">Nom </label>
+                    {{ form_widget(form.lastNameRep2) }}
+                </div>
+            </div>
+            <div class="col-3">
+                <div class="row">
+                    <label for="">Prénom </label>
+                    {{ form_widget(form.firstNameRep2) }}
+                </div>
+            </div>
+            <div class="col-3">
+                <div class="row">
+                    <label for="">Adresse mail </label>
+                    {{ form_widget(form.emailRep2) }}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <br/>
+    <div class="col">
+        <div class="row">
+            <div class="col-3">
+                <div class="row">
+                    <label for="">Ville </label>
+                    {{ form_widget(form.cityRep2) }}
+                </div>
+            </div>
+            <div class="col-3">
+                <div class="row">
+                    <label for="">Adresse </label>
+                    {{ form_widget(form.addressRep2) }}
+                </div>
+            </div>
+            <div class="col-3">
+                <div class="row">
+                    <label for="">Code postal </label>
+                    {{ form_widget(form.zipCodeRep2) }}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <br/>
+    <div class="col">
+        <div class="row">
+            <div class="col-3">
+                <div class="row">
+                    <label for="">Profession </label>
+                    {{ form_widget(form.professionRep2) }}
+                </div>
+            </div>
+            <div class="col-3">
+                <div class="row">
+                    <label for="">Numéro de téléphone </label>
+                    {{ form_widget(form.phoneRep2) }}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <hr/>
+    <h6> Juge </h6>
+    <div class="col">
+        <div class="row">
+            <div class="col-3">
+                <div class="row">
+                    <label for="">Juge </label>
+                    {{ form_widget(form.wantsAJudgeTraining) }}
+                </div>
+            </div>
+            </div>
+        </div>
+    </div>
+
+    <br/>
+    <div class="col">
+        <div class="row">
+            <div class="col-3">
+                <div class="row">
+                    {{ form_widget(form.isGAFJudge) }}
+                </div>
+                <br/>
+                <div class="row">
+                    <label for="">Niveau </label>
+                    {{ form_widget(form.GAFJudgeLevel) }}       
+                </div>
+            </div>
+
+            <div class="col-3">
+                <div class="row">
+                    {{ form_widget(form.isGAMJudge) }}
+                </div>
+                <br/>
+                <div class="row">
+                    <label for="">Niveau </label>
+                    {{ form_widget(form.GAMJudgeLevel) }}       
+                </div>
+            </div>
+
+            <div class="col-3">
+                <div class="row">
+                    {{ form_widget(form.isTeamGYMJudge) }}
+                </div>
+                <br/>
+                <div class="row">
+                    <label for="">Niveau </label>
+                    {{ form_widget(form.teamGYMJudgeLevel) }}       
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <hr/>
+    <h6> Bénévolat </h6>
+    <div class="col">
+        <div class="row">
+            <div class="col-3">
+                <div class="row">
+                    <label for="">Aide à l'entraînement </label>
+                    {{ form_widget(form.volunteerForTrainingHelp) }}
+                </div>
+            </div>
+            <div class="col-3">
+                <div class="row">
+                    <label for="">Aide à la vie du club </label>
+                    {{ form_widget(form.volunteerForClubLife) }}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <hr/>
+    <h6> Moyen de règlement </h6>
+    <div class="col">
+        <div class="row">
+            <div class="col-3">
+                <div class="row">
+                    {{ form_widget(form.paymentType) }}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <hr/>
+    <h6> Droit à l'image </h6>
+    <div class="col">
+        <div class="row">
+            <div class="col-3">
+                <div class="row">
+                    {{ form_widget(form.imageRight) }}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <br/>
     {{ form_widget(form) }}
-    <button class="btn btn-primary">Editer</button>
+    <button class="btn btn-primary">Enregistrer</button>
 {{ form_end(form) }}
 
 {% endblock %}

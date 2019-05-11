@@ -25,7 +25,7 @@ class Adherent
      * @ORM\Column(type="string", length=255)
      * @Assert\NotBlank
      * @Assert\NotNull
-     * @Assert\Length(min=10, max=255, minMessage="Ce prenom n'est pas valide")
+     * @Assert\Length(min=1, max=255, minMessage="Ce prenom n'est pas valide")
      * @Assert\Length(min=1, max=255)
      * @Groups({"competition"})
      */
