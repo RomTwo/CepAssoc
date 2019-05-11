@@ -1,0 +1,17 @@
+{% extends 'administration/base.html.twig' %}
+
+{% block title %}Adherents{% endblock %}
+
+{% block specification %}
+    Gestion des adhérents
+{% endblock %}
+
+{% block content %}
+
+{{ form_start(form) }}
+    {{ form_widget(form) }}
+    <button class="btn btn-primary">Editer</button>
+{{ form_end(form) }}
+
+{% endblock %}
+ 

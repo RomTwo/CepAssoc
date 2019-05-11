@@ -37,6 +37,18 @@ admin_adherent_competiteurs:
     path: /admin/competiteurs
     controller: App\Controller\AdministrationController::competiteurs
 
+admin_adherents:
+    path: /adherents
+    controller: App\Controller\AdherentsController::index
+
+admin_adherentsEdit:
+    path: /adherentsEdit/{id}
+    controller: App\Controller\AdherentsController::edit
+    
+admin_adherentsRegister:
+    path: /adherentsRegister/{id}
+    controller: App\Controller\AdherentsController::register
+
 ### Errors routing ###
 
 error_404:

@@ -113,12 +113,13 @@ class AppFixtures extends Fixture
                 $adherent->setWantsAJudgeTraining(false);
 
 
-            $adherent->setRegistrationType("type".$i);
+            $adherent->setRegistrationType("Nouvelle inscription");
+            $adherent->setRegistrationCost(0);
             $adherent->setRegistrationDate(new \DateTime("01-09-2019"));
             $adherent->setpaymentFeesArePaid(false);
             $adherent->setisRegisteredInGestGym(false);
-            $adherent->setvolunteerForTrainingHelp(false);
-            $adherent->setvolunteerForClubLife(false);
+            $adherent->setVolunteerForTrainingHelp("Jamais");
+            $adherent->setVolunteerForClubLife("Jamais");
             $adherent->setPaymentType("cheque");
             $adherent->setImageRight(false);
             $adherent->setIsRegisteredInFFG(false);
