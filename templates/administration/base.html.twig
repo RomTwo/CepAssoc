@@ -32,16 +32,19 @@
             <!-- Links -->
                 <ul class="navbar-nav">
                     <li class="nav-item">
-                    <a class="nav-link" href="#">Adhérents</a>
+                    <a class="nav-link" href="{{path('admin_adherents')}}">Adhérents</a>
                     </li>
                     <li class="nav-item">
-                    <a class="nav-link" href="#">Activités</a>
+                    <a class="nav-link" href="{{path('admin_activities')}}">Activités</a>
                     </li>
                     <li class="nav-item">
-                    <a class="nav-link" href="#">Créneaux</a>
+                    <a class="nav-link" href="{{path('admin_timeSlots')}}">Créneaux</a>
                     </li>
                     <li class="nav-item">
-                    <a class="nav-link" href="#">Evènements</a>
+                    <a class="nav-link" href="{{path('admin_events')}}">Evènements</a>
+                    </li>
+                    <li class="nav-item">
+                    <a class="nav-link" href="{{path('admin_accounts')}}">Comptes</a>
                     </li>
                 </ul>
             </nav>
@@ -63,7 +66,9 @@
 <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"> </script>
         <script>
             $(document).ready( function () {    
-                $('#example').DataTable();
+                $('#example1').DataTable();
+                $('#example2').DataTable();
+                $('#example3').DataTable();
             } );
         </script>
 {% endblock %}
