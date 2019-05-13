@@ -44,7 +44,7 @@ admin_adherents:
 
 admin_adherentsEdit:
     path: /admin/adherents/edit/{id}
-    controller: App\Controller\AdminAdherentsController::edit
+    controller: App\Controller\administration\AdminAdherentsController::edit
     requirements:
         id: ([0-9]*)
     

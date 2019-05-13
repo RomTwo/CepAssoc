@@ -3,7 +3,7 @@
 namespace App\Controller\administration;
 
 use App\Entity\TimeSlot;
-use App\Form\AdminAdherentType;
+use App\Form\TimeSlotType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -19,9 +19,22 @@ class AdminTimeSlotsController extends AbstractController
         ]);
     }
 
-    public function add(TimeSlot $timeSlot)
+    public function add(Request $request)
     {
+        $timeSlot = new TimeSlot();
+
         $form = $this->createForm(TimeSlotType::class, $timeSlot);
+        $entityManager = $this->getDoctrine()->getManager();
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            $entityManager->persist($timeSlot);
+            $entityManager->flush();
+        
+            return $this->redirectToRoute('admin_timeSlots');
+        }
 
         return $this->render('administration/timeSlots/timeSlotsAdd.html.twig',[
             'form' => $form->createView()

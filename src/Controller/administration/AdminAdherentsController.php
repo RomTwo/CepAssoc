@@ -21,14 +21,14 @@ class AdminAdherentsController extends AbstractController
 
     public function edit(Adherent $adherent, Request $request)
     {
-
+        $entityManager = $this->getDoctrine()->getManager();
         $form = $this->createForm(AdminAdherentType::class, $adherent);
 
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
 
-            $entityManager = $this->getDoctrine()->getManager();
+            
             $entityManager->flush();
 
             return $this->redirectToRoute('admin_adherents');
