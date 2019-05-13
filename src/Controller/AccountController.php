@@ -52,6 +52,12 @@ class AccountController extends AbstractController
         ));
     }
 
+    /**
+     * The user can modify your profile (personnal informations and his identifiants)
+     * @param Request $request
+     * @param UserPasswordEncoderInterface $encoder
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|Response
+     */
     public function update(Request $request, UserPasswordEncoderInterface $encoder)
     {
         $manager = $this->getDoctrine()->getManager();
@@ -80,7 +86,7 @@ class AccountController extends AbstractController
         }
 
         return $this->render('account/update.html.twig', array(
-            "form" => $form->createView(),
+            "form" => $form->createView()
         ));
     }
 

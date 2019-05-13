@@ -4,11 +4,10 @@
     <meta charset="UTF-8">
 
     <title>{% block title %}Welcome!{% endblock %}</title>
-    {% block stylesheets %}
-        {{ encore_entry_link_tags('app') }}
-    {% endblock %}
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
-          integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+
+    {{ encore_entry_link_tags('app') }}
+    {% block stylesheets %}{% endblock %}
+
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-light">
@@ -41,10 +40,6 @@
 </div>
 
 {{ encore_entry_script_tags('app') }}
-
-{% block javascripts %}
-
-
-{% endblock %}
+{% block javascripts %}{% endblock %}
 </body>
 </html>
