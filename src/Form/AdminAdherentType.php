@@ -12,7 +12,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class AdherentType extends AbstractType
+class AdminAdherentType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
@@ -27,48 +27,42 @@ class AdherentType extends AbstractType
                 'multiple' => false,
                 'expanded' => true,
             ])
-            ->add('birthDate', DateType::class, [
-                'widget' => 'choice',
-                'years' => range(date('Y'), date('Y') - 100),
-            ])
+            ->add('birthDate', DateType::class)
             ->add('isGAFJudge', null, [
                 'attr' => [
                     'value' => false,
                 ],
-                'required' => false,
-                'label' => "Juge GAF",
+                'required'   => false,
             ])
             ->add('GAFJudgeLevel', NumberType::class, [
                 'attr' => [
                     'value' => 0,
                 ],
-                'required' => false,
+                'required'   => false,
             ])
             ->add('isGAMJudge', null, [
                 'attr' => [
                     'value' => false,
                 ],
-                'required' => false,
-                'label' => "Juge GAM",
+                'required'   => false,
             ])
             ->add('GAMJudgeLevel', NumberType::class, [
                 'attr' => [
                     'value' => 0,
                 ],
-                'required' => false,
+                'required'   => false,
             ])
             ->add('isTeamGYMJudge', null, [
                 'attr' => [
                     'value' => false,
                 ],
-                'required' => false,
-                'label' => "Juge TeamGYM",
+                'required'   => false,
             ])
             ->add('teamGYMJudgeLevel', NumberType::class, [
                 'attr' => [
                     'value' => 0,
                 ],
-                'required' => false,
+                'required'   => false,
             ])
             ->add('wantsAJudgeTraining', ChoiceType::class, [
                 'choices' => [
@@ -84,10 +78,7 @@ class AdherentType extends AbstractType
                 ],
                 'multiple' => false,
                 'expanded' => true,
-                'data' => 'jamais',
-                'label_attr' => [
-                    'class' => 'radio-inline'
-                ],
+                'data' => 'jamais'
             ])
             ->add('volunteerForClubLife', ChoiceType::class, [
                 'choices' => [
@@ -97,10 +88,7 @@ class AdherentType extends AbstractType
                 ],
                 'multiple' => false,
                 'expanded' => true,
-                'data' => 'jamais',
-                'label_attr' => [
-                    'class' => 'radio-inline'
-                ],
+                'data' => 'jamais'
             ])
             ->add('registrationType', ChoiceType::class, [
                 'attr' => [
@@ -113,64 +101,36 @@ class AdherentType extends AbstractType
                 ],
                 'multiple' => false,
                 'expanded' => true,
-                'label_attr' => [
-                    'class' => 'radio-inline'
-                ],
             ])
-            ->add('firstNameRep1', TextType::class, array(
-                'data' => $options['firstNameRep1']
-            ))
-            ->add('lastNameRep1', TextType::class, array(
-                'data' => $options['lastNameRep1']
-            ))
-            ->add('firstNameRep2', TextType::class, array(
-                'required' => false,
-            ))
-            ->add('lastNameRep2', TextType::class, array(
-                'required' => false,
-            ))
-            ->add('emailRep1', EmailType::class, array(
-                'data' => $options['emailRep1']
-            ))
-            ->add('emailRep2', EmailType::class, array(
-                'required' => false,
-            ))
-            ->add('cityRep1', TextType::class, array(
-                'data' => $options['cityRep1']
-            ))
-            ->add('cityRep2', TextType::class, array(
-                'required' => false,
-            ))
-            ->add('addressRep1', TextType::class, array(
-                'data' => $options['addressRep1']
-            ))
-            ->add('addressRep2', TextType::class, array(
-                'required' => false,
-            ))
-            ->add('zipCodeRep1', NumberType::class, array(
-                'data' => $options['zipCodeRep1']
-            ))
-            ->add('zipCodeRep2', NumberType::class, array(
-                'required' => false,
-            ))
-            ->add('professionRep1', TextType::class)
-            ->add('professionRep2', TextType::class, array(
-                'required' => false,
-            ))
+            ->add('firstNameRep1', TextType::class
+            )
+            ->add('lastNameRep1', TextType::class
+            )
+            ->add('firstNameRep2')
+            ->add('lastNameRep2')
+            ->add('emailRep1', EmailType::class
+            )
+            ->add('emailRep2', EmailType::class)
+            ->add('cityRep1', TextType::class
+            )
+            ->add('cityRep2')
+            ->add('addressRep1', TextType::class
+            )
+            ->add('addressRep2')
+            ->add('zipCodeRep1', NumberType::class
+            )
+            ->add('zipCodeRep2')
+            ->add('professionRep1')
+            ->add('professionRep2')
             ->add('phoneRep1', NumberType::class)
-            ->add('phoneRep2', NumberType::class, array(
-                'required' => false,
-            ))
-            ->add('paymentType', ChoiceType::class, [
+            ->add('phoneRep2')
+            ->add('paymentType', ChoiceType::class,[
                 'choices' => [
                     'Espèces' => "especes",
                     'Chèque' => "cheque",
                 ],
                 'multiple' => false,
                 'expanded' => true,
-                'label_attr' => [
-                    'class' => 'radio-inline'
-                ],
             ])
             ->add('imageRight', ChoiceType::class, [
                 'choices' => [
@@ -179,10 +139,21 @@ class AdherentType extends AbstractType
                 ],
                 'multiple' => false,
                 'expanded' => true,
-                'label_attr' => [
-                    'class' => 'radio-inline'
+            ])
+            // Admin fields
+            ->add('isMedicalCertificate',  ChoiceType::class, [
+                'choices' => [
+                    'Non' => false,
+                    'Oui' => true,
                 ],
-            ]);
+            ])
+            ->add('paymentFeesArePaid',  ChoiceType::class, [
+                'choices' => [
+                    'Non' => false,
+                    'Oui' => true,
+                ],
+            ])
+        ;
     }
 
     public function configureOptions(OptionsResolver $resolver)
@@ -190,14 +161,5 @@ class AdherentType extends AbstractType
         $resolver->setDefaults([
             'data_class' => Adherent::class,
         ]);
-
-        $resolver->setRequired(array(
-            'firstNameRep1',
-            'lastNameRep1',
-            'emailRep1',
-            'cityRep1',
-            'addressRep1',
-            'zipCodeRep1'
-        ));
     }
 }

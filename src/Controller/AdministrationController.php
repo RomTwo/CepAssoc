@@ -13,6 +13,7 @@ use Symfony\Component\Serializer\Serializer;
 use App\Entity\Activity;
 use App\Entity\Event;
 use App\Entity\Category;
+use Symfony\Component\Routing\Annotation\Route;
 
 class AdministrationController extends AbstractController
 {
