@@ -38,7 +38,6 @@ admin_adherent_competiteurs:
     controller: App\Controller\AdministrationController::competiteurs
 
 ### Errors routing ###
-
 error_404:
     path: /error404
     controller: App\Controller\ErrorController::error404
