@@ -38,7 +38,7 @@ class AppFixtures extends Fixture
             if(($i % 2) == 0)
                 $account->setSex('F');
             else
-                $account->setSex('M');
+                $account->setSex('H');
 
             $account->setBirthDate(new \DateTime("11-11-1994"));
             $account->setZipCode(86000);
@@ -62,7 +62,7 @@ class AppFixtures extends Fixture
             if(($i % 2) == 0)
                 $adherent->setSex('F');
             else
-                $adherent->setSex('M');
+                $adherent->setSex('H');
 
             $adherent->setBirthDate(new \DateTime("07-05-2019"));
             $adherent->setFirstNameRep1("dede");
@@ -113,12 +113,13 @@ class AppFixtures extends Fixture
                 $adherent->setWantsAJudgeTraining(false);
 
 
-            $adherent->setRegistrationType("type".$i);
+            $adherent->setRegistrationType("nouveau");
+            $adherent->setRegistrationCost(0);
             $adherent->setRegistrationDate(new \DateTime("01-09-2019"));
             $adherent->setpaymentFeesArePaid(false);
             $adherent->setisRegisteredInGestGym(false);
-            $adherent->setvolunteerForTrainingHelp(false);
-            $adherent->setvolunteerForClubLife(false);
+            $adherent->setVolunteerForTrainingHelp("Jamais");
+            $adherent->setVolunteerForClubLife("Jamais");
             $adherent->setPaymentType("cheque");
             $adherent->setImageRight(false);
             $adherent->setIsRegisteredInFFG(false);
