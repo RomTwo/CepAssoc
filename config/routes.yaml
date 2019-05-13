@@ -35,11 +35,12 @@ security_deconnexion:
 
 admin_adherent_competiteurs:
     path: /admin/competiteurs
-    controller: App\Controller\AdministrationController::competiteurs
+    controller: App\Controller\administration\AdministrationController::competiteurs
 
+    #--adherents
 admin_adherents:
     path: /admin/adherents
-    controller: App\Controller\AdminAdherentsController::index
+    controller: App\Controller\administration\AdminAdherentsController::index
 
 admin_adherentsEdit:
     path: /admin/adherents/edit/{id}
@@ -49,26 +50,33 @@ admin_adherentsEdit:
     
 admin_adherentsRegister:
     path: /admin/adherents/register/{id}
-    controller: App\Controller\AdminAdherentsController::register
+    controller: App\Controller\administration\AdminAdherentsController::register
     requirements:
         id: ([0-9]*)
 
+    #--activities
 admin_activities:
     path: /admin/activities
-    controller: App\Controller\AdminActivitiesController::index
+    controller: App\Controller\administration\AdminActivitiesController::index
 
+    #--timeSlots
 admin_timeSlots:
     path: /admin/timeSlots
-    controller: App\Controller\AdminTimeSlotsController::index
+    controller: App\Controller\administration\AdminTimeSlotsController::index
 
+admin_timeSlotsAdd:
+    path: /admin/timeSlots/add
+    controller: App\Controller\administration\AdminTimeSlotsController::add
+
+    #--accounts
 admin_accounts:
     path: /admin/accounts
-    controller: App\Controller\AdminAccountsController::index
+    controller: App\Controller\administration\AdminAccountsController::index
 
+    #--events
 admin_events:
     path: /admin/events
-    controller: App\Controller\AdminEventsController::index
-
+    controller: App\Controller\administration\AdminEventsController::index
 
 
 ### Errors routing ###
