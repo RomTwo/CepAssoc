@@ -27,42 +27,48 @@ class AdherentType extends AbstractType
                 'multiple' => false,
                 'expanded' => true,
             ])
-            ->add('birthDate', DateType::class)
+            ->add('birthDate', DateType::class, [
+                'widget' => 'choice',
+                'years' => range(date('Y'), date('Y') - 100),
+            ])
             ->add('isGAFJudge', null, [
                 'attr' => [
                     'value' => false,
                 ],
-                'required'   => false,
+                'required' => false,
+                'label' => "Juge GAF",
             ])
             ->add('GAFJudgeLevel', NumberType::class, [
                 'attr' => [
                     'value' => 0,
                 ],
-                'required'   => false,
+                'required' => false,
             ])
             ->add('isGAMJudge', null, [
                 'attr' => [
                     'value' => false,
                 ],
-                'required'   => false,
+                'required' => false,
+                'label' => "Juge GAM",
             ])
             ->add('GAMJudgeLevel', NumberType::class, [
                 'attr' => [
                     'value' => 0,
                 ],
-                'required'   => false,
+                'required' => false,
             ])
             ->add('isTeamGYMJudge', null, [
                 'attr' => [
                     'value' => false,
                 ],
-                'required'   => false,
+                'required' => false,
+                'label' => "Juge TeamGYM",
             ])
             ->add('teamGYMJudgeLevel', NumberType::class, [
                 'attr' => [
                     'value' => 0,
                 ],
-                'required'   => false,
+                'required' => false,
             ])
             ->add('wantsAJudgeTraining', ChoiceType::class, [
                 'choices' => [
@@ -78,7 +84,10 @@ class AdherentType extends AbstractType
                 ],
                 'multiple' => false,
                 'expanded' => true,
-                'data' => 'jamais'
+                'data' => 'jamais',
+                'label_attr' => [
+                    'class' => 'radio-inline'
+                ],
             ])
             ->add('volunteerForClubLife', ChoiceType::class, [
                 'choices' => [
@@ -88,7 +97,10 @@ class AdherentType extends AbstractType
                 ],
                 'multiple' => false,
                 'expanded' => true,
-                'data' => 'jamais'
+                'data' => 'jamais',
+                'label_attr' => [
+                    'class' => 'radio-inline'
+                ],
             ])
             ->add('registrationType', ChoiceType::class, [
                 'attr' => [
@@ -101,6 +113,9 @@ class AdherentType extends AbstractType
                 ],
                 'multiple' => false,
                 'expanded' => true,
+                'label_attr' => [
+                    'class' => 'radio-inline'
+                ],
             ])
             ->add('firstNameRep1', TextType::class, array(
                 'data' => $options['firstNameRep1']
@@ -108,35 +123,54 @@ class AdherentType extends AbstractType
             ->add('lastNameRep1', TextType::class, array(
                 'data' => $options['lastNameRep1']
             ))
-            ->add('firstNameRep2')
-            ->add('lastNameRep2')
+            ->add('firstNameRep2', TextType::class, array(
+                'required' => false,
+            ))
+            ->add('lastNameRep2', TextType::class, array(
+                'required' => false,
+            ))
             ->add('emailRep1', EmailType::class, array(
                 'data' => $options['emailRep1']
             ))
-            ->add('emailRep2', EmailType::class)
+            ->add('emailRep2', EmailType::class, array(
+                'required' => false,
+            ))
             ->add('cityRep1', TextType::class, array(
                 'data' => $options['cityRep1']
             ))
-            ->add('cityRep2')
+            ->add('cityRep2', TextType::class, array(
+                'required' => false,
+            ))
             ->add('addressRep1', TextType::class, array(
                 'data' => $options['addressRep1']
             ))
-            ->add('addressRep2')
+            ->add('addressRep2', TextType::class, array(
+                'required' => false,
+            ))
             ->add('zipCodeRep1', NumberType::class, array(
                 'data' => $options['zipCodeRep1']
             ))
-            ->add('zipCodeRep2')
-            ->add('professionRep1')
-            ->add('professionRep2')
+            ->add('zipCodeRep2', NumberType::class, array(
+                'required' => false,
+            ))
+            ->add('professionRep1', TextType::class)
+            ->add('professionRep2', TextType::class, array(
+                'required' => false,
+            ))
             ->add('phoneRep1', NumberType::class)
-            ->add('phoneRep2')
-            ->add('paymentType', ChoiceType::class,[
+            ->add('phoneRep2', NumberType::class, array(
+                'required' => false,
+            ))
+            ->add('paymentType', ChoiceType::class, [
                 'choices' => [
                     'Espèces' => "especes",
                     'Chèque' => "cheque",
                 ],
                 'multiple' => false,
                 'expanded' => true,
+                'label_attr' => [
+                    'class' => 'radio-inline'
+                ],
             ])
             ->add('imageRight', ChoiceType::class, [
                 'choices' => [
@@ -145,8 +179,10 @@ class AdherentType extends AbstractType
                 ],
                 'multiple' => false,
                 'expanded' => true,
-            ])
-        ;
+                'label_attr' => [
+                    'class' => 'radio-inline'
+                ],
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver)

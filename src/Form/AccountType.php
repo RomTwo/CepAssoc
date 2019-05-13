@@ -18,8 +18,8 @@ class AccountType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('firstName', TextType::class, array('label' => 'Nom : '))
-            ->add('lastName', TextType::class, array('label' => 'Prénom : '))
+            ->add('firstName', TextType::class, array('label' => 'Prénom : '))
+            ->add('lastName', TextType::class, array('label' => 'Nom : '))
             ->add('sex', ChoiceType::class, array(
                 'choices' => array(
                     'M' => 'M',
@@ -28,7 +28,10 @@ class AccountType extends AbstractType
                 'expanded' => false,
                 'label' => 'Civilité : '
             ))
-            ->add('birthDate', DateType::class, array('label' => 'Date de naissance : '))
+            ->add('birthDate', DateType::class, array('label' => 'Date de naissance : ',
+                'widget' => 'choice',
+                'years' => range(date('Y'), date('Y') - 100),
+            ))
             ->add('address', TextType::class, array('label' => 'Adresse : '))
             ->add('zipCode', TextType::class, array('label' => 'Code postal : '))
             ->add('city', TextType::class, array('label' => 'Ville : '))
