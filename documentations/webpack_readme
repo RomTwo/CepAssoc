@@ -11,18 +11,28 @@
 
 -- Intégration des fichiers css ou js dans twig
 
-    -- CSS
-   {% block stylesheets %}
-            {{ encore_entry_link_tags('app') }}
-   {% endblock %}
+    -- CSS (en dehors du block css)
+        {{ encore_entry_link_tags('app') }}
+        {% block stylesheets %}
+        {% endblock %}
 
-    -- JS
-   {% block javascripts %}
-            {{ encore_entry_script_tags('app') }}
-   {% endblock %}
+    -- JS (en dehors du block js)
+        {{ encore_entry_script_tags('app') }}
+        {% block javascripts %}
+        {% endblock %}
 
     -- 'app' désigne le nom du entrypoint définit dans le fichier webpack.config.js (fichier de configuration webpack)
         Dans notre cas : .addEntry('app', './assets/js/app.js') 
 
 -- Lien externe
     * documentation officiel : https://symfony.com/doc/current/frontend.html
+
+-- Utilisation d'une nouvelle librairie css/js
+    On prends l'exemple de bootstrap :
+        * on cherche le nom du paquet bootstrap sur le gestionnaire de paquet utilisé, ici nous utilisons yarn
+        * on ajoute le paquet à l'aide de la commande suivant : yarn add bootstrap
+        * on ajoute à notre fichier js principale (celui dans lequel on déclare toutes les librairies utilisées) app.js la ligne suivante :
+                require('bootstrap'); (cette ligne ajoute à webpack le js de bootstrap)
+        * on ajoute aux fichiers css qui en ont besoin le css bootstrap à l'aide de la commande suivante : @import "~bootstrap/scss/bootstrap";
+            (la commande varie en fonction de la librairie)
+        * penser a exécuter la commande yarn encore dev (si la commande yarn encore dev --watch n'est pas démarré)
