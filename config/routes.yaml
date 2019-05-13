@@ -29,13 +29,47 @@ security_deconnexion:
     path: /profile/logout
 
 ### Administration routing ###
-admin_index:
-    path: /admin/Administration
-    controller: App\Controller\AdministrationController::index
+#admin_index:
+#    path: /admin/Administration
+#    controller: App\Controller\AdministrationController::index
 
 admin_adherent_competiteurs:
     path: /admin/competiteurs
     controller: App\Controller\AdministrationController::competiteurs
+
+admin_adherents:
+    path: /admin/adherents
+    controller: App\Controller\AdminAdherentsController::index
+
+admin_adherentsEdit:
+    path: /admin/adherents/edit/{id}
+    controller: App\Controller\AdminAdherentsController::edit
+    requirements:
+        id: ([0-9]*)
+    
+admin_adherentsRegister:
+    path: /admin/adherents/register/{id}
+    controller: App\Controller\AdminAdherentsController::register
+    requirements:
+        id: ([0-9]*)
+
+admin_activities:
+    path: /admin/activities
+    controller: App\Controller\AdminActivitiesController::index
+
+admin_timeSlots:
+    path: /admin/timeSlots
+    controller: App\Controller\AdminTimeSlotsController::index
+
+admin_accounts:
+    path: /admin/accounts
+    controller: App\Controller\AdminAccountsController::index
+
+admin_events:
+    path: /admin/events
+    controller: App\Controller\AdminEventsController::index
+
+
 
 ### Errors routing ###
 error_404:

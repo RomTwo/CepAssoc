@@ -116,7 +116,7 @@ class LoginFormAuthentificator extends AbstractFormLoginAuthenticator
 
         $user = $this->entityManager->getRepository(Account::class)->findOneBy(['email' => $credentials['email']]);
         if (!$user) {
-            throw new CustomUserMessageAuthenticationException('Erreur : Les identifiants saisis sont incorrects');
+            throw new CustomUserMessageAuthenticationException('Les identifiants saisis sont incorrects');
         }
 
         return $user;
@@ -134,7 +134,7 @@ class LoginFormAuthentificator extends AbstractFormLoginAuthenticator
         if ($this->passwordEncoder->isPasswordValid($user, $credentials['password'])) {
             return true;
         }
-        throw new CustomUserMessageAuthenticationException('Erreur : Les identifiants saisis sont incorrects');
+        throw new CustomUserMessageAuthenticationException('Les identifiants saisis sont incorrects');
     }
 
     /**

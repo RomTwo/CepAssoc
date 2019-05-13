@@ -1,4 +1,4 @@
-<?php
+    <?php
 
 use App\Kernel;
 use Symfony\Component\Debug\Debug;

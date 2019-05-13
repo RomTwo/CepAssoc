@@ -1,5 +1,4 @@
-{% extends 'base.html.twig' %}
-
+{#
 {% block title %}Log in!{% endblock %}
 
 {% block body %}
@@ -40,3 +39,101 @@
         </form>
     </div>
 {% endblock %}
+#}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <title>{% block title %}Log In!{% endblock %}</title>
+    {% block stylesheets %}
+        {{ encore_entry_link_tags('app') }}
+    {% endblock %}
+</head>
+<body>
+
+<div class="d-md-flex h-md-100 align-items-center">
+    <!-- First Half -->
+    <div class="col-md-7 p-0 bg-gym h-md-100">
+        <div class="text-white d-md-flex align-items-center h-100 p-5 text-center justify-content-center">
+            <div class="pt-5 pb-5">
+                <h1 class="text-black">CEP</h1>
+                <p class="text-black">Gymnastique</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Second Half -->
+    <div class="col-md-5 p-0 bg-white h-md-100">
+        <div class="d-md-flex align-items-center h-md-100 p-5 justify-content-center">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <h1>Connexion</h1>
+                </div>
+                <hr class="d-md-flex align-items-center" color="green">
+                <div class="justify-content-center">
+                    <form action="{{ path('security_connexion') }}" method="post">
+
+                        <!-- Login form -->
+                        <label for="inputEmail" class="sr-only">Adresse mail : </label>
+                        <input type="email" name="email" id="inputEmail" class="form-control" placeholder="Email"
+                               required autofocus>
+                        <label for="inputPassword" class="sr-only">Mot de passe : </label>
+                        <input type="password" name="password" id="inputPassword" class="form-control"
+                               placeholder="mot de passe"
+                               required>
+
+                        <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+
+                        <button class="btn btn-lg btn-primary" type="submit">Connexion</button>
+                    </form>
+                    {% if errors %}
+                        <div class="row justify-content-center mt-2"><small class="form-text"><span
+                                        class="badge badge-danger">Erreur</span>{{ errors.messageKey|trans(errors.messageData, 'security') }}</small></div>
+                    {% endif %}
+
+                    {% if msg is defined %}
+                        <div class="row justify-content-center mt-2"><small class="form-text"><span
+                                        class="badge badge-danger">Erreur</span> {{ msg }}</small></div>
+                    {% endif %}
+                    <div class="row justify-content-center mt-2">
+                        <p>Vous n'avez pas encore de compte ? <a href="{{ path('account_add') }}">Inscrivez-vous !</a></p>
+                    </div>
+                    <!-- Forgot password form -->
+                    <div class=" row justify-content-between align-items-center pl-3 pr-3">
+                        <a data-toggle="collapse" href="#collapseId" role="button" aria-expanded="false"
+                           aria-controls="collapseId">Mot
+                            de passe oublié ?</a>
+                    </div>
+                    <div class="collapse" id="collapseId">
+                        <form class="form-inline" action="{{ path('account_forgot_password') }}" method="post">
+                            <input class="form-control" type="email" name="email" placeholder="Email" required>
+                            <input class="btn btn-success" type="submit" value="Envoyer">
+                        </form>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+{{ encore_entry_script_tags('app') }}
+
+
+{% block javascripts %}
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+            integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+            crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+            integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+            crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+            integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+            crossorigin="anonymous"></script>
+
+{% endblock %}
+</body>
+</html>

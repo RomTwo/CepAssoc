@@ -25,7 +25,7 @@ class Adherent
      * @ORM\Column(type="string", length=255)
      * @Assert\NotBlank
      * @Assert\NotNull
-     * @Assert\Length(min=10, max=255, minMessage="Ce prenom n'est pas valide")
+     * @Assert\Length(min=1, max=255, minMessage="Ce prenom n'est pas valide")
      * @Assert\Length(min=1, max=255)
      * @Groups({"competition"})
      */
@@ -163,14 +163,14 @@ class Adherent
     private $lastNameRep1;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      * @Assert\Length(min=1, max=255)
      * @Groups({"competition"})
      */
     private $firstNameRep2;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      * @Groups({"competition"})
      */
     private $lastNameRep2;
@@ -182,7 +182,7 @@ class Adherent
     private $emailRep1;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      * @Groups({"competition"})
      */
     private $emailRep2;
@@ -194,7 +194,7 @@ class Adherent
     private $cityRep1;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      * @Groups({"competition"})
      */
     private $cityRep2;
@@ -206,7 +206,7 @@ class Adherent
     private $addressRep1;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      * @Groups({"competition"})
      */
     private $addressRep2;
@@ -224,8 +224,7 @@ class Adherent
     private $zipCodeRep1;
 
     /**
-     * @ORM\Column(type="integer")
-     * @Assert\NotNull(message="Veuiller remplir le champ code postal")
+     * @ORM\Column(type="integer", nullable=true)
      * @Assert\Regex(
      *     pattern = "/^([0-9]{2}|(2A)|2B)[[0-9]{3}$/",
      *     match = true,
@@ -241,7 +240,7 @@ class Adherent
     private $professionRep1;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      * @Groups({"competition"})
      */
     private $professionRep2;
@@ -253,7 +252,7 @@ class Adherent
     private $phoneRep1;
 
     /**
-     * @ORM\Column(type="integer", length=10)
+     * @ORM\Column(type="integer", length=10, nullable=true)
      * @Groups({"competition"})
      */
     private $phoneRep2;

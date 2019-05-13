@@ -14,25 +14,35 @@ $ = require('jquery');
 // const $ = require('jquery');
 
 $('#next').click(function () {
-    var value = parseInt(document.getElementById('next').value);
+    var value = parseInt(document.getElementById('step').value);
     if (value < 5) {
-        if(myFunction("step" + value)){
-            $("span").hide();
-            $("#step"+(value+1)).show();
-            $("#step"+(value)).hide();
-            document.getElementById('next').value = value+1;
-            document.getElementById('previous').value = value+1;
+        if (stepChoice("step" + value)) {
+            if (value == 4) {
+                $("#next").hide();
+            }
+            $("#previous").show();
+            $("helper").hide();
+            $("#step" + (value + 1)).show();
+            $("#step" + (value)).hide();
+            document.getElementById('step').value = value + 1;
         }
+    } else {
+        $("#next").hide();
     }
 });
 
 $('#previous').click(function () {
-    var value = parseInt(document.getElementById('previous').value);
+    var value = parseInt(document.getElementById('step').value);
     if (value > 1) {
+        if (value == 2) {
+            $("#previous").hide();
+        }
+        $("#next").show();
         $("#step" + (value - 1)).show();
         $("#step" + (value)).hide();
-        document.getElementById('previous').value = value - 1;
-        document.getElementById('next').value = value - 1;
+        document.getElementById('step').value = value - 1;
+    } else {
+        $("#previous").hide();
     }
 });
 
@@ -46,22 +56,16 @@ $('#volontaire').on('change', function () {
 });
 
 $("input[name='selection']").on('change', function () {
-    var $test = 0;
+    var $prix = 0;
 
     $.each($("input[name='selection']:checked"), function () {
         var $id = $(this).val();
-        $test = $test + parseInt($("#price" + $id).text());
+        $prix = $prix + parseInt($("#price" + $id).text());
     });
-    $("#test").text($test);
+    $("#prix").text($prix);
 });
 
-document.getElementById('registrationType').addEventListener('change', function (event) {
-    if (!event.target.validity.valid) {
-        alert("Test");
-    }
-}, false);
-
-function myFunction(step) {
+function stepChoice(step) {
     switch (step) {
         case 'step1':
             return step1();
@@ -79,32 +83,32 @@ function myFunction(step) {
 function step1() {
     var bool = true;
 
-    if(isValidationRadio('adherent[registrationType]')){
+    if (isValidationRadio('adherent[registrationType]')) {
         $("#registrationTypeHelp").show();
         bool = false;
-    }else{
+    } else {
         $("#registrationTypeHelp").hide();
     }
 
-    if(isValidationInput('adherent[firstName]')){
+    if (isEmpty('adherent[firstName]')) {
         $("#firstNameTypeHelp").show();
         bool = false;
-    }else{
+    } else {
         $("#firstNameTypeHelp").hide();
     }
 
-    if(isValidationInput('adherent[lastName]')){
-        $("#lastNameHelp").show();
+    if (isEmpty('adherent[lastName]')) {
+        $("#lastNameTypeHelp").show();
         bool = false;
-    }else{
-        $("#lastNameHelp").hide();
+    } else {
+        $("#lastNameTypeHelp").hide();
     }
 
-    if(isValidationRadio('adherent[sex]')){
-        $("#sexHelp").show();
+    if (isValidationRadio('adherent[sex]')) {
+        $("#sexTypeHelp").show();
         bool = false;
-    }else{
-        $("#sexHelp").hide();
+    } else {
+        $("#sexTypeHelp").hide();
     }
 
     return bool;
@@ -113,113 +117,127 @@ function step1() {
 function step3() {
     var bool = true;
 
-    (isValidationInput('adherent[firstNameRep1]') ? ($("#firstNameRep1Help").show(), bool = false): $("#firstNameRep1Help").hide());
-    (isValidationInput('adherent[lastNameRep1]') ? ($("#lastNameRep1Help").show(), bool = false): $("#lastNameRep1Help").hide());
+    (isEmpty('adherent[firstNameRep1]') ? ($("#firstNameRep1Help").show(), bool = false) : $("#firstNameRep1Help").hide());
+    (isEmpty('adherent[lastNameRep1]') ? ($("#lastNameRep1Help").show(), bool = false) : $("#lastNameRep1Help").hide());
 
 
-    if(isValidationEmailInput('adherent[emailRep1]')){
+    if (isValidationEmailInput('adherent[emailRep1]')) {
         $("#emailRep1Help").show();
         bool = false;
-    }else{
+    } else {
         $("#emailRep1Help").hide();
     }
 
-    if(isValidationInput('adherent[professionRep1]')){
+    if (isEmpty('adherent[professionRep1]')) {
         $("#professionRep1Help").show();
         bool = false;
-    }else{
+    } else {
         $("#professionRep1Help").hide();
     }
 
-    if(isValidationInput('adherent[cityRep1]')){
+    if (isEmpty('adherent[cityRep1]')) {
         $("#cityRep1Help").show();
         bool = false;
-    }else{
+    } else {
         $("#cityRep1Help").hide();
     }
 
-    if(isValidationInput('adherent[addressRep1]')){
+    if (isEmpty('adherent[addressRep1]')) {
         $("#addressRep1Help").show();
         bool = false;
-    }else{
+    } else {
         $("#addressRep1Help").hide();
     }
 
-    if(isValidationZipCodeInput('adherent[zipCodeRep1]')){
+    if (isValidationZipCodeInput('adherent[zipCodeRep1]')) {
         $("#zipCodeRep1Help").show();
         bool = false;
-    }else{
+    } else {
         $("#zipCodeRep1Help").hide();
     }
 
-    if(isValidationPhoneNumberInput('adherent[phoneRep1]')){
+    if (isValidationPhoneNumberInput('adherent[phoneRep1]')) {
         $("#phoneRep1Help").show();
         bool = false;
-    }else{
+    } else {
         $("#phoneRep1Help").hide();
     }
 
-    (isValidationInput('adherent[firstNameRep2]') ? ($("#firstNameRep2Help").show(), bool = false): $("#firstNameRep2Help").hide());
-    (isValidationInput('adherent[lastNameRep2]') ? ($("#lastNameRep2Help").show(), bool = false): $("#lastNameRep2Help").hide());
-    (isValidationEmailInput('adherent[emailRep2]') ? ($("#emailRep2Help").show(), bool = false): $("#emailRep2Help").hide());
-    (isValidationInput('adherent[professionRep2]') ? ($("#professionRep2Help").show(), bool = false): $("#professionRep2Help").hide());
-    (isValidationInput('adherent[cityRep2]') ? ($("#cityRep2Help").show(), bool = false): $("#cityRep2Help").hide());
-    (isValidationInput('adherent[addressRep2]') ? ($("#addressRep2Help").show(), bool = false): $("#addressRep2Help").hide());
-    (isValidationZipCodeInput('adherent[zipCodeRep2]') ? ($("#zipCodeRep2Help").show(), bool = false): $("#zipCodeRep2Help").hide());
-    (isValidationPhoneNumberInput('adherent[phoneRep2]') ? ($("#phoneRep2Help").show(), bool = false): $("#phoneRep2Help").hide());
+    (isEmpty('adherent[emailRep2]') ? $("#emailRep2Help").hide() : ((isValidationEmail('adherent[emailRep2]')) ? ($("#emailRep2Help").show(), bool = false) : $("#emailRep2Help").hide()));
+    (isEmpty('adherent[zipCodeRep2]') ? $("#zipCodeRep2Help").hide() : ((isValidationZipCode('adherent[zipCodeRep2]')) ? ($("#zipCodeRep2Help").show(), bool = false) : $("#zipCodeRep2Help").hide()));
+    (isEmpty('adherent[phoneRep2]') ? $("#phoneRep2Help").hide() : ((isValidationPhoneNumber('adherent[phoneRep2]')) ? ($("#phoneRep2Help").show(), bool = false) : $("#phoneRep2Help").hide()));
     return bool;
 }
 
 function isValidationRadio(nameRadio) {
-    if ($('input[name="' + nameRadio + '"]:checked').val()) {
-        return false;
-    } else {
-        return true;
-    }
+    return !$('input[name="' + nameRadio + '"]:checked').val();
 }
 
-function isValidationInput(nameInput){
-    if (!$('input[name="' + nameInput + '"]').val()) {
-        return true;
-    } else {
-        return false;
-    }
+function isEmpty(nameInput) {
+    return !$('input[name="' + nameInput + '"]').val();
 }
 
-function isValidationEmailInput(nameEmailInput){
-    if (!$('input[name="' + nameEmailInput + '"]').val()) {
-        return true;
-    } else {
+function isValidationEmailInput(nameEmailInput) {
+    if ($('input[name="' + nameEmailInput + '"]').val()) {
         var pattern = new RegExp(/^[+a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/i);
-        if(pattern.test($('input[name="' + nameEmailInput + '"]').val())){
+        if (pattern.test($('input[name="' + nameEmailInput + '"]').val())) {
             return false;
-        }else{
+        } else {
             return true;
         }
+    } else {
+        return true;
     }
 }
 
-function isValidationZipCodeInput(nameZipCodeInput){
+function isValidationEmail(nameEmail) {
+    var pattern = new RegExp(/^[+a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/i);
+    if (pattern.test($('input[name="' + nameEmail + '"]').val())) {
+        return false;
+    } else {
+        return true;
+    }
+}
+
+function isValidationZipCode(nameZipCode) {
+    var pattern = new RegExp(/^([0-9]{2}|(2A)|2B)[[0-9]{3}$/);
+    if (pattern.test($('input[name="' + nameZipCode + '"]').val())) {
+        return false;
+    } else {
+        return true;
+    }
+}
+
+function isValidationPhoneNumber(nameZipCode) {
+    var pattern = new RegExp(/^(?:(?:\+)33|0)\s*[1-9](?:[\s.-]*\d{2}){4}$/);
+    if (pattern.test($('input[name="' + nameZipCode + '"]').val())) {
+        return false;
+    } else {
+        return true;
+    }
+}
+
+function isValidationZipCodeInput(nameZipCodeInput) {
     if (!$('input[name="' + nameZipCodeInput + '"]').val()) {
         return true;
     } else {
         var pattern = new RegExp(/^([0-9]{2}|(2A)|2B)[[0-9]{3}$/);
-        if(pattern.test($('input[name="' + nameZipCodeInput + '"]').val())){
+        if (pattern.test($('input[name="' + nameZipCodeInput + '"]').val())) {
             return false;
-        }else{
+        } else {
             return true;
         }
     }
 }
 
-function isValidationPhoneNumberInput(namePhoneNumberInput){
+function isValidationPhoneNumberInput(namePhoneNumberInput) {
     if (!$('input[name="' + namePhoneNumberInput + '"]').val()) {
         return true;
     } else {
         var pattern = new RegExp(/^(?:(?:\+)33|0)\s*[1-9](?:[\s.-]*\d{2}){4}$/);
-        if(pattern.test($('input[name="' + namePhoneNumberInput + '"]').val())){
+        if (pattern.test($('input[name="' + namePhoneNumberInput + '"]').val())) {
             return false;
-        }else{
+        } else {
             return true;
         }
     }
