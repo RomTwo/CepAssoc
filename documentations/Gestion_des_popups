@@ -1,8 +1,15 @@
 --- Affichage des popups ---
-
 Affichage du popup via le fichier popup.js
 Gestion du contenu des popups via le fichier notifications.html.twig
 
+-- Côté Front --
+Inclure le fichier twig notifications.html.twig
+
+Exemple :
+{# dans le fichier base.html.twig #}
+{% include('notifications/notifications.html.twig') %}
+
+-- Côté Back --
 Utilisation des messages flash dans les controllers
 
 Pour les messages de succès nommer sont message flash 'success'.
