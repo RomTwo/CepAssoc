@@ -2,16 +2,13 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css">
+
     <title>{% block title %}Hello AdministrationController!{% endblock %}</title>
+    {{ encore_entry_link_tags('app') }}
     {% block stylesheets %}
-        {{ encore_entry_link_tags('app') }}
     {% endblock %}
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+
 </head>
 <body>
 <br/>
@@ -28,47 +25,37 @@
             <!-- Links -->
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link" href="{{path('admin_adherents')}}">Adhérents</a>
+                    <a class="nav-link" href="{{ path('admin_adherents') }}">Adhérents</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{path('admin_activities')}}">Activités</a>
+                    <a class="nav-link" href="{{ path('admin_activities') }}">Activités</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{path('admin_timeSlots')}}">Créneaux</a>
+                    <a class="nav-link" href="{{ path('admin_timeSlots') }}">Créneaux</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{path('admin_events')}}">Evènements</a>
+                    <a class="nav-link" href="{{ path('admin_events') }}">Evènements</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{path('admin_accounts')}}">Comptes</a>
+                    <a class="nav-link" href="{{ path('admin_accounts') }}">Comptes</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{path('admin_adherent_competiteurs')}}">Plugin</a>
+                    <a class="nav-link" href="{{ path('admin_adherent_competiteurs') }}">Plugin</a>
                 </li>
             </ul>
         </nav>
     </div>
     <div class="col">
         <div class="container-fluid">
-    {% block body %}
-
-
-    {% endblock %}
+            {% block body %}{% endblock %}
         </div>
     </div>
 </div>
 
 {{ encore_entry_script_tags('app') }}
 
-<script
-        src="https://code.jquery.com/jquery-3.4.1.min.js"
-        integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
-        crossorigin="anonymous"></script>
 
-{% block javascripts %}
-
-
-{% endblock %}
+{% block javascripts %}{% endblock %}
 </body>
 </html>
  

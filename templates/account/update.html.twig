@@ -1,0 +1,125 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello SiteRegisterController!{% endblock %}
+
+{% block body %}
+    <div>
+
+        {% if msg is defined and msg is not null %}
+            {{ msg }}
+        {% endif %}
+
+        {{ form_start(form) }}
+
+        <div class="container mt-4">
+            <div class="form-group pb-3">
+                <div class="container-fluid">
+                    <h4>Informations générales : </h4>
+                    <div class="row">
+                        <div class="col-2">
+                            {{ form_label(form.firstName) }}
+                        </div>
+                        <div class="col-auto">
+                            {{ form_widget(form.firstName, {'attr': {'placeholder': "Prenom"}}) }}
+                        </div>
+                    </div>
+                    <div class="row ml-1">
+                        {{ form_errors(form.firstName) }}
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-2">
+                            {{ form_label(form.lastName) }}
+                        </div>
+                        <div class="col-auto">
+                            {{ form_widget(form.lastName, {'attr': {'placeholder': "Nom"}}) }}
+                        </div>
+                    </div>
+                    <div class="row ml-1">
+                        {{ form_errors(form.lastName) }}
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-2">
+                            {{ form_label(form.sex) }}
+                        </div>
+                        <div class="col-auto">
+                            {{ form_widget(form.sex) }}
+                        </div>
+                    </div>
+                    <div class="row ml-1">
+                        {{ form_errors(form.sex) }}
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-2">
+                            {{ form_label(form.birthDate) }}
+                        </div>
+                        <div class="col-auto">
+                            {{ form_widget(form.birthDate) }}
+                        </div>
+                    </div>
+                    <div class="row ml-1">
+                        {{ form_errors(form.birthDate) }}
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-2">
+                            {{ form_label(form.zipCode) }}
+                        </div>
+                        <div class="col-auto">
+                            {{ form_widget(form.zipCode, {'attr': {'placeholder': "Code Zip"}}) }}
+                        </div>
+                    </div>
+                    <div class="row ml-1">
+                        {{ form_errors(form.zipCode) }}
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-2">
+                            {{ form_label(form.address) }}
+                        </div>
+                        <div class="col-auto">
+                            {{ form_widget(form.address, {'attr': {'placeholder': "Adresse"}}) }}
+                        </div>
+                    </div>
+                    <div class="row ml-1">
+                        {{ form_errors(form.address) }}
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-2">
+                            {{ form_label(form.email) }}
+                        </div>
+                        <div class="col-auto">
+                            {{ form_widget(form.email, {'attr': {'placeholder': "Email"}}) }}
+                        </div>
+                    </div>
+                    <div class="row ml-1">
+                        {{ form_errors(form.email) }}
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-2">
+                            {{ form_label(form.city) }}
+                        </div>
+                        <div class="col-auto">
+                            {{ form_widget(form.city, {'attr': {'placeholder': "Ville"}}) }}
+                        </div>
+                    </div>
+                    <div class="row ml-1">
+                        {{ form_errors(form.city) }}
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-2">
+                            {{ form_label(form.password) }}
+                        </div>
+                        <div class="col-auto">
+                            {{ form_widget(form.password, {'attr': {'placeholder': "Mot de passe"}}) }}
+                        </div>
+                    </div>
+                    <div class="row ml-1">
+                        {{ form_errors(form.password) }}
+                    </div>
+                    {{ form_widget(form.valid) }}
+                </div>
+            </div>
+        </div>
+
+
+        {{ form_end(form) }}
+    </div>
+{% endblock %}

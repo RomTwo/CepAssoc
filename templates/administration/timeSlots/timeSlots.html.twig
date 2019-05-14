@@ -1,0 +1,53 @@
+{% extends 'administration/base.html.twig' %}
+
+{% block title %}Adherents{% endblock %}
+
+{% block specification %}
+    Gestion des créneaux
+{% endblock %}
+
+{% block content %}
+    {{dump(timeSlots)}}
+
+    <table id="example1" class="display nowrap dataTable dtr-inline collapsed" style="width: 100%;" role="grid" aria-describedby="example_info">
+        <thead>
+            <tr role="row">
+                <th class="sorting_asc" tabindex="0" aria-controls="example" rowspan="1" colspan="1" style="width: 119px;" aria-sort="ascending" aria-label="lastName: activate to sort column descending">Jour</th>
+                <th class="sorting_asc" tabindex="0" aria-controls="example" rowspan="1" colspan="1" style="width: 119px;" aria-sort="ascending" aria-label="firstName: activate to sort column descending">Heure de début</th>
+                <th class="sorting_asc" tabindex="0" aria-controls="example" rowspan="1" colspan="1" style="width: 119px;" aria-sort="ascending" aria-label="firstName: activate to sort column descending">Heure de fin</th>
+                <th class="sorting_asc" tabindex="0" aria-controls="example" rowspan="1" colspan="1" style="width: 119px;" aria-sort="ascending" aria-label="firstName: activate to sort column descending">Voir détails</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for timeSlot in timeSlots %}                        
+                <tr role="row" class="odd">
+                    <td>
+                        {{timeSlot.day}}
+                    </td>
+                    <td>
+                        {{timeSlot.startTime|date('H:i')}}
+                    </td>
+                    <td>
+                        {{timeSlot.endTime|date('H:i')}}
+                    </td>
+                    <td>
+                        {# <a href="{{path('admin_timeSlotsEdit', {id: timeSlot.id})}}" class="btn btn-secondary">Modifier</a>
+                        <a href="{{path('admin_timeSlotsDelete', {id: timeSlot.id})}}" class="btn btn-secondary">Supprimer</a> #}
+                    </td>
+                </tr>
+            {% endfor %}                  
+        </tbody>
+        <tfoot>
+            <tr>
+                <th rowspan="1" colspan="1">Jour</th>
+                <th rowspan="1" colspan="1">Heure de début</th>
+                <th rowspan="1" colspan="1">Heure de fin</th>
+                <th rowspan="1" colspan="1">Voir détails</th>
+            </tr>
+        </tfoot>
+    </table>
+
+        <a href="{{path('admin_timeSlotsAdd')}}" class="btn btn-primary">Ajouter un nouveau créneau</a>
+
+{% endblock %}
+ 

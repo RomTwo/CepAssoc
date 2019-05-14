@@ -4,7 +4,10 @@
 
 {% block body %}
     <div id="competiteur">
-        {{ comp }}
+        {% if comp is defined %}
+            {{ comp }}
+        {% else %}
+            <p>Aucuns compétiteurs à inscrire</p>
+        {% endif %}
     </div>
-
 {% endblock %}
