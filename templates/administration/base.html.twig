@@ -1,65 +1,61 @@
-{% extends 'base.html.twig' %}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
 
-{% block title %}Hello AdministrationController!{% endblock %}
 
-{% block body %}
-    <style>
-        .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-        .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+    <title>{% block title %}Hello AdministrationController!{% endblock %}</title>
+    {{ encore_entry_link_tags('app') }}
+    {% block stylesheets %}
+    {% endblock %}
 
-        table,
-        td {
-            border: 1px solid;
-        }
+</head>
+<body>
+<br/>
+<h2 style="text-align:center; text-decoration:underline">
+    {% block specification %}
 
-        /*thead,
-        tfoot {
-            background-color: #333;
-            color: #fff;
-        }*/
-    </style>
-    <br/>
-    <h2 style="text-align:center; text-decoration:underline">
-        {% block specification %}
-        
-        {% endblock %}
-    </h2>
-    <hr/>
-    <!-- vertical navbar -->
-    <div class="row">
-        <div class="col-2" style="height:100%">
-            <nav class="navbar bg-light">
+    {% endblock %}
+</h2>
+<hr/>
+<!-- vertical navbar -->
+<div class="row">
+    <div class="col-2" style="height:100%">
+        <nav class="navbar bg-light">
             <!-- Links -->
-                <ul class="navbar-nav">
-                    <li class="nav-item">
-                    <a class="nav-link" href="{{path('admin_adherents')}}">Adhérents</a>
-                    </li>
-                    <li class="nav-item">
-                    <a class="nav-link" href="{{path('admin_activities')}}">Activités</a>
-                    </li>
-                    <li class="nav-item">
-                    <a class="nav-link" href="{{path('admin_timeSlots')}}">Créneaux</a>
-                    </li>
-                    <li class="nav-item">
-                    <a class="nav-link" href="{{path('admin_events')}}">Evènements</a>
-                    </li>
-                    <li class="nav-item">
-                    <a class="nav-link" href="{{path('admin_accounts')}}">Comptes</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{path('admin_adherent_competiteurs')}}">Plugin</a>
-                    </li>
-                </ul>
-            </nav>
-        </div>
-        <div class="col">
-            <div class="container-fluid">
-                {% block content %}
-        
-                {% endblock %}
-            </div>
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ path('admin_adherents') }}">Adhérents</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ path('admin_activities') }}">Activités</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ path('admin_timeSlots') }}">Créneaux</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ path('admin_events') }}">Evènements</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ path('admin_accounts') }}">Comptes</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ path('admin_adherent_competiteurs') }}">Plugin</a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+    <div class="col">
+        <div class="container-fluid">
+            {% block body %}{% endblock %}
         </div>
     </div>
+</div>
 
-{% endblock %}
+{{ encore_entry_script_tags('app') }}
+
+
+{% block javascripts %}{% endblock %}
+</body>
+</html>
  

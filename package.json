@@ -14,5 +14,13 @@
         "dev": "encore dev",
         "watch": "encore dev --watch",
         "build": "encore production --progress"
+    },
+    "dependencies": {
+        "animate.css": "^3.7.0",
+        "bootstrap": "^4.3.1",
+        "bootstrap-notify": "^3.1.3",
+        "datatables.net-bs4": "^1.10.19",
+        "font-awesome": "^4.7.0",
+        "popper.js": "^1.15.0"
     }
 }

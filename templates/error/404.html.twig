@@ -1,11 +1,35 @@
-{% extends 'base.html.twig' %}
+{% extends 'base_without_navbar.html.twig' %}
 
 {% block title %}Page introuvable{% endblock %}
 
 {% block body %}
-    <h2>Erreur 404 : la page est introuvable</h2>
-    <div>
-        Retourner sur le site, cliquez
-        <a href="{{ path('home') }}">ici</a>
+    <div class="d-md-flex h-md-100 align-items-center">
+        <!-- First Half -->
+        <div class="col-md-7 p-0 bg-gym h-md-100">
+            <div class="text-white d-md-flex align-items-center h-100 p-5 text-center justify-content-center">
+                <div class="pt-5 pb-5">
+                    <h1 class="text-black">CEP</h1>
+                    <p class="text-black">Gymnastique</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Second Half -->
+        <div class="col-md-5 p-0 bg-white h-md-100">
+            <div class="d-md-flex align-items-center h-md-100 p-5 justify-content-center">
+                <div class="container">
+                    <div class="row justify-content-center">
+                        <h1 class="text-center">Erreur 404 : la page est introuvable</h1>
+                    </div>
+                    <hr class="d-md-flex align-items-center" color="green">
+                    <div class="justify-content-center text-center">
+                        Retourner sur le site, cliquez
+                        <a href="{{ path('home') }}">ici</a>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 {% endblock body %}
+
+
