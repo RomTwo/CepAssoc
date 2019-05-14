@@ -4,18 +4,9 @@
     <bookmark url="file://$PROJECT_DIR$/src/Controller/AccountController.php" description="JWT::decode($token, $_ENV['PRIVATE_KEY'], array($_..." line="100" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="53b90c9e-e36e-447f-8cc9-26b01b488158" name="Default Changelist" comment="Add service generate token">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/templates/notifications/notifications.html.twig" />
+    <list default="true" id="53b90c9e-e36e-447f-8cc9-26b01b488158" name="Default Changelist" comment="notification management, modify services">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/documentations/Gestion_des_popups" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/assets/js/popup.js" afterPath="$PROJECT_DIR$/assets/js/popup.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Controller/AccountController.php" afterPath="$PROJECT_DIR$/src/Controller/AccountController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Services/CaptchaCheck.php" afterPath="$PROJECT_DIR$/src/Services/CaptchaCheck.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Services/GenerateToken.php" afterPath="$PROJECT_DIR$/src/Services/GenerateToken.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/account/index.html.twig" afterPath="$PROJECT_DIR$/templates/account/index.html.twig" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/account/resetPassword.html.twig" afterPath="$PROJECT_DIR$/templates/account/resetPassword.html.twig" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/base.html.twig" afterPath="$PROJECT_DIR$/templates/base.html.twig" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/base_without_navbar.html.twig" afterPath="$PROJECT_DIR$/templates/base_without_navbar.html.twig" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/security/login.html.twig" afterPath="$PROJECT_DIR$/templates/security/login.html.twig" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -121,6 +112,7 @@
         <option value="$PROJECT_DIR$/templates/account/resetPassword.html.twig" />
         <option value="$PROJECT_DIR$/assets/js/popup.js" />
         <option value="$PROJECT_DIR$/templates/notifications/notifications.html.twig" />
+        <option value="$PROJECT_DIR$/documentations/Gestion_des_popups" />
       </list>
     </option>
   </component>
@@ -291,6 +283,11 @@
             <path>
               <item name="CepAssoc" type="b2602c69:ProjectViewProjectNode" />
               <item name="CepAssoc" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="documentations" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
+            <path>
+              <item name="CepAssoc" type="b2602c69:ProjectViewProjectNode" />
+              <item name="CepAssoc" type="2a2b976b:PhpTreeStructureProvider$1" />
               <item name="src" type="2a2b976b:PhpTreeStructureProvider$1" />
             </path>
             <path>
@@ -302,49 +299,13 @@
             <path>
               <item name="CepAssoc" type="b2602c69:ProjectViewProjectNode" />
               <item name="CepAssoc" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="src" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="Entity" type="2a2b976b:PhpTreeStructureProvider$1" />
-            </path>
-            <path>
-              <item name="CepAssoc" type="b2602c69:ProjectViewProjectNode" />
-              <item name="CepAssoc" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="src" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="Form" type="2a2b976b:PhpTreeStructureProvider$1" />
-            </path>
-            <path>
-              <item name="CepAssoc" type="b2602c69:ProjectViewProjectNode" />
-              <item name="CepAssoc" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="src" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="Services" type="2a2b976b:PhpTreeStructureProvider$1" />
-            </path>
-            <path>
-              <item name="CepAssoc" type="b2602c69:ProjectViewProjectNode" />
-              <item name="CepAssoc" type="2a2b976b:PhpTreeStructureProvider$1" />
               <item name="templates" type="2a2b976b:PhpTreeStructureProvider$1" />
-            </path>
-            <path>
-              <item name="CepAssoc" type="b2602c69:ProjectViewProjectNode" />
-              <item name="CepAssoc" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="templates" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="account" type="2a2b976b:PhpTreeStructureProvider$1" />
-            </path>
-            <path>
-              <item name="CepAssoc" type="b2602c69:ProjectViewProjectNode" />
-              <item name="CepAssoc" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="templates" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="home" type="2a2b976b:PhpTreeStructureProvider$1" />
             </path>
             <path>
               <item name="CepAssoc" type="b2602c69:ProjectViewProjectNode" />
               <item name="CepAssoc" type="2a2b976b:PhpTreeStructureProvider$1" />
               <item name="templates" type="2a2b976b:PhpTreeStructureProvider$1" />
               <item name="notifications" type="2a2b976b:PhpTreeStructureProvider$1" />
-            </path>
-            <path>
-              <item name="CepAssoc" type="b2602c69:ProjectViewProjectNode" />
-              <item name="CepAssoc" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="templates" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="security" type="2a2b976b:PhpTreeStructureProvider$1" />
             </path>
           </expand>
           <select />
@@ -419,7 +380,7 @@
       <workItem from="1557777944576" duration="1367000" />
       <workItem from="1557815677139" duration="152000" />
       <workItem from="1557816300205" duration="10002000" />
-      <workItem from="1557831654991" duration="6014000" />
+      <workItem from="1557831654991" duration="6375000" />
     </task>
     <task id="LOCAL-00001" summary="Default Changelist">
       <created>1557400976745</created>
@@ -617,11 +578,18 @@
       <option name="project" value="LOCAL" />
       <updated>1557832035158</updated>
     </task>
-    <option name="localTasksCounter" value="29" />
+    <task id="LOCAL-00029" summary="notification management, modify services">
+      <created>1557838396863</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1557838396863</updated>
+    </task>
+    <option name="localTasksCounter" value="30" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="71217000" />
+    <option name="totallyTimeSpent" value="71578000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -710,7 +678,8 @@
     <MESSAGE value="change namespace controller admin account" />
     <MESSAGE value="captcha system on registration web site" />
     <MESSAGE value="Add service generate token" />
-    <option name="LAST_COMMIT_MESSAGE" value="Add service generate token" />
+    <MESSAGE value="notification management, modify services" />
+    <option name="LAST_COMMIT_MESSAGE" value="notification management, modify services" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -719,13 +688,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/yarn.lock">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Security/LoginFormAuthentificator.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="585">
@@ -1042,10 +1004,18 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/documentations/Gestion_des_popups">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="45">
+          <caret line="3" column="68" lean-forward="false" selection-start-line="3" selection-start-column="68" selection-end-line="3" selection-end-column="68" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/Controller/AccountController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="285">
-          <caret line="19" column="6" lean-forward="false" selection-start-line="19" selection-start-column="6" selection-end-line="19" selection-end-column="6" />
+        <state relative-caret-position="660">
+          <caret line="44" column="71" lean-forward="true" selection-start-line="44" selection-start-column="71" selection-end-line="44" selection-end-column="71" />
           <folding>
             <element signature="e#34#57#0#PHP" expanded="true" />
           </folding>
