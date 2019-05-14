@@ -9,6 +9,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 
 
+
 /**
  * @ORM\Entity(repositoryClass="App\Repository\AccountRepository")
  */
@@ -120,6 +121,7 @@ class Account implements UserInterface
      * @ORM\Column(type="string", nullable=true)
      */
     private $tokenForgetPass;
+
 
     /**
      * Account constructor.

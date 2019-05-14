@@ -118,7 +118,20 @@
             </div>
         </div>
 
+        <input type="hidden" name="recaptcha_response" id="recaptchaResponse">
 
-    {{ form_end(form) }}
+        {{ form_end(form) }}
     </div>
+{% endblock %}
+
+{% block javascripts %}
+    <script src="https://www.google.com/recaptcha/api.js?render=6LeVY6MUAAAAAKrw5BFZm7ENY8ozD0KfjMSqDeVV"></script>
+    <script>
+        grecaptcha.ready(function () {
+            grecaptcha.execute('6LeVY6MUAAAAAKrw5BFZm7ENY8ozD0KfjMSqDeVV', {action: 'contact'}).then(function (token) {
+                var recaptchaResponse = document.getElementById('recaptchaResponse');
+                recaptchaResponse.value = token;
+            });
+        });
+    </script>
 {% endblock %}

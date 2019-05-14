@@ -4,10 +4,9 @@ namespace App\Controller;
 
 use App\Entity\Account;
 use App\Form\AccountType;
+use App\Services\CaptchaCheck;
+use App\Services\ForgotPasswordEmail;
 use Firebase\JWT\JWT;
-use Swift_Mailer;
-use Swift_Message;
-use Swift_SmtpTransport;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -20,9 +19,10 @@ class AccountController extends AbstractController
      *
      * @param Request $request
      * @param UserPasswordEncoderInterface $encoder
+     * @param CaptchaCheck $captchaCheck
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
-    public function add(Request $request, UserPasswordEncoderInterface $encoder)
+    public function add(Request $request, UserPasswordEncoderInterface $encoder, CaptchaCheck $captchaCheck)
     {
         if ($this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_FULLY')) {
             return $this->redirectToRoute('home');
@@ -33,17 +33,20 @@ class AccountController extends AbstractController
         $form->handleRequest($request);
         $msg = null;
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            if (!$this->findByEmail($account->getEmail())) {
-                $manager = $this->getDoctrine()->getManager();
-                $encoded = $encoder->encodePassword($account, $account->getPassword());
-                $account->setPassword($encoded);
-                $manager->persist($account);
-                $manager->flush();
+        if ($form->isSubmitted() && $form->isValid() && $request->request->has('recaptcha_response')) {
+            if ($captchaCheck->captchaIsValid($request->request->get('recaptcha_response'))) {
+                if (!$this->findByEmail($account->getEmail())) {
+                    $manager = $this->getDoctrine()->getManager();
+                    $encoded = $encoder->encodePassword($account, $account->getPassword());
+                    $account->setPassword($encoded);
+                    $manager->persist($account);
+                    $manager->flush();
 
-                return $this->redirectToRoute('security_connexion', array(), 301);
+                    return $this->redirectToRoute('security_connexion', array(), 301);
+                }
+                $msg = "Cet email a déjà un compte associé !";
             }
-            $msg = "Cet email a déjà un compte associé !";
+            $msg = "Captcha invalide";
         }
 
         return $this->render('account/index.html.twig', array(
@@ -94,9 +97,10 @@ class AccountController extends AbstractController
      * Generate token (save in database) and send and email at the user to change his password
      *
      * @param Request $request
+     * @param ForgotPasswordEmail $forgotPasswordEmail
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
-    public function forgotPassword(Request $request)
+    public function forgotPassword(Request $request, ForgotPasswordEmail $forgotPasswordEmail)
     {
         if ($request->isMethod('POST') && $this->findByEmail($request->request->get('email'))) {
             $manager = $this->getDoctrine()->getManager();
@@ -109,7 +113,7 @@ class AccountController extends AbstractController
             $token = $this->generateToken();
             $account->setTokenForgetPass($token);
             $manager->flush();
-            $this->sendEmail($account->getEmail(), $token);
+            $forgotPasswordEmail->sendEmail($account->getEmail(), $token);
 
             $this->addFlash("msg", "Un mail vient de vous être envoyé");
         } else {
@@ -196,43 +200,5 @@ class AccountController extends AbstractController
         return $token;
     }
 
-    /**
-     * Send an email to reset the user password. It contains a link for reset the user password
-     *
-     * @param $mail
-     * @param $token
-     */
-    private function sendEmail($mail, $token)
-    {
-
-        $transport = (new Swift_SmtpTransport('smtp.gmail.com', 465, 'ssl'))
-            ->setUsername($_ENV['MAILER_MAIL'])
-            ->setPassword($_ENV['MAILER_PASSWORD']);
-
-        $mailer = new Swift_Mailer($transport);
-
-        $message = (new Swift_Message('Réinitialisation mot de passe Association Cep Poitiers Gymnastique'))
-            ->setFrom([$_ENV['MAILER_MAIL'] => 'Association Cep Poitiers Gymnastique'])
-            ->setTo([$mail])
-            ->setBody($this->msgHtml($token), 'text/html')
-            ->setCharset('UTF-8');
-
-
-        $result = $mailer->send($message);
-    }
-
-    /**
-     * This is a body of the email (email for reset the user password)
-     *
-     * @param $token
-     * @return string
-     */
-    private function msgHtml($token)
-    {
-        $msg = '<p>Réinitialisation de votre mot de passe en cliquant <a href="' . $_ENV['MAILER_URL'] . $token . '">ici</a></p>';
-
-        return $msg;
-
-    }
 
 }
