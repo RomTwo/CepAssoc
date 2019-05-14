@@ -5,10 +5,11 @@ namespace App\Controller;
 use App\Entity\Account;
 use App\Form\AccountType;
 use App\Services\CaptchaCheck;
-use App\Services\ForgotPasswordEmail;
+use App\Services\ForgotPassword;
 use App\Services\GenerateToken;
 use Firebase\JWT\JWT;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
@@ -70,42 +71,57 @@ class AccountController extends AbstractController
         $account = $manager->getRepository(Account::class)->findOneBy(array('email' => $currentUserEmail));
 
         $form = $this->createForm(AccountType::class, $account);
+        $form->add('newPassword', PasswordType::class, array('mapped' => false, 'label' => 'Mot de passe', 'required' => false));
         $form->handleRequest($request);
         $msg = null;
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $oldPassword = $this->getDoctrine()->getRepository(Account::class)->getOldPassword($currentUserEmail); //get the password of the current user (in database)
+            $passwordEntryByUser = $account->getPassword(); //get the user password in the password field of the form
+            $account->setPassword($oldPassword); //modify the password to can compare the old password (in database) with the old password entry in the form
+
             if ($currentUserEmail != $account->getEmail()) {
                 if ($this->findByEmail($account->getEmail())) {
                     $msg = "Cet email a déjà un compte associé !";
-                    return $this->render('account/update.html.twig', array(
-                        "form" => $form->createView(),
-                        "msg" => $msg
-                    ));
+                    return $this->render('account/update.html.twig', array("form" => $form->createView(), "msg" => $msg));
                 }
                 $this->get('session')->set('_security.last_username', $account->getEmail());
             }
-            $encoded = $encoder->encodePassword($account, $account->getPassword());
-            $account->setPassword($encoded);
+
+            if (!empty($request->request->get('newPassword'))) {
+                if (preg_match('/^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[-+!*$@%_])([-+!*$@%_\w]{8,15})$/', $request->request->get('newPassword'))) {
+                    if (!$encoder->isPasswordValid($account, $passwordEntryByUser)) {
+                        $msg = "Votre ancien mot de passe n'est pas correct";
+                        return $this->render('account/update.html.twig', array("form" => $form->createView(), "msg" => $msg));
+                    }
+                    $encoded = $encoder->encodePassword($account, $request->request->get('newPassword'));
+                    $account->setPassword($encoded);
+                } else {
+                    $msg = "Votre nouveau mot de passe n'est pas correct";
+                    return $this->render('account/update.html.twig', array("form" => $form->createView(), "msg" => $msg));
+                }
+            } else if (!$encoder->isPasswordValid($account, $passwordEntryByUser)) {
+                $msg = "Votre ancien mot de passe n'est pas correct";
+                return $this->render('account/update.html.twig', array("form" => $form->createView(), "msg" => $msg));
+            }
+
             $manager->flush();
             $this->addFlash('success', "Votre compte a été modifié");
             return $this->redirectToRoute('home');
         }
-
-        return $this->render('account/update.html.twig', array(
-            "form" => $form->createView()
-        ));
+        return $this->render('account/update.html.twig', array("form" => $form->createView(), "msg" => $msg));
     }
 
     /**
      * Generate token (save in database) and send and email at the user to change his password
      *
      * @param Request $request
-     * @param ForgotPasswordEmail $forgotPasswordEmail
+     * @param ForgotPassword $forgotPasswordEmail
      * @param GenerateToken $generateToken
      * @param CaptchaCheck $captchaCheck
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
-    public function forgotPassword(Request $request, ForgotPasswordEmail $forgotPasswordEmail, GenerateToken $generateToken, CaptchaCheck $captchaCheck)
+    public function forgotPassword(Request $request, ForgotPassword $forgotPasswordEmail, GenerateToken $generateToken, CaptchaCheck $captchaCheck)
     {
         if ($request->isMethod('POST') && $request->request->has('recaptcha_response')) {
             if ($this->findByEmail($request->request->get('email'))) {
@@ -133,7 +149,6 @@ class AccountController extends AbstractController
         } else {
             $this->addFlash('error', "Une erreur c'est produite");
         }
-
         return $this->redirectToRoute('security_connexion', array(), 301);
     }
 

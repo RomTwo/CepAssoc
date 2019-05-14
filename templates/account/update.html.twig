@@ -108,7 +108,15 @@
                             {{ form_label(form.password) }}
                         </div>
                         <div class="col-auto">
-                            {{ form_widget(form.password, {'attr': {'placeholder': "Mot de passe"}}) }}
+                            {{ form_widget(form.password, {'attr': {'placeholder': "Mot de passe actuel"}}) }}
+                        </div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-2">
+                            {{ form_label(form.newPassword) }}
+                        </div>
+                        <div class="col-auto">
+                            {{ form_widget(form.newPassword, {'full_name': 'newPassword'}, {'attr': {'placeholder': "Nouveau mot de passe"}}) }}
                         </div>
                     </div>
                     <div class="row ml-1">
@@ -118,7 +126,6 @@
                 </div>
             </div>
         </div>
-
 
         {{ form_end(form) }}
     </div>

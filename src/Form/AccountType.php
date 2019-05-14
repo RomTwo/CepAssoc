@@ -43,8 +43,7 @@ class AccountType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => Account::class,
-            'cascade_calidation' => true,
+            'data_class' => Account::class
         ]);
     }
 }

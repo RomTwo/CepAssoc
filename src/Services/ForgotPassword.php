@@ -6,7 +6,7 @@ use Swift_Mailer;
 use Swift_Message;
 use Swift_SmtpTransport;
 
-class ForgotPasswordEmail
+class ForgotPassword
 {
 
     /**
