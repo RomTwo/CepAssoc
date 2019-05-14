@@ -178,11 +178,13 @@ class AccountController extends AbstractController
                         $account->setTokenForgetPass(null);
                         $manager->flush();
 
+                        $this->addFlash('success', "Votre mot de passe vient d'être modifié");
                         return $this->redirectToRoute('security_connexion', array(), 301);
                     }
+
+                    $this->addFlash('error', "Mot(s) de passe(s) incorrect(s) ou différents");
                     return $this->render('account/resetPassword.html.twig', array(
-                            'token' => $token,
-                            'error' => 'Mot de passe incorrect',
+                            'token' => $token
                         )
                     );
                 }
