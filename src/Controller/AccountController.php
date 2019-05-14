@@ -32,7 +32,6 @@ class AccountController extends AbstractController
         $account = new Account();
         $form = $this->createForm(AccountType::class, $account);
         $form->handleRequest($request);
-        $msg = null;
 
         if ($form->isSubmitted() && $form->isValid() && $request->request->has('recaptcha_response')) {
             if ($captchaCheck->captchaIsValid($request->request->get('recaptcha_response'))) {
@@ -43,16 +42,18 @@ class AccountController extends AbstractController
                     $manager->persist($account);
                     $manager->flush();
 
+                    $this->addFlash('success', "Votre compte vient d'être créé");
                     return $this->redirectToRoute('security_connexion', array(), 301);
+                } else {
+                    $this->addFlash('error', 'Cette adresse mail est déjà associé à un compte');
                 }
-                $msg = "Cet email a déjà un compte associé !";
+            } else {
+                $this->addFlash('error', 'Le captcha est invalide');
             }
-            $msg = "Captcha invalide";
         }
 
         return $this->render('account/index.html.twig', array(
-            "form" => $form->createView(),
-            "msg" => $msg
+            "form" => $form->createView()
         ));
     }
 
@@ -86,6 +87,7 @@ class AccountController extends AbstractController
             $encoded = $encoder->encodePassword($account, $account->getPassword());
             $account->setPassword($encoded);
             $manager->flush();
+            $this->addFlash('success', "Votre compte a été modifié");
             return $this->redirectToRoute('home');
         }
 
@@ -100,26 +102,36 @@ class AccountController extends AbstractController
      * @param Request $request
      * @param ForgotPasswordEmail $forgotPasswordEmail
      * @param GenerateToken $generateToken
+     * @param CaptchaCheck $captchaCheck
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
-    public function forgotPassword(Request $request, ForgotPasswordEmail $forgotPasswordEmail, GenerateToken $generateToken)
+    public function forgotPassword(Request $request, ForgotPasswordEmail $forgotPasswordEmail, GenerateToken $generateToken, CaptchaCheck $captchaCheck)
     {
-        if ($request->isMethod('POST') && $this->findByEmail($request->request->get('email'))) {
-            $manager = $this->getDoctrine()->getManager();
-            $account = $manager->getRepository(Account::class)->findOneBy(
-                array(
-                    'email' => $request->request->get('email')
-                )
-            );
+        if ($request->isMethod('POST') && $request->request->has('recaptcha_response')) {
+            if ($this->findByEmail($request->request->get('email'))) {
+                if ($captchaCheck->captchaIsValid($request->request->get('recaptcha_response'))) {
 
-            $token = $generateToken->generateToken();
-            $account->setTokenForgetPass($token);
-            $manager->flush();
-            $forgotPasswordEmail->sendEmail($account->getEmail(), $token);
+                    $manager = $this->getDoctrine()->getManager();
+                    $account = $manager->getRepository(Account::class)->findOneBy(
+                        array(
+                            'email' => $request->request->get('email')
+                        )
+                    );
 
-            $this->addFlash("msg", "Un mail vient de vous être envoyé");
+                    $token = $generateToken->generateJwtToken();
+                    $account->setTokenForgetPass($token);
+                    $manager->flush();
+                    $forgotPasswordEmail->sendEmail($account->getEmail(), $token);
+
+                    $this->addFlash('success', "Un mail vient de vous être envoyé");
+                } else {
+                    $this->addFlash('error', "Le captcha est invalide");
+                }
+            } else {
+                $this->addFlash('error', "Cette adresse mail n'existe pas");
+            }
         } else {
-            $this->addFlash("msg", "Une erreur s'est produite");
+            $this->addFlash('error', "Une erreur c'est produite");
         }
 
         return $this->redirectToRoute('security_connexion', array(), 301);

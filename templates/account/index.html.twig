@@ -1,12 +1,9 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello SiteRegisterController!{% endblock %}
+{% block title %}Inscription{% endblock %}
 
 {% block body %}
     <div>
-        {% if msg is defined and msg is not null %}
-            {{ msg }}
-        {% endif %}
 
         {{ form_start(form) }}
 
@@ -128,7 +125,7 @@
     <script src="https://www.google.com/recaptcha/api.js?render=6LeVY6MUAAAAAKrw5BFZm7ENY8ozD0KfjMSqDeVV"></script>
     <script>
         grecaptcha.ready(function () {
-            grecaptcha.execute('6LeVY6MUAAAAAKrw5BFZm7ENY8ozD0KfjMSqDeVV', {action: 'contact'}).then(function (token) {
+            grecaptcha.execute('6LeVY6MUAAAAAKrw5BFZm7ENY8ozD0KfjMSqDeVV', {action: 'register'}).then(function (token) {
                 var recaptchaResponse = document.getElementById('recaptchaResponse');
                 recaptchaResponse.value = token;
             });

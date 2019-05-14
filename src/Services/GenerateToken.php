@@ -11,7 +11,7 @@ class GenerateToken
      *
      * @return string
      */
-    public function generateToken() : string
+    public function generateJwtToken() : string
     {
         $payload = array(
             'iat' => time(),

@@ -14,6 +14,11 @@ class CaptchaCheck
         $recaptcha = file_get_contents($_ENV['CAPTCHA_URL_CHECK'] . '?secret=' . $_ENV['CAPTCHA_KEY_SECRET'] . '&response=' . $captcha);
         $recaptcha = json_decode($recaptcha);
 
-        return $recaptcha->score >= 0.5 ? true : false;
+        if ($recaptcha->success) {
+            return $recaptcha->score >= 0.5 && $recaptcha->action === 'register' ? true :
+                ($recaptcha->score >= 0.6 && $recaptcha->action === 'forgot' ? true : false);
+        } else {
+            return false;
+        }
     }
 }

@@ -36,10 +36,14 @@
     </div>
 </nav>
 <div class="container-fluid">
+
+    {% include('notifications/notifications.html.twig') %}
+    
     {% block body %}{% endblock %}
 </div>
 
 {{ encore_entry_script_tags('app') }}
+{{ encore_entry_script_tags('popup') }}
 {% block javascripts %}{% endblock %}
 </body>
 </html>

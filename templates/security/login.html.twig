@@ -1,8 +1,9 @@
 {% extends 'base_without_navbar.html.twig' %}
 
-{% block title %}Login{% endblock %}
+{% block title %}Connexion{% endblock %}
 
 {% block body %}
+
     <div class="d-md-flex h-md-100 align-items-center">
         <!-- First Half -->
         <div class="col-md-7 p-0 bg-gym h-md-100">
@@ -68,6 +69,7 @@
                             <form class="form-inline" action="{{ path('account_forgot_password') }}" method="post">
                                 <input class="form-control" type="email" name="email" placeholder="Email" required>
                                 <input class="btn btn-success" type="submit" value="Envoyer">
+                                <input type="hidden" name="recaptcha_response" id="recaptchaResponse">
                             </form>
                         </div>
                     </div>
@@ -75,4 +77,17 @@
             </div>
         </div>
     </div>
+
+{% endblock %}
+
+{% block javascripts %}
+    <script src="https://www.google.com/recaptcha/api.js?render=6LeVY6MUAAAAAKrw5BFZm7ENY8ozD0KfjMSqDeVV"></script>
+    <script>
+        grecaptcha.ready(function () {
+            grecaptcha.execute('6LeVY6MUAAAAAKrw5BFZm7ENY8ozD0KfjMSqDeVV', {action: 'forgot'}).then(function (token) {
+                var recaptchaResponse = document.getElementById('recaptchaResponse');
+                recaptchaResponse.value = token;
+            });
+        });
+    </script>
 {% endblock %}

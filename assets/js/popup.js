@@ -1,10 +1,9 @@
 if ($('#text').val() !== undefined) {
     $.notify({
         // options
-        icon: 'fa fa-exclamation-circle',
+        icon: $('#icon').val(),
         title: $('#title').val(),
         message: $('#text').val(),
-        url: 'https://github.com/mouse0270/bootstrap-notify',
         target: '_blank'
     }, {
         // settings
