@@ -68,6 +68,18 @@ admin_timeSlotsAdd:
     path: /admin/timeSlots/add
     controller: App\Controller\administration\AdminTimeSlotsController::add
 
+admin_timeSlotsEdit:
+    path: /admin/timeSlots/edit/{id}
+    controller: App\Controller\administration\AdminTimeSlotsController::edit
+    requirements:
+        id: ([0-9]*)
+
+admin_timeSlotsDelete:
+    path: /admin/timeSlots/delete/{id}
+    controller: App\Controller\administration\AdminTimeSlotsController::delete
+    requirements:
+        id: ([0-9]*)
+
     #--accounts
 admin_accounts:
     path: /admin/accounts

@@ -40,4 +40,29 @@ class AdminTimeSlotsController extends AbstractController
             'form' => $form->createView()
         ]);
     }
+
+    public function edit(TimeSlot $timeSlot, Request $request)
+    {
+        $entityManager = $this->getDoctrine()->getManager();
+        $form = $this->createForm(TimeSlotType::class, $timeSlot);
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager->flush();
+            return $this->redirectToRoute('admin_timeSlots');
+        }
+
+        return $this->render('administration/timeSlots/timeSlotsEdit.html.twig', [
+            'timeSlot' => $timeSlot,
+            'form' => $form->createView()
+        ]);
+    }
+
+    public function delete(TimeSlot $timeSlot){
+        $entityManager = $this->getDoctrine()->getManager();
+        $entityManager->remove($timeSlot);
+        $entityManager->flush();
+        return $this->redirectToRoute('admin_timeSlots');
+    }
 }
