@@ -11,7 +11,7 @@ class CaptchaCheck
      */
     public function captchaIsValid(string $captcha): bool
     {
-        $recaptcha = file_get_contents($_ENV['CAPTCHA_URL_CHECK'] . '?secret=' . $_ENV['CAPTCHA_KEY_SECRET'] . '&response=' . $captcha);
+        $recaptcha = file_get_contents($_ENV['RECAPTCHA_URL_CHECK'] . '?secret=' . $_ENV['RECAPTCHA_KEY_SECRET'] . '&response=' . $captcha);
         $recaptcha = json_decode($recaptcha);
 
         if ($recaptcha->success) {

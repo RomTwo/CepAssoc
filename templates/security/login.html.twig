@@ -47,12 +47,6 @@
                             </div>
                         {% endif %}
 
-                        {% if msg is defined %}
-                            <div class="row justify-content-center mt-2">
-                                <small class="form-text"><span
-                                            class="badge badge-danger">Erreur</span> {{ msg }}</small>
-                            </div>
-                        {% endif %}
                         <div class="row justify-content-center mt-2">
                             <p>Vous n'avez pas encore de compte ? <a href="{{ path('account_add') }}">Inscrivez-vous
                                     !</a>
@@ -80,11 +74,12 @@
 
 {% endblock %}
 
+
 {% block javascripts %}
-    <script src="https://www.google.com/recaptcha/api.js?render=6LeVY6MUAAAAAKrw5BFZm7ENY8ozD0KfjMSqDeVV"></script>
+    <script src="https://www.google.com/recaptcha/api.js?render={{ recaptcha_key_site }}"></script>
     <script>
         grecaptcha.ready(function () {
-            grecaptcha.execute('6LeVY6MUAAAAAKrw5BFZm7ENY8ozD0KfjMSqDeVV', {action: 'forgot'}).then(function (token) {
+            grecaptcha.execute('{{ recaptcha_key_site }}', {action: 'forgot'}).then(function (token) {
                 var recaptchaResponse = document.getElementById('recaptchaResponse');
                 recaptchaResponse.value = token;
             });

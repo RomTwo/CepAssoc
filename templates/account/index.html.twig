@@ -122,10 +122,10 @@
 {% endblock %}
 
 {% block javascripts %}
-    <script src="https://www.google.com/recaptcha/api.js?render=6LeVY6MUAAAAAKrw5BFZm7ENY8ozD0KfjMSqDeVV"></script>
+    <script src="https://www.google.com/recaptcha/api.js?render={{ recaptcha_key_site }}"></script>
     <script>
         grecaptcha.ready(function () {
-            grecaptcha.execute('6LeVY6MUAAAAAKrw5BFZm7ENY8ozD0KfjMSqDeVV', {action: 'register'}).then(function (token) {
+            grecaptcha.execute('{{ recaptcha_key_site }}', {action: 'register'}).then(function (token) {
                 var recaptchaResponse = document.getElementById('recaptchaResponse');
                 recaptchaResponse.value = token;
             });
