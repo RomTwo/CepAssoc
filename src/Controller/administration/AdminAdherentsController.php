@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller;
+namespace App\Controller\administration;
 
 use App\Entity\Adherent;
 use App\Form\AdminAdherentType;
@@ -14,28 +14,27 @@ class AdminAdherentsController extends AbstractController
     {
         $repository = $this->getDoctrine()->getRepository(Adherent::class);
         $adherents = $repository->findAll();
-        return $this->render('administration/adherents.html.twig', [
-            'controller_name' => 'AdherentsController',
+        return $this->render('administration/adherents/adherents.html.twig', [
             'adherents' => $adherents,
         ]);
     }
 
     public function edit(Adherent $adherent, Request $request)
     {
-
+        $entityManager = $this->getDoctrine()->getManager();
         $form = $this->createForm(AdminAdherentType::class, $adherent);
 
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
 
-            $entityManager = $this->getDoctrine()->getManager();
+            
             $entityManager->flush();
 
             return $this->redirectToRoute('admin_adherents');
         }
 
-        return $this->render('administration/adherentsEdit.html.twig', [
+        return $this->render('administration/adherents/adherentsEdit.html.twig', [
             'adherent' => $adherent,
             'form' => $form->createView()
         ]);
@@ -56,7 +55,7 @@ class AdminAdherentsController extends AbstractController
         $entityManager->flush();
 
         $adherents = $repository->findAll();
-        return $this->render('administration/adherents.html.twig', [
+        return $this->render('administration/adherents/adherents.html.twig', [
             'adherents' => $adherents,
         ]);
     }

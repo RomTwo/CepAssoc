@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller;
+namespace App\Controller\administration;
 
 use App\Entity\Adherent;
 use Doctrine\Common\Annotations\AnnotationReader;

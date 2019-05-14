@@ -1,17 +1,17 @@
 <?php
 
-namespace App\Controller;
+namespace App\Controller\administration;
 
-use App\Entity\Adherent;
+use App\Entity\Event;
 use App\Form\AdminAdherentType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 
-class AdminActivitiesController extends AbstractController
+class AdminEventsController extends AbstractController
 {
 
     public function index()
     {
-        return $this->render('administration/activities.html.twig');
+        return $this->render('administration/events/events.html.twig');
     }
 }
