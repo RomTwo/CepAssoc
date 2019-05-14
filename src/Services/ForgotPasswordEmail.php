@@ -8,13 +8,15 @@ use Swift_SmtpTransport;
 
 class ForgotPasswordEmail
 {
+
     /**
      * Send an email to reset the user password. It contains a link for reset the user password
      *
-     * @param $mail
-     * @param $token
+     * @param string $mail
+     * @param string $token
+     * @return int
      */
-    public function sendEmail($mail, $token)
+    public function sendEmail(string $mail, string $token): int
     {
 
         $transport = (new Swift_SmtpTransport('smtp.gmail.com', 465, 'ssl'))
@@ -30,7 +32,7 @@ class ForgotPasswordEmail
             ->setCharset('UTF-8');
 
 
-        $result = $mailer->send($message);
+        return $mailer->send($message);
     }
 
     /**
@@ -39,7 +41,7 @@ class ForgotPasswordEmail
      * @param $token
      * @return string
      */
-    private function msgHtml($token)
+    private function msgHtml(string $token): string
     {
         $msg = '<p>Réinitialisation de votre mot de passe en cliquant <a href="' . $_ENV['MAILER_URL'] . $token . '">ici</a></p>';
 

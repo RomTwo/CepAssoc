@@ -6,6 +6,7 @@ use App\Entity\Account;
 use App\Form\AccountType;
 use App\Services\CaptchaCheck;
 use App\Services\ForgotPasswordEmail;
+use App\Services\GenerateToken;
 use Firebase\JWT\JWT;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -98,9 +99,10 @@ class AccountController extends AbstractController
      *
      * @param Request $request
      * @param ForgotPasswordEmail $forgotPasswordEmail
+     * @param GenerateToken $generateToken
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
-    public function forgotPassword(Request $request, ForgotPasswordEmail $forgotPasswordEmail)
+    public function forgotPassword(Request $request, ForgotPasswordEmail $forgotPasswordEmail, GenerateToken $generateToken)
     {
         if ($request->isMethod('POST') && $this->findByEmail($request->request->get('email'))) {
             $manager = $this->getDoctrine()->getManager();
@@ -110,7 +112,7 @@ class AccountController extends AbstractController
                 )
             );
 
-            $token = $this->generateToken();
+            $token = $generateToken->generateToken();
             $account->setTokenForgetPass($token);
             $manager->flush();
             $forgotPasswordEmail->sendEmail($account->getEmail(), $token);
@@ -183,22 +185,4 @@ class AccountController extends AbstractController
 
         return $account != null ? true : false;
     }
-
-    /**
-     * Generate a JWT token
-     *
-     * @return string
-     */
-    private function generateToken()
-    {
-        $payload = array(
-            'iat' => time(),
-            'exp' => time() + 1800
-        );
-        $token = JWT::encode($payload, $_ENV['PRIVATE_KEY'], $_ENV['ALG']);
-
-        return $token;
-    }
-
-
 }
