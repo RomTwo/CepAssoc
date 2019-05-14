@@ -1,10 +1,8 @@
 <?php
 
-namespace App\Controller;
+namespace App\Controller\administration;
 
 use App\Entity\Account;
-use App\Entity\Adherent;
-use App\Form\AdminAdherentType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 
