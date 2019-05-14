@@ -10,7 +10,11 @@ registration:
 ### Account routing ###
 account_add:
     path: /profile/siteInscription
-    controller: App\Controller\AccountController::index
+    controller: App\Controller\AccountController::add
+
+account_update:
+    path: /profile/update
+    controller: App\Controller\AccountController::update
 
 account_forgot_password:
     path: /profile/forgotPassword
@@ -92,7 +96,6 @@ admin_events:
 
 
 ### Errors routing ###
-
 error_404:
     path: /error404
     controller: App\Controller\ErrorController::error404
@@ -102,10 +105,10 @@ error_403:
     controller: App\Controller\ErrorController::error403
 
 error_404_unexist_route:
-    path: /{path}
+    path: /{catchAll}
     defaults:
         _controller: App\Controller\ErrorController::error404
         requirements:
-            path: .*
+            catchAll: '.+'
 
 

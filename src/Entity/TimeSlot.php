@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\TimeSlotRepository")
@@ -18,6 +20,11 @@ class TimeSlot
 
     /**
      * @ORM\Column(type="integer")
+     * @Assert\Regex(
+     *     pattern = "/0|1|2|3|4|5|6/",
+     *     match = true,
+     *     message = "Le jour indiqué n'existe pas"
+     * )
      */
     private $day;
 
@@ -30,6 +37,11 @@ class TimeSlot
      * @ORM\Column(type="time")
      */
     private $endTime;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $city;
 
     public function getId(): ?int
     {
@@ -68,6 +80,18 @@ class TimeSlot
     public function setEndTime(\DateTimeInterface $endTime): self
     {
         $this->endTime = $endTime;
+
+        return $this;
+    }
+
+    public function getCity(): ?string
+    {
+        return $this->city;
+    }
+
+    public function setCity(string $city): self
+    {
+        $this->city = $city;
 
         return $this;
     }

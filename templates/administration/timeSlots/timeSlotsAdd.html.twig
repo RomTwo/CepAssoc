@@ -6,10 +6,18 @@
     Ajouter un créneau
 {% endblock %}
 
-{% block content %}
+{% block body %}
+
     {{ form_start(form) }}
 
     <button>Ajouter</button>
+    <div>
+        {% if err is defined and err is not null %}
+            <span style="color:red"> {{ err }} </span>
+        {% else %}
+            Pas d'erreur
+        {% endif %}
+    </div>
     {{ form_end(form) }}
 
 {% endblock %}

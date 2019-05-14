@@ -25,10 +25,27 @@ class AdminTimeSlotsController extends AbstractController
 
         $form = $this->createForm(TimeSlotType::class, $timeSlot);
         $entityManager = $this->getDoctrine()->getManager();
-
+        $repository = $this->getDoctrine()->getRepository(TimeSlot::class);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
+            // getting timeSlots with same values
+            $identicalTimeSlots = $repository->findBy(
+                array('startTime' => $timeSlot->getStartTime(),
+                    'endTime' => $timeSlot->getEndTime(),
+                    'city' => $timeSlot->getCity()
+            ));
+
+            // if such a timeSlot exist, we don't create a new one
+            if (!empty($identicalTimeSlots)) {
+                $err = "Un créneau avec les mêmes attributs existe déjà, veuillez en entrer un autre !";
+                return $this->render('administration/timeSlots/timeSlotsAdd.html.twig',[
+                    'form' => $form->createView(),
+                    'err' => $err
+                ]);
+            }
+
 
             $entityManager->persist($timeSlot);
             $entityManager->flush();
