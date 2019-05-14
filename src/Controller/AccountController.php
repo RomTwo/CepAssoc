@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Account;
+use App\Entity\Activity;
 use App\Entity\Adherent;
 use App\Form\AccountType;
 use App\Form\AdherentType;
@@ -15,6 +16,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+use Symfony\Component\Validator\Validation;
 
 class AccountController extends AbstractController
 {
@@ -25,7 +27,7 @@ class AccountController extends AbstractController
      * @param UserPasswordEncoderInterface $encoder
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
-    public function index(Request $request, UserPasswordEncoderInterface $encoder)
+    public function add(Request $request, UserPasswordEncoderInterface $encoder)
     {
         if ($this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_FULLY')) {
             return $this->redirectToRoute('home');
@@ -39,10 +41,24 @@ class AccountController extends AbstractController
         $form->handleRequest($request);
         $msg = null;
 
+
+
+
         if ($form->isSubmitted() && $form->isValid()) {
             if (!$this->findByEmail($account->getEmail())) {
-                if($request->request->get("registration") == true){
-                    $this->setOtherFields($adherent);
+                if($test = $request->request->get("registration")){
+                    if($this->isValidate($adherent)){
+                        $this->setOtherFields($adherent);
+                    }else{
+                        $msg = "Attention, il manque des informations pour devenir adhérent";
+                        return $this->render('account/index.html.twig', array(
+                            "form" => $form->createView(),
+                            "msg" => $msg,
+                            'activities' => $this->getDoctrine()
+                                ->getRepository(Activity::class)
+                                ->findAll(),
+                        ));
+                    }
                 }else{
                     $account->removeChild($adherent);
                 }
@@ -51,7 +67,6 @@ class AccountController extends AbstractController
                 $account->setPassword($encoded);
                 $manager->persist($account);
                 $manager->flush();
-
                 return $this->redirectToRoute('security_connexion', array(), 301);
             }
             $msg = "Cet email a déjà un compte associé !";
@@ -59,7 +74,50 @@ class AccountController extends AbstractController
 
         return $this->render('account/index.html.twig', array(
             "form" => $form->createView(),
-            "msg" => $msg
+            "msg" => $msg,
+            'activities' => $this->getDoctrine()
+                ->getRepository(Activity::class)
+                ->findAll(),
+        ));
+    }
+
+    /**
+     * The user can modify your profile (personnal informations and his identifiants)
+     * @param Request $request
+     * @param UserPasswordEncoderInterface $encoder
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|Response
+     */
+    public function update(Request $request, UserPasswordEncoderInterface $encoder)
+    {
+        $manager = $this->getDoctrine()->getManager();
+        $currentUserEmail = $this->get('session')->get('_security.last_username');
+        $account = $manager->getRepository(Account::class)->findOneBy(array('email' => $currentUserEmail));
+
+        $form = $this->createForm(AccountType::class, $account);
+        $form->remove('children');
+        $form->handleRequest($request);
+        $msg = null;
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            if ($currentUserEmail != $account->getEmail()) {
+                if ($this->findByEmail($account->getEmail())) {
+                    $msg = "Cet email a déjà un compte associé !";
+                    return $this->render('account/update.html.twig', array(
+                        "form" => $form->createView(),
+                        "msg" => $msg
+                    ));
+                }
+                $this->get('session')->set('_security.last_username', $account->getEmail());
+            }
+            $encoded = $encoder->encodePassword($account, $account->getPassword());
+            $account->setPassword($encoded);
+            $manager->flush();
+            return $this->redirectToRoute('home');
+        }
+
+        return $this->render('account/update.html.twig', array(
+            "form" => $form->createView(),
+            "account" => $account
         ));
     }
 
@@ -162,6 +220,7 @@ class AccountController extends AbstractController
     {
         $payload = array(
             'iat' => time(),
+            'exp' => time() + 1800
         );
         $token = JWT::encode($payload, $_ENV['PRIVATE_KEY'], $_ENV['ALG']);
 
@@ -226,4 +285,10 @@ class AccountController extends AbstractController
         return $adherent;
     }
 
+    private function isValidate($adherent){
+        if($adherent->getSex() == null){
+            return false;
+        }
+        return true;
+    }
 }

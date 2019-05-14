@@ -2,12 +2,14 @@
 
 {% block title %}Formulaire d'inscription !{% endblock %}
 
-{% form_theme form 'bootstrap_4_layout.html.twig' %}
+{% block stylesheets %}
+    {{ encore_entry_link_tags('registration') }}
+{% endblock %}
 
 {% block body %}
     {{ form_start(form) }}
     <div id="group">
-        <div id="step1">
+        <div id="registrationStep1">
             <div class="container mt-3">
                 <div class="form-group pb-3">
                     <div class="container-fluid">
@@ -79,7 +81,7 @@
             </div>
         </div>
 
-        <div id="step2">
+        <div id="registrationStep2">
             <div class="container mt-3">
                 <div class="form-group pb-2">
                     <div class="container-fluid">
@@ -90,7 +92,7 @@
                                 <label for="juge">Juge</label>
                             </div>
                             <div class="col-4">
-                                <input type="checkbox" id="volontaire" name="volontaire" onchange="doalert2(this)">
+                                <input type="checkbox" id="volontaire" name="volontaire">
                                 <label for="volontaire">Volontaire</label>
                             </div>
                         </div>
@@ -156,12 +158,16 @@
                             Aide à la vie du club :
                             {{ form_widget(form.volunteerForClubLife) }}
                         </div>
+                        <div>
+                            Disponibilité :
+                            {{ form_widget(form.volunteerComment) }}
+                        </div>
                     </div>
                 </div>
             </div>
 
         </div>
-        <div id="step3">
+        <div id="registrationStep3">
             <div class="container-fluid mt-3">
                 <div class="form-group pb-2">
                     <div class="container-fluid">
@@ -297,7 +303,7 @@
                 </div>
             </div>
         </div>
-        <div id="step4">
+        <div id="registrationStep4">
             <div class="container-fluid mt-3">
                 <div class="form-group pb-2">
                     <div class="container-fluid">
@@ -335,7 +341,7 @@
             </div>
 
         </div>
-        <div id="step5">
+        <div id="registrationStep5">
             <div class="container-fluid mt-3">
                 <div class="form-group pb-2">
                     <div class="container-fluid">
@@ -376,6 +382,15 @@
                         </div>
                     </div>
                 </div>
+
+                <div class="form-group pt-2 pb-2">
+                    <div class="container-fluid">
+                        <h4>Certificat médical :</h4>
+                        <div class="row align-items-center ml-2">
+                            {{ form_widget(form.medicalCertificate) }}
+                        </div>
+                    </div>
+                </div>
                 <button type="submit" class="btn btn-primary">Confirmer l'inscription de l'adhérent</button>
             </div>
 
@@ -389,7 +404,6 @@
     </div>
 
 {% endblock %}
-
 
 
 

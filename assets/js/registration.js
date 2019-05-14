@@ -6,7 +6,7 @@
  */
 
 // any CSS you require will output into a single css file (app.scss in this case)
-require('../css/app.scss');
+require('../css/registation.scss');
 
 $ = require('jquery');
 
@@ -22,8 +22,8 @@ $('#next').click(function () {
             }
             $("#previous").show();
             $("helper").hide();
-            $("#step" + (value + 1)).show();
-            $("#step" + (value)).hide();
+            $("#registrationStep" + (value + 1)).show();
+            $("#registrationStep" + (value)).hide();
             document.getElementById('step').value = value + 1;
         }
     } else {
@@ -38,8 +38,8 @@ $('#previous').click(function () {
             $("#previous").hide();
         }
         $("#next").show();
-        $("#step" + (value - 1)).show();
-        $("#step" + (value)).hide();
+        $("#registrationStep" + (value - 1)).show();
+        $("#registrationStep" + (value)).hide();
         document.getElementById('step').value = value - 1;
     } else {
         $("#previous").hide();

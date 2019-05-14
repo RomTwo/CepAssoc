@@ -23,24 +23,28 @@ class Adherent
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotNull(message="Veuiller remplir le champ nom")
      * @Groups({"competition"})
      */
     private $firstName;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotNull(message="Veuiller remplir le champ nom")
      * @Groups({"competition"})
      */
     private $lastName;
 
     /**
      * @ORM\Column(type="string", length=10)
+     * @Assert\NotNull(message="Veuiller remplir le champ genre")
      * @Groups({"competition"})
      */
     private $sex;
 
     /**
      * @ORM\Column(type="date")
+     * @Assert\NotNull(message="Veuiller remplir le champ nom")
      * @Groups({"competition"})
      */
     private $birthDate;
@@ -268,6 +272,12 @@ class Adherent
     private $isMedicalCertificate;
 
     /**
+     * @ORM\Column(type="string")
+     * @Groups({"competition"})
+     */
+    private $medicalCertificate;
+
+    /**
      * @ORM\Column(type="boolean")
      * @Groups({"competition"})
      */
@@ -308,6 +318,12 @@ class Adherent
      * @Groups({"competition"})
      */
     private $maidenName;
+
+    /**
+     * @ORM\Column(type="string", nullable = true)
+     * @Groups({"competition"})
+     */
+    private $volunteerComment;
 
     /**
      * @ORM\ManyToMany(targetEntity="App\Entity\Activity")
@@ -1011,4 +1027,39 @@ class Adherent
     {
         $this->maidenName = $maidenName;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getVolunteerComment()
+    {
+        return $this->volunteerComment;
+    }
+
+    /**
+     * @param mixed $volunteerComment
+     */
+    public function setVolunteerComment($volunteerComment): void
+    {
+        $this->volunteerComment = $volunteerComment;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getMedicalCertificate()
+    {
+        return $this->medicalCertificate;
+    }
+
+    /**
+     * @param mixed $medicalCertificate
+     */
+    public function setMedicalCertificate($medicalCertificate): void
+    {
+        $this->medicalCertificate = $medicalCertificate;
+    }
+
+
+
 }

@@ -2,6 +2,10 @@
 
 {% block title %}Hello SiteRegisterController!{% endblock %}
 
+{% block stylesheets %}
+    {{ encore_entry_link_tags('account') }}
+{% endblock %}
+
 {% block body %}
     <div>
         {% if msg is defined and msg is not null %}
@@ -10,131 +14,147 @@
 
         {{ form_start(form) }}
 
-        <div class="container mt-4">
-            <div class="form-group pb-3">
-                <div class="container-fluid">
-                    <h4>Informations générales : </h4>
-                    <div class="row">
-                        <div class="col-2">
-                            {{ form_label(form.firstName) }}
+        <div id="accountStep1">
+            <div class="container mt-4">
+                <div class="form-group pb-3">
+                    <div class="container-fluid">
+                        <h4>Informations générales : </h4>
+                        <div class="row">
+                            <div class="col-2">
+                                {{ form_label(form.firstName) }}
+                            </div>
+                            <div class="col-auto">
+                                {{ form_widget(form.firstName, {'attr': {'placeholder': "Prenom"}}) }}
+                            </div>
                         </div>
-                        <div class="col-auto">
-                            {{ form_widget(form.firstName, {'attr': {'placeholder': "Prenom"}}) }}
+                        <div class="row ml-1">
+                            {{ form_errors(form.firstName) }}
                         </div>
-                    </div>
-                    <div class="row ml-1">
-                        {{ form_errors(form.firstName) }}
-                    </div>
-                    <div class="row mt-3">
-                        <div class="col-2">
-                            {{ form_label(form.lastName) }}
+                        <div class="row mt-3">
+                            <div class="col-2">
+                                {{ form_label(form.lastName) }}
+                            </div>
+                            <div class="col-auto">
+                                {{ form_widget(form.lastName, {'attr': {'placeholder': "Nom"}}) }}
+                            </div>
                         </div>
-                        <div class="col-auto">
-                            {{ form_widget(form.lastName, {'attr': {'placeholder': "Nom"}}) }}
+                        <div class="row ml-1">
+                            {{ form_errors(form.lastName) }}
                         </div>
-                    </div>
-                    <div class="row ml-1">
-                        {{ form_errors(form.lastName) }}
-                    </div>
-                    <div class="row mt-3">
-                        <div class="col-2">
-                            {{ form_label(form.sex) }}
+                        <div class="row mt-3">
+                            <div class="col-2">
+                                {{ form_label(form.sex) }}
+                            </div>
+                            <div class="col-auto">
+                                {{ form_widget(form.sex) }}
+                            </div>
                         </div>
-                        <div class="col-auto">
-                            {{ form_widget(form.sex) }}
+                        <div class="row ml-1">
+                            {{ form_errors(form.sex) }}
                         </div>
-                    </div>
-                    <div class="row ml-1">
-                        {{ form_errors(form.sex) }}
-                    </div>
-                    <div class="row mt-3">
-                        <div class="col-2">
-                            {{ form_label(form.birthDate) }}
+                        <div class="row mt-3">
+                            <div class="col-2">
+                                {{ form_label(form.birthDate) }}
+                            </div>
+                            <div class="col-auto">
+                                {{ form_widget(form.birthDate) }}
+                            </div>
                         </div>
-                        <div class="col-auto">
-                            {{ form_widget(form.birthDate) }}
+                        <div class="row ml-1">
+                            {{ form_errors(form.birthDate) }}
                         </div>
-                    </div>
-                    <div class="row ml-1">
-                        {{ form_errors(form.birthDate) }}
-                    </div>
-                    <div class="row mt-3">
-                        <div class="col-2">
-                            {{ form_label(form.zipCode) }}
+                        <div class="row mt-3">
+                            <div class="col-2">
+                                {{ form_label(form.zipCode) }}
+                            </div>
+                            <div class="col-auto">
+                                {{ form_widget(form.zipCode, {'attr': {'placeholder': "Code Zip"}}) }}
+                            </div>
                         </div>
-                        <div class="col-auto">
-                            {{ form_widget(form.zipCode, {'attr': {'placeholder': "Code Zip"}}) }}
+                        <div class="row ml-1">
+                            {{ form_errors(form.zipCode) }}
                         </div>
-                    </div>
-                    <div class="row ml-1">
-                        {{ form_errors(form.zipCode) }}
-                    </div>
-                    <div class="row mt-3">
-                        <div class="col-2">
-                            {{ form_label(form.address) }}
+                        <div class="row mt-3">
+                            <div class="col-2">
+                                {{ form_label(form.address) }}
+                            </div>
+                            <div class="col-auto">
+                                {{ form_widget(form.address, {'attr': {'placeholder': "Adresse"}}) }}
+                            </div>
                         </div>
-                        <div class="col-auto">
-                            {{ form_widget(form.address, {'attr': {'placeholder': "Adresse"}}) }}
+                        <div class="row ml-1">
+                            {{ form_errors(form.address) }}
                         </div>
-                    </div>
-                    <div class="row ml-1">
-                        {{ form_errors(form.address) }}
-                    </div>
-                    <div class="row mt-3">
-                        <div class="col-2">
-                            {{ form_label(form.email) }}
+                        <div class="row mt-3">
+                            <div class="col-2">
+                                {{ form_label(form.email) }}
+                            </div>
+                            <div class="col-auto">
+                                {{ form_widget(form.email, {'attr': {'placeholder': "Email"}}) }}
+                            </div>
                         </div>
-                        <div class="col-auto">
-                            {{ form_widget(form.email, {'attr': {'placeholder': "Email"}}) }}
+                        <div class="row ml-1">
+                            {{ form_errors(form.email) }}
                         </div>
-                    </div>
-                    <div class="row ml-1">
-                        {{ form_errors(form.email) }}
-                    </div>
-                    <div class="row mt-3">
-                        <div class="col-2">
-                            {{ form_label(form.city) }}
+                        <div class="row mt-3">
+                            <div class="col-2">
+                                {{ form_label(form.city) }}
+                            </div>
+                            <div class="col-auto">
+                                {{ form_widget(form.city, {'attr': {'placeholder': "Ville"}}) }}
+                            </div>
                         </div>
-                        <div class="col-auto">
-                            {{ form_widget(form.city, {'attr': {'placeholder': "Ville"}}) }}
+                        <div class="row ml-1">
+                            {{ form_errors(form.city) }}
                         </div>
-                    </div>
-                    <div class="row ml-1">
-                        {{ form_errors(form.city) }}
-                    </div>
-                    <div class="row mt-3">
-                        <div class="col-2">
-                            {{ form_label(form.password) }}
+                        <div class="row mt-3">
+                            <div class="col-2">
+                                {{ form_label(form.password) }}
+                            </div>
+                            <div class="col-auto">
+                                {{ form_widget(form.password, {'attr': {'placeholder': "Mot de passe"}}) }}
+                            </div>
                         </div>
-                        <div class="col-auto">
-                            {{ form_widget(form.password, {'attr': {'placeholder': "Mot de passe"}}) }}
+                        <div class="row ml-1">
+                            {{ form_errors(form.password) }}
                         </div>
-                    </div>
-                    <div class="row ml-1">
-                        {{ form_errors(form.password) }}
-                    </div>
-                    <div class="row mt-3 ml-1 align-items-center">
-                        <div class="col-auto">
-                            <input type="checkbox" id="registration" name="registration"> Souhaitez-vous devenir membre de l'association ?
+                        <div id="accountStep1-1">
+                            <div class="row mt-3">
+                                <div class="col-auto">
+                                    {{ form_widget(form.children[0].phoneRep1) }}
+                                    <small id="phoneRep1Help" class="form-text helper"><span
+                                                class="badge badge-danger">Erreur</span> Le numéro de téléphone doit
+                                        être
+                                        rempli doit
+                                        être rempli.
+                                    </small>
+                                </div>
+                                <div class="col-auto">
+                                    {{ form_widget(form.children[0].professionRep1) }}
+                                    <small id="professionRep1Help" class="form-text helper"><span
+                                                class="badge badge-danger">Erreur</span> La profession doit être rempli.
+                                    </small>
+                                </div>
+                            </div>
+
                         </div>
-                    </div>
-                    <div class="row ml-2">
-                        <div class="col-auto">
-                            <button id="previous" type="button" class="btn btn-primary">Précédent</button>
+                        <div class="row mt-3 ml-1 align-items-center">
+                            <div class="col-auto">
+                                <input type="checkbox" id="registration" name="registration"> Souhaitez-vous devenir
+                                membre de l'association ?
+                            </div>
                         </div>
-                        <div class="col-auto">
-                            <button id="next" type="button" class="btn btn-primary">Suivant</button>
+                        <div class="row ml-2">
+                            <div class="col-auto">
+                                {{ form_widget(form.valid) }}
+                            </div>
                         </div>
-                        <div class="col-auto">
-                            {{ form_widget(form.valid) }}
-                        </div>
-                        <input id="step" value="1" hidden>
                     </div>
                 </div>
             </div>
         </div>
 
-        <div id="step1">
+        <div id="accountStep2">
             <div class="container mt-3">
                 <div class="form-group pb-3">
                     <div class="container-fluid">
@@ -155,42 +175,12 @@
                 <div class="form-group pb-3">
                     <div class="container-fluid">
                         <h4>Informations générales : </h4>
-                        <div class="row">
-                            <div class="col-6">
-                                {{ form_widget(form.children[0].firstName) }}
-                            </div>
-                        </div>
-                        <div class="row ml-1">
-
-                            <small id="firstNameTypeHelp" class="form-text helper"><span
-                                        class="badge badge-danger">Erreur</span> Le prénom doit être rempli.
-                            </small>
-                        </div>
-                        <div class="row mt-3">
-                            <div class="col-6">
-
-                            </div>
-                        </div>
-                        <div class="row ml-1">
-                            <small id="lastNameTypeHelp" class="form-text helper"><span
-                                        class="badge badge-danger">Erreur</span> Le nom de famille doit être rempli.
-                            </small>
-
-                        </div>
-                        <div class="row mt-3">
-                            <div class="ml-3">
-                                <p>Date de naissance : </p>
-                            </div>
-                            <div class="col-6">
-
-                            </div>
-                        </div>
                         <div class="row mt-3">
                             <div class="ml-3">
                                 <p>Genre : </p>
                             </div>
                             <div class="col-6">
-
+                                {{ form_widget(form.children[0].sex) }}
                             </div>
                         </div>
                         <div class="row ml-1">
@@ -198,13 +188,189 @@
                                         class="badge badge-danger">Erreur</span>
                                 Il faut séléctionner un choix parmi la liste.
                             </small>
-
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    {{ form_end(form) }}
+
+        <div id="accountStep3">
+            <div class="container mt-3">
+                <div class="form-group pb-2">
+                    <div class="container-fluid">
+                        <h4>Type d'inscription (facultatif) :</h4>
+                        <div class="row justify-content-around align-items-center">
+                            <div class="col-4">
+                                <input type="checkbox" id="juge" name="juge">
+                                <label for="juge">Juge</label>
+                            </div>
+                            <div class="col-4">
+                                <input type="checkbox" id="volontaire" name="volontaire">
+                                <label for="volontaire">Volontaire</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="container-fluid mt-3">
+                <div id="judgeDiv" class="form-group pb-2">
+                    <div class="container-fluid">
+                        <h5>Juges :</h5>
+                        <p>Si vous êtes juges et si vous souhaitez juger pour le CEP cette année, merci de cocher les
+                            cases
+                            ci-dessous</p>
+                        <div class="row justify-content-start align-items-center mt-3">
+                            <div class="col-2">
+                                {{ form_widget(form.children[0].isGAFJudge) }}
+                            </div>
+                            <div class="col-auto">
+                                {{ form_widget(form.children[0].GAFJudgeLevel) }}
+                            </div>
+                        </div>
+                        <div class="row justify-content-start align-items-center mt-3">
+                            <div class="col-2">
+                                {{ form_widget(form.children[0].isGAMJudge) }}
+                            </div>
+                            <div class="col-auto">
+                                {{ form_widget(form.children[0].GAMJudgeLevel) }}
+                            </div>
+                        </div>
+                        <div class="row justify-content-start align-items-center mt-3">
+                            <div class="col-2">
+                                {{ form_widget(form.children[0].isTeamGYMJudge) }}
+                            </div>
+                            <div class="col-auto">
+                                {{ form_widget(form.children[0].teamGYMJudgeLevel) }}
+                            </div>
+                        </div>
+                        <div class="row justify-content-start align-items-center mt-3">
+                            <div class="col-auto">
+                                <p>Souhaitez-vous suivre une formation juge ?</p>
+                            </div>
+                            <div class="col-auto">
+                                {{ form_widget(form.children[0].wantsAJudgeTraining) }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="container-fluid mt-3">
+                <div id="volunteerDiv" class="form-group pb-2">
+                    <div class="container-fluid">
+                        <h5>Volontaires :</h5>
+                        <p>Si vous souhaitez nous aider sur les activités et les actions mises en place par le club tout
+                            au long
+                            de l’année, merci de cocher les cases ci-dessous :</p>
+                        <div>
+                            Aide à l'entrainement :
+                            {{ form_widget(form.children[0].volunteerForTrainingHelp) }}
+                        </div>
+                        <div>
+                            Aide à la vie du club :
+                            {{ form_widget(form.children[0].volunteerForClubLife) }}
+                        </div>
+                        <div>
+                            Disponibilité :
+                            {{ form_widget(form.children[0].volunteerComment) }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div id="accountStep4">
+            <div class="container-fluid mt-3">
+                <div class="form-group pb-2">
+                    <div class="container-fluid">
+                        <h4>Activités disponibles :</h4>
+                        <div class="row">
+                            <table class="table m-2 text-center">
+                                <thead>
+                                <tr>
+                                    <th>Nom</th>
+                                    <th>Créneaux</th>
+                                    <th>Prix</th>
+                                    <th>Date</th>
+                                    <th>Selection</th>
+                                </tr>
+                                </thead>
+
+                                {% for activity in activities %}
+                                    <tbody>
+                                    <tr id={{ activity.id }}>
+                                        <td>{{ activity.name }}</td>
+                                        <td>Samedi - De 10h à 12h</td>
+                                        <td id="price{{ activity.id }}">{{ activity.price }}</td>
+                                        <td>{{ activity.startDate|date('d/m/y') }}</td>
+                                        <td>
+                                            <input type="checkbox" id="checkbox{{ activity.id }}" name="selection"
+                                                   value="{{ activity.id }}">
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                {% endfor %}
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div id="accountStep5">
+            <div class="container-fluid mt-3">
+                <div class="form-group pb-2">
+                    <div class="container-fluid">
+                        <div class="row align-items-center">
+                            <div class="col-auto">
+                                <h4>Prix de l'abonnement : </h4>
+                            </div>
+                            <div class="col-auto">
+                                <h4 id="prix">0</h4>
+                            </div>
+                            <h4>€</h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="container-fluid mt-3">
+                <div class="form-group pt-2 pb-2">
+                    <div class="container-fluid">
+                        <div class="row align-items-center">
+                            <div class="col-auto">
+                                <h4>Moyens de paiement : </h4>
+                            </div>
+                            <div class="col-auto">
+                                {{ form_widget(form.children[0].paymentType) }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="container-fluid mt-3">
+                <div class="form-group pt-2 pb-2">
+                    <div class="container-fluid">
+                        <h4>Droits d'image :</h4>
+                        <div class="row align-items-center ml-2">
+                            <p>{{ form_widget(form.children[0].imageRight) }} le club à prendre et à diffuser des photos
+                                me
+                                concernant pour enrichir
+                                la photothèque et le site internet du club.</p>
+                        </div>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary">Confirmer l'inscription de l'adhérent</button>
+            </div>
+
+        </div>
+        {{ form_end(form) }}
+        <div class="fixed-bottom mb-5 mr-3 d-flex justify-content-end">
+            <button id="previous" type="button" class="btn btn-primary">Précédent</button>
+            <button id="next" type="button" class="btn btn-primary">Suivant</button>
+            <input id="step" value="1" hidden>
+        </div>
     </div>
 {% endblock %}
 

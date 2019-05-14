@@ -35,6 +35,10 @@ class RegistrationController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $this->setOtherFields($adherent);
+            $file = $adherent->getMedicalCertificate();
+            $fileName = md5(uniqid()).'.'.$file->guessExtension();
+            $file->move($this->getParameter('upload_directory'), $fileName);
+            $adherent->setMedicalCertificate($fileName);
             $account = $this->getDoctrine()->getRepository(Account::class)->find($user->getId());
 
             $account->addChild($adherent);

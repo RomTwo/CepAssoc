@@ -22,12 +22,9 @@ body {
   background-color: #F0F0F0;
 }
 
-#step2, #step3, #step4, #step5, #judgeDiv, #volunteerDiv, .helper, #previous {
-  display: none;
-}
-
-small {
-  color: red;
+.navbar {
+  background-color: #CFD6DC;
+  box-shadow: 0px 0px 5px gray;
 }
 
 .form-group {
@@ -36,7 +33,6 @@ small {
   border-radius: 10px;
 }
 
-.navbar {
-  background-color: #CFD6DC;
-  box-shadow: 0px 0px 5px gray;
+small {
+  color: red;
 }
