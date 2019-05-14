@@ -8,5 +8,12 @@
 // any CSS you require will output into a single css file (app.scss in this case)
 require('../css/app.scss');
 
+$ = require('jquery');
+
 // Need jQuery? Install it with "yarn add jquery", then uncomment to require it.
 // const $ = require('jquery');
+
+$('#registration').on('change', function () {
+    var val = $(this).is(':checked') ? $("#step1").show() : $("#step1").hide();
+});
+

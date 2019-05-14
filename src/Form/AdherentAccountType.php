@@ -13,7 +13,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class AdherentType extends AbstractType
+class AdherentAccountType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
@@ -21,12 +21,12 @@ class AdherentType extends AbstractType
             ->add('firstName', TextType::class, [
                 'attr' => [
                     'placeholder' => "Prenom",
-                ]
-                ])
+                ],
+            ])
             ->add('lastName', TextType::class, [
                 'attr' => [
                     'placeholder' => "Nom de famille",
-                ]
+                ],
             ])
             ->add('sex', ChoiceType::class, [
                 'choices' => [
@@ -87,6 +87,7 @@ class AdherentType extends AbstractType
                     'Non' => false,
                     'Oui' => true,
                 ],
+                'required' => false,
             ])
             ->add('volunteerForTrainingHelp', ChoiceType::class, [
                 'choices' => [
@@ -133,13 +134,11 @@ class AdherentType extends AbstractType
                 'attr' => [
                     'placeholder' => "Prenom du représentant 1"
                 ],
-                'data' => $options['firstNameRep1']
             ])
             ->add('lastNameRep1', TextType::class, [
                 'attr' => [
                     'placeholder' => "Nom du représentant 1"
                 ],
-                'data' => $options['lastNameRep1']
             ])
             ->add('firstNameRep2', TextType::class, [
                 'attr' => [
@@ -157,7 +156,6 @@ class AdherentType extends AbstractType
                 'attr' => [
                     'placeholder' => "Email du représentant 1"
                 ],
-                'data' => $options['emailRep1']
             ])
             ->add('emailRep2', EmailType::class, [
                 'attr' => [
@@ -169,7 +167,6 @@ class AdherentType extends AbstractType
                 'attr' => [
                     'placeholder' => "Ville du représentant 1"
                 ],
-                'data' => $options['cityRep1']
             ])
             ->add('cityRep2', TextType::class, [
                 'attr' => [
@@ -181,7 +178,6 @@ class AdherentType extends AbstractType
                 'attr' => [
                     'placeholder' => "Adresse du représentant 1"
                 ],
-                'data' => $options['addressRep1']
             ])
             ->add('addressRep2', TextType::class, [
                 'attr' => [
@@ -193,7 +189,6 @@ class AdherentType extends AbstractType
                 'attr' => [
                     'placeholder' => "Zip code du représentant 1"
                 ],
-                'data' => $options['zipCodeRep1']
             ])
             ->add('zipCodeRep2', NumberType::class, [
                 'attr' => [
@@ -233,6 +228,7 @@ class AdherentType extends AbstractType
                 'label_attr' => [
                     'class' => 'radio-inline'
                 ],
+                'required' => false,
             ])
             ->add('imageRight', ChoiceType::class, [
                 'choices' => [
@@ -244,6 +240,7 @@ class AdherentType extends AbstractType
                 'label_attr' => [
                     'class' => 'radio-inline'
                 ],
+                'required' => false,
             ]);
     }
 
@@ -251,15 +248,7 @@ class AdherentType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => Adherent::class,
+            'required' => false,
         ]);
-
-        $resolver->setRequired(array(
-            'firstNameRep1',
-            'lastNameRep1',
-            'emailRep1',
-            'cityRep1',
-            'addressRep1',
-            'zipCodeRep1'
-        ));
     }
 }

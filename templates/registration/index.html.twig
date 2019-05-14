@@ -13,7 +13,7 @@
                     <div class="container-fluid">
                         <h4>Type de demande : </h4>
                         <div class="row justify-content-md-center">
-                            {{ form_widget(form.registrationType, { 'id': 'registrationType' }) }}
+                            {{ form_widget(form.registrationType) }}
                         </div>
                         <div class="row ml-1">
                             <small id="registrationTypeHelp" class="form-text helper"><span class="badge badge-danger">Erreur</span>
@@ -30,7 +30,7 @@
                         <h4>Informations générales : </h4>
                         <div class="row">
                             <div class="col-6">
-                                {{ form_widget(form.firstName, {'attr': {'placeholder': "Prenom..."}, 'id': 'firstName'}) }}
+                                {{ form_widget(form.firstName) }}
                             </div>
                         </div>
                         <div class="row ml-1">
@@ -41,7 +41,7 @@
                         </div>
                         <div class="row mt-3">
                             <div class="col-6">
-                                {{ form_widget(form.lastName, {'attr': {'placeholder': "Nom de famille..."}, 'id': 'lastName'}) }}
+                                {{ form_widget(form.lastName) }}
                             </div>
                         </div>
                         <div class="row ml-1">
@@ -55,7 +55,7 @@
                                 <p>Date de naissance : </p>
                             </div>
                             <div class="col-6">
-                                {{ form_widget(form.birthDate, {'id': 'birthDate'}) }}
+                                {{ form_widget(form.birthDate) }}
                                 {{ form_errors(form.birthDate) }}
                             </div>
                         </div>
@@ -64,7 +64,7 @@
                                 <p>Genre : </p>
                             </div>
                             <div class="col-6">
-                                {{ form_widget(form.sex, {'id': 'sex'}) }}
+                                {{ form_widget(form.sex) }}
                             </div>
                         </div>
                         <div class="row ml-1">
@@ -110,7 +110,7 @@
                                 {{ form_widget(form.isGAFJudge) }}
                             </div>
                             <div class="col-auto">
-                                {{ form_widget(form.GAFJudgeLevel, {'attr': {'placeholder':"Niveau"}}) }}
+                                {{ form_widget(form.GAFJudgeLevel) }}
                             </div>
                         </div>
                         <div class="row justify-content-start align-items-center mt-3">
@@ -118,7 +118,7 @@
                                 {{ form_widget(form.isGAMJudge) }}
                             </div>
                             <div class="col-auto">
-                                {{ form_widget(form.GAMJudgeLevel, {'attr': {'placeholder':"Niveau"}}) }}
+                                {{ form_widget(form.GAMJudgeLevel) }}
                             </div>
                         </div>
                         <div class="row justify-content-start align-items-center mt-3">
@@ -126,7 +126,7 @@
                                 {{ form_widget(form.isTeamGYMJudge) }}
                             </div>
                             <div class="col-auto">
-                                {{ form_widget(form.teamGYMJudgeLevel, {'attr': {'placeholder':"Niveau"}}) }}
+                                {{ form_widget(form.teamGYMJudgeLevel) }}
                             </div>
                         </div>
                         <div class="row justify-content-start align-items-center mt-3">
@@ -168,26 +168,26 @@
                         <h4>Membre ou représentant légal 1 pour les mineurs : </h4>
                         <div class="row mt-2">
                             <div class="col">
-                                {{ form_widget(form.firstNameRep1, {'attr': {'placeholder':"Prenom"}}) }}
+                                {{ form_widget(form.firstNameRep1) }}
                                 <small id="firstNameRep1Help" class="form-text helper"><span class="badge badge-danger">Erreur</span>
                                     Le prenom doit être rempli.
                                 </small>
                                 {{ form_errors(form.firstNameRep1) }}
                             </div>
                             <div class="col">
-                                {{ form_widget(form.lastNameRep1, {'attr': {'placeholder':"Nom de famille"}}) }}
+                                {{ form_widget(form.lastNameRep1) }}
                                 <small id="lastNameRep1Help" class="form-text helper"><span
                                             class="badge badge-danger">Erreur</span> Le nom de famille doit être rempli.
                                 </small>
                             </div>
                             <div class="col">
-                                {{ form_widget(form.emailRep1, {'attr': {'placeholder':"Email"}}) }}
+                                {{ form_widget(form.emailRep1) }}
                                 <small id="emailRep1Help" class="form-text helper"><span
                                             class="badge badge-danger">Erreur</span> L'email doit être rempli.
                                 </small>
                             </div>
                             <div class="col">
-                                {{ form_widget(form.professionRep1, {'attr': {'placeholder':"Profession"}}) }}
+                                {{ form_widget(form.professionRep1) }}
                                 <small id="professionRep1Help" class="form-text helper"><span
                                             class="badge badge-danger">Erreur</span> La profession doit être rempli.
                                 </small>
@@ -195,14 +195,14 @@
                         </div>
                         <div class="row mt-2">
                             <div class="col">
-                                {{ form_widget(form.cityRep1, {'attr': {'placeholder':"Ville"}}) }}
+                                {{ form_widget(form.cityRep1) }}
                                 <small id="cityRep1Help" class="form-text helper"><span
                                             class="badge badge-danger">Erreur</span> La ville doit être rempli doit être
                                     rempli.
                                 </small>
                             </div>
                             <div class="col">
-                                {{ form_widget(form.addressRep1, {'attr': {'placeholder':"Adresse"}}) }}
+                                {{ form_widget(form.addressRep1) }}
                                 <small id="addressRep1Help" class="form-text helper"><span
                                             class="badge badge-danger">Erreur</span> L'adresse doit être rempli doit
                                     être
@@ -210,7 +210,7 @@
                                 </small>
                             </div>
                             <div class="col">
-                                {{ form_widget(form.zipCodeRep1, {'attr': {'placeholder':"Code postal"}}) }}
+                                {{ form_widget(form.zipCodeRep1) }}
                                 <small id="zipCodeRep1Help" class="form-text helper"><span
                                             class="badge badge-danger">Erreur</span> Le code postal doit être rempli
                                     doit être
@@ -218,7 +218,7 @@
                                 </small>
                             </div>
                             <div class="col">
-                                {{ form_widget(form.phoneRep1, {'attr': {'placeholder':"Numéro de telephone"}}) }}
+                                {{ form_widget(form.phoneRep1) }}
                                 <small id="phoneRep1Help" class="form-text helper"><span
                                             class="badge badge-danger">Erreur</span> Le numéro de téléphone doit être
                                     rempli doit
@@ -236,25 +236,25 @@
                         <h4>Membre ou représentant légal 2 (pas obligatoire) : </h4>
                         <div class="row mt-2">
                             <div class="col">
-                                {{ form_widget(form.firstNameRep2, {'attr': {'placeholder':"Prenom"}}) }}
+                                {{ form_widget(form.firstNameRep2) }}
                                 <small id="firstNameRep2Help" class="form-text helper"><span
                                             class="badge badge-danger">Erreur</span> Le prenom doit être rempli.
                                 </small>
                             </div>
                             <div class="col">
-                                {{ form_widget(form.lastNameRep2, {'attr': {'placeholder':"Nom de famille"}}) }}
+                                {{ form_widget(form.lastNameRep2) }}
                                 <small id="lastNameRep2Help" class="form-text helper"><span
                                             class="badge badge-danger">Erreur</span> Le nom de famille doit être rempli.
                                 </small>
                             </div>
                             <div class="col">
-                                {{ form_widget(form.emailRep2, {'attr': {'placeholder':"Email"}}) }}
+                                {{ form_widget(form.emailRep2) }}
                                 <small id="emailRep2Help" class="form-text helper"><span
                                             class="badge badge-danger">Erreur</span> L'email doit être rempli.
                                 </small>
                             </div>
                             <div class="col">
-                                {{ form_widget(form.professionRep2, {'attr': {'placeholder':"Profession"}}) }}
+                                {{ form_widget(form.professionRep2) }}
                                 <small id="professionRep2Help" class="form-text helper"><span
                                             class="badge badge-danger">Erreur</span> La profession doit être rempli.
                                 </small>
@@ -262,14 +262,14 @@
                         </div>
                         <div class="row mt-2">
                             <div class="col">
-                                {{ form_widget(form.cityRep2, {'attr': {'placeholder':"Ville"}}) }}
+                                {{ form_widget(form.cityRep2) }}
                                 <small id="cityRep2Help" class="form-text helper"><span
                                             class="badge badge-danger">Erreur</span> La ville doit être rempli doit être
                                     rempli.
                                 </small>
                             </div>
                             <div class="col">
-                                {{ form_widget(form.addressRep2, {'attr': {'placeholder':"Adresse"}}) }}
+                                {{ form_widget(form.addressRep2) }}
                                 <small id="addressRep2Help" class="form-text helper"><span
                                             class="badge badge-danger">Erreur</span> L'adresse doit être rempli doit
                                     être
@@ -277,7 +277,7 @@
                                 </small>
                             </div>
                             <div class="col">
-                                {{ form_widget(form.zipCodeRep2, {'attr': {'placeholder':"Code postal"}}) }}
+                                {{ form_widget(form.zipCodeRep2) }}
                                 <small id="zipCodeRep2Help" class="form-text helper"><span
                                             class="badge badge-danger">Erreur</span> Le code postal doit être rempli
                                     doit
@@ -285,7 +285,7 @@
                                 </small>
                             </div>
                             <div class="col">
-                                {{ form_widget(form.phoneRep2, {'attr': {'placeholder':"Numéro de telephone"}}) }}
+                                {{ form_widget(form.phoneRep2) }}
                                 <small id="phoneRep2Help" class="form-text helper"><span
                                             class="badge badge-danger">Erreur</span> Le numéro de téléphone doit être
                                     rempli

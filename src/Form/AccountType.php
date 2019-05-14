@@ -3,8 +3,10 @@
 namespace App\Form;
 
 use App\Entity\Account;
+use App\Repository\AdherentRepository;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
@@ -37,6 +39,10 @@ class AccountType extends AbstractType
             ->add('city', TextType::class, array('label' => 'Ville : '))
             ->add('email', EmailType::class, array('label' => 'Adresse mail : '))
             ->add('password', PasswordType::class, array('label' => 'Mot de passe : '))
+            ->add('children', CollectionType::class, [
+                'entry_type' => AdherentAccountType::class,
+                'delete_empty' => true,
+            ])
             ->add('valid', SubmitType::class, array('label' => 'S\'inscrire : '));
     }
 

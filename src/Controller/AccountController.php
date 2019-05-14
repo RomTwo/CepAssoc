@@ -3,7 +3,10 @@
 namespace App\Controller;
 
 use App\Entity\Account;
+use App\Entity\Adherent;
 use App\Form\AccountType;
+use App\Form\AdherentType;
+use DateTime;
 use Firebase\JWT\JWT;
 use Swift_Mailer;
 use Swift_Message;
@@ -29,12 +32,20 @@ class AccountController extends AbstractController
         }
 
         $account = new Account();
+        $adherent = new Adherent();
+        $account->addChild($adherent);
         $form = $this->createForm(AccountType::class, $account);
+
         $form->handleRequest($request);
         $msg = null;
 
         if ($form->isSubmitted() && $form->isValid()) {
             if (!$this->findByEmail($account->getEmail())) {
+                if($request->request->get("registration") == true){
+                    $this->setOtherFields($adherent);
+                }else{
+                    $account->removeChild($adherent);
+                }
                 $manager = $this->getDoctrine()->getManager();
                 $encoded = $encoder->encodePassword($account, $account->getPassword());
                 $account->setPassword($encoded);
@@ -194,6 +205,25 @@ class AccountController extends AbstractController
 
         return $msg;
 
+    }
+
+    private function setOtherFields($adherent){
+        $adherent->setRegistrationDate(new DateTime());
+        $adherent->setIsRegisteredInGestGym(false);
+        $adherent->setJudge(false);
+        $adherent->setPaymentFeesArePaid(false);
+        $adherent->setRegistrationCost(0);
+        $adherent->setIsRegisteredInFFG(false);
+        $adherent->setIsMedicalCertificate(false);
+        $adherent->setIsValidateMedical(false);
+        $adherent->setMedicalCertificateDate(new \DateTime("01-09-2019"));
+        $adherent->setNationality("France");
+        $adherent->setIsFFGInsurance(false);
+        $adherent->setIsAllowEmail(false);
+        $adherent->setIsLicenceHolderOtherClub(false);
+        $adherent->setMaidenName("");
+
+        return $adherent;
     }
 
 }

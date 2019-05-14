@@ -102,7 +102,7 @@ class Account implements UserInterface
     private $password;
 
     /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\Adherent", inversedBy="parents")
+     * @ORM\ManyToMany(targetEntity="App\Entity\Adherent", inversedBy="parents", cascade={"persist"})
      */
     private $children;
 
