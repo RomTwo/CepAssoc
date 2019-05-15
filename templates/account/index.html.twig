@@ -137,7 +137,10 @@
                         <input type="hidden" name="recaptcha_response" id="recaptchaResponse">
 
                         {{ form_end(form) }}
-
+                        <div class="row mt-3 ml-1">
+                            <p>Vous avez déjà un compte ? <a href="{{ path('security_connexion') }}">Connexion</a>
+                            </p>
+                        </div>
                     </div>
                 </div>
             </div>

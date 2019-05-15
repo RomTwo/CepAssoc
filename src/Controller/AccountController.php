@@ -46,7 +46,7 @@ class AccountController extends AbstractController
                     $this->addFlash('success', "Votre compte vient d'être créé");
                     return $this->redirectToRoute('security_connexion', array(), 301);
                 } else {
-                    $this->addFlash('error', 'Cette adresse mail est déjà associé à un compte');
+                    $this->addFlash('errorMail', 'Cette adresse mail est déjà associé à un compte');
                 }
             } else {
                 $this->addFlash('error', 'Le captcha est invalide');

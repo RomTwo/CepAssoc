@@ -37,6 +37,7 @@
                             <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
 
                             <button class="btn btn-primary" type="submit">Connexion</button>
+
                         </form>
                         {% if errors %}
                             <div class="row justify-content-center mt-2">
@@ -46,11 +47,6 @@
                             </div>
                         {% endif %}
 
-                        <div class="row justify-content-center mt-2">
-                            <p>Vous n'avez pas encore de compte ? <a href="{{ path('account_add') }}">Inscrivez-vous
-                                    !</a>
-                            </p>
-                        </div>
 
                         <!-- Forgot password form -->
                         <div class=" row justify-content-between align-items-center pl-3 pr-3">
@@ -64,6 +60,12 @@
                                 <input class="btn btn-success" type="submit" value="Envoyer">
                                 <input type="hidden" name="recaptcha_response" id="recaptchaResponse">
                             </form>
+                        </div>
+
+                        <div class="row mt-2 ml-1">
+                            <p>Vous n'avez pas encore de compte ? <a href="{{ path('account_add') }}">Inscrivez-vous
+                                    !</a>
+                            </p>
                         </div>
                     </div>
                 </div>
