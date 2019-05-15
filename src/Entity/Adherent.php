@@ -272,12 +272,6 @@ class Adherent
     private $isMedicalCertificate;
 
     /**
-     * @ORM\Column(type="string")
-     * @Groups({"competition"})
-     */
-    private $medicalCertificate;
-
-    /**
      * @ORM\Column(type="boolean")
      * @Groups({"competition"})
      */
@@ -324,6 +318,13 @@ class Adherent
      * @Groups({"competition"})
      */
     private $volunteerComment;
+
+
+    /**
+     * @ORM\Column(type="string")
+     * @Groups({"competition"})
+     */
+    private $medicalCertificate;
 
     /**
      * @ORM\ManyToMany(targetEntity="App\Entity\Activity")
@@ -1028,6 +1029,47 @@ class Adherent
         $this->maidenName = $maidenName;
     }
 
+    public function getHasBulletinN2Allianz(): ?bool
+    {
+        return $this->hasBulletinN2Allianz;
+    }
+
+    public function setHasBulletinN2Allianz(bool $hasBulletinN2Allianz): self
+    {
+        $this->hasBulletinN2Allianz = $hasBulletinN2Allianz;
+
+        return $this;
+    }
+
+    public function getHasCompetitionCommitment(): ?bool
+    {
+        return $this->hasCompetitionCommitment;
+    }
+
+    public function setHasCompetitionCommitment(bool $hasCompetitionCommitment): self
+    {
+        $this->hasCompetitionCommitment = $hasCompetitionCommitment;
+
+        return $this;
+    }
+
+    public function getIsMutated(): ?bool
+    {
+        return $this->isMutated;
+    }
+
+    public function setIsMutated(bool $isMutated): self
+    {
+        $this->isMutated = $isMutated;
+
+        return $this;
+    }
+
+    public function getTreatedBy(): ?string
+    {
+        return $this->treatedBy;
+    }
+
     /**
      * @return mixed
      */
@@ -1060,6 +1102,34 @@ class Adherent
         $this->medicalCertificate = $medicalCertificate;
     }
 
+    public function setTreatedBy(?string $treatedBy): self
+    {
+        $this->treatedBy = $treatedBy;
 
+        return $this;
+    }
 
+    public function getAffiliateCode(): ?string
+    {
+        return $this->affiliateCode;
+    }
+
+    public function setAffiliateCode(?string $affiliateCode): self
+    {
+        $this->affiliateCode = $affiliateCode;
+
+        return $this;
+    }
+
+    public function getIsDeleted(): ?bool
+    {
+        return $this->isDeleted;
+    }
+
+    public function setIsDeleted(bool $isDeleted): self
+    {
+        $this->isDeleted = $isDeleted;
+
+        return $this;
+    }
 }

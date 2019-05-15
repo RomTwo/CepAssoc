@@ -98,14 +98,12 @@
                         </div>
                         <div class="row mt-3">
                             <div class="col-2">
-                                {{ form_label(form.city) }}
+                                <p>Ville :</p>
                             </div>
                             <div class="col-auto">
-                                {{ form_widget(form.city, {'attr': {'placeholder': "Ville"}}) }}
+                                <select id="account_city" name="account_city" class="form-control">
+                                </select>
                             </div>
-                        </div>
-                        <div class="row ml-1">
-                            {{ form_errors(form.city) }}
                         </div>
                         <div class="row mt-3">
                             <div class="col-2">

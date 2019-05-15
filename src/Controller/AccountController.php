@@ -3,16 +3,15 @@
 namespace App\Controller;
 
 use App\Entity\Account;
-use App\Entity\Activity;
 use App\Entity\Adherent;
+use App\Entity\Activity;
 use App\Form\AccountType;
-use App\Form\AdherentType;
-use DateTime;
+use App\Services\CaptchaCheck;
+use App\Services\ForgotPassword;
+use App\Services\GenerateToken;
 use Firebase\JWT\JWT;
-use Swift_Mailer;
-use Swift_Message;
-use Swift_SmtpTransport;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
@@ -25,6 +24,7 @@ class AccountController extends AbstractController
      *
      * @param Request $request
      * @param UserPasswordEncoderInterface $encoder
+     * @param CaptchaCheck $captchaCheck
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
     public function add(Request $request, UserPasswordEncoderInterface $encoder)
@@ -37,41 +37,45 @@ class AccountController extends AbstractController
         $adherent = new Adherent();
         $account->addChild($adherent);
         $form = $this->createForm(AccountType::class, $account);
-
         $form->handleRequest($request);
         $msg = null;
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            if (!$this->findByEmail($account->getEmail())) {
-                if($test = $request->request->get("registration")){
-                    if($this->isValidate($adherent)){
-                        $this->setOtherFields($adherent);
+        if ($form->isSubmitted() && $form->isValid() && $this->isValidateCity($request)) {
+            $account->setCity($request->request->get("account_city"));
+            $adherent->setCityRep1($request->request->get("account_city"));
+                if (!$this->findByEmail($account->getEmail())) {
+                    if($test = $request->request->get("registration")){
+                        if($this->isValidate($adherent)){
+                            $this->setOtherFields($adherent);
+                        }else{
+                            $msg = "Attention, il manque des informations pour devenir adhérent";
+                            return $this->render('account/index.html.twig', array(
+                                "form" => $form->createView(),
+                                "msg" => $msg,
+                                'activities' => $this->getDoctrine()
+                                    ->getRepository(Activity::class)
+                                    ->findAll(),
+                            ));
+                        }
                     }else{
-                        $msg = "Attention, il manque des informations pour devenir adhérent";
-                        return $this->render('account/index.html.twig', array(
-                            "form" => $form->createView(),
-                            "msg" => $msg,
-                            'activities' => $this->getDoctrine()
-                                ->getRepository(Activity::class)
-                                ->findAll(),
-                        ));
+                        $account->removeChild($adherent);
                     }
-                }else{
-                    $account->removeChild($adherent);
+                    $manager = $this->getDoctrine()->getManager();
+                    $encoded = $encoder->encodePassword($account, $account->getPassword());
+                    $account->setPassword($encoded);
+                    $manager->persist($account);
+                    $manager->flush();
+
+                    $this->addFlash('success', "Votre compte vient d'être créé");
+                    return $this->redirectToRoute('security_connexion', array(), 301);
+                } else {
+                    $msg = 'Cette adresse mail est déjà associé à un compte';
                 }
-                $manager = $this->getDoctrine()->getManager();
-                $encoded = $encoder->encodePassword($account, $account->getPassword());
-                $account->setPassword($encoded);
-                $manager->persist($account);
-                $manager->flush();
-                return $this->redirectToRoute('security_connexion', array(), 301);
-            }
-            $msg = "Cet email a déjà un compte associé !";
         }
 
         return $this->render('account/index.html.twig', array(
             "form" => $form->createView(),
-            "msg" => $msg,
+            "errorMail" => $msg,
             'activities' => $this->getDoctrine()
                 ->getRepository(Activity::class)
                 ->findAll(),
@@ -121,35 +125,6 @@ class AccountController extends AbstractController
     }
 
     /**
-     * Generate token (save in database) and send and email at the user to change his password
-     *
-     * @param Request $request
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse
-     */
-    public function forgotPassword(Request $request)
-    {
-        if ($request->isMethod('POST') && $this->findByEmail($request->request->get('email'))) {
-            $manager = $this->getDoctrine()->getManager();
-            $account = $manager->getRepository(Account::class)->findOneBy(
-                array(
-                    'email' => $request->request->get('email')
-                )
-            );
-
-            $token = $this->generateToken();
-            $account->setTokenForgetPass($token);
-            $manager->flush();
-            $this->sendEmail($account->getEmail(), $token);
-
-            $this->addFlash("msg", "Un mail vient de vous être envoyé");
-        } else {
-            $this->addFlash("msg", "Une erreur s'est produite");
-        }
-
-        return $this->redirectToRoute('security_connexion', array(), 301);
-    }
-
-    /**
      * Reset the user password after click on link present in the email send by the previous function (forgotPassword)
      *
      * @param Request $request
@@ -175,11 +150,13 @@ class AccountController extends AbstractController
                         $account->setTokenForgetPass(null);
                         $manager->flush();
 
+                        $this->addFlash('success', "Votre mot de passe vient d'être modifié");
                         return $this->redirectToRoute('security_connexion', array(), 301);
                     }
+
+                    $this->addFlash('error', "Mot(s) de passe(s) incorrect(s) ou différents");
                     return $this->render('account/resetPassword.html.twig', array(
-                            'token' => $token,
-                            'error' => 'Mot de passe incorrect',
+                            'token' => $token
                         )
                     );
                 }
@@ -210,63 +187,8 @@ class AccountController extends AbstractController
         return $account != null ? true : false;
     }
 
-    /**
-     * Generate a JWT token
-     *
-     * @return string
-     */
-    private function generateToken()
-    {
-        $payload = array(
-            'iat' => time(),
-            'exp' => time() + 1800
-        );
-        $token = JWT::encode($payload, $_ENV['PRIVATE_KEY'], $_ENV['ALG']);
-
-        return $token;
-    }
-
-    /**
-     * Send an email to reset the user password. It contains a link for reset the user password
-     *
-     * @param $mail
-     * @param $token
-     */
-    private function sendEmail($mail, $token)
-    {
-
-        $transport = (new Swift_SmtpTransport('smtp.gmail.com', 465, 'ssl'))
-            ->setUsername($_ENV['MAILER_MAIL'])
-            ->setPassword($_ENV['MAILER_PASSWORD']);
-
-        $mailer = new Swift_Mailer($transport);
-
-        $message = (new Swift_Message('Réinitialisation mot de passe Association Cep Poitiers Gymnastique'))
-            ->setFrom([$_ENV['MAILER_MAIL'] => 'Association Cep Poitiers Gymnastique'])
-            ->setTo([$mail])
-            ->setBody($this->msgHtml($token), 'text/html')
-            ->setCharset('UTF-8');
-
-
-        $result = $mailer->send($message);
-    }
-
-    /**
-     * This is a body of the email (email for reset the user password)
-     *
-     * @param $token
-     * @return string
-     */
-    private function msgHtml($token)
-    {
-        $msg = '<p>Réinitialisation de votre mot de passe en cliquant <a href="' . $_ENV['MAILER_URL'] . $token . '">ici</a></p>';
-
-        return $msg;
-
-    }
-
     private function setOtherFields($adherent){
-        $adherent->setRegistrationDate(new DateTime());
+        $adherent->setRegistrationDate(new \DateTime());
         $adherent->setIsRegisteredInGestGym(false);
         $adherent->setJudge(false);
         $adherent->setPaymentFeesArePaid(false);
@@ -280,6 +202,7 @@ class AccountController extends AbstractController
         $adherent->setIsAllowEmail(false);
         $adherent->setIsLicenceHolderOtherClub(false);
         $adherent->setMaidenName("");
+        $adherent->setMedicalCertificate("dede");
 
         return $adherent;
     }
@@ -288,6 +211,16 @@ class AccountController extends AbstractController
         if($adherent->getSex() == null){
             return false;
         }
+
+
+        return true;
+    }
+
+    private function isValidateCity($request){
+        if($request->request->get("account_city") == null){
+            return false;
+        }
+
         return true;
     }
 }

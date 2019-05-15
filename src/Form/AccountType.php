@@ -49,26 +49,6 @@ class AccountType extends AbstractType
                 [$this, 'onSubmit']
             )
             ->add('valid', SubmitType::class, array('label' => 'S\'inscrire'));
-
-        if($options['city'] == null){
-            $builder
-                ->add('city', ChoiceType::class, [
-                    'label' => 'Ville : ',
-                    'placeholder' => 'Veuillez saisir le zip code',
-                    'multiple' => false,
-                ]);
-
-        }else{
-            $builder
-                ->add('city', ChoiceType::class, [
-                    'choices' => array(
-                        $options['city'] => $options['city'],
-                    ),
-                    'label' => 'Ville : ',
-                    'placeholder' => 'Veuillez choisir une ville',
-                    'multiple' => false,
-                ]);
-        }
     }
 
     public function onSubmit(FormEvent $event)
@@ -76,8 +56,6 @@ class AccountType extends AbstractType
         $form = $event->getForm();
 
         $data = $form->getData();
-
-        $data->setCity($form->get('city')->getViewData());
 
         $children = $data->getChildren();
         if($data->getFirstName() != null){
@@ -94,10 +72,6 @@ class AccountType extends AbstractType
 
         if($data->getEmail() != null){
             $children[0]->setEmailRep1($data->getEmail());
-        }
-
-        if($data->getCity() != null){
-            $children[0]->setCityRep1($data->getCity());
         }
 
         if($data->getAddress() != null){
