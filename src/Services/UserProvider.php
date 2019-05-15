@@ -37,6 +37,7 @@ class UserProvider implements UserProviderInterface
      * object can just be merged into some internal array of users / identity
      * map.
      *
+     * @param UserInterface $user
      * @return \Symfony\Component\Security\Core\User\UserInterface
      *
      * @throws \Symfony\Component\Security\Core\Exception\UnsupportedUserException  if the user is not supported

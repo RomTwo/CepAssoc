@@ -1,213 +1,175 @@
-{% extends 'base.html.twig' %}
+{% extends 'base_without_navbar.html.twig' %}
 
-{% block title %}Hello SiteRegisterController!{% endblock %}
+{% block title %}Inscription{% endblock %}
 
 {% block body %}
-    <div>
-        {% if msg is defined and msg is not null %}
-            {{ msg }}
-        {% endif %}
-
-        {{ form_start(form) }}
-
-        <div class="container mt-4">
-            <div class="form-group pb-3">
-                <div class="container-fluid">
-                    <h4>Informations générales : </h4>
-                    <div class="row">
-                        <div class="col-2">
-                            {{ form_label(form.firstName) }}
-                        </div>
-                        <div class="col-auto">
-                            {{ form_widget(form.firstName, {'attr': {'placeholder': "Prenom"}}) }}
-                        </div>
-                    </div>
-                    <div class="row ml-1">
-                        {{ form_errors(form.firstName) }}
-                    </div>
-                    <div class="row mt-3">
-                        <div class="col-2">
-                            {{ form_label(form.lastName) }}
-                        </div>
-                        <div class="col-auto">
-                            {{ form_widget(form.lastName, {'attr': {'placeholder': "Nom"}}) }}
-                        </div>
-                    </div>
-                    <div class="row ml-1">
-                        {{ form_errors(form.lastName) }}
-                    </div>
-                    <div class="row mt-3">
-                        <div class="col-2">
-                            {{ form_label(form.sex) }}
-                        </div>
-                        <div class="col-auto">
-                            {{ form_widget(form.sex) }}
-                        </div>
-                    </div>
-                    <div class="row ml-1">
-                        {{ form_errors(form.sex) }}
-                    </div>
-                    <div class="row mt-3">
-                        <div class="col-2">
-                            {{ form_label(form.birthDate) }}
-                        </div>
-                        <div class="col-auto">
-                            {{ form_widget(form.birthDate) }}
-                        </div>
-                    </div>
-                    <div class="row ml-1">
-                        {{ form_errors(form.birthDate) }}
-                    </div>
-                    <div class="row mt-3">
-                        <div class="col-2">
-                            {{ form_label(form.zipCode) }}
-                        </div>
-                        <div class="col-auto">
-                            {{ form_widget(form.zipCode, {'attr': {'placeholder': "Code Zip"}}) }}
-                        </div>
-                    </div>
-                    <div class="row ml-1">
-                        {{ form_errors(form.zipCode) }}
-                    </div>
-                    <div class="row mt-3">
-                        <div class="col-2">
-                            {{ form_label(form.address) }}
-                        </div>
-                        <div class="col-auto">
-                            {{ form_widget(form.address, {'attr': {'placeholder': "Adresse"}}) }}
-                        </div>
-                    </div>
-                    <div class="row ml-1">
-                        {{ form_errors(form.address) }}
-                    </div>
-                    <div class="row mt-3">
-                        <div class="col-2">
-                            {{ form_label(form.email) }}
-                        </div>
-                        <div class="col-auto">
-                            {{ form_widget(form.email, {'attr': {'placeholder': "Email"}}) }}
-                        </div>
-                    </div>
-                    <div class="row ml-1">
-                        {{ form_errors(form.email) }}
-                    </div>
-                    <div class="row mt-3">
-                        <div class="col-2">
-                            {{ form_label(form.city) }}
-                        </div>
-                        <div class="col-auto">
-                            {{ form_widget(form.city, {'attr': {'placeholder': "Ville"}}) }}
-                        </div>
-                    </div>
-                    <div class="row ml-1">
-                        {{ form_errors(form.city) }}
-                    </div>
-                    <div class="row mt-3">
-                        <div class="col-2">
-                            {{ form_label(form.password) }}
-                        </div>
-                        <div class="col-auto">
-                            {{ form_widget(form.password, {'attr': {'placeholder': "Mot de passe"}}) }}
-                        </div>
-                    </div>
-                    <div class="row ml-1">
-                        {{ form_errors(form.password) }}
-                    </div>
-                    <div class="row mt-3 ml-1 align-items-center">
-                        <div class="col-auto">
-                            <input type="checkbox" id="registration" name="registration"> Souhaitez-vous devenir membre de l'association ?
-                        </div>
-                    </div>
-                    <div class="row ml-2">
-                        <div class="col-auto">
-                            <button id="previous" type="button" class="btn btn-primary">Précédent</button>
-                        </div>
-                        <div class="col-auto">
-                            <button id="next" type="button" class="btn btn-primary">Suivant</button>
-                        </div>
-                        <div class="col-auto">
-                            {{ form_widget(form.valid) }}
-                        </div>
-                        <input id="step" value="1" hidden>
-                    </div>
+    <div class="d-md-flex h-md-100 align-items-center">
+        <!-- First Half -->
+        <div class="col-md-7 p-0 bg-gym h-md-100">
+            <div class="text-white d-md-flex align-items-center h-100 p-5 text-center justify-content-center">
+                <div class="pt-5 pb-5">
+                    <h1 class="text-black">CEP</h1>
+                    <p class="text-black">Gymnastique</p>
                 </div>
             </div>
         </div>
 
-        <div id="step1">
-            <div class="container mt-3">
-                <div class="form-group pb-3">
-                    <div class="container-fluid">
-                        <h4>Type de demande : </h4>
-                        <div class="row justify-content-md-center">
-                            {{ form_widget(form.children[0].registrationType) }}
-                        </div>
-                        <div class="row ml-1">
-                            <small id="registrationTypeHelp" class="form-text helper"><span class="badge badge-danger">Erreur</span>
-                                Il faut séléctionner un choix parmi la liste.
-                            </small>
-                        </div>
+        <!-- Second Half -->
+        <div class="col-md-5 p-0 bg-white h-md-100">
+            <div class="d-md-flex align-items-center h-md-100 p-5 justify-content-center">
+                <div class="container">
+                    <div class="row justify-content-center">
+                        <h1>Inscription</h1>
                     </div>
-                </div>
-            </div>
+                    <hr class="d-md-flex align-items-center" color="green">
+                    <div class="justify-content-center">
+                        {{ form_start(form) }}
 
-            <div class="container mt-4">
-                <div class="form-group pb-3">
-                    <div class="container-fluid">
-                        <h4>Informations générales : </h4>
-                        <div class="row">
-                            <div class="col-6">
-                                {{ form_widget(form.children[0].firstName) }}
+                        <div class="row mt-3">
+                            <div class="col-md-5 col-sm-3">
+                                <label>Prénom : </label>
+                            </div>
+                            <div class="col-auto">
+                                {{ form_widget(form.firstName) }}
+                            </div>
+                            <div class="row ml-3">
+                                {{ form_errors(form.firstName) }}
                             </div>
                         </div>
-                        <div class="row ml-1">
 
-                            <small id="firstNameTypeHelp" class="form-text helper"><span
-                                        class="badge badge-danger">Erreur</span> Le prénom doit être rempli.
-                            </small>
+                        <div class="row mt-3">
+                            <div class="col-md-5 col-sm-3">
+                                <label>Nom : </label>
+                            </div>
+                            <div class="col-auto">
+                                {{ form_widget(form.lastName) }}
+                            </div>
+                            <div class="row ml-3">
+                                {{ form_errors(form.lastName) }}
+                            </div>
+                        </div>
+
+                        <div class="row mt-3">
+                            <div class="col-md-5 col-sm-3">
+                                <label>Civilité : </label>
+                            </div>
+                            <div class="col-auto">
+                                {{ form_widget(form.sex) }}
+                            </div>
+                            <div class="row ml-3">
+                                {{ form_errors(form.sex) }}
+                            </div>
+                        </div>
+
+                        <div class="row mt-3">
+                            <div class="col-md-5 col-sm-3">
+                                <label>Date de naissance : </label>
+                            </div>
+                            <div class="col-auto">
+                                {{ form_widget(form.birthDate) }}
+                            </div>
+                            <div class="row ml-3">
+                                {{ form_errors(form.birthDate) }}
+                            </div>
+                        </div>
+
+                        <div class="row mt-3">
+                            <div class="col-md-5 col-sm-3">
+                                <label>Adresse : </label>
+                            </div>
+                            <div class="col-auto">
+                                {{ form_widget(form.address) }}
+                            </div>
+                            <div class="row ml-3">
+                                {{ form_errors(form.address) }}
+                            </div>
+                        </div>
+
+                        <div class="row mt-3">
+                            <div class="col-md-5 col-sm-3">
+                                <label>Code postal : </label>
+                            </div>
+                            <div class="col-auto">
+                                {{ form_widget(form.zipCode) }}
+                            </div>
+                            <div class="row ml-3">
+                                {{ form_errors(form.zipCode) }}
+                            </div>
+                        </div>
+
+                        <div class="row mt-3">
+                            <div class="col-md-5 col-sm-3">
+                                <label>Ville : </label>
+                            </div>
+                            <div class="col-auto">
+                                {{ form_widget(form.city) }}
+                            </div>
+                            <div class="row ml-3">
+                                {{ form_errors(form.city) }}
+                            </div>
                         </div>
                         <div class="row mt-3">
-                            <div class="col-6">
+                            <div class="col-md-5 col-sm-3">
+                                <label>Adresse mail : </label>
+                            </div>
+                            <div class="col-auto">
+                                {{ form_widget(form.email) }}
+                            </div>
+                            <div class="row ml-3">
+                                {{ form_errors(form.email) }}
+                            </div>
+                            {% if errorMail %}
+                                <div class="row ml-3">
+                                <span class="invalid-feedback d-block">
+                                    <span class="d-block">
+                                        <span class="form-error-icon badge badge-danger text-uppercase">{{ 'Erreur' }}</span>
+                                        <span class="form-error-message">{{ errorMail }}</span>
+                                    </span>
+                                </span>
+                                </div>
+                            {% endif %}
+                        </div>
 
+                        <div class="row mt-3 mb-3">
+                            <div class="col-md-5 col-sm-3">
+                                <label>Mot de passe : </label>
+                            </div>
+                            <div class="col-auto">
+                                {{ form_widget(form.password, {'attr': {'data-placement': "bottom"}}) }}
+                            </div>
+                            <div class="row ml-3">
+                                {{ form_errors(form.password) }}
                             </div>
                         </div>
-                        <div class="row ml-1">
-                            <small id="lastNameTypeHelp" class="form-text helper"><span
-                                        class="badge badge-danger">Erreur</span> Le nom de famille doit être rempli.
-                            </small>
 
-                        </div>
-                        <div class="row mt-3">
-                            <div class="ml-3">
-                                <p>Date de naissance : </p>
-                            </div>
-                            <div class="col-6">
+                        {{ form_widget(form.valid) }}
 
-                            </div>
-                        </div>
-                        <div class="row mt-3">
-                            <div class="ml-3">
-                                <p>Genre : </p>
-                            </div>
-                            <div class="col-6">
+                        <input type="hidden" name="recaptcha_response" id="recaptchaResponse">
 
-                            </div>
-                        </div>
-                        <div class="row ml-1">
-                            <small id="sexTypeHelp" class="form-text helper"><span
-                                        class="badge badge-danger">Erreur</span>
-                                Il faut séléctionner un choix parmi la liste.
-                            </small>
-
+                        {{ form_end(form) }}
+                        <div class="row mt-3 ml-1">
+                            <p>Vous avez déjà un compte ? <a href="{{ path('security_connexion') }}">Connexion</a>
+                            </p>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    {{ form_end(form) }}
     </div>
+
 {% endblock %}
 
+
+
+
 {% block javascripts %}
-    {{ encore_entry_script_tags('account') }}
+    <script src="https://www.google.com/recaptcha/api.js?render={{ recaptcha_key_site }}"></script>
+    <script>
+        grecaptcha.ready(function () {
+            grecaptcha.execute('{{ recaptcha_key_site }}', {action: 'register'}).then(function (token) {
+                var recaptchaResponse = document.getElementById('recaptchaResponse');
+                recaptchaResponse.value = token;
+            });
+        });
+    </script>
 {% endblock %}

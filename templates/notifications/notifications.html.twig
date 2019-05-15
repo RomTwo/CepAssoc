@@ -1,0 +1,17 @@
+{% for success in app.flashes('success') %}
+    <div class="flash-success">
+        <input id="title" type="hidden" value="Succès : ">
+        <input id="text" type="hidden" value="{{ success }}">
+        <input id="type" type="hidden" value="success">
+        <input id="icon" type="hidden" value="fas fa-check">
+    </div>
+{% endfor %}
+
+{% for error in app.flashes('error') %}
+    <div class="flash-error">
+        <input id="title" type="hidden" value="Erreur : ">
+        <input id="text" type="hidden" value="{{ error }}">
+        <input id="type" type="hidden" value="danger">
+        <input id="icon" type="hidden" value="fa fa-exclamation-circle">
+    </div>
+{% endfor %}
