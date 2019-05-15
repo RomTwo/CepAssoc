@@ -1,10 +1,10 @@
+// Print a notification
 if ($('#text').val() !== undefined) {
     $.notify({
         // options
-        icon: 'fa fa-exclamation-circle',
+        icon: $('#icon').val(),
         title: $('#title').val(),
         message: $('#text').val(),
-        url: 'https://github.com/mouse0270/bootstrap-notify',
         target: '_blank'
     }, {
         // settings
@@ -21,7 +21,7 @@ if ($('#text').val() !== undefined) {
         offset: 20,
         spacing: 10,
         z_index: 1031,
-        delay: 3000,
+        delay: 3500,
         timer: 1000,
         url_target: '_blank',
         mouse_over: null,
@@ -36,3 +36,8 @@ if ($('#text').val() !== undefined) {
         icon_type: 'class'
     });
 }
+
+// Initialize tooltip (bootstrap component)
+$(function () {
+    $('.tool').tooltip();
+});

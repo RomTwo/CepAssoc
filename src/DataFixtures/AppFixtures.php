@@ -9,14 +9,117 @@ use App\Entity\Adherent;
 use App\Entity\Category;
 use App\Entity\Event;
 use App\Entity\Activity;
+use phpDocumentor\Reflection\Types\Integer;
 
 class AppFixtures extends Fixture
 {
+
+    private function loadAccount(Account $a, ObjectManager $o, string $firstName, string $lastName, string $sex, \DateTime $birthDate, int $zipCode, string $address,
+string $email, string $city, string $password)
+    {
+        $a->setFirstName($firstName);
+        $a->setLastName($lastName);
+        $a->setSex($sex);
+        $a->setBirthDate($birthDate);
+        $a->setZipCode($zipCode);
+        $a->setAddress($address);
+        $a->setEmail($email);
+        $a->setCity($city);
+        $a->setPassword($password);
+
+        $o->persist($a);
+    }
+
+    private function loadAdherent1(Adherent $a, ObjectManager $o, string $firstName, string $lastName, string $sex, \DateTime $birthDate)
+    {
+        $a->setFirstName($firstName);
+        $a->setLastName($lastName);
+        $a->setSex($sex);
+        $a->setBirthDate($birthDate);
+    }
+
+    private function loadAdherent2(Adherent $a, ObjectManager $o, string $firstNameRep1, string $lastNameRep1, int $zipCodeRep1, string $addressRep1, string $emailRep1,
+                                   string $cityRep1, string $professionRep1, string $phoneRep1)
+    {
+        $a->setFirstNameRep1($firstNameRep1);
+        $a->setLastNameRep1($lastNameRep1);
+        $a->setZipCodeRep1($zipCodeRep1);
+        $a->setAddressRep1($addressRep1);
+        $a->setEmailRep1($emailRep1);
+        $a->setCityRep1($cityRep1);
+        $a->setProfessionRep1($professionRep1);
+        $a->setPhoneRep1($phoneRep1);
+    }
+
+    private function loadAdherent3(Adherent $a, ObjectManager $o, string $firstNameRep2, string $lastNameRep2, int $zipCodeRep2, string $addressRep2, string $emailRep2,
+                                   string $cityRep2, string $professionRep2, string $phoneRep2)
+    {
+        $a->setFirstNameRep1($firstNameRep2);
+        $a->setLastNameRep1($lastNameRep2);
+        $a->setZipCodeRep1($zipCodeRep2);
+        $a->setAddressRep1($addressRep2);
+        $a->setEmailRep1($emailRep2);
+        $a->setCityRep1($cityRep2);
+        $a->setProfessionRep1($professionRep2);
+        $a->setPhoneRep1($phoneRep2);
+    }
+
+    private function loadAdherent4(Adherent $a, ObjectManager $o, bool $isJudge, bool $wantsAJudgeTraining, bool $isGAFJudge, int $gafJudgeLevel,
+                                   bool $isGAMJudge, int $gamJudgeLevel,
+                                   bool $isTeamGYMJudge, int $teamGYMJudgeLevel)
+    {
+        $a->setWantsAJudgeTraining($wantsAJudgeTraining);
+        $a->setJudge($isJudge);
+        $a->setIsGAFJudge($isGAFJudge);
+        $a->setGAFJudgeLevel($gafJudgeLevel);
+        $a->setIsGAMJudge($isGAMJudge);
+        $a->setGAMJudgeLevel($gamJudgeLevel);
+        $a->setIsTeamGYMJudge($isTeamGYMJudge);
+        $a->setTeamGYMJudgeLevel($isTeamGYMJudge);
+    }
+
+    private function loadAdherent5(Adherent $a, ObjectManager $o)
+    {
+        $a->setpaymentFeesArePaid(false);
+        $a->setisRegisteredInGestGym(false);
+        $a->setIsRegisteredInFFG(false);
+        $a->setIsMedicalCertificate(false);
+        $a->setIsValidateMedical(false);
+        $a->setMedicalCertificateDate(new \DateTime("01-09-2019"));
+        $a->setNationality("France");
+        $a->setIsFFGInsurance(false);
+        $a->setIsAllowEmail(false);
+        $a->setIsLicenceHolderOtherClub(false);
+        $a->setMaidenName("");
+
+
+        $a->setHasBulletinN2Allianz(false);
+        $a->setHasCompetitionCommitment(false);
+        $a->setIsMutated(false);
+        $a->setIsDeleted(false);
+    }
+
+    private function loadCategory(Category $c, ObjectManager $o, string $name)
+    {
+        $c->setName($name);
+        $o->persist($c);
+    }
+
+    private function loadActivity(Activity $a, ObjectManager $o, string $name, float $priece, \DateTime $startDate, string $type, Category $category){
+        $a->setName($name);
+        $a->setPrice($priece);
+        $a->setStartDate($startDate);
+        $a->setType($type);
+        $a->setCategory($category);
+
+        $o->persist($a);
+    }
+
     public function load(ObjectManager $manager)
     {
         $accountsNumber = 10;
         $adherentsNumber = 10;
-        $categoriesNumber = 5;
+        $categoriesNumber = 10;
         $eventsNumber = 5;
         $activitiesNumber = 5;
         
@@ -29,31 +132,28 @@ class AppFixtures extends Fixture
         /*******************
          * Loading accounts
          *******************/
+
         for ($i = 0; $i < $accountsNumber; $i++) {
             $account = new Account();
             array_push($accounts, $account);
-            $account->setFirstName('parent');
-            $account->setLastName($i);
-            
-            if(($i % 2) == 0)
-                $account->setSex('F');
-            else
-                $account->setSex('H');
-
-            $account->setBirthDate(new \DateTime("11-11-1994"));
-            $account->setZipCode(86000);
-            $account->setAddress(87);
-            $account->setEmail("parent".$i."@gmail.com");
-            $account->setCity("Poitiers");
-            $account->setPassWord("toto");
-
-            $manager->persist($accounts[$i]);
         }
+
+
+        $this->loadAccount($accounts[0], $manager, "Jean Luc", "Boulanger", "M", new \DateTime("18-10-1975"), 86000, "22 Rue de la Fièvre", "jeanB@gmail.com", "Poitiers", "toto");
+        $a = $this->loadAccount($accounts[1], $manager,"Norris", "Gaulin", "M", new \DateTime("17-03-1943"), 86440, "111 Boulevard du Lac", "norris-gaulin@outlook.com", "Migne-auxances", "toto");
+        $a = $this->loadAccount($accounts[2], $manager,"Aimée Rouze", "Boulanger", "F", new \DateTime("21-11-1983"), 86000, "1 Avenue de Gaulle", "aime.rouze@gmail.com", "Poitiers", "toto");
+        $a = $this->loadAccount($accounts[3], $manager,"Tempesete", "Lafontaine", "F", new \DateTime("14-11-1953"), 86360, "17 Rue Charles Tempestier", "jeanB@gmail.com", "Chasseneuil-du-Poitou", "toto");
+        $a = $this->loadAccount($accounts[4], $manager,"Slainie", "Giroud", "F", new \DateTime("13-02-1953"), 86580, "4 Allée Mansart", "slainieG86@gmail.com", "Vouneuil-sous-biard", "toto");
+        $a = $this->loadAccount($accounts[5], $manager,"Porter", "Fluet", "M", new \DateTime("07-07-1947"), 86280, "78 Rue de la Rivière", "fluetporter@free.fr", "Saint-Benoit", "toto");
+        $a = $this->loadAccount($accounts[6], $manager,"Antoinette", "Berthiaume", "F", new \DateTime("20-01-1989"), 86240, "14 Avenue Claude Chenou", "antoinette.berthiaume@live.fxs", "Smarves", "toto");
+        $a = $this->loadAccount($accounts[7], $manager,"Camille", "Dubé", "F", new \DateTime("04-07-1995"), 86550, "11 Rue des Bons Samaritins", "camille.dube@etu.univ-poitirs.fr", "Mignalloux-beauvoir", "toto");
+        $a = $this->loadAccount($accounts[8], $manager,"Leroy", "Tachel", "M", new \DateTime("15-12-1977"), 86000, "2 Rue de l'Université", "l.tachelB@gmail.com", "Poitiers", "toto");
+        $a = $this->loadAccount($accounts[9], $manager,"Raoul", "St-Jean", "M", new \DateTime("18-07-1997"), 86000, "3 Avenue René Monory", "raoul.s.j@gmail.com", "Poitiers", "toto");
 
         /*******************
          * Loading adherents
          *******************/
-        for ($i = 0; $i < $adherentsNumber; $i++) {
+        /*for ($i = 0; $i < $adherentsNumber; $i++) {
             $adherent = new Adherent();
             array_push($adherents, $adherent);
             $adherent->setFirstName('adherent');
@@ -113,15 +213,18 @@ class AppFixtures extends Fixture
                 $adherent->setWantsAJudgeTraining(false);
 
 
-            $adherent->setRegistrationType("nouveau");
+            //$adherent->setRegistrationType("nouveau");
             $adherent->setRegistrationCost(0);
             $adherent->setRegistrationDate(new \DateTime("01-09-2019"));
-            $adherent->setpaymentFeesArePaid(false);
-            $adherent->setisRegisteredInGestGym(false);
             $adherent->setVolunteerForTrainingHelp("Jamais");
             $adherent->setVolunteerForClubLife("Jamais");
-            $adherent->setPaymentType("cheque");
             $adherent->setImageRight(false);
+            $adherent->setPaymentType("cheque");
+
+
+            // champs defaut ::
+            $adherent->setpaymentFeesArePaid(false);
+            $adherent->setisRegisteredInGestGym(false);
             $adherent->setIsRegisteredInFFG(false);
             $adherent->setIsMedicalCertificate(false);
             $adherent->setIsValidateMedical(false);
@@ -132,8 +235,178 @@ class AppFixtures extends Fixture
             $adherent->setIsLicenceHolderOtherClub(false);
             $adherent->setMaidenName("");
 
+
+            $adherent->setHasBulletinN2Allianz(false);
+            $adherent->setHasCompetitionCommitment(false);
+            $adherent->setIsMutated(false);
+            $adherent->setIsDeleted(false);
+
             $manager->persist($adherents[$i]);
+        }*/
+
+        for ($i = 0; $i < $adherentsNumber; $i++) {
+            $adherent = new Adherent();
+            array_push($adherents, $adherent);
         }
+
+        /* ADHERENT 0 */
+        $this->loadAdherent1($adherents[0], $manager, "Arthur", "Belge", "M", new \DateTime("01-12-2003"));
+        $this->loadAdherent2($adherents[0], $manager, "Martin", "Belge", 86000, "5 Rue René Descartes", "martin.belge@gmail.com", "Poitiers", "Charpentier", "0654789574");
+        $this->loadAdherent3($adherents[0], $manager, "Agnès", "Belge", 86000, "5 Rue René Descartes", "agnes.belge@gmail.com", "Poitiers", "Développeur", "0798754125");
+        $this->loadAdherent4($adherents[0], $manager, 0, 0, 0, 0,0, 0, 0, 0);
+        $this->loadAdherent5($adherents[0], $manager);
+
+        $adherents[0]->setRegistrationCost(0);
+        $adherents[0]->setRegistrationDate(new \DateTime("01-09-2018"));
+        $adherents[0]->setVolunteerForTrainingHelp("Jamais");
+        $adherents[0]->setVolunteerForClubLife("Jamais");
+        $adherents[0]->setImageRight(false);
+        $adherents[0]->setPaymentType("cheque");
+
+        $manager->persist($adherents[0]);
+
+
+        /* ADHERENT 1 */
+        $this->loadAdherent1($adherents[1], $manager, "Charlotte", "Fraise", "F", new \DateTime("01-12-2015"));
+        $this->loadAdherent2($adherents[1], $manager, "Aurélie", "Fraise", 86360, "114 bis Avennue Pascal Vert", "aurelie.fraise@gmail.com", "Chasseneuil-du-Poitou", "Menuisier", "0741254628");
+        $this->loadAdherent3($adherents[1], $manager, "Maxime", "Fraise", 86360, "114 bis Avennue Pascal Vert", "maxime.fraise@hotmail.com", "Chasseneuil-du-Poitou", "Enseignant", "0325487514");
+        $this->loadAdherent4($adherents[1], $manager, 0, 0, 0, 0,0, 0, 0, 0);
+        $this->loadAdherent5($adherents[1], $manager);
+
+        $adherents[1]->setRegistrationCost(0);
+        $adherents[1]->setRegistrationDate(new \DateTime("11-10-2018"));
+        $adherents[1]->setVolunteerForTrainingHelp("Jamais");
+        $adherents[1]->setVolunteerForClubLife("Jamais");
+        $adherents[1]->setImageRight(false);
+        $adherents[1]->setPaymentType("cheque");
+
+        $manager->persist($adherents[1]);
+
+
+        /* ADHERENT 2 */
+        $this->loadAdherent1($adherents[2], $manager, "Salomon", "Dupuit", "M", new \DateTime("08-01-2017"));
+        $this->loadAdherent2($adherents[2], $manager, "Gildas", "Dupuit", 75008, "1 Avenue Champs Elysées", "gildas.dupuit@gmail.com", "Paris", "Plombier", "0147587412");
+        $this->loadAdherent4($adherents[2], $manager, 0, 0, 0, 0,0, 0, 0, 0);
+        $this->loadAdherent5($adherents[2], $manager);
+
+        $adherents[2]->setRegistrationCost(0);
+        $adherents[2]->setRegistrationDate(new \DateTime("05-01-2019"));
+        $adherents[2]->setVolunteerForTrainingHelp("Jamais");
+        $adherents[2]->setVolunteerForClubLife("Jamais");
+        $adherents[2]->setImageRight(false);
+        $adherents[2]->setPaymentType("cheque");
+
+        $manager->persist($adherents[2]);
+
+        /* ADHERENT 3 */
+        $this->loadAdherent1($adherents[3], $manager, "René", "Tourcoing", "M", new \DateTime("01-12-1995"));
+        $this->loadAdherent2($adherents[3], $manager, "Martin", "Belge", 86000, "14 Rue Henry Sucré ", "rené.tourcoing@gmail.com", "Poitiers", "Charpentier", "0654789574");
+        $this->loadAdherent4($adherents[3], $manager, 0, 0, 0, 0,0, 0, 0, 0);
+        $this->loadAdherent5($adherents[3], $manager);
+
+        $adherents[3]->setRegistrationCost(0);
+        $adherents[3]->setRegistrationDate(new \DateTime("12-05-2019"));
+        $adherents[3]->setVolunteerForTrainingHelp("Jamais");
+        $adherents[3]->setVolunteerForClubLife("Jamais");
+        $adherents[3]->setImageRight(false);
+        $adherents[3]->setPaymentType("cheque");
+
+        $manager->persist($adherents[3]);
+
+        /* ADHERENT 4 */
+        $this->loadAdherent1($adherents[4], $manager, "Khaled", "Ratatouille", "M", new \DateTime("01-12-2003"));
+        $this->loadAdherent2($adherents[4], $manager, "Marine", "Ratatouille", 86360, "XLIM Chasseneuil", "marineR@gmail.com", "Chasseneuil-du-Poitou", "Chroniqueuse", "0128547841");
+        $this->loadAdherent3($adherents[4], $manager, "Gilbert", "Ratattouille", 86360, "XLIM Chasseneuil", "gigi26@gmail.com", "Chasseneuil-du-Poitou", "Youtubeur", "0451245674");
+        $this->loadAdherent4($adherents[4], $manager, 0, 0, 0, 0,0, 0, 0, 0);
+        $this->loadAdherent5($adherents[4], $manager);
+
+        $adherents[4]->setRegistrationCost(0);
+        $adherents[4]->setRegistrationDate(new \DateTime("16-11-2018"));
+        $adherents[4]->setVolunteerForTrainingHelp("Jamais");
+        $adherents[4]->setVolunteerForClubLife("Jamais");
+        $adherents[4]->setImageRight(false);
+        $adherents[4]->setPaymentType("cheque");
+
+        $manager->persist($adherents[4]);
+
+        /* ADHERENT 5 */
+        $this->loadAdherent1($adherents[5], $manager, "Clause", "Hermel", "F", new \DateTime("01-12-2003"));
+        $this->loadAdherent2($adherents[5], $manager, "Junior", "Hermel", 86000, "5 Rue René Descartes", "martin.belge@gmail.com", "Poitiers", "Agent d'entretien", "0654789574");
+        $this->loadAdherent3($adherents[5], $manager, "Judith", "Parker", 86000, "5 Rue René Descartes", "agnes.belge@gmail.com", "Poitiers", "Basketteur professionnelle", "0798754125");
+        $this->loadAdherent4($adherents[5], $manager, 0, 0, 0, 0,0, 0, 0, 0);
+        $this->loadAdherent5($adherents[5], $manager);
+
+        $adherents[5]->setRegistrationCost(0);
+        $adherents[5]->setRegistrationDate(new \DateTime("30-09-2018"));
+        $adherents[5]->setVolunteerForTrainingHelp("Jamais");
+        $adherents[5]->setVolunteerForClubLife("Jamais");
+        $adherents[5]->setImageRight(false);
+        $adherents[5]->setPaymentType("cheque");
+
+        $manager->persist($adherents[5]);
+
+        /* ADHERENT 6 */
+        $this->loadAdherent1($adherents[6], $manager, "Marion", "Lachaise", "F", new \DateTime("01-12-2003"));
+        $this->loadAdherent2($adherents[6], $manager, "Omarion", "Lachaise", 86000, "8 Rue de L'avoine", "marion.lachaise@gmail.com", "Poitiers", "Juriste d'affaires", "0654789574");
+        $this->loadAdherent3($adherents[6], $manager, "Tartiflette", "Lachaise", 86000, "8 Rue de L'avoine", "tartiflette.lachaise@gmail.com", "Poitiers", "Commerçante", "0798754125");
+        $this->loadAdherent4($adherents[6], $manager, 0, 0, 0, 0,0, 0, 0, 0);
+        $this->loadAdherent5($adherents[6], $manager);
+
+        $adherents[6]->setRegistrationCost(0);
+        $adherents[6]->setRegistrationDate(new \DateTime("11-02-2019"));
+        $adherents[6]->setVolunteerForTrainingHelp("Jamais");
+        $adherents[6]->setVolunteerForClubLife("Jamais");
+        $adherents[6]->setImageRight(false);
+        $adherents[6]->setPaymentType("cheque");
+
+        $manager->persist($adherents[6]);
+
+        /* ADHERENT 7 */
+        $this->loadAdherent1($adherents[7], $manager, "Mickael", "Bellard", "M", new \DateTime("01-12-2003"));
+        $this->loadAdherent2($adherents[7], $manager, "Suzanne", "Bellard", 86000, "3 Rue de la Nuitée", "suzanne.bel@live.fr", "Poitiers", "Enseignant", "0654789574");
+        $this->loadAdherent3($adherents[7], $manager, "Romaric", "Bellard", 75000, "5 Avenue Montainge", "r.bellard@outlook.com", "Paris", "Magasinier", "0798754125");
+        $this->loadAdherent4($adherents[7], $manager, 0, 0, 0, 0,0, 0, 0, 0);
+        $this->loadAdherent5($adherents[7], $manager);
+
+        $adherents[7]->setRegistrationCost(0);
+        $adherents[7]->setRegistrationDate(new \DateTime("07-10-2018"));
+        $adherents[7]->setVolunteerForTrainingHelp("Jamais");
+        $adherents[7]->setVolunteerForClubLife("Jamais");
+        $adherents[7]->setImageRight(false);
+        $adherents[7]->setPaymentType("cheque");
+
+        $manager->persist($adherents[7]);
+
+        /* ADHERENT 8 */
+        $this->loadAdherent1($adherents[8], $manager, "Rachelle", "Lenglen", "F", new \DateTime("01-12-1995"));
+        $this->loadAdherent2($adherents[8], $manager, "Rachelle", "Lenglen", 86000, "3 bis Rue François Mittérand", "rlenglenn@free.fr", "Poitiers", "Etudiante", "0654789574");
+        $this->loadAdherent4($adherents[8], $manager, 0, 0, 0, 0,0, 0, 0, 0);
+        $this->loadAdherent5($adherents[8], $manager);
+
+        $adherents[8]->setRegistrationCost(0);
+        $adherents[8]->setRegistrationDate(new \DateTime("01-04-2019"));
+        $adherents[8]->setVolunteerForTrainingHelp("Jamais");
+        $adherents[8]->setVolunteerForClubLife("Jamais");
+        $adherents[8]->setImageRight(false);
+        $adherents[8]->setPaymentType("cheque");
+
+        $manager->persist($adherents[8]);
+
+        /* ADHERENT 9 */
+        $this->loadAdherent1($adherents[9], $manager, "Alexandre", "Chevalier", "M", new \DateTime("01-12-2003"));
+        $this->loadAdherent2($adherents[9], $manager, "Damien", "Chevalier", 86000, "5 Rue René Descartes", "d.chevalier358@gmail.com", "Poitiers", "Cuisinier", "0654789574");
+        $this->loadAdherent3($adherents[9], $manager, "Roxane", "Chevalier", 86000, "5 Rue René Descartes", "rocane.chevalier@outlook.com", "Poitiers", "Livreuse en restauration", "0798754125");
+        $this->loadAdherent4($adherents[9], $manager, 0, 0, 0, 0,0, 0, 0, 0);
+        $this->loadAdherent5($adherents[9], $manager);
+
+        $adherents[9]->setRegistrationCost(0);
+        $adherents[9]->setRegistrationDate(new \DateTime("02-07-2018"));
+        $adherents[9]->setVolunteerForTrainingHelp("Jamais");
+        $adherents[9]->setVolunteerForClubLife("Jamais");
+        $adherents[9]->setImageRight(false);
+        $adherents[9]->setPaymentType("cheque");
+
+        $manager->persist($adherents[9]);
 
         /*******************
          * Loading Category
@@ -141,10 +414,18 @@ class AppFixtures extends Fixture
         for ($i = 0; $i < $categoriesNumber; $i++) {
             $category = new Category();
             array_push($categories, $category);
-            $category->setName("group".$i);
-
-            $manager->persist($categories[$i]);
         }
+
+        $this->loadCategory($categories[0], $manager, "Baby Gym");
+        $this->loadCategory($categories[1], $manager, "Baby Gym (Fontaine-le-Compte)");
+        $this->loadCategory($categories[2], $manager, "Ecole de Gym Féminine");
+        $this->loadCategory($categories[3], $manager, "Ecole de Gym Masculine");
+        $this->loadCategory($categories[4], $manager, "Ecole de Gym (Fontaine-le-Compte)");
+        $this->loadCategory($categories[5], $manager, "Autres Activités");
+        $this->loadCategory($categories[6], $manager, "Gymnastique Artistique Féminine (GAF)");
+        $this->loadCategory($categories[7], $manager, "Gymnastique Artistique Masculine (GAM)");
+        $this->loadCategory($categories[8], $manager, "Gymnastique Artistique Féminine (GAF-GAM)");
+        $this->loadCategory($categories[9], $manager, "Gymnastique Artistique Féminine (Teamgym)");
 
 
         /*******************
@@ -166,7 +447,7 @@ class AppFixtures extends Fixture
         }
 
 
-        // GIVING SOME CHILDREN TO SOME PARENTS
+        /*// GIVING SOME CHILDREN TO SOME PARENTS
         // 1 - Giving children number 0, 1 and 2 to parents number 0
         $accounts[0]->addChild($adherents[0]);
         $accounts[0]->addChild($adherents[1]);
@@ -186,8 +467,13 @@ class AppFixtures extends Fixture
         $accounts[3]->addChild($adherents[5]);
 
         // 5 - Major parent adherent -- one adherent, himself
-        $accounts[4]->addChild($adherents[6]);
+        $accounts[4]->addChild($adherents[6]);*/
 
+
+        /*******************
+         * Loading Activities
+         *******************/
+        // simple loading. one activity for each category
 
         /*******************
          * Loading Activities
@@ -207,7 +493,20 @@ class AppFixtures extends Fixture
             $manager->persist($activities[$i]);
         }
 
-        
+        /*
+        for ($i = 0; $i < $activitiesNumber; $i++) {
+            $activity = new Activity();
+            array_push($activities, $activity);
+        }
+
+        $this->loadActivity($activities[0], $manager, "Baby Gym (nés en 2017)", 160, new \DateTime("15-09-2018"), "SECTEUR LOISIRS", $categories[0] );
+        $this->loadActivity($activities[0], $manager, "EG1 (2012 à 2007", 180, new \DateTime("15-09-2018"), "SECTEUR LOISIRS", $categories[2] );
+        $this->loadActivity($activities[0], $manager, "EGM (2012 et avant)", 180, new \DateTime("12-09-2018"), "SECTEUR LOISIRS", $categories[3] );
+        $this->loadActivity($activities[0], $manager, "EGS (2012 à 2010)", 165, new \DateTime("15-09-2018"), "SECTEUR LOISIRS", $categories[4 ] );
+        $this->loadActivity($activities[0], $manager, "Renforcement Musculaire", 125, new \DateTime("12-09-2018"), "SECTEUR LOISIRS", $categories[4 ]);
+        */
+
+
         // ADDING BETWEEN ONE AND THREE ACTIVITIES TO EACH ADHERENTS
         for ($i = 0; $i < $adherentsNumber; $i++) {
 
@@ -224,8 +523,6 @@ class AppFixtures extends Fixture
             }
             
         }
-
         $manager->flush();
-        
     }
 }
