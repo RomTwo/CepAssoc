@@ -1,3 +1,4 @@
+// Print a notification
 if ($('#text').val() !== undefined) {
     $.notify({
         // options
@@ -35,3 +36,8 @@ if ($('#text').val() !== undefined) {
         icon_type: 'class'
     });
 }
+
+// Initialize tooltip (bootstrap component)
+$(function () {
+    $('.tool').tooltip();
+});

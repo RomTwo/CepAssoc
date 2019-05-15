@@ -73,7 +73,18 @@ class AccountController extends AbstractController
         $account = $manager->getRepository(Account::class)->findOneBy(array('email' => $currentUserEmail));
 
         $form = $this->createForm(AccountType::class, $account);
-        $form->add('newPassword', PasswordType::class, array('mapped' => false, 'label' => 'Mot de passe', 'required' => false));
+        $form->add('newPassword', PasswordType::class, array(
+            'mapped' => false,
+            'label' => 'Mot de passe',
+            'required' => false,
+            'attr' => array(
+                'placeholder' => 'Nouveau mot de passe',
+                'class' => 'tool',
+                'data-toggle' => 'tooltip',
+                'data-placement' => 'right',
+                'title' => '8 à 15 caractères minimum, 1 caractère spécial, 1 chiffre, 1 majuscule',
+            )
+        ));
         $form->handleRequest($request);
         $msg = null;
 

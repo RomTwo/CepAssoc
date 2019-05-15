@@ -19,7 +19,7 @@
                             <label>Prénom : </label>
                         </div>
                         <div class="col-auto">
-                            {{ form_widget(form.firstName, {'attr': {'placeholder': "Prenom"}}) }}
+                            {{ form_widget(form.firstName) }}
                         </div>
                         <div class="row ml-1">
                             {{ form_errors(form.firstName) }}
@@ -32,7 +32,7 @@
                             <label>Nom : </label>
                         </div>
                         <div class="col-auto">
-                            {{ form_widget(form.lastName, {'attr': {'placeholder': "Nom"}}) }}
+                            {{ form_widget(form.lastName) }}
                         </div>
                         <div class="row ml-1">
                             {{ form_errors(form.lastName) }}
@@ -68,7 +68,7 @@
                             <label>Adresse</label>
                         </div>
                         <div class="col-auto">
-                            {{ form_widget(form.address, {'attr': {'placeholder': "Adresse"}}) }}
+                            {{ form_widget(form.address) }}
                         </div>
                         <div class="row ml-1">
                             {{ form_errors(form.address) }}
@@ -80,7 +80,7 @@
                             <label>Code Postal</label>
                         </div>
                         <div class="col-auto">
-                            {{ form_widget(form.zipCode, {'attr': {'placeholder': "Code Zip"}}) }}
+                            {{ form_widget(form.zipCode) }}
                         </div>
                         <div class="row ml-1">
                             {{ form_errors(form.zipCode) }}
@@ -92,7 +92,7 @@
                             <label>Ville : </label>
                         </div>
                         <div class="col-auto">
-                            {{ form_widget(form.city, {'attr': {'placeholder': "Ville"}}) }}
+                            {{ form_widget(form.city) }}
                         </div>
                         <div class="row ml-1">
                             {{ form_errors(form.city) }}
@@ -104,12 +104,12 @@
                             <label>Adresse mail : </label>
                         </div>
                         <div class="col-auto">
-                            {{ form_widget(form.email, {'attr': {'placeholder': "Email"}}) }}
+                            {{ form_widget(form.email) }}
                         </div>
                         <div class="row ml-1">
                             {{ form_errors(form.email) }}
                         </div>
-                        {% if errorMail is defined%}
+                        {% if errorMail is defined %}
                             <div class="row ml-1">
                                 <span class="invalid-feedback d-block">
                                     <span class="d-block">
@@ -131,7 +131,7 @@
                         <div class="row ml-1">
                             {{ form_errors(form.password) }}
                         </div>
-                        {% if errorOldPassFalse is defined%}
+                        {% if errorOldPassFalse is defined %}
                             <div class="row ml-1">
                                 <span class="invalid-feedback d-block">
                                     <span class="d-block">
@@ -148,8 +148,9 @@
                             <label>Mot de passe : </label>
                         </div>
                         <div class="col-auto">
-                            {{ form_widget(form.newPassword, {'attr': {'placeholder': "Nouveau mot de passe"}, 'full_name': "newPassword" }) }}
+                            {{ form_widget(form.newPassword) }}
                         </div>
+
                         {% if errorNewPassFalse is defined %}
                             <div class="row ml-1">
                                 <span class="invalid-feedback d-block">

@@ -30,7 +30,7 @@
                                 <label>Prénom : </label>
                             </div>
                             <div class="col-auto">
-                                {{ form_widget(form.firstName, {'attr': {'placeholder': "Prenom"}}) }}
+                                {{ form_widget(form.firstName) }}
                             </div>
                             <div class="row ml-3">
                                 {{ form_errors(form.firstName) }}
@@ -42,7 +42,7 @@
                                 <label>Nom : </label>
                             </div>
                             <div class="col-auto">
-                                {{ form_widget(form.lastName, {'attr': {'placeholder': "Nom"}}) }}
+                                {{ form_widget(form.lastName) }}
                             </div>
                             <div class="row ml-3">
                                 {{ form_errors(form.lastName) }}
@@ -78,7 +78,7 @@
                                 <label>Adresse : </label>
                             </div>
                             <div class="col-auto">
-                                {{ form_widget(form.address, {'attr': {'placeholder': "Adresse"}}) }}
+                                {{ form_widget(form.address) }}
                             </div>
                             <div class="row ml-3">
                                 {{ form_errors(form.address) }}
@@ -90,7 +90,7 @@
                                 <label>Code postal : </label>
                             </div>
                             <div class="col-auto">
-                                {{ form_widget(form.zipCode, {'attr': {'placeholder': "Code Zip"}}) }}
+                                {{ form_widget(form.zipCode) }}
                             </div>
                             <div class="row ml-3">
                                 {{ form_errors(form.zipCode) }}
@@ -102,7 +102,7 @@
                                 <label>Ville : </label>
                             </div>
                             <div class="col-auto">
-                                {{ form_widget(form.city, {'attr': {'placeholder': "Ville"}}) }}
+                                {{ form_widget(form.city) }}
                             </div>
                             <div class="row ml-3">
                                 {{ form_errors(form.city) }}
@@ -113,12 +113,12 @@
                                 <label>Adresse mail : </label>
                             </div>
                             <div class="col-auto">
-                                {{ form_widget(form.email, {'attr': {'placeholder': "Email"}}) }}
+                                {{ form_widget(form.email) }}
                             </div>
                             <div class="row ml-3">
                                 {{ form_errors(form.email) }}
                             </div>
-                            {% if errorMail is defined %}
+                            {% if errorMail %}
                                 <div class="row ml-3">
                                 <span class="invalid-feedback d-block">
                                     <span class="d-block">
@@ -135,7 +135,7 @@
                                 <label>Mot de passe : </label>
                             </div>
                             <div class="col-auto">
-                                {{ form_widget(form.password, {'attr': {'placeholder': "Mot de passe"}}) }}
+                                {{ form_widget(form.password, {'attr': {'data-placement': "bottom"}}) }}
                             </div>
                             <div class="row ml-3">
                                 {{ form_errors(form.password) }}
