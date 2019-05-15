@@ -1,6 +1,6 @@
 {% extends 'base_without_navbar.html.twig' %}
 
-{% block title %}Accès refusé{% endblock %}
+{% block title %}Connexion{% endblock %}
 
 {% block body %}
     <div class="d-md-flex h-md-100 align-items-center">
@@ -37,26 +37,19 @@
                             <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
 
                             <button class="btn btn-primary" type="submit">Connexion</button>
+
                         </form>
                         {% if errors %}
-                            <div class="row justify-content-center mt-2">
-                                <small class="form-text"><span
-                                            class="badge badge-danger">Erreur</span>{{ errors.messageKey|trans(errors.messageData, 'security') }}
-                                </small>
+                            <div class="row ml-1">
+                                <span class="invalid-feedback d-block">
+                                    <span class="d-block">
+                                        <span class="form-error-icon badge badge-danger text-uppercase">{{ 'Erreur' }}</span>
+                                        <span class="form-error-message">{{ errors.messageKey|trans(errors.messageData, 'security') }}</span>
+                                    </span>
+                                </span>
                             </div>
                         {% endif %}
 
-                        {% if msg is defined %}
-                            <div class="row justify-content-center mt-2">
-                                <small class="form-text"><span
-                                            class="badge badge-danger">Erreur</span> {{ msg }}</small>
-                            </div>
-                        {% endif %}
-                        <div class="row justify-content-center mt-2">
-                            <p>Vous n'avez pas encore de compte ? <a href="{{ path('account_add') }}">Inscrivez-vous
-                                    !</a>
-                            </p>
-                        </div>
 
                         <!-- Forgot password form -->
                         <div class=" row justify-content-between align-items-center pl-3 pr-3">
@@ -68,11 +61,32 @@
                             <form class="form-inline" action="{{ path('account_forgot_password') }}" method="post">
                                 <input class="form-control" type="email" name="email" placeholder="Email" required>
                                 <input class="btn btn-success" type="submit" value="Envoyer">
+                                <input type="hidden" name="recaptcha_response" id="recaptchaResponse">
                             </form>
+                        </div>
+
+                        <div class="row mt-2 ml-1">
+                            <p>Vous n'avez pas encore de compte ? <a href="{{ path('account_add') }}">Inscrivez-vous
+                                    !</a>
+                            </p>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+
+{% endblock %}
+
+
+{% block javascripts %}
+    <script src="https://www.google.com/recaptcha/api.js?render={{ recaptcha_key_site }}"></script>
+    <script>
+        grecaptcha.ready(function () {
+            grecaptcha.execute('{{ recaptcha_key_site }}', {action: 'forgot'}).then(function (token) {
+                var recaptchaResponse = document.getElementById('recaptchaResponse');
+                recaptchaResponse.value = token;
+            });
+        });
+    </script>
 {% endblock %}

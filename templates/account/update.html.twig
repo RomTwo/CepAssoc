@@ -143,10 +143,35 @@
                         {% endif %}
                     </div>
 
+                    <div class="row mt-3">
+                        <div class="col-2">
+                            <label>Mot de passe : </label>
+                        </div>
+                        <div class="col-auto">
+                            {{ form_widget(form.newPassword) }}
+                        </div>
+
+                        {% if errorNewPassFalse is defined %}
+                            <div class="row ml-1">
+                                <span class="invalid-feedback d-block">
+                                    <span class="d-block">
+                                        <span class="form-error-icon badge badge-danger text-uppercase">{{ 'Erreur' }}</span>
+                                        <span class="form-error-message">{{ errorNewPassFalse }}</span>
+                                    </span>
+                                </span>
+                            </div>
+                        {% endif %}
+                    </div>
+
                     {{ form_widget(form.valid) }}
                 </div>
             </div>
         </div>
+
+<<<<<<< HEAD
+
+=======
+>>>>>>> c6b7ebc7efa21c6ce39417a0169bf10e3bf7bd29
         {{ form_end(form) }}
     </div>
 {% endblock %}

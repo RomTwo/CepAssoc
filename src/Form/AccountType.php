@@ -22,28 +22,73 @@ class AccountType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('firstName', TextType::class, array('label' => 'Prénom : '))
-            ->add('lastName', TextType::class, array('label' => 'Nom : '))
+            ->add('firstName', TextType::class, array(
+                    'label' => 'Prénom : ',
+                    'attr' => array(
+                        'placeholder' => 'Prénom'
+                    )
+                )
+            )
+            ->add('lastName', TextType::class, array(
+                    'label' => 'Nom : ',
+                    'attr' => array(
+                        'placeholder' => 'Nom'
+                    )
+                )
+            )
             ->add('sex', ChoiceType::class, array(
-                'choices' => array(
-                    'M' => 'M',
-                    'F' => 'F'
-                ),
-                'expanded' => false,
-                'label' => 'Civilité : '
-            ))
-            ->add('birthDate', DateType::class, array('label' => 'Date de naissance : ',
-                'widget' => 'choice',
-                'years' => range(date('Y'), date('Y') - 100),
-            ))
-            ->add('address', TextType::class, array('label' => 'Adresse : '))
-            ->add('zipCode', TextType::class, array('label' => 'Code postal : '))
-            ->add('email', EmailType::class, array('label' => 'Adresse mail : '))
-            ->add('password', PasswordType::class, array('label' => 'Mot de passe : '))
-            ->add('children', CollectionType::class, [
-                'entry_type' => AdherentAccountType::class,
-                'required' => false,
-            ])
+                    'choices' => array(
+                        'M' => 'M',
+                        'F' => 'F'
+                    ),
+                    'expanded' => false,
+                    'label' => 'Civilité : ',
+                    'attr' => array(
+                        'placeholder' => 'Civilité'
+                    )
+                )
+            )
+            ->add('birthDate', DateType::class, array(
+                    'label' => 'Date de naissance : ',
+                    'widget' => 'choice',
+                    'years' => range(date('Y'), date('Y') - 100),
+                    'attr' => array(
+                        'placeholder' => 'Date de naissance'
+                    )
+                )
+            )
+            ->add('address', TextType::class, array(
+                    'label' => 'Adresse : ',
+                    'attr' => array(
+                        'placeholder' => 'Adresse'
+                    )
+                )
+            )
+            ->add('zipCode', TextType::class, array(
+                    'label' => 'Code postal : ',
+                    'attr' => array(
+                        'placeholder' => 'Code postal'
+                    )
+                )
+            )
+            ->add('email', EmailType::class, array(
+                    'label' => 'Adresse mail : ',
+                    'attr' => array(
+                        'placeholder' => 'Email'
+                    )
+                )
+            )
+            ->add('password', PasswordType::class, array(
+                    'label' => 'Mot de passe : ',
+                    'attr' => array(
+                        'placeholder' => 'Mot de passe',
+                        'class' => 'tool',
+                        'data-toggle' => 'tooltip',
+                        'data-placement' => 'right',
+                        'title' => '8 à 15 caractères minimum, 1 caractère spécial, 1 chiffre, 1 majuscule',
+                    )
+                )
+            )
             ->addEventListener(
                 FormEvents::SUBMIT,
                 [$this, 'onSubmit']
@@ -87,8 +132,8 @@ class AccountType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => Account::class,
-            'cascade_validation' => true,
             'city' => null
         ]);
     }
+
 }

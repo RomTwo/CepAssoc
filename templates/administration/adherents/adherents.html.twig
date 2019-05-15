@@ -12,24 +12,24 @@
             <li class="nav-item">
                 <a class="nav-link active" id="pills-all" data-toggle="pill" href="#content-all" role="tab" aria-controls="content-all" aria-selected="true">
                             Tous les adhérents
-                        </a>
+                </a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" id="pills-recues" data-toggle="pill" href="#content-recues" role="tab" aria-controls="content-recues" aria-selected="false">
                             Adhérents inscrits
-                        </a>
+                </a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" id="pills-envoyees" data-toggle="pill" href="#content-envoyees" role="tab" aria-controls="content-envoyees" aria-selected="false">
                             Inscriptions en attente
-                        </a>
+                </a>
             </li>
         </ul>
     </div>
 
     <div class="tab-content" id="pills-tabContent">
         <div class="tab-pane fade show active" id="content-all" role="tabpanel" aria-labelledby="pills-all">
-            <table id="example1" class="table table-striped table-bordered" style="width: 100%;" role="grid"
+            <table id="allAdherentsTable" class="table table-striped table-bordered" style="width: 100%;" role="grid"
                    aria-describedby="example_info">
                 <thead>
                     <tr role="row">
@@ -43,37 +43,39 @@
                 </thead>
                 <tbody>
                     {% for adherent in adherents %}
-                        <tr role="row" class="odd">
-                            <td>
-                                {{adherent.lastName}}
-                            </td>
-                            <td>
-                                {{adherent.firstName}}
-                            </td>
-                            <td>
-                                {{adherent.registrationDate|date('d-m-Y')}}
-                            </td>
-                            <td>
-                                {% if adherent.isRegisteredInFFG %}
-                                    <span style="color:green">Inscription validée</span>
-                                {% else %}
-                                    <span style="color:red">Inscription non validée</span>
-                                {% endif %}
-                            </td>
-                            <td>
-                                {% if adherent.isRegisteredInGestGym %}
-                                    <span style="color:green">Effectuée</span>
-                                {% else %}
-                                    <span style="color:red">Non effectuée</span>
-                                {% endif %}
-                            </td>
-                            <td>
-                                <!-- Button trigger modal -->
-                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal{{adherent.id}}">
-                                    Voir plus
-                                </button>
-                            </td>
-                        </tr>
+                        {% if adherent.isDeleted == false %}
+                            <tr role="row" class="odd">
+                                <td>
+                                    {{adherent.lastName}}
+                                </td>
+                                <td>
+                                    {{adherent.firstName}}
+                                </td>
+                                <td>
+                                    {{adherent.registrationDate|date('d-m-Y')}}
+                                </td>
+                                <td>
+                                    {% if adherent.isRegisteredInFFG %}
+                                        <span style="color:green">Inscription validée</span>
+                                    {% else %}
+                                        <span style="color:red">Inscription non validée</span>
+                                    {% endif %}
+                                </td>
+                                <td>
+                                    {% if adherent.isRegisteredInGestGym %}
+                                        <span style="color:green">Effectuée</span>
+                                    {% else %}
+                                        <span style="color:red">Non effectuée</span>
+                                    {% endif %}
+                                </td>
+                                <td>
+                                    <!-- Button trigger modal -->
+                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal{{adherent.id}}">
+                                        Voir plus
+                                    </button>
+                                </td>
+                            </tr>
+                        {% endif %}
                     {% endfor %}
                 </tbody>
                 <tfoot>
@@ -90,7 +92,7 @@
         </div>
 
         <div class="tab-pane fade show" id="content-recues" role="tabpanel" aria-labelledby="pills-recus">
-            <table id="example2" class="table table-striped table-bordered" style="width: 100%;" role="grid"
+            <table id="registeredAdherentsTable" class="table table-striped table-bordered" style="width: 100%;" role="grid"
                    aria-describedby="example_info">
                 <thead>
                     <tr role="row">
@@ -104,7 +106,7 @@
                 </thead>
                 <tbody>
                     {% for adherent in adherents %}
-                        {% if adherent.isRegisteredInFFG %}
+                        {% if adherent.isRegisteredInFFG and adherent.isDeleted == false %}
                             <tr role="row" class="odd">
                                 <td>
                                     {{adherent.lastName}}
@@ -153,8 +155,7 @@
         </div>
 
         <div class="tab-pane fade show" id="content-envoyees" role="tabpanel" aria-labelledby="pills-envoyees">
-            <table id="example3" class="table table-striped table-bordered" style="width: 100%;" role="grid"
-                   aria-describedby="example_info">
+            <table id="example3" class="display nowrap dataTable dtr-inline collapsed" style="width: 100%;" role="grid" aria-describedby="example_info">
                 <thead>
                     <tr role="row">
                         <th class="sorting_asc" tabindex="0" aria-controls="example" rowspan="1" colspan="1" style="width: 119px;" aria-sort="ascending" aria-label="lastName: activate to sort column descending">Nom</th>
@@ -167,7 +168,7 @@
                 </thead>
                 <tbody>
                     {% for adherent in adherents %}
-                        {% if not adherent.isRegisteredInFFG %}
+                        {% if not adherent.isRegisteredInFFG and adherent.isDeleted == false %}
                             <tr role="row" class="odd">
                                 <td>
                                     {{adherent.lastName}}
@@ -456,7 +457,8 @@
                         {% if not adherent.isRegisteredInFFG %}
                             <a href="{{path('admin_adherentsRegister', {id: adherent.id})}}" class="btn btn-primary">Valider l'inscription</a>
                         {% endif %}
-                        <a href="{{path('admin_adherentsEdit', {id: adherent.id})}}" class="btn btn-secondary">Editer</a>
+                        <a href="{{path('admin_adherentsEdit', {id: adherent.id})}}" class="btn btn-secondary">Modifier</a>
+                        <a href="{{path('admin_adherentsDelete', {id: adherent.id})}}" class="btn btn-secondary">Supprimer</a>
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
                     </div>
                 </div>
@@ -469,9 +471,9 @@
 {% block javascripts %}
     <script type="text/javascript">
         $(document).ready(function () {
-            $('#example1').DataTable();
-            $('#example2').DataTable();
-            $('#example3').DataTable();
+            $('#allAdherentsTable').DataTable();
+            $('#registeredAdherentsTable').DataTable();
+            $('#nonRegisteredAdherentsTable').DataTable();
         });
     </script>
 {% endblock %}

@@ -6,23 +6,89 @@
     Gestion des créneaux
 {% endblock %}
 
-{% block content %}
-    {{dump(timeSlots)}}
+{% block body %}
 
-    <table id="example1" class="display nowrap dataTable dtr-inline collapsed" style="width: 100%;" role="grid" aria-describedby="example_info">
+    <div class="row justify-content-center">
+        <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+            Ajouter un nouveau créneau
+        </button>
+    </div>
+    </p>
+    <div class="collapse" id="collapseExample">
+        <div class="card card-body">
+            {% if err is defined and err is not null %}
+                <span style="color:red"> {{ err }} </span>
+            {% endif %}
+            <div class="container-fluid">
+                {{ form_start(form) }}
+
+                    <div class="row">
+                        <div class="col-3">
+                            Jour :
+                            <br/>
+                            {{ form_widget(form.day)}}
+                        </div>
+
+                        <div class="col-3">
+                            Heure de début :
+                            {{ form_widget(form.startTime)}}
+                        </div>
+
+                        <div class="col-3">
+                            Heure de fin :
+                            {{ form_widget(form.endTime)}}
+                        </div>
+
+                        <div class="col-3">
+                            Lieu :
+                            {{ form_widget(form.city)}}
+                        </div>
+
+                    </div>
+
+                    <br/>
+                    <div class="row justify-content-center">
+                        <button class="btn btn-primary">
+                            Ajouter
+                        </button>
+                    </div>
+                {{ form_end(form) }}
+            </div>
+        </div>
+        <br/>
+    </div>
+
+    <!-- Displaying timeSlots -->
+    <table id="timeSlotsTable" class="display nowrap dataTable dtr-inline collapsed" style="width: 100%;" role="grid" aria-describedby="example_info">
         <thead>
             <tr role="row">
                 <th class="sorting_asc" tabindex="0" aria-controls="example" rowspan="1" colspan="1" style="width: 119px;" aria-sort="ascending" aria-label="lastName: activate to sort column descending">Jour</th>
                 <th class="sorting_asc" tabindex="0" aria-controls="example" rowspan="1" colspan="1" style="width: 119px;" aria-sort="ascending" aria-label="firstName: activate to sort column descending">Heure de début</th>
                 <th class="sorting_asc" tabindex="0" aria-controls="example" rowspan="1" colspan="1" style="width: 119px;" aria-sort="ascending" aria-label="firstName: activate to sort column descending">Heure de fin</th>
-                <th class="sorting_asc" tabindex="0" aria-controls="example" rowspan="1" colspan="1" style="width: 119px;" aria-sort="ascending" aria-label="firstName: activate to sort column descending">Voir détails</th>
+                <th class="sorting_asc" tabindex="0" aria-controls="example" rowspan="1" colspan="1" style="width: 119px;" aria-sort="ascending" aria-label="firstName: activate to sort column descending">Lieu</th>
+                <th class="sorting_asc" tabindex="0" aria-controls="example" rowspan="1" colspan="1" style="width: 119px;" aria-sort="ascending" aria-label="firstName: activate to sort column descending">Modifier</th>
+                <th class="sorting_asc" tabindex="0" aria-controls="example" rowspan="1" colspan="1" style="width: 119px;" aria-sort="ascending" aria-label="firstName: activate to sort column descending">Supprimer</th>
             </tr>
         </thead>
         <tbody>
             {% for timeSlot in timeSlots %}                        
                 <tr role="row" class="odd">
                     <td>
-                        {{timeSlot.day}}
+                        {% if timeSlot.day == 0 %}
+                            Diamanche
+                        {% elseif timeSlot.day == 1 %}
+                            Lundi
+                        {% elseif timeSlot.day == 2 %}
+                            Mardi
+                        {% elseif timeSlot.day == 3 %}
+                            Mercredi
+                        {% elseif timeSlot.day == 4 %}
+                            Jeudi
+                        {% elseif timeSlot.day == 5 %}
+                            Vendredi
+                        {% elseif timeSlot.day == 6 %}
+                            Samedi
+                        {% endif %}
                     </td>
                     <td>
                         {{timeSlot.startTime|date('H:i')}}
@@ -31,8 +97,17 @@
                         {{timeSlot.endTime|date('H:i')}}
                     </td>
                     <td>
-                        {# <a href="{{path('admin_timeSlotsEdit', {id: timeSlot.id})}}" class="btn btn-secondary">Modifier</a>
-                        <a href="{{path('admin_timeSlotsDelete', {id: timeSlot.id})}}" class="btn btn-secondary">Supprimer</a> #}
+                        {% if timeSlot.city == NULL %}
+                            /
+                        {% else %}
+                            {{ timeSlot.city }}
+                        {% endif %}
+                    </td>
+                    <td>
+                        <a href="{{path('admin_timeSlotsEdit', {id: timeSlot.id})}}" class="btn btn-secondary">Modifier</a>
+                    </td>
+                    <td>
+                        <a href="{{path('admin_timeSlotsDelete', {id: timeSlot.id})}}" class="btn btn-secondary">Supprimer</a>
                     </td>
                 </tr>
             {% endfor %}                  
@@ -42,12 +117,18 @@
                 <th rowspan="1" colspan="1">Jour</th>
                 <th rowspan="1" colspan="1">Heure de début</th>
                 <th rowspan="1" colspan="1">Heure de fin</th>
-                <th rowspan="1" colspan="1">Voir détails</th>
+                <th rowspan="1" colspan="1">Lieu</th>
+                <th rowspan="1" colspan="1">Modifier</th>
+                <th rowspan="1" colspan="1">Supprimer</th>
             </tr>
         </tfoot>
     </table>
-
-        <a href="{{path('admin_timeSlotsAdd')}}" class="btn btn-primary">Ajouter un nouveau créneau</a>
-
 {% endblock %}
- 
+
+{% block javascripts %}
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#timeSlotsTable').DataTable();
+        });
+    </script>
+{% endblock %}

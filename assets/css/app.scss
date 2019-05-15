@@ -11,10 +11,11 @@
 }
 
 .bg-gym {
-  background-image: url("../images/sports-stadium-crowds.jpg");
-  background-position: center center;
-  background-repeat: no-repeat;
+  background: url("../images/sports-stadium-crowds.jpg") no-repeat center center;
   background-attachment: inherit;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
   background-size: cover;
 }
 

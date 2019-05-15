@@ -272,6 +272,12 @@ class Adherent
     private $isMedicalCertificate;
 
     /**
+     * @ORM\Column(type="string")
+     * @Groups({"competition"})
+     */
+    private $medicalCertificate;
+
+    /**
      * @ORM\Column(type="boolean")
      * @Groups({"competition"})
      */

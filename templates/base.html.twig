@@ -28,6 +28,11 @@
             <li class="nav-item">
                 <a class="nav-link" href="{{ path('account_update') }}">Mon compte</a>
             </li>
+            {% if is_granted('ROLE_ADMIN') %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ path('admin_adherents') }}">Administration</a>
+                </li>
+            {% endif %}
         </ul>
         <form class="form-inline my-2 my-lg-0">
             <button class="btn btn-sm btn-outline-success my-2 my-sm-0" type="submit">Search</button>
@@ -36,10 +41,14 @@
     </div>
 </nav>
 <div class="container-fluid">
+
+    {% include('notifications/notifications.html.twig') %}
+
     {% block body %}{% endblock %}
 </div>
 
 {{ encore_entry_script_tags('app') }}
+{{ encore_entry_script_tags('popup') }}
 {% block javascripts %}{% endblock %}
 </body>
 </html>
