@@ -1,4 +1,5 @@
-<div class="modal fade" id="modalDeleteAccount{{ account.id }}" tabindex="-1" role="dialog" aria-labelledby="modalDeleteAccountLabel{{ account.id }}"
+<div class="modal fade" id="modalDeleteAccount{{ account.id }}" tabindex="-1" role="dialog"
+     aria-labelledby="modalDeleteAccountLabel{{ account.id }}"
      aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -12,8 +13,10 @@
                 Êtes-vous sûr de vouloir supprimer ce compte ?
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal" data-toggle="modal" data-target="#modalAccount{{ account.id }}">Non</button>
-                <input class="btn btn-primary" type="submit" value="Oui">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal" data-toggle="modal"
+                        data-target="#modalAccount{{ account.id }}">Non
+                </button>
+                <a href="{{ path('admin_accounts_delete', {'id': account.id}) }}" role="button" class="btn btn-primary">Oui</a>
             </div>
         </div>
     </div>

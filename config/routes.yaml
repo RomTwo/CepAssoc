@@ -87,6 +87,18 @@ admin_accounts:
     path: /admin/accounts
     controller: App\Controller\administration\AdminAccountsController::index
 
+admin_accounts_edit:
+    path: /admin/accounts/edit/{id}
+    controller: App\Controller\administration\AdminAccountsController::edit
+    requirements:
+        id: ([0-9]*)
+
+admin_accounts_delete:
+    path: /admin/accounts/delete/{id}
+    controller: App\Controller\administration\AdminAccountsController::delete
+    requirements:
+        id: ([0-9]*)
+
     #--events
 admin_events:
     path: /admin/events
