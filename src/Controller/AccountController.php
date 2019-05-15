@@ -33,6 +33,7 @@ class AccountController extends AbstractController
         $account = new Account();
         $form = $this->createForm(AccountType::class, $account);
         $form->handleRequest($request);
+        $msg = null;
 
         if ($form->isSubmitted() && $form->isValid() && $request->request->has('recaptcha_response')) {
             if ($captchaCheck->captchaIsValid($request->request->get('recaptcha_response'))) {
@@ -46,7 +47,7 @@ class AccountController extends AbstractController
                     $this->addFlash('success', "Votre compte vient d'être créé");
                     return $this->redirectToRoute('security_connexion', array(), 301);
                 } else {
-                    $this->addFlash('errorMail', 'Cette adresse mail est déjà associé à un compte');
+                    $msg = 'Cette adresse mail est déjà associé à un compte';
                 }
             } else {
                 $this->addFlash('error', 'Le captcha est invalide');
@@ -54,7 +55,8 @@ class AccountController extends AbstractController
         }
 
         return $this->render('account/index.html.twig', array(
-            "form" => $form->createView()
+            "form" => $form->createView(),
+            "errorMail" => $msg
         ));
     }
 
@@ -82,8 +84,8 @@ class AccountController extends AbstractController
 
             if ($currentUserEmail != $account->getEmail()) {
                 if ($this->findByEmail($account->getEmail())) {
-                    $msg = "Cet email a déjà un compte associé !";
-                    return $this->render('account/update.html.twig', array("form" => $form->createView(), "msg" => $msg));
+                    $msg = "Cet email a déjà un compte associé";
+                    return $this->render('account/update.html.twig', array("form" => $form->createView(), "errorMail" => $msg));
                 }
                 $this->get('session')->set('_security.last_username', $account->getEmail());
             }
@@ -91,25 +93,25 @@ class AccountController extends AbstractController
             if (!empty($request->request->get('newPassword'))) {
                 if (preg_match('/^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[-+!*$@%_])([-+!*$@%_\w]{8,15})$/', $request->request->get('newPassword'))) {
                     if (!$encoder->isPasswordValid($account, $passwordEntryByUser)) {
-                        $msg = "Votre ancien mot de passe n'est pas correct";
-                        return $this->render('account/update.html.twig', array("form" => $form->createView(), "msg" => $msg));
+                        $msg = "Votre mot de passe actuel est incorrect";
+                        return $this->render('account/update.html.twig', array("form" => $form->createView(), "errorOldPassFalse" => $msg));
                     }
                     $encoded = $encoder->encodePassword($account, $request->request->get('newPassword'));
                     $account->setPassword($encoded);
                 } else {
-                    $msg = "Votre nouveau mot de passe n'est pas correct";
-                    return $this->render('account/update.html.twig', array("form" => $form->createView(), "msg" => $msg));
+                    $msg = "Votre nouveau mot de passe est incorrect";
+                    return $this->render('account/update.html.twig', array("form" => $form->createView(), "errorNewPassFalse" => $msg));
                 }
             } else if (!$encoder->isPasswordValid($account, $passwordEntryByUser)) {
-                $msg = "Votre ancien mot de passe n'est pas correct";
-                return $this->render('account/update.html.twig', array("form" => $form->createView(), "msg" => $msg));
+                $msg = "Votre mot de passe actuel est incorrect";
+                return $this->render('account/update.html.twig', array("form" => $form->createView(), "errorOldPassFalse" => $msg));
             }
 
             $manager->flush();
             $this->addFlash('success', "Votre compte a été modifié");
             return $this->redirectToRoute('home');
         }
-        return $this->render('account/update.html.twig', array("form" => $form->createView(), "msg" => $msg));
+        return $this->render('account/update.html.twig', array("form" => $form->createView(), "error" => $msg));
     }
 
     /**

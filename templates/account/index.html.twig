@@ -118,6 +118,16 @@
                             <div class="row ml-3">
                                 {{ form_errors(form.email) }}
                             </div>
+                            {% if errorMail is defined %}
+                                <div class="row ml-3">
+                                <span class="invalid-feedback d-block">
+                                    <span class="d-block">
+                                        <span class="form-error-icon badge badge-danger text-uppercase">{{ 'Erreur' }}</span>
+                                        <span class="form-error-message">{{ errorMail }}</span>
+                                    </span>
+                                </span>
+                                </div>
+                            {% endif %}
                         </div>
 
                         <div class="row mt-3 mb-3">

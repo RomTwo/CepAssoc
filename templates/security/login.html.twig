@@ -40,10 +40,13 @@
 
                         </form>
                         {% if errors %}
-                            <div class="row justify-content-center mt-2">
-                                <small class="form-text"><span
-                                            class="badge badge-danger">Erreur</span>{{ errors.messageKey|trans(errors.messageData, 'security') }}
-                                </small>
+                            <div class="row ml-1">
+                                <span class="invalid-feedback d-block">
+                                    <span class="d-block">
+                                        <span class="form-error-icon badge badge-danger text-uppercase">{{ 'Erreur' }}</span>
+                                        <span class="form-error-message">{{ errors.messageKey|trans(errors.messageData, 'security') }}</span>
+                                    </span>
+                                </span>
                             </div>
                         {% endif %}
 
