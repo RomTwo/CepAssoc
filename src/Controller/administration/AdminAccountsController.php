@@ -17,6 +17,6 @@ class AdminAccountsController extends AbstractController
     public function index()
     {
         $accounts = $this->getDoctrine()->getRepository(Account::class)->findAll();
-        return $this->render('administration/accounts.html.twig', array('accounts' => $accounts));
+        return $this->render('administration/accounts/accounts.html.twig', array('accounts' => $accounts));
     }
 }
