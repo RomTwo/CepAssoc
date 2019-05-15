@@ -323,6 +323,36 @@ class Adherent
      */
     private $activities;
 
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $hasBulletinN2Allianz;
+
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $hasCompetitionCommitment;
+
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $isMutated;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $treatedBy;
+
+    /**
+     * @ORM\Column(type="string", length=5, nullable=true)
+     */
+    private $affiliateCode;
+
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $isDeleted;
+
     public function __construct()
     {
         $this->activities = new ArrayCollection();
@@ -1018,5 +1048,77 @@ class Adherent
     public function setMaidenName($maidenName): void
     {
         $this->maidenName = $maidenName;
+    }
+
+    public function getHasBulletinN2Allianz(): ?bool
+    {
+        return $this->hasBulletinN2Allianz;
+    }
+
+    public function setHasBulletinN2Allianz(bool $hasBulletinN2Allianz): self
+    {
+        $this->hasBulletinN2Allianz = $hasBulletinN2Allianz;
+
+        return $this;
+    }
+
+    public function getHasCompetitionCommitment(): ?bool
+    {
+        return $this->hasCompetitionCommitment;
+    }
+
+    public function setHasCompetitionCommitment(bool $hasCompetitionCommitment): self
+    {
+        $this->hasCompetitionCommitment = $hasCompetitionCommitment;
+
+        return $this;
+    }
+
+    public function getIsMutated(): ?bool
+    {
+        return $this->isMutated;
+    }
+
+    public function setIsMutated(bool $isMutated): self
+    {
+        $this->isMutated = $isMutated;
+
+        return $this;
+    }
+
+    public function getTreatedBy(): ?string
+    {
+        return $this->treatedBy;
+    }
+
+    public function setTreatedBy(?string $treatedBy): self
+    {
+        $this->treatedBy = $treatedBy;
+
+        return $this;
+    }
+
+    public function getAffiliateCode(): ?string
+    {
+        return $this->affiliateCode;
+    }
+
+    public function setAffiliateCode(?string $affiliateCode): self
+    {
+        $this->affiliateCode = $affiliateCode;
+
+        return $this;
+    }
+
+    public function getIsDeleted(): ?bool
+    {
+        return $this->isDeleted;
+    }
+
+    public function setIsDeleted(bool $isDeleted): self
+    {
+        $this->isDeleted = $isDeleted;
+
+        return $this;
     }
 }

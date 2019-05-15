@@ -3,7 +3,6 @@
 namespace App\Controller\administration;
 
 use App\Entity\Event;
-use App\Form\AdminAdherentType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 
