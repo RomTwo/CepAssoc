@@ -3,13 +3,17 @@
 namespace App\Form;
 
 use App\Entity\Account;
+use App\Repository\AdherentRepository;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Form\FormEvent;
+use Symfony\Component\Form\FormEvents;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 
@@ -67,13 +71,6 @@ class AccountType extends AbstractType
                     )
                 )
             )
-            ->add('city', TextType::class, array(
-                    'label' => 'Ville : ',
-                    'attr' => array(
-                        'placeholder' => 'Ville'
-                    )
-                )
-            )
             ->add('email', EmailType::class, array(
                     'label' => 'Adresse mail : ',
                     'attr' => array(
@@ -92,13 +89,76 @@ class AccountType extends AbstractType
                     )
                 )
             )
+            ->addEventListener(
+                FormEvents::SUBMIT,
+                [$this, 'onSubmit']
+            )
             ->add('valid', SubmitType::class, array('label' => 'S\'inscrire : '));
+
+        if($options['city'] == null){
+            $builder
+                ->add('city', ChoiceType::class, [
+                    'label' => 'Ville : ',
+                    'placeholder' => 'Veuillez saisir le zip code',
+                    'multiple' => false,
+                ]);
+
+        }else{
+            $builder
+                ->add('city', ChoiceType::class, [
+                    'choices' => array(
+                        $options['city'] => $options['city'],
+                    ),
+                    'label' => 'Ville : ',
+                    'placeholder' => 'Veuillez choisir une ville',
+                    'multiple' => false,
+                ]);
+        }
+    }
+
+    public function onSubmit(FormEvent $event)
+    {
+        $form = $event->getForm();
+
+        $data = $form->getData();
+
+        $data->setCity($form->get('city')->getViewData());
+
+        $children = $data->getChildren();
+        if($data->getFirstName() != null){
+            $children[0]->setFirstName($data->getFirstName());
+            $children[0]->setFirstNameRep1($data->getFirstName());
+        }
+
+        if($data->getLastName() != null){
+            $children[0]->setLastName($data->getLastName());
+            $children[0]->setLastNameRep1($data->getLastName());
+        }
+
+        $children[0]->setBirthDate($data->getBirthDate());
+
+        if($data->getEmail() != null){
+            $children[0]->setEmailRep1($data->getEmail());
+        }
+
+        if($data->getCity() != null){
+            $children[0]->setCityRep1($data->getCity());
+        }
+
+        if($data->getAddress() != null){
+            $children[0]->setAddressRep1($data->getAddress());
+        }
+
+        if($data->getZipCode() != null){
+            $children[0]->setZipCodeRep1($data->getZipCode());
+        }
     }
 
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => Account::class
+            'data_class' => Account::class,
+            'city' => null
         ]);
     }
 

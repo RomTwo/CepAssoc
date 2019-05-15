@@ -23,24 +23,28 @@ class Adherent
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotNull(message="Veuiller remplir le champ nom")
      * @Groups({"competition"})
      */
     private $firstName;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotNull(message="Veuiller remplir le champ nom")
      * @Groups({"competition"})
      */
     private $lastName;
 
     /**
      * @ORM\Column(type="string", length=10)
+     * @Assert\NotNull(message="Veuiller remplir le champ genre")
      * @Groups({"competition"})
      */
     private $sex;
 
     /**
      * @ORM\Column(type="date")
+     * @Assert\NotNull(message="Veuiller remplir le champ nom")
      * @Groups({"competition"})
      */
     private $birthDate;
@@ -314,36 +318,6 @@ class Adherent
      * @Groups({"competition"})
      */
     private $activities;
-
-    /**
-     * @ORM\Column(type="boolean")
-     */
-    private $hasBulletinN2Allianz;
-
-    /**
-     * @ORM\Column(type="boolean")
-     */
-    private $hasCompetitionCommitment;
-
-    /**
-     * @ORM\Column(type="boolean")
-     */
-    private $isMutated;
-
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
-    private $treatedBy;
-
-    /**
-     * @ORM\Column(type="string", length=5, nullable=true)
-     */
-    private $affiliateCode;
-
-    /**
-     * @ORM\Column(type="boolean")
-     */
-    private $isDeleted;
 
     public function __construct()
     {
@@ -1081,6 +1055,38 @@ class Adherent
     public function getTreatedBy(): ?string
     {
         return $this->treatedBy;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getVolunteerComment()
+    {
+        return $this->volunteerComment;
+    }
+
+    /**
+     * @param mixed $volunteerComment
+     */
+    public function setVolunteerComment($volunteerComment): void
+    {
+        $this->volunteerComment = $volunteerComment;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getMedicalCertificate()
+    {
+        return $this->medicalCertificate;
+    }
+
+    /**
+     * @param mixed $medicalCertificate
+     */
+    public function setMedicalCertificate($medicalCertificate): void
+    {
+        $this->medicalCertificate = $medicalCertificate;
     }
 
     public function setTreatedBy(?string $treatedBy): self

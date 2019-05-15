@@ -2,6 +2,10 @@
 
 {% block title %}Inscription{% endblock %}
 
+{% block stylesheets %}
+    {{ encore_entry_link_tags('account') }}
+{% endblock %}
+
 {% block body %}
     <div class="d-md-flex h-md-100 align-items-center">
         <!-- First Half -->
@@ -163,6 +167,7 @@
 
 
 {% block javascripts %}
+    {{ encore_entry_script_tags('account') }}
     <script src="https://www.google.com/recaptcha/api.js?render={{ recaptcha_key_site }}"></script>
     <script>
         grecaptcha.ready(function () {
