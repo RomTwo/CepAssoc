@@ -19,4 +19,9 @@ class AdminAccountsController extends AbstractController
         $accounts = $this->getDoctrine()->getRepository(Account::class)->findAll();
         return $this->render('administration/accounts/accounts.html.twig', array('accounts' => $accounts));
     }
+
+    public function delete($id)
+    {
+
+    }
 }

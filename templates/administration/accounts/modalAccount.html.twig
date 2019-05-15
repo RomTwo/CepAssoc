@@ -1,0 +1,50 @@
+<div class="modal fade" id="modalAccount{{ account.id }}" tabindex="-1" role="dialog"
+     aria-labelledby="modalAccountLabel{{ account.id }}" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalAccountLabel{{ account.id }}">Détails du compte</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="container-fluid">
+                    <div class="alert alert-secondary" role="alert">
+                        <div class="row justify-content-center">
+                            Prénom : {{ account.firstName }}
+                        </div>
+                        <div class="row justify-content-center">
+                            Nom : {{ account.lastName }}
+                        </div>
+                        <div class="row justify-content-center">
+                            Civilité : {{ account.sex }}
+                        </div>
+                        <div class="row justify-content-center">
+                            Date de naissance : {{ account.birthDate | date("d/m/Y") }}
+                        </div>
+                        <div class="row justify-content-center">
+                            Code postal : {{ account.zipCode }}
+                        </div>
+                        <div class="row justify-content-center">
+                            Adresse Postal : {{ account.zipCode }}
+                        </div>
+                        <div class="row justify-content-center">
+                            Adresse Mail : {{ account.email }}
+                        </div>
+                        <div class="row justify-content-center">
+                            Role : {{ account.getRoles() | join }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-warning">Editer</button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal" data-toggle="modal" data-target="#modalDeleteAccount">Supprimer</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% include('administration/accounts/modalDeleteAccount.html.twig') %}
