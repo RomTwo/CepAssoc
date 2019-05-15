@@ -47,4 +47,12 @@ class AccountRepository extends ServiceEntityRepository
         ;
     }
     */
+
+    public function getOldPassword($email)
+    {
+        $result = $this->getEntityManager()->createQuery('select a.password from App\Entity\Account a where a.email = :email')
+            ->setParameter(':email', $email)->getSingleResult();
+
+        return $result['password'];
+    }
 }

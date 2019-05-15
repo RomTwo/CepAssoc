@@ -11,8 +11,10 @@
 </head>
 
 <body>
-{% block body %}{% endblock %}
 
+{% include('notifications/notifications.html.twig') %}
+
+{% block body %}{% endblock %}
 
 {{ encore_entry_script_tags('app') }}
 {{ encore_entry_script_tags('popup') }}
