@@ -41,9 +41,6 @@ class AccountController extends AbstractController
         $form->handleRequest($request);
         $msg = null;
 
-
-
-
         if ($form->isSubmitted() && $form->isValid()) {
             if (!$this->findByEmail($account->getEmail())) {
                 if($test = $request->request->get("registration")){
@@ -93,12 +90,14 @@ class AccountController extends AbstractController
         $currentUserEmail = $this->get('session')->get('_security.last_username');
         $account = $manager->getRepository(Account::class)->findOneBy(array('email' => $currentUserEmail));
 
-        $form = $this->createForm(AccountType::class, $account);
+        $form = $this->createForm(AccountType::class, $account, array(
+            'city'=>$account->getCity(),
+        ));
         $form->remove('children');
         $form->handleRequest($request);
         $msg = null;
 
-        if ($form->isSubmitted() && $form->isValid()) {
+        if ($form->isSubmitted()) {
             if ($currentUserEmail != $account->getEmail()) {
                 if ($this->findByEmail($account->getEmail())) {
                     $msg = "Cet email a déjà un compte associé !";

@@ -38,7 +38,6 @@ class AccountType extends AbstractType
             ))
             ->add('address', TextType::class, array('label' => 'Adresse : '))
             ->add('zipCode', TextType::class, array('label' => 'Code postal : '))
-            ->add('city', ChoiceType::class, array('label' => 'Ville : '))
             ->add('email', EmailType::class, array('label' => 'Adresse mail : '))
             ->add('password', PasswordType::class, array('label' => 'Mot de passe : '))
             ->add('children', CollectionType::class, [
@@ -51,6 +50,25 @@ class AccountType extends AbstractType
             )
             ->add('valid', SubmitType::class, array('label' => 'S\'inscrire'));
 
+        if($options['city'] == null){
+            $builder
+                ->add('city', ChoiceType::class, [
+                    'label' => 'Ville : ',
+                    'placeholder' => 'Veuillez saisir le zip code',
+                    'multiple' => false,
+                ]);
+
+        }else{
+            $builder
+                ->add('city', ChoiceType::class, [
+                    'choices' => array(
+                        $options['city'] => $options['city'],
+                    ),
+                    'label' => 'Ville : ',
+                    'placeholder' => 'Veuillez choisir une ville',
+                    'multiple' => false,
+                ]);
+        }
     }
 
     public function onSubmit(FormEvent $event)
@@ -58,6 +76,8 @@ class AccountType extends AbstractType
         $form = $event->getForm();
 
         $data = $form->getData();
+
+        $data->setCity($form->get('city')->getViewData());
 
         $children = $data->getChildren();
         if($data->getFirstName() != null){
@@ -94,6 +114,7 @@ class AccountType extends AbstractType
         $resolver->setDefaults([
             'data_class' => Account::class,
             'cascade_validation' => true,
+            'city' => null
         ]);
     }
 }

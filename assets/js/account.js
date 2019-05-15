@@ -216,16 +216,14 @@ $('#account_zipCode').change( function(){
             "dataset": "laposte_hexasmal",
             "refine.code_postal": $('#account_zipCode').val(),
         },
-        async: true,
         success: function (data)
         {
             $('#account_city option').remove();
             for (var i in data["records"]) {
                 commune = data["records"][i]["fields"]["nom_de_la_commune"];
-                $('#account_city').append('<option value=' + commune + '>' + commune + '</option>');
+                $('#account_city').append(new Option(commune, commune));
             }
         }
     })
 });
-
 

@@ -168,13 +168,13 @@ class AdherentType extends AbstractType
                 ],
                 'required' => false,
             ])
-            ->add('cityRep1', TextType::class, [
+            ->add('cityRep1', ChoiceType::class, [
                 'attr' => [
                     'placeholder' => "Ville du représentant 1"
                 ],
                 'data' => $options['cityRep1']
             ])
-            ->add('cityRep2', TextType::class, [
+            ->add('cityRep2', ChoiceType::class, [
                 'attr' => [
                     'placeholder' => "Ville du représentant 2"
                 ],
