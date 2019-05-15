@@ -27,10 +27,7 @@ class AdminAdherentsController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-
-            
             $entityManager->flush();
-
             return $this->redirectToRoute('admin_adherents');
         }
 
@@ -40,7 +37,7 @@ class AdminAdherentsController extends AbstractController
         ]);
     }
 
-    public function register(Adherent $adherent, $id)
+    public function register($id)
     {
         $repository = $this->getDoctrine()->getRepository(Adherent::class);
         $entityManager = $this->getDoctrine()->getManager();
@@ -51,12 +48,21 @@ class AdminAdherentsController extends AbstractController
         }
 
         $adherent->setIsRegisteredInFFG(true);
-        $entityManager->persist($adherent);
         $entityManager->flush();
 
-        $adherents = $repository->findAll();
-        return $this->render('administration/adherents/adherents.html.twig', [
-            'adherents' => $adherents,
-        ]);
+        return $this->redirectToRoute("admin_adherents");
     }
+
+    public function delete($id)
+    {
+        $repository = $this->getDoctrine()->getRepository(Adherent::class);
+        $entityManager = $this->getDoctrine()->getManager();
+        $adherent = $repository->findOneById($id);
+
+        $adherent->setIsDeleted(true);
+        $entityManager->flush();
+
+        return $this->redirectToRoute("admin_adherents");
+    }
+
 }

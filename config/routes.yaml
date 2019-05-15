@@ -33,10 +33,6 @@ security_deconnexion:
     path: /profile/logout
 
 ### Administration routing ###
-#admin_index:
-#    path: /admin/Administration
-#    controller: App\Controller\AdministrationController::index
-
 admin_adherent_competiteurs:
     path: /admin/competiteurs
     controller: App\Controller\administration\AdministrationController::competiteurs
@@ -58,6 +54,12 @@ admin_adherentsRegister:
     requirements:
         id: ([0-9]*)
 
+admin_adherentsDelete:
+    path: /admin/adherents/delete/{id}
+    controller: App\Controller\administration\AdminAdherentsController::delete
+    requirements:
+        id: ([0-9]*)
+
     #--activities
 admin_activities:
     path: /admin/activities
@@ -67,10 +69,6 @@ admin_activities:
 admin_timeSlots:
     path: /admin/timeSlots
     controller: App\Controller\administration\AdminTimeSlotsController::index
-
-admin_timeSlotsAdd:
-    path: /admin/timeSlots/add
-    controller: App\Controller\administration\AdminTimeSlotsController::add
 
 admin_timeSlotsEdit:
     path: /admin/timeSlots/edit/{id}

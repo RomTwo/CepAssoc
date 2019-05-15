@@ -348,6 +348,11 @@ class Adherent
      */
     private $affiliateCode;
 
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $isDeleted;
+
     public function __construct()
     {
         $this->activities = new ArrayCollection();
@@ -1101,6 +1106,18 @@ class Adherent
     public function setAffiliateCode(?string $affiliateCode): self
     {
         $this->affiliateCode = $affiliateCode;
+
+        return $this;
+    }
+
+    public function getIsDeleted(): ?bool
+    {
+        return $this->isDeleted;
+    }
+
+    public function setIsDeleted(bool $isDeleted): self
+    {
+        $this->isDeleted = $isDeleted;
 
         return $this;
     }

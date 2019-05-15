@@ -24,7 +24,7 @@ class TimeSlotType extends AbstractType
                     'Dimanche' => 0,
                 ],
                 'multiple' => false,
-                'expanded' => true,
+                'expanded' => false,
             ])
             ->add('startTime')
             ->add('endTime')

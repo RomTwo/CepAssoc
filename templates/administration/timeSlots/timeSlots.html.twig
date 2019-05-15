@@ -7,6 +7,58 @@
 {% endblock %}
 
 {% block body %}
+
+    <div class="row justify-content-center">
+        <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+            Ajouter un nouveau créneau
+        </button>
+    </div>
+    </p>
+    <div class="collapse" id="collapseExample">
+        <div class="card card-body">
+            {% if err is defined and err is not null %}
+                <span style="color:red"> {{ err }} </span>
+            {% endif %}
+            <div class="container-fluid">
+                {{ form_start(form) }}
+
+                    <div class="row">
+                        <div class="col-3">
+                            Jour :
+                            <br/>
+                            {{ form_widget(form.day)}}
+                        </div>
+
+                        <div class="col-3">
+                            Heure de début :
+                            {{ form_widget(form.startTime)}}
+                        </div>
+
+                        <div class="col-3">
+                            Heure de fin :
+                            {{ form_widget(form.endTime)}}
+                        </div>
+
+                        <div class="col-3">
+                            Lieu :
+                            {{ form_widget(form.city)}}
+                        </div>
+
+                    </div>
+
+                    <br/>
+                    <div class="row justify-content-center">
+                        <button class="btn btn-primary">
+                            Ajouter
+                        </button>
+                    </div>
+                {{ form_end(form) }}
+            </div>
+        </div>
+        <br/>
+    </div>
+
+    <!-- Displaying timeSlots -->
     <table id="timeSlotsTable" class="display nowrap dataTable dtr-inline collapsed" style="width: 100%;" role="grid" aria-describedby="example_info">
         <thead>
             <tr role="row">
@@ -71,9 +123,6 @@
             </tr>
         </tfoot>
     </table>
-
-        <a href="{{path('admin_timeSlotsAdd')}}" class="btn btn-primary">Ajouter un nouveau créneau</a>
-
 {% endblock %}
 
 {% block javascripts %}

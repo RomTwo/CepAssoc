@@ -10,22 +10,15 @@ use Symfony\Component\HttpFoundation\Request;
 class AdminTimeSlotsController extends AbstractController
 {
 
-    public function index()
+    public function index(Request $request)
     {
         $repository = $this->getDoctrine()->getRepository(TimeSlot::class);
         $timeSlots = $repository->findAll();
-        return $this->render('administration/timeSlots/timeSlots.html.twig',[
-            'timeSlots' => $timeSlots,
-        ]);
-    }
 
-    public function add(Request $request)
-    {
         $timeSlot = new TimeSlot();
 
         $form = $this->createForm(TimeSlotType::class, $timeSlot);
         $entityManager = $this->getDoctrine()->getManager();
-        $repository = $this->getDoctrine()->getRepository(TimeSlot::class);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -35,12 +28,12 @@ class AdminTimeSlotsController extends AbstractController
                 array('startTime' => $timeSlot->getStartTime(),
                     'endTime' => $timeSlot->getEndTime(),
                     'city' => $timeSlot->getCity()
-            ));
+                ));
 
             // if such a timeSlot exist, we don't create a new one
             if (!empty($identicalTimeSlots)) {
                 $err = "Un créneau avec les mêmes attributs existe déjà, veuillez en entrer un autre !";
-                return $this->render('administration/timeSlots/timeSlotsAdd.html.twig',[
+                return $this->render('administration/timeSlots/timeSlots.html.twig',[
                     'form' => $form->createView(),
                     'err' => $err
                 ]);
@@ -49,11 +42,12 @@ class AdminTimeSlotsController extends AbstractController
 
             $entityManager->persist($timeSlot);
             $entityManager->flush();
-        
+
             return $this->redirectToRoute('admin_timeSlots');
         }
 
-        return $this->render('administration/timeSlots/timeSlotsAdd.html.twig',[
+        return $this->render('administration/timeSlots/timeSlots.html.twig',[
+            'timeSlots' => $timeSlots,
             'form' => $form->createView()
         ]);
     }
@@ -70,7 +64,10 @@ class AdminTimeSlotsController extends AbstractController
             return $this->redirectToRoute('admin_timeSlots');
         }
 
-        return $this->render('administration/timeSlots/timeSlotsEdit.html.twig', [
+        $repository = $this->getDoctrine()->getRepository(TimeSlot::class);
+        $timeSlots = $repository->findAll();
+        return $this->render('administration/timeSlots/timeSlots.html.twig',[
+            'timeSlots' => $timeSlots,
             'timeSlot' => $timeSlot,
             'form' => $form->createView()
         ]);
