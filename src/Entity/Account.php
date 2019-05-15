@@ -121,6 +121,7 @@ class Account implements UserInterface
      */
     private $tokenForgetPass;
 
+
     /**
      * Account constructor.
      */
@@ -128,7 +129,7 @@ class Account implements UserInterface
     {
         $this->children = new ArrayCollection();
         $this->eventManagements = new ArrayCollection();
-        $this->roles = array('ROLE_ADMIN');
+        $this->roles = array('ROLE_USER');
     }
 
 
@@ -251,7 +252,6 @@ class Account implements UserInterface
     }
 
 
-
     /**
      * @return Collection|Adherent[]
      */
@@ -336,7 +336,14 @@ class Account implements UserInterface
      */
     public function getRoles()
     {
-        return $this->roles[0] === "ROLE_USER" ? ['ROLE_USER'] : ['ROLE_ADMIN'];
+        if ($this->roles[0] === "ROLE_SUPER_ADMIN") {
+            return ['ROLE_SUPER_ADMIN'];
+        } elseif ($this->roles[0] === "ROLE_ADMIN") {
+            return ['ROLE_ADMIN'];
+        } elseif ($this->roles[0] === "ROLE_USER") {
+            return ['ROLE_USER'];
+        }
+        return [];
     }
 
     /**

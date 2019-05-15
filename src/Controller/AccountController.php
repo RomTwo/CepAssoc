@@ -4,11 +4,12 @@ namespace App\Controller;
 
 use App\Entity\Account;
 use App\Form\AccountType;
+use App\Services\CaptchaCheck;
+use App\Services\ForgotPassword;
+use App\Services\GenerateToken;
 use Firebase\JWT\JWT;
-use Swift_Mailer;
-use Swift_Message;
-use Swift_SmtpTransport;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
@@ -20,9 +21,10 @@ class AccountController extends AbstractController
      *
      * @param Request $request
      * @param UserPasswordEncoderInterface $encoder
+     * @param CaptchaCheck $captchaCheck
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
-    public function add(Request $request, UserPasswordEncoderInterface $encoder)
+    public function add(Request $request, UserPasswordEncoderInterface $encoder, CaptchaCheck $captchaCheck)
     {
         if ($this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_FULLY')) {
             return $this->redirectToRoute('home');
@@ -33,22 +35,28 @@ class AccountController extends AbstractController
         $form->handleRequest($request);
         $msg = null;
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            if (!$this->findByEmail($account->getEmail())) {
-                $manager = $this->getDoctrine()->getManager();
-                $encoded = $encoder->encodePassword($account, $account->getPassword());
-                $account->setPassword($encoded);
-                $manager->persist($account);
-                $manager->flush();
+        if ($form->isSubmitted() && $form->isValid() && $request->request->has('recaptcha_response')) {
+            if ($captchaCheck->captchaIsValid($request->request->get('recaptcha_response'))) {
+                if (!$this->findByEmail($account->getEmail())) {
+                    $manager = $this->getDoctrine()->getManager();
+                    $encoded = $encoder->encodePassword($account, $account->getPassword());
+                    $account->setPassword($encoded);
+                    $manager->persist($account);
+                    $manager->flush();
 
-                return $this->redirectToRoute('security_connexion', array(), 301);
+                    $this->addFlash('success', "Votre compte vient d'être créé");
+                    return $this->redirectToRoute('security_connexion', array(), 301);
+                } else {
+                    $msg = 'Cette adresse mail est déjà associé à un compte';
+                }
+            } else {
+                $this->addFlash('error', 'Le captcha est invalide');
             }
-            $msg = "Cet email a déjà un compte associé !";
         }
 
         return $this->render('account/index.html.twig', array(
             "form" => $form->createView(),
-            "msg" => $msg
+            "errorMail" => $msg
         ));
     }
 
@@ -65,57 +73,95 @@ class AccountController extends AbstractController
         $account = $manager->getRepository(Account::class)->findOneBy(array('email' => $currentUserEmail));
 
         $form = $this->createForm(AccountType::class, $account);
+        $form->add('newPassword', PasswordType::class, array(
+            'mapped' => false,
+            'label' => 'Mot de passe',
+            'required' => false,
+            'attr' => array(
+                'placeholder' => 'Nouveau mot de passe',
+                'class' => 'tool',
+                'data-toggle' => 'tooltip',
+                'data-placement' => 'right',
+                'title' => '8 à 15 caractères minimum, 1 caractère spécial, 1 chiffre, 1 majuscule',
+            )
+        ));
         $form->handleRequest($request);
         $msg = null;
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $oldPassword = $this->getDoctrine()->getRepository(Account::class)->getOldPassword($currentUserEmail); //get the password of the current user (in database)
+            $passwordEntryByUser = $account->getPassword(); //get the user password in the password field of the form
+            $account->setPassword($oldPassword); //modify the password to can compare the old password (in database) with the old password entry in the form
+
             if ($currentUserEmail != $account->getEmail()) {
                 if ($this->findByEmail($account->getEmail())) {
-                    $msg = "Cet email a déjà un compte associé !";
-                    return $this->render('account/update.html.twig', array(
-                        "form" => $form->createView(),
-                        "msg" => $msg
-                    ));
+                    $msg = "Cet email a déjà un compte associé";
+                    return $this->render('account/update.html.twig', array("form" => $form->createView(), "errorMail" => $msg));
                 }
                 $this->get('session')->set('_security.last_username', $account->getEmail());
             }
-            $encoded = $encoder->encodePassword($account, $account->getPassword());
-            $account->setPassword($encoded);
+
+            if (!empty($request->request->get('newPassword'))) {
+                if (preg_match('/^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[-+!*$@%_])([-+!*$@%_\w]{8,15})$/', $request->request->get('newPassword'))) {
+                    if (!$encoder->isPasswordValid($account, $passwordEntryByUser)) {
+                        $msg = "Votre mot de passe actuel est incorrect";
+                        return $this->render('account/update.html.twig', array("form" => $form->createView(), "errorOldPassFalse" => $msg));
+                    }
+                    $encoded = $encoder->encodePassword($account, $request->request->get('newPassword'));
+                    $account->setPassword($encoded);
+                } else {
+                    $msg = "Votre nouveau mot de passe est incorrect";
+                    return $this->render('account/update.html.twig', array("form" => $form->createView(), "errorNewPassFalse" => $msg));
+                }
+            } else if (!$encoder->isPasswordValid($account, $passwordEntryByUser)) {
+                $msg = "Votre mot de passe actuel est incorrect";
+                return $this->render('account/update.html.twig', array("form" => $form->createView(), "errorOldPassFalse" => $msg));
+            }
+
             $manager->flush();
+            $this->addFlash('success', "Votre compte a été modifié");
             return $this->redirectToRoute('home');
         }
-
-        return $this->render('account/update.html.twig', array(
-            "form" => $form->createView()
-        ));
+        return $this->render('account/update.html.twig', array("form" => $form->createView(), "error" => $msg));
     }
 
     /**
      * Generate token (save in database) and send and email at the user to change his password
      *
      * @param Request $request
+     * @param ForgotPassword $forgotPasswordEmail
+     * @param GenerateToken $generateToken
+     * @param CaptchaCheck $captchaCheck
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
-    public function forgotPassword(Request $request)
+    public function forgotPassword(Request $request, ForgotPassword $forgotPasswordEmail, GenerateToken $generateToken, CaptchaCheck $captchaCheck)
     {
-        if ($request->isMethod('POST') && $this->findByEmail($request->request->get('email'))) {
-            $manager = $this->getDoctrine()->getManager();
-            $account = $manager->getRepository(Account::class)->findOneBy(
-                array(
-                    'email' => $request->request->get('email')
-                )
-            );
+        if ($request->isMethod('POST') && $request->request->has('recaptcha_response')) {
+            if ($this->findByEmail($request->request->get('email'))) {
+                if ($captchaCheck->captchaIsValid($request->request->get('recaptcha_response'))) {
 
-            $token = $this->generateToken();
-            $account->setTokenForgetPass($token);
-            $manager->flush();
-            $this->sendEmail($account->getEmail(), $token);
+                    $manager = $this->getDoctrine()->getManager();
+                    $account = $manager->getRepository(Account::class)->findOneBy(
+                        array(
+                            'email' => $request->request->get('email')
+                        )
+                    );
 
-            $this->addFlash("msg", "Un mail vient de vous être envoyé");
+                    $token = $generateToken->generateJwtToken();
+                    $account->setTokenForgetPass($token);
+                    $manager->flush();
+                    $forgotPasswordEmail->sendEmail($account->getEmail(), $token);
+
+                    $this->addFlash('success', "Un mail vient de vous être envoyé");
+                } else {
+                    $this->addFlash('error', "Le captcha est invalide");
+                }
+            } else {
+                $this->addFlash('error', "Cette adresse mail n'existe pas");
+            }
         } else {
-            $this->addFlash("msg", "Une erreur s'est produite");
+            $this->addFlash('error', "Une erreur c'est produite");
         }
-
         return $this->redirectToRoute('security_connexion', array(), 301);
     }
 
@@ -145,11 +191,13 @@ class AccountController extends AbstractController
                         $account->setTokenForgetPass(null);
                         $manager->flush();
 
+                        $this->addFlash('success', "Votre mot de passe vient d'être modifié");
                         return $this->redirectToRoute('security_connexion', array(), 301);
                     }
+
+                    $this->addFlash('error', "Mot(s) de passe(s) incorrect(s) ou différents");
                     return $this->render('account/resetPassword.html.twig', array(
-                            'token' => $token,
-                            'error' => 'Mot de passe incorrect',
+                            'token' => $token
                         )
                     );
                 }
@@ -179,60 +227,4 @@ class AccountController extends AbstractController
 
         return $account != null ? true : false;
     }
-
-    /**
-     * Generate a JWT token
-     *
-     * @return string
-     */
-    private function generateToken()
-    {
-        $payload = array(
-            'iat' => time(),
-            'exp' => time() + 1800
-        );
-        $token = JWT::encode($payload, $_ENV['PRIVATE_KEY'], $_ENV['ALG']);
-
-        return $token;
-    }
-
-    /**
-     * Send an email to reset the user password. It contains a link for reset the user password
-     *
-     * @param $mail
-     * @param $token
-     */
-    private function sendEmail($mail, $token)
-    {
-
-        $transport = (new Swift_SmtpTransport('smtp.gmail.com', 465, 'ssl'))
-            ->setUsername($_ENV['MAILER_MAIL'])
-            ->setPassword($_ENV['MAILER_PASSWORD']);
-
-        $mailer = new Swift_Mailer($transport);
-
-        $message = (new Swift_Message('Réinitialisation mot de passe Association Cep Poitiers Gymnastique'))
-            ->setFrom([$_ENV['MAILER_MAIL'] => 'Association Cep Poitiers Gymnastique'])
-            ->setTo([$mail])
-            ->setBody($this->msgHtml($token), 'text/html')
-            ->setCharset('UTF-8');
-
-
-        $result = $mailer->send($message);
-    }
-
-    /**
-     * This is a body of the email (email for reset the user password)
-     *
-     * @param $token
-     * @return string
-     */
-    private function msgHtml($token)
-    {
-        $msg = '<p>Réinitialisation de votre mot de passe en cliquant <a href="' . $_ENV['MAILER_URL'] . $token . '">ici</a></p>';
-
-        return $msg;
-
-    }
-
 }
