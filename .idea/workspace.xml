@@ -4,17 +4,10 @@
     <bookmark url="file://$PROJECT_DIR$/src/Controller/AccountController.php" description="JWT::decode($token, $_ENV['PRIVATE_KEY'], array($_..." line="94" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="53b90c9e-e36e-447f-8cc9-26b01b488158" name="Default Changelist" comment="Add folder plugin in administration, add link to return on site in the administration part">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/templates/administration/accounts/modalAccount.html.twig" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/templates/administration/accounts/modalDeleteAccount.html.twig" />
+    <list default="true" id="53b90c9e-e36e-447f-8cc9-26b01b488158" name="Default Changelist" comment="Modify front admin account">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Controller/RegistrationController.php" afterPath="$PROJECT_DIR$/src/Controller/RegistrationController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Controller/administration/AdminAccountsController.php" afterPath="$PROJECT_DIR$/src/Controller/administration/AdminAccountsController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/administration/accounts/accounts.html.twig" afterPath="$PROJECT_DIR$/templates/administration/accounts/accounts.html.twig" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/administration/adherents/adherents.html.twig" afterPath="$PROJECT_DIR$/templates/administration/adherents/adherents.html.twig" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/administration/base.html.twig" afterPath="$PROJECT_DIR$/templates/administration/base.html.twig" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/base.html.twig" afterPath="$PROJECT_DIR$/templates/base.html.twig" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/home/index.html.twig" afterPath="$PROJECT_DIR$/templates/home/index.html.twig" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/administration/accounts/modalAccount.html.twig" afterPath="$PROJECT_DIR$/templates/administration/accounts/modalAccount.html.twig" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/administration/accounts/modalDeleteAccount.html.twig" afterPath="$PROJECT_DIR$/templates/administration/accounts/modalDeleteAccount.html.twig" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -27,7 +20,28 @@
     <pharConfigPath>$PROJECT_DIR$/composer.json</pharConfigPath>
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300" />
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file leaf-file-name="modalAccount.html.twig" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/templates/administration/accounts/modalAccount.html.twig">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="645">
+              <caret line="43" column="100" lean-forward="false" selection-start-line="43" selection-start-column="100" selection-end-line="43" selection-end-column="100" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="modalDeleteAccount.html.twig" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/templates/administration/accounts/modalDeleteAccount.html.twig">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="285">
+              <caret line="19" column="6" lean-forward="false" selection-start-line="19" selection-start-column="6" selection-end-line="19" selection-end-column="6" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -133,12 +147,12 @@
         <option value="$PROJECT_DIR$/templates/administration/adherents/adherents.html.twig" />
         <option value="$PROJECT_DIR$/templates/administration/accounts/accounts.html.twig" />
         <option value="$PROJECT_DIR$/src/Controller/administration/AdminAccountsController.php" />
-        <option value="$PROJECT_DIR$/templates/administration/accounts/modalAccount.html.twig" />
-        <option value="$PROJECT_DIR$/templates/administration/accounts/modalDeleteAccount.html.twig" />
         <option value="$PROJECT_DIR$/templates/base.html.twig" />
         <option value="$PROJECT_DIR$/templates/administration/base.html.twig" />
         <option value="$PROJECT_DIR$/src/Controller/RegistrationController.php" />
         <option value="$PROJECT_DIR$/templates/home/index.html.twig" />
+        <option value="$PROJECT_DIR$/templates/administration/accounts/modalAccount.html.twig" />
+        <option value="$PROJECT_DIR$/templates/administration/accounts/modalDeleteAccount.html.twig" />
       </list>
     </option>
   </component>
@@ -429,7 +443,7 @@
       <workItem from="1557902435928" duration="11499000" />
       <workItem from="1557918052681" duration="91000" />
       <workItem from="1557918165205" duration="31000" />
-      <workItem from="1557918244216" duration="8241000" />
+      <workItem from="1557918244216" duration="9038000" />
     </task>
     <task id="LOCAL-00001" summary="Default Changelist">
       <created>1557400976745</created>
@@ -711,11 +725,18 @@
       <option name="project" value="LOCAL" />
       <updated>1557923558957</updated>
     </task>
-    <option name="localTasksCounter" value="41" />
+    <task id="LOCAL-00041" summary="Modify front admin account">
+      <created>1557928922738</created>
+      <option name="number" value="00041" />
+      <option name="presentableId" value="LOCAL-00041" />
+      <option name="project" value="LOCAL" />
+      <updated>1557928922738</updated>
+    </task>
+    <option name="localTasksCounter" value="42" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="105172000" />
+    <option name="totallyTimeSpent" value="105969000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -816,7 +837,8 @@
     <MESSAGE value="modify AccountType and add informations when the user move your mouse on the password field (register form and modify profil form)" />
     <MESSAGE value="Add new role (super_admin), add link administration in navbar, change the getRole() function in Account Entity" />
     <MESSAGE value="Add folder plugin in administration, add link to return on site in the administration part" />
-    <option name="LAST_COMMIT_MESSAGE" value="Add folder plugin in administration, add link to return on site in the administration part" />
+    <MESSAGE value="Modify front admin account" />
+    <option name="LAST_COMMIT_MESSAGE" value="Modify front admin account" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1160,10 +1182,18 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/templates/administration/base.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="338">
+          <caret line="37" column="44" lean-forward="false" selection-start-line="37" selection-start-column="44" selection-end-line="37" selection-end-column="44" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/templates/administration/accounts/modalAccount.html.twig">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="443">
-          <caret line="31" column="64" lean-forward="false" selection-start-line="31" selection-start-column="64" selection-end-line="31" selection-end-column="64" />
+        <state relative-caret-position="645">
+          <caret line="43" column="100" lean-forward="false" selection-start-line="43" selection-start-column="100" selection-end-line="43" selection-end-column="100" />
           <folding />
         </state>
       </provider>
@@ -1172,16 +1202,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="285">
           <caret line="19" column="6" lean-forward="false" selection-start-line="19" selection-start-column="6" selection-end-line="19" selection-end-column="6" />
-          <folding>
-            <element signature="e#487#494#1#HTML" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/administration/base.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="338">
-          <caret line="37" column="44" lean-forward="false" selection-start-line="37" selection-start-column="44" selection-end-line="37" selection-end-column="44" />
           <folding />
         </state>
       </provider>
