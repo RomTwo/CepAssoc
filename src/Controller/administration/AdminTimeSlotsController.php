@@ -32,19 +32,18 @@ class AdminTimeSlotsController extends AbstractController
 
             // if such a timeSlot exist, we don't create a new one
             if (!empty($identicalTimeSlots)) {
-                $err = "Un créneau avec les mêmes attributs existe déjà, veuillez en entrer un autre !";
                 return $this->render('administration/timeSlots/timeSlots.html.twig',[
+                    'timeSlots' => $timeSlots,
                     'form' => $form->createView(),
-                    'err' => $err
+                    'err' => "Un créneau avec les mêmes attributs existe déjà, veuillez modifier les valeurs entrées !"  // to mention the error
                 ]);
             }
 
-
             $entityManager->persist($timeSlot);
             $entityManager->flush();
-
-            return $this->redirectToRoute('admin_timeSlots');
+            return $this->redirectToRoute("admin_timeSlots");
         }
+
 
         return $this->render('administration/timeSlots/timeSlots.html.twig',[
             'timeSlots' => $timeSlots,
@@ -57,19 +56,39 @@ class AdminTimeSlotsController extends AbstractController
         $entityManager = $this->getDoctrine()->getManager();
         $form = $this->createForm(TimeSlotType::class, $timeSlot);
 
+        $repository = $this->getDoctrine()->getRepository(TimeSlot::class);
+        $timeSlots = $repository->findAll();
+
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
+            // getting timeSlots with same values
+            $identicalTimeSlots = $repository->findBy(
+                array('startTime' => $timeSlot->getStartTime(),
+                    'endTime' => $timeSlot->getEndTime(),
+                    'city' => $timeSlot->getCity()
+                ));
+
+            // if such a timeSlot exist, we don't create a new one
+            if (!empty($identicalTimeSlots)) {
+                return $this->render('administration/timeSlots/timeSlots.html.twig',[
+                    'timeSlots' => $timeSlots,
+                    'form' => $form->createView(),
+                    'err' => "Un créneau avec les mêmes attributs existe déjà, veuillez modifier les valeurs entrées !",  // to mention the error
+                    'isAModification' => true
+                ]);
+            }
+
             $entityManager->flush();
-            return $this->redirectToRoute('admin_timeSlots');
+            return $this->redirectToRoute("admin_timeSlots");
         }
 
-        $repository = $this->getDoctrine()->getRepository(TimeSlot::class);
-        $timeSlots = $repository->findAll();
         return $this->render('administration/timeSlots/timeSlots.html.twig',[
             'timeSlots' => $timeSlots,
             'timeSlot' => $timeSlot,
-            'form' => $form->createView()
+            'form' => $form->createView(),
+            'isAModification' => true       // specify that it is a modifiction because, we use the same view for the adding.
         ]);
     }
 

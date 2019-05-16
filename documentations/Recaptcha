@@ -1,0 +1,14 @@
+-- Identifiants google
+    E-mail : CepAsso86@gmail.com
+    Password : PoitiersCep@sso86
+
+--Dashboard google (requêtes, voir les clés, modifier les paramètres...)
+    url : https://www.google.com/u/1/recaptcha/admin/site/346252181/setup
+
+-- Clés
+    clé du site : 6LeVY6MUAAAAAKrw5BFZm7ENY8ozD0KfjMSqDeVV
+    clé secrète : 6LeVY6MUAAAAACRbYVr-h6jRZt3wGoobEbfJTl5_
+
+-- URLs
+    appel de l'api : https://www.google.com/recaptcha/api.js?render=KEY
+    verification : https://www.google.com/recaptcha/api/siteverify
