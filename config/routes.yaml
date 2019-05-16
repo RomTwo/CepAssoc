@@ -37,6 +37,11 @@ admin_adherent_competiteurs:
     path: /admin/competiteurs
     controller: App\Controller\administration\AdministrationController::competiteurs
 
+admin_adherent_update_state:
+    path: /admin/adherent/update_state
+    controller: App\Controller\administration\AdministrationController::update_state
+    methods: POST
+
     #--adherents
 admin_adherents:
     path: /admin/adherents

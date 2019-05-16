@@ -3,14 +3,83 @@
 {% block title %}Compétiteurs{% endblock %}
 
 {% block body %}
-    <div id="competiteur">
-        {% if comp is defined %}
-            {{ comp }}
-        {% else %}
-            <p>Aucuns compétiteurs à inscrire</p>
-        {% endif %}
-    </div>
+    <div class ="row">
+        <div class="col-6">
+           <h2>Initialisation</h2>
+            <p>Aucune initialisation en cours.</p>
+            <img class ="spinner_sync" src="{{ asset('build/spinner.gif') }}" hidden>
 
-    <h2>Aucune synchronisation en cours.</h2>
-<img src="{{ asset('build/spinner.gif') }}" hide>
+            <div id="competiteur" hidden>
+                {% if comp is defined %}
+                    {{ comp }}
+                {% else %}
+                    <p>Aucuns compétiteurs à inscrire</p>
+                {% endif %}
+            </div>
+        </div>
+         <div class="col-6">
+                <h2>Synchronisation</h2>
+                <p id ="lbl_sync" >Aucune synchronisation en cours.</p>
+                <img id="spinner_sync" src="{{ asset('build/spinner.gif') }}" style = "display:none;" >
+                <button id="a" hidden ></button>
+                <button id="sync" hidden></button>
+                <div id="ids" hidden></div>
+         </div>
+    </div>
+    
+
+ 
+{% endblock %}
+
+{% block javascripts %}
+<script>
+        
+        
+        document.getElementById("sync").addEventListener("click",function(){
+            var timeout1 = false;
+            var timeout2 = false;
+            document.getElementById("lbl_sync").textContent = "Synchronisation en cours ...";
+            document.getElementById("spinner_sync").style.display = "inline";
+
+            console.log(JSON.parse(document.getElementById("ids").textContent));
+            
+            $.ajax({
+                url:'{{path('admin_adherent_update_state')}}',
+                type: "POST",
+                dataType: "json",
+                data: {
+                    "ids": JSON.parse(document.getElementById("ids").textContent),
+                },
+                complete: function(jqXHR, textStatus) {
+                    switch (jqXHR.status) {
+                        case 200:
+                            timeout2 = true;
+                        
+                            document.getElementById("a").click()
+
+                            if(timeout1 == true){
+                                    document.getElementById("lbl_sync").textContent = "Synchronisation terminée.";
+                                    document.getElementById("spinner_sync").style.display = "none";
+                            }
+                            
+
+                            break;
+                        default:
+                            alert("ERREUR");
+                    }
+                }
+
+            })
+            
+
+            setTimeout(function(){
+                timeout1 = true;
+                if(timeout2==true){
+                    document.getElementById("lbl_sync").textContent = "Synchronisation terminée.";
+                    document.getElementById("spinner_sync").style.display = "none";
+                }
+            }, 2000); 
+        });
+    
+</script>
 {% endblock %}

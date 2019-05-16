@@ -14,6 +14,8 @@ use App\Entity\Activity;
 use App\Entity\Event;
 use App\Entity\Category;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Request;
 
 class AdministrationController extends AbstractController
 {
@@ -53,6 +55,33 @@ class AdministrationController extends AbstractController
             ));
         }
         return $this->render('administration/competiteurs.html.twig');
+    }
+
+    public function update_state(Request $req){
+        if($this->get('security.authorization_checker')->isGranted('ROLE_ADMIN')){
+            $ids =  $req->get("ids");
+            var_dump($req->get("ids"));
+            var_dump(json_decode($ids));
+            //var_dump($req->get("ids"));
+            return new Response ("admin",200);
+
+
+        }else{
+            
+            $ids =  $req->get("ids");
+            var_dump(json_decode($ids));
+          //  echo(json_decode($ids));
+            /*
+            
+            for ($i=0; $i < count($ids); $i++) { 
+               echo $ids[$i]+"-";
+            }
+            echo("dzqdzq");*/
+
+            return new Response ("",200);
+        }
+
+        
     }
     /**
      * @Route("/administration/category", name="addCategory")
