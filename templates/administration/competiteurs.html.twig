@@ -6,9 +6,9 @@
     <div class ="row">
         <div class="col-6">
            <h2>Initialisation</h2>
-            <p>Aucune initialisation en cours.</p>
-            <img class ="spinner_sync" src="{{ asset('build/spinner.gif') }}" hidden>
-
+            <p id="lbl_init" >Aucune initialisation en cours.</p>
+            <img id="spinner_init" src="{{ asset('build/spinner.gif') }}" style = "display:none;">
+            <button id="init" hidden></button>
             <div id="competiteur" hidden>
                 {% if comp is defined %}
                     {{ comp }}
@@ -23,7 +23,7 @@
                 <img id="spinner_sync" src="{{ asset('build/spinner.gif') }}" style = "display:none;" >
                 <button id="a" hidden ></button>
                 <button id="sync" hidden></button>
-                <div id="ids" hidden></div>
+                <div id="ids" hidden ></div>
          </div>
     </div>
     
@@ -33,36 +33,44 @@
 
 {% block javascripts %}
 <script>
-        
-        
+
+    document.getElementById("init").addEventListener("click",function() {
+        document.getElementById("lbl_init").textContent = "Initialisation en cours.";
+        document.getElementById("spinner_init").style.display = "inline";
+        setTimeout(function() {
+            document.getElementById("lbl_init").textContent = "Initialisation terminée.";
+            document.getElementById("spinner_init").style.display = "none";
+        },2000);
+
+
+    });
+
         document.getElementById("sync").addEventListener("click",function(){
             var timeout1 = false;
             var timeout2 = false;
             document.getElementById("lbl_sync").textContent = "Synchronisation en cours ...";
             document.getElementById("spinner_sync").style.display = "inline";
 
-            console.log(JSON.parse(document.getElementById("ids").textContent));
+            console.log(document.getElementById("ids").textContent);
             
             $.ajax({
                 url:'{{path('admin_adherent_update_state')}}',
                 type: "POST",
                 dataType: "json",
                 data: {
-                    "ids": JSON.parse(document.getElementById("ids").textContent),
+                    "ids": document.getElementById("ids").textContent,
                 },
                 complete: function(jqXHR, textStatus) {
                     switch (jqXHR.status) {
                         case 200:
                             timeout2 = true;
-                        
                             document.getElementById("a").click()
 
                             if(timeout1 == true){
                                     document.getElementById("lbl_sync").textContent = "Synchronisation terminée.";
                                     document.getElementById("spinner_sync").style.display = "none";
                             }
-                            
-
+                            console.log(jqXHR.responseText);
                             break;
                         default:
                             alert("ERREUR");
@@ -70,8 +78,6 @@
                 }
 
             })
-            
-
             setTimeout(function(){
                 timeout1 = true;
                 if(timeout2==true){
