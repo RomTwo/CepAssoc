@@ -65,6 +65,35 @@ admin_activities:
     path: /admin/activities
     controller: App\Controller\administration\AdminActivitiesController::index
 
+admin_activityAdd:
+    path: /admin/activities/addActivity
+    controller: App\Controller\administration\AdminActivitiesController::addActivity
+
+admin_activityEdit:
+    path: /admin/activities/editActivity/{id}
+    controller: App\Controller\administration\AdminActivitiesController::editActivity
+
+admin_activityDelete:
+    path: /admin/activities/deleteActivity/{id}
+    controller: App\Controller\administration\AdminActivitiesController::deleteActivity
+
+admin_categories:
+    path: /admin/categories
+    controller: App\Controller\administration\AdminActivitiesController::index
+
+admin_categoryEdit:
+    path: /admin/categories/edit/{id}
+    controller: App\Controller\administration\AdminActivitiesController::edit
+
+admin_categoryAdd:
+    path: /admin/categories/add
+    controller: App\Controller\administration\AdminActivitiesController::add
+
+admin_categoryDelete:
+    path: /admin/categories/delete/{id}
+    controller: App\Controller\administration\AdminActivitiesController::delete
+
+
     #--timeSlots
 admin_timeSlots:
     path: /admin/timeSlots
