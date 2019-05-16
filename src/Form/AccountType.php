@@ -92,7 +92,7 @@ class AccountType extends AbstractType
                     )
                 )
             )
-            ->add('valid', SubmitType::class, array('label' => 'S\'inscrire : '));
+            ->add('valid', SubmitType::class, array('label' => 'S\'inscrire'));
     }
 
     public function configureOptions(OptionsResolver $resolver)

@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello SiteRegisterController!{% endblock %}
+{% block title %}Édition d'un compte{% endblock %}
 
 {% block body %}
     {{ form_start(form) }}
@@ -8,7 +8,7 @@
     <div class="container mt-4">
         <div class="form-group pb-3">
             <div class="container-fluid">
-                <h4>Informations générales : </h4>
+                <h4>Édition du compte : </h4>
 
                 <div class="row mt-3">
                     <div class="col-2">
@@ -60,18 +60,6 @@
 
                 <div class="row mt-3">
                     <div class="col-2">
-                        <label>Code postal : </label>
-                    </div>
-                    <div class="col-auto">
-                        {{ form_widget(form.zipCode) }}
-                    </div>
-                    <div class="row ml-1">
-                        {{ form_errors(form.zipCode) }}
-                    </div>
-                </div>
-
-                <div class="row mt-3">
-                    <div class="col-2">
                         <label>Adresse postal : </label>
                     </div>
                     <div class="col-auto">
@@ -84,13 +72,13 @@
 
                 <div class="row mt-3">
                     <div class="col-2">
-                        <label>Email : </label>
+                        <label>Code postal : </label>
                     </div>
                     <div class="col-auto">
-                        {{ form_widget(form.email) }}
+                        {{ form_widget(form.zipCode) }}
                     </div>
                     <div class="row ml-1">
-                        {{ form_errors(form.email) }}
+                        {{ form_errors(form.zipCode) }}
                     </div>
                 </div>
 
@@ -108,6 +96,18 @@
 
                 <div class="row mt-3">
                     <div class="col-2">
+                        <label>Email : </label>
+                    </div>
+                    <div class="col-auto">
+                        {{ form_widget(form.email) }}
+                    </div>
+                    <div class="row ml-1">
+                        {{ form_errors(form.email) }}
+                    </div>
+                </div>
+
+                <div class="row mt-3">
+                    <div class="col-2">
                         <label>Role : </label>
                     </div>
                     <div class="col-auto">
@@ -116,6 +116,16 @@
                     <div class="row ml-1">
                         {{ form_errors(form.roles) }}
                     </div>
+                    {% if errorRole %}
+                        <div class="row ml-1">
+                                <span class="invalid-feedback d-block">
+                                    <span class="d-block">
+                                        <span class="form-error-icon badge badge-danger text-uppercase">{{ 'Erreur' }}</span>
+                                        <span class="form-error-message">{{ errorRole }}</span>
+                                    </span>
+                                </span>
+                        </div>
+                    {% endif %}
                 </div>
 
                 {{ form_widget(form.valid) }}

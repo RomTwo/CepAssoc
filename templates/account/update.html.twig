@@ -148,7 +148,7 @@
                             <label>Mot de passe : </label>
                         </div>
                         <div class="col-auto">
-                            {{ form_widget(form.newPassword) }}
+                            {{ form_widget(form.newPassword, {'full_name': 'newPassword'}) }}
                         </div>
 
                         {% if errorNewPassFalse is defined %}
@@ -163,7 +163,7 @@
                         {% endif %}
                     </div>
 
-                    {{ form_widget(form.valid) }}
+                    {{ form_widget(form.valid, {'label': "Modifier"}) }}
                 </div>
             </div>
         </div>
