@@ -135,7 +135,7 @@ function step3() {
         $("#professionRep1Help").hide();
     }
 
-    if (isEmpty('adherent[cityRep1]')) {
+    if (isValidationList('#adherent_cityRep1')) {
         $("#cityRep1Help").show();
         bool = false;
     } else {
@@ -177,6 +177,14 @@ function isValidationRadio(nameRadio) {
     return !$('input[name="' + nameRadio + '"]:checked').val();
 }
 
+function isValidationList(nameList) {
+    var bool = true;
+    $.each($(nameList + ' option:selected'), function () {
+       bool = false;
+    });
+    return bool;
+}
+
 function isValidationEmail(nameEmail) {
     var pattern = new RegExp(/^[+a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/i);
     if (pattern.test($('input[name="' + nameEmail + '"]').val())) {
@@ -203,5 +211,45 @@ function isValidationPhoneNumber(nameZipCode) {
         return true;
     }
 }
+
+$('#adherent_zipCodeRep1').focusout( function(){
+    $.ajax({
+        url:'https://datanova.legroupe.laposte.fr/api/records/1.0/search/',
+        type: "POST",
+        dataType: "json",
+        data: {
+            "dataset": "laposte_hexasmal",
+            "refine.code_postal": $('#adherent_zipCodeRep1').val(),
+        },
+        success: function (data)
+        {
+            $('#adherent_cityRep1 option').remove();
+            for (var i in data["records"]) {
+                commune = data["records"][i]["fields"]["nom_de_la_commune"];
+                $('#adherent_cityRep1').append(new Option(commune, commune));
+            }
+        }
+    })
+});
+
+$('#adherent_zipCodeRep2').focusout( function(){
+    $.ajax({
+        url:'https://datanova.legroupe.laposte.fr/api/records/1.0/search/',
+        type: "POST",
+        dataType: "json",
+        data: {
+            "dataset": "laposte_hexasmal",
+            "refine.code_postal": $('#adherent_zipCodeRep2').val(),
+        },
+        success: function (data)
+        {
+            $('#adherent_cityRep2 option').remove();
+            for (var i in data["records"]) {
+                commune = data["records"][i]["fields"]["nom_de_la_commune"];
+                $('#adherent_cityRep2').append(new Option(commune, commune));
+            }
+        }
+    })
+});
 
 

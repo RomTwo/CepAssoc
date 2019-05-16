@@ -33,8 +33,8 @@ class AdherentType extends AbstractType
             ])
             ->add('sex', ChoiceType::class, [
                 'choices' => [
-                    'Homme' => 'H',
-                    'Femme' => 'F',
+                    'Masculin' => 'H',
+                    'Feminin' => 'F',
                 ],
                 'multiple' => false,
                 'expanded' => true,
@@ -118,13 +118,9 @@ class AdherentType extends AbstractType
                 ],
             ])
             ->add('registrationType', ChoiceType::class, [
-                'attr' => [
-                    'id' => 'gender',
-                ],
                 'choices' => [
                     'Renouvellement' => 'renouvellement',
                     'Nouvelle inscription' => 'nouveau',
-                    'Mutation' => 'mutation'
                 ],
                 'multiple' => false,
                 'expanded' => true,
@@ -165,18 +161,6 @@ class AdherentType extends AbstractType
             ->add('emailRep2', EmailType::class, [
                 'attr' => [
                     'placeholder' => "Email du représentant 2"
-                ],
-                'required' => false,
-            ])
-            ->add('cityRep1', ChoiceType::class, [
-                'attr' => [
-                    'placeholder' => "Ville du représentant 1"
-                ],
-                'data' => $options['cityRep1']
-            ])
-            ->add('cityRep2', ChoiceType::class, [
-                'attr' => [
-                    'placeholder' => "Ville du représentant 2"
                 ],
                 'required' => false,
             ])
@@ -248,9 +232,8 @@ class AdherentType extends AbstractType
                     'class' => 'radio-inline'
                 ],
             ])
-            ->add('volunteerComment', TextareaType::class)
-            ->add('medicalCertificate', FileType::class, [
-                'label' => "Choisissez votre certificat médical"
+            ->add('volunteerComment', TextareaType::class, [
+                'required' => false,
             ]);
     }
 
@@ -264,7 +247,6 @@ class AdherentType extends AbstractType
             'firstNameRep1',
             'lastNameRep1',
             'emailRep1',
-            'cityRep1',
             'addressRep1',
             'zipCodeRep1'
         ));

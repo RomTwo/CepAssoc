@@ -7,6 +7,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -18,14 +19,6 @@ class AdherentAccountType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('sex', ChoiceType::class, [
-                'choices' => [
-                    'Homme' => 'H',
-                    'Femme' => 'F',
-                ],
-                'multiple' => false,
-                'expanded' => true,
-            ])
             ->add('isGAFJudge', null, [
                 'attr' => [
                     'value' => false,
@@ -100,21 +93,6 @@ class AdherentAccountType extends AbstractType
                     'class' => 'radio-inline'
                 ],
             ])
-            ->add('registrationType', ChoiceType::class, [
-                'attr' => [
-                    'id' => 'gender',
-                ],
-                'choices' => [
-                    'Renouvellement' => 'renouvellement',
-                    'Nouvelle inscription' => 'nouveau',
-                    'Mutation' => 'mutation'
-                ],
-                'multiple' => false,
-                'expanded' => true,
-                'label_attr' => [
-                    'class' => 'radio-inline'
-                ],
-            ])
             ->add('professionRep1', TextType::class, [
                 'attr' => [
                     'placeholder' => "Profession du représentant 1"
@@ -147,7 +125,21 @@ class AdherentAccountType extends AbstractType
                     'class' => 'radio-inline'
                 ],
             ])
-            ->add('volunteerComment', TextareaType::class);
+            ->add('volunteerComment', TextareaType::class)
+            ->add('medicalCertificate', FileType::class, [
+                'attr' => [
+                    'placeholder' => "Choisissez votre certificat médical"
+                ],
+                'required' => false,
+                'data_class' => null,
+            ])
+            ->add('bulletinN2Allianz', FileType::class, [
+                'attr' => [
+                    'placeholder' => "Choisissez votre bulletin N2 Allianz "
+                ],
+                'required' => false,
+                'data_class' => null,
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver)

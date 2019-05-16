@@ -85,7 +85,7 @@
             <div class="container mt-3">
                 <div class="form-group pb-2">
                     <div class="container-fluid">
-                        <h4>Type d'inscription (pas obligatoire) :</h4>
+                        <h4>Type d'inscription (facultatif) :</h4>
                         <div class="row justify-content-around align-items-center">
                             <div class="col-4">
                                 <input type="checkbox" id="juge" name="juge">
@@ -201,34 +201,32 @@
                         </div>
                         <div class="row mt-2">
                             <div class="col">
-                                {{ form_widget(form.cityRep1) }}
+                                <select id="adherent_cityRep1" name="adherent_cityRep1" class="form-control">
+                                    {% if cityRep1 is defined and cityRep1 is not null %}
+                                        <option value={{ cityRep1 }} selected>{{ cityRep1 }}</option>
+                                    {% endif %}
+                                    <option value="POITIERS" selected>POITIERS</option>
+                                </select>
                                 <small id="cityRep1Help" class="form-text helper"><span
-                                            class="badge badge-danger">Erreur</span> La ville doit être rempli doit être
-                                    rempli.
+                                            class="badge badge-danger">Erreur</span> Le code postal doit être rempli pour choisir la ville
                                 </small>
                             </div>
                             <div class="col">
                                 {{ form_widget(form.addressRep1) }}
                                 <small id="addressRep1Help" class="form-text helper"><span
-                                            class="badge badge-danger">Erreur</span> L'adresse doit être rempli doit
-                                    être
-                                    rempli.
+                                            class="badge badge-danger">Erreur</span> L'adresse doit être rempli.
                                 </small>
                             </div>
                             <div class="col">
                                 {{ form_widget(form.zipCodeRep1) }}
                                 <small id="zipCodeRep1Help" class="form-text helper"><span
-                                            class="badge badge-danger">Erreur</span> Le code postal doit être rempli
-                                    doit être
-                                    rempli.
+                                            class="badge badge-danger">Erreur</span> Le code postal doit être rempli.
                                 </small>
                             </div>
                             <div class="col">
                                 {{ form_widget(form.phoneRep1) }}
                                 <small id="phoneRep1Help" class="form-text helper"><span
-                                            class="badge badge-danger">Erreur</span> Le numéro de téléphone doit être
-                                    rempli doit
-                                    être rempli.
+                                            class="badge badge-danger">Erreur</span> Le numéro de téléphone doit être rempli.
                                 </small>
                             </div>
                         </div>
@@ -239,7 +237,7 @@
             <div class="container-fluid mt-3">
                 <div class="form-group pb-2">
                     <div class="container-fluid">
-                        <h4>Membre ou représentant légal 2 (pas obligatoire) : </h4>
+                        <h4>Membre ou représentant légal 2 (facultatif) : </h4>
                         <div class="row mt-2">
                             <div class="col">
                                 {{ form_widget(form.firstNameRep2) }}
@@ -268,34 +266,32 @@
                         </div>
                         <div class="row mt-2">
                             <div class="col">
-                                {{ form_widget(form.cityRep2) }}
+                                <select id="adherent_cityRep2" name="adherent_cityRep2" class="form-control">
+                                    {% if cityRep2 is defined and cityRep2 is not null %}
+                                        <option value={{ cityRep2 }} selected>{{ cityRep2 }}</option>
+                                    {% endif %}
+                                    <option value="POITIERS" selected>POITIERS</option>
+                                </select>
                                 <small id="cityRep2Help" class="form-text helper"><span
-                                            class="badge badge-danger">Erreur</span> La ville doit être rempli doit être
-                                    rempli.
+                                            class="badge badge-danger">Erreur</span> La ville doit être rempli.
                                 </small>
                             </div>
                             <div class="col">
                                 {{ form_widget(form.addressRep2) }}
                                 <small id="addressRep2Help" class="form-text helper"><span
-                                            class="badge badge-danger">Erreur</span> L'adresse doit être rempli doit
-                                    être
-                                    rempli.
+                                            class="badge badge-danger">Erreur</span> L'adresse doit être rempli.
                                 </small>
                             </div>
                             <div class="col">
                                 {{ form_widget(form.zipCodeRep2) }}
                                 <small id="zipCodeRep2Help" class="form-text helper"><span
-                                            class="badge badge-danger">Erreur</span> Le code postal doit être rempli
-                                    doit
-                                    être rempli.
+                                            class="badge badge-danger">Erreur</span> Le code postal doit être rempli.
                                 </small>
                             </div>
                             <div class="col">
                                 {{ form_widget(form.phoneRep2) }}
                                 <small id="phoneRep2Help" class="form-text helper"><span
-                                            class="badge badge-danger">Erreur</span> Le numéro de téléphone doit être
-                                    rempli
-                                    doit être rempli.
+                                            class="badge badge-danger">Erreur</span> Le numéro de téléphone doit être rempli.
                                 </small>
                             </div>
                         </div>
@@ -379,15 +375,6 @@
                             <p>{{ form_widget(form.imageRight) }} le club à prendre et à diffuser des photos me
                                 concernant pour enrichir
                                 la photothèque et le site internet du club.</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="form-group pt-2 pb-2">
-                    <div class="container-fluid">
-                        <h4>Certificat médical :</h4>
-                        <div class="row align-items-center ml-2">
-                            {{ form_widget(form.medicalCertificate) }}
                         </div>
                     </div>
                 </div>

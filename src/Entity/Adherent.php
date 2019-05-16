@@ -325,12 +325,23 @@ class Adherent
      */
     private $volunteerComment;
 
-
     /**
      * @ORM\Column(type="string")
      * @Groups({"competition"})
      */
-    private $medicalCertificate;
+    private $bulletinN2Allianz;
+
+    /**
+     * @ORM\Column(type="boolean")
+     * @Groups({"competition"})
+     */
+    private $hasBulletinN2Allianz;
+
+    /**
+     * @ORM\Column(type="boolean")
+     * @Groups({"competition"})
+     */
+    private $isDeleted;
 
     /**
      * @ORM\ManyToMany(targetEntity="App\Entity\Activity")
@@ -1138,4 +1149,22 @@ class Adherent
 
         return $this;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getBulletinN2Allianz()
+    {
+        return $this->bulletinN2Allianz;
+    }
+
+    /**
+     * @param mixed $bulletinN2Allianz
+     */
+    public function setBulletinN2Allianz($bulletinN2Allianz): void
+    {
+        $this->bulletinN2Allianz = $bulletinN2Allianz;
+    }
+
+
 }

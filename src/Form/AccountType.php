@@ -89,6 +89,11 @@ class AccountType extends AbstractType
                     )
                 )
             )
+            ->add('children', CollectionType::class, [
+                'entry_type' => AdherentAccountType::class,
+                'delete_empty' => true,
+                'required' => false,
+            ])
             ->addEventListener(
                 FormEvents::SUBMIT,
                 [$this, 'onSubmit']
@@ -126,13 +131,17 @@ class AccountType extends AbstractType
         if($data->getZipCode() != null){
             $children[0]->setZipCodeRep1($data->getZipCode());
         }
+
+        if($data->getSex() != null){
+            $children[0]->setSex($data->getSex());
+        }
     }
 
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
             'data_class' => Account::class,
-            'city' => null
+            "allow_extra_fields" => true
         ]);
     }
 
