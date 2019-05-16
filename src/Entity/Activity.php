@@ -121,10 +121,23 @@ class Activity
         return $this;
     }
 
+    public function getCategories(): ?Category
+    {
+        return $this->category;
+    }
+
+    public function setCategories(?Category $category): self
+    {
+        $this->category = $category;
+
+        return $this;
+    }
+
     /**
      * @return Collection|TimeSlot[]
      */
-    public function getTimeSlot(): Collection
+
+    public function timeSlot(): Collection
     {
         return $this->timeSlot;
     }
