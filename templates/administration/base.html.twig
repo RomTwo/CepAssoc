@@ -12,7 +12,9 @@
 </head>
 <body>
 <br/>
+<a href="{{ path('home') }}">Revenir sur le site</a>
 <h2 style="text-align:center; text-decoration:underline">
+
     {% block specification %}
 
     {% endblock %}
@@ -27,13 +29,13 @@
                 <li class="nav-item">
                     <a class="nav-link" href="{{ path('admin_adherents') }}">Adhérents</a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item" hidden>
                     <a class="nav-link" href="{{ path('admin_activities') }}">Activités</a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item" hidden>
                     <a class="nav-link" href="{{ path('admin_timeSlots') }}">Créneaux</a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item" hidden>
                     <a class="nav-link" href="{{ path('admin_events') }}">Evènements</a>
                 </li>
                 <li class="nav-item">
@@ -47,12 +49,14 @@
     </div>
     <div class="col">
         <div class="container-fluid">
+            {% include('notifications/notifications.html.twig') %}
             {% block body %}{% endblock %}
         </div>
     </div>
 </div>
 
 {{ encore_entry_script_tags('app') }}
+{{ encore_entry_script_tags('popup') }}
 
 
 {% block javascripts %}{% endblock %}

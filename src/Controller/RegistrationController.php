@@ -70,10 +70,7 @@ class RegistrationController extends AbstractController
         $adherent->setIsAllowEmail(false);
         $adherent->setIsLicenceHolderOtherClub(false);
         $adherent->setMaidenName("");
-        $adherent->setHasBulletinN2Allianz(false);
-        $adherent->setHasCompetitionCommitment(false);
-        $adherent->setIsMutated(false);
-        $adherent->setIsDeleted(false);
+
         return $adherent;
     }
 }
