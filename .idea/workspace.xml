@@ -1,10 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="53b90c9e-e36e-447f-8cc9-26b01b488158" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/RegistrationController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/RegistrationController.php" afterDir="false" />
-    </list>
+    <list default="true" id="53b90c9e-e36e-447f-8cc9-26b01b488158" name="Default Changelist" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -23,7 +20,7 @@
         <entry file="file://$PROJECT_DIR$/src/DataFixtures/AppFixtures.php">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="-406">
-              <caret line="241" column="43" lean-forward="true" selection-start-line="238" selection-start-column="12" selection-end-line="241" selection-end-column="43" />
+              <caret line="241" column="43" selection-start-line="238" selection-start-column="12" selection-end-line="241" selection-end-column="43" />
             </state>
           </provider>
         </entry>
@@ -624,7 +621,7 @@
       <workItem from="1557777944576" duration="1367000" />
       <workItem from="1557815677139" duration="152000" />
       <workItem from="1557904113661" duration="19996000" />
-      <workItem from="1557988892862" duration="844000" />
+      <workItem from="1557988892862" duration="1268000" />
     </task>
     <task id="LOCAL-00001" summary="Default Changelist">
       <created>1557400976745</created>
@@ -808,11 +805,18 @@
       <option name="project" value="LOCAL" />
       <updated>1557900136837</updated>
     </task>
-    <option name="localTasksCounter" value="27" />
+    <task id="LOCAL-00027" summary="Ajout des champs supplémentaires dans setOtherFields() afin de faire marcher la master">
+      <created>1557989905529</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1557989905529</updated>
+    </task>
+    <option name="localTasksCounter" value="28" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="83285000" />
+    <option name="totallyTimeSpent" value="83709000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -825,14 +829,13 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info id="Favorites" order="0" side_tool="true" />
       <window_info active="true" content_ui="combo" id="Project" order="1" visible="true" weight="0.27155825" />
       <window_info id="Structure" order="2" weight="0.25" />
-      <window_info anchor="bottom" id="Event Log" order="0" sideWeight="0.290469" side_tool="true" visible="true" weight="0.22913256" />
-      <window_info anchor="bottom" id="Version Control" order="1" sideWeight="0.4969743" weight="0.31914893" />
-      <window_info anchor="bottom" id="Terminal" order="2" sideWeight="0.709531" visible="true" weight="0.22913256" />
+      <window_info anchor="bottom" id="Event Log" order="0" sideWeight="0.50378215" side_tool="true" visible="true" weight="0.31914893" />
+      <window_info anchor="bottom" id="Version Control" order="1" sideWeight="0.49621785" visible="true" weight="0.31914893" />
+      <window_info anchor="bottom" id="Terminal" order="2" sideWeight="0.709531" weight="0.22913256" />
       <window_info anchor="bottom" id="Message" order="3" />
       <window_info anchor="bottom" id="Find" order="4" sideWeight="0.4969743" weight="0.32569557" />
       <window_info anchor="bottom" id="Run" order="5" />
@@ -913,7 +916,8 @@
     <MESSAGE value="Notification, add js package, user profil management" />
     <MESSAGE value="comment, modify templates, modify webpack encore documentation" />
     <MESSAGE value="added the suppresion of adherents and the final design for the timeSlot management" />
-    <option name="LAST_COMMIT_MESSAGE" value="added the suppresion of adherents and the final design for the timeSlot management" />
+    <MESSAGE value="Ajout des champs supplémentaires dans setOtherFields() afin de faire marcher la master" />
+    <option name="LAST_COMMIT_MESSAGE" value="Ajout des champs supplémentaires dans setOtherFields() afin de faire marcher la master" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/assets/js/registration.js">
@@ -1185,7 +1189,7 @@
     <entry file="file://$PROJECT_DIR$/src/DataFixtures/AppFixtures.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-406">
-          <caret line="241" column="43" lean-forward="true" selection-start-line="238" selection-start-column="12" selection-end-line="241" selection-end-column="43" />
+          <caret line="241" column="43" selection-start-line="238" selection-start-column="12" selection-end-line="241" selection-end-column="43" />
         </state>
       </provider>
     </entry>
