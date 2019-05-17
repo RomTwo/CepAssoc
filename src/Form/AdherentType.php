@@ -2,12 +2,16 @@
 
 namespace App\Form;
 
+use App\Entity\Account;
 use App\Entity\Adherent;
+use function Sodium\add;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -17,12 +21,20 @@ class AdherentType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('firstName', TextType::class)
-            ->add('lastName', TextType::class)
+            ->add('firstName', TextType::class, [
+                'attr' => [
+                    'placeholder' => "Prenom",
+                ]
+                ])
+            ->add('lastName', TextType::class, [
+                'attr' => [
+                    'placeholder' => "Nom de famille",
+                ]
+            ])
             ->add('sex', ChoiceType::class, [
                 'choices' => [
-                    'Homme' => 'H',
-                    'Femme' => 'F',
+                    'Masculin' => 'H',
+                    'Feminin' => 'F',
                 ],
                 'multiple' => false,
                 'expanded' => true,
@@ -41,6 +53,7 @@ class AdherentType extends AbstractType
             ->add('GAFJudgeLevel', NumberType::class, [
                 'attr' => [
                     'value' => 0,
+                    'placeholder' => "Niveau",
                 ],
                 'required' => false,
             ])
@@ -54,6 +67,7 @@ class AdherentType extends AbstractType
             ->add('GAMJudgeLevel', NumberType::class, [
                 'attr' => [
                     'value' => 0,
+                    'placeholder' => "Niveau",
                 ],
                 'required' => false,
             ])
@@ -67,6 +81,7 @@ class AdherentType extends AbstractType
             ->add('teamGYMJudgeLevel', NumberType::class, [
                 'attr' => [
                     'value' => 0,
+                    'placeholder' => "Niveau",
                 ],
                 'required' => false,
             ])
@@ -103,13 +118,9 @@ class AdherentType extends AbstractType
                 ],
             ])
             ->add('registrationType', ChoiceType::class, [
-                'attr' => [
-                    'id' => 'gender',
-                ],
                 'choices' => [
                     'Renouvellement' => 'renouvellement',
                     'Nouvelle inscription' => 'nouveau',
-                    'Mutation' => 'mutation'
                 ],
                 'multiple' => false,
                 'expanded' => true,
@@ -117,50 +128,88 @@ class AdherentType extends AbstractType
                     'class' => 'radio-inline'
                 ],
             ])
-            ->add('firstNameRep1', TextType::class, array(
+            ->add('firstNameRep1', TextType::class, [
+                'attr' => [
+                    'placeholder' => "Prenom du représentant 1"
+                ],
                 'data' => $options['firstNameRep1']
-            ))
-            ->add('lastNameRep1', TextType::class, array(
+            ])
+            ->add('lastNameRep1', TextType::class, [
+                'attr' => [
+                    'placeholder' => "Nom du représentant 1"
+                ],
                 'data' => $options['lastNameRep1']
-            ))
-            ->add('firstNameRep2', TextType::class, array(
+            ])
+            ->add('firstNameRep2', TextType::class, [
+                'attr' => [
+                    'placeholder' => "Prenom du représentant 2"
+                ],
                 'required' => false,
-            ))
-            ->add('lastNameRep2', TextType::class, array(
+            ])
+            ->add('lastNameRep2', TextType::class, [
+                'attr' => [
+                    'placeholder' => "Nom du représentant 2"
+                ],
                 'required' => false,
-            ))
-            ->add('emailRep1', EmailType::class, array(
+            ])
+            ->add('emailRep1', EmailType::class, [
+                'attr' => [
+                    'placeholder' => "Email du représentant 1"
+                ],
                 'data' => $options['emailRep1']
-            ))
-            ->add('emailRep2', EmailType::class, array(
+            ])
+            ->add('emailRep2', EmailType::class, [
+                'attr' => [
+                    'placeholder' => "Email du représentant 2"
+                ],
                 'required' => false,
-            ))
-            ->add('cityRep1', TextType::class, array(
-                'data' => $options['cityRep1']
-            ))
-            ->add('cityRep2', TextType::class, array(
-                'required' => false,
-            ))
-            ->add('addressRep1', TextType::class, array(
+            ])
+            ->add('addressRep1', TextType::class, [
+                'attr' => [
+                    'placeholder' => "Adresse du représentant 1"
+                ],
                 'data' => $options['addressRep1']
-            ))
-            ->add('addressRep2', TextType::class, array(
+            ])
+            ->add('addressRep2', TextType::class, [
+                'attr' => [
+                    'placeholder' => "Adresse du représentant 2"
+                ],
                 'required' => false,
-            ))
-            ->add('zipCodeRep1', NumberType::class, array(
+            ])
+            ->add('zipCodeRep1', NumberType::class, [
+                'attr' => [
+                    'placeholder' => "Zip code du représentant 1"
+                ],
                 'data' => $options['zipCodeRep1']
-            ))
-            ->add('zipCodeRep2', NumberType::class, array(
+            ])
+            ->add('zipCodeRep2', NumberType::class, [
+                'attr' => [
+                    'placeholder' => "Zip code du représentant 2"
+                ],
                 'required' => false,
-            ))
-            ->add('professionRep1', TextType::class)
-            ->add('professionRep2', TextType::class, array(
+            ])
+            ->add('professionRep1', TextType::class, [
+                'attr' => [
+                    'placeholder' => "Profession du représentant 1"
+                ],
+            ])
+            ->add('professionRep2', TextType::class, [
+                'attr' => [
+                    'placeholder' => "Profession du représentant 2"
+                ],
                 'required' => false,
-            ))
-            ->add('phoneRep1', NumberType::class)
-            ->add('phoneRep2', NumberType::class, array(
+            ])
+            ->add('phoneRep1', NumberType::class, [
+                'attr' => [
+                    'placeholder' => "Numéro de téléphone du représentant 1"
+                ],
+            ])
+            ->add('phoneRep2', NumberType::class, [
+                'attr' => [
+                    'placeholder' => "Numéro de téléphone du représentant 2"
+                ],
                 'required' => false,
-            ))
+            ])
             ->add('paymentType', ChoiceType::class, [
                 'choices' => [
                     'Espèces' => "especes",
@@ -182,7 +231,13 @@ class AdherentType extends AbstractType
                 'label_attr' => [
                     'class' => 'radio-inline'
                 ],
-            ]);
+            ])
+            ->add('volunteerComment', TextareaType::class, [
+                'required' => false,
+            ])
+        ->add('medicalCertificate', FileType::class, array(
+            'label' => 'PDF'
+        ));
     }
 
     public function configureOptions(OptionsResolver $resolver)
@@ -195,7 +250,6 @@ class AdherentType extends AbstractType
             'firstNameRep1',
             'lastNameRep1',
             'emailRep1',
-            'cityRep1',
             'addressRep1',
             'zipCodeRep1'
         ));

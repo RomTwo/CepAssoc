@@ -300,7 +300,7 @@ string $email, string $city, string $password)
 
         /* ADHERENT 3 */
         $this->loadAdherent1($adherents[3], $manager, "René", "Tourcoing", "M", new \DateTime("01-12-1995"));
-        $this->loadAdherent2($adherents[3], $manager, "Martin", "Belge", 86000, "14 Rue Henry Sucré ", "rené.tourcoing@gmail.com", "Poitiers", "Charpentier", "0654789574");
+        $this->loadAdherent2($adherents[3], $manager, "Martin", "Belge", 86000, "14 Rue Henry Sucré ", "rene.tourcoing@gmail.com", "Poitiers", "Charpentier", "0654789574");
         $this->loadAdherent4($adherents[3], $manager, 0, 0, 0, 0,0, 0, 0, 0);
         $this->loadAdherent5($adherents[3], $manager);
 

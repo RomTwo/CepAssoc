@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Serializer\Annotation\Groups;
@@ -23,32 +24,28 @@ class Adherent
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Assert\NotBlank
-     * @Assert\NotNull
-     * @Assert\Length(min=1, max=255, minMessage="Ce prenom n'est pas valide")
-     * @Assert\Length(min=1, max=255)
+     * @Assert\NotNull(message="Veuiller remplir le champ nom")
      * @Groups({"competition"})
      */
     private $firstName;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Assert\NotBlank
-     * @Assert\NotNull
-     * @Assert\Length(min=1, max=255)
+     * @Assert\NotNull(message="Veuiller remplir le champ nom")
      * @Groups({"competition"})
      */
     private $lastName;
 
     /**
      * @ORM\Column(type="string", length=10)
-     * @Assert\NotNull
+     * @Assert\NotNull(message="Veuiller remplir le champ genre")
      * @Groups({"competition"})
      */
     private $sex;
 
     /**
      * @ORM\Column(type="date")
+     * @Assert\NotNull(message="Veuiller remplir le champ nom")
      * @Groups({"competition"})
      */
     private $birthDate;
@@ -276,6 +273,14 @@ class Adherent
     private $isMedicalCertificate;
 
     /**
+     * @ORM\Column(type="string")
+     * @Assert\NotBlank(message="Veuillez importer votre bulletin Allianz")
+     * @Assert\File(mimeTypes={ "application/pdf" })
+     * @Groups({"competition"})
+     */
+    private $medicalCertificate;
+
+    /**
      * @ORM\Column(type="boolean")
      * @Groups({"competition"})
      */
@@ -318,40 +323,40 @@ class Adherent
     private $maidenName;
 
     /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\Activity")
+     * @ORM\Column(type="string", nullable = true)
      * @Groups({"competition"})
      */
-    private $activities;
+    private $volunteerComment;
+
+    /**
+     * @ORM\Column(type="string")
+     * @Groups({"competition"})
+     */
+    private $bulletinN2Allianz;
 
     /**
      * @ORM\Column(type="boolean")
+     * @Groups({"competition"})
      */
     private $hasBulletinN2Allianz;
 
     /**
      * @ORM\Column(type="boolean")
+     * @Groups({"competition"})
      */
-    private $hasCompetitionCommitment;
-
-    /**
-     * @ORM\Column(type="boolean")
-     */
-    private $isMutated;
-
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
-    private $treatedBy;
+    private $isDeleted;
 
     /**
      * @ORM\Column(type="string", length=5, nullable=true)
+     * @Groups({"competition"})
      */
     private $affiliateCode;
 
     /**
-     * @ORM\Column(type="boolean")
+     * @ORM\ManyToMany(targetEntity="App\Entity\Activity")
+     * @Groups({"competition"})
      */
-    private $isDeleted;
+    private $activities;
 
     public function __construct()
     {
@@ -1091,6 +1096,38 @@ class Adherent
         return $this->treatedBy;
     }
 
+    /**
+     * @return mixed
+     */
+    public function getVolunteerComment()
+    {
+        return $this->volunteerComment;
+    }
+
+    /**
+     * @param mixed $volunteerComment
+     */
+    public function setVolunteerComment($volunteerComment): void
+    {
+        $this->volunteerComment = $volunteerComment;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getMedicalCertificate()
+    {
+        return $this->medicalCertificate;
+    }
+
+    /**
+     * @param mixed $medicalCertificate
+     */
+    public function setMedicalCertificate($medicalCertificate): void
+    {
+        $this->medicalCertificate = $medicalCertificate;
+    }
+
     public function setTreatedBy(?string $treatedBy): self
     {
         $this->treatedBy = $treatedBy;
@@ -1121,4 +1158,22 @@ class Adherent
 
         return $this;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getBulletinN2Allianz()
+    {
+        return $this->bulletinN2Allianz;
+    }
+
+    /**
+     * @param mixed $bulletinN2Allianz
+     */
+    public function setBulletinN2Allianz($bulletinN2Allianz): void
+    {
+        $this->bulletinN2Allianz = $bulletinN2Allianz;
+    }
+
+
 }

@@ -86,19 +86,18 @@
                             {{ form_errors(form.zipCode) }}
                         </div>
                     </div>
-
                     <div class="row mt-3">
                         <div class="col-2">
-                            <label>Ville : </label>
+                            <p>Ville :</p>
                         </div>
                         <div class="col-auto">
-                            {{ form_widget(form.city) }}
-                        </div>
-                        <div class="row ml-1">
-                            {{ form_errors(form.city) }}
+                            <select id="account_city" name="account_city" class="form-control">
+                                {% if city is defined and city is not null %}
+                                    <option value={{ city }} selected>{{ city }}</option>
+                                {% endif %}
+                            </select>
                         </div>
                     </div>
-
                     <div class="row mt-3">
                         <div class="col-2">
                             <label>Adresse mail : </label>
@@ -148,7 +147,7 @@
                             <label>Mot de passe : </label>
                         </div>
                         <div class="col-auto">
-                            {{ form_widget(form.newPassword) }}
+                            {{ form_widget(form.newPassword, {'full_name': 'newPassword'}) }}
                         </div>
 
                         {% if errorNewPassFalse is defined %}
@@ -163,11 +162,10 @@
                         {% endif %}
                     </div>
 
-                    {{ form_widget(form.valid) }}
+                    {{ form_widget(form.valid, {'label': "Modifier"}) }}
                 </div>
             </div>
         </div>
-
         {{ form_end(form) }}
     </div>
 {% endblock %}
