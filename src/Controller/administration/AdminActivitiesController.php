@@ -40,13 +40,14 @@ class AdminActivitiesController extends AbstractController
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->flush();
 
-            return $this->redirectToRoute('admin_categories');
+            return $this->redirectToRoute('admin_activities');
         }
 
         return $this->render('administration/activities/categoryEdit.html.twig', [
             'category' => $category,
             'form' => $form->createView()
         ]);
+
 
     }
     public function add(Request $request)
@@ -63,13 +64,15 @@ class AdminActivitiesController extends AbstractController
             $em->persist($category);
             $em->flush();
 
-            return $this->redirectToRoute('admin_categories');
-
+            return $this->redirectToRoute('admin_activities');
         }
+
 
         return $this->render('administration/activities/categoryAdd.html.twig', [
             'category' => $category,
             'form' => $form->createView()]);
+
+
     }
     public function delete (Request $request,$id)
     {
@@ -80,16 +83,17 @@ class AdminActivitiesController extends AbstractController
         $activity =$repositoryActivity->findBy(array(
             "category"=>$category
         ));
-        if($activity == null)
+        if($activity != null)
         {
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($category);
             $entityManager->flush();
-            return $this->redirectToRoute('admin_categories');
+            $this->addFlash('sucess',"Activité supprimée avec succès");
+            return $this->redirectToRoute('admin_activities');
         }
         else
-        {
-            return $this->render('error/errorPage.html.twig');
+        {    $this->addFlash('error', "Vous ne pouvez pas supprimer cette catégorie vu qu'elle est déjà utilisée par une autre entité");
+            return $this->redirectToRoute('admin_activities');
         }
     }
 
@@ -145,11 +149,13 @@ class AdminActivitiesController extends AbstractController
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($activity);
             $entityManager->flush();
+            $this->addFlash('sucess',"Activité supprimée avec succès");
             return $this->redirectToRoute('admin_activities');
         }
         else
         {
-            return $this->render('administration/error/errorPage.html.twig');
+            $this->addFlash('error', "Vous ne pouvez pas supprimer cette activité vu qu'elle est déjà utilisée par une autre entité");
+            return $this->redirectToRoute('admin_activities');
         }
     }
 }
