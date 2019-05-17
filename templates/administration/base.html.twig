@@ -47,12 +47,15 @@
     </div>
     <div class="col">
         <div class="container-fluid">
+            {% include('notifications/notifications.html.twig') %}
+
             {% block body %}{% endblock %}
         </div>
     </div>
 </div>
 
 {{ encore_entry_script_tags('app') }}
+{{ encore_entry_script_tags('popup') }}
 
 
 {% block javascripts %}{% endblock %}
