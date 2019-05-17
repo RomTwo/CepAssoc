@@ -22,7 +22,7 @@ $('#next').click(function () {
     var value = parseInt($("#accountStep").val());
     console.log(numberOfStep + " and " + value);
     if (value < numberOfStep) {
-        //if (stepChoice("accountStep" + value)) {
+        if (stepChoice("accountStep" + value)) {
             if (value == numberOfStep-1) {
                 $("#next").hide();
             }
@@ -39,7 +39,7 @@ $('#next').click(function () {
             }
             $("#accountStep" + (value)).hide();
 
-        //}
+        }
     } else {
         $("#next").hide();
     }
