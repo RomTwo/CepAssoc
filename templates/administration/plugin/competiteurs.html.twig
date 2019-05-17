@@ -82,6 +82,7 @@
                 complete: function(jqXHR, textStatus) {
                     switch (jqXHR.status) {
                         case 200:
+                             document.getElementById("competiteur").textContent = jqXHR.responseText;
                             timeout2 = true;
                             document.getElementById("a").click()
 
@@ -90,6 +91,7 @@
                                     document.getElementById("lbl_sync").style.color = "green";
                                     document.getElementById("spinner_sync").style.display = "none";
                                     document.getElementById("sync_valid").style.display = "inline";
+                                   
 
                             }
                             break;
