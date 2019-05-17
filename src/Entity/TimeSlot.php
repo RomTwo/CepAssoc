@@ -5,7 +5,10 @@ namespace App\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use phpDocumentor\Reflection\Types\String_;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Serializer\Serializer;
+use Symfony\Component\Serializer\Normalizer\DateTimeNormalizer;
 
 
 /**
@@ -99,6 +102,36 @@ class TimeSlot
     public function getCity(): ?string
     {
         return $this->city;
+    }
+    public function getFullTime(): ?string
+    {
+        switch ($this->getDay()) {
+            case 1:
+                $day="Lundi";
+                break;
+            case 2:
+               $day="Mardi";
+                break;
+            case 3:
+               $day="Mercredi";
+                break;
+            case 4:
+                $day="Jeudi";
+                break;
+            case 5:
+                $day="Vendredi";
+                break;
+            case 6:
+                $day="Samedi";
+                break;
+            case 0:
+                $day="Dimanche";
+                break;
+        }
+if($this->getCity()!=null)
+       return $day." ".$this->getStartTime()->format(' H:i')."/".$this->getEndTime()->format(' H:i')." à ".$this->getCity();
+else
+    return $day." ".$this->getStartTime()->format(' H:i')."/".$this->getEndTime()->format(' H:i');
     }
 
     public function setCity(string $city): self

@@ -12,7 +12,9 @@
 </head>
 <body>
 <br/>
+<a href="{{ path('home') }}">Revenir sur le site</a>
 <h2 style="text-align:center; text-decoration:underline">
+
     {% block specification %}
 
     {% endblock %}
@@ -47,12 +49,14 @@
     </div>
     <div class="col">
         <div class="container-fluid">
+            {% include('notifications/notifications.html.twig') %}
             {% block body %}{% endblock %}
         </div>
     </div>
 </div>
 
 {{ encore_entry_script_tags('app') }}
+{{ encore_entry_script_tags('popup') }}
 
 
 {% block javascripts %}{% endblock %}

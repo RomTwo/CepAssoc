@@ -157,8 +157,7 @@ class AccountType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => Account::class,
-            'city' => null
+            'data_class' => Account::class
         ]);
     }
 

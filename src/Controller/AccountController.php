@@ -135,6 +135,7 @@ class AccountController extends AbstractController
         $manager = $this->getDoctrine()->getManager();
         $currentUserEmail = $this->get('session')->get('_security.last_username');
         $account = $manager->getRepository(Account::class)->findOneBy(array('email' => $currentUserEmail));
+        $oldPassword = $account->getPassword();
 
         $form = $this->createForm(AccountType::class, $account);
         $form->add('newPassword', PasswordType::class, array(
@@ -153,7 +154,6 @@ class AccountController extends AbstractController
         $msg = null;
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $oldPassword = $this->getDoctrine()->getRepository(Account::class)->getOldPassword($currentUserEmail); //get the password of the current user (in database)
             $passwordEntryByUser = $account->getPassword(); //get the user password in the password field of the form
             $account->setPassword($oldPassword); //modify the password to can compare the old password (in database) with the old password entry in the form
 
