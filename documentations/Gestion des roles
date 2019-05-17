@@ -1,0 +1,57 @@
+-- Gestion des rôles de l'application
+Il y a trois rôles : - ROLE_USER         --> Utilisateur classique
+                     - ROLE_ADMIN        --> Administrateur
+                     - ROLE_SUPER_ADMIN  --> Super Administrateur (peux changer les rôles des utilisateurs)
+
+Possibilité d'ajouter d'autres rôles.
+
+-- La hiérarchie des rôles est définie dans le fichier config/security.yaml
+
+    {# security.yaml #}
+    role_hierarchy:
+        ROLE_ADMIN: ROLE_USER
+        ROLE_SUPER_ADMIN: [ROLE_ADMIN, ROLE_USER]
+
+-- url accessible en fonction du rôle de l'utilisateur
+    {# security.yaml #}
+    access_control:
+             - { path: ^/profile/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+             - { path: ^/profile/siteInscription, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+             - { path: ^/profile/forgotPassword, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+             - { path: ^/profile/resetPassword/, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+             - { path: ^/admin, roles: ROLE_ADMIN }
+             - { path: ^/profile, roles: ROLE_USER }
+
+     * Toutes les urls commençant par /profile sont accessibles pour tous les utilisateurs (user, admin, super admin)
+     * Toutes les urls commençant par /admin sont accessibles pour les administrateurs et super administrateur
+       (car le super administrateur à plus de droit qu'un administrateur)
+     * Les autres urls sont accessibles pour les utilisateurs non connectés (anonymes) :
+            pour se connecter, s'inscrire ou bien indiquer que l'on a oublié sont mot de passe il ne faut pas être connecté (aucun intérêt si on est déjà connecté)
+
+
+-- Dans le cas où l'on veut ajouter un rôle :
+    - En fonction des droits que l'on souhaite lui attribuer, il faudras modifier la hiérarchie des rôles dans le fichier config/security.yaml
+    - Ajouter le role dans l'entité account :
+        * fichier src/Entity/Account.php : modifier la méthodes getRoles()
+        * fichier src/Form/AccountAdminType.php : modifier le champ role :
+
+            ->add('roles', ChoiceType::class, array(
+                                'choices' => array(
+                                    'ROLE_USER' => 'ROLE_USER',
+                                    'ROLE_ADMIN' => 'ROLE_ADMIN',
+                                    'ROLE_SUPER_ADMIN' => 'ROLE_SUPER_ADMIN',
+                                    'NOUVEAU_ROLE' => 'NOUVEAU_ROLE'
+                                ),
+                                'expanded' => false
+                            )
+                        )
+
+-- Vérifier le rôle de l'utilisateur connecté : $this->get('security.authorization_checker')->isGranted('ROLE_A_TESTER')
+    Par exemple, on veut vérifier que l'utilisateur est bien un administrateur, on écrit :
+
+    if($this->get('security.authorization_checker')->isGranted('ROLE_ADMIN')) {
+        -- Succès, vous êtes administrateur
+    } else {
+        -- Erreur, vous n'êtes pas administrateur
+    }
+

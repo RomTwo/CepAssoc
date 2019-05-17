@@ -3,6 +3,7 @@
 namespace App\Security;
 
 use App\Entity\Account;
+use App\Services\CaptchaCheck;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -80,7 +81,7 @@ class LoginFormAuthentificator extends AbstractFormLoginAuthenticator
     }
 
     /**
-     * Get and store in array the parameters of the request
+     * Get and store in array the parameters of the request (fields of login form)
      *
      * @param Request $request
      * @return array
@@ -91,6 +92,7 @@ class LoginFormAuthentificator extends AbstractFormLoginAuthenticator
             'email' => $request->request->get('email'),
             'password' => $request->request->get('password'),
             'csrf_token' => $request->request->get('_csrf_token'),
+            'recaptcha_response' => $request->request->get('recaptcha_response')
         ];
         $request->getSession()->set(
             Security::LAST_USERNAME,
@@ -102,6 +104,9 @@ class LoginFormAuthentificator extends AbstractFormLoginAuthenticator
 
     /**
      * Get the user from the database with your email address (present in array create by the function getCredentials)
+     * We check the token to protect against xss flaws
+     * We check the captcha to protect to bots attacks
+     * We check if the user exist (in function of the email address)
      *
      * @param mixed $credentials
      * @param UserProviderInterface $userProvider
@@ -112,6 +117,9 @@ class LoginFormAuthentificator extends AbstractFormLoginAuthenticator
         $token = new CsrfToken('authenticate', $credentials['csrf_token']);
         if (!$this->csrfTokenManager->isTokenValid($token)) {
             throw new InvalidCsrfTokenException('Une erreur s\'est produit');
+        }
+        if (!(new CaptchaCheck())->captchaIsValid($credentials['recaptcha_response'])) {
+            throw new CustomUserMessageAuthenticationException('Le capatcha est incorrect');
         }
 
         $user = $this->entityManager->getRepository(Account::class)->findOneBy(['email' => $credentials['email']]);
