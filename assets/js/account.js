@@ -94,6 +94,12 @@ function stepChoice(step) {
             return true;
         case 'accountStep4':
             return true;
+        case 'accountStep5':
+            return true;
+        case 'accountStep6':
+            return true;
+        case 'accountStep7':
+            return true;
         default:
             console.log('Sorry, we are out of ' + step + '.');
     }

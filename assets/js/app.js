@@ -12,6 +12,7 @@ $ = require('jquery');
 require('bootstrap');
 require('datatables.net-bs4');
 require('bootstrap-notify');
+require('@fortawesome/fontawesome-free/js/all.js');
 
 // Need jQuery? Install it with "yarn add jquery", then uncomment to require it.
 // const $ = require('jquery');

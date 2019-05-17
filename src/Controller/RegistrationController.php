@@ -34,6 +34,7 @@ class RegistrationController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid() && $utilitaires->isValidateCity($request->request->get("adherent_cityRep1"))) {
+            var_dump($request->request->get("adherent_cityRep1"));
             $utilitaires->setOtherFields($adherent);
             $adherent->setAffiliateCode($this->generateAffiliateCode());
             $adherent->setCityRep1($request->request->get("adherent_cityRep1"));
