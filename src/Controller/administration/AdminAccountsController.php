@@ -23,6 +23,15 @@ class AdminAccountsController extends AbstractController
         return $this->render('administration/accounts/accounts.html.twig', array('accounts' => $accounts));
     }
 
+    /**
+     * Update a user account by id
+     * if the user has a ROLE_SUPER_ADMIN role, he can change the user role
+     *
+     * @param Request $request
+     * @param $id
+     * @param UserPasswordEncoderInterface $encoder
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     */
     public function edit(Request $request, $id, UserPasswordEncoderInterface $encoder)
     {
         $manager = $this->getDoctrine()->getManager();

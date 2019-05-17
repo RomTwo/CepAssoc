@@ -582,8 +582,11 @@
                             <a href="{{ path('admin_adherentsRegister', {id: adherent.id}) }}" class="btn btn-primary">Valider
                                 l'inscription</a>
                         {% endif %}
-                        <a href="{{ path('admin_adherentsEdit', {id: adherent.id}) }}" class="btn btn-secondary">Modifier</a>
-                        <a href="{{ path('admin_adherentsDelete', {id: adherent.id}) }}" class="btn btn-secondary">Supprimer</a>
+
+                        <a href="{{path('admin_adherentsPDF', {id: adherent.id})}}" class="btn btn-danger">Imprimer</a>
+                        <a href="{{path('admin_adherentsEdit', {id: adherent.id})}}" class="btn btn-secondary">Modifier</a>
+                        <a href="{{path('admin_adherentsDelete', {id: adherent.id})}}" class="btn btn-secondary">Supprimer</a>
+
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
                     </div>
                 </div>

@@ -8,9 +8,9 @@
             <div class="col-md-6 col-sm-12">
             <h2>Initialisation</h2>
                 <p id="lbl_init" >Aucune initialisation en cours.</p>
-                <i id="init_valid" class=" fas fa-check-circle" style = "display:none;"></i>
-                <i id="init_error" class=" fas fa-times-circle" style = "display:none;"></i>
-                <img id="spinner_init" src="{{ asset('build/spinner.gif') }}" style = "display:none;">
+                <i id="init_valid" class=" fas fa-check-circle fa-10x" style = "display: none; color:green"></i>
+                <i id="init_error" class=" fas fa-times-circle fa-10x" style = "display:none;"></i>
+                <img id="spinner_init" src="{{ asset('build/spinner.gif') }}" style = "display:none; color:red">
                 
                 <button id="init" hidden></button>
                 <div id="competiteur" hidden>
@@ -26,6 +26,10 @@
                     <p id ="lbl_sync" >Aucune synchronisation en cours.</p>
                     <i id="sync_valid" class=" fa fa-check-circle" style = "display:none;"></i>
                     <i id="sync_error" class=" fa fa-times-circle" style = "display:none;"></i>
+                    <i id="sync_valid" class=" fas fa-check-circle fa-10x" style = "display:none; color:green"></i>
+                    <i id="sync_error" class=" fas fa-times-circle fa-10x" style = "display:none; color:red"></i>
+
+
                     <img id="spinner_sync" src="{{ asset('build/spinner.gif') }}" style = "display:none;" >
                     <button id="a" hidden ></button>
                     <button id="sync" hidden></button>
@@ -80,6 +84,7 @@
                 complete: function(jqXHR, textStatus) {
                     switch (jqXHR.status) {
                         case 200:
+                             document.getElementById("competiteur").textContent = jqXHR.responseText;
                             timeout2 = true;
                             document.getElementById("a").click()
 
@@ -88,6 +93,7 @@
                                     document.getElementById("lbl_sync").style.color = "green";
                                     document.getElementById("spinner_sync").style.display = "none";
                                     document.getElementById("sync_valid").style.display = "inline";
+
 
                             }
                             break;

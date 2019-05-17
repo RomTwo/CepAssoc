@@ -7,7 +7,7 @@ use Firebase\JWT\JWT;
 class GenerateToken
 {
     /**
-     * Generate a JWT token
+     * Generate a JWT token (this token is valid during 30 minutes (1800 secondes)
      *
      * @return string
      */

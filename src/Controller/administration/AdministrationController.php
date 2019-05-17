@@ -68,6 +68,26 @@ class AdministrationController extends AbstractController
                 $adherent->setIsRegisteredInGestGym(true);
                 $manager->flush();
             }
+            $competiteurs = $manager->getRepository(Adherent::class)->findByIsRegisteredInGestGym(false);
+
+            if ($competiteurs) {
+                $classMetadataFactory = new ClassMetadataFactory(new AnnotationLoader(new AnnotationReader()));
+    
+                $callback = function ($innerObject, $outerObject, string $attributeName, string $format = null, array $context = []) {
+                    return $innerObject instanceof \DateTime ? $innerObject->format('d-m-Y') : '';
+                };
+    
+                $normalizer = new ObjectNormalizer($classMetadataFactory);
+                $normalizer->setCallbacks(array('birthDate' => $callback));
+                $encoder = new JsonEncoder();
+                $serializer = new Serializer(array($normalizer), array($encoder));
+                $data = $serializer->serialize($competiteurs, 'json', ['groups' => 'competition']);
+
+                return new Response ($data,200);
+            }
+
+
+
             return new Response ("ok",200);
 
         }else{

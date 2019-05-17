@@ -5,7 +5,11 @@ namespace App\Controller\administration;
 use App\Entity\Activity;
 use App\Entity\Adherent;
 use App\Form\AdminAdherentType;
+
+use Dompdf\Dompdf;
+use Dompdf\Options;
 use App\Services\Utilitaires;
+
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -70,6 +74,25 @@ class AdminAdherentsController extends AbstractController
         $entityManager->flush();
 
         return $this->redirectToRoute("admin_adherents");
+    }
+    public function generatePDF($id)
+    {    $adherent= new Adherent();
+
+        $repository = $this->getDoctrine()->getRepository(Adherent::class);
+        $adherent = $repository->find($id);
+        $html= $this->render('administration/adherents/generateAdherentsPDF.html.twig', [
+            'adherent' => $adherent,
+        ]);
+        $pdfOptions = new Options();
+        $dompdf = new Dompdf($pdfOptions);
+        $dompdf->loadHtml($html);
+        $dompdf->setPaper('A4', 'portrait');
+        $dompdf->render();
+        $dompdf->stream( $adherent->getFirstName()."_". $adherent->getLastName().".pdf", [
+            "Attachment" => true
+        ]);
+
+
     }
 
 }
