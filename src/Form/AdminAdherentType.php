@@ -163,13 +163,13 @@ class AdminAdherentType extends AbstractType
                 ],
             ]);
 
-        $builder->get('medicalCertificate')->addEventListener(FormEvents::PRE_SUBMIT, function (FormEvent $event) {
+        $builder->get('medicalCertificate')->addEventListener(FormEvents::SUBMIT, function (FormEvent $event) {
             if (null === $event->getData()) {
                 $event->setData($event->getForm()->getData());
             }
         });
 
-        $builder->get('bulletinN2Allianz')->addEventListener(FormEvents::PRE_SUBMIT, function (FormEvent $event) {
+        $builder->get('bulletinN2Allianz')->addEventListener(FormEvents::SUBMIT, function (FormEvent $event) {
             if (null === $event->getData()) {
                 $event->setData($event->getForm()->getData());
             }

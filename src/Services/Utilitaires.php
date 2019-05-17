@@ -52,15 +52,15 @@ class Utilitaires
     }
 
     public function setFiles($adherent){
-        if($adherent->getMedicalCertificate() != null){
+        if($adherent->getMedicalCertificate() != null && !is_string($adherent->getMedicalCertificate())){
             $adherent->setMedicalCertificate($this->addFile($adherent->getMedicalCertificate()));
         }
 
-        if($adherent->getBulletinN2Allianz() != null){
+        if($adherent->getBulletinN2Allianz() != null && !is_string($adherent->getMedicalCertificate())){
             $adherent->setBulletinN2Allianz($this->addFile($adherent->getBulletinN2Allianz()));
         }
 
-        if($adherent->getHealthQuestionnaire() != null){
+        if($adherent->getHealthQuestionnaire() != null && !is_string($adherent->getMedicalCertificate())){
             $adherent->setHealthQuestionnaire($this->addFile($adherent->getHealthQuestionnaire()));
         }
 

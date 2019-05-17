@@ -28,9 +28,12 @@ class AdminAdherentsController extends AbstractController
     public function edit(Adherent $adherent, Request $request, Utilitaires $utilitaires)
     {
         $entityManager = $this->getDoctrine()->getManager();
+
         $form = $this->createForm(AdminAdherentType::class, $adherent);
 
         $form->handleRequest($request);
+
+        $oldAdherent = $adherent;
 
         if ($form->isSubmitted() && $form->isValid() && $utilitaires->isValidateCity($request->request->get("admin_adherent_cityRep1"))) {
             $adherent->setCityRep1($request->request->get("admin_adherent_cityRep1"));
