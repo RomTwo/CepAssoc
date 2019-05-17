@@ -5,6 +5,7 @@ namespace App\Form;
 use App\Entity\Account;
 use App\Entity\Activity;
 use App\Entity\Adherent;
+use Faker\Provider\File;
 use function Sodium\add;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
@@ -238,12 +239,15 @@ class AdherentType extends AbstractType
             ->add('volunteerComment', TextareaType::class, [
                 'required' => false,
             ])
-        ->add('medicalCertificate', FileType::class, array(
-            'label' => 'PDF'
-        ))
-        ->add('activities', CollectionType::class, [
-            'entry_type' => TagType::class,
-        ]);
+            ->add('medicalCertificate', FileType::class, array(
+                'required' => false,
+            ))
+            ->add('bulletinN2Allianz', FileType::class, array(
+                'required' => false,
+            ))
+            ->add('healthQuestionnaire', FileType::class, array(
+                'required' => false,
+            ));
     }
 
     public function configureOptions(OptionsResolver $resolver)

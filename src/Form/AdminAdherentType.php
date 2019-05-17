@@ -7,9 +7,12 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Form\FormEvent;
+use Symfony\Component\Form\FormEvents;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class AdminAdherentType extends AbstractType
@@ -138,8 +141,16 @@ class AdminAdherentType extends AbstractType
                 'multiple' => false,
                 'expanded' => true,
             ])
+            ->add('medicalCertificate', FileType::class, array(
+                'required' => false,
+                'data_class' => null,
+            ))
+            ->add('bulletinN2Allianz', FileType::class, array(
+                'required' => false,
+                'data_class' => null,
+            ))
             // Admin fields
-            ->add('isMedicalCertificate',  ChoiceType::class, [
+            ->add('hasMedicalCertificate',  ChoiceType::class, [
                 'choices' => [
                     'Non' => false,
                     'Oui' => true,
@@ -150,9 +161,21 @@ class AdminAdherentType extends AbstractType
                     'Non' => false,
                     'Oui' => true,
                 ],
-            ])
-        ;
+            ]);
+
+        $builder->get('medicalCertificate')->addEventListener(FormEvents::PRE_SUBMIT, function (FormEvent $event) {
+            if (null === $event->getData()) {
+                $event->setData($event->getForm()->getData());
+            }
+        });
+
+        $builder->get('bulletinN2Allianz')->addEventListener(FormEvents::PRE_SUBMIT, function (FormEvent $event) {
+            if (null === $event->getData()) {
+                $event->setData($event->getForm()->getData());
+            }
+        });
     }
+
 
     public function configureOptions(OptionsResolver $resolver)
     {

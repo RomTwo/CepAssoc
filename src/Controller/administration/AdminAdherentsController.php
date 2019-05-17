@@ -30,6 +30,7 @@ class AdminAdherentsController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid() && $utilitaires->isValidateCity($request->request->get("admin_adherent_cityRep1"))) {
             $adherent->setCityRep1($request->request->get("admin_adherent_cityRep1"));
+            $utilitaires->setFiles($adherent);
             $entityManager->flush();
             return $this->redirectToRoute('admin_adherents');
         }
@@ -38,7 +39,8 @@ class AdminAdherentsController extends AbstractController
             'adherent' => $adherent,
             'form' => $form->createView(),
             "cityRep1" => $adherent->getCityRep1(),
-            "cityRep2" => $adherent->getCityRep2()
+            "cityRep2" => $adherent->getCityRep2(),
+            "adherent" => $adherent,
         ]);
     }
 

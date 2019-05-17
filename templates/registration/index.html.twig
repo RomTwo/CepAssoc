@@ -216,7 +216,8 @@
                                     {% endif %}
                                 </select>
                                 <small id="cityRep1Help" class="form-text helper"><span
-                                            class="badge badge-danger">Erreur</span> Le code postal doit être rempli pour choisir la ville
+                                            class="badge badge-danger">Erreur</span> Le code postal doit être rempli
+                                    pour choisir la ville
                                 </small>
                             </div>
                             <div class="col">
@@ -234,7 +235,8 @@
                             <div class="col">
                                 {{ form_widget(form.phoneRep1) }}
                                 <small id="phoneRep1Help" class="form-text helper"><span
-                                            class="badge badge-danger">Erreur</span> Le numéro de téléphone doit être rempli.
+                                            class="badge badge-danger">Erreur</span> Le numéro de téléphone doit être
+                                    rempli.
                                 </small>
                             </div>
                         </div>
@@ -298,7 +300,8 @@
                             <div class="col">
                                 {{ form_widget(form.phoneRep2) }}
                                 <small id="phoneRep2Help" class="form-text helper"><span
-                                            class="badge badge-danger">Erreur</span> Le numéro de téléphone doit être rempli.
+                                            class="badge badge-danger">Erreur</span> Le numéro de téléphone doit être
+                                    rempli.
                                 </small>
                             </div>
                         </div>
@@ -312,7 +315,7 @@
                     <div class="container-fluid">
                         <h4>Activités disponibles :</h4>
                         <div class="row">
-                            <table class="table m-2 text-center">
+                            <table id="test" name="test" class="table m-2 text-center">
                                 <thead>
                                 <tr>
                                     <th>Nom</th>
@@ -322,8 +325,7 @@
                                     <th>Selection</th>
                                 </tr>
                                 </thead>
-
-                                {% for activity in form.activities %}
+                                {% for activity in activities %}
                                     <tbody>
                                     <tr id={{ activity.id }}>
                                         <td>{{ activity.name }}</td>
@@ -388,6 +390,18 @@
                         <h4>Certificat medical :</h4>
                         <div class="row align-items-center ml-2">
                             {{ form_widget(form.medicalCertificate) }}
+                        </div>
+                    </div>
+                    <div class="container-fluid">
+                        <h4>Bulletin Allianz :</h4>
+                        <div class="row align-items-center ml-2">
+                            {{ form_widget(form.bulletinN2Allianz) }}
+                        </div>
+                    </div>
+                    <div class="container-fluid">
+                        <h4>Questionnaire de santé :</h4>
+                        <div class="row align-items-center ml-2">
+                            {{ form_widget(form.healthQuestionnaire) }}
                         </div>
                     </div>
                 </div>

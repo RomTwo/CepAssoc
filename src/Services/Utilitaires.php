@@ -4,9 +4,18 @@
 namespace App\Services;
 
 use App\Entity\Adherent;
+use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 
 class Utilitaires
 {
+
+    private $params;
+
+    public function __construct(ParameterBagInterface $params)
+    {
+        $this->params = $params;
+    }
+
     public function setOtherFields($adherent){
         $adherent->setRegistrationDate(new \DateTime());
         $adherent->setIsRegisteredInGestGym(false);
@@ -14,17 +23,46 @@ class Utilitaires
         $adherent->setPaymentFeesArePaid(false);
         $adherent->setRegistrationCost(0);
         $adherent->setIsRegisteredInFFG(false);
-        $adherent->setIsMedicalCertificate(false);
-        $adherent->setIsValidateMedical(false);
         $adherent->setMedicalCertificateDate(new \DateTime("01-09-2019"));
         $adherent->setNationality("France");
         $adherent->setIsFFGInsurance(false);
         $adherent->setIsAllowEmail(false);
         $adherent->setIsLicenceHolderOtherClub(false);
         $adherent->setMaidenName("");
-        $adherent->setBulletinN2Allianz("dede");
         $adherent->setHasBulletinN2Allianz(false);
         $adherent->setIsDeleted(false);
+        $adherent->setHasMedicalCertificate(false);
+        $adherent->setHasBulletinN2Allianz(false);
+        $adherent->setHasHealthQuestionnaire(false);
+
+
+        if($adherent->getMedicalCertificate() != null){
+            $adherent->setMedicalCertificate($this->addFile($adherent->getMedicalCertificate()));
+        }
+
+        if($adherent->getBulletinN2Allianz() != null){
+            $adherent->setBulletinN2Allianz($this->addFile($adherent->getBulletinN2Allianz()));
+        }
+
+        if($adherent->getHealthQuestionnaire() != null){
+            $adherent->setHealthQuestionnaire($this->addFile($adherent->getHealthQuestionnaire()));
+        }
+
+        return $adherent;
+    }
+
+    public function setFiles($adherent){
+        if($adherent->getMedicalCertificate() != null){
+            $adherent->setMedicalCertificate($this->addFile($adherent->getMedicalCertificate()));
+        }
+
+        if($adherent->getBulletinN2Allianz() != null){
+            $adherent->setBulletinN2Allianz($this->addFile($adherent->getBulletinN2Allianz()));
+        }
+
+        if($adherent->getHealthQuestionnaire() != null){
+            $adherent->setHealthQuestionnaire($this->addFile($adherent->getHealthQuestionnaire()));
+        }
 
         return $adherent;
     }
@@ -35,6 +73,12 @@ class Utilitaires
         }
 
         return true;
+    }
+
+    private function addFile($file){
+        $fileName = md5(uniqid()).'.'.$file->guessExtension();
+        $file->move($this->params->get('upload_directory'), $fileName);
+        return $fileName;
     }
 
 }
