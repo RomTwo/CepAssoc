@@ -57,6 +57,10 @@ class Category
     {
         return $this->activities;
     }
+    public function getActivity(): Collection
+    {
+        return $this->activities;
+    }
 
     public function addActivity(Activity $activity): self
     {

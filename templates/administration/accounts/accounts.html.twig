@@ -1,13 +1,81 @@
 {% extends 'administration/base.html.twig' %}
 
-{% block title %}Adherents{% endblock %}
+{% block title %}Comptes{% endblock %}
 
 {% block specification %}
     Gestion des comptes
 {% endblock %}
 
-{% block content %}
-    
+{% block body %}
+
+    <!-- DataTable -->
+    <table id="accounts" class="table table-striped table-bordered" style="width:100%">
+        <thead>
+        <tr>
+            <th>Prénom</th>
+            <th>Nom</th>
+            <th>Adresse mail</th>
+            <th>Role</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for account in accounts %}
+            <tr>
+                <td>{{ account.firstName }}</td>
+                <td>{{ account.lastName }}</td>
+                <td>{{ account.email }}</td>
+                <td>{{ account.getRoles() | join }}</td>
+                <td>
+                    <button type="button" class="btn btn-primary" data-toggle="modal"
+                            data-target="#modalAccount{{ account.id }}">
+                        Voir plus
+                    </button>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+        <tfoot>
+        <tr>
+            <th>Prénom</th>
+            <th>Nom</th>
+            <th>Adresse mail</th>
+            <th>Role</th>
+            <th>Actions</th>
+        </tr>
+        </tfoot>
+    </table>
+
+    <table border="0" cellpadding="0" cellspacing="0">
+        <tbody>
+        <tr>
+            <td class="gutter">
+                <div class="line number1 index0 alt2" style="display: none;">1</div>
+            </td>
+            <td class="code">
+                <div class="container" style="display: none;">
+                    <div class="line number1 index0 alt2" style="display: none;">&nbsp;</div>
+                </div>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+
+    <!-- Modal -->
+    {% for account in accounts %}
+        {% include('administration/accounts/modalAccount.html.twig') %}
+    {% endfor %}
 
 {% endblock %}
- 
+
+
+
+
+{% block javascripts %}
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#accounts').DataTable();
+        });
+    </script>
+{% endblock %}

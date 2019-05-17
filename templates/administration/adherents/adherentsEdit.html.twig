@@ -138,8 +138,18 @@
         <div class="row">
             <div class="col-3">
                 <div class="row">
+                    <label for="">Code postal </label>
+                    {{ form_widget(form.zipCodeRep1) }}
+                </div>
+            </div>
+            <div class="col-3">
+                <div class="row">
                     <label for="">Ville </label>
-                    {{ form_widget(form.cityRep1) }}
+                    <select id="admin_adherent_cityRep1" name="admin_adherent_cityRep1" class="form-control">
+                        {% if cityRep1 is defined and cityRep1 is not null %}
+                            <option value={{ cityRep1 }} selected>{{ cityRep1 }}</option>
+                        {% endif %}
+                    </select>
                 </div>
             </div>
             <div class="col-3">
@@ -148,12 +158,7 @@
                     {{ form_widget(form.addressRep1) }}
                 </div>
             </div>
-            <div class="col-3">
-                <div class="row">
-                    <label for="">Code postal </label>
-                    {{ form_widget(form.zipCodeRep1) }}
-                </div>
-            </div>
+
         </div>
     </div>
 
@@ -205,20 +210,24 @@
         <div class="row">
             <div class="col-3">
                 <div class="row">
+                    <label for="">Code postal </label>
+                    {{ form_widget(form.zipCodeRep2) }}
+                </div>
+            </div>
+            <div class="col-3">
+                <div class="row">
                     <label for="">Ville </label>
-                    {{ form_widget(form.cityRep2) }}
+                    <select id="admin_adherent_cityRep2" name="admin_adherent_cityRep2" class="form-control">
+                        {% if cityRep2 is defined and cityRep2 is not null %}
+                            <option value={{ cityRep2 }} selected>{{ cityRep2 }}</option>
+                        {% endif %}
+                    </select>
                 </div>
             </div>
             <div class="col-3">
                 <div class="row">
                     <label for="">Adresse </label>
                     {{ form_widget(form.addressRep2) }}
-                </div>
-            </div>
-            <div class="col-3">
-                <div class="row">
-                    <label for="">Code postal </label>
-                    {{ form_widget(form.zipCodeRep2) }}
                 </div>
             </div>
         </div>
@@ -342,5 +351,9 @@
     <button class="btn btn-primary">Enregistrer</button>
 {{ form_end(form) }}
 
+{% endblock %}
+
+{% block javascripts %}
+    {{ encore_entry_script_tags('adminAdherentsEdit') }}
 {% endblock %}
  
