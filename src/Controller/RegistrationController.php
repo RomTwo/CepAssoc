@@ -36,6 +36,7 @@ class RegistrationController extends AbstractController
         if ($form->isSubmitted() && $form->isValid() && $utilitaires->isValidateCity($request->request->get("adherent_cityRep1"))) {
             var_dump($request->request->get("adherent_cityRep1"));
             $utilitaires->setOtherFields($adherent);
+            $adherent->setAffiliateCode($this->generateAffiliateCode());
             $adherent->setCityRep1($request->request->get("adherent_cityRep1"));
             $adherent->setMedicalCertificate($this->addFile($adherent->getMedicalCertificate()));
             //$adherent->setBulletinN2Allianz($this->addFile($adherent->getBulletinN2Allianz()));
@@ -65,4 +66,29 @@ class RegistrationController extends AbstractController
         $file->move($this->getParameter('upload_directory'), $fileName);
         return $fileName;
     }
+
+    private function generateAffiliateCode()
+    {
+        $repository = $this->getDoctrine()->getRepository(Adherent::class);
+        $code = ""; // code that will be returned
+        $adherentWithSameCode = -1; // this will contain an Adherent Entity instance having a certain given affiliateCode equals to $code
+
+        $characters = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'; //characters list for code generation
+        $charactersLength = strlen($characters);
+
+        while ($adherentWithSameCode != null) {
+
+            // generating a new code
+            $code = "";
+            for ($nbLetter = 0; $nbLetter < 5; $nbLetter++) {  // our code contain 5 characters !
+                //$code .= chr(rand(65, 90));   // 65-90 range for upper case characters
+                $code .= $characters[rand(0, $charactersLength - 1)];
+            }
+
+            $adherentWithSameCode = $repository->findOneBy(['affiliateCode' => $code]);
+        }
+
+        return $code;
+    }
+
 }

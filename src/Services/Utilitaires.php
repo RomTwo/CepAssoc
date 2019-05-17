@@ -3,6 +3,8 @@
 
 namespace App\Services;
 
+use App\Entity\Adherent;
+
 class Utilitaires
 {
     public function setOtherFields($adherent){
@@ -34,4 +36,5 @@ class Utilitaires
 
         return true;
     }
+
 }
