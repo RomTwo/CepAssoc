@@ -347,6 +347,12 @@ class Adherent
     private $isDeleted;
 
     /**
+     * @ORM\Column(type="string", length=5, nullable=true)
+     * @Groups({"competition"})
+     */
+    private $affiliateCode;
+
+    /**
      * @ORM\ManyToMany(targetEntity="App\Entity\Activity")
      * @Groups({"competition"})
      */

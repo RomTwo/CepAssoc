@@ -35,6 +35,7 @@ class RegistrationController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid() && $utilitaires->isValidateCity($request->request->get("adherent_cityRep1"))) {
             $utilitaires->setOtherFields($adherent);
+            $adherent->setAffiliateCode($this->generateAffiliateCode());
             $adherent->setCityRep1($request->request->get("adherent_cityRep1"));
             $adherent->setMedicalCertificate($this->addFile($adherent->getMedicalCertificate()));
             //$adherent->setBulletinN2Allianz($this->addFile($adherent->getBulletinN2Allianz()));
@@ -63,29 +64,6 @@ class RegistrationController extends AbstractController
         $fileName = md5(uniqid()).'.'.$file->guessExtension();
         $file->move($this->getParameter('upload_directory'), $fileName);
         return $fileName;
-    }
-
-    private function setOtherFields($adherent){
-        $adherent->setRegistrationDate(new DateTime());
-        $adherent->setIsRegisteredInGestGym(false);
-        $adherent->setJudge(false);
-        $adherent->setPaymentFeesArePaid(false);
-        $adherent->setRegistrationCost(0);
-        $adherent->setIsRegisteredInFFG(false);
-        $adherent->setIsMedicalCertificate(false);
-        $adherent->setIsValidateMedical(false);
-        $adherent->setMedicalCertificateDate(new \DateTime("01-09-2019"));
-        $adherent->setNationality("France");
-        $adherent->setIsFFGInsurance(false);
-        $adherent->setIsAllowEmail(false);
-        $adherent->setIsLicenceHolderOtherClub(false);
-        $adherent->setMaidenName("");
-        $adherent->setHasBulletinN2Allianz(false);
-        $adherent->setHasCompetitionCommitment(false);
-        $adherent->setIsMutated(false);
-        $adherent->setIsDeleted(false);
-        $adherent->setAffiliateCode($this->generateAffiliateCode());
-        return $adherent;
     }
 
     private function generateAffiliateCode()
