@@ -16,7 +16,7 @@ require('bootstrap-notify');
 // Need jQuery? Install it with "yarn add jquery", then uncomment to require it.
 // const $ = require('jquery');
 
-$('#account_zipCode').keyup( function(){
+$('#account_zipCode').focusout( function(){
     $.ajax({
         url:'https://datanova.legroupe.laposte.fr/api/records/1.0/search/',
         type: "POST",

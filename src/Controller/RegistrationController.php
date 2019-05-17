@@ -36,7 +36,7 @@ class RegistrationController extends AbstractController
         if ($form->isSubmitted() && $form->isValid() && $utilitaires->isValidateCity($request->request->get("adherent_cityRep1"))) {
             $utilitaires->setOtherFields($adherent);
             $adherent->setCityRep1($request->request->get("adherent_cityRep1"));
-            //$adherent->setMedicalCertificate($this->addFile($adherent->getMedicalCertificate()));
+            $adherent->setMedicalCertificate($this->addFile($adherent->getMedicalCertificate()));
             //$adherent->setBulletinN2Allianz($this->addFile($adherent->getBulletinN2Allianz()));
             $account = $this->getDoctrine()->getRepository(Account::class)->find($user->getId());
 

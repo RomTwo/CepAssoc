@@ -205,7 +205,6 @@
                                     {% if cityRep1 is defined and cityRep1 is not null %}
                                         <option value={{ cityRep1 }} selected>{{ cityRep1 }}</option>
                                     {% endif %}
-                                    <option value="POITIERS" selected>POITIERS</option>
                                 </select>
                                 <small id="cityRep1Help" class="form-text helper"><span
                                             class="badge badge-danger">Erreur</span> Le code postal doit être rempli pour choisir la ville
@@ -270,7 +269,6 @@
                                     {% if cityRep2 is defined and cityRep2 is not null %}
                                         <option value={{ cityRep2 }} selected>{{ cityRep2 }}</option>
                                     {% endif %}
-                                    <option value="POITIERS" selected>POITIERS</option>
                                 </select>
                                 <small id="cityRep2Help" class="form-text helper"><span
                                             class="badge badge-danger">Erreur</span> La ville doit être rempli.
@@ -375,6 +373,12 @@
                             <p>{{ form_widget(form.imageRight) }} le club à prendre et à diffuser des photos me
                                 concernant pour enrichir
                                 la photothèque et le site internet du club.</p>
+                        </div>
+                    </div>
+                    <div class="container-fluid">
+                        <h4>Droits d'image :</h4>
+                        <div class="row align-items-center ml-2">
+                            {{ form_widget(form.medicalCertificate) }}
                         </div>
                     </div>
                 </div>

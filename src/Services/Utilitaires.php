@@ -20,7 +20,6 @@ class Utilitaires
         $adherent->setIsAllowEmail(false);
         $adherent->setIsLicenceHolderOtherClub(false);
         $adherent->setMaidenName("");
-        $adherent->setMedicalCertificate("dede");
         $adherent->setBulletinN2Allianz("dede");
         $adherent->setHasBulletinN2Allianz(false);
         $adherent->setIsDeleted(false);

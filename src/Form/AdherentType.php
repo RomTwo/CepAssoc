@@ -234,7 +234,10 @@ class AdherentType extends AbstractType
             ])
             ->add('volunteerComment', TextareaType::class, [
                 'required' => false,
-            ]);
+            ])
+        ->add('medicalCertificate', FileType::class, array(
+            'label' => 'PDF'
+        ));
     }
 
     public function configureOptions(OptionsResolver $resolver)

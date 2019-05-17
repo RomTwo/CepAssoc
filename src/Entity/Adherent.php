@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Serializer\Annotation\Groups;
@@ -273,6 +274,8 @@ class Adherent
 
     /**
      * @ORM\Column(type="string")
+     * @Assert\NotBlank(message="Veuillez importer votre bulletin Allianz")
+     * @Assert\File(mimeTypes={ "application/pdf" })
      * @Groups({"competition"})
      */
     private $medicalCertificate;
