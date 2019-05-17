@@ -108,12 +108,10 @@ class AdminAdherentType extends AbstractType
             )
             ->add('firstNameRep2')
             ->add('lastNameRep2')
-            ->add('emailRep1', EmailType::class
-            )
-            ->add('emailRep2', EmailType::class)
-            ->add('cityRep1', TextType::class
-            )
-            ->add('cityRep2')
+            ->add('emailRep1', EmailType::class)
+            ->add('emailRep2', EmailType::class, [
+                'required' => false
+            ])
             ->add('addressRep1', TextType::class
             )
             ->add('addressRep2')

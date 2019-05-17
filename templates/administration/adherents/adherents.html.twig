@@ -10,18 +10,21 @@
     <div class="row justify-content-center">
         <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
             <li class="nav-item">
-                <a class="nav-link active" id="pills-all" data-toggle="pill" href="#content-all" role="tab" aria-controls="content-all" aria-selected="true">
-                            Tous les adhérents
+                <a class="nav-link active" id="pills-all" data-toggle="pill" href="#content-all" role="tab"
+                   aria-controls="content-all" aria-selected="true">
+                    Tous les adhérents
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" id="pills-recues" data-toggle="pill" href="#content-recues" role="tab" aria-controls="content-recues" aria-selected="false">
-                            Adhérents inscrits
+                <a class="nav-link" id="pills-recues" data-toggle="pill" href="#content-recues" role="tab"
+                   aria-controls="content-recues" aria-selected="false">
+                    Adhérents inscrits
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" id="pills-envoyees" data-toggle="pill" href="#content-envoyees" role="tab" aria-controls="content-envoyees" aria-selected="false">
-                            Inscriptions en attente
+                <a class="nav-link" id="pills-envoyees" data-toggle="pill" href="#content-envoyees" role="tab"
+                   aria-controls="content-envoyees" aria-selected="false">
+                    Inscriptions en attente
                 </a>
             </li>
         </ul>
@@ -32,201 +35,261 @@
             <table id="allAdherentsTable" class="table table-striped table-bordered" style="width: 100%;" role="grid"
                    aria-describedby="example_info">
                 <thead>
-                    <tr role="row">
-                        <th class="sorting_asc" tabindex="0" aria-controls="example" rowspan="1" colspan="1" style="width: 119px;" aria-sort="ascending" aria-label="lastName: activate to sort column descending">Nom</th>
-                        <th class="sorting_asc" tabindex="0" aria-controls="example" rowspan="1" colspan="1" style="width: 119px;" aria-sort="ascending" aria-label="firstName: activate to sort column descending">Prénom</th>
-                        <th class="sorting_asc" tabindex="0" aria-controls="example" rowspan="1" colspan="1" style="width: 119px;" aria-sort="ascending" aria-label="firstName: activate to sort column descending">Date d'inscription</th>
-                        <th class="sorting_asc" tabindex="0" aria-controls="example" rowspan="1" colspan="1" style="width: 119px;" aria-sort="ascending" aria-label="firstName: activate to sort column descending">Statut de l'inscription</th>
-                        <th class="sorting_asc" tabindex="0" aria-controls="example" rowspan="1" colspan="1" style="width: 119px;" aria-sort="ascending" aria-label="firstName: activate to sort column descending">Inscription dans GestGym</th>
-                        <th class="sorting_asc" tabindex="0" aria-controls="example" rowspan="1" colspan="1" style="width: 119px;" aria-sort="ascending" aria-label="firstName: activate to sort column descending">Voir détails</th>
-                    </tr>
+                <tr role="row">
+                    <th class="sorting_asc" tabindex="0" aria-controls="example" rowspan="1" colspan="1"
+                        style="width: 119px;" aria-sort="ascending"
+                        aria-label="lastName: activate to sort column descending">Nom
+                    </th>
+                    <th class="sorting_asc" tabindex="0" aria-controls="example" rowspan="1" colspan="1"
+                        style="width: 119px;" aria-sort="ascending"
+                        aria-label="firstName: activate to sort column descending">Prénom
+                    </th>
+                    <th class="sorting_asc" tabindex="0" aria-controls="example" rowspan="1" colspan="1"
+                        style="width: 119px;" aria-sort="ascending"
+                        aria-label="firstName: activate to sort column descending">Date d'inscription
+                    </th>
+                    <th class="sorting_asc" tabindex="0" aria-controls="example" rowspan="1" colspan="1"
+                        style="width: 119px;" aria-sort="ascending"
+                        aria-label="firstName: activate to sort column descending">Statut de l'inscription
+                    </th>
+                    <th class="sorting_asc" tabindex="0" aria-controls="example" rowspan="1" colspan="1"
+                        style="width: 119px;" aria-sort="ascending"
+                        aria-label="firstName: activate to sort column descending">Inscription dans GestGym
+                    </th>
+                    <th class="sorting_asc" tabindex="0" aria-controls="example" rowspan="1" colspan="1"
+                        style="width: 119px;" aria-sort="ascending"
+                        aria-label="firstName: activate to sort column descending">Voir détails
+                    </th>
+                </tr>
                 </thead>
                 <tbody>
-                    {% for adherent in adherents %}
-                        {% if adherent.isDeleted == false %}
-                            <tr role="row" class="odd">
-                                <td>
-                                    {{adherent.lastName}}
-                                </td>
-                                <td>
-                                    {{adherent.firstName}}
-                                </td>
-                                <td>
-                                    {{adherent.registrationDate|date('d-m-Y')}}
-                                </td>
-                                <td>
-                                    {% if adherent.isRegisteredInFFG %}
-                                        <span style="color:green">Inscription validée</span>
-                                    {% else %}
-                                        <span style="color:red">Inscription non validée</span>
-                                    {% endif %}
-                                </td>
-                                <td>
-                                    {% if adherent.isRegisteredInGestGym %}
-                                        <span style="color:green">Effectuée</span>
-                                    {% else %}
-                                        <span style="color:red">Non effectuée</span>
-                                    {% endif %}
-                                </td>
-                                <td>
-                                    <!-- Button trigger modal -->
-                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal{{adherent.id}}">
-                                        Voir plus
-                                    </button>
-                                </td>
-                            </tr>
-                        {% endif %}
-                    {% endfor %}
+                {% for adherent in adherents %}
+                    {% if adherent.isDeleted == false %}
+                        <tr role="row" class="odd">
+                            <td>
+                                {{ adherent.lastName }}
+                            </td>
+                            <td>
+                                {{ adherent.firstName }}
+                            </td>
+                            <td>
+                                {{ adherent.registrationDate|date('d-m-Y') }}
+                            </td>
+                            <td>
+                                {% if adherent.isRegisteredInFFG %}
+                                    <span style="color:green">Inscription validée</span>
+                                {% else %}
+                                    <span style="color:red">Inscription non validée</span>
+                                {% endif %}
+                            </td>
+                            <td>
+                                {% if adherent.isRegisteredInGestGym %}
+                                    <span style="color:green">Effectuée</span>
+                                {% else %}
+                                    <span style="color:red">Non effectuée</span>
+                                {% endif %}
+                            </td>
+                            <td>
+                                <!-- Button trigger modal -->
+                                <button type="button" class="btn btn-primary" data-toggle="modal"
+                                        data-target="#exampleModal{{ adherent.id }}">
+                                    Voir plus
+                                </button>
+                            </td>
+                        </tr>
+                    {% endif %}
+                {% endfor %}
                 </tbody>
                 <tfoot>
-                    <tr>
-                        <th rowspan="1" colspan="1">Nom</th>
-                        <th rowspan="1" colspan="1">Prénom</th>
-                        <th rowspan="1" colspan="1">Date d'inscription</th>
-                        <th rowspan="1" colspan="1">Statut de l'inscription</th>
-                        <th rowspan="1" colspan="1">Inscription dans GestGym</th>
-                        <th rowspan="1" colspan="1">Voir détails</th>
-                    </tr>
+                <tr>
+                    <th rowspan="1" colspan="1">Nom</th>
+                    <th rowspan="1" colspan="1">Prénom</th>
+                    <th rowspan="1" colspan="1">Date d'inscription</th>
+                    <th rowspan="1" colspan="1">Statut de l'inscription</th>
+                    <th rowspan="1" colspan="1">Inscription dans GestGym</th>
+                    <th rowspan="1" colspan="1">Voir détails</th>
+                </tr>
                 </tfoot>
             </table>
         </div>
 
         <div class="tab-pane fade show" id="content-recues" role="tabpanel" aria-labelledby="pills-recus">
-            <table id="registeredAdherentsTable" class="table table-striped table-bordered" style="width: 100%;" role="grid"
+            <table id="registeredAdherentsTable" class="table table-striped table-bordered" style="width: 100%;"
+                   role="grid"
                    aria-describedby="example_info">
                 <thead>
-                    <tr role="row">
-                        <th class="sorting_asc" tabindex="0" aria-controls="example" rowspan="1" colspan="1" style="width: 119px;" aria-sort="ascending" aria-label="lastName: activate to sort column descending">Nom</th>
-                        <th class="sorting_asc" tabindex="0" aria-controls="example" rowspan="1" colspan="1" style="width: 119px;" aria-sort="ascending" aria-label="firstName: activate to sort column descending">Prénom</th>
-                        <th class="sorting_asc" tabindex="0" aria-controls="example" rowspan="1" colspan="1" style="width: 119px;" aria-sort="ascending" aria-label="firstName: activate to sort column descending">Date d'inscription</th>
-                        <th class="sorting_asc" tabindex="0" aria-controls="example" rowspan="1" colspan="1" style="width: 119px;" aria-sort="ascending" aria-label="firstName: activate to sort column descending">Statut de l'inscription</th>
-                        <th class="sorting_asc" tabindex="0" aria-controls="example" rowspan="1" colspan="1" style="width: 119px;" aria-sort="ascending" aria-label="firstName: activate to sort column descending">Inscription dans GestGym</th>
-                        <th class="sorting_asc" tabindex="0" aria-controls="example" rowspan="1" colspan="1" style="width: 119px;" aria-sort="ascending" aria-label="firstName: activate to sort column descending">Voir détails</th>
-                    </tr>
+                <tr role="row">
+                    <th class="sorting_asc" tabindex="0" aria-controls="example" rowspan="1" colspan="1"
+                        style="width: 119px;" aria-sort="ascending"
+                        aria-label="lastName: activate to sort column descending">Nom
+                    </th>
+                    <th class="sorting_asc" tabindex="0" aria-controls="example" rowspan="1" colspan="1"
+                        style="width: 119px;" aria-sort="ascending"
+                        aria-label="firstName: activate to sort column descending">Prénom
+                    </th>
+                    <th class="sorting_asc" tabindex="0" aria-controls="example" rowspan="1" colspan="1"
+                        style="width: 119px;" aria-sort="ascending"
+                        aria-label="firstName: activate to sort column descending">Date d'inscription
+                    </th>
+                    <th class="sorting_asc" tabindex="0" aria-controls="example" rowspan="1" colspan="1"
+                        style="width: 119px;" aria-sort="ascending"
+                        aria-label="firstName: activate to sort column descending">Statut de l'inscription
+                    </th>
+                    <th class="sorting_asc" tabindex="0" aria-controls="example" rowspan="1" colspan="1"
+                        style="width: 119px;" aria-sort="ascending"
+                        aria-label="firstName: activate to sort column descending">Inscription dans GestGym
+                    </th>
+                    <th class="sorting_asc" tabindex="0" aria-controls="example" rowspan="1" colspan="1"
+                        style="width: 119px;" aria-sort="ascending"
+                        aria-label="firstName: activate to sort column descending">Voir détails
+                    </th>
+                </tr>
                 </thead>
                 <tbody>
-                    {% for adherent in adherents %}
-                        {% if adherent.isRegisteredInFFG and adherent.isDeleted == false %}
-                            <tr role="row" class="odd">
-                                <td>
-                                    {{adherent.lastName}}
-                                </td>
-                                <td>
-                                    {{adherent.firstName}}
-                                </td>
-                                <td>
-                                    {{adherent.registrationDate|date('d-m-Y')}}
-                                </td>
-                                <td>
-                                    {% if adherent.isRegisteredInFFG %}
-                                        <span style="color:green">Inscription validée</span>
-                                    {% else %}
-                                        <span style="color:red">Inscription non validée</span>
-                                    {% endif %}
-                                </td>
-                                <td>
-                                    {% if adherent.isRegisteredInGestGym %}
-                                        <span style="color:green">Effectuée</span>
-                                    {% else %}
-                                        <span style="color:red">Non effectuée</span>
-                                    {% endif %}
-                                </td>
-                                <td>
-                                    <!-- Button trigger modal -->
-                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal{{adherent.id}}">
-                                        Voir plus
-                                    </button>
-                                </td>
-                            </tr>
-                        {% endif %}
-                    {% endfor %}
+                {% for adherent in adherents %}
+                    {% if adherent.isRegisteredInFFG and adherent.isDeleted == false %}
+                        <tr role="row" class="odd">
+                            <td>
+                                {{ adherent.lastName }}
+                            </td>
+                            <td>
+                                {{ adherent.firstName }}
+                            </td>
+                            <td>
+                                {{ adherent.registrationDate|date('d-m-Y') }}
+                            </td>
+                            <td>
+                                {% if adherent.isRegisteredInFFG %}
+                                    <span style="color:green">Inscription validée</span>
+                                {% else %}
+                                    <span style="color:red">Inscription non validée</span>
+                                {% endif %}
+                            </td>
+                            <td>
+                                {% if adherent.isRegisteredInGestGym %}
+                                    <span style="color:green">Effectuée</span>
+                                {% else %}
+                                    <span style="color:red">Non effectuée</span>
+                                {% endif %}
+                            </td>
+                            <td>
+                                <!-- Button trigger modal -->
+                                <button type="button" class="btn btn-primary" data-toggle="modal"
+                                        data-target="#exampleModal{{ adherent.id }}">
+                                    Voir plus
+                                </button>
+                            </td>
+                        </tr>
+                    {% endif %}
+                {% endfor %}
                 </tbody>
                 <tfoot>
-                    <tr>
-                        <th rowspan="1" colspan="1">Nom</th>
-                        <th rowspan="1" colspan="1">Prénom</th>
-                        <th rowspan="1" colspan="1">Date d'inscription</th>
-                        <th rowspan="1" colspan="1">Statut de l'inscription</th>
-                        <th rowspan="1" colspan="1">Inscription dans GestGym</th>
-                        <th rowspan="1" colspan="1">Voir détails</th>
-                    </tr>
+                <tr>
+                    <th rowspan="1" colspan="1">Nom</th>
+                    <th rowspan="1" colspan="1">Prénom</th>
+                    <th rowspan="1" colspan="1">Date d'inscription</th>
+                    <th rowspan="1" colspan="1">Statut de l'inscription</th>
+                    <th rowspan="1" colspan="1">Inscription dans GestGym</th>
+                    <th rowspan="1" colspan="1">Voir détails</th>
+                </tr>
                 </tfoot>
             </table>
         </div>
 
         <div class="tab-pane fade show" id="content-envoyees" role="tabpanel" aria-labelledby="pills-envoyees">
-            <table id="nonRegisteredAdherentsTable" class="table table-striped table-bordered" style="width: 100%;" role="grid"
+            <table id="nonRegisteredAdherentsTable" class="table table-striped table-bordered" style="width: 100%;"
+                   role="grid"
                    aria-describedby="example_info">
                 <thead>
-                    <tr role="row">
-                        <th class="sorting_asc" tabindex="0" aria-controls="example" rowspan="1" colspan="1" style="width: 119px;" aria-sort="ascending" aria-label="lastName: activate to sort column descending">Nom</th>
-                        <th class="sorting_asc" tabindex="0" aria-controls="example" rowspan="1" colspan="1" style="width: 119px;" aria-sort="ascending" aria-label="firstName: activate to sort column descending">Prénom</th>
-                        <th class="sorting_asc" tabindex="0" aria-controls="example" rowspan="1" colspan="1" style="width: 119px;" aria-sort="ascending" aria-label="firstName: activate to sort column descending">Date d'inscription</th>
-                        <th class="sorting_asc" tabindex="0" aria-controls="example" rowspan="1" colspan="1" style="width: 119px;" aria-sort="ascending" aria-label="firstName: activate to sort column descending">Statut de l'inscription</th>
-                        <th class="sorting_asc" tabindex="0" aria-controls="example" rowspan="1" colspan="1" style="width: 119px;" aria-sort="ascending" aria-label="firstName: activate to sort column descending">Inscription dans GestGym</th>
-                        <th class="sorting_asc" tabindex="0" aria-controls="example" rowspan="1" colspan="1" style="width: 119px;" aria-sort="ascending" aria-label="firstName: activate to sort column descending">Voir détails</th>
-                    </tr>
+                <tr role="row">
+                    <th class="sorting_asc" tabindex="0" aria-controls="example" rowspan="1" colspan="1"
+                        style="width: 119px;" aria-sort="ascending"
+                        aria-label="lastName: activate to sort column descending">Nom
+                    </th>
+                    <th class="sorting_asc" tabindex="0" aria-controls="example" rowspan="1" colspan="1"
+                        style="width: 119px;" aria-sort="ascending"
+                        aria-label="firstName: activate to sort column descending">Prénom
+                    </th>
+                    <th class="sorting_asc" tabindex="0" aria-controls="example" rowspan="1" colspan="1"
+                        style="width: 119px;" aria-sort="ascending"
+                        aria-label="firstName: activate to sort column descending">Date d'inscription
+                    </th>
+                    <th class="sorting_asc" tabindex="0" aria-controls="example" rowspan="1" colspan="1"
+                        style="width: 119px;" aria-sort="ascending"
+                        aria-label="firstName: activate to sort column descending">Statut de l'inscription
+                    </th>
+                    <th class="sorting_asc" tabindex="0" aria-controls="example" rowspan="1" colspan="1"
+                        style="width: 119px;" aria-sort="ascending"
+                        aria-label="firstName: activate to sort column descending">Inscription dans GestGym
+                    </th>
+                    <th class="sorting_asc" tabindex="0" aria-controls="example" rowspan="1" colspan="1"
+                        style="width: 119px;" aria-sort="ascending"
+                        aria-label="firstName: activate to sort column descending">Voir détails
+                    </th>
+                </tr>
                 </thead>
                 <tbody>
-                    {% for adherent in adherents %}
-                        {% if not adherent.isRegisteredInFFG and adherent.isDeleted == false %}
-                            <tr role="row" class="odd">
-                                <td>
-                                    {{adherent.lastName}}
-                                </td>
-                                <td>
-                                    {{adherent.firstName}}
-                                </td>
-                                <td>
-                                    {{adherent.registrationDate|date('d-m-Y')}}
-                                </td>
-                                <td>
-                                    {% if adherent.isRegisteredInFFG %}
-                                        <span style="color:green">Inscription validée</span>
-                                    {% else %}
-                                        <span style="color:red">Inscription non validée</span>
-                                    {% endif %}
-                                </td>
-                                <td>
-                                    {% if adherent.isRegisteredInGestGym %}
-                                        <span style="color:green">Effectuée</span>
-                                    {% else %}
-                                        <span style="color:red">Non effectuée</span>
-                                    {% endif %}
-                                </td>
-                                <td>
-                                    <!-- Button trigger modal -->
-                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal{{adherent.id}}">
-                                        Voir plus
-                                    </button>
-                                </td>
-                            </tr>
-                        {% endif %}
-                    {% endfor %}
+                {% for adherent in adherents %}
+                    {% if not adherent.isRegisteredInFFG and adherent.isDeleted == false %}
+                        <tr role="row" class="odd">
+                            <td>
+                                {{ adherent.lastName }}
+                            </td>
+                            <td>
+                                {{ adherent.firstName }}
+                            </td>
+                            <td>
+                                {{ adherent.registrationDate|date('d-m-Y') }}
+                            </td>
+                            <td>
+                                {% if adherent.isRegisteredInFFG %}
+                                    <span style="color:green">Inscription validée</span>
+                                {% else %}
+                                    <span style="color:red">Inscription non validée</span>
+                                {% endif %}
+                            </td>
+                            <td>
+                                {% if adherent.isRegisteredInGestGym %}
+                                    <span style="color:green">Effectuée</span>
+                                {% else %}
+                                    <span style="color:red">Non effectuée</span>
+                                {% endif %}
+                            </td>
+                            <td>
+                                <!-- Button trigger modal -->
+                                <button type="button" class="btn btn-primary" data-toggle="modal"
+                                        data-target="#exampleModal{{ adherent.id }}">
+                                    Voir plus
+                                </button>
+                            </td>
+                        </tr>
+                    {% endif %}
+                {% endfor %}
                 </tbody>
                 <tfoot>
-                    <tr>
-                        <th rowspan="1" colspan="1">Nom</th>
-                        <th rowspan="1" colspan="1">Prénom</th>
-                        <th rowspan="1" colspan="1">Date d'inscription</th>
-                        <th rowspan="1" colspan="1">Statut de l'inscription</th>
-                        <th rowspan="1" colspan="1">Inscription dans GestGym</th>
-                        <th rowspan="1" colspan="1">Voir détails</th>
-                    </tr>
+                <tr>
+                    <th rowspan="1" colspan="1">Nom</th>
+                    <th rowspan="1" colspan="1">Prénom</th>
+                    <th rowspan="1" colspan="1">Date d'inscription</th>
+                    <th rowspan="1" colspan="1">Statut de l'inscription</th>
+                    <th rowspan="1" colspan="1">Inscription dans GestGym</th>
+                    <th rowspan="1" colspan="1">Voir détails</th>
+                </tr>
                 </tfoot>
             </table>
         </div>
     </div>
 
 
-    
+
     <!-- Modals -->
     {% for adherent in adherents %}
-        <div class="modal fade" id="exampleModal{{adherent.id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel{{adherent.id}}" aria-hidden="true">
+        <div class="modal fade" id="exampleModal{{ adherent.id }}" tabindex="-1" role="dialog"
+             aria-labelledby="exampleModalLabel{{ adherent.id }}" aria-hidden="true">
             <div class="modal-dialog modal-lg" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel{{adherent.id}}">Fiche adhérent</h5>
+                        <h5 class="modal-title" id="exampleModalLabel{{ adherent.id }}">Fiche adhérent</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -234,39 +297,69 @@
                     <div class="modal-body">
                         <div class="container-fluid">
 
-                            <h6>TYPE D'INSCRIPTION : {{adherent.registrationType}} </h6>
-                            <h6>DATE DE DEPOT DU DOSSIER {{adherent.registrationDate|date('d-m-Y')}}</h6>
+                            <h6>TYPE D'INSCRIPTION : {{ adherent.registrationType }} </h6>
+                            <h6>DATE DE DEPOT DU DOSSIER {{ adherent.registrationDate|date('d-m-Y') }}</h6>
 
                             <hr/>
 
                             <div class="alert alert-secondary" role="alert">
                                 <div class="row">
                                     <div class="col">
-                                                                    Nom : {{adherent.lastName}}
-                                                                </div>
+                                        Nom : {{ adherent.lastName }}
+                                    </div>
                                     <div class="col">
-                                                                    Prénom : {{adherent.firstName}}
-                                                                </div>
+                                        Prénom : {{ adherent.firstName }}
+                                    </div>
                                 </div>
                                 <div class="row">
                                     <div class="col">
-                                                                    Sexe : {{adherent.sex}}
-                                                                </div>
+                                        Sexe : {{ adherent.sex }}
+                                    </div>
                                     <div class="col">
-                                                                    Date de naissance : {{adherent.birthDate|date('d-m-Y')}}
-                                                                </div>
+                                        Date de naissance : {{ adherent.birthDate|date('d-m-Y') }}
+                                    </div>
                                 </div>
                             </div>
                             <div class="alert alert-secondary" role="alert">
                                 <table>
                                     <thead>
-                                        <tr>
-                                            <th></th>
-                                            <th>Adhérent ou représentant légal</th>
-                                            <th>Représentant légal 2</th>
-                                        </tr>
+                                    <tr>
+                                        <th></th>
+                                        <th>Adhérent ou représentant légal</th>
+                                        <th>Représentant légal 2</th>
+                                    </tr>
                                     </thead>
                                     <tbody>
+                                    <tr>
+                                        <td>Nom/Prénom</td>
+                                        <td>{{ adherent.firstNameRep1 }} {{ adherent.lastNameRep1 }}</td>
+                                        <td>{{ adherent.firstNameRep2 }} {{ adherent.lastNameRep2 }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Profession</td>
+                                        <td>{{ adherent.professionRep1 }}</td>
+                                        <td>{{ adherent.professionRep2 }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Adresse</td>
+                                        <td>{{ adherent.addressRep1 }}</td>
+                                        <td>{{ adherent.addressRep2 }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Code postal/Ville</td>
+                                        <td>{{ adherent.zipCodeRep1 }} {{ adherent.cityRep1 }}</td>
+                                        <td>{{ adherent.zipCodeRep2 }} {{ adherent.cityRep1 }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Téléphone</td>
+                                        <td>{{ adherent.phoneRep1 }}</td>
+                                        <td>{{ adherent.phoneRep2 }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Email</td>
+                                        <td>{{ adherent.emailRep1 }}</td>
+                                        <td>{{ adherent.emailRep2 }}</td>
+                                    </tr>
                                         <tr>
                                             <td>Nom/Prénom</td>
                                             <td>{{adherent.firstNameRep1}} {{adherent.lastNameRep1}}</td>
@@ -285,7 +378,7 @@
                                         <tr>
                                             <td>Code postal/Ville</td>
                                             <td>{{adherent.zipCodeRep1}} {{adherent.cityRep1}}</td>
-                                            <td>{{adherent.zipCodeRep2}} {{adherent.cityRep1}}</td>
+                                            <td>{{adherent.zipCodeRep2}} {{adherent.cityRep2}}</td>
                                         </tr>
                                         <tr>
                                             <td>Téléphone</td>
@@ -308,39 +401,39 @@
                                         Juge GAF
                                         {% if adherent.isGAFJudge %}
                                             <i class="fas fa-check"></i>
-                                            Niveau : {{adherent.GAFJudgeLevel}}
+                                            Niveau : {{ adherent.GAFJudgeLevel }}
                                         {% else %}
                                             <i class="fas fa-times"></i>
                                         {% endif %}
-                                        
+
                                     </div>
                                     <div class="col">
-                                        Juge GAM     
+                                        Juge GAM
                                         {% if adherent.isGAMJudge %}
                                             <i class="fas fa-check"></i>
-                                            Niveau : {{adherent.GAMJudgeLevel}}
+                                            Niveau : {{ adherent.GAMJudgeLevel }}
                                         {% else %}
                                             <i class="fas fa-times"></i>
                                         {% endif %}
                                     </div>
                                     <div class="col">
-                                        Juge TEAMGYM     
+                                        Juge TEAMGYM
                                         {% if adherent.isTEAMGYMJudge %}
                                             <i class="fas fa-check"></i>
-                                            Niveau : {{adherent.TEAMGYMJudgeLevel}}
+                                            Niveau : {{ adherent.TEAMGYMJudgeLevel }}
                                         {% else %}
                                             <i class="fas fa-times"></i>
-                                        {% endif %} 
+                                        {% endif %}
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col">
-                                    Je souhaite suivre une formation de juge : 
-                                    {% if adherent.wantsAJudgeTraining %}
-                                        <i class="fas fa-check"></i>
-                                    {% else %}
-                                        <i class="fas fa-times"></i>
-                                    {% endif %}
+                                        Je souhaite suivre une formation de juge :
+                                        {% if adherent.wantsAJudgeTraining %}
+                                            <i class="fas fa-check"></i>
+                                        {% else %}
+                                            <i class="fas fa-times"></i>
+                                        {% endif %}
                                     </div>
                                 </div>
                             </div>
@@ -349,26 +442,27 @@
                             <div class="alert alert-secondary" role="alert">
                                 <div class="row">
                                     <div class="col">
-                                        Aide à l'entraînement : {{adherent.volunteerForTrainingHelp}}
+                                        Aide à l'entraînement : {{ adherent.volunteerForTrainingHelp }}
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col">
-                                        Aide à la vie du club : {{adherent.volunteerForClubLife}}
+                                        Aide à la vie du club : {{ adherent.volunteerForClubLife }}
                                     </div>
                                 </div>
                             </div>
                             <hr/>
-                            <h6>MONTANT DE LA COTISATION : <span style="color:red"> {{adherent.registrationCost}} €</span> </h6>
+                            <h6>MONTANT DE LA COTISATION : <span style="color:red"> {{ adherent.registrationCost }}
+                                    €</span></h6>
                             <div class="alert alert-secondary" role="alert">
                                 <div class="row">
                                     <div class="col">
-                                        Mode de règlement : {{adherent.paymentType}}
+                                        Mode de règlement : {{ adherent.paymentType }}
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col">
-                                        Engagement compétition : 
+                                        Engagement compétition :
                                     </div>
                                 </div>
                             </div>
@@ -377,8 +471,9 @@
                             <div class="alert alert-secondary" role="alert">
                                 <div class="row">
                                     <div class="col">
-                                        J'autorise le club à prendre et à diffuser des photos me concernant pour enrichir la
-                                        photothèque et le site internet du club : 
+                                        J'autorise le club à prendre et à diffuser des photos me concernant pour
+                                        enrichir la
+                                        photothèque et le site internet du club :
                                         {% if adherent.imageRight %}
                                             <i class="fas fa-check"></i>
                                         {% else %}
@@ -392,7 +487,7 @@
                             <div class="alert alert-secondary" role="alert">
                                 <div class="row">
                                     <div class="col-5">
-                                        Certificat medical ou attestation : 
+                                        Certificat medical ou attestation :
                                     </div>
                                     <div class="col">
                                         {% if adherent.isMedicalCertificate %}
@@ -401,16 +496,19 @@
                                             <i class="fas fa-times"></i>
                                         {% endif %}
                                     </div>
+                                    <div class="col">
+                                        <a target="_blank" rel="noopener noreferrer" href="{{ asset('uploads/' ~ adherent.medicalCertificate) }}" class="btn btn-success">PDF</a>
+                                    </div>
                                 </div>
                                 <div class="row">
                                     <div class="col">
-                                        Bulletin N°2 Allianz : 
+                                        Bulletin N°2 Allianz :
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-5">
                                         Règlement cotisation :
-                                    </div> 
+                                    </div>
                                     <div class="col">
                                         {% if adherent.paymentFeesArePaid %}
                                             <i class="fas fa-check"></i>
@@ -421,22 +519,22 @@
                                 </div>
                                 <div class="row">
                                     <div class="col">
-                                        Engagement compétition : 
+                                        Engagement compétition :
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col">
-                                        Mutation : 
+                                        Mutation :
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col">
-                                        Dossier traité par : 
+                                        Dossier traité par :
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-5">
-                                        Saisie dans Gest'Gym : 
+                                        Saisie dans Gest'Gym :
                                     </div>
                                     <div class="col">
                                         {% if adherent.isRegisteredInGestGym %}
@@ -448,19 +546,22 @@
                                 </div>
                                 <div class="row">
                                     <div class="col">
-                                        Licence 2019 : 
+                                        Licence 2019 :
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="modal-footer">                       
+                    <div class="modal-footer">
                         {% if not adherent.isRegisteredInFFG %}
-                            <a href="{{path('admin_adherentsRegister', {id: adherent.id})}}" class="btn btn-primary">Valider l'inscription</a>
+                            <a href="{{ path('admin_adherentsRegister', {id: adherent.id}) }}" class="btn btn-primary">Valider
+                                l'inscription</a>
                         {% endif %}
+
                         <a href="{{path('admin_adherentsPDF', {id: adherent.id})}}" class="btn btn-danger">Imprimer</a>
                         <a href="{{path('admin_adherentsEdit', {id: adherent.id})}}" class="btn btn-secondary">Modifier</a>
                         <a href="{{path('admin_adherentsDelete', {id: adherent.id})}}" class="btn btn-secondary">Supprimer</a>
+
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
                     </div>
                 </div>

@@ -6,7 +6,7 @@
  */
 
 // any CSS you require will output into a single css file (app.scss in this case)
-require('../css/app.scss');
+require('../css/registation.scss');
 
 $ = require('jquery');
 
@@ -22,8 +22,8 @@ $('#next').click(function () {
             }
             $("#previous").show();
             $("helper").hide();
-            $("#step" + (value + 1)).show();
-            $("#step" + (value)).hide();
+            $("#registrationStep" + (value + 1)).show();
+            $("#registrationStep" + (value)).hide();
             document.getElementById('step').value = value + 1;
         }
     } else {
@@ -38,8 +38,8 @@ $('#previous').click(function () {
             $("#previous").hide();
         }
         $("#next").show();
-        $("#step" + (value - 1)).show();
-        $("#step" + (value)).hide();
+        $("#registrationStep" + (value - 1)).show();
+        $("#registrationStep" + (value)).hide();
         document.getElementById('step').value = value - 1;
     } else {
         $("#previous").hide();
@@ -121,7 +121,7 @@ function step3() {
     (isEmpty('adherent[lastNameRep1]') ? ($("#lastNameRep1Help").show(), bool = false) : $("#lastNameRep1Help").hide());
 
 
-    if (isValidationEmailInput('adherent[emailRep1]')) {
+    if (isEmpty('adherent[emailRep1]') || isValidationEmail('adherent[emailRep1]')) {
         $("#emailRep1Help").show();
         bool = false;
     } else {
@@ -135,7 +135,7 @@ function step3() {
         $("#professionRep1Help").hide();
     }
 
-    if (isEmpty('adherent[cityRep1]')) {
+    if (isValidationList('#adherent_cityRep1')) {
         $("#cityRep1Help").show();
         bool = false;
     } else {
@@ -149,14 +149,14 @@ function step3() {
         $("#addressRep1Help").hide();
     }
 
-    if (isValidationZipCodeInput('adherent[zipCodeRep1]')) {
+    if (isEmpty('adherent[zipCodeRep1]') || isValidationZipCode('adherent[zipCodeRep1]')) {
         $("#zipCodeRep1Help").show();
         bool = false;
     } else {
         $("#zipCodeRep1Help").hide();
     }
 
-    if (isValidationPhoneNumberInput('adherent[phoneRep1]')) {
+    if (isEmpty('adherent[phoneRep1]') || isValidationPhoneNumber('adherent[phoneRep1]')) {
         $("#phoneRep1Help").show();
         bool = false;
     } else {
@@ -169,25 +169,20 @@ function step3() {
     return bool;
 }
 
-function isValidationRadio(nameRadio) {
-    return !$('input[name="' + nameRadio + '"]:checked').val();
-}
-
 function isEmpty(nameInput) {
     return !$('input[name="' + nameInput + '"]').val();
 }
 
-function isValidationEmailInput(nameEmailInput) {
-    if ($('input[name="' + nameEmailInput + '"]').val()) {
-        var pattern = new RegExp(/^[+a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/i);
-        if (pattern.test($('input[name="' + nameEmailInput + '"]').val())) {
-            return false;
-        } else {
-            return true;
-        }
-    } else {
-        return true;
-    }
+function isValidationRadio(nameRadio) {
+    return !$('input[name="' + nameRadio + '"]:checked').val();
+}
+
+function isValidationList(nameList) {
+    var bool = true;
+    $.each($(nameList + ' option:selected'), function () {
+       bool = false;
+    });
+    return bool;
 }
 
 function isValidationEmail(nameEmail) {
@@ -217,30 +212,44 @@ function isValidationPhoneNumber(nameZipCode) {
     }
 }
 
-function isValidationZipCodeInput(nameZipCodeInput) {
-    if (!$('input[name="' + nameZipCodeInput + '"]').val()) {
-        return true;
-    } else {
-        var pattern = new RegExp(/^([0-9]{2}|(2A)|2B)[[0-9]{3}$/);
-        if (pattern.test($('input[name="' + nameZipCodeInput + '"]').val())) {
-            return false;
-        } else {
-            return true;
+$('#adherent_zipCodeRep1').focusout( function(){
+    $.ajax({
+        url:'https://datanova.legroupe.laposte.fr/api/records/1.0/search/',
+        type: "POST",
+        dataType: "json",
+        data: {
+            "dataset": "laposte_hexasmal",
+            "refine.code_postal": $('#adherent_zipCodeRep1').val(),
+        },
+        success: function (data)
+        {
+            $('#adherent_cityRep1 option').remove();
+            for (var i in data["records"]) {
+                commune = data["records"][i]["fields"]["nom_de_la_commune"];
+                $('#adherent_cityRep1').append(new Option(commune, commune));
+            }
         }
-    }
-}
+    })
+});
 
-function isValidationPhoneNumberInput(namePhoneNumberInput) {
-    if (!$('input[name="' + namePhoneNumberInput + '"]').val()) {
-        return true;
-    } else {
-        var pattern = new RegExp(/^(?:(?:\+)33|0)\s*[1-9](?:[\s.-]*\d{2}){4}$/);
-        if (pattern.test($('input[name="' + namePhoneNumberInput + '"]').val())) {
-            return false;
-        } else {
-            return true;
+$('#adherent_zipCodeRep2').focusout( function(){
+    $.ajax({
+        url:'https://datanova.legroupe.laposte.fr/api/records/1.0/search/',
+        type: "POST",
+        dataType: "json",
+        data: {
+            "dataset": "laposte_hexasmal",
+            "refine.code_postal": $('#adherent_zipCodeRep2').val(),
+        },
+        success: function (data)
+        {
+            $('#adherent_cityRep2 option').remove();
+            for (var i in data["records"]) {
+                commune = data["records"][i]["fields"]["nom_de_la_commune"];
+                $('#adherent_cityRep2').append(new Option(commune, commune));
+            }
         }
-    }
-}
+    })
+});
 
 
