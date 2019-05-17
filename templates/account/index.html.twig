@@ -9,7 +9,7 @@
 {% block body %}
     <div class="d-md-flex h-md-100 align-items-center">
         <!-- First Half -->
-        <div class="col-md-7 p-0 bg-gym h-md-100">
+        <div class="col-md-6 p-0 bg-gym h-md-100">
             <div class="text-white d-md-flex align-items-center h-100 p-5 text-center justify-content-center">
                 <div class="pt-5 pb-5">
                     <h1 class="text-black">CEP</h1>
@@ -19,7 +19,7 @@
         </div>
 
         <!-- Second Half -->
-        <div class="col-md-5 p-0 bg-white h-md-100">
+        <div class="col-md-6 p-0 bg-white h-md-100">
             <div class="align-items-center h-md-100 p-3 justify-content-center">
                 <div class="container-fluid">
                     <div class="row justify-content-center">
@@ -105,7 +105,7 @@
                                 <select id="account_city" name="account_city" class="form-control">
                                 </select>
                             </div>
-                            <div class="col-auto">
+                            <div class="col-5">
                                 <small id="cityHelp" class="form-text helper"><span
                                             class="badge badge-danger">Erreur</span> Le zip code doit être rempli pour
                                     pouvoir choisir la ville.
@@ -231,6 +231,14 @@
                             <div class="pb-2">
                                 <div class="container-fluid">
                                     <h5>Juges :</h5>
+                                    <div class="row justify-content-start align-items-center mt-3">
+                                        <div class="col-auto">
+                                            <p>Souhaitez-vous suivre une formation juge ?</p>
+                                        </div>
+                                        <div class="col-auto">
+                                            {{ form_widget(form.children[0].wantsAJudgeTraining) }}
+                                        </div>
+                                    </div>
                                     <p>Si vous êtes juges et si vous souhaitez juger pour le CEP cette année, merci
                                         de
                                         cocher les
@@ -241,7 +249,7 @@
                                             {{ form_widget(form.children[0].isGAFJudge) }}
                                         </div>
                                         <div class="col-auto">
-                                            {{ form_widget(form.children[0].GAFJudgeLevel) }}
+                                            Niveau : {{ form_widget(form.children[0].GAFJudgeLevel) }}
                                         </div>
                                     </div>
                                     <div class="row justify-content-start align-items-center mt-3">
@@ -249,7 +257,7 @@
                                             {{ form_widget(form.children[0].isGAMJudge) }}
                                         </div>
                                         <div class="col-auto">
-                                            {{ form_widget(form.children[0].GAMJudgeLevel) }}
+                                            Niveau : {{ form_widget(form.children[0].GAMJudgeLevel) }}
                                         </div>
                                     </div>
                                     <div class="row justify-content-start align-items-center mt-3">
@@ -257,15 +265,7 @@
                                             {{ form_widget(form.children[0].isTeamGYMJudge) }}
                                         </div>
                                         <div class="col-auto">
-                                            {{ form_widget(form.children[0].teamGYMJudgeLevel) }}
-                                        </div>
-                                    </div>
-                                    <div class="row justify-content-start align-items-center mt-3">
-                                        <div class="col-auto">
-                                            <p>Souhaitez-vous suivre une formation juge ?</p>
-                                        </div>
-                                        <div class="col-auto">
-                                            {{ form_widget(form.children[0].wantsAJudgeTraining) }}
+                                            Niveau : {{ form_widget(form.children[0].teamGYMJudgeLevel) }}
                                         </div>
                                     </div>
                                 </div>

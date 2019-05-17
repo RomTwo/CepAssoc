@@ -108,8 +108,19 @@
                             cases
                             ci-dessous</p>
                         <div class="row justify-content-start align-items-center mt-3">
+                            <div class="col-auto">
+                                <p>Souhaitez-vous suivre une formation juge ?</p>
+                            </div>
+                            <div class="col-auto">
+                                {{ form_widget(form.wantsAJudgeTraining) }}
+                            </div>
+                        </div>
+                        <div class="row justify-content-start align-items-center mt-3">
                             <div class="col-2">
                                 {{ form_widget(form.isGAFJudge) }}
+                            </div>
+                            <div class="col-auto">
+                                Niveau :
                             </div>
                             <div class="col-auto">
                                 {{ form_widget(form.GAFJudgeLevel) }}
@@ -120,6 +131,9 @@
                                 {{ form_widget(form.isGAMJudge) }}
                             </div>
                             <div class="col-auto">
+                                Niveau :
+                            </div>
+                            <div class="col-auto">
                                 {{ form_widget(form.GAMJudgeLevel) }}
                             </div>
                         </div>
@@ -128,15 +142,10 @@
                                 {{ form_widget(form.isTeamGYMJudge) }}
                             </div>
                             <div class="col-auto">
+                                Niveau :
+                            </div>
+                            <div class="col-auto">
                                 {{ form_widget(form.teamGYMJudgeLevel) }}
-                            </div>
-                        </div>
-                        <div class="row justify-content-start align-items-center mt-3">
-                            <div class="col-auto">
-                                <p>Souhaitez-vous suivre une formation juge ?</p>
-                            </div>
-                            <div class="col-auto">
-                                {{ form_widget(form.wantsAJudgeTraining) }}
                             </div>
                         </div>
                     </div>
@@ -314,7 +323,7 @@
                                 </tr>
                                 </thead>
 
-                                {% for activity in activities %}
+                                {% for activity in form.activities %}
                                     <tbody>
                                     <tr id={{ activity.id }}>
                                         <td>{{ activity.name }}</td>
@@ -376,7 +385,7 @@
                         </div>
                     </div>
                     <div class="container-fluid">
-                        <h4>Droits d'image :</h4>
+                        <h4>Certificat medical :</h4>
                         <div class="row align-items-center ml-2">
                             {{ form_widget(form.medicalCertificate) }}
                         </div>
@@ -384,15 +393,20 @@
                 </div>
                 <button type="submit" class="btn btn-primary">Confirmer l'inscription de l'adhérent</button>
             </div>
-
         </div>
+        <div class="row justify-content-between">
+            <div class="mb-5 ml-5">
+                <button id="previous" type="button" class="btn btn-primary">Précédent</button>
+            </div>
+            <div class="mb-5 mr-5">
+                <button id="next" type="button" class="btn btn-primary">Suivant</button>
+                <input id="step" value="1" hidden>
+            </div>
+        </div>
+
     </div>
     {{ form_end(form) }}
-    <div class="fixed-bottom mb-5 mr-3 d-flex justify-content-end">
-        <button id="previous" type="button" class="btn btn-primary">Précédent</button>
-        <button id="next" type="button" class="btn btn-primary">Suivant</button>
-        <input id="step" value="1" hidden>
-    </div>
+
 
 {% endblock %}
 
