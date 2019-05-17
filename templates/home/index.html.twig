@@ -3,5 +3,127 @@
 {% block title %}Hello HomeController!{% endblock %}
 
 {% block body %}
-    <p>Accueil</p>
+
+    <div class="row">
+        <div class="col-7" style="padding-right:20px; border-right: 1px dotted #ccc;">
+            <br/>
+
+            {% if errorCode is defined%}
+                {% if errorCode == 0 %}
+                    <h4 style="color:green">{{ msg }}</h4>
+                {% else %}
+                    <h4 style="color:red">{{ msg }}</h4>
+                {% endif %}
+            {% endif %}
+
+            <div class="row justify-content-center">
+                <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="true" aria-controls="collapseExample">
+                    Récapitulatif des inscriptions effectuées
+                </button>
+            </div>
+
+            <div class="collapse" id="collapseExample">
+                <br/>
+                <!--<div class="card card-body">-->
+                    <div class="container-fluid">
+                        <table>
+                            <thead>
+                            <tr>
+                                <th>Nom</th>
+                                <th>Prénom</th>
+                                <th>Date d'inscription</th>
+                                <th>Statut de l'inscription</th>
+                                <th>Inscription dans Gestgym</th>
+                                <th>Code d'affiliation </th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for adherent in adherents %}
+                                <tr role="row" class="odd">
+                                    <td>
+                                        {{adherent.lastName}}
+                                    </td>
+                                    <td>
+                                        {{adherent.firstName}}
+                                    </td>
+                                    <td>
+                                        {{adherent.registrationDate|date('d-m-Y')}}
+                                    </td>
+                                    <td>
+                                        {% if adherent.isDeleted == true %}
+                                            <span style="color:green">Inscription rejeté !</span>
+                                        {% else %}
+                                            {% if adherent.isRegisteredInFFG %}
+                                                <span style="color:green">Inscription validée</span>
+                                            {% else %}
+                                                <span style="color:red">Inscription non validée</span>
+                                            {% endif %}
+                                        {% endif %}
+                                    </td>
+                                    <td>
+                                        {% if adherent.isRegisteredInGestGym %}
+                                            <span style="color:green">Effectuée</span>
+                                        {% else %}
+                                            <span style="color:red">Non effectuée</span>
+                                        {% endif %}
+                                    </td>
+                                    <td>
+                                        {# {{ adherent.affiliateCode }} #}
+
+                                        <div class="input-group mb-3">
+                                            <input readonly type="text" class="form-control" value="{{ adherent.affiliateCode }}" aria-describedby="basic-addon2"  id="cible{{ adherent.id }}">
+                                            <div class="input-group-append">
+                                                <button class="btn btn-outline-secondary" type="button" onclick="myFunction(this.id)" id="{{ adherent.id }}">Copier</button>
+                                            </div>
+                                        </div>
+
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                <!--</div>-->
+            </div>
+
+            <br/>
+            <div class="row justify-content-center">
+                <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#addChild" aria-expanded="true" aria-controls="collapseExample">
+                    Ajouter un enfant
+                </button>
+            </div>
+
+            <div class="collapse" id="addChild">
+                <br/>
+                <!--<div class="card card-body">-->
+                    <div class="container-fluid">
+                        {{ form_start(form) }}
+                        <div class="row justify-content-center">
+                            <div class="col">
+                                {{ form_widget(form.code, {'attr': {'placeholder': "Entrez votre code ici"}}) }}
+                            </div>
+                            <div class="col">
+                                <button class="btn btn-primary">Ajouter</button>
+                            </div>
+                        </div>
+                        {{ form_end(form) }}
+                    </div>
+                <!--</div>-->
+            </div>
+        </div>
+
+        <div class="col">
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block javascripts %}
+    <script>
+        function myFunction(id) {
+            var copyText = document.getElementById("cible"+id);
+            copyText.select();
+            document.execCommand("copy");
+        }
+    </script>
 {% endblock %}

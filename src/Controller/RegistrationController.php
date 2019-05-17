@@ -64,4 +64,52 @@ class RegistrationController extends AbstractController
         $file->move($this->getParameter('upload_directory'), $fileName);
         return $fileName;
     }
+
+    private function setOtherFields($adherent){
+        $adherent->setRegistrationDate(new DateTime());
+        $adherent->setIsRegisteredInGestGym(false);
+        $adherent->setJudge(false);
+        $adherent->setPaymentFeesArePaid(false);
+        $adherent->setRegistrationCost(0);
+        $adherent->setIsRegisteredInFFG(false);
+        $adherent->setIsMedicalCertificate(false);
+        $adherent->setIsValidateMedical(false);
+        $adherent->setMedicalCertificateDate(new \DateTime("01-09-2019"));
+        $adherent->setNationality("France");
+        $adherent->setIsFFGInsurance(false);
+        $adherent->setIsAllowEmail(false);
+        $adherent->setIsLicenceHolderOtherClub(false);
+        $adherent->setMaidenName("");
+        $adherent->setHasBulletinN2Allianz(false);
+        $adherent->setHasCompetitionCommitment(false);
+        $adherent->setIsMutated(false);
+        $adherent->setIsDeleted(false);
+        $adherent->setAffiliateCode($this->generateAffiliateCode());
+        return $adherent;
+    }
+
+    private function generateAffiliateCode()
+    {
+        $repository = $this->getDoctrine()->getRepository(Adherent::class);
+        $code = ""; // code that will be returned
+        $adherentWithSameCode = -1; // this will contain an Adherent Entity instance having a certain given affiliateCode equals to $code
+
+        $characters = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'; //characters list for code generation
+        $charactersLength = strlen($characters);
+
+        while ($adherentWithSameCode != null) {
+
+            // generating a new code
+            $code = "";
+            for ($nbLetter = 0; $nbLetter < 5; $nbLetter++) {  // our code contain 5 characters !
+                //$code .= chr(rand(65, 90));   // 65-90 range for upper case characters
+                $code .= $characters[rand(0, $charactersLength - 1)];
+            }
+
+            $adherentWithSameCode = $repository->findOneBy(['affiliateCode' => $code]);
+        }
+
+        return $code;
+    }
+
 }
