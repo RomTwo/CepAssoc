@@ -3,28 +3,37 @@
 {% block title %}Compétiteurs{% endblock %}
 
 {% block body %}
-    <div class ="row">
-        <div class="col-6">
-           <h2>Initialisation</h2>
-            <p id="lbl_init" >Aucune initialisation en cours.</p>
-            <img id="spinner_init" src="{{ asset('build/spinner.gif') }}" style = "display:none;">
-            <button id="init" hidden></button>
-            <div id="competiteur" hidden>
-                {% if comp is defined %}
-                    {{ comp }}
-                {% else %}
-                    <p>Aucuns compétiteurs à inscrire</p>
-                {% endif %}
+    <div class="container" style ="margin-top : 30px;">
+        <div class ="row">
+            <div class="col-md-6 col-sm-12">
+            <h2>Initialisation</h2>
+                <p id="lbl_init" >Aucune initialisation en cours.</p>
+                <i id="init_valid" class=" fas fa-check-circle" style = "display:none;"></i>
+                <i id="init_error" class=" fas fa-times-circle" style = "display:none;"></i>
+                <img id="spinner_init" src="{{ asset('build/spinner.gif') }}" style = "display:none;">
+                
+                <button id="init" hidden></button>
+                <div id="competiteur" hidden>
+                    {% if comp is defined %}
+                        {{ comp }}
+                    {% else %}
+                        <p>Aucuns compétiteurs à inscrire</p>
+                    {% endif %}
+                </div>
+            </div>
+            <div class="col-md-6  col-sm-12">
+                    <h2>Synchronisation</h2>
+                    <p id ="lbl_sync" >Aucune synchronisation en cours.</p>
+                    <i id="sync_valid" class=" fas fa-check-circle" style = "display:none;"></i>
+                    <i id="sync_error" class=" fas fa-times-circle" style = "display:none;"></i>
+        
+
+                    <img id="spinner_sync" src="{{ asset('build/spinner.gif') }}" style = "display:none;" >
+                    <button id="a" hidden ></button>
+                    <button id="sync" hidden></button>
+                    <div id="ids" hidden ></div>
             </div>
         </div>
-         <div class="col-6">
-                <h2>Synchronisation</h2>
-                <p id ="lbl_sync" >Aucune synchronisation en cours.</p>
-                <img id="spinner_sync" src="{{ asset('build/spinner.gif') }}" style = "display:none;" >
-                <button id="a" hidden ></button>
-                <button id="sync" hidden></button>
-                <div id="ids" hidden ></div>
-         </div>
     </div>
     
 
@@ -36,10 +45,17 @@
 
     document.getElementById("init").addEventListener("click",function() {
         document.getElementById("lbl_init").textContent = "Initialisation en cours.";
+        document.getElementById("lbl_init").style.color = "black";
+
         document.getElementById("spinner_init").style.display = "inline";
+        document.getElementById("init_valid").style.display = "none";
+        document.getElementById("init_error").style.display = "none";
+
         setTimeout(function() {
             document.getElementById("lbl_init").textContent = "Initialisation terminée.";
             document.getElementById("spinner_init").style.display = "none";
+            document.getElementById("init_valid").style.display = "inline";
+            document.getElementById("lbl_init").style.color = "green";
         },2000);
 
 
@@ -49,10 +65,13 @@
             var timeout1 = false;
             var timeout2 = false;
             document.getElementById("lbl_sync").textContent = "Synchronisation en cours ...";
+            document.getElementById("lbl_sync").style.color = "black";
             document.getElementById("spinner_sync").style.display = "inline";
+            document.getElementById("sync_valid").style.display = "none";
+            document.getElementById("sync_error").style.display = "none";
 
-            console.log(document.getElementById("ids").textContent);
-            
+
+
             $.ajax({
                 url:'{{path('admin_adherent_update_state')}}',
                 type: "POST",
@@ -68,12 +87,16 @@
 
                             if(timeout1 == true){
                                     document.getElementById("lbl_sync").textContent = "Synchronisation terminée.";
+                                    document.getElementById("lbl_sync").style.color = "green";
                                     document.getElementById("spinner_sync").style.display = "none";
+                                    document.getElementById("sync_valid").style.display = "inline";
+
                             }
-                            console.log(jqXHR.responseText);
                             break;
                         default:
-                            alert("ERREUR");
+                                document.getElementById("lbl_sync").textContent = "Erreur. Synchronisation annulée.";
+                                document.getElementById("spinner_sync").style.display = "none";
+                                document.getElementById("lbl_sync").style.color = "red";
                     }
                 }
 
@@ -82,7 +105,9 @@
                 timeout1 = true;
                 if(timeout2==true){
                     document.getElementById("lbl_sync").textContent = "Synchronisation terminée.";
-                    document.getElementById("spinner_sync").style.display = "none";
+                        document.getElementById("lbl_sync").style.color = "green";
+                        document.getElementById("spinner_sync").style.display = "none";
+                        document.getElementById("sync_valid").style.display = "inline";
                 }
             }, 2000); 
         });
