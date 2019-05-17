@@ -89,31 +89,16 @@ class AccountType extends AbstractType
                     )
                 )
             )
+            ->add('children', CollectionType::class, [
+                'entry_type' => AdherentAccountType::class,
+                'delete_empty' => true,
+                'required' => false,
+            ])
             ->addEventListener(
                 FormEvents::SUBMIT,
                 [$this, 'onSubmit']
             )
-            ->add('valid', SubmitType::class, array('label' => 'S\'inscrire : '));
-
-        if($options['city'] == null){
-            $builder
-                ->add('city', ChoiceType::class, [
-                    'label' => 'Ville : ',
-                    'placeholder' => 'Veuillez saisir le zip code',
-                    'multiple' => false,
-                ]);
-
-        }else{
-            $builder
-                ->add('city', ChoiceType::class, [
-                    'choices' => array(
-                        $options['city'] => $options['city'],
-                    ),
-                    'label' => 'Ville : ',
-                    'placeholder' => 'Veuillez choisir une ville',
-                    'multiple' => false,
-                ]);
-        }
+            ->add('valid', SubmitType::class, array('label' => 'S\'inscrire'));
     }
 
     public function onSubmit(FormEvent $event)
@@ -121,8 +106,6 @@ class AccountType extends AbstractType
         $form = $event->getForm();
 
         $data = $form->getData();
-
-        $data->setCity($form->get('city')->getViewData());
 
         $children = $data->getChildren();
         if($data->getFirstName() != null){
@@ -141,10 +124,6 @@ class AccountType extends AbstractType
             $children[0]->setEmailRep1($data->getEmail());
         }
 
-        if($data->getCity() != null){
-            $children[0]->setCityRep1($data->getCity());
-        }
-
         if($data->getAddress() != null){
             $children[0]->setAddressRep1($data->getAddress());
         }
@@ -152,12 +131,17 @@ class AccountType extends AbstractType
         if($data->getZipCode() != null){
             $children[0]->setZipCodeRep1($data->getZipCode());
         }
+
+        if($data->getSex() != null){
+            $children[0]->setSex($data->getSex());
+        }
     }
 
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => Account::class
+            'data_class' => Account::class,
+            "allow_extra_fields" => true
         ]);
     }
 

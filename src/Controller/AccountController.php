@@ -3,10 +3,13 @@
 namespace App\Controller;
 
 use App\Entity\Account;
+use App\Entity\Activity;
+use App\Entity\Adherent;
 use App\Form\AccountType;
 use App\Services\CaptchaCheck;
 use App\Services\ForgotPassword;
 use App\Services\GenerateToken;
+use App\Services\Utilitaires;
 use Firebase\JWT\JWT;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
@@ -25,7 +28,7 @@ class AccountController extends AbstractController
      * @param CaptchaCheck $captchaCheck
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
-    public function add(Request $request, UserPasswordEncoderInterface $encoder)
+    public function add(Request $request, UserPasswordEncoderInterface $encoder, CaptchaCheck $captchaCheck, Utilitaires $utilitaires)
     {
         if ($this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_FULLY')) {
             return $this->redirectToRoute('home');
@@ -38,12 +41,15 @@ class AccountController extends AbstractController
         $form->handleRequest($request);
         $msg = null;
 
-        if ($form->isSubmitted() && $form->isValid() && $request->request->has('recaptcha_response')) {
+        if ($form->isSubmitted() && $form->isValid() && $utilitaires->isValidateCity($request)) {
             if ($captchaCheck->captchaIsValid($request->request->get('recaptcha_response'))) {
+            $account->setCity($request->request->get("account_city"));
+            $adherent->setCityRep1($request->request->get("account_city"));
                 if (!$this->findByEmail($account->getEmail())) {
                     if($test = $request->request->get("registration")){
                         if($this->isValidate($adherent)){
-                            $this->setOtherFields($adherent);
+                            $utilitaires->setOtherFields($adherent);
+                            $adherent->setRegistrationType("nouveau");
                         }else{
                             $msg = "Attention, il manque des informations pour devenir adhérent";
                             return $this->render('account/index.html.twig', array(
@@ -88,49 +94,7 @@ class AccountController extends AbstractController
      * @param UserPasswordEncoderInterface $encoder
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|Response
      */
-    public function update(Request $request, UserPasswordEncoderInterface $encoder)
-    {
-        $manager = $this->getDoctrine()->getManager();
-        $currentUserEmail = $this->get('session')->get('_security.last_username');
-        $account = $manager->getRepository(Account::class)->findOneBy(array('email' => $currentUserEmail));
-
-        $form = $this->createForm(AccountType::class, $account, array(
-            'city'=>$account->getCity(),
-        ));
-        $form->remove('children');
-        $form->handleRequest($request);
-        $msg = null;
-
-        if ($form->isSubmitted()) {
-            if ($currentUserEmail != $account->getEmail()) {
-                if ($this->findByEmail($account->getEmail())) {
-                    $msg = "Cet email a déjà un compte associé !";
-                    return $this->render('account/update.html.twig', array(
-                        "form" => $form->createView(),
-                        "msg" => $msg
-                    ));
-                }
-                $this->get('session')->set('_security.last_username', $account->getEmail());
-            }
-            $encoded = $encoder->encodePassword($account, $account->getPassword());
-            $account->setPassword($encoded);
-            $manager->flush();
-            return $this->redirectToRoute('home');
-        }
-
-        return $this->render('account/update.html.twig', array(
-            "form" => $form->createView(),
-            "account" => $account
-        ));
-    }
-
-    /**
-     * The user can modify your profile (personnal informations and his identifiants)
-     * @param Request $request
-     * @param UserPasswordEncoderInterface $encoder
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse|Response
-     */
-    public function update(Request $request, UserPasswordEncoderInterface $encoder)
+    public function update(Request $request, UserPasswordEncoderInterface $encoder, Utilitaires $utilitaires)
     {
         $manager = $this->getDoctrine()->getManager();
         $currentUserEmail = $this->get('session')->get('_security.last_username');
@@ -138,6 +102,7 @@ class AccountController extends AbstractController
         $oldPassword = $account->getPassword();
 
         $form = $this->createForm(AccountType::class, $account);
+        $form->remove('children');
         $form->add('newPassword', PasswordType::class, array(
             'mapped' => false,
             'label' => 'Mot de passe',
@@ -153,10 +118,11 @@ class AccountController extends AbstractController
         $form->handleRequest($request);
         $msg = null;
 
-        if ($form->isSubmitted() && $form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid() && $utilitaires->isValidateCity($request->request->get("account_city"))) {
+            $oldPassword = $this->getDoctrine()->getRepository(Account::class)->getOldPassword($currentUserEmail); //get the password of the current user (in database)
             $passwordEntryByUser = $account->getPassword(); //get the user password in the password field of the form
             $account->setPassword($oldPassword); //modify the password to can compare the old password (in database) with the old password entry in the form
-
+            $account->setCity($request->request->get("account_city"));
             if ($currentUserEmail != $account->getEmail()) {
                 if ($this->findByEmail($account->getEmail())) {
                     $msg = "Cet email a déjà un compte associé";
@@ -186,7 +152,7 @@ class AccountController extends AbstractController
             $this->addFlash('success', "Votre compte a été modifié");
             return $this->redirectToRoute('home');
         }
-        return $this->render('account/update.html.twig', array("form" => $form->createView(), "error" => $msg));
+        return $this->render('account/update.html.twig', array("form" => $form->createView(), "error" => $msg, "city" => $account->getCity()));
     }
 
     /**
@@ -292,29 +258,12 @@ class AccountController extends AbstractController
         return $account != null ? true : false;
     }
 
-    private function setOtherFields($adherent){
-        $adherent->setRegistrationDate(new DateTime());
-        $adherent->setIsRegisteredInGestGym(false);
-        $adherent->setJudge(false);
-        $adherent->setPaymentFeesArePaid(false);
-        $adherent->setRegistrationCost(0);
-        $adherent->setIsRegisteredInFFG(false);
-        $adherent->setIsMedicalCertificate(false);
-        $adherent->setIsValidateMedical(false);
-        $adherent->setMedicalCertificateDate(new \DateTime("01-09-2019"));
-        $adherent->setNationality("France");
-        $adherent->setIsFFGInsurance(false);
-        $adherent->setIsAllowEmail(false);
-        $adherent->setIsLicenceHolderOtherClub(false);
-        $adherent->setMaidenName("");
-
-        return $adherent;
-    }
-
     private function isValidate($adherent){
         if($adherent->getSex() == null){
             return false;
         }
+
+
         return true;
     }
 }

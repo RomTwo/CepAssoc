@@ -2,8 +2,10 @@
 
 namespace App\Controller\administration;
 
+use App\Entity\Activity;
 use App\Entity\Adherent;
 use App\Form\AdminAdherentType;
+use App\Services\Utilitaires;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -19,21 +21,24 @@ class AdminAdherentsController extends AbstractController
         ]);
     }
 
-    public function edit(Adherent $adherent, Request $request)
+    public function edit(Adherent $adherent, Request $request, Utilitaires $utilitaires)
     {
         $entityManager = $this->getDoctrine()->getManager();
         $form = $this->createForm(AdminAdherentType::class, $adherent);
 
         $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid() && $utilitaires->isValidateCity($request->request->get("admin_adherent_cityRep1"))) {
+            $adherent->setCityRep1($request->request->get("admin_adherent_cityRep1"));
             $entityManager->flush();
             return $this->redirectToRoute('admin_adherents');
         }
 
         return $this->render('administration/adherents/adherentsEdit.html.twig', [
             'adherent' => $adherent,
-            'form' => $form->createView()
+            'form' => $form->createView(),
+            "cityRep1" => $adherent->getCityRep1(),
+            "cityRep2" => $adherent->getCityRep2()
         ]);
     }
 

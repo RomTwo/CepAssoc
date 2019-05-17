@@ -1,6 +1,6 @@
 {% extends 'base_without_navbar.html.twig' %}
 
-{% block title %}Inscription{% endblock %}
+{% block title %}Hello SiteRegisterController!{% endblock %}
 
 {% block stylesheets %}
     {{ encore_entry_link_tags('account') }}
@@ -20,149 +20,365 @@
 
         <!-- Second Half -->
         <div class="col-md-5 p-0 bg-white h-md-100">
-            <div class="d-md-flex align-items-center h-md-100 p-5 justify-content-center">
-                <div class="container">
+            <div class="align-items-center h-md-100 p-3 justify-content-center">
+                <div class="container-fluid">
                     <div class="row justify-content-center">
                         <h1>Inscription</h1>
                     </div>
-                    <hr class="d-md-flex align-items-center" color="green">
-                    <div class="justify-content-center">
-                        {{ form_start(form) }}
-
+                    <hr class="align-items-center" color="green">
+                    {{ form_start(form) }}
+                    <div id="accountStep1" class="justify-content-center">
                         <div class="row mt-3">
-                            <div class="col-md-5 col-sm-3">
+                            <div class="col-auto">
                                 <label>Prénom : </label>
                             </div>
-                            <div class="col-auto">
+                            <div class="col-4">
                                 {{ form_widget(form.firstName) }}
                             </div>
-                            <div class="row ml-3">
-                                {{ form_errors(form.firstName) }}
-                            </div>
-                        </div>
-
-                        <div class="row mt-3">
-                            <div class="col-md-5 col-sm-3">
+                            <div class="col-auto">
                                 <label>Nom : </label>
                             </div>
-                            <div class="col-auto">
+                            <div class="col-4">
                                 {{ form_widget(form.lastName) }}
                             </div>
-                            <div class="row ml-3">
+                        </div>
+                        <div class="row">
+                            <div class="col-auto">
+                                <small id="firstNameHelp" class="form-text helper"><span
+                                            class="badge badge-danger">Erreur</span> Le prenom doit être rempli.
+                                </small>
+                                {{ form_errors(form.firstName) }}
+                            </div>
+                            <div class="col-auto">
+                                <small id="lastNameHelp" class="form-text helper"><span
+                                            class="badge badge-danger">Erreur</span> Le nom doit être rempli.
+                                </small>
                                 {{ form_errors(form.lastName) }}
                             </div>
                         </div>
-
                         <div class="row mt-3">
-                            <div class="col-md-5 col-sm-3">
+                            <div class="col-auto">
                                 <label>Civilité : </label>
                             </div>
                             <div class="col-auto">
                                 {{ form_widget(form.sex) }}
-                            </div>
-                            <div class="row ml-3">
+                                <small id="sexHelp" class="form-text helper"><span
+                                            class="badge badge-danger">Erreur</span> Vous devez choisir dans la liste.
+                                </small>
                                 {{ form_errors(form.sex) }}
                             </div>
                         </div>
 
                         <div class="row mt-3">
-                            <div class="col-md-5 col-sm-3">
+                            <div class="col-auto">
                                 <label>Date de naissance : </label>
                             </div>
                             <div class="col-auto">
                                 {{ form_widget(form.birthDate) }}
-                            </div>
-                            <div class="row ml-3">
+                                <small id="birthDateHelp" class="form-text helper"><span
+                                            class="badge badge-danger">Erreur</span> La date de naissance doit être
+                                    rempli.
+                                </small>
                                 {{ form_errors(form.birthDate) }}
                             </div>
                         </div>
 
                         <div class="row mt-3">
-                            <div class="col-md-5 col-sm-3">
+                            <div class="col-auto">
+                                <label>Code postal : </label>
+                            </div>
+                            <div class="col-3">
+                                {{ form_widget(form.zipCode) }}
+                            </div>
+                            <div class="col-auto">
+                                <small id="zipCodeHelp" class="form-text helper"><span
+                                            class="badge badge-danger">Erreur</span> Le zip code doit être rempli.
+                                </small>
+                                {{ form_errors(form.zipCode) }}
+                            </div>
+                        </div>
+                        <div class="row mt-3">
+                            <div class="col-auto">
+                                <p>Ville :</p>
+                            </div>
+                            <div class="col-auto">
+                                <select id="account_city" name="account_city" class="form-control">
+                                </select>
+                            </div>
+                            <div class="col-auto">
+                                <small id="cityHelp" class="form-text helper"><span
+                                            class="badge badge-danger">Erreur</span> Le zip code doit être rempli pour
+                                    pouvoir choisir la ville.
+                                </small>
+                            </div>
+                        </div>
+                        <div class="row mt-3">
+                            <div class="col-auto">
                                 <label>Adresse : </label>
                             </div>
                             <div class="col-auto">
                                 {{ form_widget(form.address) }}
                             </div>
-                            <div class="row ml-3">
+                            <div class="col-auto">
+                                <small id="addressHelp" class="form-text helper"><span
+                                            class="badge badge-danger">Erreur</span> L'adresse doit être rempli.
+                                </small>
                                 {{ form_errors(form.address) }}
                             </div>
                         </div>
 
                         <div class="row mt-3">
-                            <div class="col-md-5 col-sm-3">
-                                <label>Code postal : </label>
-                            </div>
                             <div class="col-auto">
-                                {{ form_widget(form.zipCode) }}
-                            </div>
-                            <div class="row ml-3">
-                                {{ form_errors(form.zipCode) }}
-                            </div>
-                        </div>
-
-                        <div class="row mt-3">
-                            <div class="col-md-5 col-sm-3">
-                                <label>Ville : </label>
-                            </div>
-                            <div class="col-auto">
-                                {{ form_widget(form.city) }}
-                            </div>
-                            <div class="row ml-3">
-                                {{ form_errors(form.city) }}
-                            </div>
-                        </div>
-                        <div class="row mt-3">
-                            <div class="col-md-5 col-sm-3">
                                 <label>Adresse mail : </label>
                             </div>
                             <div class="col-auto">
                                 {{ form_widget(form.email) }}
                             </div>
-                            <div class="row ml-3">
-                                {{ form_errors(form.email) }}
-                            </div>
-                            {% if errorMail %}
-                                <div class="row ml-3">
+                            <div class="col-4">
+                                <small id="emailHelp" class="form-text helper"><span
+                                            class="badge badge-danger">Erreur</span> L'adresse mail doit être rempli.
+                                </small>
+                                {% if errorMail %}
+                                    <div class="row ml-3">
                                 <span class="invalid-feedback d-block">
                                     <span class="d-block">
                                         <span class="form-error-icon badge badge-danger text-uppercase">{{ 'Erreur' }}</span>
                                         <span class="form-error-message">{{ errorMail }}</span>
                                     </span>
                                 </span>
-                                </div>
-                            {% endif %}
+                                    </div>
+                                {% endif %}
+                            </div>
                         </div>
 
                         <div class="row mt-3 mb-3">
-                            <div class="col-md-5 col-sm-3">
+                            <div class="col-auto">
                                 <label>Mot de passe : </label>
                             </div>
                             <div class="col-auto">
                                 {{ form_widget(form.password, {'attr': {'data-placement': "bottom"}}) }}
                             </div>
-                            <div class="row ml-3">
+                            <div class="col-4">
+                                <small id="passwordHelp" class="form-text helper"><span
+                                            class="badge badge-danger">Erreur</span> Le mot de passe doit être rempli.
+                                </small>
                                 {{ form_errors(form.password) }}
                             </div>
                         </div>
-
+                        <div class="row">
+                            <input type="checkbox" id="registration" name="registration" value="registration">
+                            <label for="registration">Souhaitez-vous devenir membre ?</label>
+                        </div>
                         {{ form_widget(form.valid) }}
 
                         <input type="hidden" name="recaptcha_response" id="recaptchaResponse">
+                    </div>
+                    <div id="accountStep2">
+                        <div class="row mt-3 mb-3">
+                            <div class="col-auto">
+                                <label>Numéro de téléphone : </label>
+                            </div>
+                            <div class="col-auto">
+                                {{ form_widget(form.children[0].phoneRep1) }}
+                            </div>
+                            <div class="col-auto">
+                                <small id="phoneRep1Help" class="form-text helper"><span
+                                            class="badge badge-danger">Erreur</span> Le numéro de téléphone doit être
+                                    rempli.
+                                </small>
+                                {{ form_errors(form.children[0].phoneRep1) }}
+                            </div>
+                        </div>
+                        <div class="row mt-3 mb-3">
+                            <div class="col-auto">
+                                <label>Profession : </label>
+                            </div>
+                            <div class="col-auto">
+                                {{ form_widget(form.children[0].professionRep1) }}
+                            </div>
+                            <div class="col-auto">
+                                <small id="professionRep1Help" class="form-text helper"><span
+                                            class="badge badge-danger">Erreur</span> Le numéro de téléphone doit être
+                                    rempli.
+                                </small>
+                                {{ form_errors(form.children[0].phoneRep1) }}
+                            </div>
+                        </div>
 
-                        {{ form_end(form) }}
-                        <div class="row mt-3 ml-1">
-                            <p>Vous avez déjà un compte ? <a href="{{ path('security_connexion') }}">Connexion</a>
-                            </p>
+                    </div>
+
+                    <div id="accountStep3">
+                        <div class="container mt-3">
+                            <div class="pb-2">
+                                <div class="container-fluid">
+                                    <h4>Type d'inscription (facultatif) :</h4>
+                                    <div class="row justify-content-around align-items-center">
+                                        <div class="col-4">
+                                            <input type="checkbox" id="juge" name="juge">
+                                            <label for="juge">Juge</label>
+                                        </div>
+                                        <div class="col-4">
+                                            <input type="checkbox" id="volontaire" name="volontaire">
+                                            <label for="volontaire">Bénévole</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
+                    <div id="accountStep4">
+                        <div class="container-fluid mt-3">
+                            <div class="pb-2">
+                                <div class="container-fluid">
+                                    <h5>Juges :</h5>
+                                    <p>Si vous êtes juges et si vous souhaitez juger pour le CEP cette année, merci
+                                        de
+                                        cocher les
+                                        cases
+                                        ci-dessous</p>
+                                    <div class="row justify-content-start align-items-center mt-3">
+                                        <div class="col-2">
+                                            {{ form_widget(form.children[0].isGAFJudge) }}
+                                        </div>
+                                        <div class="col-auto">
+                                            {{ form_widget(form.children[0].GAFJudgeLevel) }}
+                                        </div>
+                                    </div>
+                                    <div class="row justify-content-start align-items-center mt-3">
+                                        <div class="col-2">
+                                            {{ form_widget(form.children[0].isGAMJudge) }}
+                                        </div>
+                                        <div class="col-auto">
+                                            {{ form_widget(form.children[0].GAMJudgeLevel) }}
+                                        </div>
+                                    </div>
+                                    <div class="row justify-content-start align-items-center mt-3">
+                                        <div class="col-2">
+                                            {{ form_widget(form.children[0].isTeamGYMJudge) }}
+                                        </div>
+                                        <div class="col-auto">
+                                            {{ form_widget(form.children[0].teamGYMJudgeLevel) }}
+                                        </div>
+                                    </div>
+                                    <div class="row justify-content-start align-items-center mt-3">
+                                        <div class="col-auto">
+                                            <p>Souhaitez-vous suivre une formation juge ?</p>
+                                        </div>
+                                        <div class="col-auto">
+                                            {{ form_widget(form.children[0].wantsAJudgeTraining) }}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="accountStep5">
+                        <div class="container-fluid mt-3">
+                            <div class="pb-2">
+                                <div class="container-fluid">
+                                    <h5>Volontaires :</h5>
+                                    <p>Si vous souhaitez nous aider sur les activités et les actions mises en place
+                                        par
+                                        le club tout
+                                        au long
+                                        de l’année, merci de cocher les cases ci-dessous :</p>
+                                    <div>
+                                        Aide à l'entrainement :
+                                        {{ form_widget(form.children[0].volunteerForTrainingHelp) }}
+                                    </div>
+                                    <div>
+                                        Aide à la vie du club :
+                                        {{ form_widget(form.children[0].volunteerForClubLife) }}
+                                    </div>
+                                    <div>
+                                        Disponibilité :
+                                        {{ form_widget(form.children[0].volunteerComment) }}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="accountStep6">
+                        <h4>Activités disponibles :</h4>
+                        <div class="row">
+                            <table class="table m-2 text-center">
+                                <thead>
+                                <tr>
+                                    <th>Nom</th>
+                                    <th>Créneaux</th>
+                                    <th>Prix</th>
+                                    <th>Date</th>
+                                    <th>Selection</th>
+                                </tr>
+                                </thead>
+
+                                {% for activity in activities %}
+                                    <tbody>
+                                    <tr id={{ activity.id }}>
+                                        <td>{{ activity.name }}</td>
+                                        <td>Samedi - De 10h à 12h</td>
+                                        <td id="price{{ activity.id }}">{{ activity.price }}</td>
+                                        <td>{{ activity.startDate|date('d/m/y') }}</td>
+                                        <td>
+                                            <input type="checkbox" id="checkbox{{ activity.id }}" name="selection"
+                                                   value="{{ activity.id }}">
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                {% endfor %}
+                            </table>
+                        </div>
+                    </div>
+                    <div id="accountStep7">
+                        <div class="row align-items-center">
+                            <div class="col-auto">
+                                <h6>Prix de l'abonnement : </h6>
+                            </div>
+                            <div class="col-auto">
+                                <h4 id="prix">0</h4>
+                            </div>
+                            <h4>€</h4>
+                        </div>
+                        <div class="row align-items-center">
+                            <div class="col-auto">
+                                <h6>Moyens de paiement : </h6>
+                            </div>
+                            <div class="col-auto">
+                                {{ form_widget(form.children[0].imageRight) }}
+                            </div>
+                        </div>
+                        <h6>Droits d'image :</h6>
+                        <div class="row align-items-center ml-2">
+                            <p>{{ form_widget(form.children[0].paymentType) }} le club à prendre et à diffuser des
+                                photos me
+                                concernant pour enrichir
+                                la photothèque et le site internet du club.</p>
+                        </div>
+                        <h6>Certificat medical : </h6>
+                        <div class="row align-items-center ml-2 mr-2">
+                            {{ form_widget(form.children[0].medicalCertificate) }}
+                        </div>
+                        <h6>Bulletin N2 allianz : </h6>
+                        <div class="row align-items-center ml-2 mr-2">
+                            {{ form_widget(form.children[0].bulletinN2Allianz) }}
+                        </div>
+                        <button type="submit" class="btn btn-primary">Confirmer l'inscription de l'adhérent</button>
+                    </div>
+                </div>
+                {{ form_end(form) }}
+                <button id="previous" type="button" class="btn btn-primary">Précédent</button>
+                <button id="next" type="button" class="btn btn-primary">Suivant</button>
+                <input id="accountStep" value="1" hidden>
+                <div class="row mt-3 ml-1">
+                    <p>Vous avez déjà un compte ? <a href="{{ path('security_connexion') }}">Connexion</a>
+                    </p>
                 </div>
             </div>
         </div>
     </div>
+    </div>
 
 {% endblock %}
-
 
 
 

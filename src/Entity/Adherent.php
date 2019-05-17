@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Serializer\Annotation\Groups;
@@ -272,6 +273,14 @@ class Adherent
     private $isMedicalCertificate;
 
     /**
+     * @ORM\Column(type="string")
+     * @Assert\NotBlank(message="Veuillez importer votre bulletin Allianz")
+     * @Assert\File(mimeTypes={ "application/pdf" })
+     * @Groups({"competition"})
+     */
+    private $medicalCertificate;
+
+    /**
      * @ORM\Column(type="boolean")
      * @Groups({"competition"})
      */
@@ -312,6 +321,30 @@ class Adherent
      * @Groups({"competition"})
      */
     private $maidenName;
+
+    /**
+     * @ORM\Column(type="string", nullable = true)
+     * @Groups({"competition"})
+     */
+    private $volunteerComment;
+
+    /**
+     * @ORM\Column(type="string")
+     * @Groups({"competition"})
+     */
+    private $bulletinN2Allianz;
+
+    /**
+     * @ORM\Column(type="boolean")
+     * @Groups({"competition"})
+     */
+    private $hasBulletinN2Allianz;
+
+    /**
+     * @ORM\Column(type="boolean")
+     * @Groups({"competition"})
+     */
+    private $isDeleted;
 
     /**
      * @ORM\ManyToMany(targetEntity="App\Entity\Activity")
@@ -1119,4 +1152,22 @@ class Adherent
 
         return $this;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getBulletinN2Allianz()
+    {
+        return $this->bulletinN2Allianz;
+    }
+
+    /**
+     * @param mixed $bulletinN2Allianz
+     */
+    public function setBulletinN2Allianz($bulletinN2Allianz): void
+    {
+        $this->bulletinN2Allianz = $bulletinN2Allianz;
+    }
+
+
 }

@@ -223,12 +223,12 @@ class Account implements UserInterface
         return $this;
     }
 
-    public function getCity(): ?string
+    public function getCity()
     {
         return $this->city;
     }
 
-    public function setCity(string $city): self
+    public function setCity($city)
     {
         $this->city = $city;
 
