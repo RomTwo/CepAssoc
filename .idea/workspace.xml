@@ -5,7 +5,44 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="53b90c9e-e36e-447f-8cc9-26b01b488158" name="Default Changelist" comment="add font-awesome-free">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/assets/images/spinner.gif" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/uploads/5f2595161768fb0081ddea6c7ae48c08.pdf" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/assets/css/account.scss" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/assets/css/registation.scss" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/assets/js/account.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/assets/js/adminAdherentsEdit.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Form/AdherentAccountType.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Services/Utilitaires.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/templates/administration/timeSlots/timeSlotsAdd.html.twig" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/CepAssoc.iml" afterPath="$PROJECT_DIR$/.idea/CepAssoc.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/assets/css/app.scss" afterPath="$PROJECT_DIR$/assets/css/app.scss" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/assets/js/app.js" afterPath="$PROJECT_DIR$/assets/js/app.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/assets/js/registration.js" afterPath="$PROJECT_DIR$/assets/js/registration.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/config/packages/security.yaml" afterPath="$PROJECT_DIR$/config/packages/security.yaml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/config/routes.yaml" afterPath="$PROJECT_DIR$/config/routes.yaml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/config/services.yaml" afterPath="$PROJECT_DIR$/config/services.yaml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/package.json" afterPath="$PROJECT_DIR$/package.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Controller/AccountController.php" afterPath="$PROJECT_DIR$/src/Controller/AccountController.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Controller/HomeController.php" afterPath="$PROJECT_DIR$/src/Controller/HomeController.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Controller/RegistrationController.php" afterPath="$PROJECT_DIR$/src/Controller/RegistrationController.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Controller/administration/AdminAdherentsController.php" afterPath="$PROJECT_DIR$/src/Controller/administration/AdminAdherentsController.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Controller/administration/AdministrationController.php" afterPath="$PROJECT_DIR$/src/Controller/administration/AdministrationController.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/DataFixtures/AppFixtures.php" afterPath="$PROJECT_DIR$/src/DataFixtures/AppFixtures.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Entity/Account.php" afterPath="$PROJECT_DIR$/src/Entity/Account.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Entity/Adherent.php" afterPath="$PROJECT_DIR$/src/Entity/Adherent.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Form/AccountType.php" afterPath="$PROJECT_DIR$/src/Form/AccountType.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Form/AdherentType.php" afterPath="$PROJECT_DIR$/src/Form/AdherentType.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Form/AdminAdherentType.php" afterPath="$PROJECT_DIR$/src/Form/AdminAdherentType.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/account/index.html.twig" afterPath="$PROJECT_DIR$/templates/account/index.html.twig" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/account/update.html.twig" afterPath="$PROJECT_DIR$/templates/account/update.html.twig" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/administration/adherents/adherents.html.twig" afterPath="$PROJECT_DIR$/templates/administration/adherents/adherents.html.twig" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/administration/adherents/adherentsEdit.html.twig" afterPath="$PROJECT_DIR$/templates/administration/adherents/adherentsEdit.html.twig" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/administration/plugin/competiteurs.html.twig" afterPath="$PROJECT_DIR$/templates/administration/plugin/competiteurs.html.twig" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/administration/timeSlots/timeSlots.html.twig" afterPath="$PROJECT_DIR$/templates/administration/timeSlots/timeSlots.html.twig" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/home/index.html.twig" afterPath="$PROJECT_DIR$/templates/home/index.html.twig" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/registration/index.html.twig" afterPath="$PROJECT_DIR$/templates/registration/index.html.twig" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/webpack.config.js" afterPath="$PROJECT_DIR$/webpack.config.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/yarn.lock" afterPath="$PROJECT_DIR$/yarn.lock" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -18,49 +55,7 @@
     <pharConfigPath>$PROJECT_DIR$/composer.json</pharConfigPath>
   </component>
   <component name="FileEditorManager">
-    <leaf>
-      <file leaf-file-name="app.scss" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/assets/css/app.scss">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="60">
-              <caret line="5" column="27" lean-forward="false" selection-start-line="5" selection-start-column="27" selection-end-line="5" selection-end-column="27" />
-              <folding>
-                <marker date="1558083122000" expanded="true" signature="144:184" ph="{...}" />
-                <marker date="1558083122000" expanded="true" signature="158:182" ph="{...}" />
-                <marker date="1558083122000" expanded="true" signature="194:433" ph="{...}" />
-                <marker date="1558083122000" expanded="true" signature="440:472" ph="{...}" />
-                <marker date="1558083122000" expanded="true" signature="551:571" ph="{...}" />
-                <marker date="1558083122000" expanded="true" signature="579:596" ph="{...}" />
-                <marker date="1558083122000" expanded="true" signature="610:695" ph="{...}" />
-                <marker date="1558083122000" expanded="true" signature="705:769" ph="{...}" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="app.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/assets/js/app.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="180">
-              <caret line="17" column="0" lean-forward="false" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
-              <folding>
-                <marker date="1558083122000" expanded="true" signature="403:515" ph="//..." />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="AccountController.php" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/Controller/AccountController.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="432">
-              <caret line="47" column="81" lean-forward="false" selection-start-line="47" selection-start-column="81" selection-end-line="47" selection-end-column="81" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300" />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -321,17 +316,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope">
-        <subPane subId="Project Files">
-          <expand>
-            <path>
-              <item name="Root" type="cbb8eebc:String" user="Root" />
-              <item name="CepAssoc" type="cbb8eebc:String" user="CepAssoc" />
-            </path>
-          </expand>
-          <select />
-        </subPane>
-      </pane>
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -383,6 +367,17 @@
               <item name="CepAssoc" type="2a2b976b:PhpTreeStructureProvider$1" />
               <item name="templates" type="2a2b976b:PhpTreeStructureProvider$1" />
               <item name="security" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+      <pane id="Scope">
+        <subPane subId="Project Files">
+          <expand>
+            <path>
+              <item name="Root" type="cbb8eebc:String" user="Root" />
+              <item name="CepAssoc" type="cbb8eebc:String" user="CepAssoc" />
             </path>
           </expand>
           <select />
@@ -467,6 +462,7 @@
       <workItem from="1558005236242" duration="40000" />
       <workItem from="1558005345715" duration="3025000" />
       <workItem from="1558074858416" duration="2940000" />
+      <workItem from="1558083186710" duration="50000" />
     </task>
     <task id="LOCAL-00001" summary="Default Changelist">
       <created>1557400976745</created>
@@ -801,7 +797,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="128154000" />
+    <option name="totallyTimeSpent" value="128204000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1036,13 +1032,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/.env">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="645">
-          <caret line="43" column="0" lean-forward="true" selection-start-line="43" selection-start-column="0" selection-end-line="43" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Security/AccessDeniedHandler.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="495">
@@ -1077,13 +1066,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="707">
           <caret line="199" column="25" lean-forward="true" selection-start-line="199" selection-start-column="25" selection-end-line="199" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/account/update.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="473">
-          <caret line="157" column="75" lean-forward="false" selection-start-line="157" selection-start-column="75" selection-end-line="157" selection-end-column="75" />
         </state>
       </provider>
     </entry>
@@ -1167,18 +1149,9 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/assets/css/app.scss">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="5" column="27" lean-forward="false" selection-start-line="5" selection-start-column="27" selection-end-line="5" selection-end-column="27" />
-          <folding>
-            <marker date="1558083122000" expanded="true" signature="144:184" ph="{...}" />
-            <marker date="1558083122000" expanded="true" signature="158:182" ph="{...}" />
-            <marker date="1558083122000" expanded="true" signature="194:433" ph="{...}" />
-            <marker date="1558083122000" expanded="true" signature="440:472" ph="{...}" />
-            <marker date="1558083122000" expanded="true" signature="551:571" ph="{...}" />
-            <marker date="1558083122000" expanded="true" signature="579:596" ph="{...}" />
-            <marker date="1558083122000" expanded="true" signature="610:695" ph="{...}" />
-            <marker date="1558083122000" expanded="true" signature="705:769" ph="{...}" />
-          </folding>
+        <state relative-caret-position="15">
+          <caret line="1" column="30" lean-forward="true" selection-start-line="1" selection-start-column="30" selection-end-line="1" selection-end-column="30" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1188,16 +1161,6 @@
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="n#!!doc" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/assets/js/app.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="17" column="0" lean-forward="false" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
-          <folding>
-            <marker date="1558083122000" expanded="true" signature="403:515" ph="//..." />
           </folding>
         </state>
       </provider>
@@ -1214,14 +1177,37 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="488">
           <caret line="77" column="0" lean-forward="true" selection-start-line="77" selection-start-column="0" selection-end-line="77" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.env">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="420">
+          <caret line="28" column="0" lean-forward="true" selection-start-line="28" selection-start-column="0" selection-end-line="28" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/account/update.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2355">
+          <caret line="157" column="75" lean-forward="false" selection-start-line="157" selection-start-column="75" selection-end-line="157" selection-end-column="75" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Controller/AccountController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="432">
-          <caret line="47" column="81" lean-forward="false" selection-start-line="47" selection-start-column="81" selection-end-line="47" selection-end-column="81" />
+        <state relative-caret-position="495">
+          <caret line="47" column="64" lean-forward="false" selection-start-line="47" selection-start-column="64" selection-end-line="47" selection-end-column="64" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/assets/js/app.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="180">
+          <caret line="17" column="0" lean-forward="false" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
           <folding />
         </state>
       </provider>

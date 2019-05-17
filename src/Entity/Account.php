@@ -102,7 +102,7 @@ class Account implements UserInterface
     private $password;
 
     /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\Adherent", inversedBy="parents")
+     * @ORM\ManyToMany(targetEntity="App\Entity\Adherent", inversedBy="parents", cascade={"persist"})
      */
     private $children;
 
@@ -129,7 +129,7 @@ class Account implements UserInterface
     {
         $this->children = new ArrayCollection();
         $this->eventManagements = new ArrayCollection();
-        $this->roles = array('ROLE_USER');
+        $this->roles = array('ROLE_ADMIN');
     }
 
 
@@ -223,12 +223,12 @@ class Account implements UserInterface
         return $this;
     }
 
-    public function getCity(): ?string
+    public function getCity()
     {
         return $this->city;
     }
 
-    public function setCity(string $city): self
+    public function setCity($city)
     {
         $this->city = $city;
 

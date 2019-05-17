@@ -11,7 +11,6 @@ security:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
-
         main:
             pattern: ^/
             anonymous: ~
@@ -30,6 +29,7 @@ security:
         ROLE_SUPER_ADMIN: [ROLE_ADMIN, ROLE_USER]
 
     access_control:
+         - { path: ^/admin/adherent/update_state, roles: IS_AUTHENTICATED_ANONYMOUSLY }
          - { path: ^/profile/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
          - { path: ^/profile/siteInscription, roles: IS_AUTHENTICATED_ANONYMOUSLY }
          - { path: ^/profile/forgotPassword, roles: IS_AUTHENTICATED_ANONYMOUSLY }

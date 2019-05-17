@@ -360,6 +360,36 @@
                                         <td>{{ adherent.emailRep1 }}</td>
                                         <td>{{ adherent.emailRep2 }}</td>
                                     </tr>
+                                        <tr>
+                                            <td>Nom/Prénom</td>
+                                            <td>{{adherent.firstNameRep1}} {{adherent.lastNameRep1}}</td>
+                                            <td>{{adherent.firstNameRep2}} {{adherent.lastNameRep2}}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Profession</td>
+                                            <td>{{adherent.professionRep1}}</td>
+                                            <td>{{adherent.professionRep2}}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Adresse</td>
+                                            <td>{{adherent.addressRep1}}</td>
+                                            <td>{{adherent.addressRep2}}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Code postal/Ville</td>
+                                            <td>{{adherent.zipCodeRep1}} {{adherent.cityRep1}}</td>
+                                            <td>{{adherent.zipCodeRep2}} {{adherent.cityRep2}}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Téléphone</td>
+                                            <td>{{adherent.phoneRep1}}</td>
+                                            <td>{{adherent.phoneRep2}}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Email</td>
+                                            <td>{{adherent.emailRep1}}</td>
+                                            <td>{{adherent.emailRep2}}</td>
+                                        </tr>
                                     </tbody>
                                 </table>
                             </div>
@@ -465,6 +495,9 @@
                                         {% else %}
                                             <i class="fas fa-times"></i>
                                         {% endif %}
+                                    </div>
+                                    <div class="col">
+                                        <a target="_blank" rel="noopener noreferrer" href="{{ asset('uploads/' ~ adherent.medicalCertificate) }}" class="btn btn-success">PDF</a>
                                     </div>
                                 </div>
                                 <div class="row">
