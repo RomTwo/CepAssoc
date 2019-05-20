@@ -2,17 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="53b90c9e-e36e-447f-8cc9-26b01b488158" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/assets/js/account.js" beforeDir="false" afterPath="$PROJECT_DIR$/assets/js/account.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/assets/js/registration.js" beforeDir="false" afterPath="$PROJECT_DIR$/assets/js/registration.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Form/AdherentAccountType.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Form/AdherentAccountType.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Form/AdherentType.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Form/AdherentType.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Form/AdminAdherentType.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Form/AdminAdherentType.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/account/index.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/account/index.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/administration/adherents/adherents.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/administration/adherents/adherents.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/administration/adherents/adherentsEdit.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/administration/adherents/adherentsEdit.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/administration/adherents/generateAdherentsPDF.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/administration/adherents/generateAdherentsPDF.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/registration/index.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/registration/index.html.twig" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -43,11 +35,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/templates/account/index.html.twig">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="260">
-              <caret line="480" column="30" selection-start-line="386" selection-start-column="24" selection-end-line="480" selection-end-column="30" />
+            <state relative-caret-position="332">
+              <caret line="492" column="36" lean-forward="true" selection-start-line="492" selection-start-column="36" selection-end-line="492" selection-end-column="36" />
               <folding>
                 <element signature="e#22544#22551#1#HTML" expanded="true" />
               </folding>
@@ -55,11 +47,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/templates/registration/index.html.twig">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="420">
-              <caret line="517" column="51" selection-start-line="517" selection-start-column="51" selection-end-line="517" selection-end-column="51" />
+            <state relative-caret-position="5713">
+              <caret line="512" column="53" selection-start-line="512" selection-start-column="53" selection-end-line="512" selection-end-column="53" />
               <folding>
                 <element signature="e#23366#23373#1#HTML" expanded="true" />
               </folding>
@@ -68,22 +60,10 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/assets/js/registration.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="440">
-              <caret line="259" selection-start-line="259" selection-end-line="261" selection-end-column="3" />
-              <folding>
-                <element signature="n#!!doc" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/assets/js/account.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="485">
-              <caret line="200" column="3" selection-start-line="200" selection-start-column="3" selection-end-line="200" selection-end-column="3" />
+            <state relative-caret-position="215">
+              <caret line="84" column="3" selection-start-line="84" selection-start-column="3" selection-end-line="84" selection-end-column="3" />
               <folding>
                 <element signature="n#!!doc" expanded="true" />
               </folding>
@@ -92,11 +72,21 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Form/AdherentAccountType.php">
+        <entry file="file://$PROJECT_DIR$/assets/js/app.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1815">
-              <caret line="131" column="18" selection-start-line="129" selection-start-column="16" selection-end-line="131" selection-end-column="18" />
+            <state relative-caret-position="380">
+              <caret line="37" column="3" selection-start-line="37" selection-start-column="3" selection-end-line="37" selection-end-column="3" />
+              <folding>
+                <element signature="n#!!doc" expanded="true" />
+              </folding>
             </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/assets/js/popup.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-175" />
           </provider>
         </entry>
       </file>
@@ -135,9 +125,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>surName</find>
-      <find>test</find>
-      <find>rep2</find>
       <find>zipcode</find>
       <find>firstName</find>
       <find>level</find>
@@ -165,6 +152,9 @@
       <find>medicalCertificate</find>
       <find>if</find>
       <find>fa</find>
+      <find>accept</find>
+      <find>help</find>
+      <find>inpu</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -232,10 +222,10 @@
         <option value="$PROJECT_DIR$/src/Form/AdminAdherentType.php" />
         <option value="$PROJECT_DIR$/templates/administration/adherents/adherents.html.twig" />
         <option value="$PROJECT_DIR$/templates/administration/adherents/adherentsEdit.html.twig" />
+        <option value="$PROJECT_DIR$/templates/registration/index.html.twig" />
         <option value="$PROJECT_DIR$/assets/js/registration.js" />
         <option value="$PROJECT_DIR$/assets/js/account.js" />
         <option value="$PROJECT_DIR$/templates/account/index.html.twig" />
-        <option value="$PROJECT_DIR$/templates/registration/index.html.twig" />
       </list>
     </option>
   </component>
@@ -751,7 +741,7 @@
       <workItem from="1558202158709" duration="393000" />
       <workItem from="1558263568989" duration="814000" />
       <workItem from="1558279383085" duration="2215000" />
-      <workItem from="1558333320073" duration="3218000" />
+      <workItem from="1558333320073" duration="6372000" />
     </task>
     <task id="LOCAL-00001" summary="New routes and controllers added.">
       <created>1557132241841</created>
@@ -928,11 +918,18 @@
       <option name="project" value="LOCAL" />
       <updated>1558119550173</updated>
     </task>
-    <option name="localTasksCounter" value="26" />
+    <task id="LOCAL-00026" summary="Form registation (RGPD + Rules)">
+      <created>1558337132705</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1558337132705</updated>
+    </task>
+    <option name="localTasksCounter" value="27" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="122588000" />
+    <option name="totallyTimeSpent" value="125742000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1059,16 +1056,10 @@
     <MESSAGE value="Merge branch 'master' of https://github.com/RomTwo/CepAssoc&#10;&#10;# Conflicts:&#10;#&#9;.idea/workspace.xml" />
     <MESSAGE value="Files PDF + Fix Error" />
     <MESSAGE value="Fix Error on PDF files" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fix Error on PDF files" />
+    <MESSAGE value="Form registation (RGPD + Rules)" />
+    <option name="LAST_COMMIT_MESSAGE" value="Form registation (RGPD + Rules)" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/vendor/symfony/framework-bundle/Controller/ControllerTrait.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="177">
-          <caret line="335" column="23" selection-start-line="335" selection-start-column="23" selection-end-line="335" selection-end-column="23" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Controller/AdminAccountsController.php" />
     <entry file="file://$PROJECT_DIR$/src/Controller/SecurityController.php">
       <provider selected="true" editor-type-id="text-editor">
@@ -1277,16 +1268,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/assets/js/app.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="380">
-          <caret line="37" column="3" selection-start-line="37" selection-start-column="3" selection-end-line="37" selection-end-column="3" />
-          <folding>
-            <element signature="n#!!doc" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Entity/Adherent.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="515">
@@ -1372,26 +1353,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/assets/js/registration.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="440">
-          <caret line="259" selection-start-line="259" selection-end-line="261" selection-end-column="3" />
-          <folding>
-            <element signature="n#!!doc" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/assets/js/account.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="485">
-          <caret line="200" column="3" selection-start-line="200" selection-start-column="3" selection-end-line="200" selection-end-column="3" />
-          <folding>
-            <element signature="n#!!doc" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/templates/administration/adherents/adherentsEdit.html.twig">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="343">
@@ -1413,22 +1374,57 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/account/index.html.twig">
+    <entry file="file://$PROJECT_DIR$/assets/js/app.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="260">
-          <caret line="480" column="30" selection-start-line="386" selection-start-column="24" selection-end-line="480" selection-end-column="30" />
+        <state relative-caret-position="380">
+          <caret line="37" column="3" selection-start-line="37" selection-start-column="3" selection-end-line="37" selection-end-column="3" />
           <folding>
-            <element signature="e#22544#22551#1#HTML" expanded="true" />
+            <element signature="n#!!doc" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/assets/js/popup.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-175" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/assets/js/registration.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-407">
+          <caret line="121" column="20" selection-start-line="121" selection-start-column="20" selection-end-line="121" selection-end-column="20" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/templates/registration/index.html.twig">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="420">
-          <caret line="517" column="51" selection-start-line="517" selection-start-column="51" selection-end-line="517" selection-end-column="51" />
+        <state relative-caret-position="5713">
+          <caret line="512" column="53" selection-start-line="512" selection-start-column="53" selection-end-line="512" selection-end-column="53" />
           <folding>
             <element signature="e#23366#23373#1#HTML" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/assets/js/account.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="215">
+          <caret line="84" column="3" selection-start-line="84" selection-start-column="3" selection-end-line="84" selection-end-column="3" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/account/index.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="332">
+          <caret line="492" column="36" lean-forward="true" selection-start-line="492" selection-start-column="36" selection-end-line="492" selection-end-column="36" />
+          <folding>
+            <element signature="e#22544#22551#1#HTML" expanded="true" />
           </folding>
         </state>
       </provider>
