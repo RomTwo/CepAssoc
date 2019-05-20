@@ -15,7 +15,6 @@ use Symfony\Component\HttpFoundation\Request;
 
 class AdminAdherentsController extends AbstractController
 {
-
     public function index()
     {
         $repository = $this->getDoctrine()->getRepository(Adherent::class);
@@ -73,25 +72,6 @@ class AdminAdherentsController extends AbstractController
 
         return $this->redirectToRoute("admin_adherents");
     }
-    public function generatePDF($id)
-    {    $adherent= new Adherent();
-
-        $repository = $this->getDoctrine()->getRepository(Adherent::class);
-        $adherent = $repository->find($id);
-        $html= $this->render('administration/adherents/generateAdherentsPDF.html.twig', [
-            'adherent' => $adherent,
-        ]);
-        $pdfOptions = new Options();
-        $dompdf = new Dompdf($pdfOptions);
-        $dompdf->loadHtml($html);
-        $dompdf->setPaper('A4', 'portrait');
-        $dompdf->render();
-        $dompdf->stream( $adherent->getFirstName()."_". $adherent->getLastName().".pdf", [
-            "Attachment" => true
-        ]);
-
-
-    }
 
     public function generatePDF($id)
     {
@@ -107,12 +87,12 @@ class AdminAdherentsController extends AbstractController
         $dompdf->loadHtml($html);
         $dompdf->setPaper('A4', 'portrait');
         $dompdf->render();
-        $dompdf->stream($adherent->getFirstName() . "_" . $adherent->getLastName() . ".pdf", array(
-                "Attachment" => 1,
-            )
-        );
+        $dompdf->stream($adherent->getFirstName() . "_" . $adherent->getLastName() . ".pdf", [
+            "Attachment" => true
+        ]);
 
 
     }
+
 
 }
