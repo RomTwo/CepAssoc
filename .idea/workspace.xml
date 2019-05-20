@@ -6,7 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="53b90c9e-e36e-447f-8cc9-26b01b488158" name="Default Changelist" comment="pull master">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Controller/administration/AdminAdherentsController.php" afterPath="$PROJECT_DIR$/src/Controller/administration/AdminAdherentsController.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/administration/plugin/competiteurs.html.twig" afterPath="$PROJECT_DIR$/templates/administration/plugin/competiteurs.html.twig" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -20,22 +20,25 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="routes.yaml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/config/routes.yaml">
+      <file leaf-file-name="CaptchaCheck.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Services/CaptchaCheck.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="975">
-              <caret line="65" column="20" lean-forward="false" selection-start-line="65" selection-start-column="20" selection-end-line="65" selection-end-column="20" />
+            <state relative-caret-position="450">
+              <caret line="30" column="1" lean-forward="false" selection-start-line="30" selection-start-column="1" selection-end-line="30" selection-end-column="1" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="AdminAdherentsController.php" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/Controller/administration/AdminAdherentsController.php">
+      <file leaf-file-name="competiteurs.html.twig" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/templates/administration/plugin/competiteurs.html.twig">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="668">
-              <caret line="95" column="0" lean-forward="false" selection-start-line="95" selection-start-column="0" selection-end-line="95" selection-end-column="0" />
-              <folding />
+            <state relative-caret-position="534">
+              <caret line="42" column="23" lean-forward="false" selection-start-line="42" selection-start-column="23" selection-end-line="42" selection-end-column="23" />
+              <folding>
+                <element signature="n#style#0;n#i#0;n#div#1;n#div#0;n#div#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#i#1;n#div#1;n#div#0;n#div#0;n#!!top" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -120,7 +123,6 @@
         <option value="$PROJECT_DIR$/templates/account/index.html.twig" />
         <option value="$PROJECT_DIR$/assets/js/popup.js" />
         <option value="$PROJECT_DIR$/src/Controller/administration/AdministrationController.php" />
-        <option value="$PROJECT_DIR$/templates/administration/plugin/competiteurs.html.twig" />
         <option value="$PROJECT_DIR$/templates/administration/adherents/adherents.html.twig" />
         <option value="$PROJECT_DIR$/templates/administration/accounts/accounts.html.twig" />
         <option value="$PROJECT_DIR$/templates/base.html.twig" />
@@ -152,6 +154,7 @@
         <option value="$PROJECT_DIR$/documentations/Système de connexion deconnexion" />
         <option value="$PROJECT_DIR$/documentations/Gestion des roles" />
         <option value="$PROJECT_DIR$/src/Controller/administration/AdminAdherentsController.php" />
+        <option value="$PROJECT_DIR$/templates/administration/plugin/competiteurs.html.twig" />
       </list>
     </option>
   </component>
@@ -312,6 +315,48 @@
               <item name="CepAssoc" type="b2602c69:ProjectViewProjectNode" />
               <item name="CepAssoc" type="2a2b976b:PhpTreeStructureProvider$1" />
             </path>
+            <path>
+              <item name="CepAssoc" type="b2602c69:ProjectViewProjectNode" />
+              <item name="CepAssoc" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="src" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
+            <path>
+              <item name="CepAssoc" type="b2602c69:ProjectViewProjectNode" />
+              <item name="CepAssoc" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="src" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="Controller" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
+            <path>
+              <item name="CepAssoc" type="b2602c69:ProjectViewProjectNode" />
+              <item name="CepAssoc" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="src" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="Controller" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="administration" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
+            <path>
+              <item name="CepAssoc" type="b2602c69:ProjectViewProjectNode" />
+              <item name="CepAssoc" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="src" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="Services" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
+            <path>
+              <item name="CepAssoc" type="b2602c69:ProjectViewProjectNode" />
+              <item name="CepAssoc" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="templates" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
+            <path>
+              <item name="CepAssoc" type="b2602c69:ProjectViewProjectNode" />
+              <item name="CepAssoc" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="templates" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="administration" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
+            <path>
+              <item name="CepAssoc" type="b2602c69:ProjectViewProjectNode" />
+              <item name="CepAssoc" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="templates" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="administration" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="plugin" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
           </expand>
           <select />
         </subPane>
@@ -414,13 +459,7 @@
       <workItem from="1558100167279" duration="1815000" />
       <workItem from="1558116209653" duration="16000" />
       <workItem from="1558336021464" duration="611000" />
-    </task>
-    <task id="LOCAL-00003" summary="Default Changelist">
-      <created>1557401414365</created>
-      <option name="number" value="00003" />
-      <option name="presentableId" value="LOCAL-00003" />
-      <option name="project" value="LOCAL" />
-      <updated>1557401414365</updated>
+      <workItem from="1558337258738" duration="750000" />
     </task>
     <task id="LOCAL-00004" summary="Default Changelist">
       <created>1557401717978</created>
@@ -758,11 +797,18 @@
       <option name="project" value="LOCAL" />
       <updated>1558100401247</updated>
     </task>
-    <option name="localTasksCounter" value="52" />
+    <task id="LOCAL-00052" summary="pull master">
+      <created>1558337704693</created>
+      <option name="number" value="00052" />
+      <option name="presentableId" value="LOCAL-00052" />
+      <option name="project" value="LOCAL" />
+      <updated>1558337704693</updated>
+    </task>
+    <option name="localTasksCounter" value="53" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="140760000" />
+    <option name="totallyTimeSpent" value="141510000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -873,13 +919,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/Entity/Adherent.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="747">
-          <caret line="1112" column="41" lean-forward="false" selection-start-line="1112" selection-start-column="41" selection-end-line="1112" selection-end-column="41" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/templates/account/resetPassword.html.twig">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="570">
@@ -1070,13 +1109,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Services/CaptchaCheck.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="450">
-          <caret line="30" column="1" lean-forward="false" selection-start-line="30" selection-start-column="1" selection-end-line="30" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Security/LoginFormAuthentificator.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="300">
@@ -1103,7 +1135,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2323">
           <caret line="333" column="6" lean-forward="true" selection-start-line="333" selection-start-column="6" selection-end-line="333" selection-end-column="6" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1151,13 +1182,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/.env">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="465">
-          <caret line="31" column="35" lean-forward="true" selection-start-line="31" selection-start-column="35" selection-end-line="31" selection-end-column="35" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/templates/administration/activities/activityEdit.html.twig">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -1186,19 +1210,46 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/config/routes.yaml">
+    <entry file="file://$PROJECT_DIR$/.env">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="975">
-          <caret line="65" column="20" lean-forward="false" selection-start-line="65" selection-start-column="20" selection-end-line="65" selection-end-column="20" />
+        <state relative-caret-position="270">
+          <caret line="18" column="36" lean-forward="true" selection-start-line="18" selection-start-column="36" selection-end-line="18" selection-end-column="36" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Controller/administration/AdminAdherentsController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="668">
-          <caret line="95" column="0" lean-forward="false" selection-start-line="95" selection-start-column="0" selection-end-line="95" selection-end-column="0" />
+        <state relative-caret-position="338">
+          <caret line="73" column="0" lean-forward="false" selection-start-line="73" selection-start-column="0" selection-end-line="73" selection-end-column="0" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/config/routes.yaml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="65" column="20" lean-forward="false" selection-start-line="65" selection-start-column="20" selection-end-line="65" selection-end-column="20" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Services/CaptchaCheck.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="450">
+          <caret line="30" column="1" lean-forward="false" selection-start-line="30" selection-start-column="1" selection-end-line="30" selection-end-column="1" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/administration/plugin/competiteurs.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="534">
+          <caret line="42" column="23" lean-forward="false" selection-start-line="42" selection-start-column="23" selection-end-line="42" selection-end-column="23" />
+          <folding>
+            <element signature="n#style#0;n#i#0;n#div#1;n#div#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#i#1;n#div#1;n#div#0;n#div#0;n#!!top" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
