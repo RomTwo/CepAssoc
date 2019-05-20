@@ -350,9 +350,8 @@
                                         <th>Selection</th>
                                     </tr>
                                     </thead>
-
+                                    <tbody>
                                     {% for activity in activities %}
-                                        <tbody>
                                         <tr id={{ activity.id }}>
                                             <td>{{ activity.name }}</td>
                                             <td>Samedi - De 10h à 12h</td>
@@ -363,8 +362,8 @@
                                                        value="{{ activity.id }}">
                                             </td>
                                         </tr>
-                                        </tbody>
                                     {% endfor %}
+                                    </tbody>
                                 </table>
                             </div>
                             <div class="tab-pane fade" id="nav-competitif" role="tabpanel" aria-labelledby="nav-competitif-tab">...</div>
