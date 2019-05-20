@@ -8,7 +8,7 @@
     <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
     <meta name="generator" content="Jekyll v3.8.5">
 
-    <title>{{ block('title') }}</title>
+    <title>CEP Admin - {{ block('title') }}</title>
     {{ encore_entry_link_tags('admin') }}
    
 
@@ -75,14 +75,15 @@
 
 <body>
     <nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
-        <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#">CEP Administration</a>
+        <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="{{ path('admin_home') }}">CEP Administration</a>
         <ul class="navbar-nav px-3 test">
             <li class="nav-item text-nowrap mobile-nav">
-                <a class="nav-link" href="#">Accueil</a>
+                <a class="nav-link" href="{{ path("admin_home")}}">Accueil</a>
             </li>
             <li class="nav-item text-nowrap ">
-                <a class="nav-link" href="#">Déconnexion</a>
+                <a class="nav-link" href="{{ path("security_deconnexion")}}">Déconnexion</a>
             </li>
+
 
 
         </ul>
@@ -96,7 +97,7 @@
                 <div class="sidebar-sticky">
                     <ul class="nav flex-column">
                         <li class="nav-item">
-                            <a class="nav-link active" href="#">
+                            <a class="nav-link" href="{{ path('admin_home') }}">
                                 Accueil
                             </a>
                         </li>
@@ -130,7 +131,19 @@
                                 Plugin
                             </a>
                         </li>
-
+                    </ul>
+                    <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
+                        <span>Navigation</span>
+                        <a class="d-flex align-items-center text-muted" href="#">
+                            <span data-feather="plus-circle"></span>
+                        </a>
+                    </h6>
+                    <ul class="nav flex-column mb-2">
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ path("home")}}">
+                                Retour sur le site
+                            </a>
+                        </li>
                     </ul>
                 </div>
             </nav>
@@ -141,38 +154,7 @@
                 </div>
                 {% include('notifications/notifications.html.twig') %}
                 {{ block('body') }}
-                <div class="mobile-menu">
-                    <div>
-                        <a class="" href="{{ path('admin_adherents') }}">
-                            Adhérents
-                        </a>
-                    </div>
-                    <div>
-                        <a class="" href="{{ path('admin_activities') }}">
-                            Activités
-                        </a>
-                    </div>
-                    <div>
-                        <a class="" href="{{ path('admin_timeSlots') }}">
-                            Evénements
-                        </a>
-                    </div>
-                    <div>
-                        <a class="" href="{{ path('admin_events') }}">
-                            Crénaux
-                        </a>
-                    </div>
-                    <div>
-                        <a class="" href="{{ path('admin_accounts') }}">
-                            Comptes
-                        </a>
-                    </div>
-                    <div>
-                        <a class="" href="{{ path('admin_adherent_competiteurs') }}">
-                            Plugin
-                        </a>
-                    </div>
-                </div>
+                
 
             </main>
         </div>
