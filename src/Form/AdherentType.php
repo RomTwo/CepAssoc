@@ -240,12 +240,21 @@ class AdherentType extends AbstractType
                 'required' => false,
             ])
             ->add('medicalCertificate', FileType::class, array(
+                'attr' => [
+                    'placeholder' => "Choisissez votre certificat médical"
+                ],
                 'required' => false,
             ))
             ->add('bulletinN2Allianz', FileType::class, array(
+                'attr' => [
+                    'placeholder' => "Choisissez votre bulletin N2 Allianz "
+                ],
                 'required' => false,
             ))
             ->add('healthQuestionnaire', FileType::class, array(
+                'attr' => [
+                    'placeholder' => "Choisissez le questionnaire de santé"
+                ],
                 'required' => false,
             ));
     }

@@ -161,7 +161,11 @@ class AdminAdherentType extends AbstractType
                     'Non' => false,
                     'Oui' => true,
                 ],
-            ]);
+            ])
+            ->add('healthQuestionnaire', FileType::class, array(
+                'required' => false,
+                'data_class' => null,
+            ));
 
         $builder->get('medicalCertificate')->addEventListener(FormEvents::SUBMIT, function (FormEvent $event) {
             if (null === $event->getData()) {
@@ -170,6 +174,12 @@ class AdminAdherentType extends AbstractType
         });
 
         $builder->get('bulletinN2Allianz')->addEventListener(FormEvents::SUBMIT, function (FormEvent $event) {
+            if (null === $event->getData()) {
+                $event->setData($event->getForm()->getData());
+            }
+        });
+
+        $builder->get('healthQuestionnaire')->addEventListener(FormEvents::SUBMIT, function (FormEvent $event) {
             if (null === $event->getData()) {
                 $event->setData($event->getForm()->getData());
             }
