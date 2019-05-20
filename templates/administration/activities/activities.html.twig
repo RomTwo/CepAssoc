@@ -6,6 +6,56 @@
 {% endblock %}
 
 {% block body %}
+<center>
+    <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+        Lister les catégories
+    </button>
+</center>
+
+        <div class="collapse" id="collapseExample">
+    <div class="card card-body">
+        <div class="container-fluid">
+            <table id="example2" class="table table-hover" style="width: 100%;" role="grid" aria-describedby="example_info">
+                {% for category in categories %}
+                <thead>
+
+                <tr role="row">
+                    <th class="sorting_asc" tabindex="0" aria-controls="example" rowspan="1" colspan="1" style="width: 119px; color:red" aria-sort="ascending" aria-label="lastName: activate to sort column descending">{{category.name }}</th>
+                    <th class="sorting_asc" tabindex="0" aria-controls="example" rowspan="1" colspan="1" style="width: 119px;" aria-sort="ascending" aria-label="firstName: activate to sort column descending">Actions</th>
+                </tr>
+                </thead>
+                <tbody>
+
+
+
+                    <tr role="row" class="odd">
+                        <td>
+                            {{ category.name }}
+                        </td>
+
+                        <td>
+                            <a  href="{{path('admin_categoryEdit', {id: category.id } )}}" class="btn btn-secondary">Modifier</a>
+
+                            <a  href="{{path('admin_categoryDelete', {id: category.id } )}}" class="btn btn-secondary">Supprimer</a>
+
+                        </td>
+
+                    </tr>
+                {% endfor %}
+
+
+
+
+                </tbody>
+
+            </table>
+
+
+
+    </div>
+    </div>
+        </div>
+
 
 
 
