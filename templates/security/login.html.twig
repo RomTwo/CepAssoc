@@ -5,17 +5,17 @@
 {% block body %}
     <div class="d-md-flex h-md-100 align-items-center">
         <!-- First Half -->
-        <div class="col-md-7 p-0 bg-gym h-md-100">
+        <div class="col-md-6 p-0 bg-gym h-md-100">
             <div class="text-white d-md-flex align-items-center h-100 p-5 text-center justify-content-center">
                 <div class="pt-5 pb-5">
                     <h1 class="text-black">CEP</h1>
-                    <p class="text-black">Gymnastique</p>
+                    <p class="text-black">Poitiers Gymnastique</p>
                 </div>
             </div>
         </div>
 
         <!-- Second Half -->
-        <div class="col-md-5 p-0 bg-white h-md-100">
+        <div class="col-md-6 p-0 bg-white h-md-100">
             <div class="d-md-flex align-items-center h-md-100 p-5 justify-content-center">
                 <div class="container">
                     <div class="row justify-content-center">
@@ -27,11 +27,11 @@
 
                             <!-- Login form -->
                             <label for="inputEmail" class="sr-only">Adresse mail : </label>
-                            <input type="email" name="email" id="inputEmail" class="form-control" placeholder="Email"
+                            <input type="email" name="email" id="inputEmail" class="form-control" placeholder="Adresse mail"
                                    required autofocus>
                             <label for="inputPassword" class="sr-only">Mot de passe : </label>
                             <input type="password" name="password" id="inputPassword" class="form-control"
-                                   placeholder="mot de passe"
+                                   placeholder="Mot de passe"
                                    required>
 
                             <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">

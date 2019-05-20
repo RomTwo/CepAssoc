@@ -67,6 +67,8 @@ $('#next').click(function () {
     } else {
         $("#next").hide();
     }
+
+    $('#example').DataTable();
 });
 
 $('#previous').click(function () {

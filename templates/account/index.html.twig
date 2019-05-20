@@ -9,17 +9,17 @@
 {% block body %}
     <div class="d-md-flex h-md-100 align-items-center">
         <!-- First Half -->
-        <div class="col-md-6 p-0 bg-gym h-md-100">
+        <div class="col-md-4 p-0 bg-gym h-md-100">
             <div class="text-white d-md-flex align-items-center h-100 p-5 text-center justify-content-center">
                 <div class="pt-5 pb-5">
                     <h1 class="text-black">CEP</h1>
-                    <p class="text-black">Gymnastique</p>
+                    <p class="text-black">Poitiers Gymnastique</p>
                 </div>
             </div>
         </div>
 
         <!-- Second Half -->
-        <div class="col-md-6 p-0 bg-white h-md-100">
+        <div class="col-md-8 p-0 bg-white h-md-100">
             <div class="align-items-center h-md-100 p-3 justify-content-center">
                 <div class="container-fluid">
                     <div class="row justify-content-center">
@@ -168,7 +168,7 @@
                         <div class="form-check mt-3">
                             <input class="form-check-input" type="checkbox" id="registration" name="registration" value="registration">
                             <label class="form-check-label" for="registration">
-                                Je m'inscris également à l'association. <a><i class="fa fa-info-circle" data-toggle="tooltip"
+                                Je suis compétiteur. <a><i class="fa fa-info-circle" data-toggle="tooltip"
                                                                               data-original-title="Cette étape est optionnelle, il est possible de rejoindre l'association ultérieurement au sein du site internet."></i></a>
                             </label>
                         </div>
@@ -302,6 +302,7 @@
                     </div>
                     <div id="accountStep6">
                         <h4>Activités disponibles :</h4>
+                        {#
                         <div class="row">
                             <table class="table m-2 text-center">
                                 <thead>
@@ -330,6 +331,45 @@
                                 {% endfor %}
                             </table>
                         </div>
+                        #}
+                        <nav>
+                            <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                                <a class="nav-item nav-link active" id="nav-loisirs-tab" href="#nav-loisirs" data-toggle="tab" role="tab" aria-controls="nav-loisirs" aria-selected="true">Loisirs</a>
+                                <a class="nav-item nav-link" id="nav-competitif-tab" href="#nav-competitif" data-toggle="tab" role="tab" aria-controls="nav-competitif" aria-selected="false">Compétitif</a>
+                            </div>
+                        </nav>
+                        <div class="tab-content" id="nav-tabContent">
+                            <div class="tab-pane fade show active" id="nav-loisirs" role="tabpanel" aria-labelledby="nav-home-tab">
+                                <table id="example" class="display" style="width:100%">
+                                    <thead>
+                                    <tr>
+                                        <th>Nom</th>
+                                        <th>Créneaux</th>
+                                        <th>Prix</th>
+                                        <th>Date</th>
+                                        <th>Selection</th>
+                                    </tr>
+                                    </thead>
+
+                                    {% for activity in activities %}
+                                        <tbody>
+                                        <tr id={{ activity.id }}>
+                                            <td>{{ activity.name }}</td>
+                                            <td>Samedi - De 10h à 12h</td>
+                                            <td id="price{{ activity.id }}">{{ activity.price }}</td>
+                                            <td>{{ activity.startDate|date('d/m/y') }}</td>
+                                            <td>
+                                                <input type="checkbox" id="checkbox{{ activity.id }}" name="selection"
+                                                       value="{{ activity.id }}">
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                    {% endfor %}
+                                </table>
+                            </div>
+                            <div class="tab-pane fade" id="nav-competitif" role="tabpanel" aria-labelledby="nav-competitif-tab">...</div>
+                        </div>
+
                     </div>
                     <div id="accountStep7">
                         <div class="row align-items-center">
@@ -480,8 +520,8 @@
                             <input class="form-check-input" type="checkbox" id="acceptRGPD" name="acceptRGPD">
                             <label class="form-check-label" for="acceptRGPD">
                                 En soumettant ce formulaire, j’accepte que les informations saisies soient utilisées
-                                dans le cadre du
-                                demande de licence à CEP GYM Poitiers et à son organisation.
+                                dans le cadre de la
+                                demande de licence à CEP GYM Poitiers et à son organisation. Pour en savoir plus sur la loi RGPD, veuillez consulter <a href="https://www.cnil.fr/fr/reglement-europeen-protection-donnees" target="_blank">la réglementation en ligne</a>
                             </label>
                             <small id="rgpdHelp" class="form-text helper"><span
                                         class="badge badge-danger">Erreur</span> La loi RGPD doit être validée.
