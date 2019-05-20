@@ -13,6 +13,44 @@ $ = require('jquery');
 // Need jQuery? Install it with "yarn add jquery", then uncomment to require it.
 // const $ = require('jquery');
 
+$( window ).ready(function() {
+    $.ajax({
+        url:'https://datanova.legroupe.laposte.fr/api/records/1.0/search/',
+        type: "POST",
+        dataType: "json",
+        data: {
+            "dataset": "laposte_hexasmal",
+            "refine.code_postal": $('#account_zipCode1').val(),
+        },
+        success: function (data)
+        {
+            $('#adherent_cityRep1 option').remove();
+            for (var i in data["records"]) {
+                commune = data["records"][i]["fields"]["nom_de_la_commune"];
+                $('#adherent_cityRep1').append(new Option(commune, commune));
+            }
+        }
+    });
+
+    $.ajax({
+        url:'https://datanova.legroupe.laposte.fr/api/records/1.0/search/',
+        type: "POST",
+        dataType: "json",
+        data: {
+            "dataset": "laposte_hexasmal",
+            "refine.code_postal": $('#account_zipCode2').val(),
+        },
+        success: function (data)
+        {
+            $('#adherent_cityRep2 option').remove();
+            for (var i in data["records"]) {
+                commune = data["records"][i]["fields"]["nom_de_la_commune"];
+                $('#adherent_cityRep2').append(new Option(commune, commune));
+            }
+        }
+    })
+});
+
 $('#next').click(function () {
     var value = parseInt(document.getElementById('step').value);
     if (value < 5) {
@@ -250,6 +288,15 @@ $('#adherent_zipCodeRep2').focusout( function(){
             }
         }
     })
+});
+
+$(".custom-file-input").on("change", function() {
+    var fileName = $(this).val().split("\\").pop();
+    $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+});
+
+$(function () {
+    $('[data-toggle="tooltip"]').tooltip()
 });
 
 

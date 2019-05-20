@@ -83,8 +83,6 @@ string $email, string $city, string $password)
         $a->setpaymentFeesArePaid(false);
         $a->setisRegisteredInGestGym(false);
         $a->setIsRegisteredInFFG(false);
-        $a->setIsMedicalCertificate(false);
-        $a->setIsValidateMedical(false);
         $a->setMedicalCertificateDate(new \DateTime("01-09-2019"));
         $a->setNationality("France");
         $a->setIsFFGInsurance(false);
@@ -264,6 +262,8 @@ string $email, string $city, string $password)
         $adherents[0]->setPaymentType("cheque");
         $adherents[0]->setMedicalCertificate(false);
         $adherents[0]->setBulletinN2Allianz(false);
+        $adherents[0]->setHasMedicalCertificate(false);
+        $adherents[0]->setHasHealthQuestionnaire(false);
 
 
         $manager->persist($adherents[0]);
@@ -284,6 +284,9 @@ string $email, string $city, string $password)
         $adherents[1]->setPaymentType("cheque");
         $adherents[1]->setMedicalCertificate(false);
         $adherents[1]->setBulletinN2Allianz(false);
+        $adherents[1]->setHasMedicalCertificate(false);
+        $adherents[1]->setHasHealthQuestionnaire(false);
+
 
         $manager->persist($adherents[1]);
 
@@ -302,6 +305,8 @@ string $email, string $city, string $password)
         $adherents[2]->setPaymentType("cheque");
         $adherents[2]->setMedicalCertificate(false);
         $adherents[2]->setBulletinN2Allianz(false);
+        $adherents[2]->setHasMedicalCertificate(false);
+        $adherents[2]->setHasHealthQuestionnaire(false);
 
         $manager->persist($adherents[2]);
 
@@ -319,6 +324,8 @@ string $email, string $city, string $password)
         $adherents[3]->setPaymentType("cheque");
         $adherents[3]->setMedicalCertificate(false);
         $adherents[3]->setBulletinN2Allianz(false);
+        $adherents[3]->setHasMedicalCertificate(false);
+        $adherents[3]->setHasHealthQuestionnaire(false);
 
         $manager->persist($adherents[3]);
 
@@ -337,7 +344,8 @@ string $email, string $city, string $password)
         $adherents[4]->setPaymentType("cheque");
         $adherents[4]->setMedicalCertificate(false);
         $adherents[4]->setBulletinN2Allianz(false);
-        $adherents[4]->setBulletinN2Allianz(false);
+        $adherents[4]->setHasMedicalCertificate(false);
+        $adherents[4]->setHasHealthQuestionnaire(false);
 
         $manager->persist($adherents[4]);
 
@@ -356,6 +364,8 @@ string $email, string $city, string $password)
         $adherents[5]->setPaymentType("cheque");
         $adherents[5]->setMedicalCertificate(false);
         $adherents[5]->setBulletinN2Allianz(false);
+        $adherents[5]->setHasMedicalCertificate(false);
+        $adherents[5]->setHasHealthQuestionnaire(false);
 
         $manager->persist($adherents[5]);
 
@@ -374,6 +384,8 @@ string $email, string $city, string $password)
         $adherents[6]->setPaymentType("cheque");
         $adherents[6]->setMedicalCertificate(false);
         $adherents[6]->setBulletinN2Allianz(false);
+        $adherents[6]->setHasMedicalCertificate(false);
+        $adherents[6]->setHasHealthQuestionnaire(false);
 
         $manager->persist($adherents[6]);
 
@@ -392,6 +404,8 @@ string $email, string $city, string $password)
         $adherents[7]->setPaymentType("cheque");
         $adherents[7]->setMedicalCertificate(false);
         $adherents[7]->setBulletinN2Allianz(false);
+        $adherents[7]->setHasMedicalCertificate(false);
+        $adherents[7]->setHasHealthQuestionnaire(false);
 
         $manager->persist($adherents[7]);
 
@@ -409,6 +423,8 @@ string $email, string $city, string $password)
         $adherents[8]->setPaymentType("cheque");
         $adherents[8]->setMedicalCertificate(false);
         $adherents[8]->setBulletinN2Allianz(false);
+        $adherents[8]->setHasMedicalCertificate(false);
+        $adherents[8]->setHasHealthQuestionnaire(false);
 
         $manager->persist($adherents[8]);
 
@@ -427,6 +443,8 @@ string $email, string $city, string $password)
         $adherents[9]->setPaymentType("cheque");
         $adherents[9]->setMedicalCertificate(false);
         $adherents[9]->setBulletinN2Allianz(false);
+        $adherents[9]->setHasMedicalCertificate(false);
+        $adherents[9]->setHasHealthQuestionnaire(false);
 
         $manager->persist($adherents[9]);
 

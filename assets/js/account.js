@@ -10,6 +10,26 @@ require('../css/account.scss');
 
 $ = require('jquery');
 
+$( window ).ready(function() {
+    $.ajax({
+        url:'https://datanova.legroupe.laposte.fr/api/records/1.0/search/',
+        type: "POST",
+        dataType: "json",
+        data: {
+            "dataset": "laposte_hexasmal",
+            "refine.code_postal": $('#account_zipCode').val(),
+        },
+        success: function (data)
+        {
+            $('#account_city option').remove();
+            for (var i in data["records"]) {
+                commune = data["records"][i]["fields"]["nom_de_la_commune"];
+                $('#account_city').append(new Option(commune, commune));
+            }
+        }
+    })
+});
+
 // Need jQuery? Install it with "yarn add jquery", then uncomment to require it.
 // const $ = require('jquery');
 
@@ -20,13 +40,11 @@ $('#registration').on('change', function () {
 $('#next').click(function () {
     var numberOfStep = 7;
     var value = parseInt($("#accountStep").val());
-    console.log(numberOfStep + " and " + value);
     if (value < numberOfStep) {
         if (stepChoice("accountStep" + value)) {
             if (value == numberOfStep-1) {
                 $("#next").hide();
             }
-
             $("#previous").show();
             $("helper").hide();
             if(value == 3){
@@ -99,7 +117,7 @@ function stepChoice(step) {
         case 'accountStep6':
             return true;
         case 'accountStep7':
-            return true;
+            return step7();
         default:
             console.log('Sorry, we are out of ' + step + '.');
     }
@@ -109,18 +127,25 @@ function step1() {
     var bool = true;
     (isEmpty('account[firstName]') ? ($("#firstNameHelp").show(), bool = false) : $("#firstNameHelp").hide());
     (isEmpty('account[lastName]') ? ($("#lastNameHelp").show(), bool = false) : $("#lastNameHelp").hide() );
-    (isEmpty('account[zipCode]') ? $("#zipCodeHelp").show() : ((isValidationZipCode('account[zipCode]')) ? ($("#zipCodeHelp").show(), bool = false) : $("#zipCodeHelp").hide()));
+    (isEmpty('account[zipCode]') ? ($("#zipCodeHelp").show(), bool = false) : ((isValidationZipCode('account[zipCode]')) ? ($("#zipCodeHelp").show(), bool = false) : $("#zipCodeHelp").hide()));
     (isValidationList('#account_city') ? ($("#cityHelp").show(), bool = false) : $("#cityHelp").hide() );
     (isEmpty('account[address]') ? ($("#addressHelp").show(), bool = false) : $("#addressHelp").hide() );
-    (isEmpty('account[email]') ? $("#emailHelp").show() : ((isValidationEmail('account[email]')) ? ($("#emailHelp").show(), bool = false) : $("#emailHelp").hide()));
-    (isEmpty('account[password]') ? $("#passwordHelp").show() : ((isValidationPassword('account[password]')) ? ($("#passwordHelp").show(), bool = false) : $("#passwordHelp").hide()));
+    (isEmpty('account[email]') ? ($("#emailHelp").show(), bool = false) : ((isValidationEmail('account[email]')) ? ($("#emailHelp").show(), bool = false) : $("#emailHelp").hide()));
+    (isEmpty('account[password]') ? ($("#passwordHelp").show(), bool = false ): ((isValidationPassword('account[password]')) ? ($("#passwordHelp").show(), bool = false) : $("#passwordHelp").hide()));
     return bool;
 }
 
 function step2(){
     var bool = true;
-    (isEmpty('account[children][0][phoneRep1]') ? $("#phoneRep1Help").show() : ((isValidationPhoneNumber('account[children][0][phoneRep1]')) ? ($("#phoneRep1Help").show(), bool = false) : $("#phoneRep1Help").hide()));
+    (isEmpty('account[children][0][phoneRep1]') ? ($("#phoneRep1Help").show(), bool = false) : ((isValidationPhoneNumber('account[children][0][phoneRep1]')) ? ($("#phoneRep1Help").show(), bool = false) : $("#phoneRep1Help").hide()));
     (isEmpty('account[children][0][professionRep1]') ? ($("#professionRep1Help").show(), bool = false) : $("#professionRep1Help").hide() )
+    return bool;
+}
+
+function step7(){
+    var bool = true;
+    (isValidationRadio('acceptRules') ? ($("#rulesHelp").show(), bool = false) : $("#rulesHelp").hide())
+    (isValidationRadio('acceptRGPD') ? ($("#rgpdHelp").show(), bool = false) : $("#rgpdHelp").hide())
     return bool;
 }
 
@@ -194,5 +219,9 @@ $('#account_zipCode').focusout( function(){
             }
         }
     })
+});
+
+$(function () {
+    $('[data-toggle="tooltip"]').tooltip()
 });
 
