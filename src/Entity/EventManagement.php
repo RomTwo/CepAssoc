@@ -18,18 +18,35 @@ class EventManagement
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Event", inversedBy="eventManagements")
+     * @ORM\JoinColumn(nullable=false)
      */
     private $event;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Account", inversedBy="eventManagements")
+     * @ORM\JoinColumn(nullable=false)
      */
     private $account;
+
+    /**
+     * @ORM\Column(type="datetime", length=255)
+     */
+    private $startDate;
+
+    /**
+     * @ORM\Column(type="datetime", length=255)
+     */
+    private $endDate;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
     private $job;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $place;
 
     public function getId(): ?int
     {
@@ -71,5 +88,17 @@ class EventManagement
 
         return $this;
     }
-    
+
+
+    public function getPlace()
+    {
+        return $this->place;
+    }
+
+    public function setPlace($place)
+    {
+        $this->place = $place;
+    }
+
+
 }

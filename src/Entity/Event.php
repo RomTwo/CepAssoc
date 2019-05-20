@@ -24,9 +24,14 @@ class Event
     private $name;
 
     /**
-     * @ORM\Column(type="date")
+     * @ORM\Column(type="datetime")
      */
-    private $date;
+    private $startDate;
+
+    /**
+     * @ORM\Column(type="datetime")
+     */
+    private $endDate;
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -39,14 +44,14 @@ class Event
     private $description;
 
     /**
-     * @ORM\Column(type="boolean")
-     */
-    private $AuthorizationOfOrganization;
-
-    /**
      * @ORM\OneToMany(targetEntity="App\Entity\EventManagement", mappedBy="events")
      */
     private $eventManagements;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\Job", cascade={"persist"})
+     */
+    private $jobs;
 
     public function __construct()
     {
@@ -70,17 +75,27 @@ class Event
         return $this;
     }
 
-    public function getDate(): ?\DateTimeInterface
+    public function getStartDate()
     {
-        return $this->date;
+        return $this->startDate;
     }
 
-    public function setDate(\DateTimeInterface $date): self
+    public function setStartDate($startDate)
     {
-        $this->date = $date;
-
-        return $this;
+        $this->startDate = $startDate;
     }
+
+
+    public function getEndDate()
+    {
+        return $this->endDate;
+    }
+
+    public function setEndDate($endDate)
+    {
+        $this->endDate = $endDate;
+    }
+
 
     public function getAddress(): ?string
     {
@@ -102,18 +117,6 @@ class Event
     public function setDescription(string $description): self
     {
         $this->description = $description;
-
-        return $this;
-    }
-
-    public function getAuthorizationOfOrganization(): ?bool
-    {
-        return $this->AuthorizationOfOrganization;
-    }
-
-    public function setAuthorizationOfOrganization(bool $AuthorizationOfOrganization): self
-    {
-        $this->AuthorizationOfOrganization = $AuthorizationOfOrganization;
 
         return $this;
     }
@@ -148,5 +151,31 @@ class Event
 
         return $this;
     }
+
+    /**
+     * @return Collection|Job[]
+     */
+    public function getJobs(): Collection
+    {
+        return $this->jobs;
+    }
+
+    public function addJob(Job $job): self
+    {
+        if (!$this->eventManagements->contains($job)) {
+            $this->jobs[] = $job;
+        }
+        return $this;
+    }
+
+    public function removeJob(Job $job): self
+    {
+        if ($this->eventManagements->contains($job)) {
+            $this->jobs->removeElement($job);
+        }
+
+        return $this;
+    }
+
 
 }
