@@ -196,3 +196,7 @@ $('#account_zipCode').focusout( function(){
     })
 });
 
+$(function () {
+    $('[data-toggle="tooltip"]').tooltip()
+});
+

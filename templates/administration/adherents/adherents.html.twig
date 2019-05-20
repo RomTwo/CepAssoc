@@ -490,19 +490,35 @@
                                         Certificat medical ou attestation :
                                     </div>
                                     <div class="col">
-                                        {% if adherent.isMedicalCertificate %}
+                                        {% if adherent.medicalCertificate is not null %}
                                             <i class="fas fa-check"></i>
                                         {% else %}
                                             <i class="fas fa-times"></i>
                                         {% endif %}
                                     </div>
-                                    <div class="col">
-                                        <a target="_blank" rel="noopener noreferrer" href="{{ asset('uploads/' ~ adherent.medicalCertificate) }}" class="btn btn-success">PDF</a>
-                                    </div>
                                 </div>
                                 <div class="row">
                                     <div class="col">
                                         Bulletin N°2 Allianz :
+                                    </div>
+                                    <div class="col">
+                                        {% if adherent.bulletinN2Allianz %}
+                                            <i class="fas fa-check"></i>
+                                        {% else %}
+                                            <i class="fas fa-times"></i>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col">
+                                        Questionnaire de santé :
+                                    </div>
+                                    <div class="col">
+                                        {% if adherent.healthQuestionnaire %}
+                                            <i class="fas fa-check"></i>
+                                        {% else %}
+                                            <i class="fas fa-times"></i>
+                                        {% endif %}
                                     </div>
                                 </div>
                                 <div class="row">

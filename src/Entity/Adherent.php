@@ -4,7 +4,6 @@ namespace App\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
-use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Serializer\Annotation\Groups;
@@ -267,15 +266,7 @@ class Adherent
     private $isRegisteredInFFG;
 
     /**
-     * @ORM\Column(type="boolean")
-     * @Groups({"competition"})
-     */
-    private $isMedicalCertificate;
-
-    /**
-     * @ORM\Column(type="string")
-     * @Assert\NotBlank(message="Veuillez importer votre bulletin Allianz")
-     * @Assert\File(mimeTypes={ "application/pdf" })
+     * @ORM\Column(type="string", nullable=true)
      * @Groups({"competition"})
      */
     private $medicalCertificate;
@@ -284,7 +275,7 @@ class Adherent
      * @ORM\Column(type="boolean")
      * @Groups({"competition"})
      */
-    private $isValidateMedical;
+    private $hasMedicalCertificate;
 
     /**
      * @ORM\Column(type="date")
@@ -329,7 +320,7 @@ class Adherent
     private $volunteerComment;
 
     /**
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="string", nullable=true)
      * @Groups({"competition"})
      */
     private $bulletinN2Allianz;
@@ -339,6 +330,18 @@ class Adherent
      * @Groups({"competition"})
      */
     private $hasBulletinN2Allianz;
+
+    /**
+     * @ORM\Column(type="string", nullable=true)
+     * @Groups({"competition"})
+     */
+    private $healthQuestionnaire;
+
+    /**
+     * @ORM\Column(type="boolean")
+     * @Groups({"competition"})
+     */
+    private $hasHealthQuestionnaire;
 
     /**
      * @ORM\Column(type="boolean")
@@ -930,38 +933,6 @@ class Adherent
     /**
      * @return mixed
      */
-    public function getIsMedicalCertificate()
-    {
-        return $this->isMedicalCertificate;
-    }
-
-    /**
-     * @param mixed $isMedicalCertificate
-     */
-    public function setIsMedicalCertificate($isMedicalCertificate): void
-    {
-        $this->isMedicalCertificate = $isMedicalCertificate;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getIsValidateMedical()
-    {
-        return $this->isValidateMedical;
-    }
-
-    /**
-     * @param mixed $isValidateMedical
-     */
-    public function setIsValidateMedical($isValidateMedical): void
-    {
-        $this->isValidateMedical = $isValidateMedical;
-    }
-
-    /**
-     * @return mixed
-     */
     public function getMedicalCertificateDate()
     {
         return $this->medicalCertificateDate;
@@ -1174,6 +1145,55 @@ class Adherent
     {
         $this->bulletinN2Allianz = $bulletinN2Allianz;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getHealthQuestionnaire()
+    {
+        return $this->healthQuestionnaire;
+    }
+
+    /**
+     * @param mixed $healthQuestionnaire
+     */
+    public function setHealthQuestionnaire($healthQuestionnaire): void
+    {
+        $this->healthQuestionnaire = $healthQuestionnaire;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getHasHealthQuestionnaire()
+    {
+        return $this->hasHealthQuestionnaire;
+    }
+
+    /**
+     * @param mixed $hasHealthQuestionnaire
+     */
+    public function setHasHealthQuestionnaire($hasHealthQuestionnaire): void
+    {
+        $this->hasHealthQuestionnaire = $hasHealthQuestionnaire;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getHasMedicalCertificate()
+    {
+        return $this->hasMedicalCertificate;
+    }
+
+    /**
+     * @param mixed $hasMedicalCertificate
+     */
+    public function setHasMedicalCertificate($hasMedicalCertificate): void
+    {
+        $this->hasMedicalCertificate = $hasMedicalCertificate;
+    }
+
 
 
 }

@@ -34,12 +34,10 @@ class RegistrationController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid() && $utilitaires->isValidateCity($request->request->get("adherent_cityRep1"))) {
-            var_dump($request->request->get("adherent_cityRep1"));
             $utilitaires->setOtherFields($adherent);
             $adherent->setAffiliateCode($this->generateAffiliateCode());
             $adherent->setCityRep1($request->request->get("adherent_cityRep1"));
-            $adherent->setMedicalCertificate($this->addFile($adherent->getMedicalCertificate()));
-            //$adherent->setBulletinN2Allianz($this->addFile($adherent->getBulletinN2Allianz()));
+
             $account = $this->getDoctrine()->getRepository(Account::class)->find($user->getId());
 
             $account->addChild($adherent);
@@ -59,12 +57,6 @@ class RegistrationController extends AbstractController
             'cityRep1' => $user->getCity(),
         ]);
 
-    }
-
-    private function addFile($file){
-        $fileName = md5(uniqid()).'.'.$file->guessExtension();
-        $file->move($this->getParameter('upload_directory'), $fileName);
-        return $fileName;
     }
 
     private function generateAffiliateCode()
