@@ -112,7 +112,7 @@ string $email, string $city, string $password)
         $a->setType($type);
         $a->setCategory($category);
 
-        $o->persist($a);
+        //$o->persist($a);
     }
 
     public function load(ObjectManager $manager)
@@ -121,7 +121,7 @@ string $email, string $city, string $password)
         $adherentsNumber = 10;
         $categoriesNumber = 10;
         $eventsNumber = 5;
-        $activitiesNumber = 5;
+        $activitiesNumber = 36;
         
         $accounts = array();
         $adherents = array();
@@ -262,6 +262,9 @@ string $email, string $city, string $password)
         $adherents[0]->setVolunteerForClubLife("Jamais");
         $adherents[0]->setImageRight(false);
         $adherents[0]->setPaymentType("cheque");
+        $adherents[0]->setMedicalCertificate(false);
+        $adherents[0]->setBulletinN2Allianz(false);
+
 
         $manager->persist($adherents[0]);
 
@@ -279,6 +282,8 @@ string $email, string $city, string $password)
         $adherents[1]->setVolunteerForClubLife("Jamais");
         $adherents[1]->setImageRight(false);
         $adherents[1]->setPaymentType("cheque");
+        $adherents[1]->setMedicalCertificate(false);
+        $adherents[1]->setBulletinN2Allianz(false);
 
         $manager->persist($adherents[1]);
 
@@ -295,6 +300,8 @@ string $email, string $city, string $password)
         $adherents[2]->setVolunteerForClubLife("Jamais");
         $adherents[2]->setImageRight(false);
         $adherents[2]->setPaymentType("cheque");
+        $adherents[2]->setMedicalCertificate(false);
+        $adherents[2]->setBulletinN2Allianz(false);
 
         $manager->persist($adherents[2]);
 
@@ -310,6 +317,8 @@ string $email, string $city, string $password)
         $adherents[3]->setVolunteerForClubLife("Jamais");
         $adherents[3]->setImageRight(false);
         $adherents[3]->setPaymentType("cheque");
+        $adherents[3]->setMedicalCertificate(false);
+        $adherents[3]->setBulletinN2Allianz(false);
 
         $manager->persist($adherents[3]);
 
@@ -326,6 +335,9 @@ string $email, string $city, string $password)
         $adherents[4]->setVolunteerForClubLife("Jamais");
         $adherents[4]->setImageRight(false);
         $adherents[4]->setPaymentType("cheque");
+        $adherents[4]->setMedicalCertificate(false);
+        $adherents[4]->setBulletinN2Allianz(false);
+        $adherents[4]->setBulletinN2Allianz(false);
 
         $manager->persist($adherents[4]);
 
@@ -342,6 +354,8 @@ string $email, string $city, string $password)
         $adherents[5]->setVolunteerForClubLife("Jamais");
         $adherents[5]->setImageRight(false);
         $adherents[5]->setPaymentType("cheque");
+        $adherents[5]->setMedicalCertificate(false);
+        $adherents[5]->setBulletinN2Allianz(false);
 
         $manager->persist($adherents[5]);
 
@@ -358,6 +372,8 @@ string $email, string $city, string $password)
         $adherents[6]->setVolunteerForClubLife("Jamais");
         $adherents[6]->setImageRight(false);
         $adherents[6]->setPaymentType("cheque");
+        $adherents[6]->setMedicalCertificate(false);
+        $adherents[6]->setBulletinN2Allianz(false);
 
         $manager->persist($adherents[6]);
 
@@ -374,6 +390,8 @@ string $email, string $city, string $password)
         $adherents[7]->setVolunteerForClubLife("Jamais");
         $adherents[7]->setImageRight(false);
         $adherents[7]->setPaymentType("cheque");
+        $adherents[7]->setMedicalCertificate(false);
+        $adherents[7]->setBulletinN2Allianz(false);
 
         $manager->persist($adherents[7]);
 
@@ -389,6 +407,8 @@ string $email, string $city, string $password)
         $adherents[8]->setVolunteerForClubLife("Jamais");
         $adherents[8]->setImageRight(false);
         $adherents[8]->setPaymentType("cheque");
+        $adherents[8]->setMedicalCertificate(false);
+        $adherents[8]->setBulletinN2Allianz(false);
 
         $manager->persist($adherents[8]);
 
@@ -405,6 +425,8 @@ string $email, string $city, string $password)
         $adherents[9]->setVolunteerForClubLife("Jamais");
         $adherents[9]->setImageRight(false);
         $adherents[9]->setPaymentType("cheque");
+        $adherents[9]->setMedicalCertificate(false);
+        $adherents[9]->setBulletinN2Allianz(false);
 
         $manager->persist($adherents[9]);
 
@@ -484,11 +506,11 @@ string $email, string $city, string $password)
             $activity = new Activity();
             array_push($activities, $activity);
 
-            $activity->setName("activity".$i);
+            /*$activity->setName("activity".$i);
             $activity->setPrice(10 + $i*10);
             $activity->setStartDate(new \DateTime("09-05-2019"));
             $activity->setType("type of activity".$i);
-            $activity->setCategory($categories[$i]);
+            $activity->setCategory($categories[$i]);*/
 
             $manager->persist($activities[$i]);
         }
@@ -497,15 +519,57 @@ string $email, string $city, string $password)
         for ($i = 0; $i < $activitiesNumber; $i++) {
             $activity = new Activity();
             array_push($activities, $activity);
-        }
+        }*/
 
         $this->loadActivity($activities[0], $manager, "Baby Gym (nés en 2017)", 160, new \DateTime("15-09-2018"), "SECTEUR LOISIRS", $categories[0] );
-        $this->loadActivity($activities[0], $manager, "EG1 (2012 à 2007", 180, new \DateTime("15-09-2018"), "SECTEUR LOISIRS", $categories[2] );
-        $this->loadActivity($activities[0], $manager, "EGM (2012 et avant)", 180, new \DateTime("12-09-2018"), "SECTEUR LOISIRS", $categories[3] );
-        $this->loadActivity($activities[0], $manager, "EGS (2012 à 2010)", 165, new \DateTime("15-09-2018"), "SECTEUR LOISIRS", $categories[4 ] );
-        $this->loadActivity($activities[0], $manager, "Renforcement Musculaire", 125, new \DateTime("12-09-2018"), "SECTEUR LOISIRS", $categories[4 ]);
-        */
+        $this->loadActivity($activities[1], $manager, "Baby Gym (nés en 2016 + de juillet à décembre 2015)", 160, new \DateTime("15-09-2018"), "SECTEUR LOISIRS", $categories[0] );
+        $this->loadActivity($activities[2], $manager, "Baby Gym (nés de janvier à juin 2015 + 2014)", 160, new \DateTime("15-09-2018"), "SECTEUR LOISIRS", $categories[0] );
+        $this->loadActivity($activities[3], $manager, "Eveil Gym (nés en 2013)", 160, new \DateTime("15-09-2018"), "SECTEUR LOISIRS", $categories[0] );
 
+
+        $this->loadActivity($activities[4], $manager, "Baby Gym (nés en 2017 et 2016)", 120, new \DateTime("11-09-2018"), "SECTEUR LOISIRS", $categories[1] );
+        $this->loadActivity($activities[5], $manager, "Baby Gym (nés de 2015 à 2013)", 120, new \DateTime("11-09-2018"), "SECTEUR LOISIRS", $categories[1] );
+
+
+        $this->loadActivity($activities[6], $manager, "EG1 (2012 à 2007)", 180, new \DateTime("15-09-2018"), "SECTEUR LOISIRS", $categories[2] );
+        $this->loadActivity($activities[7], $manager, "EG2 (2012 à 2007)", 180, new \DateTime("15-09-2018"), "SECTEUR LOISIRS", $categories[2] );
+        $this->loadActivity($activities[8], $manager, "EG3 (2006 et avant)", 180, new \DateTime("15-09-2018"), "SECTEUR LOISIRS", $categories[2] );
+        $this->loadActivity($activities[9], $manager, "EG4 (2009 et avant)", 205, new \DateTime("15-09-2018"), "SECTEUR LOISIRS", $categories[2] );
+
+        $this->loadActivity($activities[10], $manager, "EGM (2012 et avant)", 180, new \DateTime("12-09-2018"), "SECTEUR LOISIRS", $categories[3] );
+
+        $this->loadActivity($activities[11], $manager, "EG5 (2012 à 2010)", 165, new \DateTime("10-09-2018"), "SECTEUR LOISIRS", $categories[4] );
+        $this->loadActivity($activities[12], $manager, "EG6 (2009 et avant)", 165, new \DateTime("10-09-2018"), "SECTEUR LOISIRS", $categories[4] );
+        $this->loadActivity($activities[13], $manager, "EG7 (2012 et avant)", 165, new \DateTime("13-09-2018"), "SECTEUR LOISIRS", $categories[4] );
+
+        $this->loadActivity($activities[14], $manager, "Adultes", 125, new \DateTime("12-09-2018"), "SECTEUR LOISIRS", $categories[5]);
+        $this->loadActivity($activities[15], $manager, "Renforcement musculaire", 125, new \DateTime("12-09-2018"), "SECTEUR LOISIRS", $categories[5]);
+        $this->loadActivity($activities[16], $manager, "Freestyle Gym", 125, new \DateTime("12-09-2018"), "SECTEUR LOISIRS", $categories[5]);
+        $this->loadActivity($activities[17], $manager, "Gym Adultes aux Agrès", 125, new \DateTime("12-09-2018"), "SECTEUR LOISIRS", $categories[5]);
+        $this->loadActivity($activities[18], $manager, "Gym Santé Bien-Etre", 125, new \DateTime("12-09-2018"), "SECTEUR LOISIRS", $categories[5]);
+        $this->loadActivity($activities[19], $manager, "Fitness", 125, new \DateTime("12-09-2018"), "SECTEUR LOISIRS", $categories[5]);
+        $this->loadActivity($activities[20], $manager, "Gym Spectacle", -1, new \DateTime("01-01-2011"), "SECTEUR LOISIRS", $categories[5]);
+        $this->loadActivity($activities[21], $manager, "Pilates", -1, new \DateTime("01-01-2011"), "SECTEUR LOISIRS", $categories[5]);
+
+        $this->loadActivity($activities[21], $manager, "Poussines 1 (2012)", 205, new \DateTime("03-09-2018"), "SECTEUR LOISIRS", $categories[6]);
+        $this->loadActivity($activities[22], $manager, "Poussines 2 (2011 et 2010)", 225, new \DateTime("03-09-2018"), "SECTEUR LOISIRS", $categories[6]);
+        $this->loadActivity($activities[23], $manager, "Benjamines/Minimes 1 (2009 à 2006)", 205, new \DateTime("04-09-2018"), "SECTEUR LOISIRS", $categories[6]);
+        $this->loadActivity($activities[24], $manager, "Benjamines/Minimes 2 (2009 à 2006)", 225, new \DateTime("03-09-2018"), "SECTEUR LOISIRS", $categories[6]);
+        $this->loadActivity($activities[25], $manager, "Toutes Catégories 1 (2005 et plus)", 205, new \DateTime("04-09-2018"), "SECTEUR LOISIRS", $categories[6]);
+        $this->loadActivity($activities[26], $manager, "Toutes Catégories 2 (2005 et plus)", 205, new \DateTime("03-09-2018"), "SECTEUR LOISIRS", $categories[6]);
+        $this->loadActivity($activities[27], $manager, "Toutes Catégories 3 (2005 et plus)", 225, new \DateTime("04-09-2018"), "SECTEUR LOISIRS", $categories[6]);
+        $this->loadActivity($activities[28], $manager, "Toutes Catégories 4 (2005 et plus)", 225, new \DateTime("03-09-2018"), "SECTEUR LOISIRS", $categories[6]);
+        $this->loadActivity($activities[29], $manager, "Groupe Performance", 240, new \DateTime("03-09-2018"), "SECTEUR LOISIRS", $categories[6]);
+
+
+        $this->loadActivity($activities[30], $manager, "Poussins (2012 à 2010)", -1, new \DateTime("03-09-2018"), "SECTEUR LOISIRS", $categories[7]);
+        $this->loadActivity($activities[31], $manager, "Benjamins/Minimes/Cadets (2009 à 2004)", -1, new \DateTime("03-09-2018"), "SECTEUR LOISIRS", $categories[7]);
+        $this->loadActivity($activities[32], $manager, "Juniors/Seniors (2003 et avant)", -1, new \DateTime("03-09-2018"), "SECTEUR LOISIRS", $categories[7]);
+
+        $this->loadActivity($activities[33], $manager, "GAF-GAM", 325, new \DateTime("03-09-2018"), "SECTEUR LOISIRS", $categories[8]);
+
+        $this->loadActivity($activities[34], $manager, "Découvertes / Evolution (2006 et avant) / Adultes", -1, new \DateTime("06-09-2018"), "SECTEUR LOISIRS", $categories[9]);
+        $this->loadActivity($activities[35], $manager, "Détente / Passion", 250, new \DateTime("07-09-2018"), "SECTEUR LOISIRS", $categories[9]);
 
         // ADDING BETWEEN ONE AND THREE ACTIVITIES TO EACH ADHERENTS
         for ($i = 0; $i < $adherentsNumber; $i++) {

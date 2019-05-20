@@ -15,8 +15,15 @@ class CaptchaCheck
         $recaptcha = json_decode($recaptcha);
 
         if ($recaptcha->success) {
-            return $recaptcha->score >= 0.5 && $recaptcha->action === 'register' ? true :
-                ($recaptcha->score >= 0.6 && $recaptcha->action === 'forgot' ? true : false);
+            if ($recaptcha->score >= 0.5 && $recaptcha->action === 'register') {
+                return true;
+            } elseif ($recaptcha->score >= 0.6 && $recaptcha->action === 'forgot') {
+                return true;
+            } elseif ($recaptcha->score >= 0.7 && $recaptcha->action === 'login') {
+                return true;
+            } else {
+                return false;
+            }
         } else {
             return false;
         }

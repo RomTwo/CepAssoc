@@ -139,6 +139,13 @@ class AdherentAccountType extends AbstractType
                 ],
                 'required' => false,
                 'data_class' => null,
+            ])
+            ->add('healthQuestionnaire', FileType::class, [
+                'attr' => [
+                    'placeholder' => "Choisissez le questionnaire de santé"
+                ],
+                'required' => false,
+                'data_class' => null,
             ]);
     }
 
