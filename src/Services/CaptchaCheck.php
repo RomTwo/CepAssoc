@@ -19,8 +19,6 @@ class CaptchaCheck
                 return true;
             } elseif ($recaptcha->score >= 0.6 && $recaptcha->action === 'forgot') {
                 return true;
-            } elseif ($recaptcha->score >= 0.7 && $recaptcha->action === 'login') {
-                return true;
             } else {
                 return false;
             }
