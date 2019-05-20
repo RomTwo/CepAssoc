@@ -352,6 +352,7 @@
                                     </thead>
                                     <tbody>
                                     {% for activity in activities %}
+                                        {% if activity.type == "SECTEUR LOISIRS" %}
                                         <tr id={{ activity.id }}>
                                             <td>{{ activity.name }}</td>
                                             <td>Samedi - De 10h à 12h</td>
@@ -362,11 +363,38 @@
                                                        value="{{ activity.id }}">
                                             </td>
                                         </tr>
+                                        {% endif %}
                                     {% endfor %}
                                     </tbody>
                                 </table>
                             </div>
-                            <div class="tab-pane fade" id="nav-competitif" role="tabpanel" aria-labelledby="nav-competitif-tab">...</div>
+                            <div class="tab-pane fade" id="nav-competitif" role="tabpanel" aria-labelledby="nav-competitif-tab"><table id="example" class="display" style="width:100%">
+                                    <thead>
+                                    <tr>
+                                        <th>Nom</th>
+                                        <th>Créneaux</th>
+                                        <th>Prix</th>
+                                        <th>Date</th>
+                                        <th>Selection</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    {% for activity in activities %}
+                                        {% if activity.type == "SECTEUR COMPETITIF" %}
+                                            <tr id={{ activity.id }}>
+                                                <td>{{ activity.name }}</td>
+                                                <td>Samedi - De 10h à 12h</td>
+                                                <td id="price{{ activity.id }}">{{ activity.price }}</td>
+                                                <td>{{ activity.startDate|date('d/m/y') }}</td>
+                                                <td>
+                                                    <input type="checkbox" id="checkbox{{ activity.id }}" name="selection"
+                                                           value="{{ activity.id }}">
+                                                </td>
+                                            </tr>
+                                        {% endif %}
+                                    {% endfor %}
+                                    </tbody>
+                                </table></div>
                         </div>
 
                     </div>
@@ -555,6 +583,39 @@
                 var recaptchaResponse = document.getElementById('recaptchaResponse');
                 recaptchaResponse.value = token;
             });
+        });
+
+        $('#example').DataTable({
+            "lengthChange": false,
+            "language" : {
+                "sProcessing":     "Traitement en cours...",
+                "sSearch":         "Rechercher&nbsp;:",
+                "sLengthMenu":     "Afficher _MENU_ &eacute;l&eacute;ments",
+                "sInfo":           "Affichage de l'&eacute;l&eacute;ment _START_ &agrave; _END_ sur _TOTAL_ &eacute;l&eacute;ments",
+                "sInfoEmpty":      "Affichage de l'&eacute;l&eacute;ment 0 &agrave; 0 sur 0 &eacute;l&eacute;ment",
+                "sInfoFiltered":   "(filtr&eacute; de _MAX_ &eacute;l&eacute;ments au total)",
+                "sInfoPostFix":    "",
+                "sLoadingRecords": "Chargement en cours...",
+                "sZeroRecords":    "Aucun &eacute;l&eacute;ment &agrave; afficher",
+                "sEmptyTable":     "Aucune donn&eacute;e disponible dans le tableau",
+                "oPaginate": {
+                    "sFirst":      "Premier",
+                    "sPrevious":   "Pr&eacute;c&eacute;dent",
+                    "sNext":       "Suivant",
+                    "sLast":       "Dernier"
+                },
+                "oAria": {
+                    "sSortAscending":  ": activer pour trier la colonne par ordre croissant",
+                    "sSortDescending": ": activer pour trier la colonne par ordre d&eacute;croissant"
+                },
+                "select": {
+                    "rows": {
+                        _: "%d lignes séléctionnées",
+                        0: "Aucune ligne séléctionnée",
+                        1: "1 ligne séléctionnée"
+                    }
+                }
+            }
         });
     </script>
 {% endblock %}

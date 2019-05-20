@@ -35,7 +35,6 @@
                                    required>
 
                             <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
-                            <input type="hidden" name="recaptcha_response" id="recaptchaResponseLogin">
 
                             <button class="btn btn-primary" type="submit">Connexion</button>
 
@@ -93,13 +92,4 @@
         });
     </script>
 
-    <!-- Recaptcha for the login form -->
-    <script>
-        grecaptcha.ready(function () {
-            grecaptcha.execute('{{ recaptcha_key_site }}', {action: 'login'}).then(function (token) {
-                var recaptchaResponse = document.getElementById('recaptchaResponseLogin');
-                recaptchaResponse.value = token;
-            });
-        });
-    </script>
 {% endblock %}

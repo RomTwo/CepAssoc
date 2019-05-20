@@ -32,6 +32,10 @@
                 <li class="nav-item">
                     <a class="nav-link" href="{{ path('admin_adherents') }}">Administration</a>
                 </li>
+            {% elseif is_granted('ROLE_MODERATOR') %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ path('admin_activities') }}">Administration</a>
+                </li>
             {% endif %}
         </ul>
         <form class="form-inline my-2 my-lg-0">

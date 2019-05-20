@@ -1,5 +1,6 @@
 -- Gestion des rôles de l'application
 Il y a trois rôles : - ROLE_USER         --> Utilisateur classique
+                     - ROLE_MODERATOR    --> Modérateur
                      - ROLE_ADMIN        --> Administrateur
                      - ROLE_SUPER_ADMIN  --> Super Administrateur (peux changer les rôles des utilisateurs)
 
@@ -9,8 +10,10 @@ Possibilité d'ajouter d'autres rôles.
 
     {# security.yaml #}
     role_hierarchy:
-        ROLE_ADMIN: ROLE_USER
-        ROLE_SUPER_ADMIN: [ROLE_ADMIN, ROLE_USER]
+            ROLE_MODERATOR: ROLE_USER
+            ROLE_ADMIN: [ROLE_MODERATOR, ROLE_USER]
+            ROLE_SUPER_ADMIN: [ROLE_ADMIN, ROLE_MODERATOR, ROLE_USER]
+
 
 -- url accessible en fonction du rôle de l'utilisateur
     {# security.yaml #}
