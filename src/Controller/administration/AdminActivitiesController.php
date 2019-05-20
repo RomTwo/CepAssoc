@@ -77,24 +77,15 @@ class AdminActivitiesController extends AbstractController
     public function delete (Request $request,$id)
     {
         $repository = $this->getDoctrine()->getRepository(Category::class);
-        $repositoryActivity = $this->getDoctrine()->getRepository(Activity::class);
-
         $category = $repository->find($id);
-        $activity =$repositoryActivity->findBy(array(
-            "category"=>$category
-        ));
-        if($activity != null)
-        {
+
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($category);
             $entityManager->flush();
-            $this->addFlash('sucess',"Activité supprimée avec succès");
+            $this->addFlash('sucess',"Category supprimée avec succès");
             return $this->redirectToRoute('admin_activities');
-        }
-        else
-        {    $this->addFlash('error', "Vous ne pouvez pas supprimer cette catégorie vu qu'elle est déjà utilisée par une autre entité");
-            return $this->redirectToRoute('admin_activities');
-        }
+
+
     }
 
     public function addActivity(Request $request)
