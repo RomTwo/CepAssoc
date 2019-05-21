@@ -524,10 +524,10 @@
         </div>
         <div class="row justify-content-between">
             <div class="mb-5 ml-5">
-                <button id="previous" type="button" class="btn btn-primary">Précédent</button>
+                <button id="previousRegistration" type="button" class="btn btn-primary">Précédent</button>
             </div>
             <div class="mb-5 mr-5">
-                <button id="next" type="button" class="btn btn-primary">Suivant</button>
+                <button id="nextRegistration" type="button" class="btn btn-primary">Suivant</button>
                 <input id="step" value="1" hidden>
             </div>
         </div>
@@ -580,38 +580,38 @@
             })
         });
 
-        $('#next').click(function () {
+        $('#nextRegistration').click(function () {
             var value = parseInt(document.getElementById('step').value);
             if (value < 5) {
                 if (stepChoice("step" + value)) {
                     if (value == 4) {
-                        $("#next").hide();
+                        $("#nextRegistration").hide();
                     }
-                    $("#previous").show();
+                    $("#previousRegistration").show();
                     $("helper").hide();
                     $("#registrationStep" + (value + 1)).show();
                     $("#registrationStep" + (value)).hide();
                     document.getElementById('step').value = value + 1;
                 }
             } else {
-                $("#next").hide();
+                $("#nextRegistration").hide();
             }
 
             $('#example').DataTable();
         });
 
-        $('#previous').click(function () {
+        $('#previousRegistration').click(function () {
             var value = parseInt(document.getElementById('step').value);
             if (value > 1) {
                 if (value == 2) {
-                    $("#previous").hide();
+                    $("#previousRegistration").hide();
                 }
-                $("#next").show();
+                $("#nextRegistration").show();
                 $("#registrationStep" + (value - 1)).show();
                 $("#registrationStep" + (value)).hide();
                 document.getElementById('step').value = value - 1;
             } else {
-                $("#previous").hide();
+                $("#previousRegistration").hide();
             }
         });
 
