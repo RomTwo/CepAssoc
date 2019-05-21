@@ -17,7 +17,6 @@ class HomeController extends AbstractController
     public function index(Request $request)
     {
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
-        $errorCode = ""; $msg = ""; // will be use to print messages in the view
 
         // Getting a user's children --(adherents)
         $user = $this->getUser();
@@ -26,7 +25,7 @@ class HomeController extends AbstractController
         $adherents = $account->getChildren();
 
         // Building the mini form for getting an affiliate code
-        $defaultData = ['message' => 'Type your message here'];
+        $defaultData = [];
         $form = $this->createFormBuilder($defaultData)
             ->add('code', TextType::class)
             ->getForm();
@@ -34,7 +33,7 @@ class HomeController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            // data is an array with "name", "email", and "message" keys
+            // data is an array with "code"
             $data = $form->getData();
             $code = $data['code'];
 
@@ -42,29 +41,23 @@ class HomeController extends AbstractController
             $adherent = $this->getDoctrine()->getRepository(Adherent::class)->findOneBy(['affiliateCode' => $code]);
 
             if($adherent == null){
-                $errorCode = 1; // we signal the error
-                $msg = "La clé que vous avez entré ne correspond à aucun adhérent";
+                $this->addFlash('error', "La clé que vous avez entré ne correspond à aucun adhérent");
             }
             else{
                 // if the user already had the child, we do nothing and we mention it
-                //if(isset($adherent, $adherents)){
-                    $errorCode = 1; // we signal the error
-                    $msg = "Vous suivez déjà l'adhérent correspondant au code entré";
-                //}
-                //else{
+                if($adherents->contains($adherent)){
+                    $this->addFlash('error', "Vous suivez déjà l'adhérent correspondant au code entré");
+                }
+                else{
                     // Adding the child to the user
                     $account->addChild($adherent);
-                    $errorCode = 0;
-                    $msg = "Adhérent rajouté avec succès !";
+                    $this->addFlash('success', "Adhérent rajouté avec succès");
                     $entityManager = $this->getDoctrine()->getManager();
-                    //$entityManager->persist($account);
                     $entityManager->flush();
-                //}
+                }
 
             }
-
-
-            return $this->render('home/index.html.twig', ['adherents' => $adherents, 'form' => $form->createView(), 'code' => $code, 'errorCode' => $errorCode, 'msg' => $msg]);
+            //return $this->render('home/index.html.twig', ['adherents' => $adherents, 'form' => $form->createView()]);
         }
 
         return $this->render('home/index.html.twig', ['adherents' => $adherents, 'form' => $form->createView()]);

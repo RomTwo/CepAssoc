@@ -1,0 +1,142 @@
+-- Système de connexion à l'application
+-- Utilisation du service Guard
+
+-- Côté client
+    Utilisation dans un fomulaire classique dans lequel on ajoute un token csrf pour se prémunir des attaques XSS
+
+    <form action="{{ path('security_connexion') }}" method="post">
+
+        <!-- Login form -->
+        <label for="inputEmail" class="sr-only">Adresse mail : </label>
+        <input type="email" name="email" id="inputEmail" class="form-control" placeholder="Email" required autofocus>
+        <label for="inputPassword" class="sr-only">Mot de passe : </label>
+        <input type="password" name="password" id="inputPassword" class="form-control" placeholder="mot de passe" required>
+        <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}"> <!-- TOKEN CSRF -->
+        <input type="hidden" name="recaptcha_response" id="recaptchaResponseLogin">
+        <button class="btn btn-primary" type="submit">Connexion</button>
+
+    </form>
+
+-- Côté serveur
+    Création d'une classe LoginFormAuthentificator qui étend la classe AbstractFormLoginAuthenticator (contient des méthodes obligatoires)
+
+    Attributs de la classes :
+        EntityManagerInterface $entityManager           --> Permet d'accéder à la base de données
+        UrlGeneratorInterface $urlGenerator             --> Permet de générer une url à partir du nom d'une route
+        CsrfTokenManagerInterface $csrfTokenManager     --> Permet de vérifier si le token passé dans le formulaire est valide
+        UserPasswordEncoderInterface $passwordEncoder   --> Permet d'encoder le mot de passe entré dans le formulaire (encodage bcrypt)
+                                                            pour pourvoir le comparé avec celui qui est présent dans la base de données
+
+    Méthodes de la classe : (à par le contructeur, toutes les méthodes proviennent de la classe AbstractFormLoginAuthenticator, on ne peut
+                            donc pas modifier leur signature, seulement leur contenue).
+
+        __construct
+        supports(Request $request)  --> Vérifie si la requête est bien envoyé via la méthode POST sur la route correspondant au controller s'occupant de la connexion
+
+        getCredentials(Request $request)  --> Récupère le contenu dans champs du formulaire. Ces données sont contenu dans un tableau.
+
+        getUser($credentials, UserProviderInterface $userProvider)  -> Vérifie si le token CSRF est valide (savoir si il s'agit du formulaire d'origine), si non valide déclenche une exception,
+                                                                       vérifie si le captcha est valide (contrer les attaques en provenance de bots), si non valide déclenche une exception,
+                                                                       Vérifie si les données correspondent à un utilisateur présent dans la base de données;
+                                                                       Si c'est le cas il retourne un objet user sinon il renvoi une exception arrêtant le processus de connexion.
+
+        checkCredentials($credentials, UserInterface $user)  --> Vérifie si le mot de passe entré par l'utilisateur est correct, sinon il déclenche une exception
+
+        onAuthenticationSuccess(Request $request, TokenInterface $token, $providerKey)  --> On atteint cette méthode si toute les méthodes précédentes on retourner une valeur juste.
+                                                                                            Cette méthode, ve rediriger l'utilisateur la page d'accueil de l'application
+
+        onAuthenticationFailure(Request $request, AuthenticationException $exception)   --> On atteint cette méthode si il y a une erreurs dans une des méthodes vu précédemment.
+                                                                                            Cette méthode, va retourner une erreur etva rediriger l'utilisateur sur le formulaire de connexion
+
+        getLoginUrl()   --> Retourne l'url du formulaire de login
+
+
+    Ordre d'appel des méthodes :    Request (envoi du formulaire)
+                                                |
+                                               \|/
+                                                °
+                                             supports___________________ERREUR_____________________
+                                                |                                                  |
+                                               \|/                                                 |
+                                                °                                                  |
+                                           getCredentials_______________ERREUR_____________________|
+                                                |                                                  |
+                                               \|/                                                 |
+                                                °                                                  |
+                                             getUser____________________NULL__________________     |
+                                                |                                             |    |
+                                               \|/                                            |    |
+                                                °                                             |    |
+                                          checkCredentials                                    |    |
+                                                |                                             |    |
+                            ________TRUE________|_________FALSE_______                        |    |
+                           |                                          |                       |    |
+                          \|/                                        \|/                      |    |
+                           °                                          °                       |    |
+                 onAuthenticationFailure                    onAuthenticationFailure  <---------    |
+                           |                                          |                            |
+                           |                                          |                            |
+                           |                                          |                            |
+                           |______________              ______________|                            |
+                                          |            |                                           |
+                                          |            |                                           |
+                                         \|/          \|/                                          |
+                                          °            °                                           |
+                                             Response <---------------------------------------------
+
+
+
+
+
+
+
+
+-- Configuration
+    La classe vu précédemment (LoginFormAuthentificator.php) est déclaré en tant que service dans le fichier config/services.yaml
+    Ce service est utilisé dans le fichier config/security.yaml. Le service est déclenché à chaque fois qu'un utilisateur souhaite se connecter.
+
+    {# service.yaml #}
+    app.id_authentificator:
+        class: App\Security\LoginFormAuthentificator
+
+
+    Dans le fichier concernant la sécurité de l'application (config/security.yaml), on doit déclaré l'utilisation du service guard.
+    Le firewalls 'main' capte toute les routes proposé par l'application (pattern : ^/ , toutes les routes commençant par / ).
+    Le service guard est définit à l'aide du mot clé 'guard'. Il faut le passé un service d'authentification ('authentificators')
+    en l'occurrence notre service déclaré dans le fichier service.yaml.
+
+    {# security.yaml #}
+        firewalls:
+
+            main:
+                pattern: ^/
+                anonymous: ~
+                provider: user
+                logout:
+                    path: /profile/logout
+                    target: /profile/login
+                guard:
+                    authenticators:
+                        - app.id_authentificator
+                access_denied_handler: App\Security\AccessDeniedHandler
+
+
+-- Système de déconnexion de l'application
+    Dans le fichier concernant la sécurité de l'application (config/security.yaml), On déclare une url de déconnexion contenu dans la propriété 'logout'
+        * path    --> url de déconnexion
+        * target  --> url de redirection après déconnexion
+
+    {# security.yaml #}
+            firewalls:
+
+                main:
+                    pattern: ^/
+                    anonymous: ~
+                    provider: user
+                    logout:
+                        path: /profile/logout
+                        target: /profile/login
+                    guard:
+                        authenticators:
+                            - app.id_authentificator
+                    access_denied_handler: App\Security\AccessDeniedHandler

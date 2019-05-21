@@ -502,39 +502,106 @@
                                     <i class="fas fa-times"></i>
                                 {% endif %}
                             </div>
-                        </div>
-                        <div class="row">
-                            <div class="col">
-                                Engagement compétition :
+                            <hr/>
+                            <h6>PARTIE RESERVE A L'ADMINISTRATION</h6>
+                            <div class="alert alert-secondary" role="alert">
+                                <div class="row">
+                                    <div class="col-5">
+                                        Certificat medical ou attestation :
+                                    </div>
+                                    <div class="col">
+                                        {% if adherent.medicalCertificate is not null %}
+                                            <i class="fas fa-check"></i>
+                                        {% else %}
+                                            <i class="fas fa-times"></i>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col">
+                                        Bulletin N°2 Allianz :
+                                    </div>
+                                    <div class="col">
+                                        {% if adherent.bulletinN2Allianz %}
+                                            <i class="fas fa-check"></i>
+                                        {% else %}
+                                            <i class="fas fa-times"></i>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col">
+                                        Questionnaire de santé :
+                                    </div>
+                                    <div class="col">
+                                        {% if adherent.healthQuestionnaire %}
+                                            <i class="fas fa-check"></i>
+                                        {% else %}
+                                            <i class="fas fa-times"></i>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-5">
+                                        Règlement cotisation :
+                                    </div>
+                                    <div class="col">
+                                        {% if adherent.paymentFeesArePaid %}
+                                            <i class="fas fa-check"></i>
+                                        {% else %}
+                                            <i class="fas fa-times"></i>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col">
+                                        Engagement compétition :
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col">
+                                        Mutation :
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col">
+                                        Dossier traité par :
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-5">
+                                        Saisie dans Gest'Gym :
+                                    </div>
+                                    <div class="col">
+                                        {% if adherent.isRegisteredInGestGym %}
+                                            <i class="fas fa-check"></i>
+                                        {% else %}
+                                            <i class="fas fa-times"></i>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col">
+                                        Licence 2019 :
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="col">
-                                Mutation :
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col">
-                                Dossier traité par :
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-5">
-                                Saisie dans Gest'Gym :
-                            </div>
-                            <div class="col">
-                                {% if adherent.isRegisteredInGestGym %}
-                                    <i class="fas fa-check"></i>
-                                {% else %}
-                                    <i class="fas fa-times"></i>
-                                {% endif %}
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col">
-                                Licence 2019 :
-                            </div>
-                        </div>
+<<<<<<< HEAD
+=======
+                    </div>
+                    <div class="modal-footer">
+                        {% if not adherent.isRegisteredInFFG %}
+                            <a href="{{ path('admin_adherentsRegister', {id: adherent.id}) }}" class="btn btn-primary">Valider
+                                l'inscription</a>
+                        {% endif %}
+
+                        <a href="{{path('admin_adherentsPDF', {id: adherent.id})}}" class="btn btn-danger">Imprimer</a>
+                        <a href="{{path('admin_adherentsEdit', {id: adherent.id})}}" class="btn btn-secondary">Modifier</a>
+                        <a href="{{path('admin_adherentsDelete', {id: adherent.id})}}" class="btn btn-secondary">Supprimer</a>
+
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+>>>>>>> master
                     </div>
                 </div>
             </div>

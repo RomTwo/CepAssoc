@@ -165,12 +165,14 @@
                                 {{ form_errors(form.password) }}
                             </div>
                         </div>
-                        <div class="row">
-                            <input type="checkbox" id="registration" name="registration" value="registration">
-                            <label for="registration">Souhaitez-vous devenir membre ?</label>
+                        <div class="form-check mt-3">
+                            <input class="form-check-input" type="checkbox" id="registration" name="registration" value="registration">
+                            <label class="form-check-label" for="registration">
+                                Je m'inscris également à l'association. <a><i class="fa fa-info-circle" data-toggle="tooltip"
+                                                                              data-original-title="Cette étape est optionnelle, il est possible de rejoindre l'association ultérieurement au sein du site internet."></i></a>
+                            </label>
                         </div>
                         {{ form_widget(form.valid) }}
-
                         <input type="hidden" name="recaptcha_response" id="recaptchaResponse">
                     </div>
                     <div id="accountStep2">
@@ -344,25 +346,148 @@
                                 <h6>Moyens de paiement : </h6>
                             </div>
                             <div class="col-auto">
-                                {{ form_widget(form.children[0].imageRight) }}
+                                {{ form_widget(form.children[0].paymentType) }}
+
                             </div>
                         </div>
                         <h6>Droits d'image :</h6>
                         <div class="row align-items-center ml-2">
-                            <p>{{ form_widget(form.children[0].paymentType) }} le club à prendre et à diffuser des
-                                photos me
-                                concernant pour enrichir
-                                la photothèque et le site internet du club.</p>
+                            {{ form_widget(form.children[0].imageRight) }} le club à prendre et à diffuser des
+                            photos me
+                            concernant pour enrichir
+                            la photothèque et le site internet du club.
                         </div>
                         <h6>Certificat medical : </h6>
                         <div class="row align-items-center ml-2 mr-2">
-                            {{ form_widget(form.children[0].medicalCertificate) }}
+                            <div class="col-auto">
+                                {{ form_widget(form.children[0].medicalCertificate) }}
+                            </div>
+                            <a><i class="fa fa-info-circle" data-toggle="tooltip"
+                                  data-original-title="Le certificat médical peut être rendu plus tard."></i></a>
                         </div>
                         <h6>Bulletin N2 allianz : </h6>
                         <div class="row align-items-center ml-2 mr-2">
-                            {{ form_widget(form.children[0].bulletinN2Allianz) }}
+                            <div class="col-auto">
+                                {{ form_widget(form.children[0].bulletinN2Allianz) }}
+                            </div>
+                            <a><i class="fa fa-info-circle" data-toggle="tooltip"
+                                  data-original-title="Le bulletin peut être rendu plus tard."></i></a>
+
                         </div>
-                        <button type="submit" class="btn btn-primary">Confirmer l'inscription de l'adhérent</button>
+                        <h6>Questionnaire de santé : </h6>
+                        <div class="row align-items-center ml-2 mr-2">
+                            <div class="col-auto">
+                                {{ form_widget(form.children[0].healthQuestionnaire) }}
+                            </div>
+                            <div class="col-auto">
+                                <a href="{{ asset('PDF/QuestionnaireDeSante.pdf') }}" class="btn btn-success" download>Obtenir
+                                    le questionnaire</a>
+                            </div>
+                            <a><i class="fa fa-info-circle" data-toggle="tooltip"
+                                  data-original-title="Le questionnaire peut être rendu plus tard."></i></a>
+                        </div>
+                        <div class="form-check mt-3">
+                            <input class="form-check-input" type="checkbox" id="acceptRules" name="acceptRules">
+                            <label class="form-check-label" for="acceptRules">
+                                J'accepte le réglement intérieur de l'association. <a href=""
+                                                                                      data-toggle="modal"
+                                                                                      data-target="#exampleModal">Voir
+                                    le réglement</a>
+                            </label>
+                            <small id="rulesHelp" class="form-text helper"><span
+                                        class="badge badge-danger">Erreur</span> Le réglement doit être validé.
+                            </small>
+                        </div>
+                        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
+                             aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog modal-lg" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLabel">Réglement intérieur</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <h6>Les documents à fournir pour l’inscription sont les suivants : </h6>
+                                        <ul>
+                                            <li>Un certificat médical de non contre-indication à la pratique de la
+                                                gymnastique de moins de 3 mois (sauf pour les
+                                                renouvellements)**
+                                            </li>
+                                            <li>La fiche d’inscription dûment remplie</li>
+                                            <li>Le règlement total de la cotisation (possibilité d’établir trois
+                                                chèques à débit différé)
+                                            </li>
+                                            <li>Le règlement du forfait d’engagement en compétitions (pour les
+                                                groupes
+                                                compétitifs et Teamgym)
+                                            </li>
+                                            <li>Envoyer une photo par mail au cep.gymnastique@gmail.com (en
+                                                précisant
+                                                les nom, prénom et le groupe)
+                                            </li>
+                                            <li>Le bulletin N°2 Allianz fourni par le club le jour de
+                                                l’inscription
+                                            </li>
+                                        </ul>
+                                        <br/>
+                                        <b>Séance d’essai : </b>
+                                        <p>Chaque gymnaste a droit à une séance d’essai gratuite sous réserve de
+                                            présentation d’un certificat médical. A l’issue
+                                            de cette séance, le dossier devra impérativement être constitué.</p>
+                                        <br/>
+                                        <b>En cas d’abandon, aucun remboursement ne sera effectué.</b>
+                                        <p> Pour
+                                            information, les assurances partenaires de la FFGym proposent une
+                                            assurance « Interruption Abonnement Sportif » (voir modalités sur le
+                                            site de la FFGym)</p>
+                                        <br/>
+                                        <b>Aux parents ou responsables des adhérents mineurs :</b>
+                                        <p>Les parents
+                                            ou responsables des enfants doivent s’assurer de la présence des
+                                            éducateurs du club et du déroulement effectif de l’entrainement avant de
+                                            déposer leur enfant. Les parents doivent également
+                                            récupérer leur enfant dans la salle dès la fin de l’entrainement. Le
+                                            club décline toute responsabilité en cas d’accident en dehors des
+                                            horaires d’entrainement. Toutes les informations à destination des
+                                            membres du club ne sont pas données par voie postale. Elles sont
+                                            transmises par affichage sur les panneaux réservés à cet effet dans la
+                                            salle, par mail et sur le site internet : www.cep-gymnastique.com.</p>
+                                        <br/>
+                                        <b>Hygiène :</b>
+                                        <p>Pour des raisons d’hygiène, les gymnastes doivent
+                                            porter des chaussures (tongs, claquettes, chaussures de piscine, hors
+                                            chaussons de gym) pour se déplacer dans les couloirs et dans les
+                                            toilettes, et les retirer pour marcher sur les tapis de gymnastique.</p>
+                                        <br/>
+                                        <b>Périodes de congés scolaires :</b>
+                                        <p>Les entrainements ne sont assurés
+                                            que pendant les périodes scolaires et sont donc interrompus pendant
+                                            les vacances scolaires. Des stages seront mis en place pendant les
+                                            vacances scolaires. Tenues : Pour les compétitions, les gymnastes
+                                            doivent avoir la tenue du club. Celui-ci se charge des commandes selon
+                                            les tailles indiquées dans le formulaire de pré-inscription.</p>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-check mt-3">
+                            <input class="form-check-input" type="checkbox" id="acceptRGPD" name="acceptRGPD">
+                            <label class="form-check-label" for="acceptRGPD">
+                                En soumettant ce formulaire, j’accepte que les informations saisies soient utilisées
+                                dans le cadre du
+                                demande de licence à CEP GYM Poitiers et à son organisation.
+                            </label>
+                            <small id="rgpdHelp" class="form-text helper"><span
+                                        class="badge badge-danger">Erreur</span> La loi RGPD doit être validée.
+                            </small>
+                        </div>
+                        <button type="submit" id="buttonSubmit" class="btn btn-primary">Confirmer l'inscription de l'adhérent</button>
                     </div>
                 </div>
                 {{ form_end(form) }}

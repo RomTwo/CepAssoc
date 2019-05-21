@@ -81,6 +81,8 @@
 
 {% block javascripts %}
     <script src="https://www.google.com/recaptcha/api.js?render={{ recaptcha_key_site }}"></script>
+
+    <!-- Recaptcha for the forgot password form -->
     <script>
         grecaptcha.ready(function () {
             grecaptcha.execute('{{ recaptcha_key_site }}', {action: 'forgot'}).then(function (token) {
@@ -89,4 +91,5 @@
             });
         });
     </script>
+
 {% endblock %}

@@ -5,10 +5,63 @@
 --Dashboard google (requêtes, voir les clés, modifier les paramètres...)
     url : https://www.google.com/u/1/recaptcha/admin/site/346252181/setup
 
--- Clés
+-- Clés (stockées dans le .env)
     clé du site : 6LeVY6MUAAAAAKrw5BFZm7ENY8ozD0KfjMSqDeVV
     clé secrète : 6LeVY6MUAAAAACRbYVr-h6jRZt3wGoobEbfJTl5_
+
+    -- Accès depuis un Controller
+        clé du site : $_ENV['RECAPTCHA_KEY_SITE']
+        clé secrète : $_ENV['RECAPTCHA_KEY_SECRET']
+
+    -- Accès depuis une vue twig (seulement la clé publique)
+        clé du site : {{ recaptcha_key_site }}  (config de la variable dans le fichier config/packages/twig.yaml)
 
 -- URLs
     appel de l'api : https://www.google.com/recaptcha/api.js?render=KEY
     verification : https://www.google.com/recaptcha/api/siteverify
+
+-- Utilisation
+
+    -- Côté client :
+
+        -- Ajouter une input hidden dans le formulaire : (stocke le token renvoyer par l'api recaptcha de google)
+
+            <input type="hidden" name="recaptcha_response" id="recaptchaResponse">
+
+        -- Inclure le js suivant :
+
+            // Identification au service google
+            <script src="https://www.google.com/recaptcha/api.js?render={{ recaptcha_key_site }}"></script>
+
+            // Appel du service avec la clé publique, le service va nous retourner un token,
+               on va par la suite le stocker dans l'input hidden vu précédemment
+            <script>
+                grecaptcha.ready(function () {
+                    grecaptcha.execute('{{ recaptcha_key_site }}', {action: 'forgot'}).then(function (token) {
+                        var recaptchaResponse = document.getElementById('recaptchaResponse');
+                        recaptchaResponse.value = token;
+                    });
+                });
+            </script>
+
+    -- Côté serveur :
+        -- Utilisation du service CaptchaCheck (chemin : src/Services/CaptchaCheck.php) dans le controller
+            exemple :
+
+            public function login(Request $request, CaptchaCheck $captchaCheck) {
+                if ($captchaCheck->captchaIsValid($request->request->get('recaptcha_response'))) {
+                    // Succès captcha valide
+                } else {
+                    // Erreur captcha invalide
+                }
+            }
+
+            autre exemple : (dans le cas d'une méthode @Override)
+
+            public function login(Request $request, $captchaCheck) {
+                if ((new CaptchaCheck)->captchaIsValid($request->request->get('recaptcha_response'))) {
+                   // Succès captcha valide
+                } else {
+                   // Erreur captcha invalide
+                }
+            }
