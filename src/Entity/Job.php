@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\JobRepository")
@@ -18,6 +19,7 @@ class Job
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotNull(message="Veuiller remplir le champ nom")
      */
     private $name;
 

@@ -5,6 +5,7 @@ namespace App\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\EventRepository")
@@ -20,26 +21,31 @@ class Event
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotNull(message="Veuiller renseigner le nom de l'évènement")
      */
     private $name;
 
     /**
      * @ORM\Column(type="datetime")
+     * @Assert\NotNull(message="Veuiller renseigner la date de début")
      */
     private $startDate;
 
     /**
      * @ORM\Column(type="datetime")
+     * @Assert\NotNull(message="Veuiller renseigner la date de fin")
      */
     private $endDate;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotNull(message="Veuiller renseigner l'adresse de l'évènement")
      */
     private $address;
 
     /**
      * @ORM\Column(type="text")
+     * @Assert\NotNull(message="Veuiller remplir la description de l'évènement")
      */
     private $description;
 

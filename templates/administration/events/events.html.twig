@@ -46,12 +46,12 @@
                 <td>{{ event.address }}</td>
                 <td>{{ event.description }}</td>
                 <td>
-                    <button type="button" class="btn btn-primary" data-toggle="modal"
-                            data-target="#deleteEvent{{ event.id }}">
-                        <i class="far fa-calendar-alt"></i>
-                    </button>
+                    <a class="btn btn-primary" href="{{ path('admin_event_manage', {'id': event.id}) }}"><i
+                                class="far fa-calendar-alt"></i></a>
+
                     <a class="btn btn-warning" href="{{ path('admin_event_update', {'id': event.id}) }}"><i
                                 class="far fa-edit"></i></a>
+
                     <button type="button" class="btn btn-danger" data-toggle="modal"
                             data-target="#modalDeleteEvent{{ event.id }}">
                         <i class="far fa-trash-alt"></i>

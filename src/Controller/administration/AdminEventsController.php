@@ -75,4 +75,10 @@ class AdminEventsController extends AbstractController
         return $this->redirectToRoute('admin_events');
     }
 
+    public function manage(Request $request, $id)
+    {
+
+        return $this->render('administration/events/manageEvent.html.twig');
+    }
+
 }

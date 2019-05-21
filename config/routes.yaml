@@ -156,6 +156,12 @@ admin_event_delete:
     requirements:
         id: ([0-9]*)
 
+admin_event_manage:
+    path: /admin/event/manage/{id}
+    controller: App\Controller\administration\AdminEventsController::manage
+    requirements:
+        id: ([0-9]*)
+
     #--jobs
 job_add:
     path: /admin/job/add
