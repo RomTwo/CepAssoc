@@ -16,14 +16,6 @@ class DatetimeToStringTransformer implements DataTransformerInterface
      */
     public function transform($datetime)
     {
-        /*try {
-            var_dump($value);
-            $date = new \DateTime($value);
-            return $date->format('d-m-Y H:i');
-        } catch (\Exception $e) {
-            return $value->format('d-m-Y H:i');
-        }*/
-
         if (null === $datetime) {
             return '';
         }

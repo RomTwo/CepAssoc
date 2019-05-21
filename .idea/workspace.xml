@@ -4,15 +4,9 @@
     <bookmark url="file://$PROJECT_DIR$/src/Controller/AccountController.php" description="JWT::decode($token, $_ENV['PRIVATE_KEY'], array($_..." line="94" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="53b90c9e-e36e-447f-8cc9-26b01b488158" name="Default Changelist" comment="add datetimepicker">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Transformer/DatetimeToStringTransformer.php" />
+    <list default="true" id="53b90c9e-e36e-447f-8cc9-26b01b488158" name="Default Changelist" comment="add datatransformer for convert datetime in string and string in datetime">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/assets/js/datepicker.js" afterPath="$PROJECT_DIR$/assets/js/datepicker.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Controller/administration/AdminEventsController.php" afterPath="$PROJECT_DIR$/src/Controller/administration/AdminEventsController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Form/EventType.php" afterPath="$PROJECT_DIR$/src/Form/EventType.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/account/update.html.twig" afterPath="$PROJECT_DIR$/templates/account/update.html.twig" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/administration/events/events.html.twig" afterPath="$PROJECT_DIR$/templates/administration/events/events.html.twig" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/administration/events/updateEvent.html.twig" afterPath="$PROJECT_DIR$/templates/administration/events/updateEvent.html.twig" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Transformer/DatetimeToStringTransformer.php" afterPath="$PROJECT_DIR$/src/Transformer/DatetimeToStringTransformer.php" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -29,8 +23,8 @@
       <file leaf-file-name="AdminEventsController.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/Controller/administration/AdminEventsController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="375">
-              <caret line="29" column="70" lean-forward="false" selection-start-line="29" selection-start-column="70" selection-end-line="29" selection-end-column="70" />
+            <state relative-caret-position="390">
+              <caret line="30" column="46" lean-forward="true" selection-start-line="30" selection-start-column="46" selection-end-line="30" selection-end-column="46" />
               <folding />
             </state>
           </provider>
@@ -146,9 +140,9 @@
         <option value="$PROJECT_DIR$/templates/account/update.html.twig" />
         <option value="$PROJECT_DIR$/src/Form/EventType.php" />
         <option value="$PROJECT_DIR$/templates/administration/events/updateEvent.html.twig" />
-        <option value="$PROJECT_DIR$/src/Transformer/DatetimeToStringTransformer.php" />
         <option value="$PROJECT_DIR$/src/Controller/administration/AdminEventsController.php" />
         <option value="$PROJECT_DIR$/templates/administration/events/events.html.twig" />
+        <option value="$PROJECT_DIR$/src/Transformer/DatetimeToStringTransformer.php" />
       </list>
     </option>
   </component>
@@ -490,14 +484,7 @@
       <workItem from="1558375488469" duration="10399000" />
       <workItem from="1558420915719" duration="9466000" />
       <workItem from="1558436083547" duration="12608000" />
-      <workItem from="1558474748363" duration="881000" />
-    </task>
-    <task id="LOCAL-00015" summary="xml">
-      <created>1557473167023</created>
-      <option name="number" value="00015" />
-      <option name="presentableId" value="LOCAL-00015" />
-      <option name="project" value="LOCAL" />
-      <updated>1557473167023</updated>
+      <workItem from="1558474748363" duration="956000" />
     </task>
     <task id="LOCAL-00016" summary="xml">
       <created>1557473209461</created>
@@ -835,11 +822,18 @@
       <option name="project" value="LOCAL" />
       <updated>1558449151296</updated>
     </task>
-    <option name="localTasksCounter" value="64" />
+    <task id="LOCAL-00064" summary="add datatransformer for convert datetime in string and string in datetime">
+      <created>1558475767079</created>
+      <option name="number" value="00064" />
+      <option name="presentableId" value="LOCAL-00064" />
+      <option name="project" value="LOCAL" />
+      <updated>1558475767080</updated>
+    </task>
+    <option name="localTasksCounter" value="65" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="185995000" />
+    <option name="totallyTimeSpent" value="186070000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -936,7 +930,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="terminate the profil part" />
     <MESSAGE value="add globals variable twig for the site key google recaptcha" />
     <MESSAGE value="Add notifications when the user change his password (when he has forgotten his password)" />
     <MESSAGE value="new theme for forms, change design of register form" />
@@ -961,7 +954,8 @@
     <MESSAGE value="script in file .js, update event" />
     <MESSAGE value="add assert" />
     <MESSAGE value="add datetimepicker" />
-    <option name="LAST_COMMIT_MESSAGE" value="add datetimepicker" />
+    <MESSAGE value="add datatransformer for convert datetime in string and string in datetime" />
+    <option name="LAST_COMMIT_MESSAGE" value="add datatransformer for convert datetime in string and string in datetime" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1223,6 +1217,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="60">
           <caret line="4" column="3" lean-forward="true" selection-start-line="4" selection-start-column="3" selection-end-line="4" selection-end-column="3" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1230,14 +1225,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="45">
           <caret line="3" column="3" lean-forward="false" selection-start-line="3" selection-start-column="3" selection-end-line="3" selection-end-column="3" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Transformer/ArrayToStringTransformer.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="450">
-          <caret line="31" column="1" lean-forward="true" selection-start-line="31" selection-start-column="1" selection-end-line="31" selection-end-column="1" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1289,14 +1276,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Transformer/DatetimeToStringTransformer.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="535">
-          <caret line="39" column="7" lean-forward="false" selection-start-line="39" selection-start-column="7" selection-end-line="39" selection-end-column="7" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/templates/administration/events/events.html.twig">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="378">
@@ -1305,10 +1284,26 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/Transformer/ArrayToStringTransformer.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="450">
+          <caret line="31" column="1" lean-forward="true" selection-start-line="31" selection-start-column="1" selection-end-line="31" selection-end-column="1" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Transformer/DatetimeToStringTransformer.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="218">
+          <caret line="16" column="26" lean-forward="false" selection-start-line="16" selection-start-column="26" selection-end-line="16" selection-end-column="26" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/Controller/administration/AdminEventsController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="375">
-          <caret line="29" column="70" lean-forward="false" selection-start-line="29" selection-start-column="70" selection-end-line="29" selection-end-column="70" />
+        <state relative-caret-position="390">
+          <caret line="30" column="46" lean-forward="true" selection-start-line="30" selection-start-column="46" selection-end-line="30" selection-end-column="46" />
           <folding />
         </state>
       </provider>
