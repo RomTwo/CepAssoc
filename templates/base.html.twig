@@ -52,7 +52,7 @@
             .btn-primary,.btn-primary:hover{
                 background-color: #c1030a !important;
                 border-color: #c1030a !important;
-            
+
             }
 
             .btn-primary:focus{
@@ -80,10 +80,14 @@
                             <a class="nav-link" href="{{ path('account_update') }}">Mon compte</a>
                         </li>
                         {% if is_granted('ROLE_ADMIN') %}
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ path('admin_home') }}">Administration</a>
-                        </li>
-                         {% endif %}
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ path('admin_adherents') }}">Administration</a>
+                            </li>
+                        {% elseif is_granted('ROLE_MODERATOR') %}
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ path('admin_activities') }}">Administration</a>
+                            </li>
+                        {% endif %}
                     </ul>
                 </div>
             </div>

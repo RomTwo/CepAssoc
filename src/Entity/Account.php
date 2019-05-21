@@ -103,6 +103,7 @@ class Account implements UserInterface
 
     /**
      * @ORM\ManyToMany(targetEntity="App\Entity\Adherent", inversedBy="parents", cascade={"persist"})
+     * @Assert\Valid()
      */
     private $children;
 
