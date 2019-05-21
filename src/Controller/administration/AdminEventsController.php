@@ -35,7 +35,7 @@ class AdminEventsController extends AbstractController
         );
     }
 
-    public function update(Request $request, $id)
+    public function update(Request $request, $id, GenerateToken $generateToken)
     {
         $manager = $this->getDoctrine()->getManager();
         $event = $manager->getRepository(Event::class)->find($id);
@@ -43,6 +43,7 @@ class AdminEventsController extends AbstractController
         if ($event !== null) {
             $form = $this->createForm(EventType::class, $event);
             $form->handleRequest($request);
+            $token = $generateToken->generateCustomToken(120);
 
             if ($form->isSubmitted() && $form->isValid()) {
                 $manager->flush();
@@ -52,8 +53,9 @@ class AdminEventsController extends AbstractController
         } else {
             $this->addFlash('danger', "L'évènement n'existe pas");
         }
-        return $this->render('administration/events/events.html.twig', array(
-            'form' => $form->createView()
+        return $this->render('administration/events/updateEvent.html.twig', array(
+            'form' => $form->createView(),
+            'token' => $token,
         ));
     }
 
