@@ -144,6 +144,18 @@ admin_events:
     path: /admin/events
     controller: App\Controller\administration\AdminEventsController::index
 
+admin_event_update:
+    path: /admin/event/update/{id}
+    controller: App\Controller\administration\AdminEventsController::update
+    requirements:
+        id: ([0-9]*)
+
+admin_event_delete:
+    path: /admin/event/delete/{id}
+    controller: App\Controller\administration\AdminEventsController::delete
+    requirements:
+        id: ([0-9]*)
+
     #--jobs
 job_add:
     path: /admin/job/add

@@ -71,13 +71,14 @@
             </div>
             <div class="row mt-3">
                 <div class="col-2">
-                    <label>Roles : </label>
+                    <label>Postes : </label>
                 </div>
                 <div class="col-auto">
                     {{ form_widget(form.jobs) }}
                 </div>
                 <div class="col-auto">
                     <a id="addJob" style="color: green;"><i class="fas fa-plus-circle fa-2x"></i></a>
+
                 </div>
                 <div class="row ml-1">
                     {{ form_errors(form.jobs) }}
@@ -87,15 +88,14 @@
 
             {{ form_widget(form.submit) }}
             {{ form_end(form) }}
-
-
+            
             <div id="divAddJob">
                 <div class="row mt-3">
                     <h3>Ajouter un poste : </h3>
                 </div>
                 <div class="row mt-3">
                     <div class="col-2">
-                        <label>Poste : </label>
+                        <label>Intitulé du poste : </label>
                     </div>
                     <div class="col-auto">
                         <form id="jobForm" class="form-inline">

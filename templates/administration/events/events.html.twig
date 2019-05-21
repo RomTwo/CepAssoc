@@ -28,6 +28,7 @@
             <th>Fin</th>
             <th>Adresse</th>
             <th>Description</th>
+            <th>Action</th>
         </tr>
         </thead>
         <tbody>
@@ -35,9 +36,21 @@
             <tr>
                 <td>{{ event.name }}</td>
                 <td>le {{ event.startDate | date("m/d/Y H:i") }}</td>
-                <td>{{ event.endDate | date("m/d/Y H:i") }}</td>
+                <td>le {{ event.endDate | date("m/d/Y H:i") }}</td>
                 <td>{{ event.address }}</td>
                 <td>{{ event.description }}</td>
+                <td>
+                    <button type="button" class="btn btn-primary" data-toggle="modal"
+                            data-target="#deleteEvent{{ event.id }}">
+                        <i class="far fa-calendar-alt"></i>
+                    </button>
+                    <a class="btn btn-warning" href="{{ path('admin_event_update', {'id': event.id}) }}"><i
+                                class="far fa-edit"></i></a>
+                    <button type="button" class="btn btn-danger" data-toggle="modal"
+                            data-target="#modalDeleteEvent{{ event.id }}">
+                        <i class="far fa-trash-alt"></i>
+                    </button>
+                </td>
             </tr>
         {% endfor %}
         </tbody>
@@ -48,6 +61,7 @@
             <th>Fin</th>
             <th>Adresse</th>
             <th>Description</th>
+            <th>Action</th>
         </tr>
         </tfoot>
     </table>
@@ -66,6 +80,11 @@
         </tr>
         </tbody>
     </table>
+
+    <!-- Modal -->
+    {% for event in events %}
+        {% include('administration/events/modalDeleteEvent.html.twig') %}
+    {% endfor %}
 
 
 {% endblock %}
