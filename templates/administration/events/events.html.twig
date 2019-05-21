@@ -43,8 +43,8 @@
         {% for event in events %}
             <tr>
                 <td>{{ event.name }}</td>
-                <td>le {{ event.startDate | date("m/d/Y H:i") }}</td>
-                <td>le {{ event.endDate | date("m/d/Y H:i") }}</td>
+                <td>le {{ event.startDate | date("d/m/Y H:i") }}</td>
+                <td>le {{ event.endDate | date("d/m/Y H:i") }}</td>
                 <td>{{ event.address }}</td>
                 <td>{{ event.description }}</td>
                 <td>

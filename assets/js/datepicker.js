@@ -1,5 +1,5 @@
 $.datetimepicker.setLocale('fr');
-$('.datetimepicker').datetimepicker({
+$('.datepicker').datetimepicker({
     format: 'd-m-Y H:i',
     timepicker: false
 });

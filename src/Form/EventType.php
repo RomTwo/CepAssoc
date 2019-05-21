@@ -5,6 +5,7 @@ namespace App\Form;
 use App\Entity\Event;
 use App\Entity\Job;
 use App\Repository\JobRepository;
+use App\Transformer\DatetimeToStringTransformer;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -36,6 +37,8 @@ class EventType extends AbstractType
                 )
             )
             ->add('submit', SubmitType::class);
+        $builder->get('startDate')->addModelTransformer(new DatetimeToStringTransformer());
+        $builder->get('endDate')->addModelTransformer(new DatetimeToStringTransformer());
     }
 
     public function configureOptions(OptionsResolver $resolver)

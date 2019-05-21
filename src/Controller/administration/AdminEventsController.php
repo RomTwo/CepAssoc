@@ -21,8 +21,6 @@ class AdminEventsController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $manager = $this->getDoctrine()->getManager();
-            $event->setStartDate(new \DateTime($event->getStartDate()));
-            $event->setEndDate(new \DateTime($event->getEndDate()));
             $manager->persist($event);
             $manager->flush();
             $this->addFlash('success', 'évènement ajouté');
