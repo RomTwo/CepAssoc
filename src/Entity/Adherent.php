@@ -362,14 +362,13 @@ class Adherent
     private $affiliateCode;
 
     /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\Activity")
-     * @Groups({"competition"})
+     * @ORM\ManyToMany(targetEntity="App\Entity\TimeSlot", inversedBy="adherents")
      */
-    private $activities;
+    private $timeSlots;
 
     public function __construct()
     {
-        $this->activities = new ArrayCollection();
+        $this->timeSlots = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -781,24 +780,6 @@ class Adherent
         $this->zipCodeRep1 = $zipCodeRep1;
     }
 
-    /**
-     * @return mixed
-     * @return Collection|Activity[]
-     */
-    public function getActivities(): Collection
-    {
-        return $this->activities;
-    }
-
-
-    public function addActivity(Activity $activity): self
-    {
-
-        if (!$this->activities->contains($activity)) {
-            $this->activities[] = $activity;
-        }
-        return $this;
-    }
 
     /**
      * @return mixed
@@ -806,13 +787,6 @@ class Adherent
     public function getProfessionRep1()
     {
         return $this->professionRep1;
-    }
-
-    public function removeActivity(Activity $activity): self
-    {
-        if ($this->activities->contains($activity)) {
-            $this->activities->removeElement($activity);
-        }
     }
 
     /**
@@ -1198,6 +1172,32 @@ class Adherent
     public function setHasMedicalCertificate($hasMedicalCertificate): void
     {
         $this->hasMedicalCertificate = $hasMedicalCertificate;
+    }
+
+    /**
+     * @return Collection|TimeSlot[]
+     */
+    public function getTimeSlots(): Collection
+    {
+        return $this->timeSlots;
+    }
+
+    public function addTimeSlot(TimeSlot $timeSlot): self
+    {
+        if (!$this->timeSlots->contains($timeSlot)) {
+            $this->timeSlots[] = $timeSlot;
+        }
+
+        return $this;
+    }
+
+    public function removeTimeSlot(TimeSlot $timeSlot): self
+    {
+        if ($this->timeSlots->contains($timeSlot)) {
+            $this->timeSlots->removeElement($timeSlot);
+        }
+
+        return $this;
     }
 
 

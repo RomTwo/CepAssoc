@@ -20,13 +20,9 @@ use Symfony\Component\HttpFoundation\Request;
 class AdministrationController extends AbstractController
 {
 
-    public function index()
-    {
-        return $this->render('administration/index.html.twig', [
-            'controller_name' => 'AdministrationController',
-        ]);
+    public function home(){
+        return $this->render('administration/home.html.twig');
     }
-
     /**
      * Return and Print a list of the competitors (for the plugin)
      *
@@ -50,11 +46,11 @@ class AdministrationController extends AbstractController
             $serializer = new Serializer(array($normalizer), array($encoder));
             $data = $serializer->serialize($competiteurs, 'json', ['groups' => 'competition']);
 
-            return $this->render('administration/plugin/competiteurs.html.twig', array(
+            return $this->render('administration/plugin/plugin_home.html.twig', array(
                 "comp" => $data
             ));
         }
-        return $this->render('administration/plugin/competiteurs.html.twig');
+        return $this->render('administration/plugin/plugin_home.html.twig');
     }
 
     public function update_state(Request $req){

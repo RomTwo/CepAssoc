@@ -47,6 +47,7 @@ class AccountAdminType extends AbstractType
             ->add('roles', ChoiceType::class, array(
                     'choices' => array(
                         'ROLE_USER' => 'ROLE_USER',
+                        'ROLE_MODERATOR' => 'ROLE_MODERATOR',
                         'ROLE_ADMIN' => 'ROLE_ADMIN',
                         'ROLE_SUPER_ADMIN' => 'ROLE_SUPER_ADMIN'
                     ),
