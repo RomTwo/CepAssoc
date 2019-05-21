@@ -88,6 +88,12 @@ admin_activityDelete:
     path: /admin/activities/deleteActivity/{id}
     controller: App\Controller\administration\AdminActivitiesController::deleteActivity
 
+admin_activityDetails:
+    path: /admin/activities/details/{id}
+    controller: App\Controller\administration\AdminActivitiesController::details
+    requirements:
+        id: ([0-9]*)
+
 admin_categories:
     path: /admin/categories
     controller: App\Controller\administration\AdminActivitiesController::index
