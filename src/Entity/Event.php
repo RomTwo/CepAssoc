@@ -56,6 +56,7 @@ class Event
     public function __construct()
     {
         $this->eventManagements = new ArrayCollection();
+        $this->jobs = new ArrayCollection();
     }
 
     public function getId(): ?int

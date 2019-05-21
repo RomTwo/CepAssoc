@@ -25,9 +25,8 @@ class AdminActivityTimeSlotType extends AbstractType
         $builder
             ->add('name', TextType::class)
             ->add('price', NumberType::class)
-            ->add('startDate',\Symfony\Component\Form\Extension\Core\Type\DateType::class)
-            ->add('type',TextType::class)
-
+            ->add('startDate', \Symfony\Component\Form\Extension\Core\Type\DateType::class)
+            ->add('type', TextType::class)
             ->add('categories', EntityType::class, [
                 'class' => Category::class,
                 'query_builder' => function (CategoryRepository $er) {
@@ -38,16 +37,15 @@ class AdminActivityTimeSlotType extends AbstractType
                 "multiple" => false
             ])
             ->add('timeSlot', EntityType::class, [
-                'class'        => 'App\Entity\TimeSlot',
+                'class' => 'App\Entity\TimeSlot',
                 'choice_label' => 'getFullTime',
-                'label'        => 'Affectation des créneaux ',
-                'expanded'     => true,
-                'multiple'     => true,
-            ])
-
-           ;
+                'label' => 'Affectation des créneaux ',
+                'expanded' => true,
+                'multiple' => true,
+            ]);
 
     }
+
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([

@@ -144,6 +144,11 @@ admin_events:
     path: /admin/events
     controller: App\Controller\administration\AdminEventsController::index
 
+    #--jobs
+job_add:
+    path: /admin/job/add
+    controller: App\Controller\JobController::add
+
 
 ### Errors routing ###
 error_404:
