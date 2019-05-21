@@ -165,12 +165,14 @@
                                 {{ form_errors(form.password) }}
                             </div>
                         </div>
-                        <div class="row">
-                            <input type="checkbox" id="registration" name="registration" value="registration">
-                            <label for="registration">Souhaitez-vous devenir membre ?</label>
+                        <div class="form-check mt-3">
+                            <input class="form-check-input" type="checkbox" id="registration" name="registration" value="registration">
+                            <label class="form-check-label" for="registration">
+                                Je m'inscris également à l'association. <a><i class="fa fa-info-circle" data-toggle="tooltip"
+                                                                              data-original-title="Cette étape est optionnelle, il est possible de rejoindre l'association ultérieurement au sein du site internet."></i></a>
+                            </label>
                         </div>
                         {{ form_widget(form.valid) }}
-
                         <input type="hidden" name="recaptcha_response" id="recaptchaResponse">
                     </div>
                     <div id="accountStep2">
@@ -385,13 +387,16 @@
                                   data-original-title="Le questionnaire peut être rendu plus tard."></i></a>
                         </div>
                         <div class="form-check mt-3">
-                            <input class="form-check-input" type="checkbox" id="acceptRules" name="accept">
+                            <input class="form-check-input" type="checkbox" id="acceptRules" name="acceptRules">
                             <label class="form-check-label" for="acceptRules">
                                 J'accepte le réglement intérieur de l'association. <a href=""
                                                                                       data-toggle="modal"
                                                                                       data-target="#exampleModal">Voir
                                     le réglement</a>
                             </label>
+                            <small id="rulesHelp" class="form-text helper"><span
+                                        class="badge badge-danger">Erreur</span> Le réglement doit être validé.
+                            </small>
                         </div>
                         <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
                              aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -472,14 +477,17 @@
                             </div>
                         </div>
                         <div class="form-check mt-3">
-                            <input class="form-check-input" type="checkbox" id="acceptRGPD" name="accept">
+                            <input class="form-check-input" type="checkbox" id="acceptRGPD" name="acceptRGPD">
                             <label class="form-check-label" for="acceptRGPD">
                                 En soumettant ce formulaire, j’accepte que les informations saisies soient utilisées
                                 dans le cadre du
                                 demande de licence à CEP GYM Poitiers et à son organisation.
                             </label>
+                            <small id="rgpdHelp" class="form-text helper"><span
+                                        class="badge badge-danger">Erreur</span> La loi RGPD doit être validée.
+                            </small>
                         </div>
-                        <button type="submit" class="btn btn-primary">Confirmer l'inscription de l'adhérent</button>
+                        <button type="submit" id="buttonSubmit" class="btn btn-primary">Confirmer l'inscription de l'adhérent</button>
                     </div>
                 </div>
                 {{ form_end(form) }}

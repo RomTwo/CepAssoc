@@ -25,8 +25,9 @@ security:
 
 
     role_hierarchy:
-        ROLE_ADMIN: ROLE_USER
-        ROLE_SUPER_ADMIN: [ROLE_ADMIN, ROLE_USER]
+        ROLE_MODERATOR: ROLE_USER
+        ROLE_ADMIN: [ROLE_MODERATOR, ROLE_USER]
+        ROLE_SUPER_ADMIN: [ROLE_ADMIN, ROLE_MODERATOR, ROLE_USER]
 
     access_control:
          - { path: ^/admin/adherent/update_state, roles: IS_AUTHENTICATED_ANONYMOUSLY }
@@ -34,5 +35,6 @@ security:
          - { path: ^/profile/siteInscription, roles: IS_AUTHENTICATED_ANONYMOUSLY }
          - { path: ^/profile/forgotPassword, roles: IS_AUTHENTICATED_ANONYMOUSLY }
          - { path: ^/profile/resetPassword/, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+         - { path: ^/admin/activities, roles: ROLE_MODERATOR }
          - { path: ^/admin, roles: ROLE_ADMIN }
          - { path: ^/profile, roles: ROLE_USER }
