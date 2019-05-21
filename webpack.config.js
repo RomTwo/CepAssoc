@@ -23,6 +23,8 @@ Encore
     .addEntry('popup', './assets/js/popup.js')
     .addEntry('adminAdherentsEdit', './assets/js/adminAdherentsEdit.js')
     .addEntry('event', './assets/js/event.js')
+    .addEntry('datetime', './assets/js/datetimepicker.js')
+    .addEntry('date', './assets/js/datepicker.js')
 
     // When enabled, Webpack "splits" your files into smaller pieces for greater optimization.
     .splitEntryChunks()

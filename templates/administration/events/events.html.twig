@@ -2,10 +2,12 @@
 
 {% block title %}Adherents{% endblock %}
 
+{% block stylesheets %}
+{% endblock %}
+
 {% block specification %}
     Gestion des évènements
 {% endblock %}
-
 
 {% block body %}
     <!-- Button who print the event form -->
@@ -93,9 +95,11 @@
     {% endfor %}
 
 
+
 {% endblock %}
 
 
 {% block javascripts %}
     {{ encore_entry_script_tags('event') }}
+    {{ encore_entry_script_tags('datetime') }}
 {% endblock %}

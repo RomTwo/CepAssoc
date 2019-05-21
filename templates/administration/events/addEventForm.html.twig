@@ -19,7 +19,7 @@
         <label>Date de début : </label>
     </div>
     <div class="col-auto">
-        {{ form_widget(form.startDate) }}
+        {{ form_widget(form.startDate, { 'attr': {'class': 'datetimepicker'} }) }}
     </div>
     <div class="row ml-1">
         {{ form_errors(form.startDate) }}
@@ -31,7 +31,7 @@
         <label>Date de fin : </label>
     </div>
     <div class="col-auto">
-        {{ form_widget(form.endDate) }}
+        {{ form_widget(form.endDate, { 'attr': {'class': 'datetimepicker'} }) }}
     </div>
     <div class="row ml-1">
         {{ form_errors(form.endDate) }}

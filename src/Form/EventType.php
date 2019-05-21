@@ -20,8 +20,8 @@ class EventType extends AbstractType
     {
         $builder
             ->add('name', TextType::class)
-            ->add('startDate', DateTimeType::class)
-            ->add('endDate', DateTimeType::class)
+            ->add('startDate', TextType::class)
+            ->add('endDate', TextType::class)
             ->add('address', TextType::class)
             ->add('description', TextareaType::class)
             ->add('jobs', EntityType::class, array(
