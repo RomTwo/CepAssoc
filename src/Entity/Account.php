@@ -103,6 +103,7 @@ class Account implements UserInterface
 
     /**
      * @ORM\ManyToMany(targetEntity="App\Entity\Adherent", inversedBy="parents", cascade={"persist"})
+     * @Assert\Valid()
      */
     private $children;
 
@@ -129,7 +130,7 @@ class Account implements UserInterface
     {
         $this->children = new ArrayCollection();
         $this->eventManagements = new ArrayCollection();
-        $this->roles = array('ROLE_MODERATOR');
+        $this->roles = array('ROLE_ADMIN');
     }
 
 

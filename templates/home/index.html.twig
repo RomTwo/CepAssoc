@@ -105,6 +105,7 @@
         </div>
 
         <div class="col">
+
         </div>
     </div>
 
@@ -117,5 +118,10 @@
             copyText.select();
             document.execCommand("copy");
         }
+
+        $(document).ready(function () {
+            $('#registeredAdherentsTable').DataTable();
+        });
+
     </script>
 {% endblock %}

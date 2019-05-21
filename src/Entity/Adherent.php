@@ -267,6 +267,12 @@ class Adherent
 
     /**
      * @ORM\Column(type="string", nullable=true)
+     * @Assert\File(
+     *     maxSize = "2048k",
+     *     maxSizeMessage = "La taille du fichier est au-dessus de la limite",
+     *     mimeTypes = {"application/pdf", "application/x-pdf"},
+     *     mimeTypesMessage = "Le fichier doit être sous format PDF"
+     * )
      * @Groups({"competition"})
      */
     private $medicalCertificate;
@@ -321,6 +327,12 @@ class Adherent
 
     /**
      * @ORM\Column(type="string", nullable=true)
+     * @Assert\File(
+     *     maxSize = "2048k",
+     *     maxSizeMessage = "La taille du fichier est au-dessus de la limite",
+     *     mimeTypes = {"application/pdf", "application/x-pdf"},
+     *     mimeTypesMessage = "Le fichier doit être sous format PDF"
+     * )
      * @Groups({"competition"})
      */
     private $bulletinN2Allianz;
@@ -334,7 +346,7 @@ class Adherent
     /**
      * @ORM\Column(type="string", nullable=true)
      * @Assert\File(
-     *     maxSize = "500k",
+     *     maxSize = "2048k",
      *     maxSizeMessage = "La taille du fichier est au-dessus de la limite",
      *     mimeTypes = {"application/pdf", "application/x-pdf"},
      *     mimeTypesMessage = "Le fichier doit être sous format PDF"
