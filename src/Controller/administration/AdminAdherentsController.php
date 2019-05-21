@@ -5,13 +5,16 @@ namespace App\Controller\administration;
 use App\Entity\Activity;
 use App\Entity\Adherent;
 use App\Form\AdminAdherentType;
+
+use Dompdf\Dompdf;
+use Dompdf\Options;
 use App\Services\Utilitaires;
+
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 
 class AdminAdherentsController extends AbstractController
 {
-
     public function index()
     {
         $repository = $this->getDoctrine()->getRepository(Adherent::class);
@@ -24,12 +27,16 @@ class AdminAdherentsController extends AbstractController
     public function edit(Adherent $adherent, Request $request, Utilitaires $utilitaires)
     {
         $entityManager = $this->getDoctrine()->getManager();
+
         $form = $this->createForm(AdminAdherentType::class, $adherent);
 
         $form->handleRequest($request);
 
+        $oldAdherent = $adherent;
+
         if ($form->isSubmitted() && $form->isValid() && $utilitaires->isValidateCity($request->request->get("admin_adherent_cityRep1"))) {
             $adherent->setCityRep1($request->request->get("admin_adherent_cityRep1"));
+            $utilitaires->setFiles($adherent);
             $entityManager->flush();
             return $this->redirectToRoute('admin_adherents');
         }
@@ -38,7 +45,8 @@ class AdminAdherentsController extends AbstractController
             'adherent' => $adherent,
             'form' => $form->createView(),
             "cityRep1" => $adherent->getCityRep1(),
-            "cityRep2" => $adherent->getCityRep2()
+            "cityRep2" => $adherent->getCityRep2(),
+            "adherent" => $adherent,
         ]);
     }
 
@@ -69,5 +77,27 @@ class AdminAdherentsController extends AbstractController
 
         return $this->redirectToRoute("admin_adherents");
     }
+
+    public function generatePDF($id)
+    {
+        $adherent = new Adherent();
+
+        $repository = $this->getDoctrine()->getRepository(Adherent::class);
+        $adherent = $repository->find($id);
+        $html = $this->render('administration/adherents/generateAdherentsPDF.html.twig', [
+            'adherent' => $adherent,
+        ]);
+        $pdfOptions = new Options();
+        $dompdf = new Dompdf($pdfOptions);
+        $dompdf->loadHtml($html);
+        $dompdf->setPaper('A4', 'portrait');
+        $dompdf->render();
+        $dompdf->stream($adherent->getFirstName() . "_" . $adherent->getLastName() . ".pdf", [
+            "Attachment" => true
+        ]);
+
+
+    }
+
 
 }

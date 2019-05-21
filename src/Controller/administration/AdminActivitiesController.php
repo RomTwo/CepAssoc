@@ -40,7 +40,7 @@ class AdminActivitiesController extends AbstractController
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->flush();
 
-            return $this->redirectToRoute('admin_categories');
+            return $this->redirectToRoute('admin_activities');
         }
 
         return $this->render('administration/activities/categoryEdit.html.twig', [
@@ -48,12 +48,10 @@ class AdminActivitiesController extends AbstractController
             'form' => $form->createView()
         ]);
 
+
     }
     public function add(Request $request)
     {
-
-
-
         $category = new Category();
         $form = $this->createForm(AdminCategoryType::class,$category);
         $form->handleRequest($request);
@@ -63,34 +61,28 @@ class AdminActivitiesController extends AbstractController
             $em->persist($category);
             $em->flush();
 
-            return $this->redirectToRoute('admin_categories');
-
+            return $this->redirectToRoute('admin_activities');
         }
+
 
         return $this->render('administration/activities/categoryAdd.html.twig', [
             'category' => $category,
             'form' => $form->createView()]);
+
+
     }
     public function delete (Request $request,$id)
     {
         $repository = $this->getDoctrine()->getRepository(Category::class);
-        $repositoryActivity = $this->getDoctrine()->getRepository(Activity::class);
-
         $category = $repository->find($id);
-        $activity =$repositoryActivity->findBy(array(
-            "category"=>$category
-        ));
-        if($activity == null)
-        {
+
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($category);
             $entityManager->flush();
-            return $this->redirectToRoute('admin_categories');
-        }
-        else
-        {
-            return $this->render('error/errorPage.html.twig');
-        }
+            $this->addFlash('sucess',"Category supprimée avec succès");
+            return $this->redirectToRoute('admin_activities');
+
+
     }
 
     public function addActivity(Request $request)
@@ -103,6 +95,14 @@ class AdminActivitiesController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
+
+            $timeSlotsArray = $activity->timeSlot()->toArray();
+            $timeSlotsSize = sizeof($timeSlotsArray);
+
+            for($i = 0; $i < $timeSlotsSize; $i++){
+                $em->persist($timeSlotsArray[$i]);
+            }
+
             $em->persist($activity);
             $em->flush();
             return $this->redirectToRoute('admin_activities');
@@ -116,12 +116,18 @@ class AdminActivitiesController extends AbstractController
     public function editActivity(Activity $activity, Request $request)
     {
         $form = $this->createForm(AdminActivityTimeSlotType::class, $activity);
-
         $form->handleRequest($request);
+        $entityManager = $this->getDoctrine()->getManager();
 
         if ($form->isSubmitted() && $form->isValid()) {
 
-            $entityManager = $this->getDoctrine()->getManager();
+            $timeSlotsArray = $activity->timeSlot()->toArray();
+            $timeSlotsSize = sizeof($timeSlotsArray);
+
+            for($i = 0; $i < $timeSlotsSize; $i++){
+                $entityManager->persist($timeSlotsArray[$i]);
+            }
+
             $entityManager->flush();
 
             return $this->redirectToRoute('admin_activities');
@@ -133,23 +139,38 @@ class AdminActivitiesController extends AbstractController
         ]);
 
     }
-    public function deleteActivity (Request $request,$id)
+
+    public function deleteActivity(Request $request, $id)
     {
 
         $repositoryActivity = $this->getDoctrine()->getRepository(Activity::class);
 
         $activity = $repositoryActivity->find($id);
 
-        if($activity != null)
-        {
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->remove($activity);
-            $entityManager->flush();
-            return $this->redirectToRoute('admin_activities');
-        }
-        else
-        {
-            return $this->render('administration/error/errorPage.html.twig');
-        }
+
+        $entityManager = $this->getDoctrine()->getManager();
+        $entityManager->remove($activity);
+        $entityManager->flush();
+        $this->addFlash('sucess', "Activité supprimée avec succès");
+        return $this->redirectToRoute('admin_activities');
+
     }
+
+    public function details(Request $request, $id)
+    {
+
+        $repositoryActivity = $this->getDoctrine()->getRepository(Activity::class);
+
+        //$activity = $repositoryActivity->find($id);
+
+
+        //$entityManager = $this->getDoctrine()->getManager();
+        //$entityManager->remove($activity);
+        //$entityManager->flush();
+        //$this->addFlash('sucess', "Activité supprimée avec succès");
+        return $this->render('administration/activities/activityDetails.html.twig');
+
+    }
+
+
 }

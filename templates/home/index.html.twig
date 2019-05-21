@@ -8,14 +8,6 @@
         <div class="col-7" style="padding-right:20px; border-right: 1px dotted #ccc;">
             <br/>
 
-            {% if errorCode is defined%}
-                {% if errorCode == 0 %}
-                    <h4 style="color:green">{{ msg }}</h4>
-                {% else %}
-                    <h4 style="color:red">{{ msg }}</h4>
-                {% endif %}
-            {% endif %}
-
             <div class="row justify-content-center">
                 <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="true" aria-controls="collapseExample">
                     Récapitulatif des inscriptions effectuées

@@ -47,6 +47,12 @@ admin_adherents:
     path: /admin/adherents
     controller: App\Controller\administration\AdminAdherentsController::index
 
+admin_adherentsPDF:
+    path: /admin/adherents/pdf/{id}
+    controller: App\Controller\administration\AdminAdherentsController::generatePDF
+    requirements:
+        id: ([0-9]*)
+
 admin_adherentsEdit:
     path: /admin/adherents/edit/{id}
     controller: App\Controller\administration\AdminAdherentsController::edit
@@ -81,6 +87,12 @@ admin_activityEdit:
 admin_activityDelete:
     path: /admin/activities/deleteActivity/{id}
     controller: App\Controller\administration\AdminActivitiesController::deleteActivity
+
+admin_activityDetails:
+    path: /admin/activities/details/{id}
+    controller: App\Controller\administration\AdminActivitiesController::details
+    requirements:
+        id: ([0-9]*)
 
 admin_categories:
     path: /admin/categories
