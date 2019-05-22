@@ -1,0 +1,44 @@
+<div id="modal-view-event-add" class="modal modal-top fade calendar-modal">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            {{ form_start(form) }}
+            <div class="modal-body">
+                <h4>Ajouter une personne</h4>
+                <div>
+                    <label>Personne : </label>
+                    {{ form_widget(form.account) }}
+                    {{ form_errors(form.account) }}
+                </div>
+
+                <div>
+                    <label>Date de début : </label>
+                    {{ form_widget(form.startDate) }}
+                    {{ form_errors(form.startDate) }}
+                </div>
+
+                <div>
+                    <label>Date de fin : </label>
+                    {{ form_widget(form.endDate) }}
+                    {{ form_errors(form.endDate) }}
+                </div>
+
+                <div>
+                    <label>Poste : </label>
+                    {{ form_widget(form.job) }}
+                    {{ form_errors(form.job) }}
+                </div>
+
+                <div>
+                    <label>Lieu d'intervention : </label>
+                    {{ form_widget(form.place) }}
+                    {{ form_errors(form.place) }}
+                </div>
+            </div>
+            <div class="modal-footer">
+                {{ form_widget(form.submit) }}
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+            </div>
+            {{ form_end(form) }}
+        </div>
+    </div>
+</div>

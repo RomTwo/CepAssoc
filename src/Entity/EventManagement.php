@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\EventManagementRepository")
@@ -25,26 +26,31 @@ class EventManagement
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Account", inversedBy="eventManagements")
      * @ORM\JoinColumn(nullable=false)
+     * @Groups({"event"})
      */
     private $account;
 
     /**
      * @ORM\Column(type="datetime", length=255)
+     * @Groups({"event"})
      */
     private $startDate;
 
     /**
      * @ORM\Column(type="datetime", length=255)
+     * @Groups({"event"})
      */
     private $endDate;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"event"})
      */
     private $job;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Groups({"event"})
      */
     private $place;
 
@@ -77,16 +83,20 @@ class EventManagement
         return $this;
     }
 
-    public function getJob(): ?string
+    /**
+     * @return mixed
+     */
+    public function getJob()
     {
         return $this->job;
     }
 
-    public function setJob(string $job): self
+    /**
+     * @param mixed $job
+     */
+    public function setJob($job)
     {
         $this->job = $job;
-
-        return $this;
     }
 
 
@@ -98,6 +108,38 @@ class EventManagement
     public function setPlace($place)
     {
         $this->place = $place;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getStartDate()
+    {
+        return $this->startDate;
+    }
+
+    /**
+     * @param mixed $startDate
+     */
+    public function setStartDate($startDate)
+    {
+        $this->startDate = $startDate;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getEndDate()
+    {
+        return $this->endDate;
+    }
+
+    /**
+     * @param mixed $endDate
+     */
+    public function setEndDate($endDate)
+    {
+        $this->endDate = $endDate;
     }
 
 

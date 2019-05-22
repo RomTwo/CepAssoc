@@ -57,13 +57,14 @@ class AdministrationController extends AbstractController
         return $this->render('administration/plugin/competiteurs.html.twig');
     }
 
-    public function update_state(Request $req){
-        if($this->get('security.authorization_checker')->isGranted('ROLE_ADMIN')){
+    public function update_state(Request $req)
+    {
+        if ($this->get('security.authorization_checker')->isGranted('ROLE_ADMIN')) {
             $manager = $this->getDoctrine()->getManager();
 
-            $ids =$req->get("ids");
-            $new_ids = explode(",",substr(substr($ids, 0, -1),1));
-            for ($i=0; $i < count($new_ids); $i++) {
+            $ids = $req->get("ids");
+            $new_ids = explode(",", substr(substr($ids, 0, -1), 1));
+            for ($i = 0; $i < count($new_ids); $i++) {
                 $adherent = $manager->getRepository(Adherent::class)->find($new_ids[$i]);
                 $adherent->setIsRegisteredInGestGym(true);
                 $manager->flush();
@@ -72,29 +73,28 @@ class AdministrationController extends AbstractController
 
             if ($competiteurs) {
                 $classMetadataFactory = new ClassMetadataFactory(new AnnotationLoader(new AnnotationReader()));
-    
+
                 $callback = function ($innerObject, $outerObject, string $attributeName, string $format = null, array $context = []) {
                     return $innerObject instanceof \DateTime ? $innerObject->format('d-m-Y') : '';
                 };
-    
+
                 $normalizer = new ObjectNormalizer($classMetadataFactory);
                 $normalizer->setCallbacks(array('birthDate' => $callback));
                 $encoder = new JsonEncoder();
                 $serializer = new Serializer(array($normalizer), array($encoder));
                 $data = $serializer->serialize($competiteurs, 'json', ['groups' => 'competition']);
 
-                return new Response ($data,200);
+                return new Response ($data, 200);
             }
 
 
+            return new Response ("ok", 200);
 
-            return new Response ("ok",200);
-
-        }else{
-            return new Response ("",500);
+        } else {
+            return new Response ("", 500);
         }
 
-        
+
     }
 
     /**

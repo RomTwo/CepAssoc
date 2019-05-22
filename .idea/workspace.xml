@@ -4,10 +4,30 @@
     <bookmark url="file://$PROJECT_DIR$/src/Controller/AccountController.php" description="JWT::decode($token, $_ENV['PRIVATE_KEY'], array($_..." line="94" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="53b90c9e-e36e-447f-8cc9-26b01b488158" name="Default Changelist" comment="change datetimepicker">
+    <list default="true" id="53b90c9e-e36e-447f-8cc9-26b01b488158" name="Default Changelist" comment="documentation datetimepicker et listes des dépendances yarn utilisées">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/assets/js/calendar.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Controller/administration/AdminEventManagerController.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Form/EventManagerType.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Transformer/JobToStringTransformer.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/templates/administration/eventManage/add.html.twig" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/templates/administration/eventManage/index.html.twig" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/templates/administration/events/manageEvent.html.twig" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/documentations/Librarie_yarn_utilisées" afterPath="$PROJECT_DIR$/documentations/Librarie_yarn_utilisées" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/documentations/datetimepicker" afterPath="$PROJECT_DIR$/documentations/datetimepicker" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/assets/css/app.scss" afterPath="$PROJECT_DIR$/assets/css/app.scss" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/assets/js/app.js" afterPath="$PROJECT_DIR$/assets/js/app.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/config/routes.yaml" afterPath="$PROJECT_DIR$/config/routes.yaml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/package.json" afterPath="$PROJECT_DIR$/package.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Controller/administration/AdminEventsController.php" afterPath="$PROJECT_DIR$/src/Controller/administration/AdminEventsController.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Controller/administration/AdministrationController.php" afterPath="$PROJECT_DIR$/src/Controller/administration/AdministrationController.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Entity/Account.php" afterPath="$PROJECT_DIR$/src/Entity/Account.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Entity/Event.php" afterPath="$PROJECT_DIR$/src/Entity/Event.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Entity/EventManagement.php" afterPath="$PROJECT_DIR$/src/Entity/EventManagement.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Form/EventType.php" afterPath="$PROJECT_DIR$/src/Form/EventType.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Repository/EventRepository.php" afterPath="$PROJECT_DIR$/src/Repository/EventRepository.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/administration/events/addEventForm.html.twig" afterPath="$PROJECT_DIR$/templates/administration/events/addEventForm.html.twig" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/administration/events/events.html.twig" afterPath="$PROJECT_DIR$/templates/administration/events/events.html.twig" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/webpack.config.js" afterPath="$PROJECT_DIR$/webpack.config.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/yarn.lock" afterPath="$PROJECT_DIR$/yarn.lock" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -21,21 +41,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="events.html.twig" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/templates/administration/events/events.html.twig">
+      <file leaf-file-name="AdminEventManagerController.php" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/Controller/administration/AdminEventManagerController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="653">
-              <caret line="98" column="23" lean-forward="true" selection-start-line="98" selection-start-column="23" selection-end-line="98" selection-end-column="23" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="datetimepicker" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/documentations/datetimepicker">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="600">
-              <caret line="40" column="0" lean-forward="true" selection-start-line="40" selection-start-column="0" selection-end-line="40" selection-end-column="0" />
+            <state relative-caret-position="135">
+              <caret line="9" column="44" lean-forward="false" selection-start-line="9" selection-start-column="44" selection-end-line="9" selection-end-column="44" />
               <folding />
             </state>
           </provider>
@@ -52,16 +62,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>gene</find>
-      <find>findByEma</find>
-      <find>preg</find>
-      <find>Forgot</find>
-      <find>form_errors</find>
-      <find>login</find>
-      <find>mt-2</find>
-      <find>ml-1</find>
-      <find>error</find>
-      <find>compet</find>
       <find>Voir</find>
       <find>exampleModal</find>
       <find>modal</find>
@@ -82,11 +82,24 @@
       <find>account</find>
       <find>gly</find>
       <find>dateT</find>
+      <find>job</find>
+      <find>col-2</find>
+      <find>even</find>
+      <find>var</find>
+      <find>bootstra</find>
+      <find>JQuery</find>
+      <find>form-group</find>
+      <find>class=&quot;row mt-3&quot;</find>
+      <find>serial</find>
+      <find>seria</find>
     </findStrings>
     <replaceStrings>
       <replace>mt-3</replace>
       <replace>ml-3</replace>
       <replace>event</replace>
+      <replace>col-3</replace>
+      <replace>let</replace>
+      <replace>$</replace>
     </replaceStrings>
     <dirStrings>
       <dir>$PROJECT_DIR$/documentations</dir>
@@ -106,14 +119,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/templates/administration/accounts/modalAccount.html.twig" />
-        <option value="$PROJECT_DIR$/templates/notifications/notifications.html.twig" />
-        <option value="$PROJECT_DIR$/src/Transformer/ArrayToStringTransformer.php" />
-        <option value="$PROJECT_DIR$/src/Controller/administration/AdminAccountsController.php" />
-        <option value="$PROJECT_DIR$/documentations/Recaptcha" />
-        <option value="$PROJECT_DIR$/documentations/Système de connexion" />
-        <option value="$PROJECT_DIR$/documentations/Système de connexion deconnexion" />
-        <option value="$PROJECT_DIR$/src/Controller/administration/AdminAdherentsController.php" />
         <option value="$PROJECT_DIR$/templates/administration/plugin/competiteurs.html.twig" />
         <option value="$PROJECT_DIR$/.env" />
         <option value="$PROJECT_DIR$/src/DataFixtures/AppFixtures.php" />
@@ -123,10 +128,8 @@
         <option value="$PROJECT_DIR$/src/Services/CaptchaCheck.php" />
         <option value="$PROJECT_DIR$/src/Security/LoginFormAuthentificator.php" />
         <option value="$PROJECT_DIR$/templates/security/login.html.twig" />
-        <option value="$PROJECT_DIR$/src/Entity/EventManagement.php" />
         <option value="$PROJECT_DIR$/src/Controller/AccountController.php" />
         <option value="$PROJECT_DIR$/src/Form/AdminActivityTimeSlotType.php" />
-        <option value="$PROJECT_DIR$/src/Entity/Account.php" />
         <option value="$PROJECT_DIR$/assets/js/account.js" />
         <option value="$PROJECT_DIR$/config/packages/security.yaml" />
         <option value="$PROJECT_DIR$/src/Services/GenerateToken.php" />
@@ -136,27 +139,37 @@
         <option value="$PROJECT_DIR$/templates/administration/accounts/edit.html.twig" />
         <option value="$PROJECT_DIR$/assets/js/event.js" />
         <option value="$PROJECT_DIR$/templates/administration/events/manageEvent.html.twig" />
-        <option value="$PROJECT_DIR$/src/Entity/Event.php" />
-        <option value="$PROJECT_DIR$/src/Entity/Job.php" />
-        <option value="$PROJECT_DIR$/config/routes.yaml" />
         <option value="$PROJECT_DIR$/templates/administration/base.html.twig" />
         <option value="$PROJECT_DIR$/node_modules/eonasdan-bootstrap-datetimepicker-bootstrap4beta/build/css/bootstrap-datetimepicker-standalone.css" />
         <option value="$PROJECT_DIR$/package.json" />
-        <option value="$PROJECT_DIR$/templates/administration/events/addEventForm.html.twig" />
-        <option value="$PROJECT_DIR$/webpack.config.js" />
         <option value="$PROJECT_DIR$/src/Form/AccountType.php" />
         <option value="$PROJECT_DIR$/templates/account/update.html.twig" />
-        <option value="$PROJECT_DIR$/src/Form/EventType.php" />
-        <option value="$PROJECT_DIR$/src/Controller/administration/AdminEventsController.php" />
         <option value="$PROJECT_DIR$/src/Transformer/DatetimeToStringTransformer.php" />
         <option value="$PROJECT_DIR$/templates/administration/events/updateEvent.html.twig" />
         <option value="$PROJECT_DIR$/assets/js/datetimepicker.js" />
         <option value="$PROJECT_DIR$/assets/js/datepicker.js" />
-        <option value="$PROJECT_DIR$/assets/js/app.js" />
-        <option value="$PROJECT_DIR$/assets/css/app.scss" />
-        <option value="$PROJECT_DIR$/templates/administration/events/events.html.twig" />
         <option value="$PROJECT_DIR$/documentations/Librarie_yarn_utilisées" />
         <option value="$PROJECT_DIR$/documentations/datetimepicker" />
+        <option value="$PROJECT_DIR$/templates/administration/events/events.html.twig" />
+        <option value="$PROJECT_DIR$/config/routes.yaml" />
+        <option value="$PROJECT_DIR$/templates/administration/events/addEventForm.html.twig" />
+        <option value="$PROJECT_DIR$/src/Form/EventType.php" />
+        <option value="$PROJECT_DIR$/src/Repository/EventRepository.php" />
+        <option value="$PROJECT_DIR$/src/Entity/Job.php" />
+        <option value="$PROJECT_DIR$/src/Controller/administration/AdminEventsController.php" />
+        <option value="$PROJECT_DIR$/src/Transformer/JobToStringTransformer.php" />
+        <option value="$PROJECT_DIR$/src/Form/EventManagerType.php" />
+        <option value="$PROJECT_DIR$/src/Entity/Event.php" />
+        <option value="$PROJECT_DIR$/assets/js/app.js" />
+        <option value="$PROJECT_DIR$/assets/css/app.scss" />
+        <option value="$PROJECT_DIR$/templates/administration/eventManage/add.html.twig" />
+        <option value="$PROJECT_DIR$/webpack.config.js" />
+        <option value="$PROJECT_DIR$/src/Controller/administration/AdministrationController.php" />
+        <option value="$PROJECT_DIR$/src/Entity/Account.php" />
+        <option value="$PROJECT_DIR$/src/Entity/EventManagement.php" />
+        <option value="$PROJECT_DIR$/src/Controller/administration/AdminEventManagerController.php" />
+        <option value="$PROJECT_DIR$/templates/administration/eventManage/index.html.twig" />
+        <option value="$PROJECT_DIR$/assets/js/calendar.js" />
       </list>
     </option>
   </component>
@@ -311,6 +324,17 @@
     </navigator>
     <panes>
       <pane id="Scratches" />
+      <pane id="Scope">
+        <subPane subId="Project Files">
+          <expand>
+            <path>
+              <item name="Root" type="cbb8eebc:String" user="Root" />
+              <item name="CepAssoc" type="cbb8eebc:String" user="CepAssoc" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -338,12 +362,7 @@
             <path>
               <item name="CepAssoc" type="b2602c69:ProjectViewProjectNode" />
               <item name="CepAssoc" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="documentations" type="2a2b976b:PhpTreeStructureProvider$1" />
-            </path>
-            <path>
-              <item name="CepAssoc" type="b2602c69:ProjectViewProjectNode" />
-              <item name="CepAssoc" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="public" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="config" type="2a2b976b:PhpTreeStructureProvider$1" />
             </path>
             <path>
               <item name="CepAssoc" type="b2602c69:ProjectViewProjectNode" />
@@ -362,6 +381,12 @@
               <item name="src" type="2a2b976b:PhpTreeStructureProvider$1" />
               <item name="Controller" type="2a2b976b:PhpTreeStructureProvider$1" />
               <item name="administration" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
+            <path>
+              <item name="CepAssoc" type="b2602c69:ProjectViewProjectNode" />
+              <item name="CepAssoc" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="src" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="Entity" type="2a2b976b:PhpTreeStructureProvider$1" />
             </path>
             <path>
               <item name="CepAssoc" type="b2602c69:ProjectViewProjectNode" />
@@ -391,18 +416,7 @@
               <item name="CepAssoc" type="2a2b976b:PhpTreeStructureProvider$1" />
               <item name="templates" type="2a2b976b:PhpTreeStructureProvider$1" />
               <item name="administration" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="events" type="2a2b976b:PhpTreeStructureProvider$1" />
-            </path>
-          </expand>
-          <select />
-        </subPane>
-      </pane>
-      <pane id="Scope">
-        <subPane subId="Project Files">
-          <expand>
-            <path>
-              <item name="Root" type="cbb8eebc:String" user="Root" />
-              <item name="CepAssoc" type="cbb8eebc:String" user="CepAssoc" />
+              <item name="eventManage" type="2a2b976b:PhpTreeStructureProvider$1" />
             </path>
           </expand>
           <select />
@@ -419,12 +433,13 @@
     <property name="SearchEverywhereHistoryKey" value="&#9;FILE&#9;file:///Users/romainpoitevin/PhpStormProjects/CepAssoc/templates/administration/base.html.twig" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/templates/home" />
-    </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/templates/administration/eventManage" />
       <recent name="$PROJECT_DIR$/templates/administration/plugin" />
       <recent name="$PROJECT_DIR$/templates" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/templates/home" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -504,14 +519,8 @@
       <workItem from="1558420915719" duration="9466000" />
       <workItem from="1558436083547" duration="12608000" />
       <workItem from="1558474748363" duration="1340000" />
-      <workItem from="1558507044956" duration="2738000" />
-    </task>
-    <task id="LOCAL-00018" summary="modif class to id">
-      <created>1557474614356</created>
-      <option name="number" value="00018" />
-      <option name="presentableId" value="LOCAL-00018" />
-      <option name="project" value="LOCAL" />
-      <updated>1557474614356</updated>
+      <workItem from="1558507044956" duration="9609000" />
+      <workItem from="1558522893904" duration="15954000" />
     </task>
     <task id="LOCAL-00019" summary="normalizer date (list of competitor for plugin), forgot password form">
       <created>1557477907229</created>
@@ -849,11 +858,18 @@
       <option name="project" value="LOCAL" />
       <updated>1558510404570</updated>
     </task>
-    <option name="localTasksCounter" value="67" />
+    <task id="LOCAL-00067" summary="documentation datetimepicker et listes des dépendances yarn utilisées">
+      <created>1558511487246</created>
+      <option name="number" value="00067" />
+      <option name="presentableId" value="LOCAL-00067" />
+      <option name="project" value="LOCAL" />
+      <updated>1558511487246</updated>
+    </task>
+    <option name="localTasksCounter" value="68" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="189192000" />
+    <option name="totallyTimeSpent" value="212017000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -930,7 +946,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="new theme for forms, change design of register form" />
     <MESSAGE value="Modify front and add link for return at the login form (when the user is on the register form)" />
     <MESSAGE value="print of error messages in register, login and modify user profil is finish" />
     <MESSAGE value="modify AccountType and add informations when the user move your mouse on the password field (register form and modify profil form)" />
@@ -955,7 +970,8 @@
     <MESSAGE value="add datatransformer for convert datetime in string and string in datetime" />
     <MESSAGE value="delete comment" />
     <MESSAGE value="change datetimepicker" />
-    <option name="LAST_COMMIT_MESSAGE" value="change datetimepicker" />
+    <MESSAGE value="documentation datetimepicker et listes des dépendances yarn utilisées" />
+    <option name="LAST_COMMIT_MESSAGE" value="documentation datetimepicker et listes des dépendances yarn utilisées" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -964,165 +980,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/assets/js/account.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="566">
-          <caret line="219" column="9" lean-forward="true" selection-start-line="219" selection-start-column="9" selection-end-line="219" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/administration/timeSlots/timeSlotsAdd.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/administration/timeSlots/timeSlots.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="555">
-          <caret line="37" column="38" lean-forward="true" selection-start-line="37" selection-start-column="38" selection-end-line="37" selection-end-column="38" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/administration/activities/activityAdd.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="390">
-          <caret line="26" column="0" lean-forward="true" selection-start-line="26" selection-start-column="0" selection-end-line="26" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Repository/JobRepository.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="390">
-          <caret line="28" column="47" lean-forward="false" selection-start-line="28" selection-start-column="47" selection-end-line="28" selection-end-column="47" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Controller/JobController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="375">
-          <caret line="25" column="50" lean-forward="true" selection-start-line="25" selection-start-column="50" selection-end-line="25" selection-end-column="50" />
-          <folding>
-            <element signature="e#34#53#0#PHP" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/administration/accounts/modalDeleteAccount.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="330">
-          <caret line="22" column="6" lean-forward="true" selection-start-line="22" selection-start-column="6" selection-end-line="22" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/administration/accounts/modalAccount.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="428">
-          <caret line="32" column="62" lean-forward="true" selection-start-line="32" selection-start-column="62" selection-end-line="32" selection-end-column="62" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/administration/accounts/accounts.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="606">
-          <caret line="68" column="0" lean-forward="true" selection-start-line="68" selection-start-column="0" selection-end-line="68" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/administration/accounts/edit.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="360">
-          <caret line="24" column="38" lean-forward="false" selection-start-line="24" selection-start-column="38" selection-end-line="24" selection-end-column="38" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/assets/js/popup.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="300">
-          <caret line="20" column="19" lean-forward="true" selection-start-line="20" selection-start-column="19" selection-end-line="20" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/symfony.lock">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Controller/administration/AdminAccountsController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="511">
-          <caret line="51" column="17" lean-forward="true" selection-start-line="51" selection-start-column="17" selection-end-line="51" selection-end-column="17" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Controller/AccountController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="882">
-          <caret line="120" column="67" lean-forward="false" selection-start-line="120" selection-start-column="67" selection-end-line="120" selection-end-column="67" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Entity/EventManagement.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="603">
-          <caret line="43" column="17" lean-forward="false" selection-start-line="43" selection-start-column="17" selection-end-line="43" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Entity/Adherent.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="5340">
-          <caret line="360" column="7" lean-forward="true" selection-start-line="360" selection-start-column="7" selection-end-line="360" selection-end-column="7" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/documentations/Gestion_des_popups">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="285">
-          <caret line="19" column="41" lean-forward="true" selection-start-line="19" selection-start-column="41" selection-end-line="19" selection-end-column="41" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/administration/events/modalDeleteEvent.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="345">
-          <caret line="23" column="6" lean-forward="true" selection-start-line="23" selection-start-column="6" selection-end-line="23" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Entity/Account.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="135">
-          <caret line="9" column="0" lean-forward="true" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Entity/Job.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="75">
-          <caret line="5" column="54" lean-forward="false" selection-start-line="5" selection-start-column="54" selection-end-line="5" selection-end-column="54" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/administration/events/manageEvent.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="210">
-          <caret line="14" column="14" lean-forward="false" selection-start-line="14" selection-start-column="14" selection-end-line="14" selection-end-column="14" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/config/routes.yaml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="474">
-          <caret line="156" column="20" lean-forward="false" selection-start-line="156" selection-start-column="20" selection-end-line="156" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/node_modules/tempusdominus-bootstrap-4/src/sass/_tempusdominus-bootstrap-4.scss" />
     <entry file="file://$PROJECT_DIR$/node_modules/eonasdan-bootstrap-datetimepicker-bootstrap4beta/build/css/bootstrap-datetimepicker.min.css" />
     <entry file="file://$PROJECT_DIR$/node_modules/eonasdan-bootstrap-datetimepicker-bootstrap4beta/build/css/bootstrap-datetimepicker.css" />
@@ -1141,16 +998,9 @@
         <state relative-caret-position="390">
           <caret line="26" column="5" lean-forward="false" selection-start-line="26" selection-start-column="5" selection-end-line="26" selection-end-column="5" />
           <folding>
-            <marker date="1558510214000" expanded="true" signature="0:905" ph="{&quot;license&quot;: &quot;UNLICENSED&quot;...}" />
-            <marker date="1558510214000" expanded="true" signature="543:903" ph="{&quot;@fortawesome/fontawesome-free&quot;: &quot;^5.8.2&quot;...}" />
+            <marker date="1558529225000" expanded="true" signature="0:1068" ph="{&quot;license&quot;: &quot;UNLICENSED&quot;...}" />
+            <marker date="1558529225000" expanded="true" signature="543:1066" ph="{&quot;@fortawesome/fontawesome-free&quot;: &quot;^5.8.2&quot;...}" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Entity/Event.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="7" column="54" lean-forward="false" selection-start-line="7" selection-start-column="54" selection-end-line="7" selection-end-column="54" />
         </state>
       </provider>
     </entry>
@@ -1184,14 +1034,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Form/EventType.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="585">
-          <caret line="50" column="0" lean-forward="false" selection-start-line="50" selection-start-column="0" selection-end-line="50" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/templates/account/update.html.twig">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2565">
@@ -1207,27 +1049,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Transformer/DatetimeToStringTransformer.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="218">
-          <caret line="16" column="26" lean-forward="false" selection-start-line="16" selection-start-column="26" selection-end-line="16" selection-end-column="26" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Controller/administration/AdminEventsController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="338">
-          <caret line="59" column="5" lean-forward="false" selection-start-line="59" selection-start-column="5" selection-end-line="59" selection-end-column="5" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/assets/js/event.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="465">
           <caret line="31" column="2" lean-forward="true" selection-start-line="31" selection-start-column="2" selection-end-line="31" selection-end-column="2" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1235,15 +1060,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="60">
           <caret line="4" column="3" lean-forward="false" selection-start-line="4" selection-start-column="3" selection-end-line="4" selection-end-column="3" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/administration/events/addEventForm.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="240">
-          <caret line="16" column="22" lean-forward="false" selection-start-line="16" selection-start-column="22" selection-end-line="16" selection-end-column="22" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1251,7 +1067,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="315">
           <caret line="21" column="14" lean-forward="false" selection-start-line="21" selection-start-column="14" selection-end-line="21" selection-end-column="14" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1259,23 +1074,35 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="150">
           <caret line="10" column="90" lean-forward="false" selection-start-line="10" selection-start-column="90" selection-end-line="10" selection-end-column="90" />
-          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/assets/js/app.js">
+    <entry file="file://$PROJECT_DIR$/documentations/datetimepicker">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="330">
-          <caret line="27" column="15" lean-forward="true" selection-start-line="27" selection-start-column="15" selection-end-line="27" selection-end-column="15" />
-          <folding />
+        <state relative-caret-position="555">
+          <caret line="37" column="28" lean-forward="true" selection-start-line="37" selection-start-column="28" selection-end-line="37" selection-end-column="28" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/webpack.config.js">
+    <entry file="file://$PROJECT_DIR$/templates/administration/eventManage/index.twig" />
+    <entry file="file://$PROJECT_DIR$/templates/administration/activities/activities.html.twig">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="210">
-          <caret line="14" column="53" lean-forward="false" selection-start-line="14" selection-start-column="53" selection-end-line="14" selection-end-column="53" />
-          <folding />
+        <state relative-caret-position="-158">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/administration/activities/activityEdit.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/administration/activities/activityAdd.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="270">
+          <caret line="18" column="24" lean-forward="true" selection-start-line="18" selection-start-column="24" selection-end-line="18" selection-end-column="24" />
         </state>
       </provider>
     </entry>
@@ -1283,30 +1110,232 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="60">
           <caret line="7" column="3" lean-forward="true" selection-start-line="7" selection-start-column="3" selection-end-line="7" selection-end-column="3" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Form/EventType.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="473">
+          <caret line="45" column="38" lean-forward="true" selection-start-line="45" selection-start-column="38" selection-end-line="45" selection-end-column="38" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/assets/css/app.scss">
+    <entry file="file://$PROJECT_DIR$/src/Entity/Job.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="4" column="87" lean-forward="true" selection-start-line="4" selection-start-column="0" selection-end-line="4" selection-end-column="87" />
+        <state relative-caret-position="375">
+          <caret line="26" column="5" lean-forward="true" selection-start-line="26" selection-start-column="5" selection-end-line="26" selection-end-column="5" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Repository/EventRepository.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="403">
+          <caret line="29" column="26" lean-forward="false" selection-start-line="29" selection-start-column="26" selection-end-line="29" selection-end-column="26" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/administration/events/addEventForm.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="360">
+          <caret line="24" column="41" lean-forward="true" selection-start-line="24" selection-start-column="41" selection-end-line="24" selection-end-column="41" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/templates/administration/events/events.html.twig">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="653">
-          <caret line="98" column="23" lean-forward="true" selection-start-line="98" selection-start-column="23" selection-end-line="98" selection-end-column="23" />
+        <state relative-caret-position="360">
+          <caret line="24" column="10" lean-forward="false" selection-start-line="24" selection-start-column="4" selection-end-line="24" selection-end-column="10" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Controller/administration/AdminEventsController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="657">
+          <caret line="48" column="34" lean-forward="true" selection-start-line="48" selection-start-column="34" selection-end-line="48" selection-end-column="34" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/documentations/datetimepicker">
+    <entry file="file://$PROJECT_DIR$/src/Transformer/DatetimeToStringTransformer.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="600">
-          <caret line="40" column="0" lean-forward="true" selection-start-line="40" selection-start-column="0" selection-end-line="40" selection-end-column="0" />
+        <state relative-caret-position="465">
+          <caret line="32" column="61" lean-forward="false" selection-start-line="32" selection-start-column="61" selection-end-line="32" selection-end-column="61" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Form/EventManagerType.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="435">
+          <caret line="43" column="51" lean-forward="false" selection-start-line="43" selection-start-column="51" selection-end-line="43" selection-end-column="51" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Transformer/JobToStringTransformer.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="578">
+          <caret line="46" column="9" lean-forward="false" selection-start-line="46" selection-start-column="9" selection-end-line="46" selection-end-column="9" />
+          <folding>
+            <element signature="e#35#54#0#PHP" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/assets/js/adminAdherentsEdit.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="n#!!doc" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/assets/css/app.scss">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="480">
+          <caret line="32" column="31" lean-forward="true" selection-start-line="32" selection-start-column="31" selection-end-line="32" selection-end-column="31" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/assets/js/app.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="105">
+          <caret line="12" column="34" lean-forward="false" selection-start-line="12" selection-start-column="34" selection-end-line="12" selection-end-column="34" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/webpack.config.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="405">
+          <caret line="27" column="47" lean-forward="false" selection-start-line="27" selection-start-column="47" selection-end-line="27" selection-end-column="47" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/administration/eventManage/add.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="360">
+          <caret line="24" column="21" lean-forward="false" selection-start-line="24" selection-start-column="21" selection-end-line="24" selection-end-column="21" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/config/routes.yaml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2550">
+          <caret line="170" column="0" lean-forward="false" selection-start-line="170" selection-start-column="0" selection-end-line="170" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Controller/administration/AdminAccountsController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="325">
+          <caret line="48" column="61" lean-forward="false" selection-start-line="48" selection-start-column="61" selection-end-line="48" selection-end-column="61" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Controller/administration/AdminAdherentsController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="390">
+          <caret line="26" column="85" lean-forward="true" selection-start-line="26" selection-start-column="85" selection-end-line="26" selection-end-column="85" />
+          <folding>
+            <element signature="e#49#73#0#PHP" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Controller/AccountController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="8" column="11" lean-forward="false" selection-start-line="8" selection-start-column="11" selection-end-line="8" selection-end-column="11" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Controller/administration/AdminTimeSlotsController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Controller/administration/AdministrationController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="285">
+          <caret line="19" column="55" lean-forward="true" selection-start-line="19" selection-start-column="55" selection-end-line="19" selection-end-column="55" />
+          <folding>
+            <element signature="e#49#73#0#PHP" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Entity/Adherent.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="8" column="51" lean-forward="true" selection-start-line="8" selection-start-column="51" selection-end-line="8" selection-end-column="51" />
+          <folding>
+            <element signature="e#30#78#0#PHP" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Entity/Account.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="135">
+          <caret line="9" column="51" lean-forward="false" selection-start-line="9" selection-start-column="51" selection-end-line="9" selection-end-column="51" />
+          <folding>
+            <element signature="e#30#78#0#PHP" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Entity/EventManagement.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="8" column="22" lean-forward="false" selection-start-line="8" selection-start-column="22" selection-end-line="8" selection-end-column="22" />
+          <folding>
+            <element signature="e#30#62#0#PHP" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Entity/Event.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="420">
+          <caret line="31" column="23" lean-forward="true" selection-start-line="31" selection-start-column="23" selection-end-line="31" selection-end-column="23" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/assets/js/calendar.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="375">
+          <caret line="25" column="26" lean-forward="true" selection-start-line="25" selection-start-column="26" selection-end-line="25" selection-end-column="26" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/administration/eventManage/index.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="360">
+          <caret line="24" column="46" lean-forward="false" selection-start-line="24" selection-start-column="46" selection-end-line="24" selection-end-column="46" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Controller/administration/AdminEventManagerController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="135">
+          <caret line="9" column="44" lean-forward="false" selection-start-line="9" selection-start-column="44" selection-end-line="9" selection-end-column="44" />
           <folding />
         </state>
       </provider>

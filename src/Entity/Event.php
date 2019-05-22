@@ -50,7 +50,7 @@ class Event
     private $description;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\EventManagement", mappedBy="events")
+     * @ORM\OneToMany(targetEntity="App\Entity\EventManagement", mappedBy="event")
      */
     private $eventManagements;
 
@@ -140,7 +140,6 @@ class Event
     {
         if (!$this->eventManagements->contains($eventManagement)) {
             $this->eventManagements[] = $eventManagement;
-            $eventManagement->setEvents($this);
         }
 
         return $this;
@@ -150,10 +149,6 @@ class Event
     {
         if ($this->eventManagements->contains($eventManagement)) {
             $this->eventManagements->removeElement($eventManagement);
-            // set the owning side to null (unless already changed)
-            if ($eventManagement->getEvents() === $this) {
-                $eventManagement->setEvents(null);
-            }
         }
 
         return $this;

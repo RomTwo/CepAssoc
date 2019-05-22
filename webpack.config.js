@@ -25,6 +25,7 @@ Encore
     .addEntry('event', './assets/js/event.js')
     .addEntry('datetime', './assets/js/datetimepicker.js')
     .addEntry('date', './assets/js/datepicker.js')
+    .addEntry('calendar', './assets/js/calendar.js')
 
     // When enabled, Webpack "splits" your files into smaller pieces for greater optimization.
     .splitEntryChunks()

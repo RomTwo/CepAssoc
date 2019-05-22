@@ -21,8 +21,18 @@ class EventType extends AbstractType
     {
         $builder
             ->add('name', TextType::class)
-            ->add('startDate', TextType::class)
-            ->add('endDate', TextType::class)
+            ->add('startDate', TextType::class, array(
+                    'attr' => array(
+                        'class' => 'datetimepicker'
+                    )
+                )
+            )
+            ->add('endDate', TextType::class, array(
+                    'attr' => array(
+                        'class' => 'datetimepicker'
+                    )
+                )
+            )
             ->add('address', TextType::class)
             ->add('description', TextareaType::class)
             ->add('jobs', EntityType::class, array(
@@ -39,6 +49,7 @@ class EventType extends AbstractType
             ->add('submit', SubmitType::class);
         $builder->get('startDate')->addModelTransformer(new DatetimeToStringTransformer());
         $builder->get('endDate')->addModelTransformer(new DatetimeToStringTransformer());
+
     }
 
     public function configureOptions(OptionsResolver $resolver)

@@ -51,7 +51,8 @@ class AdminEventsController extends AbstractController
                 return $this->redirectToRoute('admin_events');
             }
         } else {
-            $this->addFlash('danger', "L'évènement n'existe pas");
+            $this->addFlash('error', "L'évènement n'existe pas");
+            return $this->redirectToRoute('admin_events');
         }
         return $this->render('administration/events/updateEvent.html.twig', array(
             'form' => $form->createView(),
@@ -73,12 +74,6 @@ class AdminEventsController extends AbstractController
         }
 
         return $this->redirectToRoute('admin_events');
-    }
-
-    public function manage(Request $request, $id)
-    {
-
-        return $this->render('administration/events/manageEvent.html.twig');
     }
 
 }

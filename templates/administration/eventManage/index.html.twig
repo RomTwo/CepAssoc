@@ -1,0 +1,28 @@
+{% extends 'administration/base.html.twig' %}
+
+{% block title %}Adherents{% endblock %}
+
+{% block specification %}
+    Gestion des évènements
+{% endblock %}
+
+{% block body %}
+    <!-- Form add personn on the event -->
+    {% include('administration/eventManage/add.html.twig') %}
+
+    <!-- Data get by the JS code for write events in the calendar -->
+    <div class="dataEvent" hidden>
+        {{ eventManagers }}
+    </div>
+
+    <!-- Print calendar -->
+    <div id='calendar'></div>
+
+{% endblock %}
+
+{% block javascripts %}
+    {{ encore_entry_script_tags('datetime') }}
+    {{ encore_entry_script_tags('calendar') }}
+{% endblock %}
+
+

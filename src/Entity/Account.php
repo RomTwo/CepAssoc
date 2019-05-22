@@ -7,6 +7,7 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 
 /**
@@ -29,6 +30,7 @@ class Account implements UserInterface
      *     match = true,
      *     message = "le nom n'est pas correct"
      * )
+     * @Groups({"event"})
      */
     private $firstName;
 
@@ -40,6 +42,7 @@ class Account implements UserInterface
      *     match = true,
      *     message = "le prénom n'est pas correct"
      * )
+     * @Groups({"event"})
      */
     private $lastName;
 
@@ -387,5 +390,10 @@ class Account implements UserInterface
     public function eraseCredentials()
     {
         // TODO: Implement eraseCredentials() method.
+    }
+
+    public function getFullName()
+    {
+        return $this->firstName . ' ' . $this->lastName;
     }
 }
