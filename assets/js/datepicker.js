@@ -1,5 +1,5 @@
-$.datetimepicker.setLocale('fr');
-$('.datepicker').datetimepicker({
-    format: 'd-m-Y H:i',
-    timepicker: false
+$('.datepicker').bootstrapMaterialDatePicker({
+    weekStart: 0,
+    time: false,
+    format: 'DD-MM-YYYY'
 });

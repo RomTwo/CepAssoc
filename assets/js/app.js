@@ -10,11 +10,12 @@ require('../css/app.scss');
 
 $ = require('jquery');
 jQuery = require('jquery');
+global.moment = require('moment');
 require('bootstrap');
 require('datatables.net-bs4');
 require('bootstrap-notify');
 require('@fortawesome/fontawesome-free/js/all.js');
-require('jquery-datetimepicker');
+require('bootstrap-material-datetimepicker/js/bootstrap-material-datetimepicker.js');
 
 // Need jQuery? Install it with "yarn add jquery", then uncomment to require it.
 // const $ = require('jquery');
