@@ -202,4 +202,8 @@ else
 
         return $this;
     }
+
+    public function getAdherentsNumber(){
+        return sizeof($this->adherents);
+    }
 }

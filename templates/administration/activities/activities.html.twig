@@ -51,8 +51,8 @@
                             <td> {{ activity.price }} €</td>
                             <td>  <!-- Button trigger modal -->
 
-                                <a href="{{path('admin_activityDetails', {id: activity.id})}}" class="btn btn-primary">Voir plus</a>
-
+                                <a href="{{path('admin_activityDetails', {id: activity.id})}}" class="btn btn-primary">Gérer</a>
+                                <a href="{{path('admin_activityEdit', {id: activity.id})}}" class="btn btn-primary">Modifier</a>
                                 <a  href="{{path('admin_activityDelete', {id: activity.id } )}}" class="btn btn-secondary">Supprimer</a></td>
                         </tr>
                     {% endfor %}

@@ -4,9 +4,9 @@ namespace App\Controller\administration;
 
 use App\Entity\Activity;
 use App\Entity\Category;
-use App\Entity\TimeSlot;
+use App\Form\AdminActivityDetailsType;
 use App\Form\AdminActivityTimeSlotType;
-use App\Form\AdminActivityType;
+use App\Form\AdminAddAdherentToTimeSlotType;
 use App\Form\AdminCategoryType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -68,9 +68,8 @@ class AdminActivitiesController extends AbstractController
         return $this->render('administration/activities/categoryAdd.html.twig', [
             'category' => $category,
             'form' => $form->createView()]);
-
-
     }
+
     public function delete (Request $request,$id)
     {
         $repository = $this->getDoctrine()->getRepository(Category::class);
@@ -159,17 +158,38 @@ class AdminActivitiesController extends AbstractController
     public function details(Request $request, $id)
     {
 
+        $em = $this->getDoctrine()->getManager();
         $repositoryActivity = $this->getDoctrine()->getRepository(Activity::class);
+        $activity = $repositoryActivity->findOneBy(['id' => $id]);
+        $timeSlots = $activity->getTimeSlot();
 
-        //$activity = $repositoryActivity->find($id);
+        $forms = array();
+        // first loop (forms bodys)
+        $cpt = 0;
+        foreach ($timeSlots as $timeSlot ){
+            $form = $this->get('form.factory')->createNamedBuilder('name'.$cpt, AdminAddAdherentToTimeSlotType::class, $timeSlot)->getForm();
+            $form->handleRequest($request);
 
+            if ($form->isSubmitted() && $form->isValid()) {
 
-        //$entityManager = $this->getDoctrine()->getManager();
-        //$entityManager->remove($activity);
-        //$entityManager->flush();
-        //$this->addFlash('sucess', "Activité supprimée avec succès");
-        return $this->render('administration/activities/activityDetails.html.twig');
+                //$em->persist($timeSlot);
+                $adherentsArray = $timeSlot->getAdherents()->toArray();
+                $adherentsSize = sizeof($adherentsArray);
+                for($i = 0; $i < $adherentsSize; $i++){
+                    //$em->persist($adherentsArray[$i]);
+                    //$timeSlots[0]->addAdherent($adherentsArray[$i]);
+                    $adherentsArray[$i]->addTimeSlot($timeSlot);
+                }
+                $em->flush();
 
+                return $this->redirectToRoute('admin_activityDetails', ['id' => $id]);
+            }
+            $form = $form->createView();
+            $forms[] = $form;
+            $cpt++;
+        }
+
+        return $this->render('administration/activities/activityDetails.html.twig', ['activity' => $activity, 'timeSlots' => $timeSlots, 'forms' => $forms]);
     }
 
 

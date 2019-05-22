@@ -8,4 +8,33 @@
 
 {% block body %}
 
+    {{ dump(forms) }}
+    <h4>Activité {{ activity.name }}</h4>
+
+    <a href="#">
+        Envoyer un mail à tous
+    </a>
+    <hr/> <hr/> <hr/>
+
+    {% for timeSlot in timeSlots %}
+        <a class="btn btn-primary" data-toggle="collapse" href="#collapseExample{{ timeSlot.id }}" role="button" aria-expanded="false" aria-controls="collapseExample">
+            <h6>{{ timeSlot.getFullTime }}</h6>
+        </a>
+        <span>{{ timeSlot.id }}  {{ timeSlot.getAdherentsNumber }} participants </span>
+        <a href="#">
+            Envoyer un mail aux participants
+        </a>
+
+        <div class="collapse" id="collapseExample{{ timeSlot.id }}">
+            <div class="card card-body">
+                {{ form_start(forms[loop.index - 1]) }}
+
+                    <button>Ajouter les adherents</button>
+                {{ form_end(forms[loop.index - 1]) }}
+            </div>
+        </div>
+        <br/>
+        <hr/>
+    {% endfor %}
+
 {% endblock %}
