@@ -125,7 +125,11 @@ class AdherentAccountType extends AbstractType
                     'class' => 'radio-inline'
                 ],
             ])
-            ->add('volunteerComment', TextareaType::class)
+            ->add('volunteerComment', TextareaType::class, [
+                'attr' => [
+                    'placeholder' => "Plus d'informations sur vos disponibilités..."
+                ]
+            ])
             ->add('medicalCertificate', FileType::class, [
                 'attr' => [
                     'placeholder' => "Choisissez votre certificat médical"
