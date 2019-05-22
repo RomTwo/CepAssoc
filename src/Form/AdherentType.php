@@ -29,19 +29,18 @@ class AdherentType extends AbstractType
                 'attr' => [
                     'placeholder' => "Prenom",
                 ]
-                ])
+            ])
             ->add('lastName', TextType::class, [
                 'attr' => [
                     'placeholder' => "Nom de famille",
                 ]
             ])
             ->add('sex', ChoiceType::class, [
-                'choices' => [
-                    'Masculin' => 'H',
-                    'Feminin' => 'F',
-                ],
-                'multiple' => false,
-                'expanded' => true,
+                'choices' => array(
+                    'Masculin' => 'Masculin',
+                    'Feminin' => 'Feminin'
+                ),
+                'expanded' => false,
             ])
             ->add('birthDate', DateType::class, [
                 'widget' => 'choice',
@@ -238,6 +237,9 @@ class AdherentType extends AbstractType
             ])
             ->add('volunteerComment', TextareaType::class, [
                 'required' => false,
+                'attr' => [
+                    'placeholder' => "Plus d'informations sur vos disponibilités..."
+                ]
             ])
             ->add('medicalCertificate', FileType::class, array(
                 'attr' => [

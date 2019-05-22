@@ -23,12 +23,18 @@ class RegistrationController extends AbstractController
 
         $user = $this->getUser();
 
+        $account = $this->getDoctrine()->getRepository(Account::class)->findOneBy(
+            array(
+                'email' => $user->getEmail(),
+            )
+        );
+
         $form = $this->createForm(AdherentType::class, $adherent, array(
-            'firstNameRep1'=>$user->getFirstName(),
-            'lastNameRep1'=>$user->getLastName(),
-            'emailRep1'=>$user->getEmail(),
-            'addressRep1'=>$user->getAddress(),
-            'zipCodeRep1'=>$user->getZipCode(),
+            'firstNameRep1'=>$account->getFirstName(),
+            'lastNameRep1'=>$account->getLastName(),
+            'emailRep1'=>$account->getEmail(),
+            'addressRep1'=>$account->getAddress(),
+            'zipCodeRep1'=>$account->getZipCode(),
         ));
 
         $form->handleRequest($request);
@@ -54,7 +60,7 @@ class RegistrationController extends AbstractController
             'activities' => $this->getDoctrine()
                 ->getRepository(Activity::class)
                 ->findAll(),
-            'cityRep1' => $user->getCity(),
+            'cityRep1' => $account->getCity(),
         ]);
 
     }

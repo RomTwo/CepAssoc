@@ -95,12 +95,12 @@ class AdherentAccountType extends AbstractType
             ])
             ->add('professionRep1', TextType::class, [
                 'attr' => [
-                    'placeholder' => "Profession du représentant 1"
+                    'placeholder' => "Profession"
                 ],
             ])
             ->add('phoneRep1', TextType::class, [
                 'attr' => [
-                    'placeholder' => "Numéro de téléphone du représentant 1"
+                    'placeholder' => "Numéro de téléphone"
                 ],
             ])
             ->add('paymentType', ChoiceType::class, [
