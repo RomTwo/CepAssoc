@@ -15,16 +15,29 @@
     <hr/>
     <br> <br>
 
-    <form method="post" id="form">
-        <select class="js-example-basic-multiple" name="states[]" multiple="multiple">
-            <option value="AL">Alabama</option>
-            <option value="WY">Wyoming</option>
-        </select>
-        <input type="hidden" name="hidden_framework" id="hidden_framework"/>
-        {#<input type="hidden" name="timeSlot" id="timeSlotId" value="{{ timeSlot.id }}"/>#}
-        {#<input type="hidden" name="activity" id="activityId" value="{{ activity.id }}"/>#}
-        <input type="submit" name="submit" class="btn btn-info" value="Submit"/>
-    </form>
+    <input id="timeSlotsSize" type="hidden" value="{{ timeSlots|length }}">
+
+    {% for timeSlot in timeSlots %}
+        <button data-id="{{ loop.index0 }}" id="button{{ loop.index0 }}">
+            Button {{ loop.index0 }}
+        </button>
+        <hr/>
+    {% endfor  %}
+
+    {% for timeSlot in timeSlots %}
+        <form method="post" id="form{{ loop.index0 }}">
+            <select  class="js-example-basic-multiple{{ loop.index0 }}" name="states[]" multiple="multiple">
+                {% for adherent in adherents %}
+                    <option value="{{ adherent.lastName }} {{ adherent.firstName }}">{{ adherent.lastName }} {{ adherent.firstName }}</option>
+                {% endfor %}
+            </select>
+            <input type="hidden" name="hidden_framework" class="hidden_framework"/>
+            {#<input type="hidden" name="timeSlot" id="timeSlotId" value="{{ timeSlot.id }}"/>#}
+            {#<input type="hidden" name="activity" id="activityId" value="{{ activity.id }}"/>#}
+            <input type="submit" name="submit" class="btn btn-info" value="Submit"/>
+        </form>
+        <br> <hr>
+    {% endfor %}
 
 {#    {% for timeSlot in timeSlots %}
 
@@ -144,13 +157,97 @@
     <script>
         // In your Javascript (external .js resource or <script> tag)
         $(document).ready(function() {
-            $('.js-example-basic-multiple').select2();
+
+            var timeSlotsSize = $('#timeSlotsSize').val();
+
+
+
+
+            for(var i = 0; i < timeSlotsSize; i++){
+                $("#button" + i).on('click', function(event) {
+                    console.log(event);
+                    var id = event.currentTarget.attr('data-id');
+                    console.log(id);
+                });
+            }
+
+
+            /*for(var i = 0; i < timeSlotsSize; i++){
+                var j = i;
+                $("#button" + j).on('click',function(){
+                        alert("Button " + j);
+                    }
+                )
+            }*/
+
+
+
+            for(var i = 0; i < timeSlotsSize; i++){
+                $('.js-example-basic-multiple' + i).select2();
+
+
+                {#(function () {
+                    var ii = i;
+                    $('.js-example-basic-multiple' + ii).select2();
+
+                    $('.js-example-basic-multiple' + ii).change(function () {
+                        $('#hidden_framework').val($('.js-example-basic-multiple' + ii).val());
+                    });
+                })
+                //$("#button" + i).click( generate_handler( i ) );#}
+            }
+
+
+            function generateH( j ) {
+                return function(event) {
+                    $('.hidden_framework').val($('.js-example-basic-multiple' + j).val());
+                };
+            }
+
+
+            for(var i = 0; i <= timeSlotsSize; i++){
+                $('.js-example-basic-multiple' + i).change( generateH(i));
+            }
+
+
+
+            /*$('.js-example-basic-multiple').select2();
 
             $('.js-example-basic-multiple').change(function () {
                 $('#hidden_framework').val($('.js-example-basic-multiple').val());
-            });
+            });*/
 
-            $('#form').on('submit', function (event) {
+            function generateAjaxHandler(j){
+                return function(event) {
+                    event.preventDefault();
+                    var t = j;
+                    if ($(".js-example-basic-multiple" + t).select2("val") != '') {
+                        alert($('.hidden_framework').val());
+                        var form_data = $("#form" + t).serialize();
+                        $.ajax({
+                            url: "{{ path('admin_activity') }}",
+                            method: "POST",
+                            data: form_data,
+                            success: function (data) {
+                                //console.log(data);
+                                $('.hidden_framework').val('');
+                                $('.selectpicker').selectpicker('val', '');
+                                alert(data);
+                            }
+                        })
+                    } else {
+                        alert("Please select framework");
+                        return false;
+                    }
+                }
+            }
+
+            for(var i = 0; i < timeSlotsSize; i++){
+                //$("#button" + i).click( generate_handler( i ) );
+                $('#form' + i).on('submit',generateAjaxHandler(i));
+            }
+
+            {#$('#form').on('submit', function (event) {
                 event.preventDefault();
                 if ($(".js-example-basic-multiple").select2("val") != '') {
                     var form_data = $(this).serialize();
@@ -169,7 +266,7 @@
                     alert("Please select framework");
                     return false;
                 }
-            });
+            });#}
         });
     </script>
 {% endblock %}

@@ -225,17 +225,18 @@ class AdminActivitiesController extends AbstractController
         $category->setName($adherentsInOneLine);
         $em->persist($category);
 
-        foreach($adherents as $adherentName){
+//        foreach($adherents as $adherentName){
 /*            $adherent=$repositoryAdherant->findOneBy(['id' => $adherentName]);
             $adherent->addTimeSlot($timeSlot);
 */
-            $category = new Category();
+/*            $category = new Category();
             $category->setName($adherentsInOneLine);
 
             $em->persist($category);
 
             $em->flush();
         }
+*/
         $em->flush();
 
         //$repository = $this->getDoctrine()->getRepository(Adherent::class);
@@ -246,8 +247,8 @@ class AdminActivitiesController extends AbstractController
             'adherents' => $adherents,
         ]);*/
 
-        return $request->get("hidden_framework");
-
+        //return $request->get("hidden_framework");
+        return null;
     }
 
 }
