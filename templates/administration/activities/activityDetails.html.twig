@@ -18,35 +18,14 @@
     <input id="timeSlotsSize" type="hidden" value="{{ timeSlots|length }}">
 
     {% for timeSlot in timeSlots %}
-        <button data-id="{{ loop.index0 }}" id="button{{ loop.index0 }}">
-            Button {{ loop.index0 }}
-        </button>
-        <hr/>
-    {% endfor  %}
-
-    {% for timeSlot in timeSlots %}
-        <form method="post" id="form{{ loop.index0 }}">
-            <select  class="js-example-basic-multiple{{ loop.index0 }}" name="states[]" multiple="multiple">
-                {% for adherent in adherents %}
-                    <option value="{{ adherent.lastName }} {{ adherent.firstName }}">{{ adherent.lastName }} {{ adherent.firstName }}</option>
-                {% endfor %}
-            </select>
-            <input type="hidden" name="hidden_framework" class="hidden_framework"/>
-            {#<input type="hidden" name="timeSlot" id="timeSlotId" value="{{ timeSlot.id }}"/>#}
-            {#<input type="hidden" name="activity" id="activityId" value="{{ activity.id }}"/>#}
-            <input type="submit" name="submit" class="btn btn-info" value="Submit"/>
-        </form>
-        <br> <hr>
-    {% endfor %}
-
-{#    {% for timeSlot in timeSlots %}
 
         <div class="row">
             <a class="btn btn-primary" data-toggle="collapse" href="#collapseExample{{ timeSlot.id }}" role="button"
                aria-expanded="false" aria-controls="collapseExample">
                 <h6>{{ timeSlot.getFullTime }}</h6>
             </a>
-            <span>  {{ timeSlot.getAdherentsNumber }} participants <a href="#">Envoyer un mail aux participants</a></span>
+            <span>  {{ timeSlot.getAdherentsNumber }} participants <a
+                        href="#">Envoyer un mail aux participants</a></span>
 
         </div>
         <br/> <br/>
@@ -57,7 +36,8 @@
                     <br/>
                     <h2 align="center">Adhérents déjà associés au créneau : </h2>
 
-                    <table id="allAdherentsTable" class="table table-striped table-bordered" style="width: 100%;"
+                    <table id="adherentsTimeSlot{{ timeSlot.id }}" class="table table-striped table-bordered"
+                           style="width: 100%;"
                            role="grid"
                            aria-describedby="example_info">
                         <thead>
@@ -122,20 +102,21 @@
 
                     <br/>
                     <h6>Ajouter de nouveaux adhérents</h6>
-                    <div class="col-md-4" style="margin-left:200px;">
-                        <form method="post" id="multiple_select_form">
-                            <select name="framework" id="framework" class="form-control selectpicker"
-                                    data-live-search="true" multiple>
+                    <div class="row">
+
+                        <form style="width:100%" method="post" id="form{{ loop.index0 }}">
+                            <select style="width: 100%" class="js-example-basic-multiple{{ loop.index0 }}"
+                                    name="states[]"
+                                    multiple="multiple">
                                 {% for adherent in adherents %}
                                     {% if not timeSlot.contains(adherent) %}
                                         <option value="{{ adherent.id }}">{{ adherent.lastName }} {{ adherent.firstName }}</option>
                                     {% endif %}
                                 {% endfor %}
                             </select>
-                            <br/><br/>
+                            <input type="hidden" name="hidden_framework" class="hidden_framework"/>
                             <input type="hidden" name="timeSlot" id="timeSlotId" value="{{ timeSlot.id }}"/>
-                            <!--<input type="hidden" name="activity" id="activityId" value="{{ activity.id }}"/>-->
-                            <input type="hidden" name="hidden_framework" id="hidden_framework"/>
+                            {#<input type="hidden" name="activity" id="activityId" value="{{ activity.id }}"/>#}
                             <input type="submit" name="submit" class="btn btn-info" value="Submit"/>
                         </form>
                         <br/>
@@ -146,25 +127,24 @@
         </div>
 
     {% endfor %}
-#}
 {% endblock %}
+
 
 {% block javascripts %}
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.7/css/select2.min.css" rel="stylesheet"/>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.7/css/select2.min.css"
+          rel="stylesheet"/>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.7/js/select2.min.js"></script>
 
     <script>
         // In your Javascript (external .js resource or <script> tag)
-        $(document).ready(function() {
+        $(document).ready(function () {
 
             var timeSlotsSize = $('#timeSlotsSize').val();
 
 
-
-
-            for(var i = 0; i < timeSlotsSize; i++){
-                $("#button" + i).on('click', function(event) {
+            for (var i = 0; i < timeSlotsSize; i++) {
+                $("#button" + i).on('click', function (event) {
                     console.log(event);
                     var id = event.currentTarget.attr('data-id');
                     console.log(id);
@@ -181,11 +161,10 @@
             }*/
 
 
-
-            for(var i = 0; i < timeSlotsSize; i++){
+            for (var i = 0; i < timeSlotsSize; i++) {
                 $('.js-example-basic-multiple' + i).select2();
 
-
+                //$('#adherentsTimeSlot' + i).DataTable();
                 {#(function () {
                     var ii = i;
                     $('.js-example-basic-multiple' + ii).select2();
@@ -198,17 +177,16 @@
             }
 
 
-            function generateH( j ) {
-                return function(event) {
+            function generateH(j) {
+                return function (event) {
                     $('.hidden_framework').val($('.js-example-basic-multiple' + j).val());
                 };
             }
 
 
-            for(var i = 0; i <= timeSlotsSize; i++){
-                $('.js-example-basic-multiple' + i).change( generateH(i));
+            for (var i = 0; i <= timeSlotsSize; i++) {
+                $('.js-example-basic-multiple' + i).change(generateH(i));
             }
-
 
 
             /*$('.js-example-basic-multiple').select2();
@@ -217,8 +195,8 @@
                 $('#hidden_framework').val($('.js-example-basic-multiple').val());
             });*/
 
-            function generateAjaxHandler(j){
-                return function(event) {
+            function generateAjaxHandler(j) {
+                return function (event) {
                     event.preventDefault();
                     var t = j;
                     if ($(".js-example-basic-multiple" + t).select2("val") != '') {
@@ -242,9 +220,9 @@
                 }
             }
 
-            for(var i = 0; i < timeSlotsSize; i++){
+            for (var i = 0; i < timeSlotsSize; i++) {
                 //$("#button" + i).click( generate_handler( i ) );
-                $('#form' + i).on('submit',generateAjaxHandler(i));
+                $('#form' + i).on('submit', generateAjaxHandler(i));
             }
 
             {#$('#form').on('submit', function (event) {

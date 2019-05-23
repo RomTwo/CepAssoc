@@ -208,10 +208,10 @@ class AdminActivitiesController extends AbstractController
         ]);*/
 
         //getting the timeSlot
-/*        $timeSlotId =  $request->get("timeSlot");
+        $timeSlotId =  $request->get("timeSlot");
         $repositoryTimeSlot = $this->getDoctrine()->getRepository(TimeSlot::class);
         $timeSlot = $repositoryTimeSlot->findOneBy(['id' => $timeSlotId]);
-*/
+
 
         //getting all the adherents
         $adherentsInOneLine =  $request->get("hidden_framework");
@@ -221,22 +221,20 @@ class AdminActivitiesController extends AbstractController
 
         $em = $this->getDoctrine()->getManager();
 
-        $category = new Category();
+        /*$category = new Category();
         $category->setName($adherentsInOneLine);
-        $em->persist($category);
+        $em->persist($category);*/
 
-//        foreach($adherents as $adherentName){
-/*            $adherent=$repositoryAdherant->findOneBy(['id' => $adherentName]);
+        foreach($adherents as $adherentName){
+            $adherent=$repositoryAdherant->findOneBy(['id' => $adherentName]);
             $adherent->addTimeSlot($timeSlot);
-*/
-/*            $category = new Category();
-            $category->setName($adherentsInOneLine);
+
+            $category = new Category();
+            $category->setName($adherentName);
 
             $em->persist($category);
-
-            $em->flush();
         }
-*/
+
         $em->flush();
 
         //$repository = $this->getDoctrine()->getRepository(Adherent::class);
