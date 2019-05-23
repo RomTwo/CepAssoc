@@ -3,17 +3,10 @@
 
 namespace App\Form;
 
-use App\Entity\Activity;
-use App\Entity\Category;
 use App\Entity\TimeSlot;
-use App\Repository\CategoryRepository;
-use App\Repository\TimeSlotRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\AdherentType;
-use Symfony\Component\Form\Extension\Core\Type\CollectionType;
-use Symfony\Component\Form\Extension\Core\Type\NumberType;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -25,14 +18,14 @@ class AdminAddAdherentToTimeSlotType extends AbstractType
             ->add('city')
             ->add('adherents', EntityType::class, array(
                 'class' => 'App\Entity\Adherent',
-                'choice_label' => 'firstName',
+                'choice_label' => 'id',
                 'label' => 'Choix adherents',
                 'expanded' => true,
                 'multiple' => true,
+                'attr' => ['class' => 'select2', 'data-autocomplete-url' => '']
                 //'mapped' => false
             ))
         ;
-
     }
     public function configureOptions(OptionsResolver $resolver)
     {

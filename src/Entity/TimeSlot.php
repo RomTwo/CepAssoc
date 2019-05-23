@@ -206,4 +206,8 @@ else
     public function getAdherentsNumber(){
         return sizeof($this->adherents);
     }
+
+    public function contains($adherent){
+        return $this->adherents->contains($adherent);
+    }
 }

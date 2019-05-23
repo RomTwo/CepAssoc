@@ -7,34 +7,162 @@
 {% endblock %}
 
 {% block body %}
-
-    {{ dump(forms) }}
     <h4>Activité {{ activity.name }}</h4>
 
     <a href="#">
         Envoyer un mail à tous
     </a>
-    <hr/> <hr/> <hr/>
+    <hr/>
+    <hr/>
+    <hr/>
 
     {% for timeSlot in timeSlots %}
-        <a class="btn btn-primary" data-toggle="collapse" href="#collapseExample{{ timeSlot.id }}" role="button" aria-expanded="false" aria-controls="collapseExample">
-            <h6>{{ timeSlot.getFullTime }}</h6>
-        </a>
-        <span>{{ timeSlot.id }}  {{ timeSlot.getAdherentsNumber }} participants </span>
-        <a href="#">
-            Envoyer un mail aux participants
-        </a>
+
+        <div class="row">
+            <a class="btn btn-primary" data-toggle="collapse" href="#collapseExample{{ timeSlot.id }}" role="button"
+               aria-expanded="false" aria-controls="collapseExample">
+                <h6>{{ timeSlot.getFullTime }}</h6>
+            </a>
+            <span>  {{ timeSlot.getAdherentsNumber }} participants <a href="#">Envoyer un mail aux participants</a></span>
+
+        </div>
+        <br/> <br/>
 
         <div class="collapse" id="collapseExample{{ timeSlot.id }}">
             <div class="card card-body">
-                {{ form_start(forms[loop.index - 1]) }}
+                <div class="container">
+                    <br/>
+                    <h2 align="center">Adhérents déjà associés au créneau : </h2>
 
-                    <button>Ajouter les adherents</button>
-                {{ form_end(forms[loop.index - 1]) }}
+                    <table id="allAdherentsTable" class="table table-striped table-bordered" style="width: 100%;"
+                           role="grid"
+                           aria-describedby="example_info">
+                        <thead>
+                        <tr role="row">
+                            <th class="sorting_asc" tabindex="0" aria-controls="example" rowspan="1" colspan="1"
+                                style="width: 119px;" aria-sort="ascending"
+                                aria-label="lastName: activate to sort column descending">Nom
+                            </th>
+                            <th class="sorting_asc" tabindex="0" aria-controls="example" rowspan="1" colspan="1"
+                                style="width: 119px;" aria-sort="ascending"
+                                aria-label="firstName: activate to sort column descending">Prénom
+                            </th>
+                            <th class="sorting_asc" tabindex="0" aria-controls="example" rowspan="1" colspan="1"
+                                style="width: 119px;" aria-sort="ascending"
+                                aria-label="firstName: activate to sort column descending">Statut de l'inscription
+                            </th>
+                            <th class="sorting_asc" tabindex="0" aria-controls="example" rowspan="1" colspan="1"
+                                style="width: 119px;" aria-sort="ascending"
+                                aria-label="firstName: activate to sort column descending">Actions
+                            </th>
+                        </tr>
+                        </thead>
+                        <tbody>
+
+                        {% for adherent in timeSlot.getAdherents %}
+                            {% if adherent.isDeleted == false %}
+                                <tr role="row" class="odd">
+                                    <td>
+                                        {{ adherent.lastName }}
+                                    </td>
+                                    <td>
+                                        {{ adherent.firstName }}
+                                    </td>
+                                    <td>
+                                        {% if adherent.isRegisteredInFFG %}
+                                            <span style="color:green">Inscription validée</span>
+                                        {% else %}
+                                            <span style="color:red">Inscription non validée</span>
+                                        {% endif %}
+                                    </td>
+
+                                    <td>
+                                        <!-- Button trigger modal -->
+                                        <button type="button" class="btn btn-danger" data-toggle="modal"
+                                                data-target="#exampleModal{{ adherent.id }}">
+                                            Supprimer
+                                        </button>
+                                    </td>
+                                </tr>
+                            {% endif %}
+                        {% endfor %}
+                        </tbody>
+                        <tfoot>
+                        <tr>
+                            <th rowspan="1" colspan="1">Nom</th>
+                            <th rowspan="1" colspan="1">Prénom</th>
+                            <th rowspan="1" colspan="1">Statut de l'inscription</th>
+                            <th rowspan="1" colspan="1">Actions</th>
+                        </tr>
+                        </tfoot>
+                    </table>
+
+                    <br/>
+                    <h6>Ajouter de nouveaux adhérents</h6>
+                    <div class="col-md-4" style="margin-left:200px;">
+                        <form method="post" id="multiple_select_form">
+                            <select name="framework" id="framework" class="form-control selectpicker"
+                                    data-live-search="true" multiple>
+                                {% for adherent in adherents %}
+                                    {% if not timeSlot.contains(adherent) %}
+                                        <option value="{{ adherent.id }}">{{ adherent.lastName }} {{ adherent.firstName }}</option>
+                                    {% endif %}
+                                {% endfor %}
+                            </select>
+                            <br/><br/>
+                            <input type="hidden" name="timeSlot" id="timeSlotId" value="{{ timeSlot.id }}"/>
+                            <!--<input type="hidden" name="activity" id="activityId" value="{{ activity.id }}"/>-->
+                            <input type="hidden" name="hidden_framework" id="hidden_framework"/>
+                            <input type="submit" name="submit" class="btn btn-info" value="Submit"/>
+                        </form>
+                        <br/>
+
+                    </div>
+                </div>
             </div>
         </div>
-        <br/>
-        <hr/>
+
     {% endfor %}
 
+{% endblock %}
+
+
+{% block javascripts %}
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"/>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.2/css/bootstrap-select.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.2/js/bootstrap-select.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('.selectpicker').selectpicker();
+
+            $('#framework').change(function () {
+                $('#hidden_framework').val($('#framework').val());
+            });
+
+            $('#multiple_select_form').on('submit', function (event) {
+                event.preventDefault();
+                if ($('#framework').val() != '') {
+                    var form_data = $(this).serialize();
+                    $.ajax({
+                        url: "{{ path('admin_activity') }}",
+                        method: "POST",
+                        data: form_data,
+                        success: function (data) {
+                            //console.log(data);
+                            $('#hidden_framework').val('');
+                            $('.selectpicker').selectpicker('val', '');
+                            alert(data);
+                        }
+                    })
+                } else {
+                    alert("Please select framework");
+                    return false;
+                }
+            });
+        });
+    </script>
 {% endblock %}

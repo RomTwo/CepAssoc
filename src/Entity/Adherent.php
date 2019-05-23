@@ -1196,4 +1196,8 @@ class Adherent
 
 
 
+    public function __toString(): string
+    {
+        return $this->firstName();
+    }
 }

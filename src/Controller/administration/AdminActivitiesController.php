@@ -5,6 +5,8 @@ namespace App\Controller\administration;
 use App\Entity\Activity;
 use App\Entity\Category;
 use App\Form\AdminActivityDetailsType;
+use App\Entity\Adherent;
+use App\Entity\TimeSlot;
 use App\Form\AdminActivityTimeSlotType;
 use App\Form\AdminAddAdherentToTimeSlotType;
 use App\Form\AdminCategoryType;
@@ -157,13 +159,17 @@ class AdminActivitiesController extends AbstractController
 
     public function details(Request $request, $id)
     {
+        $repositoryAdherant=$this->getDoctrine()->getRepository(Adherent::class);
+        $adherants=$repositoryAdherant->findAll();
+
+
 
         $em = $this->getDoctrine()->getManager();
         $repositoryActivity = $this->getDoctrine()->getRepository(Activity::class);
         $activity = $repositoryActivity->findOneBy(['id' => $id]);
         $timeSlots = $activity->getTimeSlot();
 
-        $forms = array();
+        /*$forms = array();
         // first loop (forms bodys)
         $cpt = 0;
         foreach ($timeSlots as $timeSlot ){
@@ -187,10 +193,62 @@ class AdminActivitiesController extends AbstractController
             $form = $form->createView();
             $forms[] = $form;
             $cpt++;
-        }
+        }*/
 
-        return $this->render('administration/activities/activityDetails.html.twig', ['activity' => $activity, 'timeSlots' => $timeSlots, 'forms' => $forms]);
+        //return $this->render('administration/activities/activityDetails.html.twig', [  'adherants' =>$adherants,'activity' => $activity, 'timeSlots' => $timeSlots, 'forms' => $forms]);
+        return $this->render('administration/activities/activityDetails.html.twig', ['timeSlots' => $timeSlots, 'activity' => $activity, 'adherents' => $adherants] );
     }
 
+    public function addToTimeSlot(Request $request)
+    {
+        $repositoryAdherant=$this->getDoctrine()->getRepository(Adherent::class);
+
+        /*return $this->render('administration/adherents/adherents.html.twig', [
+            'adherents' => $adherents,
+        ]);*/
+
+        //getting the timeSlot
+        $timeSlotId =  $request->get("timeSlot");
+        $repositoryTimeSlot = $this->getDoctrine()->getRepository(TimeSlot::class);
+        $timeSlot = $repositoryTimeSlot->findOneBy(['id' => $timeSlotId]);
+
+        //getting all the adherents
+        $adherentsInOneLine =  $request->get("hidden_framework");
+        $adherents = explode(',', $adherentsInOneLine);
+        $adherentsSize = sizeof($adherents);
+
+
+        $em = $this->getDoctrine()->getManager();
+
+
+        $category = new Category();
+        $category->setName('toto');
+
+        $em->persist($category);
+
+        foreach($adherents as $adherentName){
+            $adherent=$repositoryAdherant->findOneBy(['id' => $adherentName]);
+            $adherent->addTimeSlot($timeSlot);
+
+            $category = new Category();
+            $category->setName($timeSlotId);
+
+            $em->persist($category);
+
+            $em->flush();
+        }
+        $em->flush();
+
+        //$repository = $this->getDoctrine()->getRepository(Adherent::class);
+        //$adherents = $repository->findAll();
+
+
+        /*return $this->render('administration/adherents/adherents.html.twig', [
+            'adherents' => $adherents,
+        ]);*/
+
+        return $request->get("hidden_framework");
+
+    }
 
 }
