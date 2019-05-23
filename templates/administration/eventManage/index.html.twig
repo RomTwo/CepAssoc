@@ -7,13 +7,20 @@
 {% endblock %}
 
 {% block body %}
-    <!-- Form add personn on the event -->
+    <!-- Form add personn on the event (Modal)-->
     {% include('administration/eventManage/add.html.twig') %}
 
     <!-- Data get by the JS code for write events in the calendar -->
-    <div class="dataEvent" hidden>
-        {{ eventManagers }}
-    </div>
+
+    <input id="idEvent" type="hidden" value="{{ idEvent }}">
+    <input id="token" type="hidden" value="{{ token }}">
+    <input id="url" type="hidden" value="{{ path('admin_event_manager_events') }}">
+
+
+    <!-- Describe event (Modal)-->
+    {% include('administration/eventManage/describeModal.html.twig') %}
+    {% include('administration/eventManage/updateModal.html.twig') %}
+
 
     <!-- Print calendar -->
     <div id='calendar'></div>

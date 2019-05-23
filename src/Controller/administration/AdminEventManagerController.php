@@ -5,21 +5,17 @@ namespace App\Controller\administration;
 use App\Entity\Event;
 use App\Entity\EventManagement;
 use App\Form\EventManagerType;
-use Doctrine\Common\Annotations\AnnotationReader;
+use App\Services\GenerateToken;
+use Firebase\JWT\JWT;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Serializer\Encoder\JsonEncoder;
-use Symfony\Component\Serializer\Mapping\Factory\ClassMetadataFactory;
-use Symfony\Component\Serializer\Mapping\Loader\AnnotationLoader;
-use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
-use Symfony\Component\Serializer\Serializer;
 
 class AdminEventManagerController extends AbstractController
 {
-    public function index(Request $request, $id)
+    public function index(Request $request, $id, GenerateToken $generateToken)
     {
         $event = $this->getDoctrine()->getRepository(Event::class)->find($id);
-        $eventManagers = $this->getDoctrine()->getRepository(EventManagement::class)->findBy(array('event' => $event));
 
         if ($event !== null) {
             $newEventManagers = new EventManagement();
@@ -43,7 +39,8 @@ class AdminEventManagerController extends AbstractController
 
         return $this->render('administration/eventManage/index.html.twig', array(
                 'form' => $form->createView(),
-                'eventManagers' => $this->makeEventJson($eventManagers)
+                'idEvent' => $id,
+                'token' => $generateToken->generateCustomToken(120)
             )
         );
     }
@@ -53,30 +50,70 @@ class AdminEventManagerController extends AbstractController
 
     }
 
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
+        if ($request->isMethod('POST')) {
+            $eventManagerId = $request->request->get('id');
+            $person = $request->request->get('person');
+            $start = $request->request->get('start');
+            $end = $request->request->get('end');
+            $job = $request->request->get('job');
+            $place = $request->request->get('place');
+
+        }
+        return JsonResponse::create('okok', 200);
+    }
+
+    public function delete(Request $request)
+    {
+        $id = $request->request->get('id');
+
+        $manager = $this->getDoctrine()->getManager();
+        $eventManager = $manager->getRepository(EventManagement::class)->find($id);
+
+        if ($eventManager === null) {
+            return JsonResponse::create('L\'évènement n\'existe pas', 404);
+        }
+        $manager->remove($eventManager);
+        $manager->flush();
+
+        return JsonResponse::create('Effectué', 200);
 
     }
 
-    public function delete($id)
+    public function events(Request $request)
     {
+        $id = $request->query->get('id');
+        $token = $request->query->get('token');
 
-    }
+        $event = $this->getDoctrine()->getRepository(Event::class)->find($id);
 
-    public function makeEventJson($eventManagers)
-    {
-        $classMetadataFactory = new ClassMetadataFactory(new AnnotationLoader(new AnnotationReader()));
+        if ($event === null) {
+            return JsonResponse::create('L\'évènement n\'existe pas', 404);
+        }
 
-        $callback = function ($innerObject, $outerObject, string $attributeName, string $format = null, array $context = []) {
-            return $innerObject instanceof \DateTime ? $innerObject->format('Y-m-d H:i:s') : '';
-        };
+        try {
+            JWT::decode($token, $_ENV['PRIVATE_KEY'], array($_ENV['ALG']));
+            $eventManagers = $this->getDoctrine()->getRepository(EventManagement::class)->findBy(array('event' => $event));
+            $tab = array();
 
-        $normalizer = new ObjectNormalizer($classMetadataFactory);
-        $normalizer->setCallbacks(array('startDate' => $callback, 'endDate' => $callback));
-        $encoder = new JsonEncoder();
-        $serializer = new Serializer(array($normalizer), array($encoder));
-        $data = $serializer->serialize($eventManagers, 'json', ['groups' => 'event']);
-        return $data;
+            foreach ($eventManagers as $e) {
+                array_push($tab, array(
+                        'id' => $e->getId(),
+                        'title' => $e->getAccount()->getFullName() . ', ' . $e->getJob(),
+                        'person' => $e->getAccount()->getFullName(),
+                        'job' => $e->getJob(),
+                        'place' => $e->getPlace(),
+                        'start' => $e->getStartDate()->format('Y-m-d H:i:s'),
+                        'end' => $e->getEndDate()->format('Y-m-d H:i:s'),
+                    )
+                );
+            }
+            return JsonResponse::create($tab, 202);
+        } catch (\Exception $e) {
+            $e->getMessage();
+            return JsonResponse::create('Une authentification est requise', 401);
+        }
     }
 
 }

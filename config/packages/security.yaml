@@ -36,6 +36,7 @@ security:
          - { path: ^/profile/forgotPassword, roles: IS_AUTHENTICATED_ANONYMOUSLY }
          - { path: ^/profile/resetPassword/, roles: IS_AUTHENTICATED_ANONYMOUSLY }
          - { path: ^/admin/job/add, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+         - { path: ^/admin/event/manager/events, roles: IS_AUTHENTICATED_ANONYMOUSLY }
          - { path: ^/admin/activities, roles: ROLE_MODERATOR }
          - { path: ^/admin, roles: ROLE_ADMIN }
          - { path: ^/profile, roles: ROLE_USER }

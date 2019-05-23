@@ -1,0 +1,34 @@
+<div id="modal-view-event-desc" class="modal modal-top fade calendar-modal">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-body">
+                <h4>Description : </h4>
+                <div>
+                    <div>
+                        <p>Personne : <span id="person"></span></p>
+                    </div>
+                    <div>
+                        <p>Poste occupé : <span id="job"></span></p>
+                    </div>
+                    <div>
+                        <p>Lieu d'intervention : <span id="place"></span></p>
+                    </div>
+                    <div>
+                        <p>Date de début : <span id="start"></span></p>
+                    </div>
+                    <div>
+                        <p>Date de fin: <span id="end"></span></p>
+                    </div>
+                </div>
+                <input id="idEventManager" type="hidden">
+                <div class="modal-footer">
+                    <button id="updateEvent" type="button" class="btn btn-warning">Modifier</button>
+                    <button id="deleteEvent" type="button" class="btn btn-danger"
+                            value="{{ path('admin_event_manager_delete') }}">Supprimer
+                    </button>
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

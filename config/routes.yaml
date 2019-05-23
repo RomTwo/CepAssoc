@@ -170,17 +170,16 @@ admin_event_manager_add:
         id: ([0-9]*)
 
 admin_event_manager_update:
-    path: /admin/event/manager/update/{id}
+    path: /admin/event/manager/update
     controller: App\Controller\administration\AdminEventManagerController::update
-    requirements:
-        id: ([0-9]*)
 
 admin_event_manager_delete:
-    path: /admin/event/manager/delete/{id}
+    path: /admin/event/manager/delete
     controller: App\Controller\administration\AdminEventManagerController::delete
-    requirements:
-        id: ([0-9]*)
 
+admin_event_manager_events:
+    path: /admin/event/manager/events
+    controller: App\Controller\administration\AdminEventManagerController::events
 
     #--jobs
 job_add:

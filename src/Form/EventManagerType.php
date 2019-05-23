@@ -25,6 +25,9 @@ class EventManagerType extends AbstractType
 
         $builder
             ->add('account', EntityType::class, array(
+                    'attr' => array(
+                        'class' => 'selectAccount'
+                    ),
                     'class' => Account::class,
                     'choice_label' => 'getFullName',
                     'query_builder' => function (AccountRepository $rep) {
@@ -46,6 +49,9 @@ class EventManagerType extends AbstractType
                 )
             )
             ->add('job', ChoiceType::class, array(
+                    'attr' => array(
+                        'class' => 'selectJob'
+                    ),
                     'choices' => $options['jobsEvent'],
                     'choice_label' => function (Job $job) {
                         return $job->getName();

@@ -22,11 +22,10 @@ $('#jobForm').submit(function (e) {
                 "<input type='checkbox' id='event_jobs_" + json.id + "' name='event[jobs][]' class='form-check-input' value='" + json.id + "'>" +
                 "<label class='form-check-label' for='event_jobs_" + json.id + "'>" + json.name + "</label>" +
                 "</div>";
-
-
+            
             $('#jobName').val('');
             $('#divAddJob').hide();
             $('#event_jobs').append(div);
         }
     })
-})
+});

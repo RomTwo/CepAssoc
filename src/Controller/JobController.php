@@ -3,7 +3,6 @@
 namespace App\Controller;
 
 use App\Entity\Job;
-use App\Form\EventType;
 use Firebase\JWT\JWT;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
