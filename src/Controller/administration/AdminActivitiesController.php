@@ -4,11 +4,9 @@ namespace App\Controller\administration;
 
 use App\Entity\Activity;
 use App\Entity\Category;
-use App\Form\AdminActivityDetailsType;
 use App\Entity\Adherent;
 use App\Entity\TimeSlot;
 use App\Form\AdminActivityTimeSlotType;
-use App\Form\AdminAddAdherentToTimeSlotType;
 use App\Form\AdminCategoryType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -83,8 +81,6 @@ class AdminActivitiesController extends AbstractController
             $entityManager->flush();
             $this->addFlash('sucess',"Category supprimée avec succès");
             return $this->redirectToRoute('admin_activities');
-
-
     }
 
     public function addActivity(Request $request)
@@ -92,17 +88,15 @@ class AdminActivitiesController extends AbstractController
         $activity = new Activity();
         $form = $this->createForm(AdminActivityTimeSlotType::class,$activity);
 
-
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
 
-            $timeSlotsArray = $activity->timeSlot()->toArray();
-            $timeSlotsSize = sizeof($timeSlotsArray);
+            $timeSlotsArray = $activity->getTimeSlot()->toArray();
 
-            for($i = 0; $i < $timeSlotsSize; $i++){
-                $em->persist($timeSlotsArray[$i]);
+            foreach($timeSlotsArray as $timeSlot){
+                $em->persist($timeSlot);
             }
 
             $em->persist($activity);
@@ -123,11 +117,10 @@ class AdminActivitiesController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
 
-            $timeSlotsArray = $activity->timeSlot()->toArray();
-            $timeSlotsSize = sizeof($timeSlotsArray);
+            $timeSlotsArray = $activity->getTimeSlot()->toArray();
 
-            for($i = 0; $i < $timeSlotsSize; $i++){
-                $entityManager->persist($timeSlotsArray[$i]);
+            foreach($timeSlotsArray as $timeSlot){
+                $entityManager->persist($timeSlot);
             }
 
             $entityManager->flush();
@@ -144,11 +137,9 @@ class AdminActivitiesController extends AbstractController
 
     public function deleteActivity(Request $request, $id)
     {
-
         $repositoryActivity = $this->getDoctrine()->getRepository(Activity::class);
 
         $activity = $repositoryActivity->find($id);
-
 
         $entityManager = $this->getDoctrine()->getManager();
         $entityManager->remove($activity);
@@ -163,40 +154,10 @@ class AdminActivitiesController extends AbstractController
         $repositoryAdherant=$this->getDoctrine()->getRepository(Adherent::class);
         $adherants=$repositoryAdherant->findAll();
 
-
-
-        $em = $this->getDoctrine()->getManager();
         $repositoryActivity = $this->getDoctrine()->getRepository(Activity::class);
         $activity = $repositoryActivity->findOneBy(['id' => $id]);
         $timeSlots = $activity->getTimeSlot();
 
-        /*$forms = array();
-        // first loop (forms bodys)
-        $cpt = 0;
-        foreach ($timeSlots as $timeSlot ){
-            $form = $this->get('form.factory')->createNamedBuilder('name'.$cpt, AdminAddAdherentToTimeSlotType::class, $timeSlot)->getForm();
-            $form->handleRequest($request);
-
-            if ($form->isSubmitted() && $form->isValid()) {
-
-                //$em->persist($timeSlot);
-                $adherentsArray = $timeSlot->getAdherents()->toArray();
-                $adherentsSize = sizeof($adherentsArray);
-                for($i = 0; $i < $adherentsSize; $i++){
-                    //$em->persist($adherentsArray[$i]);
-                    //$timeSlots[0]->addAdherent($adherentsArray[$i]);
-                    $adherentsArray[$i]->addTimeSlot($timeSlot);
-                }
-                $em->flush();
-
-                return $this->redirectToRoute('admin_activityDetails', ['id' => $id]);
-            }
-            $form = $form->createView();
-            $forms[] = $form;
-            $cpt++;
-        }*/
-
-        //return $this->render('administration/activities/activityDetails.html.twig', [  'adherants' =>$adherants,'activity' => $activity, 'timeSlots' => $timeSlots, 'forms' => $forms]);
         return $this->render('administration/activities/activityDetails.html.twig', ['timeSlots' => $timeSlots, 'activity' => $activity, 'adherents' => $adherants] );
     }
 
@@ -204,50 +165,32 @@ class AdminActivitiesController extends AbstractController
     {
         $repositoryAdherant=$this->getDoctrine()->getRepository(Adherent::class);
 
-        /*return $this->render('administration/adherents/adherents.html.twig', [
-            'adherents' => $adherents,
-        ]);*/
+        // get activity Id
+        $activityId =  $request->get("activity");
+
+        $adherentsInOneLine =  $request->get("hidden_framework");
+        if($adherentsInOneLine === ""){
+            $this->addFlash("error", "Rien a été rajouté");
+            return $this->redirectToRoute('admin_activityDetails', ["id" => $activityId]);
+        }
+
+        $adherents = explode(',', $adherentsInOneLine);
 
         //getting the timeSlot
         $timeSlotId =  $request->get("timeSlot");
         $repositoryTimeSlot = $this->getDoctrine()->getRepository(TimeSlot::class);
         $timeSlot = $repositoryTimeSlot->findOneBy(['id' => $timeSlotId]);
 
-
-        //getting all the adherents
-        $adherentsInOneLine =  $request->get("hidden_framework");
-        $adherents = explode(',', $adherentsInOneLine);
-        $adherentsSize = sizeof($adherents);
-
-
         $em = $this->getDoctrine()->getManager();
-
-        /*$category = new Category();
-        $category->setName($adherentsInOneLine);
-        $em->persist($category);*/
 
         foreach($adherents as $adherentName){
             $adherent=$repositoryAdherant->findOneBy(['id' => $adherentName]);
             $adherent->addTimeSlot($timeSlot);
-
-            $category = new Category();
-            $category->setName($adherentName);
-
-            $em->persist($category);
         }
-
         $em->flush();
 
-        //$repository = $this->getDoctrine()->getRepository(Adherent::class);
-        //$adherents = $repository->findAll();
-
-
-        /*return $this->render('administration/adherents/adherents.html.twig', [
-            'adherents' => $adherents,
-        ]);*/
-
-        //return $request->get("hidden_framework");
-        return null;
+        $this->addFlash("success", "Ajout(s) effectués");
+        return $this->redirectToRoute('admin_activityDetails', ["id" => $activityId]);
     }
 
     public function copyEmails(Request $request){
@@ -271,10 +214,6 @@ class AdminActivitiesController extends AbstractController
                 $allEmails .= $adherent->getEmailRep1() . "; ";
             }
         }
-
-        /*for($i=0; $i<$activityId; $i++){
-            $allEmails .= "toto";
-        }*/
 
         $jsonDatas[] = $allEmails;
         return new JsonResponse($jsonDatas);
