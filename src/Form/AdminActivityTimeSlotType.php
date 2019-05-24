@@ -37,14 +37,18 @@ class AdminActivityTimeSlotType extends AbstractType
                 'choice_label' => 'name',
                 "multiple" => false
             ])
-            ->add('timeSlot', EntityType::class, [
+            /*->add('timeSlot', EntityType::class, [
                 'class'        => 'App\Entity\TimeSlot',
                 'choice_label' => 'getFullTime',
                 'label'        => 'Affectation des créneaux ',
                 'expanded'     => true,
                 'multiple'     => true,
-            ])
-
+            ])*/
+            ->add('timeSlot', CollectionType::class, array(
+                'entry_type'   => TimeSlotType::class,
+                'allow_add'    => true,
+                'allow_delete' => true
+            ))
            ;
 
     }

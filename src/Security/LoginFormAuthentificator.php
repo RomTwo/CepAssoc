@@ -118,9 +118,6 @@ class LoginFormAuthentificator extends AbstractFormLoginAuthenticator
         if (!$this->csrfTokenManager->isTokenValid($token)) {
             throw new InvalidCsrfTokenException('Une erreur s\'est produit');
         }
-        if (!(new CaptchaCheck())->captchaIsValid($credentials['recaptcha_response'])) {
-            throw new CustomUserMessageAuthenticationException('Le capatcha est incorrect');
-        }
 
         $user = $this->entityManager->getRepository(Account::class)->findOneBy(['email' => $credentials['email']]);
         if (!$user) {

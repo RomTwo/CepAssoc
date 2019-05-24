@@ -130,7 +130,7 @@ class Account implements UserInterface
     {
         $this->children = new ArrayCollection();
         $this->eventManagements = new ArrayCollection();
-        $this->roles = array('ROLE_ADMIN');
+        $this->roles = array('ROLE_MODERATOR');
     }
 
 
@@ -341,6 +341,8 @@ class Account implements UserInterface
             return ['ROLE_SUPER_ADMIN'];
         } elseif ($this->roles[0] === "ROLE_ADMIN") {
             return ['ROLE_ADMIN'];
+        } elseif ($this->roles[0] === "ROLE_MODERATOR") {
+            return ['ROLE_MODERATOR'];
         } elseif ($this->roles[0] === "ROLE_USER") {
             return ['ROLE_USER'];
         }

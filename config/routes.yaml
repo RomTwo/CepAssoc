@@ -33,6 +33,10 @@ security_deconnexion:
     path: /profile/logout
 
 ### Administration routing ###
+admin_home:
+    path: /admin
+    controller: App\Controller\administration\AdministrationController::home
+
 admin_adherent_competiteurs:
     path: /admin/competiteurs
     controller: App\Controller\administration\AdministrationController::competiteurs
@@ -87,6 +91,12 @@ admin_activityEdit:
 admin_activityDelete:
     path: /admin/activities/deleteActivity/{id}
     controller: App\Controller\administration\AdminActivitiesController::deleteActivity
+
+admin_activityDetails:
+    path: /admin/activities/details/{id}
+    controller: App\Controller\administration\AdminActivitiesController::details
+    requirements:
+        id: ([0-9]*)
 
 admin_categories:
     path: /admin/categories
