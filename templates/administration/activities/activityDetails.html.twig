@@ -1,4 +1,4 @@
-{% extends 'administration/base.html.twig' %}
+{% extends 'administration/layout_admin.html.twig' %}
 
 {% block title %}Activités détaillées{% endblock %}
 
@@ -75,11 +75,7 @@
                                         {{ adherent.firstName }}
                                     </td>
                                     <td>
-                                        {% if adherent.isRegisteredInFFG %}
-                                            <span style="color:green">Inscription validée</span>
-                                        {% else %}
-                                            <span style="color:red">Inscription non validée</span>
-                                        {% endif %}
+                                        {{ adherent.status }}
                                     </td>
 
                                     <td>
