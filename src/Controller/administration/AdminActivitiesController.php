@@ -11,6 +11,7 @@ use App\Form\AdminActivityTimeSlotType;
 use App\Form\AdminAddAdherentToTimeSlotType;
 use App\Form\AdminCategoryType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 
 class AdminActivitiesController extends AbstractController
@@ -247,6 +248,36 @@ class AdminActivitiesController extends AbstractController
 
         //return $request->get("hidden_framework");
         return null;
+    }
+
+    public function copyEmails(Request $request){
+        $jsonDatas = array();
+
+        $allEmails = "";
+        $activityId = (int)$request->request->get('activityId');
+
+        $repositoryActivity = $this->getDoctrine()->getRepository(Activity::class);
+
+        // getting the activity
+        $activity = $repositoryActivity->find($activityId);
+
+        // getting all the timeSlots connected to the activity
+        $timeSlots = $activity->getTimeSlot();
+        $timeSlotsArray = $timeSlots->toArray();   // converting it to php array type
+        foreach($timeSlots as $timeSlot){
+            // for each timeSlot we get the adherents
+            $adherents = $timeSlot->getAdherents()->toArray();
+            foreach($adherents as $adherent){
+                $allEmails .= $adherent->getEmailRep1() . "; ";
+            }
+        }
+
+        /*for($i=0; $i<$activityId; $i++){
+            $allEmails .= "toto";
+        }*/
+
+        $jsonDatas[] = $allEmails;
+        return new JsonResponse($jsonDatas);
     }
 
 }

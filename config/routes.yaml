@@ -98,6 +98,12 @@ admin_activity:
     path: /admin/activities/addToTimeSlot
     controller: App\Controller\administration\AdminActivitiesController::addToTimeSlot
 
+admin_activityCopyEmails:
+    path: /admin/activities/activityCopyEmails
+    controller: App\Controller\administration\AdminActivitiesController::copyEmails
+
+
+    #--ACategories
 admin_categories:
     path: /admin/categories
     controller: App\Controller\administration\AdminActivitiesController::index

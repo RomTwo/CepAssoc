@@ -12,10 +12,13 @@
     <a href="#">
         Envoyer un mail à tous
     </a>
+    <button id="allEmails">Envoyer un mail à tous</button>
+    <button>toto</button>
     <hr/>
     <br> <br>
 
     <input id="timeSlotsSize" type="hidden" value="{{ timeSlots|length }}">
+    <input id="sandbox"> <!-- Field to paste value in order to get copy them later in the clipboard -->
 
     {% for timeSlot in timeSlots %}
 
@@ -224,6 +227,39 @@
                 //$("#button" + i).click( generate_handler( i ) );
                 $('#form' + i).on('submit', generateAjaxHandler(i));
             }
+
+            $('#allEmails').on('click', function (event) {
+                alert("toto");
+                event.preventDefault();
+                $.ajax({
+                    url: "{{ path('admin_activityCopyEmails') }}",
+                    method: "POST",
+                    data: {activityId:231},
+                    dataType: "json",
+                    success: function (data){
+                        alert(data);
+                        console.log(data);
+                        $("#sandbox").val(data);
+                        $("#sandbox").select();
+                        // Copy text to clipboard
+                        document.execCommand('copy');
+                    }
+                })
+            });
+            {#$("#treeButtonSearch").click(function(){
+                path = $("#treeSort").val();
+                $.ajax({
+                    url:path,
+                    method: "post",
+                    dataType: "json"
+                }).success(function(rep){
+                    refreshTree();
+                    makeTree(path);
+                    //$('#jstree').html("BABAR");
+                    console.log(rep);
+                    //makeTree("{{ path('treePromotion') }}",null);
+                });
+            });#}
 
             {#$('#form').on('submit', function (event) {
                 event.preventDefault();
