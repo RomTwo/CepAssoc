@@ -373,7 +373,7 @@ class Adherent
     private $timeSlots;
 
     /**
-     * @ORM\Column(type="string", length=100,options={"default":"EN ATTENTE MAIS PAS VALIDE"})
+     * @ORM\Column(type="string", length=100,options={"default":"EN ATTENTE"})
      */
     private $status;
 
