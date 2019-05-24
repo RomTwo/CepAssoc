@@ -24,6 +24,7 @@ Encore
     .addEntry('adminAdherentsEdit', './assets/js/adminAdherentsEdit.js')
     .addEntry('event', './assets/js/event.js')
     .addEntry('datetime', './assets/js/datetimepicker.js')
+    .addEntry('datetimeEvent', './assets/js/datetimepickerEvent.js')
     .addEntry('date', './assets/js/datepicker.js')
     .addEntry('calendar', './assets/js/calendar.js')
 

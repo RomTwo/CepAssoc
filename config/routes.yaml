@@ -164,10 +164,8 @@ admin_event_manager_index:
         id: ([0-9]*)
 
 admin_event_manager_add:
-    path: /admin/event/manager/add/{id}
+    path: /admin/event/manager/add
     controller: App\Controller\administration\AdminEventManagerController::add
-    requirements:
-        id: ([0-9]*)
 
 admin_event_manager_update:
     path: /admin/event/manager/update

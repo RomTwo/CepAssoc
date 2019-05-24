@@ -38,13 +38,13 @@ class EventManagerType extends AbstractType
             )
             ->add('startDate', TextType::class, array(
                     'attr' => array(
-                        'class' => 'datetimepicker'
+                        'class' => 'dateTimePickerEvent'
                     )
                 )
             )
             ->add('endDate', TextType::class, array(
                     'attr' => array(
-                        'class' => 'datetimepicker'
+                        'class' => 'dateTimePickerEvent'
                     )
                 )
             )
@@ -56,6 +56,9 @@ class EventManagerType extends AbstractType
                     'choice_label' => function (Job $job) {
                         return $job->getName();
                     },
+                    'choice_value' => function (Job $job = null) {
+                        return $job ? $job->getId() : '';
+                    }
                 )
             )
             ->add('place', TextType::class)

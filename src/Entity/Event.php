@@ -50,7 +50,7 @@ class Event
     private $description;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\EventManagement", mappedBy="event")
+     * @ORM\OneToMany(targetEntity="App\Entity\EventManagement", mappedBy="event", cascade={"persist", "remove"})
      */
     private $eventManagements;
 

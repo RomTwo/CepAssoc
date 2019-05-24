@@ -13,8 +13,9 @@
     <!-- Data get by the JS code for write events in the calendar -->
 
     <input id="idEvent" type="hidden" value="{{ idEvent }}">
-    <input id="token" type="hidden" value="{{ token }}">
     <input id="url" type="hidden" value="{{ path('admin_event_manager_events') }}">
+    <input id="startDate" type="hidden" value="{{ startDate | date('Y-m-d H:i:s') }}">
+    <input id="endDate" type="hidden" value="{{ endDate | date('Y-m-d H:i:s') }}">
 
 
     <!-- Describe event (Modal)-->
@@ -28,8 +29,9 @@
 {% endblock %}
 
 {% block javascripts %}
-    {{ encore_entry_script_tags('datetime') }}
+    {{ encore_entry_script_tags('datetimeEvent') }}
     {{ encore_entry_script_tags('calendar') }}
+    {{ encore_entry_script_tags('popup') }}
 {% endblock %}
 
 

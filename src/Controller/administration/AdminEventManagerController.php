@@ -2,36 +2,31 @@
 
 namespace App\Controller\administration;
 
+use App\Entity\Account;
 use App\Entity\Event;
 use App\Entity\EventManagement;
+use App\Entity\Job;
 use App\Form\EventManagerType;
-use App\Services\GenerateToken;
-use Firebase\JWT\JWT;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 class AdminEventManagerController extends AbstractController
 {
-    public function index(Request $request, $id, GenerateToken $generateToken)
+    public function index($id)
     {
         $event = $this->getDoctrine()->getRepository(Event::class)->find($id);
 
         if ($event !== null) {
             $newEventManagers = new EventManagement();
-            $form = $this->createForm(EventManagerType::class, $newEventManagers, array('jobsEvent' => $event->getJobs()));
-            $form->handleRequest($request);
+            $form = $this->createForm(EventManagerType::class, $newEventManagers, array(
+                'action' => $this->generateUrl('admin_event_manager_add'),
+                'method' => 'post',
+                'jobsEvent' => $event->getJobs()));
+            $form->add('idEvent', HiddenType::class, array('data' => $id, 'mapped' => false));
 
-            if ($form->isSubmitted() && $form->isValid()) {
-
-                $newEventManagers->setEvent($event);
-                $manager = $this->getDoctrine()->getManager();
-                $manager->persist($newEventManagers);
-                $manager->flush();
-
-                $this->addFlash('success', 'Personne ajoutée');
-                return $this->redirectToRoute('admin_event_manager_index', array('id' => $id));
-            }
         } else {
             $this->addFlash('error', "L'évènement n'existe pas");
             return $this->redirectToRoute('admin_events');
@@ -40,28 +35,85 @@ class AdminEventManagerController extends AbstractController
         return $this->render('administration/eventManage/index.html.twig', array(
                 'form' => $form->createView(),
                 'idEvent' => $id,
-                'token' => $generateToken->generateCustomToken(120)
+                'startDate' => $event->getStartDate(),
+                'endDate' => $event->getEndDate(),
             )
         );
     }
 
-    public function add(Request $request, $id)
-    {
-
-    }
-
-    public function update(Request $request)
+    public function add(Request $request, ValidatorInterface $validator)
     {
         if ($request->isMethod('POST')) {
-            $eventManagerId = $request->request->get('id');
-            $person = $request->request->get('person');
+            $eventId = $request->request->get('idEvent');
+            $personId = $request->request->get('person');
             $start = $request->request->get('start');
             $end = $request->request->get('end');
-            $job = $request->request->get('job');
+            $jobId = $request->request->get('job');
             $place = $request->request->get('place');
 
+            $manager = $this->getDoctrine()->getManager();
+
+            $account = $manager->getRepository(Account::class)->find($personId);
+            $event = $manager->getRepository(Event::class)->find($eventId);
+            $job = $manager->getRepository(Job::class)->find($jobId);
+
+            if ($event === null || $account === null || $job === null) {
+                return JsonResponse::create('Les données saisies sont fausses', 404);
+            }
+
+            $eventManager = new EventManagement();
+            $eventManager->setEvent($event);
+            $eventManager->setAccount($account);
+            $eventManager->setStartDate(new \DateTime($start));
+            $eventManager->setEndDate(new \DateTime($end));
+            $eventManager->setJob($job->getName());
+            $eventManager->setPlace($place);
+
+            $errors = $validator->validate($eventManager);
+            if (count($errors) > 0) {
+                return JsonResponse::create($errors, 400);
+            }
+            $manager->persist($eventManager);
+            $manager->flush();
         }
-        return JsonResponse::create('okok', 200);
+
+        return JsonResponse::create('Ajout effectué', 200);
+    }
+
+    public function update(Request $request, ValidatorInterface $validator)
+    {
+        if ($request->isMethod('POST')) {
+            $eventManagerId = $request->request->get('idEventManager');
+            $personId = $request->request->get('person');
+            $start = $request->request->get('start');
+            $end = $request->request->get('end');
+            $jobId = $request->request->get('job');
+            $place = $request->request->get('place');
+
+            $manager = $this->getDoctrine()->getManager();
+
+            $eventManager = $manager->getRepository(EventManagement::class)->find($eventManagerId);
+            $account = $manager->getRepository(Account::class)->find($personId);
+            $job = $manager->getRepository(Job::class)->find($jobId);
+
+            if ($eventManager === null || $account === null || $job === null) {
+                return JsonResponse::create('Les données saisies sont fausses', 404);
+            }
+
+            $eventManager->setAccount($account);
+            $eventManager->setStartDate(new \DateTime($start));
+            $eventManager->setEndDate(new \DateTime($end));
+            $eventManager->setJob($job->getName());
+            $eventManager->setPlace($place);
+
+            $errors = $validator->validate($eventManager);
+            if (count($errors) > 0) {
+                return JsonResponse::create($errors, 400);
+            }
+
+            $manager->flush();
+        }
+        return JsonResponse::create('Mise à jour effectuée', 200);
     }
 
     public function delete(Request $request)
@@ -77,14 +129,12 @@ class AdminEventManagerController extends AbstractController
         $manager->remove($eventManager);
         $manager->flush();
 
-        return JsonResponse::create('Effectué', 200);
-
+        return JsonResponse::create('Suppression terminée', 200);
     }
 
     public function events(Request $request)
     {
         $id = $request->query->get('id');
-        $token = $request->query->get('token');
 
         $event = $this->getDoctrine()->getRepository(Event::class)->find($id);
 
@@ -92,28 +142,23 @@ class AdminEventManagerController extends AbstractController
             return JsonResponse::create('L\'évènement n\'existe pas', 404);
         }
 
-        try {
-            JWT::decode($token, $_ENV['PRIVATE_KEY'], array($_ENV['ALG']));
-            $eventManagers = $this->getDoctrine()->getRepository(EventManagement::class)->findBy(array('event' => $event));
-            $tab = array();
+        $eventManagers = $this->getDoctrine()->getRepository(EventManagement::class)->findBy(array('event' => $event));
+        $tab = array();
 
-            foreach ($eventManagers as $e) {
-                array_push($tab, array(
-                        'id' => $e->getId(),
-                        'title' => $e->getAccount()->getFullName() . ', ' . $e->getJob(),
-                        'person' => $e->getAccount()->getFullName(),
-                        'job' => $e->getJob(),
-                        'place' => $e->getPlace(),
-                        'start' => $e->getStartDate()->format('Y-m-d H:i:s'),
-                        'end' => $e->getEndDate()->format('Y-m-d H:i:s'),
-                    )
-                );
-            }
-            return JsonResponse::create($tab, 202);
-        } catch (\Exception $e) {
-            $e->getMessage();
-            return JsonResponse::create('Une authentification est requise', 401);
+        foreach ($eventManagers as $e) {
+            array_push($tab, array(
+                    'id' => $e->getId(),
+                    'title' => $e->getAccount()->getFullName() . ', ' . $e->getJob(),
+                    'person' => $e->getAccount()->getFullName(),
+                    'job' => $e->getJob(),
+                    'place' => $e->getPlace(),
+                    'start' => $e->getStartDate()->format('Y-m-d H:i:s'),
+                    'end' => $e->getEndDate()->format('Y-m-d H:i:s'),
+                )
+            );
         }
+        return JsonResponse::create($tab, 202);
+
     }
 
 }

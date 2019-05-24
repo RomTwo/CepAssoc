@@ -5,14 +5,34 @@ $(function () {
         themeSystem: 'bootstrap4',
         businessHours: false,
         defaultView: 'agendaWeek',
-        editable: false,
+        editable: true,
+        eventLimit: true,
         timeFormat: 'H:mm',
         slotLabelFormat: ['H:mm'],
         allDaySlot: false,
         header: {
             left: 'title',
-            center: 'month,agendaWeek,agendaDay',
-            right: 'today prev,next'
+            right: 'agendaWeek,agendaDay',
+            center: 'prev,next'
+        },
+        visibleRange: function () {
+            return {
+                start: moment($('#startDate').val()),
+                end: moment($('#endDate').val()),
+            };
+        },
+        validRange: function () {
+            return {
+                start: moment($('#startDate').val()),
+                end: moment($('#endDate').val()),
+            };
+        },
+        dayRender: function (date, cell) {
+            console.log(date);
+            let start = $('#startDate').val();
+            let end = $('#endDate').val();
+            if (moment(date).isBetween($('#startDate').val(), $('#endDate').val(), null, '[]') !== true) {
+            }
         },
         buttonText: {
             today: "Ajourd'hui",
@@ -26,7 +46,6 @@ $(function () {
                 type: 'GET',
                 data: {
                     id: $('#idEvent').val(),
-                    token: $('#token').val()
                 },
             }
         ],
@@ -43,7 +62,35 @@ $(function () {
 
             $('#modal-view-event-desc').modal();
         },
+        eventResize: function (info) {
+            alert(info.title);
+            alert((info.end));
+        },
+        eventDrop: function (info) {
+            alert(info.job);
+            alert((info.start));
+        },
     })
+});
+
+// Add an event on calendar
+$('#addEventManager').submit(function (e) {
+    e.preventDefault();
+    let form_data = $(this).serialize();
+    $.ajax({
+        url: $(this).attr("action"),
+        type: $(this).attr("method"),
+        data: form_data,
+        success: function (json) {
+            $('#calendar').fullCalendar('refetchEvents');
+            $('#modal-view-event-add').modal('hide');
+            $.notification('fas fa-check', 'Succès : ', 'l\'évènement viens d\être ajouté', 'success');
+        },
+        error: function (response) {
+            $.notification('fa fa-exclamation-circle', 'Erreur : ', response.responseJSON, 'danger');
+        }
+    });
+    $(this).get(0).reset();
 });
 
 // Delete an event on calendar
@@ -55,8 +102,12 @@ $('#deleteEvent').click(function () {
             id: $('#idEventManager').val(),
         },
         success: function (json) {
-            $('#modal-view-event-desc').modal('hide');
             $('#calendar').fullCalendar('refetchEvents');
+            $('#modal-view-event-desc').modal('hide');
+            $.notification('fas fa-check', 'Succès : ', json, 'success');
+        },
+        error: function (json) {
+            $.notification('fa fa-exclamation-circle', 'Erreur : ', json, 'danger');
         }
     })
 });
@@ -64,19 +115,34 @@ $('#deleteEvent').click(function () {
 // When the user click on the update button in description modal
 $('#updateEvent').click(function () {
 
-    if ($("#selectJobUpdate option").length === 0 || $("#selectAccountUpdate option").length == 0) {
+    // Clear data in select for add a news data
+    $('#selectJobUpdate').empty();
+    $('#selectAccountUpdate').empty();
 
-        $(".selectJob option").each(function () {
-            let opt = "<option value='" + $(this).val() + "'>" + $(this).text() + "</option>";
+    // Fill the job selected in modal update
+    $(".selectJob option").each(function () {
+        let opt = '';
+        if ($(this).text() === $('#job').text()) {
+            opt = "<option value='" + $(this).val() + "' selected>" + $(this).text() + "</option>";
             $('#selectJobUpdate').append(opt);
-        });
+        } else {
+            opt = "<option value='" + $(this).val() + "'>" + $(this).text() + "</option>";
+            $('#selectJobUpdate').append(opt);
+        }
+    });
 
-        $(".selectAccount option").each(function () {
-            let opt = "<option value='" + $(this).val() + "'>" + $(this).text() + "</option>";
+    // Fill the person selected in modal update
+    $(".selectAccount option").each(function () {
+        if ($(this).text() === $('#person').text()) {
+            opt = "<option value='" + $(this).val() + "' selected>" + $(this).text() + "</option>";
             $('#selectAccountUpdate').append(opt);
-        });
-    }
+        } else {
+            opt = "<option value='" + $(this).val() + "'>" + $(this).text() + "</option>";
+            $('#selectAccountUpdate').append(opt);
+        }
+    });
 
+    // Fill all field form with data
     $('#startUpdate').val($('#start').text());
     $('#endUpdate').val($('#end').text());
     $('#placeUpdate').val($('#place').text());
@@ -84,17 +150,22 @@ $('#updateEvent').click(function () {
     $('#modal-view-event-update').modal();
 });
 
-
+// Submit the update form
 $('#updateEventManagerForm').submit(function (e) {
     e.preventDefault();
     let form_data = $(this).serialize();
-    console.log(form_data);
     $.ajax({
         url: $(this).attr("action"),
         type: $(this).attr("method"),
         data: form_data,
         success: function (json) {
-
+            $('#calendar').fullCalendar('refetchEvents');
+            $('#modal-view-event-desc').modal('hide');
+            $('#modal-view-event-update').modal('hide');
+            $.notification('fas fa-check', 'Succès : ', 'l\'évènement à été mis à jour', 'success');
+        },
+        error: function (json) {
+            $.notification('fa fa-exclamation-circle', 'Erreur : ', json, 'danger');
         }
     })
 });

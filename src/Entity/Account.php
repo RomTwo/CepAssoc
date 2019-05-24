@@ -19,6 +19,7 @@ class Account implements UserInterface
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
+     * @Groups({"event"})
      */
     private $id;
 
@@ -110,7 +111,8 @@ class Account implements UserInterface
     private $children;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\EventManagement", mappedBy="account")
+     * @ORM\OneToMany(targetEntity="App\Entity\EventManagement", mappedBy="account", cascade={"persist", "remove"})
+     * @ORM\JoinColumn(onDelete="CASCADE")
      */
     private $eventManagements;
 
@@ -132,7 +134,7 @@ class Account implements UserInterface
     {
         $this->children = new ArrayCollection();
         $this->eventManagements = new ArrayCollection();
-        $this->roles = array('ROLE_ADMIN');
+        $this->roles = array('ROLE_USER');
     }
 
 
