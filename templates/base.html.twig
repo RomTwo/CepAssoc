@@ -1,58 +1,115 @@
 <!DOCTYPE html>
-<html>
-<head>
-    <meta charset="UTF-8">
+<html lang="fr">
 
-    <title>{% block title %}Welcome!{% endblock %}</title>
+    <head>
 
-    {{ encore_entry_link_tags('app') }}
-    {% block stylesheets %}{% endblock %}
+        <meta charset="utf-8">
+        <meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport">
+        <meta content="" name="description">
+        <meta content="" name="author">
 
-</head>
-<body>
-<nav class="navbar navbar-expand-lg navbar-light">
-    <a class="navbar-brand" href="{{ path('home') }}">CEP</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
+        <title>CEP -
+            {% block title %}{% endblock %}
+        </title>
+        {{ encore_entry_link_tags('app') }}
+        {% block stylesheets %}{% endblock %}
 
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav mr-auto">
-            <li class="nav-item">
-                <a class="nav-link" href="{{ path('home') }}">Accueil</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="{{ path('registration') }}">Formulaire d'inscription</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="{{ path('account_update') }}">Mon compte</a>
-            </li>
-            {% if is_granted('ROLE_ADMIN') %}
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ path('admin_adherents') }}">Administration</a>
-                </li>
-            {% elseif is_granted('ROLE_MODERATOR') %}
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ path('admin_activities') }}">Administration</a>
-                </li>
-            {% endif %}
-        </ul>
-        <form class="form-inline my-2 my-lg-0">
-            <button class="btn btn-sm btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-        </form>
-        <a class="btn btn-sm btn-danger" href="{{ path('security_deconnexion') }}">Déconnexion</a>
-    </div>
-</nav>
-<div class="container-fluid">
+        <style>
+            html{
+                height : 100%;
+            }
+            body {
+                padding-top: 56px;
+                display:flex;
+                flex-direction : column;
+                height : 100vh;
+                padding-top : 56px;
+            }
 
-    {% include('notifications/notifications.html.twig') %}
+            .content{
+                flex : 1 0 auto;
+                padding : 20px;
+            }
+            .footer{
+                flex-shrink : 0;
+                padding : 20px;
+            }
+            .container-title-card{
+                display : flex;
+                flex-direction: row;
+            }
 
-    {% block body %}{% endblock %}
-</div>
+            .container-title-card > div {
+                width: 100%;
+            }
+            .navbar{
+                background-color: #8a020e !important;
+            }
+            footer{
+                background-color: #8a020e !important;
 
-{{ encore_entry_script_tags('app') }}
-{{ encore_entry_script_tags('popup') }}
-{% block javascripts %}{% endblock %}
-</body>
+            }
+            .btn-primary,.btn-primary:hover{
+                background-color: #c1030a !important;
+                border-color: #c1030a !important;
+
+            }
+
+            .btn-primary:focus{
+                box-shadow: 0 0 0 .2rem #ffc8ca !important;
+            }
+        </style>
+    </head>
+    <body>
+        <!-- Navigation -->
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+            <div class="container">
+                <a class="navbar-brand" href="#">CEP Gymnastique</a>
+                <button aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler" data-target="#navbarResponsive" data-toggle="collapse" type="button">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarResponsive">
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item active">
+                            <a class="nav-link" href="{{ path('home') }}">Accueil</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ path('registration') }}">Formulaire d'inscription</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ path('account_update') }}">Mon compte</a>
+                        </li>
+                        {% if is_granted('ROLE_ADMIN') %}
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ path('admin_home') }}">Administration</a>
+                            </li>
+                        {% elseif is_granted('ROLE_MODERATOR') %}
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ path('admin_home') }}">Administration</a>
+                            </li>
+                        {% endif %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ path('security_deconnexion') }}">Deconnexion</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Page Content -->
+        <div class="container content">
+            {% include('notifications/notifications.html.twig') %}
+
+            {% block body %}{% endblock %}
+        </div>
+        <footer class="py-2 footer">
+            <div class="container">
+                <p class="m-0 text-center text-white">Copyright &copy; Your Website 2019</p>
+            </div>
+        </footer>
+
+        {{ encore_entry_script_tags('app') }}
+        {{ encore_entry_script_tags('popup') }}
+        {% block javascripts %}{% endblock %}
+    </body>
 </html>

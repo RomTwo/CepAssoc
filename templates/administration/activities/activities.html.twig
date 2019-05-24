@@ -1,10 +1,7 @@
-{% extends 'administration/base.html.twig' %}
+{% extends 'administration/layout_admin.html.twig' %}
 
-{% block title %}Adherents{% endblock %}
+{% block title %}Activités{% endblock %}
 
-{% block specification %}
-    Gestion des activités
-{% endblock %}
 
 {% block body %}
     <a href="{{path('admin_activityAdd')}}" class="btn btn-primary">Ajouter une activité</a>

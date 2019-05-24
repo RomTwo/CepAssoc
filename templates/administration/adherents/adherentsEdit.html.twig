@@ -1,4 +1,4 @@
-{% extends 'administration/base.html.twig' %}
+{% extends 'administration/layout_admin.html.twig' %}
 
 {% form_theme form 'bootstrap_4_layout.html.twig' %}
 
@@ -98,6 +98,17 @@
             <div class="col-3">
                 <div class="row">
                     {{ form_widget(form.registrationType) }}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <h6> Etat d'inscription </h6>
+    <div class="col">
+        <div class="row">
+            <div class="col-3">
+                <div class="row">
+                    {{ form_widget(form.status) }}
                 </div>
             </div>
         </div>
@@ -390,6 +401,46 @@
 {% endblock %}
 
 {% block javascripts %}
-    {{ encore_entry_script_tags('adminAdherentsEdit') }}
+    <script>
+        $('#admin_adherent_zipCodeRep1').focusout( function(){
+            $.ajax({
+                url:'https://datanova.legroupe.laposte.fr/api/records/1.0/search/',
+                type: "POST",
+                dataType: "json",
+                data: {
+                    "dataset": "laposte_hexasmal",
+                    "refine.code_postal": $('#admin_adherent_zipCodeRep1').val(),
+                },
+                success: function (data)
+                {
+                    $('#admin_adherent_cityRep1 option').remove();
+                    for (var i in data["records"]) {
+                        commune = data["records"][i]["fields"]["nom_de_la_commune"];
+                        $('#admin_adherent_cityRep1').append(new Option(commune, commune));
+                    }
+                }
+            })
+        });
+
+        $('#admin_adherent_zipCodeRep2').focusout( function(){
+            $.ajax({
+                url:'https://datanova.legroupe.laposte.fr/api/records/1.0/search/',
+                type: "POST",
+                dataType: "json",
+                data: {
+                    "dataset": "laposte_hexasmal",
+                    "refine.code_postal": $('#admin_adherent_zipCodeRep2').val(),
+                },
+                success: function (data)
+                {
+                    $('#admin_adherent_cityRep2 option').remove();
+                    for (var i in data["records"]) {
+                        commune = data["records"][i]["fields"]["nom_de_la_commune"];
+                        $('#admin_adherent_cityRep2').append(new Option(commune, commune));
+                    }
+                }
+            })
+        });
+    </script>
 {% endblock %}
  

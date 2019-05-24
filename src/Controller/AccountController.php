@@ -10,7 +10,10 @@ use App\Services\CaptchaCheck;
 use App\Services\ForgotPassword;
 use App\Services\GenerateToken;
 use App\Services\Utilitaires;
+use Dompdf\Dompdf;
+use Dompdf\Options;
 use Firebase\JWT\JWT;
+use http\Header;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\HttpFoundation\Request;
@@ -46,10 +49,13 @@ class AccountController extends AbstractController
             $account->setCity($request->request->get("account_city"));
             $adherent->setCityRep1($request->request->get("account_city"));
                 if (!$this->findByEmail($account->getEmail())) {
-                    if($test = $request->request->get("registration")){
+                    if($request->request->get("registration")){
                         if($this->isValidate($adherent)){
                             $utilitaires->setOtherFields($adherent);
                             $adherent->setRegistrationType("nouveau");
+
+
+
                         }else{
                             $msg = "Attention, il manque des informations pour devenir adhérent";
                             return $this->render('account/index.html.twig', array(

@@ -33,6 +33,10 @@ security_deconnexion:
     path: /profile/logout
 
 ### Administration routing ###
+admin_home:
+    path: /admin
+    controller: App\Controller\administration\AdministrationController::home
+
 admin_adherent_competiteurs:
     path: /admin/competiteurs
     controller: App\Controller\administration\AdministrationController::competiteurs

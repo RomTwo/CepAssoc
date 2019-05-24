@@ -1,0 +1,117 @@
+{% extends 'administration/layout_admin.html.twig' %}
+
+{% block title %}Plugin
+{% endblock %}
+
+{% block body %}
+
+    <div class="row">
+        <div class="col-md-6 col-sm-12">
+            <h3>Initialisation</h3>
+            <p id="lbl_init">Aucune initialisation en cours.</p>
+            <i class=" fas fa-check-circle fa-10x" id="init_valid" style="display: none; color:green"></i>
+            <i class=" fas fa-times-circle fa-10x" id="init_error" style="display:none;"></i>
+            <img id="spinner_init" src="{{ asset('build/spinner.gif') }}" style="display:none; color:red">
+
+            <button hidden id="init"></button>
+            <div hidden id="competiteur">
+                {% if comp is defined %}
+                    {{ comp }}
+                {% else %}
+                    <p>Aucuns compétiteurs à inscrire</p>
+                {% endif %}
+            </div>
+        </div>
+        <div class="col-md-6  col-sm-12">
+            <h3>Synchronisation</h3>
+            <p id="lbl_sync">Aucune synchronisation en cours.</p>
+            <i class=" fas fa-check-circle fa-10x" id="sync_valid" style="display:none; color:green;"></i>
+            <i class=" fas fa-times-circle fa-10x" id="sync_error" style="display:none; color:red;"></i>
+
+
+            <img id="spinner_sync" src="{{ asset('build/spinner.gif') }}" style="display:none;" >
+            <button hidden id="a"></button>
+            <button hidden id="sync"></button>
+            <div hidden id="ids"></div>
+        </div>
+    </div>
+
+
+{% endblock %}
+
+{% block javascripts %}
+    <script>
+
+        document.getElementById("init").addEventListener("click", function () {
+            document.getElementById("lbl_init").textContent = "Initialisation en cours.";
+            document.getElementById("lbl_init").style.color = "black";
+
+            document.getElementById("spinner_init").style.display = "inline";
+            document.getElementById("init_valid").style.display = "none";
+            document.getElementById("init_error").style.display = "none";
+
+            setTimeout(function () {
+                document.getElementById("lbl_init").textContent = "Initialisation terminée.";
+                document.getElementById("spinner_init").style.display = "none";
+                document.getElementById("init_valid").style.display = "inline";
+                document.getElementById("lbl_init").style.color = "green";
+            }, 2000);
+
+
+        });
+
+        document.getElementById("sync").addEventListener("click", function () {
+            document.getElementById("lbl_sync").textContent = "Synchronisation en cours ...";
+            document.getElementById("lbl_sync").style.color = "black";
+            document.getElementById("spinner_sync").style.display = "inline";
+            document.getElementById("sync_valid").style.display = "none";
+            document.getElementById("sync_error").style.display = "none";
+
+
+            $.ajax({
+                url: '{{path('admin_adherent_update_state')}}',
+                type: "POST",
+                dataType: "json",
+                data: {
+                    "ids": document.getElementById("ids").textContent
+                },
+                complete: function (jqXHR, textStatus) {
+                    switch (jqXHR.status) {
+                        case 200:
+                            var datas = JSON.parse(jqXHR.responseText);
+
+                            document.getElementById("competiteur").textContent = datas.notSync;
+
+                            document.getElementById("a").click();
+
+                            setTimeout(function () {
+                                const justSync = JSON.parse(datas.justSync);
+                                justSync.forEach(function (user) {
+                                    var p = document.createElement("p");
+                                    p.textContent = user.firstName + " " + user.lastName + " a été marqué comme inscrit sur GestGym.";
+                                    document.getElementById("spinner_sync").after(p);
+                                })
+                                document.getElementById("lbl_sync").textContent = "Synchronisation terminée.";
+                                document.getElementById("lbl_sync").style.color = "green";
+                                document.getElementById("spinner_sync").style.display = "none";
+                                document.getElementById("sync_valid").style.display = "inline";
+
+                            }, 2000);
+
+                            break;
+                        default:
+                            setTimeout(function () {
+                                document.getElementById("lbl_sync").textContent = "Erreur. Synchronisation annulée.";
+                                document.getElementById("spinner_sync").style.display = "none";
+                                document.getElementById("lbl_sync").style.color = "red";
+                            }, 2000);
+
+
+                    }
+                }
+
+            })
+
+        });
+    </script>
+{% endblock %}
