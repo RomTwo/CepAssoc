@@ -94,6 +94,10 @@ admin_activityDetails:
     requirements:
         id: ([0-9]*)
 
+admin_activity:
+    path: /admin/activities/ajouter
+    controller: App\Controller\administration\AdminActivitiesController::ajouter
+
 admin_categories:
     path: /admin/categories
     controller: App\Controller\administration\AdminActivitiesController::index

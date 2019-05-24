@@ -1,14 +1,16 @@
 <?php
 
 namespace App\Controller\administration;
-
+use Symfony\Component\HttpFoundation\Response;
 use App\Entity\Activity;
+use App\Entity\Adherent;
 use App\Entity\Category;
 use App\Form\AdminActivityDetailsType;
 use App\Form\AdminActivityTimeSlotType;
 use App\Form\AdminAddAdherentToTimeSlotType;
 use App\Form\AdminCategoryType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 
 class AdminActivitiesController extends AbstractController
@@ -190,6 +192,27 @@ class AdminActivitiesController extends AbstractController
         }
 
         return $this->render('administration/activities/activityDetails.html.twig', ['activity' => $activity, 'timeSlots' => $timeSlots, 'forms' => $forms]);
+    }
+
+    public function ajouter()
+    {
+
+
+
+        $category = new Category();
+        $category->setName($_POST["hidden_framework"]);
+        $em = $this->getDoctrine()->getManager();
+        $em->persist($category);
+        $em->flush();
+
+        $repository = $this->getDoctrine()->getRepository(Adherent::class);
+        $adherents = $repository->findAll();
+
+
+        return $this->render('administration/adherents/adherents.html.twig', [
+            'adherents' => $adherents,
+        ]);
+
     }
 
 

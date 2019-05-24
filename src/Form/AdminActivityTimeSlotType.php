@@ -35,6 +35,7 @@ class AdminActivityTimeSlotType extends AbstractType
                 'choice_label' => 'name',
                 "multiple" => false
             ])
+
             ->add('timeSlot', CollectionType::class, array(
                 'entry_type'   => TimeSlotType::class,
                 'allow_add'    => true,

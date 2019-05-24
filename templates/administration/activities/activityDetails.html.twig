@@ -5,6 +5,48 @@
 {% block specification %}
     Gestion des détaillées des activités
 {% endblock %}
+{% block javascripts %}
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.2/css/bootstrap-select.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.2/js/bootstrap-select.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function(){
+    $('.selectpicker').selectpicker();
+
+    $('#framework').change(function(){
+    $('#hidden_framework').val($('#framework').val());
+    });
+
+    $('#multiple_select_form').on('submit', function(event){
+    event.preventDefault();
+    if($('#framework').val() != '')
+    {
+    var form_data = $(this).serialize();
+    $.ajax({
+    url:"{{ path('admin_activity') }}",
+    method:"POST",
+    data:form_data,
+    success:function(data)
+    {
+    //console.log(data);
+    $('#hidden_framework').val('');
+    $('.selectpicker').selectpicker('val', '');
+    alert(data);
+    }
+    })
+    }
+    else
+    {
+    alert("Please select framework");
+    return false;
+    }
+    });
+    });
+</script>
+{% endblock %}
 
 {% block body %}
 
@@ -27,6 +69,26 @@
 
         <div class="collapse" id="collapseExample{{ timeSlot.id }}">
             <div class="card card-body">
+                <div class="container">
+                    <br />
+                    <h2 align="center">How to Use Bootstrap Select Plugin with PHP JQuery</h2>
+                    <br />
+                    <div class="col-md-4" style="margin-left:200px;">
+                        <form method="post" id="multiple_select_form">
+                            <select name="framework" id="framework" class="form-control selectpicker" data-live-search="true" multiple >
+                                {% for t in timeSlot.adherents %}
+                                    <option value="{{ t.lastName }}">{{ t.firstName }} {{ t.lastName }}</option>
+                                {% endfor %}
+                            </select>
+                            <br /><br />
+                            <input type="hidden" name="hidden_framework" id="hidden_framework" />
+                            <input type="submit" name="submit" class="btn btn-info" value="Submit" />
+                        </form>
+                        <br />
+
+                    </div>
+                </div>
+
                 {{ form_start(forms[loop.index - 1]) }}
 
                     <button>Ajouter les adherents</button>
@@ -36,5 +98,4 @@
         <br/>
         <hr/>
     {% endfor %}
-
 {% endblock %}
