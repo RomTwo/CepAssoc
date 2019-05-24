@@ -22,7 +22,6 @@ class Utilitaires
         $adherent->setJudge(false);
         $adherent->setPaymentFeesArePaid(false);
         $adherent->setRegistrationCost(0);
-        $adherent->setIsRegisteredInFFG(false);
         $adherent->setMedicalCertificateDate(new \DateTime("01-09-2019"));
         $adherent->setNationality("France");
         $adherent->setIsFFGInsurance(false);
@@ -34,7 +33,7 @@ class Utilitaires
         $adherent->setHasMedicalCertificate(false);
         $adherent->setHasBulletinN2Allianz(false);
         $adherent->setHasHealthQuestionnaire(false);
-
+        $adherent->setStatus("EN ATTENTE");
 
         if($adherent->getMedicalCertificate() != null){
             $adherent->setMedicalCertificate($this->addFile($adherent->getMedicalCertificate()));

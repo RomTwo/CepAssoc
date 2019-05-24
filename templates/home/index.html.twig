@@ -30,7 +30,7 @@
                                 {% if adherent.isDeleted == true %}
                                     <span style="color:green">Inscription rejeté !</span>
                                 {% else %}
-                                    {% if adherent.isRegisteredInFFG %}
+                                    {% if adherent.status =="VALIDE" %}
                                         <span style="color:green">Inscription validée</span>
                                     {% else %}
                                         <span style="color:red">Inscription non validée</span>
