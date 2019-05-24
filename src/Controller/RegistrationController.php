@@ -41,7 +41,6 @@ class RegistrationController extends AbstractController
             $account = $this->getDoctrine()->getRepository(Account::class)->find($user->getId());
 
             $account->addChild($adherent);
-
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($adherent);
             $entityManager->flush();
