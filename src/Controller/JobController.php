@@ -21,29 +21,22 @@ class JobController extends AbstractController
 
     public function add(Request $request)
     {
-        $token = $request->request->get('jobToken');
         $name = $request->request->get('jobName');
 
-        try {
-            JWT::decode($token, $_ENV['PRIVATE_KEY'], array($_ENV['ALG']));
-            $manager = $this->getDoctrine()->getManager();
-
-            if ($manager->getRepository(Job::class)->findOneBy(array('name' => $name))) {
-                return new JsonResponse('already exist', 204);
-            } else {
-                $job = new Job();
-                $job->setName($name);
-                $manager->persist($job);
-                $manager->flush();
-
-                $job = $this->getDoctrine()->getRepository(Job::class)->findOneBy(array('name' => $name));
-                $data = $this->get('serializer')->serialize($job, 'json');
-
-                return new Response($data, 200, array("Content-Type" => "application/json"));
-            }
-        } catch (\Exception $e) {
-            echo $e->getMessage();
-            return new JsonResponse('error', 401);
+        $manager = $this->getDoctrine()->getManager();
+        if ($manager->getRepository(Job::class)->findOneBy(array('name' => $name))) {
+            return JsonResponse::create('Ce poste existe déjà', 409);
         }
+
+        $job = new Job();
+        $job->setName($name);
+        $manager->persist($job);
+        $manager->flush();
+
+        $job = $this->getDoctrine()->getRepository(Job::class)->findOneBy(array('name' => $name));
+        $data = $this->get('serializer')->serialize($job, 'json');
+
+        return new Response($data, 200, array("Content-Type" => "application/json"));
+
     }
 }

@@ -161,5 +161,30 @@ class AdminEventManagerController extends AbstractController
 
     }
 
+    public function updateDatetime(Request $request, ValidatorInterface $validator)
+    {
+        $id = $request->request->get('id');
+        $start = $request->request->get('start');
+        $end = $request->request->get('end');
+
+        $manager = $this->getDoctrine()->getManager();
+        $eventManager = $manager->getRepository(EventManagement::class)->find($id);
+
+        if ($eventManager === null) {
+            return JsonResponse::create('L\'évènement n\'existe pas New route', 404);
+        }
+
+        $eventManager->setStartDate(new \DateTime($start));
+        $eventManager->setEndDate(new \DateTime($end));
+
+        $errors = $validator->validate($eventManager);
+        if (count($errors) > 0) {
+            return JsonResponse::create($errors, 400);
+        }
+        $manager->flush();
+
+        return JsonResponse::create('Mise à jour effectuée', 200);
+    }
+
 }
 

@@ -3,12 +3,11 @@ $(function () {
     $('#calendar').fullCalendar({
         locale: 'fr',
         themeSystem: 'bootstrap4',
-        businessHours: false,
         defaultView: 'agendaWeek',
-        editable: true,
-        eventLimit: true,
         timeFormat: 'H:mm',
         slotLabelFormat: ['H:mm'],
+        businessHours: false,
+        editable: true,
         allDaySlot: false,
         header: {
             left: 'title',
@@ -27,11 +26,10 @@ $(function () {
                 end: moment($('#endDate').val()),
             };
         },
-        dayRender: function (date, cell) {
-            console.log(date);
-            let start = $('#startDate').val();
-            let end = $('#endDate').val();
-            if (moment(date).isBetween($('#startDate').val(), $('#endDate').val(), null, '[]') !== true) {
+        dayRender: function (dayRenderInfo) {
+            console.log(dayRenderInfo);
+            if (moment(dayRenderInfo.date).isBetween($('#startDate').val(), $('#endDate').val(), null, '[]') !== true) {
+                dayRenderInfo.el.css('background-color', 'red');
             }
         },
         buttonText: {
@@ -63,12 +61,10 @@ $(function () {
             $('#modal-view-event-desc').modal();
         },
         eventResize: function (info) {
-            alert(info.title);
-            alert((info.end));
+            $.updateDatetime(info);
         },
         eventDrop: function (info) {
-            alert(info.job);
-            alert((info.start));
+            $.updateDatetime(info);
         },
     })
 });
@@ -81,16 +77,36 @@ $('#addEventManager').submit(function (e) {
         url: $(this).attr("action"),
         type: $(this).attr("method"),
         data: form_data,
-        success: function (json) {
+        success: function (response) {
             $('#calendar').fullCalendar('refetchEvents');
             $('#modal-view-event-add').modal('hide');
-            $.notification('fas fa-check', 'Succès : ', 'l\'évènement viens d\être ajouté', 'success');
+            $.notification('fas fa-check', 'Succès : ', response, 'success');
         },
-        error: function (response) {
-            $.notification('fa fa-exclamation-circle', 'Erreur : ', response.responseJSON, 'danger');
+        error: function (error) {
+            $.notification('fa fa-exclamation-circle', 'Erreur : ', error.responseJSON, 'danger');
         }
     });
     $(this).get(0).reset();
+});
+
+// Submit the update form
+$('#updateEventManagerForm').submit(function (e) {
+    e.preventDefault();
+    let form_data = $(this).serialize();
+    $.ajax({
+        url: $(this).attr("action"),
+        type: $(this).attr("method"),
+        data: form_data,
+        success: function (response) {
+            $('#calendar').fullCalendar('refetchEvents');
+            $('#modal-view-event-desc').modal('hide');
+            $('#modal-view-event-update').modal('hide');
+            $.notification('fas fa-check', 'Succès : ', response, 'success');
+        },
+        error: function (error) {
+            $.notification('fa fa-exclamation-circle', 'Erreur : ', error.responseJSON, 'danger');
+        }
+    })
 });
 
 // Delete an event on calendar
@@ -101,13 +117,13 @@ $('#deleteEvent').click(function () {
         data: {
             id: $('#idEventManager').val(),
         },
-        success: function (json) {
+        success: function (response) {
             $('#calendar').fullCalendar('refetchEvents');
             $('#modal-view-event-desc').modal('hide');
-            $.notification('fas fa-check', 'Succès : ', json, 'success');
+            $.notification('fas fa-check', 'Succès : ', response, 'success');
         },
-        error: function (json) {
-            $.notification('fa fa-exclamation-circle', 'Erreur : ', json, 'danger');
+        error: function (error) {
+            $.notification('fa fa-exclamation-circle', 'Erreur : ', error.responseJSON, 'danger');
         }
     })
 });
@@ -150,22 +166,23 @@ $('#updateEvent').click(function () {
     $('#modal-view-event-update').modal();
 });
 
-// Submit the update form
-$('#updateEventManagerForm').submit(function (e) {
-    e.preventDefault();
-    let form_data = $(this).serialize();
+// Update the datetime of an event when the user deplace an event or resize an event by the bottom
+// This method are call in eventResize and eventDrop functions
+$.updateDatetime = function (object) {
     $.ajax({
-        url: $(this).attr("action"),
-        type: $(this).attr("method"),
-        data: form_data,
-        success: function (json) {
-            $('#calendar').fullCalendar('refetchEvents');
-            $('#modal-view-event-desc').modal('hide');
-            $('#modal-view-event-update').modal('hide');
-            $.notification('fas fa-check', 'Succès : ', 'l\'évènement à été mis à jour', 'success');
+        url: $('#urlUpdateDate').val(),
+        type: 'post',
+        data: {
+            id: object.id,
+            start: moment(object.start).format('DD-MM-YYYY HH:mm:ss'),
+            end: moment(object.end).format('DD-MM-YYYY HH:mm:ss')
         },
-        error: function (json) {
-            $.notification('fa fa-exclamation-circle', 'Erreur : ', json, 'danger');
+        success: function (response) {
+            $(this).fullCalendar('refetchEvents');
+            $.notification('fas fa-check', 'Succès : ', response, 'success');
+        },
+        error: function (response) {
+            $.notification('fa fa-exclamation-circle', 'Erreur : ', response.responseJSON, 'danger');
         }
     })
-});
+};

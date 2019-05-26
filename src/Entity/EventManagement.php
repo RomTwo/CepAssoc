@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\EventManagementRepository")
@@ -20,36 +21,44 @@ class EventManagement
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Event", inversedBy="eventManagements")
      * @ORM\JoinColumn(nullable=false)
+     * @Assert\NotNull(message="Veuiller renseigner l'évènement référent")
      */
     private $event;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Account", inversedBy="eventManagements")
      * @ORM\JoinColumn(nullable=false)
+     * @Assert\NotNull(message="Veuiller affecter un utilisateur")
      * @Groups({"event"})
      */
     private $account;
 
     /**
      * @ORM\Column(type="datetime", length=255)
+     * @Assert\NotNull(message="Veuiller définir une date de départ")
+     * @Assert\DateTime(message="Le format de la date de début n'est pas correct)
      * @Groups({"event"})
      */
     private $startDate;
 
     /**
      * @ORM\Column(type="datetime", length=255)
+     * @Assert\NotNull(message="Veuiller définir une date de fin")
+     * @Assert\DateTime(message="Le format de la date de fin n'est pas correct)
      * @Groups({"event"})
      */
     private $endDate;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotNull(message="Veuiller définir le rôle de la personne")
      * @Groups({"event"})
      */
     private $job;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Assert\NotNull(message="Veuiller renseigner le lieu d'intervention de la personne")
      * @Groups({"event"})
      */
     private $place;

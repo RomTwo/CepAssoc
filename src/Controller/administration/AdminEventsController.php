@@ -4,20 +4,18 @@ namespace App\Controller\administration;
 
 use App\Entity\Event;
 use App\Form\EventType;
-use App\Services\GenerateToken;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 
 class AdminEventsController extends AbstractController
 {
 
-    public function index(Request $request, GenerateToken $generateToken)
+    public function index(Request $request)
     {
         $events = $this->getDoctrine()->getRepository(Event::class)->findAll();
         $event = new Event();
         $form = $this->createForm(EventType::class, $event);
         $form->handleRequest($request);
-        $token = $generateToken->generateCustomToken(120);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $manager = $this->getDoctrine()->getManager();
@@ -29,13 +27,12 @@ class AdminEventsController extends AbstractController
 
         return $this->render('administration/events/events.html.twig', array(
                 'form' => $form->createView(),
-                'token' => $token,
                 'events' => $events
             )
         );
     }
 
-    public function update(Request $request, $id, GenerateToken $generateToken)
+    public function update(Request $request, $id)
     {
         $manager = $this->getDoctrine()->getManager();
         $event = $manager->getRepository(Event::class)->find($id);
@@ -43,7 +40,6 @@ class AdminEventsController extends AbstractController
         if ($event !== null) {
             $form = $this->createForm(EventType::class, $event);
             $form->handleRequest($request);
-            $token = $generateToken->generateCustomToken(120);
 
             if ($form->isSubmitted() && $form->isValid()) {
                 $manager->flush();
@@ -56,7 +52,6 @@ class AdminEventsController extends AbstractController
         }
         return $this->render('administration/events/updateEvent.html.twig', array(
             'form' => $form->createView(),
-            'token' => $token,
         ));
     }
 

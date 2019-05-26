@@ -179,6 +179,10 @@ admin_event_manager_events:
     path: /admin/event/manager/events
     controller: App\Controller\administration\AdminEventManagerController::events
 
+admin_event_manager_update_datetime:
+    path: /admin/event/manager/update/datetime
+    controller: App\Controller\administration\AdminEventManagerController::updateDatetime
+
     #--jobs
 job_add:
     path: /admin/job/add
