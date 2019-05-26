@@ -8,17 +8,18 @@
 
 {% block body %}
     <h4>Activité {{ activity.name }}</h4>
+    <input id="activityId" type="hidden" value="{{activity.id}}">
 
     <a href="#">
         Envoyer un mail à tous
     </a>
-    <button id="allEmails">Envoyer un mail à tous</button>
+    <button id="allEmails">Copier mails des participants à cette activité</button>
     <button>toto</button>
     <hr/>
     <br> <br>
 
-    <input id="timeSlotsSize" type="hidden" value="{{ timeSlots|length }}">
-    <input id="sandbox"> <!-- Field to paste value in order to get copy them later in the clipboard -->
+    <input id="timeSlotsSize" type="hidden" value="{{timeSlots|length}}">
+
 
     {% for timeSlot in timeSlots %}
 
@@ -27,8 +28,15 @@
                aria-expanded="false" aria-controls="collapseExample">
                 <h6>{{ timeSlot.getFullTime }}</h6>
             </a>
+
             <span>  {{ timeSlot.getAdherentsNumber }} participants <a
-                        href="#">Envoyer un mail aux participants</a></span>
+                        href="#">Copier mails des participants à ce créneau</a></span>
+            <input type="hidden" name="timeSlot" id="timeSlotId{{ loop.index0 }}" value="{{ timeSlot.id }}"/>
+            <button id="TimeSlotAdherentsEmailsButton{{ loop.index0 }}" class="btn btn-info"> Copier mails des participants à cette activité </button>
+            <form style="width:100%" method="post" >
+
+
+            </form>
 
         </div>
         <br/> <br/>
@@ -79,11 +87,7 @@
                                     </td>
 
                                     <td>
-                                        <!-- Button trigger modal -->
-                                        <button type="button" class="btn btn-danger" data-toggle="modal"
-                                                data-target="#exampleModal{{ adherent.id }}">
-                                            Supprimer
-                                        </button>
+                                        <a href="{{ path('admin_activityDeleteAdherentFromTimeSlot', {activityId: activity.id, timeSlotId: timeSlot.id, adherentId: adherent.id}) }}" class="btn btn-danger"> Supprimer </a>
                                     </td>
                                 </tr>
                             {% endif %}
@@ -103,7 +107,7 @@
                     <h6>Ajouter de nouveaux adhérents</h6>
                     <div class="row">
 
-                        <form style="width:100%" method="post" id="form{{ loop.index0 }}" action={{ path('admin_activity') }}>
+                        <form style="width:100%" method="post" id="form{{ loop.index0 }}" action={{ path('admin_activityAddAdherentToTimeSlot') }}>
                             <select style="width: 100%" class="js-example-basic-multiple{{ loop.index0 }}"
                                     name="states[]"
                                     multiple="multiple">
@@ -119,7 +123,6 @@
                             <input type="submit" name="submit" class="btn btn-info" value="Submit"/>
                         </form>
                         <br/>
-
                     </div>
                 </div>
             </div>
@@ -140,7 +143,6 @@
         $(document).ready(function () {
 
             var timeSlotsSize = $('#timeSlotsSize').val();
-
 
             for (var i = 0; i < timeSlotsSize; i++) {
                 $("#button" + i).on('click', function (event) {
@@ -202,7 +204,7 @@
                         alert($('.hidden_framework').val());
                         var form_data = $("#form" + t).serialize();
                         $.ajax({
-                            url: "{{ path('admin_activity') }}",
+                            url: "{{ path('admin_activityAddAdherentToTimeSlot') }}",
                             method: "POST",
                             data: form_data,
                             success: function (data) {
@@ -222,21 +224,57 @@
                 $('#form' + i).on('submit', generateAjaxHandler(i));
             }#}
 
+
+
+            function generateMailsReceptionHandler(j) {
+                return function (event) {
+                    event.preventDefault();
+                    var t = j;
+                    var timeSlotId = $("#timeSlotId" + j).val();
+                    $.ajax({
+                        url: "{{ path('admin_activityCopyTimeSlotEmails') }}",
+                        method: "POST",
+                        data: {timeSlotId: timeSlotId},
+                        success: function (data) {
+                            alert(data);
+                            console.log(data);
+                            var tempInput = document.createElement("input");
+                            tempInput.style = "position: absolute; left: -1000px; top: -1000px";
+                            tempInput.value = data;
+                            document.body.appendChild(tempInput);
+                            tempInput.select();
+                            document.execCommand("copy");
+                            document.body.removeChild(tempInput);
+                            alert("Copie effectuée");
+                        }
+                    })
+                }
+            }
+
+
+
+            for (var i = 0; i < timeSlotsSize; i++) {
+                $('#TimeSlotAdherentsEmailsButton' + i).on('click', generateMailsReceptionHandler(i));
+            }
+
+
             $('#allEmails').on('click', function (event) {
-                alert("toto");
+                var activityId = $("#activityId").val();
                 event.preventDefault();
                 $.ajax({
-                    url: "{{ path('admin_activityCopyEmails') }}",
+                    url: "{{ path('admin_activityCopyAllEmails')}}",
                     method: "POST",
-                    data: {activityId:231},
+                    data: {activityId: activityId},
                     dataType: "json",
                     success: function (data){
-                        alert(data);
-                        console.log(data);
-                        $("#sandbox").val(data);
-                        $("#sandbox").select();
-                        // Copy text to clipboard
-                        document.execCommand('copy');
+                        var tempInput = document.createElement("input");
+                        tempInput.style = "position: absolute; left: -1000px; top: -1000px";
+                        tempInput.value = data;
+                        document.body.appendChild(tempInput);
+                        tempInput.select();
+                        document.execCommand("copy");
+                        document.body.removeChild(tempInput);
+                        alert("Copie effectuée");
                     }
                 })
             });
@@ -261,7 +299,7 @@
                 if ($(".js-example-basic-multiple").select2("val") != '') {
                     var form_data = $(this).serialize();
                     $.ajax({
-                        url: "{{ path('admin_activity') }}",
+                        url: "{{ path('admin_activityAddAdherentToTimeSlot') }}",
                         method: "POST",
                         data: form_data,
                         success: function (data) {
