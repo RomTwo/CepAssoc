@@ -117,7 +117,7 @@ class AccountType extends AbstractType
 
         $children = $data->getChildren();
 
-        if($children == null){
+        if($children != null){
             if($data->getFirstName() != null){
                 $children[0]->setFirstName($data->getFirstName());
                 $children[0]->setFirstNameRep1($data->getFirstName());
