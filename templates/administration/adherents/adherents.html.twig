@@ -56,10 +56,16 @@
                             {{ adherent.registrationDate|date('d-m-Y') }}
                         </td>
                         <td>
-                            {% if adherent.status =="VALIDE" %}
+                          {% if adherent.status == "EN ATTENTE" %}
+                             <span style="color:red">Inscription en attente</span>
+                             {% elseif adherent.status == "EN MANQUE DE DOCUMENT" %}
+                             <span style="color:#916319">En manque de document(s)</span>
+                             {% elseif adherent.status == "EN MANQUE DE PAIEMENT" %}
+                             <span style="color:orangered">En attente paiement</span>
+                             {% elseif adherent.status == "EN MANQUE DE DOCUMENT ET PAIEMENT" %}
+                             <span style="color:purple">En manque de document(s) et en attente de paiement</span>
+                             {% elseif adherent.status == "VALIDE" %}
                                 <span style="color:green">Inscription validée</span>
-                            {% else %}
-                                <span style="color:red">Inscription non validée</span>
                             {% endif %}
                         </td>
                         <td>
@@ -138,8 +144,6 @@
                         <td>
                             {% if adherent.status=="VALIDE" %}
                                 <span style="color:green">Inscription validée</span>
-                            {% else %}
-                                <span style="color:red">Inscription non validée</span>
                             {% endif %}
                         </td>
                         <td>
@@ -150,7 +154,7 @@
                             {% endif %}
                         </td>
                         <td>
-                        
+
                             <button type="button" class="btn btn-primary btn-sm" data-toggle="modal"
                                     data-target="#exampleModal{{ adherent.id }}">
                                 Voir plus
@@ -283,14 +287,14 @@
                             <span style="color:red">Inscription non validée</span>
                         {% endif %}
                     </p>
-                    <p> Inscription dans GestGym : 
+                    <p> Inscription dans GestGym :
                         {% if adherent.isRegisteredInGestGym %}
                             <span style="color:green">Effectuée</span>
                         {% else %}
                             <span style="color:red">Non effectuée</span>
                         {% endif %}
                     </p>
-                    
+
                     <hr/>
 
                     <div class="alert alert-secondary" role="alert">
@@ -566,7 +570,7 @@
                             </div>
                         </div>
                     </div>
-                    
+
                 </div>
             </div>
             <div class="modal-footer">
