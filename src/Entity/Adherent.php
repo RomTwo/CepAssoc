@@ -353,7 +353,7 @@ class Adherent
      * )
      * @Groups({"competition"})
      */
-    private $healthQuestionnaire;
+    private $healthQuestionnaireFile;
 
     /**
      * @ORM\Column(type="boolean")
@@ -377,6 +377,11 @@ class Adherent
      * @ORM\ManyToMany(targetEntity="App\Entity\TimeSlot", inversedBy="adherents")
      */
     private $timeSlots;
+
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\HealthQuestionnaire", cascade={"persist"})
+     */
+    private $healthQuestionnaire;
 
     public function __construct()
     {
@@ -1141,17 +1146,17 @@ class Adherent
     /**
      * @return mixed
      */
-    public function getHealthQuestionnaire()
+    public function getHealthQuestionnaireFile()
     {
-        return $this->healthQuestionnaire;
+        return $this->healthQuestionnaireFile;
     }
 
     /**
      * @param mixed $healthQuestionnaire
      */
-    public function setHealthQuestionnaire($healthQuestionnaire): void
+    public function setHealthQuestionnaireFile($healthQuestionnaireFile): void
     {
-        $this->healthQuestionnaire = $healthQuestionnaire;
+        $this->healthQuestionnaireFile = $healthQuestionnaireFile;
     }
 
     /**
@@ -1212,6 +1217,20 @@ class Adherent
         return $this;
     }
 
+    /**
+     * @return mixed
+     */
+    public function getHealthQuestionnaire()
+    {
+        return $this->healthQuestionnaire;
+    }
 
+    /**
+     * @param mixed $healthQuestionnaire
+     */
+    public function setHealthQuestionnaire($healthQuestionnaire): void
+    {
+        $this->healthQuestionnaire = $healthQuestionnaire;
+    }
 
 }

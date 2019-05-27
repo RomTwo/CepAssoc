@@ -1,7 +1,16 @@
 twig:
-    default_path: '%kernel.project_dir%/templates'
-    debug: '%kernel.debug%'
-    strict_variables: '%kernel.debug%'
-    form_themes: ['themes/form.html.twig']
-    globals:
-        recaptcha_key_site: '%env(RECAPTCHA_KEY_SITE)%'
+  default_path: '%kernel.project_dir%/templates'
+  debug: '%kernel.debug%'
+  strict_variables: '%kernel.debug%'
+  form_themes: ['themes/form.html.twig']
+  globals:
+    recaptcha_key_site: '%env(RECAPTCHA_KEY_SITE)%'
+    healthQuestionnaireQuestion1: Un membre de votre famille est-il décédé subitement d'une crise cardiaque ou inexpliquée ?
+    healthQuestionnaireQuestion2: Avez-vous ressenti une douleur dans la poitrine, des palpitations, un essoufflement inhabituel ou un malaise ?
+    healthQuestionnaireQuestion3: Avez-vous eu un épisode de respiration sifflante (asthme) ?
+    healthQuestionnaireQuestion4: Avez-vous eu une perte de connaissance ?
+    healthQuestionnaireQuestion5: Si vous avez arrêté le sport pendant 30 jours ou plus pour des raisons de santé, avez-vous repris sans l'accord d'un médecin ?
+    healthQuestionnaireQuestion6: Avez-vous débuté un traitement médical de longue durée (hors contraception et désensibilisation aux allergies) ?
+    healthQuestionnaireQuestion7: Ressentez-vous une douleur, un manque de force ou une raideur suite à un problème osseux, articulaire ou musculaire (facture, entorse, luxation, déchirure, tendinite, etc.) survenu durant les 12 derniers mois ?
+    healthQuestionnaireQuestion8: Votre pratique sportive est-elle interrompue pour des raisons de santé ?
+    healthQuestionnaireQuestion9: Pensez-vous avoir besoin d'un avis médical pour poursuivre votre pratique sportive ?

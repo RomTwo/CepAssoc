@@ -138,17 +138,17 @@
                     <h5 class="card-header">Informations complémentaires :</h5>
                     <div class="card-body">
                         <div class="container-fluid">
-                            <input class="form-check-input" type="checkbox" id="registration" name="registration"
-                                   value="registration">
-                            <label class="form-check-label" for="registration">
-                                Je suis compétiteur. <a><i class="fa fa-info-circle" data-toggle="tooltip"
-                                                           data-original-title="Cette étape est optionnelle, il est possible de rejoindre l'association ultérieurement au sein du site internet."></i></a>
-                            </label>
+                            <div class="row align-items-center">
+                                {{ form_widget(form.addAccountAdherent) }}
+                                <a><i class="fa fa-info-circle" data-toggle="tooltip"
+                                      data-original-title="Cette étape est optionnelle, il est possible de rejoindre l'association ultérieurement au sein du site internet."></i></a>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
             <input type="hidden" name="recaptcha_response" id="recaptchaResponse">
+            <input type="hidden" name="routeToIndex" id="routeToIndex" value="{{ path('security_connexion') }}">
         </div>
         <div id="accountStep2" class="justify-content-center">
             <div class="container-fluid mt-3">
@@ -235,7 +235,10 @@
                                     {{ form_widget(form.children[0].isGAFJudge) }}
                                 </div>
                                 <div class="col-auto">
-                                    Niveau : {{ form_widget(form.children[0].GAFJudgeLevel) }}
+                                    Niveau :
+                                </div>
+                                <div class="col-auto">
+                                    {{ form_widget(form.children[0].GAFJudgeLevel) }}
                                 </div>
                             </div>
                             <div class="row justify-content-start align-items-center mt-3">
@@ -243,7 +246,10 @@
                                     {{ form_widget(form.children[0].isGAMJudge) }}
                                 </div>
                                 <div class="col-auto">
-                                    Niveau : {{ form_widget(form.children[0].GAMJudgeLevel) }}
+                                    Niveau :
+                                </div>
+                                <div class="col-auto">
+                                    {{ form_widget(form.children[0].GAMJudgeLevel) }}
                                 </div>
                             </div>
                             <div class="row justify-content-start align-items-center mt-3">
@@ -251,7 +257,10 @@
                                     {{ form_widget(form.children[0].isTeamGYMJudge) }}
                                 </div>
                                 <div class="col-auto">
-                                    Niveau : {{ form_widget(form.children[0].teamGYMJudgeLevel) }}
+                                    Niveau :
+                                </div>
+                                <div class="col-auto">
+                                    {{ form_widget(form.children[0].teamGYMJudgeLevel) }}
                                 </div>
                             </div>
                         </div>
@@ -360,7 +369,7 @@
                                                     <td id="price{{ activity.id }}">{{ activity.price }}</td>
                                                     <td>{{ activity.startDate|date('d/m/y') }}</td>
                                                     <td>
-                                                        <input type="checkbox" id="checkbox{{ activity.id }}"
+                                                         <input type="checkbox" id="checkbox{{ activity.id }}"
                                                                name="selection"
                                                                value="{{ activity.id }}">
                                                     </td>
@@ -433,17 +442,26 @@
 
                             </div>
                             <h6>Questionnaire de santé : </h6>
-                            <div class="row align-items-center ml-2 mr-2">
+                            <div class="row align-items-center ml-2 mr-2 healthQuestionnaireEmpty">
                                 <div class="col-5">
-                                    {{ form_widget(form.children[0].healthQuestionnaire) }}
-                                    {{ form_errors(form.children[0].healthQuestionnaire) }}
+                                    {{ form_widget(form.children[0].healthQuestionnaireFile) }}
+                                    {{ form_errors(form.children[0].healthQuestionnaireFile) }}
                                 </div>
                                 <a><i class="fa fa-info-circle" data-toggle="tooltip"
                                       data-original-title="Le questionnaire de santé peut être rendu plus tard."></i></a>
                                 <div class="col-auto">
-                                    <a href="{{ asset('PDF/QuestionnaireDeSante.pdf') }}" class="btn btn-primary"
-                                       download>Obtenir
-                                        le questionnaire</a>
+                                    <button id="healthQuestionnaire" type="button" class="btn btn-primary btn-block">
+                                        Répondre au questionnaire
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="row align-items-center ml-2 mr-2 healthQuestionnaireValidated">
+                                <p>Vous avez déjà rempli le questionnaire de santé. Il sera possible de le télécharger
+                                    afin de le signer et le faire valider par l'association.</p>
+                                <div class="col-auto">
+                                    <button id="healthQuestionnaireModificate" type="button" class="btn btn-primary">
+                                        Modifier le questionnaire
+                                    </button>
                                 </div>
                             </div>
                         </div>
@@ -568,10 +586,16 @@
                                             target="_blank">la réglementation en ligne</a>
                                 </label>
                             </div>
-                            <div class="row justify-content-center mt-3">
-                                <button type="submit" id="buttonSubmit" class="btn btn-success">Confirmer l'inscription
+                            <div class="row justify-content-center mt-3 healthQuestionnaireEmpty">
+                                <button type="submit" class="btn btn-success buttonSubmit">Confirmer l'inscription
                                     de
                                     l'adhérent
+                                </button>
+                            </div>
+                            <div class="row justify-content-center mt-3 healthQuestionnaireValidated">
+                                <button type="submit" class="btn btn-success buttonSubmit">Confirmer l'inscription
+                                    de
+                                    l'adhérent et télécharger votre questionnaire de santé.
                                 </button>
                             </div>
                         </div>
@@ -579,8 +603,118 @@
                 </div>
             </div>
         </div>
-
-        <div class="container-fluid pt-3 pb-2">
+        <div id="accountStep7" class="justify-content-center">
+            <div class="container-fluid mt-3">
+                <div class="card shadow-sm">
+                    <h5 class="card-header">Questionnaire de santé : </h5>
+                    <div class="card-body">
+                        <div class="container-fluid">
+                            <div class="row align-items-center justify-content-center">
+                                <small id="healthQuestionnaireQuestionHelp" class="form-text helper"><span
+                                            class="badge badge-danger">Erreur</span> Attention, pour valider le
+                                    questionnaire, il faut que toutes les réponses soient remplies.
+                                </small>
+                            </div>
+                            <div class="row align-items-center pt-2">
+                                <div class="col-auto">
+                                    {{ healthQuestionnaireQuestion1 }}
+                                </div>
+                                <div id="healthQuestionnaireQuestion" class="col-auto">
+                                    {{ form_widget(form.children[0].healthQuestionnaire.hasMemberOfFamilyDiedHeartAttack) }}
+                                    {{ form_errors(form.children[0].healthQuestionnaire.hasMemberOfFamilyDiedHeartAttack) }}
+                                </div>
+                            </div>
+                            <div class="row align-items-center mt-2">
+                                <div class="col-auto">
+                                    {{ healthQuestionnaireQuestion2 }}
+                                </div>
+                                <div id="healthQuestionnaireQuestion" class="col-auto">
+                                    {{ form_widget(form.children[0].healthQuestionnaire.hasPainChest) }}
+                                    {{ form_errors(form.children[0].healthQuestionnaire.hasPainChest) }}
+                                </div>
+                            </div>
+                            <div class="row align-items-center mt-2">
+                                <div class="col-auto">
+                                    {{ healthQuestionnaireQuestion3 }}
+                                </div>
+                                <div id="healthQuestionnaireQuestion" class="col-auto">
+                                    {{ form_widget(form.children[0].healthQuestionnaire.hasAsthma) }}
+                                    {{ form_errors(form.children[0].healthQuestionnaire.hasAsthma) }}
+                                </div>
+                            </div>
+                            <div class="row align-items-center mt-2">
+                                <div class="col-auto">
+                                    {{ healthQuestionnaireQuestion4 }}
+                                </div>
+                                <div id="healthQuestionnaireQuestion" class="col-auto">
+                                    {{ form_widget(form.children[0].healthQuestionnaire.hasLossOfConsciousness) }}
+                                    {{ form_errors(form.children[0].healthQuestionnaire.hasLossOfConsciousness) }}
+                                </div>
+                            </div>
+                            <div class="row align-items-center mt-2">
+                                <div class="col-auto">
+                                    {{ healthQuestionnaireQuestion5 }}
+                                </div>
+                                <div id="healthQuestionnaireQuestion" class="col-auto">
+                                    {{ form_widget(form.children[0].healthQuestionnaire.hasResumptionOfSportWithoutDoctorConsent) }}
+                                    {{ form_errors(form.children[0].healthQuestionnaire.hasResumptionOfSportWithoutDoctorConsent) }}
+                                </div>
+                            </div>
+                            <div class="row align-items-center mt-2">
+                                <div class="col-auto">
+                                    {{ healthQuestionnaireQuestion6 }}
+                                </div>
+                                <div id="healthQuestionnaireQuestion" class="col-auto">
+                                    {{ form_widget(form.children[0].healthQuestionnaire.hasMedicalTreatment) }}
+                                    {{ form_errors(form.children[0].healthQuestionnaire.hasMedicalTreatment) }}
+                                </div>
+                            </div>
+                            <hr/>
+                            <div class="row align-items-center mt-2">
+                                <div class="col-auto">
+                                    {{ healthQuestionnaireQuestion7 }}
+                                </div>
+                                <div id="healthQuestionnaireQuestion" class="col-auto">
+                                    {{ form_widget(form.children[0].healthQuestionnaire.hasBoneProblem) }}
+                                    {{ form_errors(form.children[0].healthQuestionnaire.hasBoneProblem) }}
+                                </div>
+                            </div>
+                            <div class="row align-items-center mt-2">
+                                <div id="healthQuestionnaireQuestion" class="col-auto">
+                                    {{ healthQuestionnaireQuestion8 }}
+                                </div>
+                                <div id="healthQuestionnaireQuestion" class="col-auto">
+                                    {{ form_widget(form.children[0].healthQuestionnaire.hasHealthProblem) }}
+                                    {{ form_errors(form.children[0].healthQuestionnaire.hasHealthProblem) }}
+                                </div>
+                            </div>
+                            <div class="row align-items-center mt-2">
+                                <div id="healthQuestionnaireQuestion" class="col-auto">
+                                    {{ healthQuestionnaireQuestion9 }}
+                                </div>
+                                <div id="healthQuestionnaireQuestion" class="col-auto">
+                                    {{ form_widget(form.children[0].healthQuestionnaire.hasNeedMedicalAdvice) }}
+                                    {{ form_errors(form.children[0].healthQuestionnaire.hasNeedMedicalAdvice) }}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="container-fluid pt-3 pb-2">
+                <div class="row justify-content-between">
+                    <div class="col">
+                        <button id="validQuestionnaire" type="button" class="btn btn-success">Valider le questionnaire
+                        </button>
+                    </div>
+                    <div class="col">
+                        <button id="cancelQuestionnaire" type="button" class="btn btn-danger">Annuler le questionnaire
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="buttonBottom" class="container-fluid pt-3 pb-2">
             {{ form_widget(form.valid) }}
             <div class="row">
                 <div class="col-6">

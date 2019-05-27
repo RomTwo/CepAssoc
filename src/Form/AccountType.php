@@ -89,6 +89,9 @@ class AccountType extends AbstractType
                     )
                 )
             )
+            ->add('addAccountAdherent', null, [
+                'label' => "Je suis un compétiteur"
+            ])
             ->add('children', CollectionType::class, [
                 'entry_type' => AdherentAccountType::class,
                 'delete_empty' => true,
@@ -114,7 +117,7 @@ class AccountType extends AbstractType
 
         $children = $data->getChildren();
 
-        if($children == null){
+        //if($children == null){
             if($data->getFirstName() != null){
                 $children[0]->setFirstName($data->getFirstName());
                 $children[0]->setFirstNameRep1($data->getFirstName());
@@ -142,7 +145,7 @@ class AccountType extends AbstractType
             if($data->getSex() != null){
                 $children[0]->setSex($data->getSex());
             }
-        }
+        //}
 
     }
 

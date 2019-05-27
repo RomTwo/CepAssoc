@@ -348,728 +348,180 @@
             </div>
         </div>
         <div id="registrationStep4">
-            <div class="container-fluid mt-3">
-                <div class="card shadow-sm">
-                    <h5 class="card-header">Activités disponibles :</h5>
-                    <div class="card-body">
-                        <div class="container-fluid">
-                            <nav>
-                                <div class="nav nav-tabs" id="nav-tab" role="tablist">
-                                    <a class="nav-item nav-link active" id="nav-loisirs-tab" href="#nav-loisirs"
-                                       data-toggle="tab"
-                                       role="tab" aria-controls="nav-loisirs" aria-selected="true">Loisirs</a>
-                                    <a class="nav-item nav-link" id="nav-competitif-tab" href="#nav-competitif"
-                                       data-toggle="tab"
-                                       role="tab" aria-controls="nav-competitif" aria-selected="false">Compétitif</a>
-                                </div>
-                            </nav>
-                            <div class="tab-content" id="nav-tabContent">
-                                <div class="tab-pane fade show active" id="nav-loisirs" role="tabpanel"
-                                     aria-labelledby="nav-home-tab">
-                                    <table id="activitiesSecteurLoisir"
-                                           class="table table-bordered table-striped table-responsive-lg"
-                                           style="width:100%">
-                                        <thead>
-                                        <tr>
-                                            <th>Nom</th>
-                                            <th>Créneaux</th>
-                                            <th>Categorie</th>
-                                            <th>Prix</th>
-                                            <th>Date</th>
-                                            <th>Selection</th>
-                                        </tr>
-                                        </thead>
-                                        <tbody>
-                                        {% for activity in activities %}
-                                            {% if activity.type == "SECTEUR LOISIRS" %}
-                                                <tr id={{ activity.id }}>
-                                                    <td>{{ activity.name }}</td>
-                                                    <td>Samedi - De 10h à 12h</td>
-                                                    <td>{{ activity.category.name }}</td>
-                                                    <td id="price{{ activity.id }}">{{ activity.price }}</td>
-                                                    <td>{{ activity.startDate|date('d/m/y') }}</td>
-                                                    <td>
-                                                        <input type="checkbox" id="checkbox{{ activity.id }}"
-                                                               name="selection"
-                                                               value="{{ activity.id }}">
-                                                    </td>
-                                                </tr>
-                                            {% endif %}
-                                        {% endfor %}
-                                    </table>
-                                </div>
-                                <div class="tab-pane fade" id="nav-competitif" role="tabpanel"
-                                     aria-labelledby="nav-competitif-tab">
-                                    <table id="activitiesSecteurCompetitif" class="display" style="width:100%">
-                                        <thead>
-                                        <tr>
-                                            <th>Nom</th>
-                                            <th>Créneaux</th>
-                                            <th>Prix</th>
-                                            <th>Date</th>
-                                            <th>Selection</th>
-                                        </tr>
-                                        </thead>
-                                        <tbody>
-                                        {% for activity in activities %}
-                                            {% if activity.type == "SECTEUR COMPETITIF" %}
-                                                <tr id={{ activity.id }}>
-                                                    <td>{{ activity.category.id }}</td>
-                                                    <td>Samedi - De 10h à 12h</td>
-                                                    <td>{{ activity.category.name }}</td>
-                                                    <td id="price{{ activity.id }}">{{ activity.price }}</td>
-                                                    <td>{{ activity.startDate|date('d/m/y') }}</td>
-                                                    <td>
-                                                        <input type="checkbox" id="checkbox{{ activity.id }}"
-                                                               name="selection"
-                                                               value="{{ activity.id }}">
-                                                    </td>
-                                                </tr>
-                                            {% endif %}
-                                        {% endfor %}
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-        <div id="registrationStep5">
-            <div class="container-fluid mt-3">
-                <div class="card shadow-sm">
-                    <h5 class="card-header">Abonnement :</h5>
-                    <div class="card-body">
-                        <div class="container-fluid">
-                            <div class="row align-items-center">
-                                <div class="col-auto">
-                                    <h6>Prix de l'abonnement : </h6>
-                                </div>
-                                <div class="col-auto">
-                                    <h4 id="prix">0</h4>
-                                </div>
-                                <h4>€</h4>
-                            </div>
-                            <div class="row align-items-center">
-                                <div class="col-auto">
-                                    <h6>Moyens de paiement : </h6>
-                                </div>
-                                <div class="col-auto">
-                                    {{ form_widget(form.paymentType) }}
-                                    <small id="paymentTypeHelp" class="form-text helper"><span
-                                                class="badge badge-danger">Erreur</span> Vous devez choisir parmi les
-                                        deux propositions.
-                                    </small>
-                                    {{ form_errors(form.paymentType) }}
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="container-fluid mt-3">
-                <div class="card shadow-sm">
-                    <h5 class="card-header">Documents à fournir :</h5>
-                    <div class="card-body">
-                        <div class="container-fluid">
-                            <h6>Certificat medical : </h6>
-                            <div class="row align-items-center ml-2 mr-2">
-                                <div class="col-5">
-                                    {{ form_widget(form.medicalCertificate) }}
-                                    {{ form_errors(form.medicalCertificate) }}
-                                </div>
-                                <a><i class="fa fa-info-circle" data-toggle="tooltip"
-                                      data-original-title="Le certificat médical peut être rendu plus tard."></i></a>
-                            </div>
-                            <h6>Bulletin N2 allianz : </h6>
-                            <div class="row align-items-center ml-2 mr-2">
-                                <div class="col-5">
-                                    {{ form_widget(form.bulletinN2Allianz) }}
-                                    {{ form_errors(form.bulletinN2Allianz) }}
-                                </div>
-                                <a><i class="fa fa-info-circle" data-toggle="tooltip"
-                                      data-original-title="Le bulletin peut être rendu plus tard."></i></a>
-
-                            </div>
-                            <h6>Questionnaire de santé : </h6>
-                            <div class="row align-items-center ml-2 mr-2">
-                                <div class="col-5">
-                                    {{ form_widget(form.healthQuestionnaire) }}
-                                    {{ form_errors(form.healthQuestionnaire) }}
-                                </div>
-                                <a><i class="fa fa-info-circle" data-toggle="tooltip"
-                                      data-original-title="Le questionnaire de santé peut être rendu plus tard."></i></a>
-                                <div class="col-auto">
-                                    <a href="{{ asset('PDF/QuestionnaireDeSante.pdf') }}" class="btn btn-primary"
-                                       download>Obtenir
-                                        le questionnaire</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="container-fluid mt-3">
-                <div class="card shadow-sm">
-                    <h5 class="card-header">Autorisations :</h5>
-                    <div class="card-body">
-                        <div class="container-fluid">
-                            <h6>Droits d'image :</h6>
-                            <div class="row align-items-center ml-2">
-                                {{ form_widget(form.imageRight) }} le club à prendre et à diffuser des
-                                photos me
-                                concernant pour enrichir
-                                la photothèque et le site internet du club.
-                                <small id="imageRightHelp" class="form-text helper"><span
-                                            class="badge badge-danger">Erreur</span> Vous devez choisir parmi les deux
-                                    propositions.
-                                </small>
-                                {{ form_errors(form.imageRight) }}
-                            </div>
-                            <div class="form-check mt-3">
-                                <input class="form-check-input" type="checkbox" id="acceptRules" name="acceptRules">
-                                <label class="form-check-label" for="acceptRules">
-                                    J'accepte le réglement intérieur de l'association. <a href=""
-                                                                                          data-toggle="modal"
-                                                                                          data-target="#exampleModal">Voir
-                                        le réglement</a>
-                                </label>
-                            </div>
-                            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
-                                 aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                <div class="modal-dialog modal-lg" role="document">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title" id="exampleModalLabel">Réglement intérieur</h5>
-                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                <span aria-hidden="true">&times;</span>
-                                            </button>
-                                        </div>
-                                        <div class="modal-body">
-                                            <h6>Les documents à fournir pour l’inscription sont les suivants : </h6>
-                                            <ul>
-                                                <li>Un certificat médical de non contre-indication à la pratique de la
-                                                    gymnastique de moins de 3 mois (sauf pour les
-                                                    renouvellements)**
-                                                </li>
-                                                <li>La fiche d’inscription dûment remplie</li>
-                                                <li>Le règlement total de la cotisation (possibilité d’établir trois
-                                                    chèques à débit différé)
-                                                </li>
-                                                <li>Le règlement du forfait d’engagement en compétitions (pour les
-                                                    groupes
-                                                    compétitifs et Teamgym)
-                                                </li>
-                                                <li>Envoyer une photo par mail au cep.gymnastique@gmail.com (en
-                                                    précisant
-                                                    les nom, prénom et le groupe)
-                                                </li>
-                                                <li>Le bulletin N°2 Allianz fourni par le club le jour de
-                                                    l’inscription
-                                                </li>
-                                            </ul>
-                                            <br/>
-                                            <b>Séance d’essai : </b>
-                                            <p>Chaque gymnaste a droit à une séance d’essai gratuite sous réserve de
-                                                présentation d’un certificat médical. A l’issue
-                                                de cette séance, le dossier devra impérativement être constitué.</p>
-                                            <br/>
-                                            <b>En cas d’abandon, aucun remboursement ne sera effectué.</b>
-                                            <p> Pour
-                                                information, les assurances partenaires de la FFGym proposent une
-                                                assurance « Interruption Abonnement Sportif » (voir modalités sur le
-                                                site de la FFGym)</p>
-                                            <br/>
-                                            <b>Aux parents ou responsables des adhérents mineurs :</b>
-                                            <p>Les parents
-                                                ou responsables des enfants doivent s’assurer de la présence des
-                                                éducateurs du club et du déroulement effectif de l’entrainement avant de
-                                                déposer leur enfant. Les parents doivent également
-                                                récupérer leur enfant dans la salle dès la fin de l’entrainement. Le
-                                                club décline toute responsabilité en cas d’accident en dehors des
-                                                horaires d’entrainement. Toutes les informations à destination des
-                                                membres du club ne sont pas données par voie postale. Elles sont
-                                                transmises par affichage sur les panneaux réservés à cet effet dans la
-                                                salle, par mail et sur le site internet : www.cep-gymnastique.com.</p>
-                                            <br/>
-                                            <b>Hygiène :</b>
-                                            <p>Pour des raisons d’hygiène, les gymnastes doivent
-                                                porter des chaussures (tongs, claquettes, chaussures de piscine, hors
-                                                chaussons de gym) pour se déplacer dans les couloirs et dans les
-                                                toilettes, et les retirer pour marcher sur les tapis de gymnastique.</p>
-                                            <br/>
-                                            <b>Périodes de congés scolaires :</b>
-                                            <p>Les entrainements ne sont assurés
-                                                que pendant les périodes scolaires et sont donc interrompus pendant
-                                                les vacances scolaires. Des stages seront mis en place pendant les
-                                                vacances scolaires. Tenues : Pour les compétitions, les gymnastes
-                                                doivent avoir la tenue du club. Celui-ci se charge des commandes selon
-                                                les tailles indiquées dans le formulaire de pré-inscription.</p>
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="form-check mt-3">
-                                <input class="form-check-input" type="checkbox" id="acceptRGPD" name="acceptRGPD">
-                                <label class="form-check-label" for="acceptRGPD">
-                                    En soumettant ce formulaire, j’accepte que les informations saisies soient utilisées
-                                    dans le cadre de la
-                                    demande de licence à CEP GYM Poitiers et à son organisation. Pour en savoir plus sur
-                                    la
-                                    loi
-                                    RGPD,
-                                    veuillez consulter <a
-                                            href="https://www.cnil.fr/fr/reglement-europeen-protection-donnees"
-                                            target="_blank">la réglementation en ligne</a>
-                                </label>
-                            </div>
-                            <div class="row justify-content-center mt-3">
-                                <button type="submit" id="buttonSubmit" class="btn btn-success">Confirmer l'inscription
-                                    de
-                                    l'adhérent
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="row pt-3 pb-3">
-            <div class="col-6">
-                <button id="previousRegistration" type="button" class="btn btn-secondary btn-block">Précédent</button>
-            </div>
-            <div class="col-6">
-                <button id="nextRegistration" type="button" class="btn btn-secondary btn-block">Suivant</button>
-            </div>
-            <input id="step" value="1" hidden>
-        </div>
-    </div>
-    {{ form_end(form) }}
-    {#
-    {{ form_start(form) }}
-    <div id="group">
-        <div id="registrationStep1">
-            <div class="container mt-3">
-                <div class="form-group pb-3">
+            <div class="card shadow-sm">
+                <h5 class="card-header">Activités disponibles :</h5>
+                <div class="card-body">
                     <div class="container-fluid">
-                        <h4>Type de demande : </h4>
-                        <div class="row justify-content-md-center">
-                            {{ form_widget(form.registrationType) }}
-                        </div>
-                        <div class="row ml-1">
-                            <small id="registrationTypeHelp" class="form-text helper"><span class="badge badge-danger">Erreur</span>
-                                Il faut séléctionner un choix parmi la liste.
-                            </small>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="container mt-4">
-                <div class="form-group pb-3">
-                    <div class="container-fluid">
-                        <h4>Informations générales : </h4>
-                        <div class="row">
-                            <div class="col-6">
-                                {{ form_widget(form.firstName) }}
+                        <nav>
+                            <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                                <a class="nav-item nav-link active" id="nav-loisirs-tab" href="#nav-loisirs"
+                                   data-toggle="tab"
+                                   role="tab" aria-controls="nav-loisirs" aria-selected="true">Loisirs</a>
+                                <a class="nav-item nav-link" id="nav-competitif-tab" href="#nav-competitif"
+                                   data-toggle="tab"
+                                   role="tab" aria-controls="nav-competitif" aria-selected="false">Compétitif</a>
                             </div>
-                        </div>
-                        <div class="row ml-1">
-                            {{ form_errors(form.firstName) }}
-                            <small id="firstNameTypeHelp" class="form-text helper"><span
-                                        class="badge badge-danger">Erreur</span> Le prénom doit être rempli.
-                            </small>
-                        </div>
-                        <div class="row mt-3">
-                            <div class="col-6">
-                                {{ form_widget(form.lastName) }}
-                            </div>
-                        </div>
-                        <div class="row ml-1">
-                            <small id="lastNameTypeHelp" class="form-text helper"><span
-                                        class="badge badge-danger">Erreur</span> Le nom de famille doit être rempli.
-                            </small>
-                            {{ form_errors(form.lastName) }}
-                        </div>
-                        <div class="row mt-3">
-                            <div class="ml-3">
-                                <p>Date de naissance : </p>
-                            </div>
-                            <div class="col-6">
-                                {{ form_widget(form.birthDate) }}
-                                {{ form_errors(form.birthDate) }}
-                            </div>
-                        </div>
-                        <div class="row mt-3">
-                            <div class="ml-3">
-                                <p>Genre : </p>
-                            </div>
-                            <div class="col-6">
-                                {{ form_widget(form.sex) }}
-                            </div>
-                        </div>
-                        <div class="row ml-1">
-                            <small id="sexTypeHelp" class="form-text helper"><span
-                                        class="badge badge-danger">Erreur</span>
-                                Il faut séléctionner un choix parmi la liste.
-                            </small>
-                            {{ form_errors(form.sex) }}
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div id="registrationStep2">
-            <div class="container mt-3">
-                <div class="form-group pb-2">
-                    <div class="container-fluid">
-                        <h4>Type d'inscription (facultatif) :</h4>
-                        <div class="row justify-content-around align-items-center">
-                            <div class="col-4">
-                                <input type="checkbox" id="juge" name="juge">
-                                <label for="juge">Juge</label>
-                            </div>
-                            <div class="col-4">
-                                <input type="checkbox" id="volontaire" name="volontaire">
-                                <label for="volontaire">Volontaire</label>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="container-fluid mt-3">
-                <div id="judgeDiv" class="form-group pb-2">
-                    <div class="container-fluid">
-                        <h5>Juges :</h5>
-                        <p>Si vous êtes juges et si vous souhaitez juger pour le CEP cette année, merci de cocher les
-                            cases
-                            ci-dessous</p>
-                        <div class="row justify-content-start align-items-center mt-3">
-                            <div class="col-auto">
-                                <p>Souhaitez-vous suivre une formation juge ?</p>
-                            </div>
-                            <div class="col-auto">
-                                {{ form_widget(form.wantsAJudgeTraining) }}
-                            </div>
-                        </div>
-                        <div class="row justify-content-start align-items-center mt-3">
-                            <div class="col-2">
-                                {{ form_widget(form.isGAFJudge) }}
-                            </div>
-                            <div class="col-auto">
-                                Niveau :
-                            </div>
-                            <div class="col-auto">
-                                {{ form_widget(form.GAFJudgeLevel) }}
-                            </div>
-                        </div>
-                        <div class="row justify-content-start align-items-center mt-3">
-                            <div class="col-2">
-                                {{ form_widget(form.isGAMJudge) }}
-                            </div>
-                            <div class="col-auto">
-                                Niveau :
-                            </div>
-                            <div class="col-auto">
-                                {{ form_widget(form.GAMJudgeLevel) }}
-                            </div>
-                        </div>
-                        <div class="row justify-content-start align-items-center mt-3">
-                            <div class="col-2">
-                                {{ form_widget(form.isTeamGYMJudge) }}
-                            </div>
-                            <div class="col-auto">
-                                Niveau :
-                            </div>
-                            <div class="col-auto">
-                                {{ form_widget(form.teamGYMJudgeLevel) }}
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="container-fluid mt-3">
-                <div id="volunteerDiv" class="form-group pb-2">
-                    <div class="container-fluid">
-                        <h5>Volontaires :</h5>
-                        <p>Si vous souhaitez nous aider sur les activités et les actions mises en place par le club tout
-                            au long
-                            de l’année, merci de cocher les cases ci-dessous :</p>
-                        <div>
-                            Aide à l'entrainement :
-                            {{ form_widget(form.volunteerForTrainingHelp) }}
-                        </div>
-                        <div>
-                            Aide à la vie du club :
-                            {{ form_widget(form.volunteerForClubLife) }}
-                        </div>
-                        <div>
-                            Disponibilité :
-                            {{ form_widget(form.volunteerComment) }}
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-        <div id="registrationStep3">
-            <div class="container-fluid mt-3">
-                <div class="form-group pb-2">
-                    <div class="container-fluid">
-                        <h4>Membre ou représentant légal 1 pour les mineurs : </h4>
-                        <div class="row mt-2">
-                            <div class="col">
-                                {{ form_widget(form.firstNameRep1) }}
-                                <small id="firstNameRep1Help" class="form-text helper"><span class="badge badge-danger">Erreur</span>
-                                    Le prenom doit être rempli.
-                                </small>
-                                {{ form_errors(form.firstNameRep1) }}
-                            </div>
-                            <div class="col">
-                                {{ form_widget(form.lastNameRep1) }}
-                                <small id="lastNameRep1Help" class="form-text helper"><span
-                                            class="badge badge-danger">Erreur</span> Le nom de famille doit être rempli.
-                                </small>
-                            </div>
-                            <div class="col">
-                                {{ form_widget(form.emailRep1) }}
-                                <small id="emailRep1Help" class="form-text helper"><span
-                                            class="badge badge-danger">Erreur</span> L'email doit être rempli.
-                                </small>
-                            </div>
-                            <div class="col">
-                                {{ form_widget(form.professionRep1) }}
-                                <small id="professionRep1Help" class="form-text helper"><span
-                                            class="badge badge-danger">Erreur</span> La profession doit être rempli.
-                                </small>
-                            </div>
-                        </div>
-                        <div class="row mt-2">
-                            <div class="col">
-                                <select id="adherent_cityRep1" name="adherent_cityRep1" class="form-control">
-                                    {% if cityRep1 is defined and cityRep1 is not null %}
-                                        <option value={{ cityRep1 }} selected>{{ cityRep1 }}</option>
-                                    {% endif %}
-                                </select>
-                                <small id="cityRep1Help" class="form-text helper"><span
-                                            class="badge badge-danger">Erreur</span> Le code postal doit être rempli
-                                    pour choisir la ville
-                                </small>
-                            </div>
-                            <div class="col">
-                                {{ form_widget(form.addressRep1) }}
-                                <small id="addressRep1Help" class="form-text helper"><span
-                                            class="badge badge-danger">Erreur</span> L'adresse doit être rempli.
-                                </small>
-                            </div>
-                            <div class="col">
-                                {{ form_widget(form.zipCodeRep1) }}
-                                <small id="zipCodeRep1Help" class="form-text helper"><span
-                                            class="badge badge-danger">Erreur</span> Le code postal doit être rempli.
-                                </small>
-                            </div>
-                            <div class="col">
-                                {{ form_widget(form.phoneRep1) }}
-                                <small id="phoneRep1Help" class="form-text helper"><span
-                                            class="badge badge-danger">Erreur</span> Le numéro de téléphone doit être
-                                    rempli.
-                                </small>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="container-fluid mt-3">
-                <div class="form-group pb-2">
-                    <div class="container-fluid">
-                        <h4>Membre ou représentant légal 2 (facultatif) : </h4>
-                        <div class="row mt-2">
-                            <div class="col">
-                                {{ form_widget(form.firstNameRep2) }}
-                                <small id="firstNameRep2Help" class="form-text helper"><span
-                                            class="badge badge-danger">Erreur</span> Le prenom doit être rempli.
-                                </small>
-                            </div>
-                            <div class="col">
-                                {{ form_widget(form.lastNameRep2) }}
-                                <small id="lastNameRep2Help" class="form-text helper"><span
-                                            class="badge badge-danger">Erreur</span> Le nom de famille doit être rempli.
-                                </small>
-                            </div>
-                            <div class="col">
-                                {{ form_widget(form.emailRep2) }}
-                                <small id="emailRep2Help" class="form-text helper"><span
-                                            class="badge badge-danger">Erreur</span> L'email doit être rempli.
-                                </small>
-                            </div>
-                            <div class="col">
-                                {{ form_widget(form.professionRep2) }}
-                                <small id="professionRep2Help" class="form-text helper"><span
-                                            class="badge badge-danger">Erreur</span> La profession doit être rempli.
-                                </small>
-                            </div>
-                        </div>
-                        <div class="row mt-2">
-                            <div class="col">
-                                <select id="adherent_cityRep2" name="adherent_cityRep2" class="form-control">
-                                    {% if cityRep2 is defined and cityRep2 is not null %}
-                                        <option value={{ cityRep2 }} selected>{{ cityRep2 }}</option>
-                                    {% endif %}
-                                </select>
-                                <small id="cityRep2Help" class="form-text helper"><span
-                                            class="badge badge-danger">Erreur</span> La ville doit être rempli.
-                                </small>
-                            </div>
-                            <div class="col">
-                                {{ form_widget(form.addressRep2) }}
-                                <small id="addressRep2Help" class="form-text helper"><span
-                                            class="badge badge-danger">Erreur</span> L'adresse doit être rempli.
-                                </small>
-                            </div>
-                            <div class="col">
-                                {{ form_widget(form.zipCodeRep2) }}
-                                <small id="zipCodeRep2Help" class="form-text helper"><span
-                                            class="badge badge-danger">Erreur</span> Le code postal doit être rempli.
-                                </small>
-                            </div>
-                            <div class="col">
-                                {{ form_widget(form.phoneRep2) }}
-                                <small id="phoneRep2Help" class="form-text helper"><span
-                                            class="badge badge-danger">Erreur</span> Le numéro de téléphone doit être
-                                    rempli.
-                                </small>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div id="registrationStep4">
-            <div class="container-fluid mt-3">
-                <div class="form-group pb-2">
-                    <div class="container-fluid">
-                        <h4>Activités disponibles :</h4>
-                        <div class="row">
-                            <table id="test" name="test" class="table m-2 text-center">
-                                <thead>
-                                <tr>
-                                    <th>Nom</th>
-                                    <th>Créneaux</th>
-                                    <th>Prix</th>
-                                    <th>Date</th>
-                                    <th>Selection</th>
-                                </tr>
-                                </thead>
-                                {% for activity in activities %}
-                                    <tbody>
-                                    <tr id={{ activity.id }}>
-                                        <td>{{ activity.name }}</td>
-                                        <td>Samedi - De 10h à 12h</td>
-                                        <td id="price{{ activity.id }}">{{ activity.price }}</td>
-                                        <td>{{ activity.startDate|date('d/m/y') }}</td>
-                                        <td>
-                                            <input type="checkbox" id="checkbox{{ activity.id }}" name="selection"
-                                                   value="{{ activity.id }}">
-                                        </td>
+                        </nav>
+                        <div class="tab-content" id="nav-tabContent">
+                            <div class="tab-pane fade show active" id="nav-loisirs" role="tabpanel"
+                                 aria-labelledby="nav-home-tab">
+                                <table id="activitiesSecteurLoisir"
+                                       class="table table-bordered table-striped table-responsive-lg"
+                                       style="width:100%">
+                                    <thead>
+                                    <tr>
+                                        <th>Nom</th>
+                                        <th>Créneaux</th>
+                                        <th>Categorie</th>
+                                        <th>Prix</th>
+                                        <th>Date</th>
+                                        <th>Selection</th>
                                     </tr>
+                                    </thead>
+                                    <tbody>
+                                    {% for activity in activities %}
+                                        {% if activity.type == "SECTEUR LOISIRS" %}
+                                            <tr id={{ activity.id }}>
+                                                <td>{{ activity.name }}</td>
+                                                <td>Samedi - De 10h à 12h</td>
+                                                <td>{{ activity.category.name }}</td>
+                                                <td id="price{{ activity.id }}">{{ activity.price }}</td>
+                                                <td>{{ activity.startDate|date('d/m/y') }}</td>
+                                                <td>
+                                                    <input type="checkbox" id="checkbox{{ activity.id }}"
+                                                           name="selection"
+                                                           value="{{ activity.id }}">
+                                                </td>
+                                            </tr>
+                                        {% endif %}
+                                    {% endfor %}
+                                </table>
+                            </div>
+                            <div class="tab-pane fade" id="nav-competitif" role="tabpanel"
+                                 aria-labelledby="nav-competitif-tab">
+                                <table id="activitiesSecteurCompetitif" class="display" style="width:100%">
+                                    <thead>
+                                    <tr>
+                                        <th>Nom</th>
+                                        <th>Créneaux</th>
+                                        <th>Prix</th>
+                                        <th>Date</th>
+                                        <th>Selection</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    {% for activity in activities %}
+                                        {% if activity.type == "SECTEUR COMPETITIF" %}
+                                            <tr id={{ activity.id }}>
+                                                <td>{{ activity.category.id }}</td>
+                                                <td>Samedi - De 10h à 12h</td>
+                                                <td>{{ activity.category.name }}</td>
+                                                <td id="price{{ activity.id }}">{{ activity.price }}</td>
+                                                <td>{{ activity.startDate|date('d/m/y') }}</td>
+                                                <td>
+                                                    <input type="checkbox" id="checkbox{{ activity.id }}"
+                                                           name="selection"
+                                                           value="{{ activity.id }}">
+                                                </td>
+                                            </tr>
+                                        {% endif %}
+                                    {% endfor %}
                                     </tbody>
-                                {% endfor %}
-                            </table>
+                                </table>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-
         </div>
         <div id="registrationStep5">
-            <div class="container-fluid mt-3">
-                <div class="form-group pb-2">
+            <div class="card shadow-sm">
+                <h5 class="card-header">Abonnement :</h5>
+                <div class="card-body">
                     <div class="container-fluid">
                         <div class="row align-items-center">
                             <div class="col-auto">
-                                <h4>Prix de l'abonnement : </h4>
+                                <h6>Prix de l'abonnement : </h6>
                             </div>
                             <div class="col-auto">
                                 <h4 id="prix">0</h4>
                             </div>
                             <h4>€</h4>
                         </div>
-                    </div>
-                </div>
-            </div>
-            <div class="container-fluid mt-3">
-                <div class="form-group pt-2 pb-2">
-                    <div class="container-fluid">
                         <div class="row align-items-center">
                             <div class="col-auto">
-                                <h4>Moyens de paiement : </h4>
+                                <h6>Moyens de paiement : </h6>
                             </div>
                             <div class="col-auto">
                                 {{ form_widget(form.paymentType) }}
+                                <small id="paymentTypeHelp" class="form-text helper"><span
+                                            class="badge badge-danger">Erreur</span> Vous devez choisir parmi les
+                                    deux propositions.
+                                </small>
+                                {{ form_errors(form.paymentType) }}
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="container-fluid mt-3">
-                <div class="form-group pt-2 pb-2">
+            <div class="card shadow-sm">
+                <h5 class="card-header">Documents à fournir :</h5>
+                <div class="card-body">
                     <div class="container-fluid">
-                        <h4>Droits d'image :</h4>
-                        <div class="row align-items-center ml-2">
-                            <p>{{ form_widget(form.imageRight) }} le club à prendre et à diffuser des photos me
-                                concernant pour enrichir
-                                la photothèque et le site internet du club.</p>
-                        </div>
-                    </div>
-                    <div class="container-fluid">
-                        <h4>Certificat medical :</h4>
-                        <div class="row align-items-center ml-2">
-                            <div class="col-6">
+                        <h6>Certificat medical : </h6>
+                        <div class="row align-items-center ml-2 mr-2">
+                            <div class="col-5">
                                 {{ form_widget(form.medicalCertificate) }}
+                                {{ form_errors(form.medicalCertificate) }}
                             </div>
                             <a><i class="fa fa-info-circle" data-toggle="tooltip"
                                   data-original-title="Le certificat médical peut être rendu plus tard."></i></a>
                         </div>
-                    </div>
-                    <div class="container-fluid">
-                        <h4>Bulletin Allianz :</h4>
-                        <div class="row align-items-center ml-2">
-                            <div class="col-6">
+                        <h6>Bulletin N2 allianz : </h6>
+                        <div class="row align-items-center ml-2 mr-2">
+                            <div class="col-5">
                                 {{ form_widget(form.bulletinN2Allianz) }}
+                                {{ form_errors(form.bulletinN2Allianz) }}
                             </div>
                             <a><i class="fa fa-info-circle" data-toggle="tooltip"
                                   data-original-title="Le bulletin peut être rendu plus tard."></i></a>
-                        </div>
 
-                    </div>
-                    <div class="container-fluid">
-                        <h4>Questionnaire de santé :</h4>
+                        </div>
+                        <h6>Questionnaire de santé : </h6>
                         <div class="row align-items-center ml-2 mr-2">
-                            <div class="col-auto">
-                                {{ form_widget(form.healthQuestionnaire) }}
-                            </div>
-                            <div class="col-auto">
-                                <a href="{{ asset('PDF/QuestionnaireDeSante.pdf') }}" class="btn btn-success" download>Obtenir
-                                    le questionnaire</a>
+                            <div class="col-5">
+                                {{ form_widget(form.healthQuestionnaireFile) }}
+                                {{ form_errors(form.healthQuestionnaireFile) }}
                             </div>
                             <a><i class="fa fa-info-circle" data-toggle="tooltip"
-                                  data-original-title="Le questionnaire peut être rendu plus tard."></i></a>
+                                  data-original-title="Le questionnaire de santé peut être rendu plus tard."></i></a>
+                            <div class="col-auto">
+                                <a href="{{ asset('PDF/QuestionnaireDeSante.pdf') }}" class="btn btn-primary"
+                                   download>Obtenir
+                                    le questionnaire</a>
+                            </div>
                         </div>
-
                     </div>
+                </div>
+            </div>
+            <div class="card shadow-sm">
+                <h5 class="card-header">Autorisations :</h5>
+                <div class="card-body">
                     <div class="container-fluid">
+                        <h6>Droits d'image :</h6>
+                        <div class="row align-items-center ml-2">
+                            {{ form_widget(form.imageRight) }} le club à prendre et à diffuser des
+                            photos me
+                            concernant pour enrichir
+                            la photothèque et le site internet du club.
+                            <small id="imageRightHelp" class="form-text helper"><span
+                                        class="badge badge-danger">Erreur</span> Vous devez choisir parmi les deux
+                                propositions.
+                            </small>
+                            {{ form_errors(form.imageRight) }}
+                        </div>
                         <div class="form-check mt-3">
-                            <input class="form-check-input" type="checkbox" id="acceptRules" name="accept">
+                            <input class="form-check-input" type="checkbox" id="acceptRules" name="acceptRules">
                             <label class="form-check-label" for="acceptRules">
                                 J'accepte le réglement intérieur de l'association. <a href=""
                                                                                       data-toggle="modal"
@@ -1156,32 +608,40 @@
                             </div>
                         </div>
                         <div class="form-check mt-3">
-                            <input class="form-check-input" type="checkbox" id="acceptRGPD" name="accept">
+                            <input class="form-check-input" type="checkbox" id="acceptRGPD" name="acceptRGPD">
                             <label class="form-check-label" for="acceptRGPD">
                                 En soumettant ce formulaire, j’accepte que les informations saisies soient utilisées
-                                dans le cadre du
-                                demande de licence à CEP GYM Poitiers et à son organisation.
+                                dans le cadre de la
+                                demande de licence à CEP GYM Poitiers et à son organisation. Pour en savoir plus sur
+                                la
+                                loi
+                                RGPD,
+                                veuillez consulter <a
+                                        href="https://www.cnil.fr/fr/reglement-europeen-protection-donnees"
+                                        target="_blank">la réglementation en ligne</a>
                             </label>
+                        </div>
+                        <div class="row justify-content-center mt-3">
+                            <button type="submit" id="buttonSubmit" class="btn btn-success">Confirmer l'inscription
+                                de
+                                l'adhérent
+                            </button>
                         </div>
                     </div>
                 </div>
-                <button type="submit" class="btn btn-primary">Confirmer l'inscription de l'adhérent</button>
             </div>
         </div>
-        <div class="row justify-content-between">
-            <div class="mb-5 ml-5">
-                <button id="previousRegistration" type="button" class="btn btn-primary">Précédent</button>
+        <div class="row pt-3 pb-3">
+            <div class="col-6">
+                <button id="previousRegistration" type="button" class="btn btn-secondary btn-block">Précédent</button>
             </div>
-            <div class="mb-5 mr-5">
-                <button id="nextRegistration" type="button" class="btn btn-primary">Suivant</button>
-                <input id="step" value="1" hidden>
+            <div class="col-6">
+                <button id="nextRegistration" type="button" class="btn btn-secondary btn-block">Suivant</button>
             </div>
+            <input id="step" value="1" hidden>
         </div>
-
     </div>
     {{ form_end(form) }}
-    #}
-
 
 {% endblock %}
 
@@ -1190,39 +650,44 @@
     {% block javascripts %}
         <script>
             $(window).ready(function () {
-                $.ajax({
-                    url: 'https://datanova.legroupe.laposte.fr/api/records/1.0/search/',
-                    type: "POST",
-                    dataType: "json",
-                    data: {
-                        "dataset": "laposte_hexasmal",
-                        "refine.code_postal": $('#account_zipCode1').val(),
-                    },
-                    success: function (data) {
-                        $('#adherent_cityRep1 option').remove();
-                        for (var i in data["records"]) {
-                            commune = data["records"][i]["fields"]["nom_de_la_commune"];
-                            $('#adherent_cityRep1').append(new Option(commune, commune));
-                        }
-                    }
-                });
 
-                $.ajax({
-                    url: 'https://datanova.legroupe.laposte.fr/api/records/1.0/search/',
-                    type: "POST",
-                    dataType: "json",
-                    data: {
-                        "dataset": "laposte_hexasmal",
-                        "refine.code_postal": $('#account_zipCode2').val(),
-                    },
-                    success: function (data) {
-                        $('#adherent_cityRep2 option').remove();
-                        for (var i in data["records"]) {
-                            commune = data["records"][i]["fields"]["nom_de_la_commune"];
-                            $('#adherent_cityRep2').append(new Option(commune, commune));
+                if ($('#adherent_cityRep1').val() == null) {
+                    $.ajax({
+                        url: 'https://datanova.legroupe.laposte.fr/api/records/1.0/search/',
+                        type: "POST",
+                        dataType: "json",
+                        data: {
+                            "dataset": "laposte_hexasmal",
+                            "refine.code_postal": $('#adherent_zipCodeRep1').val(),
+                        },
+                        success: function (data) {
+                            $('#adherent_cityRep1 option').remove();
+                            for (var i in data["records"]) {
+                                commune = data["records"][i]["fields"]["nom_de_la_commune"];
+                                $('#adherent_cityRep1').append(new Option(commune, commune));
+                            }
                         }
-                    }
-                });
+                    });
+                }
+
+                if ($('#adherent_cityRep2').val() == null) {
+                    $.ajax({
+                        url: 'https://datanova.legroupe.laposte.fr/api/records/1.0/search/',
+                        type: "POST",
+                        dataType: "json",
+                        data: {
+                            "dataset": "laposte_hexasmal",
+                            "refine.code_postal": $('#adherent_zipCodeRep2').val(),
+                        },
+                        success: function (data) {
+                            $('#adherent_cityRep2 option').remove();
+                            for (var i in data["records"]) {
+                                commune = data["records"][i]["fields"]["nom_de_la_commune"];
+                                $('#adherent_cityRep2').append(new Option(commune, commune));
+                            }
+                        }
+                    });
+                }
 
                 $("#step").val(1);
                 $('input[name=\'selection\']').prop('checked', false);
@@ -1334,16 +799,16 @@
             $('#nextRegistration').click(function () {
                 var value = parseInt(document.getElementById('step').value);
                 if (value < 5) {
-                    //if (stepChoice("step" + value)) {
-                    if (value == 4) {
-                        $("#nextRegistration").hide();
+                    if (stepChoice("step" + value)) {
+                        if (value == 4) {
+                            $("#nextRegistration").hide();
+                        }
+                        $("#previousRegistration").show();
+                        $("helper").hide();
+                        $("#registrationStep" + (value + 1)).show();
+                        $("#registrationStep" + (value)).hide();
+                        document.getElementById('step').value = value + 1;
                     }
-                    $("#previousRegistration").show();
-                    $("helper").hide();
-                    $("#registrationStep" + (value + 1)).show();
-                    $("#registrationStep" + (value)).hide();
-                    document.getElementById('step').value = value + 1;
-                    //}
                 } else {
                     $("#nextRegistration").hide();
                 }

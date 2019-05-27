@@ -3,6 +3,15 @@ require('../css/app.scss');
 $ = require('jquery');
 
 $(window).ready(function () {
+    $("#accountStep").val(1);
+    $('#account_addAccountAdherent').is(':checked') ? ($("#next").show(), $("#account_valid").hide()) : ($("#next").hide(), $("#account_valid").show());
+    $('input[name=\'selection\']').prop('checked', false);
+    if (final()) {
+        $(".buttonSubmit").removeAttr("disabled");
+    } else {
+        $(".buttonSubmit").attr("disabled", true);
+
+    }
     $.ajax({
         url: 'https://datanova.legroupe.laposte.fr/api/records/1.0/search/',
         type: "POST",
@@ -16,7 +25,7 @@ $(window).ready(function () {
             var communeExists = [];
             for (var i in data["records"]) {
                 commune = data["records"][i]["fields"]["nom_de_la_commune"];
-                if($.inArray(commune, communeExists) == -1){
+                if ($.inArray(commune, communeExists) == -1) {
                     communeExists.push(commune);
                     $('#account_city').append(new Option(commune, commune));
                 }
@@ -24,22 +33,13 @@ $(window).ready(function () {
         }
     })
 
-    $("#accountStep").val(1);
-    $('#registration').prop('checked', false);
-    $('input[name=\'selection\']').prop('checked', false);
-    if (final()) {
-        $("#buttonSubmit").removeAttr("disabled");
-    } else {
-        $("#buttonSubmit").attr("disabled", true);
-
-    }
-
     var groupColumn = 2;
 
     $('#activitiesSecteurLoisir').DataTable({
         "columnDefs": [
-            {"visible": false, "targets": groupColumn}
+            {"visible": false, "targets": groupColumn},
         ],
+
         "displayLength": 10,
         "drawCallback": function () {
             var api = this.api();
@@ -127,13 +127,13 @@ $(window).ready(function () {
 
 $('#acceptRules, #acceptRGPD').on('change', function () {
     if (final()) {
-        $("#buttonSubmit").removeAttr("disabled");
+        $(".buttonSubmit").removeAttr("disabled");
     } else {
-        $("#buttonSubmit").attr("disabled", true);
+        $(".buttonSubmit").attr("disabled", true);
     }
 });
 
-$('#registration').on('change', function () {
+$('#account_addAccountAdherent').on('change', function () {
     $(this).is(':checked') ? ($("#next").show(), $("#account_valid").hide()) : ($("#next").hide(), $("#account_valid").show());
 });
 
@@ -142,20 +142,21 @@ $('#next').click(function () {
     var value = parseInt($("#accountStep").val());
     if (value < numberOfStep) {
         //if (stepChoice("accountStep" + value)) {
-            if (value == numberOfStep - 1) {
-                $("#next").hide();
-            }
-            $("#previous").show();
-            $("helper").hide();
-            if (value == 2) {
-                $('#juge').is(':checked') ? ($("#accountStep" + (value + 1)).show(), $("#accountStep").val(value + 1)) : $("#volontaire").is(':checked') ? ($("#accountStep" + (value + 2)).show(), $("#accountStep").val(value + 2)) : ($("#accountStep" + (value + 3)).show(), $("#accountStep").val(value + 3));
-            } else if (value == 3) {
-                $('#volontaire').is(':checked') ? ($("#accountStep" + (value + 1)).show(), $("#accountStep").val(value + 1)) : ($("#accountStep" + (value + 2)).show(), $("#accountStep").val(value + 2));
-            } else {
-                $("#accountStep" + (value + 1)).show();
-                $("#accountStep").val(value + 1);
-            }
-            $("#accountStep" + (value)).hide();
+        if (value == numberOfStep - 1) {
+            $("#next").hide();
+        }
+        $("#previous").show();
+        $("helper").hide();
+        if (value == 2) {
+            $('#juge').is(':checked') ? ($("#accountStep" + (value + 1)).show(), $("#accountStep").val(value + 1)) : $("#volontaire").is(':checked') ? ($("#accountStep" + (value + 2)).show(), $("#accountStep").val(value + 2)) : ($("#accountStep" + (value + 3)).show(), $("#accountStep").val(value + 3));
+        } else if (value == 3) {
+            $('#volontaire').is(':checked') ? ($("#accountStep" + (value + 1)).show(), $("#accountStep").val(value + 1)) : ($("#accountStep" + (value + 2)).show(), $("#accountStep").val(value + 2));
+        } else {
+            $("#accountStep" + (value + 1)).show();
+            $("#accountStep").val(value + 1);
+        }
+        $("#accountStep" + (value)).hide();
+        window.scrollTo(0,0);
 
         //}
     } else {
@@ -179,10 +180,58 @@ $('#previous').click(function () {
             $("#accountStep").val(value - 1);
         }
         $("#accountStep" + (value)).hide();
+        window.scrollTo(0,0);
     } else {
         $("#previous").hide();
     }
 });
+
+$('#healthQuestionnaire').click(function () {
+    $("#accountStep7").show();
+    $("#accountStep6").hide();
+    $("#buttonBottom").hide();
+});
+
+$('#healthQuestionnaireModificate').click(function () {
+    $("#accountStep7").show();
+    $("#accountStep6").hide();
+    $("#buttonBottom").hide();
+});
+
+$('#cancelQuestionnaire').click(function () {
+    $('div #healthQuestionnaireQuestion > div > div > input').each(function () {
+        $('input[name="' + $(this).attr('name') + '"]').prop('checked', false);
+    });
+    $("#accountStep7").hide();
+    $("#accountStep6").show();
+    $("#buttonBottom").show();
+    $("#healthQuestionnaireQuestionHelp").hide();
+    $(".healthQuestionnaireEmpty").show();
+    $(".healthQuestionnaireValidated").hide();
+});
+
+$('#validQuestionnaire').click(function () {
+    if (step8()) {
+        var bool = true;
+        $('div #healthQuestionnaireQuestion > div > div > input').each(function () {
+            if (isValidationRadio($(this).attr('name'))) {
+                bool = false;
+            }
+            ;
+        });
+        if (bool) {
+            $("#accountStep7").hide();
+            $("#accountStep6").show();
+            $("#buttonBottom").show();
+            $("#healthQuestionnaireQuestionHelp").hide();
+            $(".healthQuestionnaireEmpty").hide();
+            $(".healthQuestionnaireValidated").show();
+        } else {
+            $("#healthQuestionnaireQuestionHelp").show();
+        }
+    }
+});
+
 
 $('#juge').on('change', function () {
     $(this).is(':checked') ? $("#judgeDiv").show() : $("#judgeDiv").hide();
@@ -218,6 +267,8 @@ function stepChoice(step) {
             return true;
         case 'accountStep7':
             return step7();
+        case 'accountStep8':
+            return step8();
         default:
             console.log('Sorry, we are out of ' + step + '.');
     }
@@ -246,6 +297,11 @@ function step7() {
     var bool = true;
     (isValidationList('account[children][0][paymentType]') ? ($("#paymentTypeHelp").show(), bool = false) : $("#paymentTypeHelp").hide());
     (isValidationList('account[children][0][imageRight]') ? ($("#imageRightHelp").show(), bool = false) : $("#imageRightHelp").hide())
+    return bool;
+}
+
+function step8() {
+    var bool = true;
     return bool;
 }
 
@@ -328,7 +384,7 @@ $('#account_zipCode').focusout(function () {
             var communeExists = [];
             for (var i in data["records"]) {
                 commune = data["records"][i]["fields"]["nom_de_la_commune"];
-                if($.inArray(commune, communeExists) == -1){
+                if ($.inArray(commune, communeExists) == -1) {
                     communeExists.push(commune);
                     $('#account_city').append(new Option(commune, commune));
                 }

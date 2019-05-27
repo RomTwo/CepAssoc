@@ -58,19 +58,19 @@
         <div class="form-group">
             <div class="col">
                 <label for="">Questionnaire de santé </label>
-                {% if adherent.healthQuestionnaire is null %}
-                    {{ form_widget(form.healthQuestionnaire) }}
+                {% if adherent.healthQuestionnaireFile is null %}
+                    {{ form_widget(form.healthQuestionnaireFile) }}
                 {% else %}
                     <div class="col">
                         <a target="_blank" rel="noopener noreferrer"
-                           href="{{ asset('uploads/' ~ adherent.healthQuestionnaire) }}" class="btn btn-success">PDF</a>
+                           href="{{ asset('uploads/' ~ adherent.healthQuestionnaireFile) }}" class="btn btn-success">PDF</a>
                     </div>
                     <button class="btn btn-primary" type="button" data-toggle="collapse"
-                            data-target="#healthQuestionnaire" aria-expanded="false" aria-controls="collapseExample">
+                            data-target="#healthQuestionnaireFile" aria-expanded="false" aria-controls="collapseExample">
                         Modifier
                     </button>
-                    <div class="collapse" id="healthQuestionnaire">
-                        {{ form_widget(form.healthQuestionnaire) }}
+                    <div class="collapse" id="healthQuestionnaireFile">
+                        {{ form_widget(form.healthQuestionnaireFile) }}
                     </div>
                 {% endif %}
             </div>
@@ -182,8 +182,8 @@
                 <div class="row">
                     <label for="">Ville </label>
                     <select id="admin_adherent_cityRep1" name="admin_adherent_cityRep1" class="form-control">
-                        {% if cityRep1 is defined and cityRep1 is not null %}
-                            <option value={{ cityRep1 }} selected>{{ cityRep1 }}</option>
+                        {% if adherent.cityRep1 is defined and adherent.cityRep1 is not null %}
+                            <option value={{ adherent.cityRep1 }} selected>{{ adherent.cityRep1 }}</option>
                         {% endif %}
                     </select>
                 </div>
@@ -254,8 +254,8 @@
                 <div class="row">
                     <label for="">Ville </label>
                     <select id="admin_adherent_cityRep2" name="admin_adherent_cityRep2" class="form-control">
-                        {% if cityRep2 is defined and cityRep2 is not null %}
-                            <option value={{ cityRep2 }} selected>{{ cityRep2 }}</option>
+                        {% if adherent.cityRep2 is defined and adherent.cityRep2 is not null %}
+                            <option value={{ adherent.cityRep2 }} selected>{{ adherent.cityRep2 }}</option>
                         {% endif %}
                     </select>
                 </div>
