@@ -1,10 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="53b90c9e-e36e-447f-8cc9-26b01b488158" name="Default Changelist" comment="workspace">
+    <list default="true" id="53b90c9e-e36e-447f-8cc9-26b01b488158" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/routes.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config/routes.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/administration/AdminAdherentsController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/administration/AdminAdherentsController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/administration/adherents/adherents.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/administration/adherents/adherents.html.twig" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -36,8 +34,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/templates/administration/adherents/adherents.html.twig">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="128">
-              <caret line="62" column="61" lean-forward="true" selection-start-line="62" selection-start-column="61" selection-end-line="62" selection-end-column="61" />
+            <state relative-caret-position="-2099">
+              <caret line="10" column="167" selection-start-line="10" selection-start-column="157" selection-end-line="10" selection-end-column="167" />
               <folding>
                 <element signature="e#772#797#0#HTML" expanded="true" />
                 <element signature="e#979#999#0#HTML" expanded="true" />
@@ -75,8 +73,9 @@
                 <element signature="e#11475#11496#0#HTML" expanded="true" />
                 <element signature="e#12357#12374#0#HTML" expanded="true" />
                 <element signature="e#12525#12546#0#HTML" expanded="true" />
-                <element signature="e#12708#12731#0#HTML" expanded="true" />
-                <element signature="e#12905#12925#0#HTML" expanded="true" />
+                <element signature="e#12656#12679#0#HTML" expanded="true" />
+                <element signature="e#12839#12859#0#HTML" expanded="true" />
+                <element signature="e#13026#13045#0#HTML" expanded="true" />
                 <element signature="e#13184#13203#0#HTML" expanded="true" />
                 <element signature="e#13298#13315#0#HTML" expanded="true" />
                 <element signature="e#14887#14894#1#HTML" expanded="true" />
@@ -110,7 +109,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>#}</find>
       <find>forms</find>
       <find>form_start</find>
       <find>toArray</find>
@@ -140,6 +138,7 @@
       <find>href</find>
       <find>isRegiste</find>
       <find>register</find>
+      <find>if</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -844,11 +843,18 @@
       <option name="project" value="LOCAL" />
       <updated>1558691846710</updated>
     </task>
-    <option name="localTasksCounter" value="35" />
+    <task id="LOCAL-00035" summary="Suppression de la route admin_adherentsRegister et de la fonctio register du controlleur AdminAdherentsController.php&#10;Modification de la vue adherents.html.twig">
+      <created>1558951751756</created>
+      <option name="number" value="00035" />
+      <option name="presentableId" value="LOCAL-00035" />
+      <option name="project" value="LOCAL" />
+      <updated>1558951751756</updated>
+    </task>
+    <option name="localTasksCounter" value="36" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="220767000" />
+    <option name="totallyTimeSpent" value="221019000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -980,7 +986,8 @@
     <MESSAGE value="brique intitiale finale avec un select2 parfait !" />
     <MESSAGE value="beginning of copying mails ..." />
     <MESSAGE value="workspace" />
-    <option name="LAST_COMMIT_MESSAGE" value="workspace" />
+    <MESSAGE value="Suppression de la route admin_adherentsRegister et de la fonctio register du controlleur AdminAdherentsController.php&#10;Modification de la vue adherents.html.twig" />
+    <option name="LAST_COMMIT_MESSAGE" value="Suppression de la route admin_adherentsRegister et de la fonctio register du controlleur AdminAdherentsController.php&#10;Modification de la vue adherents.html.twig" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/templates/security/login.html.twig">
@@ -1281,8 +1288,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/templates/administration/adherents/adherents.html.twig">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="128">
-          <caret line="62" column="61" lean-forward="true" selection-start-line="62" selection-start-column="61" selection-end-line="62" selection-end-column="61" />
+        <state relative-caret-position="-2099">
+          <caret line="10" column="167" selection-start-line="10" selection-start-column="157" selection-end-line="10" selection-end-column="167" />
           <folding>
             <element signature="e#772#797#0#HTML" expanded="true" />
             <element signature="e#979#999#0#HTML" expanded="true" />
@@ -1320,8 +1327,9 @@
             <element signature="e#11475#11496#0#HTML" expanded="true" />
             <element signature="e#12357#12374#0#HTML" expanded="true" />
             <element signature="e#12525#12546#0#HTML" expanded="true" />
-            <element signature="e#12708#12731#0#HTML" expanded="true" />
-            <element signature="e#12905#12925#0#HTML" expanded="true" />
+            <element signature="e#12656#12679#0#HTML" expanded="true" />
+            <element signature="e#12839#12859#0#HTML" expanded="true" />
+            <element signature="e#13026#13045#0#HTML" expanded="true" />
             <element signature="e#13184#13203#0#HTML" expanded="true" />
             <element signature="e#13298#13315#0#HTML" expanded="true" />
             <element signature="e#14887#14894#1#HTML" expanded="true" />
