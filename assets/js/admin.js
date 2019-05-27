@@ -5,6 +5,7 @@ $ = require('jquery');
 jQuery = require('jquery');
 global.moment = require('moment');
 require('bootstrap');
+require('select2');
 require('datatables.net-bs4');
 require('datatables.net-responsive-bs4');
 require('bootstrap-notify');
