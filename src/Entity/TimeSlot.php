@@ -53,9 +53,15 @@ class TimeSlot
      */
     private $activities;
 
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\Adherent", mappedBy="timeSlots")
+     */
+    private $adherents;
+
     public function __construct()
     {
         $this->activities = new ArrayCollection();
+        $this->adherents = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -167,5 +173,41 @@ else
         }
 
         return $this;
+    }
+
+    /**
+     * @return Collection|Adherent[]
+     */
+    public function getAdherents(): Collection
+    {
+        return $this->adherents;
+    }
+
+    public function addAdherent(Adherent $adherent): self
+    {
+        if (!$this->adherents->contains($adherent)) {
+            $this->adherents[] = $adherent;
+            $adherent->addTimeSlot($this);
+        }
+
+        return $this;
+    }
+
+    public function removeAdherent(Adherent $adherent): self
+    {
+        if ($this->adherents->contains($adherent)) {
+            $this->adherents->removeElement($adherent);
+            $adherent->removeTimeSlot($this);
+        }
+
+        return $this;
+    }
+
+    public function getAdherentsNumber(){
+        return sizeof($this->adherents);
+    }
+
+    public function contains($adherent){
+        return $this->adherents->contains($adherent);
     }
 }

@@ -98,7 +98,12 @@ class AccountType extends AbstractType
                 FormEvents::SUBMIT,
                 [$this, 'onSubmit']
             )
-            ->add('valid', SubmitType::class, array('label' => 'S\'inscrire'));
+            ->add('valid', SubmitType::class, array(
+                'label' => 'S\'inscrire',
+                'attr' => array(
+                    'class' => 'btn btn-success'
+                )
+            ));
     }
 
     public function onSubmit(FormEvent $event)

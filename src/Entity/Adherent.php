@@ -242,13 +242,13 @@ class Adherent
     private $professionRep2;
 
     /**
-     * @ORM\Column(type="integer", length=10)
+     * @ORM\Column(type="string", length=10)
      * @Groups({"competition"})
      */
     private $phoneRep1;
 
     /**
-     * @ORM\Column(type="integer", length=10, nullable=true)
+     * @ORM\Column(type="string", length=10, nullable=true)
      * @Groups({"competition"})
      */
     private $phoneRep2;
@@ -260,13 +260,13 @@ class Adherent
     private $imageRight;
 
     /**
-     * @ORM\Column(type="boolean")
-     * @Groups({"competition"})
-     */
-    private $isRegisteredInFFG;
-
-    /**
      * @ORM\Column(type="string", nullable=true)
+     * @Assert\File(
+     *     maxSize = "2048k",
+     *     maxSizeMessage = "La taille du fichier est au-dessus de la limite",
+     *     mimeTypes = {"application/pdf", "application/x-pdf"},
+     *     mimeTypesMessage = "Le fichier doit être sous format PDF"
+     * )
      * @Groups({"competition"})
      */
     private $medicalCertificate;
@@ -321,6 +321,12 @@ class Adherent
 
     /**
      * @ORM\Column(type="string", nullable=true)
+     * @Assert\File(
+     *     maxSize = "2048k",
+     *     maxSizeMessage = "La taille du fichier est au-dessus de la limite",
+     *     mimeTypes = {"application/pdf", "application/x-pdf"},
+     *     mimeTypesMessage = "Le fichier doit être sous format PDF"
+     * )
      * @Groups({"competition"})
      */
     private $bulletinN2Allianz;
@@ -333,6 +339,12 @@ class Adherent
 
     /**
      * @ORM\Column(type="string", nullable=true)
+     * @Assert\File(
+     *     maxSize = "2048k",
+     *     maxSizeMessage = "La taille du fichier est au-dessus de la limite",
+     *     mimeTypes = {"application/pdf", "application/x-pdf"},
+     *     mimeTypesMessage = "Le fichier doit être sous format PDF"
+     * )
      * @Groups({"competition"})
      */
     private $healthQuestionnaire;
@@ -356,14 +368,18 @@ class Adherent
     private $affiliateCode;
 
     /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\Activity")
-     * @Groups({"competition"})
+     * @ORM\ManyToMany(targetEntity="App\Entity\TimeSlot", inversedBy="adherents")
      */
-    private $activities;
+    private $timeSlots;
+
+    /**
+     * @ORM\Column(type="string", length=100,options={"default":"EN ATTENTE"})
+     */
+    private $status;
 
     public function __construct()
     {
-        $this->activities = new ArrayCollection();
+        $this->timeSlots = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -775,24 +791,6 @@ class Adherent
         $this->zipCodeRep1 = $zipCodeRep1;
     }
 
-    /**
-     * @return mixed
-     * @return Collection|Activity[]
-     */
-    public function getActivities(): Collection
-    {
-        return $this->activities;
-    }
-
-
-    public function addActivity(Activity $activity): self
-    {
-
-        if (!$this->activities->contains($activity)) {
-            $this->activities[] = $activity;
-        }
-        return $this;
-    }
 
     /**
      * @return mixed
@@ -800,13 +798,6 @@ class Adherent
     public function getProfessionRep1()
     {
         return $this->professionRep1;
-    }
-
-    public function removeActivity(Activity $activity): self
-    {
-        if ($this->activities->contains($activity)) {
-            $this->activities->removeElement($activity);
-        }
     }
 
     /**
@@ -912,22 +903,6 @@ class Adherent
     public function setImageRight($imageRight): void
     {
         $this->imageRight = $imageRight;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getIsRegisteredInFFG()
-    {
-        return $this->isRegisteredInFFG;
-    }
-
-    /**
-     * @param mixed $isRegisteredInFFG
-     */
-    public function setIsRegisteredInFFG($isRegisteredInFFG): void
-    {
-        $this->isRegisteredInFFG = $isRegisteredInFFG;
     }
 
     /**
@@ -1194,6 +1169,48 @@ class Adherent
         $this->hasMedicalCertificate = $hasMedicalCertificate;
     }
 
+    /**
+     * @return Collection|TimeSlot[]
+     */
+    public function getTimeSlots(): Collection
+    {
+        return $this->timeSlots;
+    }
+
+    public function addTimeSlot(TimeSlot $timeSlot): self
+    {
+        if (!$this->timeSlots->contains($timeSlot)) {
+            $this->timeSlots[] = $timeSlot;
+        }
+
+        return $this;
+    }
+
+    public function removeTimeSlot(TimeSlot $timeSlot): self
+    {
+        if ($this->timeSlots->contains($timeSlot)) {
+            $this->timeSlots->removeElement($timeSlot);
+        }
+
+        return $this;
+    }
+
+    public function getStatus(): ?string
+    {
+        return $this->status;
+    }
+
+    public function setStatus(string $status): self
+    {
+        $this->status = $status;
+
+        return $this;
+    }
 
 
+
+    public function __toString(): string
+    {
+        return $this->firstName();
+    }
 }

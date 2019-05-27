@@ -601,7 +601,6 @@ string $email, string $city, string $password)
                 // get the value for the random index
                 $activity = $activities[$activityIndex];
 
-                $adherents[$i]->addActivity($activity);
             }
             
         }

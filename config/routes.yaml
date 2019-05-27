@@ -33,6 +33,10 @@ security_deconnexion:
     path: /profile/logout
 
 ### Administration routing ###
+admin_home:
+    path: /admin
+    controller: App\Controller\administration\AdministrationController::home
+
 admin_adherent_competiteurs:
     path: /admin/competiteurs
     controller: App\Controller\administration\AdministrationController::competiteurs
@@ -56,12 +60,6 @@ admin_adherentsPDF:
 admin_adherentsEdit:
     path: /admin/adherents/edit/{id}
     controller: App\Controller\administration\AdminAdherentsController::edit
-    requirements:
-        id: ([0-9]*)
-    
-admin_adherentsRegister:
-    path: /admin/adherents/register/{id}
-    controller: App\Controller\administration\AdminAdherentsController::register
     requirements:
         id: ([0-9]*)
 
@@ -88,6 +86,34 @@ admin_activityDelete:
     path: /admin/activities/deleteActivity/{id}
     controller: App\Controller\administration\AdminActivitiesController::deleteActivity
 
+admin_activityDetails:
+    path: /admin/activities/details/{id}
+    controller: App\Controller\administration\AdminActivitiesController::details
+    requirements:
+        id: ([0-9]*)
+
+admin_activityAddAdherentToTimeSlot:
+    path: /admin/activities/addToTimeSlot
+    controller: App\Controller\administration\AdminActivitiesController::addToTimeSlot
+
+admin_activityDeleteAdherentFromTimeSlot:
+  path: /admin/activities/deleteFromTimeSlot/{activityId}/{timeSlotId}/{adherentId}
+  controller: App\Controller\administration\AdminActivitiesController::deleteFromTimeSlot
+  requirements:
+    activityId: ([0-9]*)
+    timeSlotId: ([0-9]*)
+    adherentId: ([0-9]*)
+
+admin_activityCopyAllEmails:
+    path: /admin/activities/activityCopyAllEmails
+    controller: App\Controller\administration\AdminActivitiesController::copyAllEmails
+
+admin_activityCopyTimeSlotEmails:
+  path: /admin/activities/activityCopyTimeSlotEmails
+  controller: App\Controller\administration\AdminActivitiesController::copyTimeSlotEmails
+
+
+    #--Categories
 admin_categories:
     path: /admin/categories
     controller: App\Controller\administration\AdminActivitiesController::index
@@ -160,5 +186,3 @@ error_404_unexist_route:
         _controller: App\Controller\ErrorController::error404
         requirements:
             catchAll: '.+'
-
-

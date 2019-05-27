@@ -203,12 +203,12 @@ class AdherentType extends AbstractType
                 ],
                 'required' => false,
             ])
-            ->add('phoneRep1', NumberType::class, [
+            ->add('phoneRep1', TextType::class, [
                 'attr' => [
                     'placeholder' => "Numéro de téléphone du représentant 1"
                 ],
             ])
-            ->add('phoneRep2', NumberType::class, [
+            ->add('phoneRep2', TextType::class, [
                 'attr' => [
                     'placeholder' => "Numéro de téléphone du représentant 2"
                 ],
