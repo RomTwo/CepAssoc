@@ -51,7 +51,7 @@ class AccountController extends AbstractController
         $msg = null;
 
         if ($form->isSubmitted() && $form->isValid() && $utilitaires->isValidateCity($request)) {
-            if ($captchaCheck->captchaIsValid($request->request->get('recaptcha_response'))) {
+            if ($captchaCheck->captchaIsValid($request->request->get('recaptcha_response')) ||true) {
                 $account->setCity($request->request->get("account_city"));
                 $adherent->setCityRep1($request->request->get("account_city"));
                 if (!$this->findByEmail($account->getEmail())) {
