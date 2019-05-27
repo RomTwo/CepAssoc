@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\Entity\Account;
 use App\Transformer\ArrayToStringTransformer;
+use App\Transformer\DateToStringTransformer;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
@@ -16,6 +17,10 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class AccountAdminType extends AbstractType
 {
+    /**
+     * @param FormBuilderInterface $builder
+     * @param array $options
+     */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
@@ -29,9 +34,10 @@ class AccountAdminType extends AbstractType
                     'expanded' => false
                 )
             )
-            ->add('birthDate', DateType::class, array(
-                    'widget' => 'choice',
-                    'years' => range(date('Y'), date('Y') - 100),
+            ->add('birthDate', TextType::class, array(
+                    'attr' => array(
+                        'class' => 'datepicker'
+                    )
                 )
             )
             ->add('address', TextType::class)
@@ -57,6 +63,7 @@ class AccountAdminType extends AbstractType
             ->add('valid', SubmitType::class, array('label' => 'Modifier'));
 
         $builder->get('roles')->addModelTransformer(new ArrayToStringTransformer());
+        $builder->get('birthDate')->addModelTransformer(new DateToStringTransformer());
     }
 
     public function configureOptions(OptionsResolver $resolver)

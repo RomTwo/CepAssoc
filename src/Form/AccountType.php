@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\Entity\Account;
 use App\Repository\AdherentRepository;
+use App\Transformer\DateToStringTransformer;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
@@ -48,13 +49,11 @@ class AccountType extends AbstractType
                     )
                 )
             )
-            ->add('birthDate', DateType::class, array(
+            ->add('birthDate', TextType::class, array(
                     'label' => 'Date de naissance : ',
-                    'widget' => 'choice',
-                    'years' => range(date('Y'), date('Y') - 100),
                     'attr' => array(
-                        'placeholder' => 'Date de naissance'
-                    )
+                        'class' => 'datepicker'
+                    ),
                 )
             )
             ->add('address', TextType::class, array(
@@ -104,6 +103,7 @@ class AccountType extends AbstractType
                     'class' => 'btn btn-success'
                 )
             ));
+        $builder->get('birthDate')->addModelTransformer(new DateToStringTransformer());
     }
 
     public function onSubmit(FormEvent $event)
@@ -113,31 +113,31 @@ class AccountType extends AbstractType
         $data = $form->getData();
 
         $children = $data->getChildren();
-        if($data->getFirstName() != null){
+        if ($data->getFirstName() != null) {
             $children[0]->setFirstName($data->getFirstName());
             $children[0]->setFirstNameRep1($data->getFirstName());
         }
 
-        if($data->getLastName() != null){
+        if ($data->getLastName() != null) {
             $children[0]->setLastName($data->getLastName());
             $children[0]->setLastNameRep1($data->getLastName());
         }
 
         $children[0]->setBirthDate($data->getBirthDate());
 
-        if($data->getEmail() != null){
+        if ($data->getEmail() != null) {
             $children[0]->setEmailRep1($data->getEmail());
         }
 
-        if($data->getAddress() != null){
+        if ($data->getAddress() != null) {
             $children[0]->setAddressRep1($data->getAddress());
         }
 
-        if($data->getZipCode() != null){
+        if ($data->getZipCode() != null) {
             $children[0]->setZipCodeRep1($data->getZipCode());
         }
 
-        if($data->getSex() != null){
+        if ($data->getSex() != null) {
             $children[0]->setSex($data->getSex());
         }
     }

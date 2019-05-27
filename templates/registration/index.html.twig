@@ -541,6 +541,8 @@
 
 
 {% block javascripts %}
+    {{ encore_entry_script_tags('date') }}
+
     <script>
         $( window ).ready(function() {
             $.ajax({

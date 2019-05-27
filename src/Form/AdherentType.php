@@ -5,6 +5,7 @@ namespace App\Form;
 use App\Entity\Account;
 use App\Entity\Activity;
 use App\Entity\Adherent;
+use App\Transformer\DateToStringTransformer;
 use Faker\Provider\File;
 use function Sodium\add;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
@@ -29,7 +30,7 @@ class AdherentType extends AbstractType
                 'attr' => [
                     'placeholder' => "Prenom",
                 ]
-                ])
+            ])
             ->add('lastName', TextType::class, [
                 'attr' => [
                     'placeholder' => "Nom de famille",
@@ -43,9 +44,10 @@ class AdherentType extends AbstractType
                 'multiple' => false,
                 'expanded' => true,
             ])
-            ->add('birthDate', DateType::class, [
-                'widget' => 'choice',
-                'years' => range(date('Y'), date('Y') - 100),
+            ->add('birthDate', TextType::class, [
+                'attr' => array(
+                    'class' => 'datepicker'
+                )
             ])
             ->add('isGAFJudge', null, [
                 'attr' => [
@@ -257,6 +259,7 @@ class AdherentType extends AbstractType
                 ],
                 'required' => false,
             ));
+        $builder->get('birthDate')->addModelTransformer(new DateToStringTransformer());
     }
 
     public function configureOptions(OptionsResolver $resolver)
