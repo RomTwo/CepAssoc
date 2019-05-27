@@ -141,24 +141,24 @@ $('#next').click(function () {
     var numberOfStep = 6;
     var value = parseInt($("#accountStep").val());
     if (value < numberOfStep) {
-        if (stepChoice("accountStep" + value)) {
-        if (value == numberOfStep - 1) {
-            $("#next").hide();
-        }
-        $("#previous").show();
-        $("helper").hide();
-        if (value == 2) {
-            $('#juge').is(':checked') ? ($("#accountStep" + (value + 1)).show(), $("#accountStep").val(value + 1)) : $("#volontaire").is(':checked') ? ($("#accountStep" + (value + 2)).show(), $("#accountStep").val(value + 2)) : ($("#accountStep" + (value + 3)).show(), $("#accountStep").val(value + 3));
-        } else if (value == 3) {
-            $('#volontaire').is(':checked') ? ($("#accountStep" + (value + 1)).show(), $("#accountStep").val(value + 1)) : ($("#accountStep" + (value + 2)).show(), $("#accountStep").val(value + 2));
-        } else {
-            $("#accountStep" + (value + 1)).show();
-            $("#accountStep").val(value + 1);
-        }
-        $("#accountStep" + (value)).hide();
-        window.scrollTo(0,0);
+        //if (stepChoice("accountStep" + value)) {
+            if (value == numberOfStep - 1) {
+                $("#next").hide();
+            }
+            $("#previous").show();
+            $("helper").hide();
+            if (value == 2) {
+                $('#juge').is(':checked') ? ($("#accountStep" + (value + 1)).show(), $("#accountStep").val(value + 1)) : $("#volontaire").is(':checked') ? ($("#accountStep" + (value + 2)).show(), $("#accountStep").val(value + 2)) : ($("#accountStep" + (value + 3)).show(), $("#accountStep").val(value + 3));
+            } else if (value == 3) {
+                $('#volontaire').is(':checked') ? ($("#accountStep" + (value + 1)).show(), $("#accountStep").val(value + 1)) : ($("#accountStep" + (value + 2)).show(), $("#accountStep").val(value + 2));
+            } else {
+                $("#accountStep" + (value + 1)).show();
+                $("#accountStep").val(value + 1);
+            }
+            $("#accountStep" + (value)).hide();
+            window.scrollTo(0, 0);
 
-        }
+        //}
     } else {
         $("#next").hide();
     }
@@ -180,7 +180,7 @@ $('#previous').click(function () {
             $("#accountStep").val(value - 1);
         }
         $("#accountStep" + (value)).hide();
-        window.scrollTo(0,0);
+        window.scrollTo(0, 0);
     } else {
         $("#previous").hide();
     }
@@ -211,7 +211,6 @@ $('#cancelQuestionnaire').click(function () {
 });
 
 $('#validQuestionnaire').click(function () {
-    if (step8()) {
         var bool = true;
         $('div #healthQuestionnaireQuestion > div > div > input').each(function () {
             if (isValidationRadio($(this).attr('name'))) {
@@ -227,9 +226,9 @@ $('#validQuestionnaire').click(function () {
             $(".healthQuestionnaireEmpty").hide();
             $(".healthQuestionnaireValidated").show();
         } else {
+            window.scrollTo(0, 0);
             $("#healthQuestionnaireQuestionHelp").show();
         }
-    }
 });
 
 
@@ -268,7 +267,7 @@ function stepChoice(step) {
         case 'accountStep7':
             return step7();
         case 'accountStep8':
-            return step8();
+            return true;
         default:
             console.log('Sorry, we are out of ' + step + '.');
     }
@@ -298,11 +297,6 @@ function step7() {
     var bool = true;
     (isValidationList('account[children][0][paymentType]') ? ($("#paymentTypeHelp").show(), bool = false) : $("#paymentTypeHelp").hide());
     (isValidationList('account[children][0][imageRight]') ? ($("#imageRightHelp").show(), bool = false) : $("#imageRightHelp").hide())
-    return bool;
-}
-
-function step8() {
-    var bool = true;
     return bool;
 }
 

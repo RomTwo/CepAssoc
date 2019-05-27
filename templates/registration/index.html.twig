@@ -63,6 +63,21 @@
                             </small>
                             {{ form_errors(form.sex) }}
                         </div>
+                        <hr/>
+                        <div class="row mt-3 mb-3">
+                            <div class="col-auto">
+                                <label>Nationalité : </label>
+                            </div>
+                            <div class="col">
+                                {{ form_widget(form.nationality) }}
+                                <small id="nationalityHelp" class="form-text helper"><span
+                                            class="badge badge-danger">Erreur</span> La nationalité doit
+                                    être
+                                    choisie.
+                                </small>
+                                {{ form_errors(form.nationality) }}
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -383,7 +398,15 @@
                                         {% if activity.type == "SECTEUR LOISIRS" %}
                                             <tr id={{ activity.id }}>
                                                 <td>{{ activity.name }}</td>
-                                                <td>Samedi - De 10h à 12h</td>
+                                                <td>
+                                                    {% for creneaux in activity.timeSlot %}
+                                                        <b>{{ days[creneaux.day] }}</b> de {{ creneaux.startTime|date('h\\hi') }}/{{ creneaux.endTime|date('h\\hi') }}
+                                                        {% if creneaux.city is not null %}
+                                                            à {{ creneaux.city }}
+                                                        {% endif %}
+                                                        <br/>
+                                                    {% endfor %}
+                                                </td>
                                                 <td>{{ activity.category.name }}</td>
                                                 <td id="price{{ activity.id }}">{{ activity.price }}</td>
                                                 <td>{{ activity.startDate|date('d/m/y') }}</td>
@@ -414,7 +437,15 @@
                                         {% if activity.type == "SECTEUR COMPETITIF" %}
                                             <tr id={{ activity.id }}>
                                                 <td>{{ activity.category.id }}</td>
-                                                <td>Samedi - De 10h à 12h</td>
+                                                <td>
+                                                    {% for creneaux in activity.timeSlot %}
+                                                        <b>{{ days[creneaux.day] }}</b> de {{ creneaux.startTime|date('h\\hi') }}/{{ creneaux.endTime|date('h\\hi') }}
+                                                        {% if creneaux.city is not null %}
+                                                            à {{ creneaux.city }}
+                                                        {% endif %}
+                                                        <br/>
+                                                    {% endfor %}
+                                                </td>
                                                 <td>{{ activity.category.name }}</td>
                                                 <td id="price{{ activity.id }}">{{ activity.price }}</td>
                                                 <td>{{ activity.startDate|date('d/m/y') }}</td>
@@ -488,17 +519,32 @@
 
                         </div>
                         <h6>Questionnaire de santé : </h6>
-                        <div class="row align-items-center ml-2 mr-2">
-                            <div class="col-5">
+                        <div class="row align-items-center ml-2 mr-2 healthQuestionnaireEmpty">
+                            <div class="col-11 col-sm-8 col-md-8 col-lg-8">
                                 {{ form_widget(form.healthQuestionnaireFile) }}
                                 {{ form_errors(form.healthQuestionnaireFile) }}
                             </div>
                             <a><i class="fa fa-info-circle" data-toggle="tooltip"
                                   data-original-title="Le questionnaire de santé peut être rendu plus tard."></i></a>
                             <div class="col-auto">
-                                <a href="{{ asset('PDF/QuestionnaireDeSante.pdf') }}" class="btn btn-primary"
-                                   download>Obtenir
-                                    le questionnaire</a>
+                                <button id="healthQuestionnaire" type="button" class="btn btn-primary">
+                                    Répondre au questionnaire
+                                </button>
+                            </div>
+                        </div>
+                        <div class="healthQuestionnaireValidated">
+                            <div class="row align-items-center ml-2 mr-2">
+                                <div class="col-5">
+                                    <p>Vous avez déjà rempli le questionnaire de santé. Il sera possible de le
+                                        télécharger
+                                        afin de le signer et le faire valider par l'association.</p>
+                                </div>
+                                <div class="col-5">
+                                    <button id="healthQuestionnaireModificate" type="button"
+                                            class="btn btn-primary">
+                                        Modifier le questionnaire
+                                    </button>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -621,17 +667,148 @@
                                         target="_blank">la réglementation en ligne</a>
                             </label>
                         </div>
-                        <div class="row justify-content-center mt-3">
-                            <button type="submit" id="buttonSubmit" class="btn btn-success">Confirmer l'inscription
+                        <div class="row justify-content-center mt-3 healthQuestionnaireEmpty">
+                            <button type="submit" class="btn btn-success buttonSubmit">Confirmer l'inscription
                                 de
                                 l'adhérent
                             </button>
+                        </div>
+                        <div class="healthQuestionnaireValidated">
+                            <div class="row justify-content-center mt-3">
+                                <button type="submit" class="btn btn-success buttonSubmit">Confirmer l'inscription
+                                    de
+                                    l'adhérent et télécharger votre questionnaire de santé.
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="row pt-3 pb-3">
+        <div id="registrationStep6" class="justify-content-center">
+            <div class="container-fluid mt-3">
+                <div class="card shadow-sm">
+                    <h5 class="card-header">Questionnaire de santé : </h5>
+                    <div class="card-body">
+                        <div class="container-fluid">
+                            <div class="row align-items-center justify-content-center">
+                                <small id="healthQuestionnaireQuestionHelp" class="form-text helper"><span
+                                            class="badge badge-danger">Erreur</span> Attention, pour valider le
+                                    questionnaire, il faut que toutes les réponses soient remplies.
+                                </small>
+                            </div>
+                            <p><b>Durant les douze derniers mois :</b></p>
+                            <hr/>
+                            <div class="row align-items-center pt-2">
+                                <div class="col-9">
+                                    {{ healthQuestionnaireQuestion1 }}
+                                </div>
+                                <div id="healthQuestionnaireQuestion" class="col-auto">
+                                    {{ form_widget(form.healthQuestionnaire.hasMemberOfFamilyDiedHeartAttack) }}
+                                    {{ form_errors(form.healthQuestionnaire.hasMemberOfFamilyDiedHeartAttack) }}
+                                </div>
+                            </div>
+                            <hr/>
+                            <div class="row align-items-center mt-2">
+                                <div class="col-9">
+                                    {{ healthQuestionnaireQuestion2 }}
+                                </div>
+                                <div id="healthQuestionnaireQuestion" class="col-auto">
+                                    {{ form_widget(form.healthQuestionnaire.hasPainChest) }}
+                                    {{ form_errors(form.healthQuestionnaire.hasPainChest) }}
+                                </div>
+                            </div>
+                            <hr/>
+                            <div class="row align-items-center mt-2">
+                                <div class="col-9">
+                                    {{ healthQuestionnaireQuestion3 }}
+                                </div>
+                                <div id="healthQuestionnaireQuestion" class="col-auto">
+                                    {{ form_widget(form.healthQuestionnaire.hasAsthma) }}
+                                    {{ form_errors(form.healthQuestionnaire.hasAsthma) }}
+                                </div>
+                            </div>
+                            <hr/>
+                            <div class="row align-items-center mt-2">
+                                <div class="col-9">
+                                    {{ healthQuestionnaireQuestion4 }}
+                                </div>
+                                <div id="healthQuestionnaireQuestion" class="col-auto">
+                                    {{ form_widget(form.healthQuestionnaire.hasLossOfConsciousness) }}
+                                    {{ form_errors(form.healthQuestionnaire.hasLossOfConsciousness) }}
+                                </div>
+                            </div>
+                            <hr/>
+                            <div class="row align-items-center mt-2">
+                                <div class="col-9">
+                                    {{ healthQuestionnaireQuestion5 }}
+                                </div>
+                                <div id="healthQuestionnaireQuestion" class="col-auto">
+                                    {{ form_widget(form.healthQuestionnaire.hasResumptionOfSportWithoutDoctorConsent) }}
+                                    {{ form_errors(form.healthQuestionnaire.hasResumptionOfSportWithoutDoctorConsent) }}
+                                </div>
+                            </div>
+                            <hr/>
+                            <div class="row align-items-center mt-2">
+                                <div class="col-9">
+                                    {{ healthQuestionnaireQuestion6 }}
+                                </div>
+                                <div id="healthQuestionnaireQuestion" class="col-auto">
+                                    {{ form_widget(form.healthQuestionnaire.hasMedicalTreatment) }}
+                                    {{ form_errors(form.healthQuestionnaire.hasMedicalTreatment) }}
+                                </div>
+                            </div>
+                            <p class="mt-5"><b>À ce jour : </b></p>
+                            <hr/>
+                            <div class="row align-items-center mt-2">
+                                <div class="col-9">
+                                    {{ healthQuestionnaireQuestion7 }}
+                                </div>
+                                <div id="healthQuestionnaireQuestion" class="col-auto">
+                                    {{ form_widget(form.healthQuestionnaire.hasBoneProblem) }}
+                                    {{ form_errors(form.healthQuestionnaire.hasBoneProblem) }}
+                                </div>
+                            </div>
+                            <hr/>
+                            <div class="row align-items-center mt-2">
+                                <div class="col-9">
+                                    {{ healthQuestionnaireQuestion8 }}
+                                </div>
+                                <div id="healthQuestionnaireQuestion" class="col-auto">
+                                    {{ form_widget(form.healthQuestionnaire.hasHealthProblem) }}
+                                    {{ form_errors(form.healthQuestionnaire.hasHealthProblem) }}
+                                </div>
+                            </div>
+                            <hr/>
+                            <div class="row align-items-center mt-2">
+                                <div class="col-9">
+                                    {{ healthQuestionnaireQuestion9 }}
+                                </div>
+                                <div id="healthQuestionnaireQuestion" class="col-auto">
+                                    {{ form_widget(form.healthQuestionnaire.hasNeedMedicalAdvice) }}
+                                    {{ form_errors(form.healthQuestionnaire.hasNeedMedicalAdvice) }}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="container-fluid pt-3 pb-2">
+                <div class="row justify-content-between">
+                    <div class="col">
+                        <button id="validQuestionnaire" type="button" class="btn btn-success btn-block">Valider le
+                            questionnaire
+                        </button>
+                    </div>
+                    <div class="col">
+                        <button id="cancelQuestionnaire" type="button" class="btn btn-danger btn-block">Annuler le
+                            questionnaire
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="buttonBottom" class="row pt-3 pb-3">
             <div class="col-6">
                 <button id="previousRegistration" type="button" class="btn btn-secondary btn-block">Précédent</button>
             </div>
@@ -1044,6 +1221,51 @@
             $(".custom-file-input").on("change", function () {
                 var fileName = $(this).val().split("\\").pop();
                 $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+            });
+
+            $('#healthQuestionnaire').click(function () {
+                $("#registrationStep6").show();
+                $("#registrationStep5").hide();
+                $("#buttonBottom").hide();
+            });
+
+            $('#healthQuestionnaireModificate').click(function () {
+                $("#registrationStep6").show();
+                $("#registrationStep5").hide();
+                $("#buttonBottom").hide();
+            });
+
+            $('#cancelQuestionnaire').click(function () {
+                $('div #healthQuestionnaireQuestion > div > div > input').each(function () {
+                    $('input[name="' + $(this).attr('name') + '"]').prop('checked', false);
+                });
+                $("#registrationStep6").hide();
+                $("#registrationStep5").show();
+                $("#buttonBottom").show();
+                $("#healthQuestionnaireQuestionHelp").hide();
+                $(".healthQuestionnaireEmpty").show();
+                $(".healthQuestionnaireValidated").hide();
+            });
+
+            $('#validQuestionnaire').click(function () {
+                var bool = true;
+                $('div #healthQuestionnaireQuestion > div > div > input').each(function () {
+                    if (isValidationRadio($(this).attr('name'))) {
+                        bool = false;
+                    }
+                    ;
+                });
+                if (bool) {
+                    $("#registrationStep6").hide();
+                    $("#registrationStep5").show();
+                    $("#buttonBottom").show();
+                    $("#healthQuestionnaireQuestionHelp").hide();
+                    $(".healthQuestionnaireEmpty").hide();
+                    $(".healthQuestionnaireValidated").show();
+                } else {
+                    window.scrollTo(0, 0);
+                    $("#healthQuestionnaireQuestionHelp").show();
+                }
             });
         </script>
     {% endblock %}

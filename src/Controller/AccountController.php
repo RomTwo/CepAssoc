@@ -99,6 +99,7 @@ class AccountController extends AbstractController
             'activities' => $this->getDoctrine()
                 ->getRepository(Activity::class)
                 ->findAll(),
+            'days' => array('Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi')
         ));
     }
 
@@ -117,6 +118,7 @@ class AccountController extends AbstractController
 
         $form = $this->createForm(AccountType::class, $account);
         $form->remove('children');
+        $form->remove('addAccountAdherent');
         $form->add('newPassword', PasswordType::class, array(
             'mapped' => false,
             'label' => 'Mot de passe',
@@ -161,7 +163,6 @@ class AccountController extends AbstractController
                 $msg = "Votre mot de passe actuel est incorrect";
                 return $this->render('account/update.html.twig', array("form" => $form->createView(), "errorOldPassFalse" => $msg));
             }
-
             $manager->flush();
             $this->addFlash('success', "Votre compte a été modifié");
             return $this->redirectToRoute('home');
@@ -304,8 +305,8 @@ class AccountController extends AbstractController
         $html = $this->render('account/generateHealthQuestionnairePDF.html.twig', [
             'adherent' => $adherent,
         ])->getContent();//Cette ligne permet de générer l'HTML d'une page twig.
-                         //L'option 'getContent()' permet quant à elle de générer cette page sans les informations
-                         //fournis par domPDF comme des informations de requêtes...
+        //L'option 'getContent()' permet quant à elle de générer cette page sans les informations
+        //fournis par domPDF comme des informations de requêtes...
         $pdfOptions = new Options();
         $dompdf = new Dompdf($pdfOptions);
         $dompdf->loadHtml($html);

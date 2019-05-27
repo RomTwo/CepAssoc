@@ -9,149 +9,132 @@
 
         {{ form_start(form) }}
 
-        <div class="container mt-4">
-            <div class="form-group pb-4 pt-4">
-                <div class="container-fluid">
-                    <h4>Informations générales : </h4>
-
-                    <div class="row mt-3">
-                        <div class="col-2">
-                            <label>Prénom : </label>
+        <div class="container-fluid mt-3">
+            <div class="card shadow-sm">
+                <h5 class="card-header">Informations générales :</h5>
+                <div class="card-body">
+                    <div class="container-fluid">
+                        <div class="row justify-content-around">
+                            <div class="col-6">
+                                {{ form_widget(form.firstName) }}
+                                <small id="firstNameHelp" class="form-text helper"><span
+                                            class="badge badge-danger">Erreur</span> Le prenom doit être rempli.
+                                </small>
+                                {{ form_errors(form.firstName) }}
+                            </div>
+                            <div class="col-6">
+                                {{ form_widget(form.lastName) }}
+                                <small id="lastNameHelp" class="form-text helper"><span
+                                            class="badge badge-danger">Erreur</span> Le nom doit être rempli.
+                                </small>
+                                {{ form_errors(form.lastName) }}
+                            </div>
                         </div>
-                        <div class="col-auto">
-                            {{ form_widget(form.firstName) }}
+                        <hr/>
+                        <div class="row justify-content-around">
+                            <div class="col-auto">
+                                Date de naissance : {{ form_widget(form.birthDate) }}
+                            </div>
+                            <div class="col-auto">
+                                Genre : {{ form_widget(form.sex) }}
+                            </div>
                         </div>
-                        <div class="row ml-1">
-                            {{ form_errors(form.firstName) }}
+                        <div class="row justify-content-around">
+                            <div class="col-auto">
+                                <small id="birthDateHelp" class="form-text helper"><span
+                                            class="badge badge-danger">Erreur</span> La date de naissance doit être
+                                    rempli.
+                                </small>
+                                {{ form_errors(form.birthDate) }}
+                            </div>
+                            <div class="col-auto">
+                                <small id="sexHelp" class="form-text helper"><span
+                                            class="badge badge-danger">Erreur</span> Le genre doit être
+                                    rempli.
+                                </small>
+                                {{ form_errors(form.sex) }}
+                            </div>
                         </div>
-
-                    </div>
-
-                    <div class="row mt-3">
-                        <div class="col-2">
-                            <label>Nom : </label>
+                        <hr/>
+                        <div class="row align-content-center">
+                            <div class="col-auto">
+                                <label>Code postal : </label>
+                            </div>
+                            <div class="col-auto">
+                                {{ form_widget(form.zipCode) }}
+                                <small id="zipCodeHelp" class="form-text helper"><span
+                                            class="badge badge-danger">Erreur</span> Le zip code doit être
+                                    rempli.
+                                </small>
+                            </div>
+                            <div class="col-auto">
+                                <p>Ville :</p>
+                            </div>
+                            <div class="col-auto">
+                                <div class="col-auto">
+                                    <select id="account_city" name="account_city" class="form-control">
+                                        {% if city is defined and city is not null %}
+                                            <option value={{ city }} selected>{{ city }}</option>
+                                        {% endif %}
+                                    </select>
+                                </div>
+                                <small id="cityHelp" class="form-text helper"><span
+                                            class="badge badge-danger">Erreur</span> Le zip code doit être
+                                    rempli pour
+                                    pouvoir choisir la ville.
+                                </small>
+                            </div>
                         </div>
-                        <div class="col-auto">
-                            {{ form_widget(form.lastName) }}
+                        <div class="container-fluid">
+                            <div class="row mt-3">
+                                {{ form_widget(form.address) }}
+                                <small id="addressHelp" class="form-text helper"><span
+                                            class="badge badge-danger">Erreur</span> L'adresse doit être rempli.
+                                </small>
+                                {{ form_errors(form.address) }}
+                            </div>
                         </div>
-                        <div class="row ml-1">
-                            {{ form_errors(form.lastName) }}
-                        </div>
-                    </div>
-
-                    <div class="row mt-3">
-                        <div class="col-2">
-                            <label>Civilité : </label>
-                        </div>
-                        <div class="col-auto">
-                            {{ form_widget(form.sex) }}
-                        </div>
-                        <div class="row ml-1">
-                            {{ form_errors(form.sex) }}
-                        </div>
-                    </div>
-
-                    <div class="row mt-3">
-                        <div class="col-2">
-                            <label>Date de naissance</label>
-                        </div>
-                        <div class="col-auto">
-                            {{ form_widget(form.birthDate) }}
-                        </div>
-                        <div class="row ml-1">
-                            {{ form_errors(form.birthDate) }}
-                        </div>
-                    </div>
-
-                    <div class="row mt-3">
-                        <div class="col-2">
-                            <label>Adresse</label>
-                        </div>
-                        <div class="col-auto">
-                            {{ form_widget(form.address) }}
-                        </div>
-                        <div class="row ml-1">
-                            {{ form_errors(form.address) }}
-                        </div>
-                    </div>
-
-                    <div class="row mt-3">
-                        <div class="col-2">
-                            <label>Code Postal</label>
-                        </div>
-                        <div class="col-auto">
-                            {{ form_widget(form.zipCode) }}
-                        </div>
-                        <div class="row ml-1">
-                            {{ form_errors(form.zipCode) }}
-                        </div>
-                    </div>
-                    <div class="row mt-3">
-                        <div class="col-2">
-                            <p>Ville :</p>
-                        </div>
-                        <div class="col-auto">
-                            <select id="account_city" name="account_city" class="form-control">
-                                {% if city is defined and city is not null %}
-                                    <option value={{ city }} selected>{{ city }}</option>
-                                {% endif %}
-                            </select>
-                        </div>
-                    </div>
-                    <div class="row mt-3">
-                        <div class="col-2">
-                            <label>Adresse mail : </label>
-                        </div>
-                        <div class="col-auto">
-                            {{ form_widget(form.email) }}
-                        </div>
-                        <div class="row ml-1">
-                            {{ form_errors(form.email) }}
-                        </div>
-                        {% if errorMail is defined %}
-                            <div class="row ml-1">
+                        <hr/>
+                        <div class="row justify-content-around">
+                            <div class="col-4">
+                                {{ form_widget(form.email) }}
+                                <small id="emailHelp" class="form-text helper"><span
+                                            class="badge badge-danger">Erreur</span> L'adresse mail doit être
+                                    rempli.
+                                </small>
+                                {% if errorMail is defined %}
+                                    <div class="row ml-1">
                                 <span class="invalid-feedback d-block">
                                     <span class="d-block">
                                         <span class="form-error-icon badge badge-danger text-uppercase">{{ 'Erreur' }}</span>
                                         <span class="form-error-message">{{ errorMail }}</span>
                                     </span>
                                 </span>
+                                    </div>
+                                {% endif %}
                             </div>
-                        {% endif %}
-                    </div>
-
-                    <div class="row mt-3">
-                        <div class="col-2">
-                            <label>Mot de passe : </label>
-                        </div>
-                        <div class="col-auto">
-                            {{ form_widget(form.password, {'attr': {'placeholder': "Mot de passe actuel"}}) }}
-                        </div>
-                        <div class="row ml-1">
-                            {{ form_errors(form.password) }}
-                        </div>
-                        {% if errorOldPassFalse is defined %}
-                            <div class="row ml-1">
+                            <div class="col-4">
+                                {{ form_widget(form.password, {'attr': {'data-placement': "bottom"}}) }}
+                                <small id="passwordHelp" class="form-text helper"><span
+                                            class="badge badge-danger">Erreur</span> Le mot de passe doit être
+                                    rempli.
+                                </small>
+                                {{ form_errors(form.password) }}
+                                {% if errorOldPassFalse is defined %}
+                                    <div class="row ml-1">
                                 <span class="invalid-feedback d-block">
                                     <span class="d-block">
                                         <span class="form-error-icon badge badge-danger text-uppercase">{{ 'Erreur' }}</span>
                                         <span class="form-error-message">{{ errorOldPassFalse }}</span>
                                     </span>
                                 </span>
+                                    </div>
+                                {% endif %}
                             </div>
-                        {% endif %}
-                    </div>
+                            <div class="col-4">
+                                {{ form_widget(form.newPassword, {'full_name': 'newPassword'}) }}
 
-                    <div class="row mt-3">
-                        <div class="col-2">
-                            <label>Mot de passe : </label>
-                        </div>
-                        <div class="col-auto">
-                            {{ form_widget(form.newPassword, {'full_name': 'newPassword'}) }}
-                        </div>
-
-                        {% if errorNewPassFalse is defined %}
-                            <div class="row ml-1">
+                                {% if errorNewPassFalse is defined %}
                                 <span class="invalid-feedback d-block">
                                     <span class="d-block">
                                         <span class="form-error-icon badge badge-danger text-uppercase">{{ 'Erreur' }}</span>
@@ -159,14 +142,19 @@
                                     </span>
                                 </span>
                             </div>
-                        {% endif %}
+                            {% endif %}
+                        </div>
                     </div>
-
-                    {{ form_widget(form.valid, {'label': "Modifier"}) }}
                 </div>
             </div>
         </div>
-        {{ form_end(form) }}
+    </div>
+
+    <div class="container-fluid mt-4">
+
+        {{ form_widget(form.valid, {'label': "Modifier"}) }}
+    </div>
+    {{ form_end(form) }}
     </div>
 {% endblock %}
 {% block javascripts %}
