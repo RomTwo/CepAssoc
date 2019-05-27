@@ -43,8 +43,8 @@ class Utilitaires
             $adherent->setBulletinN2Allianz($this->addFile($adherent->getBulletinN2Allianz()));
         }
 
-        if($adherent->getHealthQuestionnaire() != null){
-            $adherent->setHealthQuestionnaire($this->addFile($adherent->getHealthQuestionnaire()));
+        if($adherent->getHealthQuestionnaireFile() != null){
+            $adherent->setHealthQuestionnaireFile($this->addFile($adherent->getHealthQuestionnaireFile()));
         }
 
         return $adherent;

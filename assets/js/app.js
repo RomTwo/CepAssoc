@@ -13,6 +13,7 @@ jQuery = require('jquery');
 global.moment = require('moment');
 require('bootstrap');
 require('datatables.net-bs4');
+require('datatables.net-select-bs4');
 require('bootstrap-notify');
 require('@fortawesome/fontawesome-free/js/all.js');
 require('bootstrap-material-datetimepicker/js/bootstrap-material-datetimepicker.js');
@@ -40,6 +41,10 @@ $('#account_zipCode').focusout(function () {
             }
         }
     })
+});
+
+$(function () {
+    $('[data-toggle="tooltip"]').tooltip()
 });
 
 $(".custom-file-input").on("change", function () {

@@ -1,5 +1,6 @@
 @import "~bootstrap/scss/bootstrap";
 @import "~datatables.net-bs4";
+@import "~datatables.net-select-bs4";
 @import "~animate.css";
 @import "~@fortawesome/fontawesome-free/css/all.css";
 @import "~bootstrap-material-datetimepicker/css/bootstrap-material-datetimepicker.css";
@@ -43,11 +44,15 @@ small {
   color: red;
 }
 
-#previous, #next, #previousRegistration, #accountStep2, #accountStep3, #accountStep4, #accountStep5, #accountStep6, #accountStep7, #judgeDiv, #volunteerDiv, .helper, #registrationStep2, #registrationStep3, #registrationStep4, #registrationStep5, #judgeDiv, #volunteerDiv{
+#previous, #next, #previousRegistration, #accountStep2, #accountStep3, #accountStep4, #accountStep5, #accountStep6, #accountStep7, #judgeDiv, #volunteerDiv, .helper, #registrationStep2, #registrationStep3, #registrationStep4, #registrationStep5, #judgeDiv, #volunteerDiv, .healthQuestionnaireValidated{
   display: none;
 }
 
 .group {
   font-weight: bold;
   color: red;
+}
+
+.form-check-input.is-invalid ~ .form-check-label {
+  color: black;
 }
