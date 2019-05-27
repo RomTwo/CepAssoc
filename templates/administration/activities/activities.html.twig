@@ -4,7 +4,9 @@
 
 
 {% block body %}
-    <a href="{{path('admin_activityAdd')}}" class="btn btn-primary">Ajouter une activité</a>
+    {% if is_granted('ROLE_ADMIN') %}
+        <a href="{{ path('admin_activityAdd') }}" class="btn btn-primary">Ajouter une activité</a>
+    {% endif %}
 
     <div class="tab-content" id="pills-tabContent">
         <div class="tab-pane fade show active" id="content-all" role="tabpanel" aria-labelledby="pills-all">
@@ -12,24 +14,32 @@
                    aria-describedby="example_info">
                 <thead>
                 <tr role="row">
-                    <th  class="sorting_asc" tabindex="0" aria-controls="example" rowspan="1" colspan="1"
-                         style="width: 119px;" aria-sort="ascending"
-                         aria-label="lastName: activate to sort column descending">Activités</th>
-                    <th  class="sorting_asc" tabindex="0" aria-controls="example" rowspan="1" colspan="1"
-                         style="width: 119px;" aria-sort="ascending"
-                         aria-label="lastName: activate to sort column descending">Créneaux</th>
-                    <th  class="sorting_asc" tabindex="0" aria-controls="example" rowspan="1" colspan="1"
-                         style="width: 119px;" aria-sort="ascending"
-                         aria-label="lastName: activate to sort column descending">Cotisation</th>
-                    <th  class="sorting_asc" tabindex="0" aria-controls="example" rowspan="1" colspan="1"
-                         style="width: 119px;" aria-sort="ascending"
-                         aria-label="lastName: activate to sort column descending">Date de début</th>
-                    <th  class="sorting_asc" tabindex="0" aria-controls="example" rowspan="1" colspan="1"
-                         style="width: 119px;" aria-sort="ascending"
-                         aria-label="lastName: activate to sort column descending">Cotisation</th>
-                    <th  class="sorting_asc" tabindex="0" aria-controls="example" rowspan="1" colspan="1"
-                         style="width: 119px;" aria-sort="ascending"
-                         aria-label="lastName: activate to sort column descending">Actions</th>
+                    <th class="sorting_asc" tabindex="0" aria-controls="example" rowspan="1" colspan="1"
+                        style="width: 119px;" aria-sort="ascending"
+                        aria-label="lastName: activate to sort column descending">Activités
+                    </th>
+                    <th class="sorting_asc" tabindex="0" aria-controls="example" rowspan="1" colspan="1"
+                        style="width: 119px;" aria-sort="ascending"
+                        aria-label="lastName: activate to sort column descending">Créneaux
+                    </th>
+                    <th class="sorting_asc" tabindex="0" aria-controls="example" rowspan="1" colspan="1"
+                        style="width: 119px;" aria-sort="ascending"
+                        aria-label="lastName: activate to sort column descending">Cotisation
+                    </th>
+                    <th class="sorting_asc" tabindex="0" aria-controls="example" rowspan="1" colspan="1"
+                        style="width: 119px;" aria-sort="ascending"
+                        aria-label="lastName: activate to sort column descending">Date de début
+                    </th>
+                    <th class="sorting_asc" tabindex="0" aria-controls="example" rowspan="1" colspan="1"
+                        style="width: 119px;" aria-sort="ascending"
+                        aria-label="lastName: activate to sort column descending">Cotisation
+                    </th>
+                    {% if is_granted('ROLE_ADMIN') %}
+                        <th class="sorting_asc" tabindex="0" aria-controls="example" rowspan="1" colspan="1"
+                            style="width: 119px;" aria-sort="ascending"
+                            aria-label="lastName: activate to sort column descending">Actions
+                        </th>
+                    {% endif %}
 
                 </tr>
                 </thead>
@@ -39,20 +49,22 @@
                         <tr role="row" class="odd">
                             <td>{{ activity.name }}</td>
                             <td>{% for slot in activity.timeSlot %}
-                                    {{slot.getFullTime  }} <br>
+                                    {{ slot.getFullTime }} <br>
                                 {% endfor %}</td>
                             <td>
                                 <font style="text-transform: uppercase;">
                                     <span style="color: red; size: 300px !important ">{{ category.name }}</span>
                                 </font>
                             </td>
-                            <td>{{ activity.startDate|date('d-m-Y')  }}</td>
+                            <td>{{ activity.startDate|date('d-m-Y') }}</td>
                             <td> {{ activity.price }} €</td>
                             <td>  <!-- Button trigger modal -->
 
-                                <a href="{{path('admin_activityDetails', {id: activity.id})}}" class="btn btn-primary">Gérer</a>
-                                <a href="{{path('admin_activityEdit', {id: activity.id})}}" class="btn btn-primary">Modifier</a>
-                                <a  href="{{path('admin_activityDelete', {id: activity.id } )}}" class="btn btn-secondary">Supprimer</a></td>
+                                <a href="{{ path('admin_activityDetails', {id: activity.id}) }}"
+                                   class="btn btn-primary">Gérer</a>
+                                <a href="{{ path('admin_activityEdit', {id: activity.id}) }}" class="btn btn-primary">Modifier</a>
+                                <a href="{{ path('admin_activityDelete', {id: activity.id } ) }}"
+                                   class="btn btn-secondary">Supprimer</a></td>
                         </tr>
                     {% endfor %}
                 {% endfor %}
@@ -61,12 +73,14 @@
 
                 <tfoot>
                 <tr>
-                    <th  rowspan="1" colspan="1">Activités</th>
-                    <th  rowspan="1" colspan="1">Créneaux</th>
-                    <th  rowspan="1" colspan="1">Cotisation</th>
-                    <th  rowspan="1" colspan="1">Date de début</th>
-                    <th  rowspan="1" colspan="1">Cotisation</th>
-                    <th  rowspan="1" colspan="1">Actions</th>
+                    <th rowspan="1" colspan="1">Activités</th>
+                    <th rowspan="1" colspan="1">Créneaux</th>
+                    <th rowspan="1" colspan="1">Cotisation</th>
+                    <th rowspan="1" colspan="1">Date de début</th>
+                    <th rowspan="1" colspan="1">Cotisation</th>
+                    {% if is_granted('ROLE_ADMIN') %}
+                        <th rowspan="1" colspan="1">Actions</th>
+                    {% endif %}
                 </tr>
                 </tfoot>
             </table>
@@ -76,42 +90,42 @@
 
 {% block javascripts %}
     <script type="text/javascript">
-        $(document).ready(function() {
+        $(document).ready(function () {
 
             var groupColumn = 2;
             var table = $('#example').DataTable({
                 "columnDefs": [
-                    { "visible": false, "targets": groupColumn }
+                    {"visible": false, "targets": groupColumn}
                 ],
-                "order": [[ groupColumn, 'asc' ]],
+                "order": [[groupColumn, 'asc']],
                 "displayLength": 25,
-                "drawCallback": function ( settings ) {
+                "drawCallback": function (settings) {
                     var api = this.api();
-                    var rows = api.rows( {page:'current'} ).nodes();
-                    var last=null;
+                    var rows = api.rows({page: 'current'}).nodes();
+                    var last = null;
 
-                    api.column(groupColumn, {page:'current'} ).data().each( function ( group, i ) {
-                        if ( last !== group ) {
-                            $(rows).eq( i ).before(
-                                '<tr class="group"><td colspan="5">'+group+'</td></tr>'
+                    api.column(groupColumn, {page: 'current'}).data().each(function (group, i) {
+                        if (last !== group) {
+                            $(rows).eq(i).before(
+                                '<tr class="group"><td colspan="5">' + group + '</td></tr>'
                             );
 
                             last = group;
                         }
-                    } );
+                    });
                 }
-            } );
+            });
 
             // Order by the grouping
-            $('#example tbody').on( 'click', 'tr.group', function () {
+            $('#example tbody').on('click', 'tr.group', function () {
                 var currentOrder = table.order()[0];
-                if ( currentOrder[0] === groupColumn && currentOrder[1] === 'asc' ) {
-                    table.order( [ groupColumn, 'desc' ] ).draw();
+                if (currentOrder[0] === groupColumn && currentOrder[1] === 'asc') {
+                    table.order([groupColumn, 'desc']).draw();
                 }
                 else {
-                    table.order( [ groupColumn, 'asc' ] ).draw();
+                    table.order([groupColumn, 'asc']).draw();
                 }
-            } );
-        } );
+            });
+        });
     </script>
 {% endblock %}

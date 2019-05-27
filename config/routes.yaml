@@ -79,6 +79,10 @@ admin_adherentsDelete:
         id: ([0-9]*)
 
     #--activities
+admin_activities_moderator:
+    path: /admin/activities/views
+    controller: App\Controller\administration\AdminActivitiesController::index
+
 admin_activities:
     path: /admin/activities
     controller: App\Controller\administration\AdminActivitiesController::index
