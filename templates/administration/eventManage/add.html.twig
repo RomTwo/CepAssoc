@@ -4,6 +4,9 @@
             {{ form_start(form, {'attr': {'id': 'addEventManager'}}) }}
             <div class="modal-body">
                 <h4>Ajouter une personne</h4>
+                <div id="errorAddEventManager">
+
+                </div>
                 <div>
                     <label>Personne : </label>
                     {{ form_widget(form.account, {'full_name': 'person'}) }}

@@ -36,7 +36,7 @@ class EventManagement
     /**
      * @ORM\Column(type="datetime", length=255)
      * @Assert\NotNull(message="Veuiller définir une date de départ")
-     * @Assert\DateTime(message="Le format de la date de début n'est pas correct)
+     * @Assert\DateTime(message="Le format de la date de début n'est pas correct")
      * @Groups({"event"})
      */
     private $startDate;
@@ -44,7 +44,7 @@ class EventManagement
     /**
      * @ORM\Column(type="datetime", length=255)
      * @Assert\NotNull(message="Veuiller définir une date de fin")
-     * @Assert\DateTime(message="Le format de la date de fin n'est pas correct)
+     * @Assert\DateTime(message="Le format de la date de fin n'est pas correct")
      * @Groups({"event"})
      */
     private $endDate;

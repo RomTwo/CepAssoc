@@ -4,6 +4,9 @@
             <form id="updateEventManagerForm" action="{{ path('admin_event_manager_update') }}" method="post">
                 <div class="modal-body">
                     <h4>Modification : </h4>
+                    <div id="errorUpdateEventManager">
+
+                    </div>
                     <div>
                         <label>Personne : </label>
                         <select id="selectAccountUpdate" class="form-control" name="person"></select>

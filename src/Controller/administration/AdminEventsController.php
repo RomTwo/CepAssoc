@@ -2,8 +2,8 @@
 
 namespace App\Controller\administration;
 
-use App\Entity\Event;
 use App\Form\EventType;
+use App\Entity\Event;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 

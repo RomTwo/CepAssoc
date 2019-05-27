@@ -28,14 +28,14 @@ class Event
     /**
      * @ORM\Column(type="datetime")
      * @Assert\NotNull(message="Veuiller renseigner la date de début")
-     * @Assert\DateTime(message="Le format de la date de début n'est pas correct)
+     * @Assert\DateTime(message="Le format de la date de début n'est pas correct")
      */
     private $startDate;
 
     /**
      * @ORM\Column(type="datetime")
      * @Assert\NotNull(message="Veuiller renseigner la date de fin")
-     * @Assert\DateTime(message="Le format de la date de fin n'est pas correct)
+     * @Assert\DateTime(message="Le format de la date de fin n'est pas correct")
      */
     private $endDate;
 

@@ -81,12 +81,13 @@ $('#addEventManager').submit(function (e) {
             $('#calendar').fullCalendar('refetchEvents');
             $('#modal-view-event-add').modal('hide');
             $.notification('fas fa-check', 'Succès : ', response, 'success');
+            $('#addEventManager').get(0).reset();
         },
         error: function (error) {
-            $.notification('fa fa-exclamation-circle', 'Erreur : ', error.responseJSON, 'danger');
+            $('#errorAddEventManager').append($.createErrorMsg(error.responseJSON));
         }
     });
-    $(this).get(0).reset();
+
 });
 
 // Submit the update form
@@ -104,7 +105,7 @@ $('#updateEventManagerForm').submit(function (e) {
             $.notification('fas fa-check', 'Succès : ', response, 'success');
         },
         error: function (error) {
-            $.notification('fa fa-exclamation-circle', 'Erreur : ', error.responseJSON, 'danger');
+            $('#errorUpdateEventManager').append($.createErrorMsg(error.responseJSON));
         }
     })
 });
@@ -182,7 +183,18 @@ $.updateDatetime = function (object) {
             $.notification('fas fa-check', 'Succès : ', response, 'success');
         },
         error: function (response) {
-            $.notification('fa fa-exclamation-circle', 'Erreur : ', response.responseJSON, 'danger');
+            $.notification('fa fa-exclamation-circle', 'Erreur : ', error.responseJSON, 'danger');
         }
     })
+};
+
+$.createErrorMsg = function (msg) {
+    return "<div class='row ml-1'>" +
+        "<span class='invalid-feedback d-block'>" +
+        "<span class='d-block'>" +
+        "<span class='form-error-icon badge badge-danger text-uppercase'>Erreur</span>" +
+        "<span class='form-error-message'>" + msg + "</span>" +
+        "</span>" +
+        "</span>" +
+        "</div>";
 };

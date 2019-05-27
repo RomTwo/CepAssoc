@@ -7,6 +7,7 @@ use App\Entity\Event;
 use App\Entity\EventManagement;
 use App\Entity\Job;
 use App\Form\EventManagerType;
+use App\Services\CompareDatetime;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -41,7 +42,7 @@ class AdminEventManagerController extends AbstractController
         );
     }
 
-    public function add(Request $request, ValidatorInterface $validator)
+    public function add(Request $request, ValidatorInterface $validator, CompareDatetime $compareDatetime)
     {
         if ($request->isMethod('POST')) {
             $eventId = $request->request->get('idEvent');
@@ -57,8 +58,14 @@ class AdminEventManagerController extends AbstractController
             $event = $manager->getRepository(Event::class)->find($eventId);
             $job = $manager->getRepository(Job::class)->find($jobId);
 
-            if ($event === null || $account === null || $job === null) {
-                return JsonResponse::create('Les données saisies sont fausses', 404);
+            if (is_null($event)) {
+                return JsonResponse::create("L'évènement n'existe pas", 404);
+            } elseif (is_null($account)) {
+                return JsonResponse::create("La personne n'existe pas", 404);
+            } elseif (is_null($job)) {
+                return JsonResponse::create("Le poste n'existe pas", 404);
+            } elseif (!$compareDatetime->isSuperior($start, $end)) {
+                return JsonResponse::create("La date de départ doit être inférieur à la date de fin", 400);
             }
 
             $eventManager = new EventManagement();
@@ -80,7 +87,7 @@ class AdminEventManagerController extends AbstractController
         return JsonResponse::create('Ajout effectué', 200);
     }
 
-    public function update(Request $request, ValidatorInterface $validator)
+    public function update(Request $request, ValidatorInterface $validator, CompareDatetime $compareDatetime)
     {
         if ($request->isMethod('POST')) {
             $eventManagerId = $request->request->get('idEventManager');
@@ -96,8 +103,14 @@ class AdminEventManagerController extends AbstractController
             $account = $manager->getRepository(Account::class)->find($personId);
             $job = $manager->getRepository(Job::class)->find($jobId);
 
-            if ($eventManager === null || $account === null || $job === null) {
-                return JsonResponse::create('Les données saisies sont fausses', 404);
+            if (is_null($eventManager)) {
+                return JsonResponse::create("L'évènement n'existe pas sur le calendrier", 404);
+            } elseif (is_null($account)) {
+                return JsonResponse::create("La personne n'existe pas", 404);
+            } elseif (is_null($job)) {
+                return JsonResponse::create("Le poste n'existe pas", 404);
+            } elseif (!$compareDatetime->isSuperior($start, $end)) {
+                return JsonResponse::create("La date de départ doit être inférieur à la date de fin", 400);
             }
 
             $eventManager->setAccount($account);
@@ -124,7 +137,7 @@ class AdminEventManagerController extends AbstractController
         $eventManager = $manager->getRepository(EventManagement::class)->find($id);
 
         if ($eventManager === null) {
-            return JsonResponse::create('L\'évènement n\'existe pas', 404);
+            return JsonResponse::create("L'évènement n'existe pas", 404);
         }
         $manager->remove($eventManager);
         $manager->flush();
@@ -139,7 +152,7 @@ class AdminEventManagerController extends AbstractController
         $event = $this->getDoctrine()->getRepository(Event::class)->find($id);
 
         if ($event === null) {
-            return JsonResponse::create('L\'évènement n\'existe pas', 404);
+            return JsonResponse::create("L'évènement n'existe pas", 404);
         }
 
         $eventManagers = $this->getDoctrine()->getRepository(EventManagement::class)->findBy(array('event' => $event));
@@ -161,7 +174,7 @@ class AdminEventManagerController extends AbstractController
 
     }
 
-    public function updateDatetime(Request $request, ValidatorInterface $validator)
+    public function updateDatetime(Request $request, ValidatorInterface $validator, CompareDatetime $compareDatetime)
     {
         $id = $request->request->get('id');
         $start = $request->request->get('start');
@@ -170,8 +183,10 @@ class AdminEventManagerController extends AbstractController
         $manager = $this->getDoctrine()->getManager();
         $eventManager = $manager->getRepository(EventManagement::class)->find($id);
 
-        if ($eventManager === null) {
-            return JsonResponse::create('L\'évènement n\'existe pas New route', 404);
+        if (!$compareDatetime->isSuperior($start, $end)) {
+            return JsonResponse::create("La date de départ doit être inférieur à la date de fin", 400);
+        } else if (is_null($eventManager)) {
+            return JsonResponse::create("L'évènement n'existe pas sur le calendrier", 400);
         }
 
         $eventManager->setStartDate(new \DateTime($start));
@@ -187,4 +202,3 @@ class AdminEventManagerController extends AbstractController
     }
 
 }
-
