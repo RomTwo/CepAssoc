@@ -43,9 +43,7 @@
 
     </div>
 
-    <div class="row">
-        {{ form_row(form.timeSlot) }}
-    </div>
+    {{ form_widget(form.timeSlot) }}
     <br>
 
     <a href="#" id="add_timeSlot" class="btn btn-outline-success">Ajouter un créneau</a>
@@ -58,6 +56,8 @@
 
 
 {% block javascripts %}
+    {{ encore_entry_script_tags('date') }}
+    {{ encore_entry_script_tags('time') }}
     <script type="text/javascript">
         $(document).ready(function () {
             // On récupère la balise <div> en question qui contient l'attribut « data-prototype » qui nous intéresse.

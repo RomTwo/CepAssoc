@@ -46,17 +46,16 @@ class AccountController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid() && $utilitaires->isValidateCity($request)) {
             if ($captchaCheck->captchaIsValid($request->request->get('recaptcha_response'))) {
-            $account->setCity($request->request->get("account_city"));
-            $adherent->setCityRep1($request->request->get("account_city"));
+                $account->setCity($request->request->get("account_city"));
+                $adherent->setCityRep1($request->request->get("account_city"));
                 if (!$this->findByEmail($account->getEmail())) {
-                    if($request->request->get("registration")){
-                        if($this->isValidate($adherent)){
+                    if ($request->request->get("registration")) {
+                        if ($this->isValidate($adherent)) {
                             $utilitaires->setOtherFields($adherent);
                             $adherent->setRegistrationType("nouveau");
 
 
-
-                        }else{
+                        } else {
                             $msg = "Attention, il manque des informations pour devenir adhérent";
                             return $this->render('account/index.html.twig', array(
                                 "form" => $form->createView(),
@@ -66,7 +65,7 @@ class AccountController extends AbstractController
                                     ->findAll(),
                             ));
                         }
-                    }else{
+                    } else {
                         $account->removeChild($adherent);
                     }
                     $manager = $this->getDoctrine()->getManager();
@@ -264,8 +263,9 @@ class AccountController extends AbstractController
         return $account != null ? true : false;
     }
 
-    private function isValidate($adherent){
-        if($adherent->getSex() == null){
+    private function isValidate($adherent)
+    {
+        if ($adherent->getSex() == null) {
             return false;
         }
 

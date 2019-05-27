@@ -58,10 +58,18 @@ class EventManagement
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
-     * @Assert\NotNull(message="Veuiller renseigner le lieu d'intervention de la personne")
      * @Groups({"event"})
      */
     private $place;
+
+    /**
+     * EventManagement constructor.
+     */
+    public function __construct()
+    {
+        $this->place = null;
+    }
+
 
     public function getId(): ?int
     {
