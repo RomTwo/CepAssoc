@@ -2,11 +2,19 @@
 require('../css/dashboard_admin.scss');
 
 $ = require('jquery');
+jQuery = require('jquery');
+global.moment = require('moment');
 require('bootstrap');
+require('select2');
 require('datatables.net-bs4');
 require('datatables.net-responsive-bs4');
 require('bootstrap-notify');
 require('@fortawesome/fontawesome-free/js/all.js');
+require('bootstrap-material-datetimepicker/js/bootstrap-material-datetimepicker.js');
+require('@fullcalendar/core');
+require('@fullcalendar/daygrid');
+require('@fullcalendar/bootstrap');
+require('fullcalendar');
 
 window.datatable_french = {
   "sProcessing":     "Traitement en cours...",

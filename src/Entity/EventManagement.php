@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\EventManagementRepository")
@@ -18,18 +20,48 @@ class EventManagement
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Event", inversedBy="eventManagements")
+     * @ORM\JoinColumn(nullable=false)
+     * @Assert\NotNull(message="Veuiller renseigner l'évènement référent")
      */
     private $event;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Account", inversedBy="eventManagements")
+     * @ORM\JoinColumn(nullable=false)
+     * @Assert\NotNull(message="Veuiller affecter un utilisateur")
+     * @Groups({"event"})
      */
     private $account;
 
     /**
+     * @ORM\Column(type="datetime", length=255)
+     * @Assert\NotNull(message="Veuiller définir une date de départ")
+     * @Assert\DateTime(message="Le format de la date de début n'est pas correct")
+     * @Groups({"event"})
+     */
+    private $startDate;
+
+    /**
+     * @ORM\Column(type="datetime", length=255)
+     * @Assert\NotNull(message="Veuiller définir une date de fin")
+     * @Assert\DateTime(message="Le format de la date de fin n'est pas correct")
+     * @Groups({"event"})
+     */
+    private $endDate;
+
+    /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotNull(message="Veuiller définir le rôle de la personne")
+     * @Groups({"event"})
      */
     private $job;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     * @Assert\NotNull(message="Veuiller renseigner le lieu d'intervention de la personne")
+     * @Groups({"event"})
+     */
+    private $place;
 
     public function getId(): ?int
     {
@@ -60,16 +92,64 @@ class EventManagement
         return $this;
     }
 
-    public function getJob(): ?string
+    /**
+     * @return mixed
+     */
+    public function getJob()
     {
         return $this->job;
     }
 
-    public function setJob(string $job): self
+    /**
+     * @param mixed $job
+     */
+    public function setJob($job)
     {
         $this->job = $job;
-
-        return $this;
     }
-    
+
+
+    public function getPlace()
+    {
+        return $this->place;
+    }
+
+    public function setPlace($place)
+    {
+        $this->place = $place;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getStartDate()
+    {
+        return $this->startDate;
+    }
+
+    /**
+     * @param mixed $startDate
+     */
+    public function setStartDate($startDate)
+    {
+        $this->startDate = $startDate;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getEndDate()
+    {
+        return $this->endDate;
+    }
+
+    /**
+     * @param mixed $endDate
+     */
+    public function setEndDate($endDate)
+    {
+        $this->endDate = $endDate;
+    }
+
+
 }

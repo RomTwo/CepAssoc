@@ -6,8 +6,97 @@
     Gestion des évènements
 {% endblock %}
 
-{% block content %}
-    
+{% block body %}
+    <!-- Button who print the event form -->
+    <div class="row justify-content-center mb-2">
+        <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#addEvent"
+                aria-expanded="false" aria-controls="addEvent">
+            Ajouter un évènement
+        </button>
+    </div>
+
+    <!-- Form add event and add job -->
+    <div class="collapse pb-4" id="addEvent">
+        <div class="card card-body">
+            <div class="container-fluid">
+                {% include('administration/events/addEventForm.html.twig') %}
+            </div>
+        </div>
+    </div>
+
+    <!-- DataTable -->
+    <table id="events" class="table table-striped table-bordered" style="width:100%">
+        <thead>
+        <tr>
+            <th>Nom</th>
+            <th>Début</th>
+            <th>Fin</th>
+            <th>Adresse</th>
+            <th>Description</th>
+            <th>Action</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for event in events %}
+            <tr>
+                <td>{{ event.name }}</td>
+                <td>le {{ event.startDate | date("d/m/Y H:i") }}</td>
+                <td>le {{ event.endDate | date("d/m/Y H:i") }}</td>
+                <td>{{ event.address }}</td>
+                <td>{{ event.description }}</td>
+                <td>
+                    <a class="btn btn-primary" href="{{ path('admin_event_manager_index', {'id': event.id}) }}"><i
+                                class="far fa-calendar-alt"></i></a>
+
+                    <a class="btn btn-warning" href="{{ path('admin_event_update', {'id': event.id}) }}"><i
+                                class="far fa-edit"></i></a>
+
+                    <button type="button" class="btn btn-danger" data-toggle="modal"
+                            data-target="#modalDeleteEvent{{ event.id }}">
+                        <i class="far fa-trash-alt"></i>
+                    </button>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+        <tfoot>
+        <tr>
+            <th>Nom</th>
+            <th>Début</th>
+            <th>Fin</th>
+            <th>Adresse</th>
+            <th>Description</th>
+            <th>Action</th>
+        </tr>
+        </tfoot>
+    </table>
+
+    <table border="0" cellpadding="0" cellspacing="0">
+        <tbody>
+        <tr>
+            <td class="gutter">
+                <div class="line number1 index0 alt2" style="display: none;">1</div>
+            </td>
+            <td class="code">
+                <div class="container" style="display: none;">
+                    <div class="line number1 index0 alt2" style="display: none;">&nbsp;</div>
+                </div>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+    <!-- Modal -->
+    {% for event in events %}
+        {% include('administration/events/modalDeleteEvent.html.twig') %}
+    {% endfor %}
+
+
 
 {% endblock %}
- 
+
+
+{% block javascripts %}
+    {{ encore_entry_script_tags('event') }}
+    {{ encore_entry_script_tags('datetime') }}
+{% endblock %}

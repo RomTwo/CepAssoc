@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Entity\Account;
 use Firebase\JWT\JWT;
 
 class GenerateToken
@@ -11,7 +12,7 @@ class GenerateToken
      *
      * @return string
      */
-    public function generateJwtToken() : string
+    public function generateJwtToken(): string
     {
         $payload = array(
             'iat' => time(),
@@ -19,6 +20,16 @@ class GenerateToken
         );
         $token = JWT::encode($payload, $_ENV['PRIVATE_KEY'], $_ENV['ALG']);
 
+        return $token;
+    }
+
+    public function generateCustomToken(int $during)
+    {
+        $payload = array(
+            'iat' => time(),
+            'exp' => time() + $during
+        );
+        $token = JWT::encode($payload, $_ENV['PRIVATE_KEY'], $_ENV['ALG']);
         return $token;
     }
 }

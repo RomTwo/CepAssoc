@@ -3,6 +3,7 @@
 {% block title %}Hello HomeController!
 {% endblock %}
 
+
 {% block body %}
     <div
         class="row">
@@ -17,15 +18,15 @@
             {% for adherent in adherents %}
                 <div class="card text-left" style="margin-bottom : 20px;">
                     <div class="card-header">
-                        <div class="container-title-card">
-                            <div>
+                        <div style ="display : flex; flex-direction: row;">
+                            <div style =" width: 100%">
                                 <strong>
                                     {{adherent.lastName}}
                                     {{adherent.firstName}}
                                 </strong>
 
                             </div>
-                            <div class="text-right">
+                            <div class="text-right" style ="width: 100%">
                                 Statut :
                                 {% if adherent.isDeleted == true %}
                                     <span style="color:green">Inscription rejeté !</span>
