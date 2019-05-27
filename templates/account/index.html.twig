@@ -184,6 +184,20 @@
                                     {{ form_errors(form.children[0].professionRep1) }}
                                 </div>
                             </div>
+                            <div class="row mt-3 mb-3">
+                                <div class="col-auto">
+                                    <label>Nationalité : </label>
+                                </div>
+                                <div class="col">
+                                    {{ form_widget(form.children[0].nationality) }}
+                                    <small id="nationalityHelp" class="form-text helper"><span
+                                                class="badge badge-danger">Erreur</span> La nationalité doit
+                                        être
+                                        choisie.
+                                    </small>
+                                    {{ form_errors(form.children[0].nationality) }}
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -455,13 +469,17 @@
                                     </button>
                                 </div>
                             </div>
-                            <div class="row align-items-center ml-2 mr-2 healthQuestionnaireValidated">
-                                <p>Vous avez déjà rempli le questionnaire de santé. Il sera possible de le télécharger
-                                    afin de le signer et le faire valider par l'association.</p>
-                                <div class="col-auto">
-                                    <button id="healthQuestionnaireModificate" type="button" class="btn btn-primary">
-                                        Modifier le questionnaire
-                                    </button>
+                            <div class="healthQuestionnaireValidated">
+                                <div class="row align-items-center ml-2 mr-2">
+                                    <div class="col-5">
+                                        <p>Vous avez déjà rempli le questionnaire de santé. Il sera possible de le télécharger
+                                            afin de le signer et le faire valider par l'association.</p>
+                                    </div>
+                                    <div class="col-5">
+                                        <button id="healthQuestionnaireModificate" type="button" class="btn btn-primary">
+                                            Modifier le questionnaire
+                                        </button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -592,11 +610,13 @@
                                     l'adhérent
                                 </button>
                             </div>
-                            <div class="row justify-content-center mt-3 healthQuestionnaireValidated">
-                                <button type="submit" class="btn btn-success buttonSubmit">Confirmer l'inscription
-                                    de
-                                    l'adhérent et télécharger votre questionnaire de santé.
-                                </button>
+                            <div class="healthQuestionnaireValidated">
+                                <div class="row justify-content-center mt-3">
+                                    <button type="submit" class="btn btn-success buttonSubmit">Confirmer l'inscription
+                                        de
+                                        l'adhérent et télécharger votre questionnaire de santé.
+                                    </button>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -615,8 +635,10 @@
                                     questionnaire, il faut que toutes les réponses soient remplies.
                                 </small>
                             </div>
+                            <p><b>Durant les douze derniers mois :</b></p>
+                            <hr/>
                             <div class="row align-items-center pt-2">
-                                <div class="col-auto">
+                                <div class="col-9">
                                     {{ healthQuestionnaireQuestion1 }}
                                 </div>
                                 <div id="healthQuestionnaireQuestion" class="col-auto">
@@ -624,8 +646,9 @@
                                     {{ form_errors(form.children[0].healthQuestionnaire.hasMemberOfFamilyDiedHeartAttack) }}
                                 </div>
                             </div>
+                            <hr/>
                             <div class="row align-items-center mt-2">
-                                <div class="col-auto">
+                                <div class="col-9">
                                     {{ healthQuestionnaireQuestion2 }}
                                 </div>
                                 <div id="healthQuestionnaireQuestion" class="col-auto">
@@ -633,8 +656,9 @@
                                     {{ form_errors(form.children[0].healthQuestionnaire.hasPainChest) }}
                                 </div>
                             </div>
+                            <hr/>
                             <div class="row align-items-center mt-2">
-                                <div class="col-auto">
+                                <div class="col-9">
                                     {{ healthQuestionnaireQuestion3 }}
                                 </div>
                                 <div id="healthQuestionnaireQuestion" class="col-auto">
@@ -642,8 +666,9 @@
                                     {{ form_errors(form.children[0].healthQuestionnaire.hasAsthma) }}
                                 </div>
                             </div>
+                            <hr/>
                             <div class="row align-items-center mt-2">
-                                <div class="col-auto">
+                                <div class="col-9">
                                     {{ healthQuestionnaireQuestion4 }}
                                 </div>
                                 <div id="healthQuestionnaireQuestion" class="col-auto">
@@ -651,8 +676,9 @@
                                     {{ form_errors(form.children[0].healthQuestionnaire.hasLossOfConsciousness) }}
                                 </div>
                             </div>
+                            <hr/>
                             <div class="row align-items-center mt-2">
-                                <div class="col-auto">
+                                <div class="col-9">
                                     {{ healthQuestionnaireQuestion5 }}
                                 </div>
                                 <div id="healthQuestionnaireQuestion" class="col-auto">
@@ -660,8 +686,9 @@
                                     {{ form_errors(form.children[0].healthQuestionnaire.hasResumptionOfSportWithoutDoctorConsent) }}
                                 </div>
                             </div>
+                            <hr/>
                             <div class="row align-items-center mt-2">
-                                <div class="col-auto">
+                                <div class="col-9">
                                     {{ healthQuestionnaireQuestion6 }}
                                 </div>
                                 <div id="healthQuestionnaireQuestion" class="col-auto">
@@ -669,9 +696,10 @@
                                     {{ form_errors(form.children[0].healthQuestionnaire.hasMedicalTreatment) }}
                                 </div>
                             </div>
+                            <p class="mt-5"><b>À ce jour : </b></p>
                             <hr/>
                             <div class="row align-items-center mt-2">
-                                <div class="col-auto">
+                                <div class="col-9">
                                     {{ healthQuestionnaireQuestion7 }}
                                 </div>
                                 <div id="healthQuestionnaireQuestion" class="col-auto">
@@ -679,8 +707,9 @@
                                     {{ form_errors(form.children[0].healthQuestionnaire.hasBoneProblem) }}
                                 </div>
                             </div>
+                            <hr/>
                             <div class="row align-items-center mt-2">
-                                <div id="healthQuestionnaireQuestion" class="col-auto">
+                                <div class="col-9">
                                     {{ healthQuestionnaireQuestion8 }}
                                 </div>
                                 <div id="healthQuestionnaireQuestion" class="col-auto">
@@ -688,8 +717,9 @@
                                     {{ form_errors(form.children[0].healthQuestionnaire.hasHealthProblem) }}
                                 </div>
                             </div>
+                            <hr/>
                             <div class="row align-items-center mt-2">
-                                <div id="healthQuestionnaireQuestion" class="col-auto">
+                                <div class="col-9">
                                     {{ healthQuestionnaireQuestion9 }}
                                 </div>
                                 <div id="healthQuestionnaireQuestion" class="col-auto">
@@ -704,11 +734,11 @@
             <div class="container-fluid pt-3 pb-2">
                 <div class="row justify-content-between">
                     <div class="col">
-                        <button id="validQuestionnaire" type="button" class="btn btn-success">Valider le questionnaire
+                        <button id="validQuestionnaire" type="button" class="btn btn-success btn-block">Valider le questionnaire
                         </button>
                     </div>
                     <div class="col">
-                        <button id="cancelQuestionnaire" type="button" class="btn btn-danger">Annuler le questionnaire
+                        <button id="cancelQuestionnaire" type="button" class="btn btn-danger btn-block">Annuler le questionnaire
                         </button>
                     </div>
                 </div>

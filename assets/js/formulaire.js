@@ -290,6 +290,7 @@ function step2() {
     var bool = true;
     (isEmpty('account[children][0][phoneRep1]') ? ($("#phoneRep1Help").show(), bool = false) : ((isValidationPhoneNumber('account[children][0][phoneRep1]')) ? ($("#phoneRep1Help").show(), bool = false) : $("#phoneRep1Help").hide()));
     (isEmpty('account[children][0][professionRep1]') ? ($("#professionRep1Help").show(), bool = false) : $("#professionRep1Help").hide())
+    (isValidationList('account[children][0][nationality]') ? ($("#nationalityHelp").show(), bool = false) : $("#nationalityHelp").hide())
     return bool;
 }
 

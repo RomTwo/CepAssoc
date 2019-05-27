@@ -46,18 +46,33 @@
         </tr>
         <tr>
             <td>{{ healthQuestionnaireQuestion4 }}</td>
-            <td class="center">X</td>
-            <td class="center"></td>
+            {% if adherent.healthQuestionnaire.hasLossOfConsciousness %}
+                <td class="center">X</td>
+                <td class="center"></td>
+            {% else %}
+                <td class="center"></td>
+                <td class="center">X</td>
+            {% endif %}
         </tr>
         <tr>
             <td>{{ healthQuestionnaireQuestion5 }}</td>
-            <td class="center">X</td>
-            <td class="center"></td>
+            {% if adherent.healthQuestionnaire.hasResumptionOfSportWithoutDoctorConsent %}
+                <td class="center">X</td>
+                <td class="center"></td>
+            {% else %}
+                <td class="center"></td>
+                <td class="center">X</td>
+            {% endif %}
         </tr>
         <tr>
             <td>{{ healthQuestionnaireQuestion6 }}</td>
-            <td class="center">X</td>
-            <td class="center"></td>
+            {% if adherent.healthQuestionnaire.hasMedicalTreatment %}
+                <td class="center">X</td>
+                <td class="center"></td>
+            {% else %}
+                <td class="center"></td>
+                <td class="center">X</td>
+            {% endif %}
         </tr>
         <tr>
             <td><b>À ce jour :</b></td>
@@ -66,18 +81,33 @@
         </tr>
         <tr>
             <td>{{ healthQuestionnaireQuestion7 }}</td>
-            <td class="center">X</td>
-            <td class="center"></td>
+            {% if adherent.healthQuestionnaire.hasBoneProblem %}
+                <td class="center">X</td>
+                <td class="center"></td>
+            {% else %}
+                <td class="center"></td>
+                <td class="center">X</td>
+            {% endif %}
         </tr>
         <tr>
             <td>{{ healthQuestionnaireQuestion8 }}</td>
-            <td class="center">X</td>
-            <td class="center"></td>
+            {% if adherent.healthQuestionnaire.hasHealthProblem %}
+                <td class="center">X</td>
+                <td class="center"></td>
+            {% else %}
+                <td class="center"></td>
+                <td class="center">X</td>
+            {% endif %}
         </tr>
         <tr>
             <td>{{ healthQuestionnaireQuestion9 }}</td>
-            <td class="center">X</td>
-            <td class="center"></td>
+            {% if adherent.healthQuestionnaire.hasNeedMedicalAdvice %}
+                <td class="center">X</td>
+                <td class="center"></td>
+            {% else %}
+                <td class="center"></td>
+                <td class="center">X</td>
+            {% endif %}
         </tr>
     </table>
     <p class="blue">Qui est concerné ?</p>
