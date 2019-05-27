@@ -104,7 +104,7 @@ class AdminActivitiesController extends AbstractController
             return $this->redirectToRoute('admin_activities');
         }
 
-        return $this->render('administration/activities/activityAdd.html.twig', [
+        return $this->render('administration/activities/activityAddOrEdit.html.twig', [
             'activity' => $activity,
             'form' => $form->createView()]);
     }
@@ -128,9 +128,10 @@ class AdminActivitiesController extends AbstractController
             return $this->redirectToRoute('admin_activities');
         }
 
-        return $this->render('administration/activities/activityEdit.html.twig', [
+        return $this->render('administration/activities/activityAddOrEdit.html.twig', [
             'activity' => $activity,
-            'form' => $form->createView()
+            'form' => $form->createView(),
+            'isEdition' => true
         ]);
 
     }
@@ -149,7 +150,7 @@ class AdminActivitiesController extends AbstractController
 
     }
 
-    public function details(Request $request, $id)
+    public function details($id)
     {
         $repositoryAdherant=$this->getDoctrine()->getRepository(Adherent::class);
         $adherants=$repositoryAdherant->findAll();
@@ -193,7 +194,43 @@ class AdminActivitiesController extends AbstractController
         return $this->redirectToRoute('admin_activityDetails', ["id" => $activityId]);
     }
 
-    public function copyEmails(Request $request){
+    public function deleteFromTimeSlot($activityId, $timeSlotId, $adherentId){
+        $repositoryTimeSlot = $this->getDoctrine()->getRepository(TimeSlot::class);
+        $timeSlot = $repositoryTimeSlot->findOneBy(['id' => $timeSlotId]);
+
+        $repositoryAdherant=$this->getDoctrine()->getRepository(Adherent::class);
+        $adherent=$repositoryAdherant->findOneBy(['id' => $adherentId]);
+
+        $timeSlot->removeAdherent($adherent);
+
+        $this->getDoctrine()->getManager()->flush();
+
+        return $this->redirectToRoute('admin_activityDetails', ["id" => $activityId]);
+    }
+
+    public function copyTimeSlotEmails(Request $request){
+        $jsonDatas = array();
+
+        $allEmails = "";
+        $timeSlotId = $request->request->get("timeSlotId");
+
+        dump($timeSlotId);
+
+        $repositoryTimeSlot = $this->getDoctrine()->getRepository(TimeSlot::class);
+
+        // getting the timeSlot
+        $timeSlot = $repositoryTimeSlot->findOneBy(["id" => $timeSlotId]);
+
+        $adherents = $timeSlot->getAdherents()->toArray();
+        foreach($adherents as $adherent){
+            $allEmails .= $adherent->getEmailRep1() . "; ";
+        }
+
+        $jsonDatas[] = $allEmails;
+        return new JsonResponse($jsonDatas);
+    }
+
+    public function copyAllEmails(Request $request){
         $jsonDatas = array();
 
         $allEmails = "";
@@ -206,15 +243,18 @@ class AdminActivitiesController extends AbstractController
 
         // getting all the timeSlots connected to the activity
         $timeSlots = $activity->getTimeSlot();
-        $timeSlotsArray = $timeSlots->toArray();   // converting it to php array type
+
+        $adherentsCopied = array();
         foreach($timeSlots as $timeSlot){
             // for each timeSlot we get the adherents
             $adherents = $timeSlot->getAdherents()->toArray();
             foreach($adherents as $adherent){
-                $allEmails .= $adherent->getEmailRep1() . "; ";
+                if(!in_array($adherent, $adherentsCopied)) {
+                    $allEmails .= $adherent->getEmailRep1() . "; ";
+                    $adherentsCopied[] = $adherent;
+                }
             }
         }
-
         $jsonDatas[] = $allEmails;
         return new JsonResponse($jsonDatas);
     }

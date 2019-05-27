@@ -1,35 +1,47 @@
 {% extends 'administration/layout_admin.html.twig' %}
 
-{% block title %}Activités détaillées{% endblock %}
-
-{% block specification %}
-    Gestion des détaillées des activités
+{% block title %}
+    Activité | {{ activity.name }}
+    <input id="activityId" type="hidden" value="{{ activity.id }}">
 {% endblock %}
 
 {% block body %}
-    <h4>Activité {{ activity.name }}</h4>
-
-    <a href="#">
-        Envoyer un mail à tous
-    </a>
-    <button id="allEmails">Envoyer un mail à tous</button>
-    <button>toto</button>
-    <hr/>
-    <br> <br>
+    <div class="row justify-content-center">
+        <button class="btn btn-outline-dark" id="allEmails">Copier mails des participants à cette activité</button>
+    </div>
+    <br> <br> <br>
 
     <input id="timeSlotsSize" type="hidden" value="{{ timeSlots|length }}">
-    <input id="sandbox"> <!-- Field to paste value in order to get copy them later in the clipboard -->
-
     {% for timeSlot in timeSlots %}
-
         <div class="row">
-            <a class="btn btn-primary" data-toggle="collapse" href="#collapseExample{{ timeSlot.id }}" role="button"
-               aria-expanded="false" aria-controls="collapseExample">
-                <h6>{{ timeSlot.getFullTime }}</h6>
-            </a>
-            <span>  {{ timeSlot.getAdherentsNumber }} participants <a
-                        href="#">Envoyer un mail aux participants</a></span>
+            <h4 style="text-decoration: underline">{{ timeSlot.getFullTime }}</h4>
+        </div>
 
+        <br>
+        <div class="row">
+            <div class="col text-right">
+                <h5> Nombre de particiants : <span
+                            style="color:red; text-align: right"> {{ timeSlot.getAdherentsNumber }} </span></h5>
+            </div>
+
+            <div class="col">
+                <input type="hidden" name="timeSlot" id="timeSlotId{{ loop.index0 }}" value="{{ timeSlot.id }}"/>
+                <button id="TimeSlotAdherentsEmailsButton{{ loop.index0 }}" class="btn btn-outline-dark"> Copier mails
+                    des
+                    participants à ce créneau
+                </button>
+            </div>
+        </div>
+
+        <br>
+        <div class="row justify-content-center" style="width: 100%">
+            <div class="col-5">
+                <a class="btn btn-outline-info" data-toggle="collapse" href="#collapseExample{{ timeSlot.id }}"
+                   role="button"
+                   aria-expanded="false" aria-controls="collapseExample" style="width: 100%">
+                    Voir et ajouter de nouveaux adhérents
+                </a>
+            </div>
         </div>
         <br/> <br/>
 
@@ -79,11 +91,8 @@
                                     </td>
 
                                     <td>
-                                        <!-- Button trigger modal -->
-                                        <button type="button" class="btn btn-danger" data-toggle="modal"
-                                                data-target="#exampleModal{{ adherent.id }}">
-                                            Supprimer
-                                        </button>
+                                        <a href="{{ path('admin_activityDeleteAdherentFromTimeSlot', {activityId: activity.id, timeSlotId: timeSlot.id, adherentId: adherent.id}) }}"
+                                           class="btn btn-danger"> Supprimer </a>
                                     </td>
                                 </tr>
                             {% endif %}
@@ -98,12 +107,19 @@
                         </tr>
                         </tfoot>
                     </table>
+                </div>
+            </div>
 
-                    <br/>
-                    <h6>Ajouter de nouveaux adhérents</h6>
+            <br/>
+            <div class="card card-body">
+                <div class="container">
+                    <div class="row justify-content-center">
+                        <h4>Ajouter de nouveaux adhérents</h4>
+                    </div>
+
                     <div class="row">
-
-                        <form style="width:100%" method="post" id="form{{ loop.index0 }}" action={{ path('admin_activity') }}>
+                        <form style="width:100%" method="post" id="form{{ loop.index0 }}"
+                              action={{ path('admin_activityAddAdherentToTimeSlot') }}>
                             <select style="width: 100%" class="js-example-basic-multiple{{ loop.index0 }}"
                                     name="states[]"
                                     multiple="multiple">
@@ -116,15 +132,15 @@
                             <input type="hidden" name="hidden_framework" class="hidden_framework"/>
                             <input type="hidden" name="timeSlot" id="timeSlotId" value="{{ timeSlot.id }}"/>
                             <input type="hidden" name="activity" id="activityId" value="{{ activity.id }}"/>
-                            <input type="submit" name="submit" class="btn btn-info" value="Submit"/>
+                            <div class="row justify-content-center">
+                                <input type="submit" name="submit" class="btn btn-outline-success" value="Submit"/>
+                            </div>
                         </form>
                         <br/>
-
                     </div>
                 </div>
             </div>
         </div>
-
     {% endfor %}
 {% endblock %}
 
@@ -138,9 +154,7 @@
     <script>
         // In your Javascript (external .js resource or <script> tag)
         $(document).ready(function () {
-
             var timeSlotsSize = $('#timeSlotsSize').val();
-
 
             for (var i = 0; i < timeSlotsSize; i++) {
                 $("#button" + i).on('click', function (event) {
@@ -150,31 +164,9 @@
                 });
             }
 
-
-            /*for(var i = 0; i < timeSlotsSize; i++){
-                var j = i;
-                $("#button" + j).on('click',function(){
-                        alert("Button " + j);
-                    }
-                )
-            }*/
-
-
             for (var i = 0; i < timeSlotsSize; i++) {
                 $('.js-example-basic-multiple' + i).select2();
-
-                //$('#adherentsTimeSlot' + i).DataTable();
-                {#(function () {
-                    var ii = i;
-                    $('.js-example-basic-multiple' + ii).select2();
-
-                    $('.js-example-basic-multiple' + ii).change(function () {
-                        $('#hidden_framework').val($('.js-example-basic-multiple' + ii).val());
-                    });
-                })
-                //$("#button" + i).click( generate_handler( i ) );#}
             }
-
 
             function generateH(j) {
                 return function (event) {
@@ -182,100 +174,54 @@
                 };
             }
 
-
             for (var i = 0; i <= timeSlotsSize; i++) {
                 $('.js-example-basic-multiple' + i).change(generateH(i));
             }
 
+            function copyTextToClipBoard(data) {
+                var tempInput = document.createElement("input");
+                tempInput.style = "position: absolute; left: -1000px; top: -1000px";
+                tempInput.value = data;
+                document.body.appendChild(tempInput);
+                tempInput.select();
+                document.execCommand("copy");
+                document.body.removeChild(tempInput);
+                alert("Copie effectuée");
+            }
 
-            /*$('.js-example-basic-multiple').select2();
-
-            $('.js-example-basic-multiple').change(function () {
-                $('#hidden_framework').val($('.js-example-basic-multiple').val());
-            });*/
-
-            function generateAjaxHandler(j) {
+            function generateMailsReceptionHandler(j) {
                 return function (event) {
-                    //event.preventDefault();
+                    event.preventDefault();
                     var t = j;
-                    if ($(".js-example-basic-multiple" + t).select2("val") != '') {
-                        alert($('.hidden_framework').val());
-                        var form_data = $("#form" + t).serialize();
-                        $.ajax({
-                            url: "{{ path('admin_activity') }}",
-                            method: "POST",
-                            data: form_data,
-                            success: function (data) {
-                                //console.log(data);
-                                $('.hidden_framework').val('');
-                                $('.selectpicker').selectpicker('val', '');
-                            }
-                        })
-                    } else {
-                        alert("Please select framework");
-                        return false;
-                    }
+                    var timeSlotId = $("#timeSlotId" + j).val();
+                    $.ajax({
+                        url: "{{ path('admin_activityCopyTimeSlotEmails') }}",
+                        method: "POST",
+                        data: {timeSlotId: timeSlotId},
+                        success: function (data) {
+                            copyTextToClipBoard(data);
+                        }
+                    })
                 }
             }
 
-            {#for (var i = 0; i < timeSlotsSize; i++) {
-                $('#form' + i).on('submit', generateAjaxHandler(i));
-            }#}
+            for (var i = 0; i < timeSlotsSize; i++) {
+                $('#TimeSlotAdherentsEmailsButton' + i).on('click', generateMailsReceptionHandler(i));
+            }
 
             $('#allEmails').on('click', function (event) {
-                alert("toto");
+                var activityId = $("#activityId").val();
                 event.preventDefault();
                 $.ajax({
-                    url: "{{ path('admin_activityCopyEmails') }}",
+                    url: "{{ path('admin_activityCopyAllEmails') }}",
                     method: "POST",
-                    data: {activityId:231},
+                    data: {activityId: activityId},
                     dataType: "json",
-                    success: function (data){
-                        alert(data);
-                        console.log(data);
-                        $("#sandbox").val(data);
-                        $("#sandbox").select();
-                        // Copy text to clipboard
-                        document.execCommand('copy');
+                    success: function (data) {
+                        copyTextToClipBoard(data);
                     }
                 })
             });
-
-            {#$("#treeButtonSearch").click(function(){
-                path = $("#treeSort").val();
-                $.ajax({
-                    url:path,
-                    method: "post",
-                    dataType: "json"
-                }).success(function(rep){
-                    refreshTree();
-                    makeTree(path);
-                    //$('#jstree').html("BABAR");
-                    console.log(rep);
-                    //makeTree("{{ path('treePromotion') }}",null);
-                });
-            });#}
-
-            {#$('#form').on('submit', function (event) {
-                event.preventDefault();
-                if ($(".js-example-basic-multiple").select2("val") != '') {
-                    var form_data = $(this).serialize();
-                    $.ajax({
-                        url: "{{ path('admin_activity') }}",
-                        method: "POST",
-                        data: form_data,
-                        success: function (data) {
-                            //console.log(data);
-                            $('#hidden_framework').val('');
-                            $('.selectpicker').selectpicker('val', '');
-                            alert(data);
-                        }
-                    })
-                } else {
-                    alert("Please select framework");
-                    return false;
-                }
-            });#}
         });
     </script>
 {% endblock %}
