@@ -22,6 +22,17 @@ class AdminAdherentType extends AbstractType
         $builder
             ->add('firstName', TextType::class)
             ->add('lastName', TextType::class)
+            ->add('status', ChoiceType::class, [
+                'choices' => [
+                    'En attente' => 'EN ATTENTE',
+                    'En manque de document(s)' => 'EN MANQUE DE DOCUMENT',
+                    'En manque de paiement' => 'EN MANQUE DE PAIEMENT',
+                    'En manque de document(s) et paiement' => 'EN MANQUE DE DOCUMENT ET PAIEMENT',
+                    'Valide' => 'VALIDE',
+                ],
+                'multiple' => false,
+                'expanded' => true,
+            ])
             ->add('sex', ChoiceType::class, [
                 'choices' => [
                     'Homme' => 'H',

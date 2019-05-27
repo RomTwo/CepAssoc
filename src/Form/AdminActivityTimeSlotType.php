@@ -25,22 +25,16 @@ class AdminActivityTimeSlotType extends AbstractType
             ->add('price', NumberType::class)
             ->add('startDate',\Symfony\Component\Form\Extension\Core\Type\DateType::class)
             ->add('type',TextType::class)
-
-            ->add('categories', EntityType::class, [
+            ->add('category', EntityType::class, [
                 'class' => Category::class,
-                'query_builder' => function (CategoryRepository $er) {
-                    return $er->createQueryBuilder('categorie')
-                        ->orderBy('categorie.name', 'ASC');
-                },
                 'choice_label' => 'name',
                 "multiple" => false
             ])
-
-            ->add('timeSlot', CollectionType::class, array(
+            ->add('timeSlot', CollectionType::class, [
                 'entry_type'   => TimeSlotType::class,
                 'allow_add'    => true,
                 'allow_delete' => true
-            ))
+            ])
            ;
 
     }

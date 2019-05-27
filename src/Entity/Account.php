@@ -7,6 +7,7 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 
 /**
@@ -18,6 +19,7 @@ class Account implements UserInterface
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
+     * @Groups({"event"})
      */
     private $id;
 
@@ -29,6 +31,7 @@ class Account implements UserInterface
      *     match = true,
      *     message = "le nom n'est pas correct"
      * )
+     * @Groups({"event"})
      */
     private $firstName;
 
@@ -40,6 +43,7 @@ class Account implements UserInterface
      *     match = true,
      *     message = "le prénom n'est pas correct"
      * )
+     * @Groups({"event"})
      */
     private $lastName;
 
@@ -103,11 +107,13 @@ class Account implements UserInterface
 
     /**
      * @ORM\ManyToMany(targetEntity="App\Entity\Adherent", inversedBy="parents", cascade={"persist"})
+     * @Assert\Valid()
      */
     private $children;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\EventManagement", mappedBy="account")
+     * @ORM\OneToMany(targetEntity="App\Entity\EventManagement", mappedBy="account", cascade={"persist", "remove"})
+     * @ORM\JoinColumn(onDelete="CASCADE")
      */
     private $eventManagements;
 
@@ -129,7 +135,7 @@ class Account implements UserInterface
     {
         $this->children = new ArrayCollection();
         $this->eventManagements = new ArrayCollection();
-        $this->roles = array('ROLE_MODERATOR');
+        $this->roles = array('ROLE_USER');
     }
 
 
@@ -387,5 +393,10 @@ class Account implements UserInterface
     public function eraseCredentials()
     {
         // TODO: Implement eraseCredentials() method.
+    }
+
+    public function getFullName()
+    {
+        return $this->firstName . ' ' . $this->lastName;
     }
 }

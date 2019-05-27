@@ -1,76 +1,135 @@
-{% extends 'administration/base.html.twig' %}
+{% extends 'administration/layout_admin.html.twig' %}
 
-{% block title %}Adherents{% endblock %}
-
-{% block specification %}
-    Gestion des activités
-{% endblock %}
+{% block title %}Activités{% endblock %}
 
 {% block body %}
-    <div class="tab-content" id="pills-tabContent">
-        <div class="tab-pane fade show active" id="content-all" role="tabpanel" aria-labelledby="pills-all">
-            <table id="example" class="table table-striped table-bordered" style="width: 100%;" role="grid"
-                   aria-describedby="example_info">
-                <thead>
-                <tr role="row">
-                    <th  class="sorting_asc" tabindex="0" aria-controls="example" rowspan="1" colspan="1"
-                         style="width: 119px;" aria-sort="ascending"
-                         aria-label="lastName: activate to sort column descending">Activités</th>
-                    <th  class="sorting_asc" tabindex="0" aria-controls="example" rowspan="1" colspan="1"
-                         style="width: 119px;" aria-sort="ascending"
-                         aria-label="lastName: activate to sort column descending">Créneaux</th>
-                    <th  class="sorting_asc" tabindex="0" aria-controls="example" rowspan="1" colspan="1"
-                         style="width: 119px;" aria-sort="ascending"
-                         aria-label="lastName: activate to sort column descending">Cotisation</th>
-                    <th  class="sorting_asc" tabindex="0" aria-controls="example" rowspan="1" colspan="1"
-                         style="width: 119px;" aria-sort="ascending"
-                         aria-label="lastName: activate to sort column descending">Date de début</th>
-                    <th  class="sorting_asc" tabindex="0" aria-controls="example" rowspan="1" colspan="1"
-                         style="width: 119px;" aria-sort="ascending"
-                         aria-label="lastName: activate to sort column descending">Cotisation</th>
-                    <th  class="sorting_asc" tabindex="0" aria-controls="example" rowspan="1" colspan="1"
-                         style="width: 119px;" aria-sort="ascending"
-                         aria-label="lastName: activate to sort column descending">Actions</th>
 
-                </tr>
-                </thead>
-                <tbody>
-                {% for category in categories %}
-                    {% for activity in category.activities %}
-                        <tr role="row" class="odd">
-                            <td>{{ activity.name }}</td>
-                            <td>{% for slot in activity.timeSlot %}
-                                    {{slot.getFullTime  }} <br>
-                                {% endfor %}</td>
-                            <td>
-                                <font style="text-transform: uppercase;">
-                                    <span style="color: red; size: 300px !important ">{{ category.name }}</span>
-                                </font>
-                            </td>
-                            <td>{{ activity.startDate|date('d-m-Y')  }}</td>
-                            <td> {{ activity.price }} €</td>
-                            <td>  <!-- Button trigger modal -->
+<div class="text-right" style ="margin-bottom : 20px">
+    <a href="{{path('admin_activityAdd')}}" class="btn btn-outline-dark">Ajouter une activité</a>
+</div>
 
-                                <a href="{{path('admin_activityDetails', {id: activity.id})}}" class="btn btn-primary">Gérer</a>
-                                <a href="{{path('admin_activityEdit', {id: activity.id})}}" class="btn btn-primary">Modifier</a>
-                                <a  href="{{path('admin_activityDelete', {id: activity.id } )}}" class="btn btn-secondary">Supprimer</a></td>
-                        </tr>
-                    {% endfor %}
+
+<div class="tab-content" id="pills-tabContent">
+    <div aria-labelledby="pills-all" class="tab-pane fade show active" id="content-all" role="tabpanel">
+    <table aria-describedby="example_info" class="table table-striped table-bordered" id="example" role="grid" style="width: 100%;">
+        <thead>
+            <tr role="row">
+                <th aria-controls="example" aria-label="lastName: activate to sort column descending" aria-sort="ascending" class="sorting_asc" colspan="1" rowspan="1" style="width: 119px;" tabindex="0">Activités</th>
+                <th aria-controls="example" aria-label="lastName: activate to sort column descending" aria-sort="ascending" class="sorting_asc" colspan="1" rowspan="1" style="width: 119px;" tabindex="0">Créneaux</th>
+                <th aria-controls="example" aria-label="lastName: activate to sort column descending" aria-sort="ascending" class="sorting_asc" colspan="1" rowspan="1" style="width: 119px;" tabindex="0">Cotisation</th>
+                <th aria-controls="example" aria-label="lastName: activate to sort column descending" aria-sort="ascending" class="sorting_asc" colspan="1" rowspan="1" style="width: 119px;" tabindex="0">Date de début</th>
+                <th aria-controls="example" aria-label="lastName: activate to sort column descending" aria-sort="ascending" class="sorting_asc" colspan="1" rowspan="1" style="width: 119px;" tabindex="0">Cotisation</th>
+                <th aria-controls="example" aria-label="lastName: activate to sort column descending" aria-sort="ascending" class="sorting_asc" colspan="1" rowspan="1" style="width: 119px;" tabindex="0">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for category in categories %}
+                {% for activity in category.activities %}
+                    <tr class="odd" role="row">
+                        <td>{{ activity.name }}</td>
+                        <td>
+                            {% for slot in activity.timeSlot %}
+                                {{slot.getFullTime  }}
+                                <br>
+                            {% endfor %}
+                        </td>
+                        <td>
+                            <font style="text-transform: uppercase;">
+                                <span style="size: 300px !important "><strong>{{ category.name }}</strong></span>
+                            </font>
+                        </td>
+                        <td>{{ activity.startDate|date('d-m-Y')  }}</td>
+                        <td>
+                            {{ activity.price }}
+                            €</td>
+                            <!-- Button trigger modal -->
+                        <td>
+                            <a class="btn btn-primary" href="{{ path('admin_activityDetails', {id: activity.id}) }}" data-toggle="tooltip" data-placement="top" title="Details de l'activité">
+                            <i
+                                        class="far fa-calendar-alt"></i></a>
+
+                            <a class="btn btn-warning" href="{{ path('admin_activityEdit', {id: activity.id}) }}" data-toggle="tooltip" data-placement="top" title="Modifier l'activité ou ajouter un créneau"><i
+                                        class="far fa-edit"></i></a>
+                            <span  data-toggle="modal" data-target="#modalDeleteActivity{{ activity.id }}">
+                                <button type="button" class="btn btn-danger" data-toggle="tooltip" data-placement="top" title="Supprimer l'activité">
+                                    <i class="far fa-trash-alt"></i>
+                                </button>
+                            </span>
+                            
+                        </td>
+                     </tr>
+                    <div class="modal fade" id="modalDeleteActivity{{ activity.id }}" tabindex="-1" role="dialog" aria-labelledby="modalDeleteActivityLabel{{ activity.id }}" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="modalDeleteActivityLabel{{ activity.id }}">Attention</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                Êtes-vous sûr de vouloir supprimer cet activitée ?
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal" data-toggle="modal">
+                                    Non
+                                </button>
+                                <a href="{{ path('admin_activityDelete', {id: activity.id}) }}" role="button"
+                                class="btn btn-primary">Oui</a>
+                            </div>
+                        </div>
+                    </div>
                 {% endfor %}
-                </tbody>
-
-
-                <tfoot>
-                <tr>
-                    <th  rowspan="1" colspan="1">Activités</th>
-                    <th  rowspan="1" colspan="1">Créneaux</th>
-                    <th  rowspan="1" colspan="1">Cotisation</th>
-                    <th  rowspan="1" colspan="1">Date de début</th>
-                    <th  rowspan="1" colspan="1">Cotisation</th>
-                    <th  rowspan="1" colspan="1">Actions</th>
-                </tr>
-                </tfoot>
-            </table>
-        </div>
+            {% endfor %}
+        </tbody>
+    </table>
     </div>
+</div>
+
 {% endblock %}
+
+{% block javascripts %}
+<script type="text/javascript">
+$(function () {
+  $('[data-toggle="tooltip"]').tooltip()
+})
+
+    $(document).ready(function () {
+
+    var groupColumn = 2;
+    var table = $('#example').DataTable({
+        "columnDefs": [
+            {
+                "visible": false,
+                "targets": groupColumn
+            }
+        ],
+        "order": [
+            [groupColumn, 'asc']
+        ],
+        "displayLength": 25,
+        "drawCallback": function (settings) {
+            var api = this.api();
+            var rows = api.rows({page: 'current'}).nodes();
+            var last = null;
+
+            api.column(groupColumn, {page: 'current'}).data().each(function (group, i) {
+                if (last !== group) {
+                    $(rows).eq(i).before('<tr class="group"><td colspan="5">' + group + '</td></tr>');
+
+                    last = group;
+                }
+            });
+        }
+    });
+
+    // Order by the grouping
+    $('#example tbody').on('click', 'tr.group', function () {
+        var currentOrder = table.order()[0];
+        if (currentOrder[0] === groupColumn && currentOrder[1] === 'asc') {
+            table.order([groupColumn, 'desc']).draw();
+        } else {
+            table.order([groupColumn, 'asc']).draw();
+        }
+    });
+});</script>{% endblock %}

@@ -33,6 +33,10 @@ security_deconnexion:
     path: /profile/logout
 
 ### Administration routing ###
+admin_home:
+    path: /admin
+    controller: App\Controller\administration\AdministrationController::home
+
 admin_adherent_competiteurs:
     path: /admin/competiteurs
     controller: App\Controller\administration\AdministrationController::competiteurs
@@ -56,12 +60,6 @@ admin_adherentsPDF:
 admin_adherentsEdit:
     path: /admin/adherents/edit/{id}
     controller: App\Controller\administration\AdminAdherentsController::edit
-    requirements:
-        id: ([0-9]*)
-    
-admin_adherentsRegister:
-    path: /admin/adherents/register/{id}
-    controller: App\Controller\administration\AdminAdherentsController::register
     requirements:
         id: ([0-9]*)
 
@@ -94,10 +92,28 @@ admin_activityDetails:
     requirements:
         id: ([0-9]*)
 
-admin_activity:
-    path: /admin/activities/ajouter
-    controller: App\Controller\administration\AdminActivitiesController::ajouter
+admin_activityAddAdherentToTimeSlot:
+    path: /admin/activities/addToTimeSlot
+    controller: App\Controller\administration\AdminActivitiesController::addToTimeSlot
 
+admin_activityDeleteAdherentFromTimeSlot:
+  path: /admin/activities/deleteFromTimeSlot/{activityId}/{timeSlotId}/{adherentId}
+  controller: App\Controller\administration\AdminActivitiesController::deleteFromTimeSlot
+  requirements:
+    activityId: ([0-9]*)
+    timeSlotId: ([0-9]*)
+    adherentId: ([0-9]*)
+
+admin_activityCopyAllEmails:
+    path: /admin/activities/activityCopyAllEmails
+    controller: App\Controller\administration\AdminActivitiesController::copyAllEmails
+
+admin_activityCopyTimeSlotEmails:
+  path: /admin/activities/activityCopyTimeSlotEmails
+  controller: App\Controller\administration\AdminActivitiesController::copyTimeSlotEmails
+
+
+    #--Categories
 admin_categories:
     path: /admin/categories
     controller: App\Controller\administration\AdminActivitiesController::index
@@ -113,24 +129,6 @@ admin_categoryAdd:
 admin_categoryDelete:
     path: /admin/categories/delete/{id}
     controller: App\Controller\administration\AdminActivitiesController::delete
-
-
-    #--timeSlots
-admin_timeSlots:
-    path: /admin/timeSlots
-    controller: App\Controller\administration\AdminTimeSlotsController::index
-
-admin_timeSlotsEdit:
-    path: /admin/timeSlots/edit/{id}
-    controller: App\Controller\administration\AdminTimeSlotsController::edit
-    requirements:
-        id: ([0-9]*)
-
-admin_timeSlotsDelete:
-    path: /admin/timeSlots/delete/{id}
-    controller: App\Controller\administration\AdminTimeSlotsController::delete
-    requirements:
-        id: ([0-9]*)
 
     #--accounts
 admin_accounts:
@@ -154,6 +152,50 @@ admin_events:
     path: /admin/events
     controller: App\Controller\administration\AdminEventsController::index
 
+admin_event_update:
+    path: /admin/event/update/{id}
+    controller: App\Controller\administration\AdminEventsController::update
+    requirements:
+        id: ([0-9]*)
+
+admin_event_delete:
+    path: /admin/event/delete/{id}
+    controller: App\Controller\administration\AdminEventsController::delete
+    requirements:
+        id: ([0-9]*)
+
+    #--event management
+admin_event_manager_index:
+    path: /admin/event/manager/{id}
+    controller: App\Controller\administration\AdminEventManagerController::index
+    requirements:
+        id: ([0-9]*)
+
+admin_event_manager_add:
+    path: /admin/event/manager/add
+    controller: App\Controller\administration\AdminEventManagerController::add
+
+admin_event_manager_update:
+    path: /admin/event/manager/update
+    controller: App\Controller\administration\AdminEventManagerController::update
+
+admin_event_manager_delete:
+    path: /admin/event/manager/delete
+    controller: App\Controller\administration\AdminEventManagerController::delete
+
+admin_event_manager_events:
+    path: /admin/event/manager/events
+    controller: App\Controller\administration\AdminEventManagerController::events
+
+admin_event_manager_update_datetime:
+    path: /admin/event/manager/update/datetime
+    controller: App\Controller\administration\AdminEventManagerController::updateDatetime
+
+    #--jobs
+job_add:
+    path: /admin/job/add
+    controller: App\Controller\JobController::add
+
 
 ### Errors routing ###
 error_404:
@@ -169,6 +211,4 @@ error_404_unexist_route:
     defaults:
         _controller: App\Controller\ErrorController::error404
         requirements:
-            catchAll: '.+'
-
-
+           catchAll: '.+'

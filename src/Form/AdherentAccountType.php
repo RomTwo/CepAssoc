@@ -98,7 +98,7 @@ class AdherentAccountType extends AbstractType
                     'placeholder' => "Profession du représentant 1"
                 ],
             ])
-            ->add('phoneRep1', NumberType::class, [
+            ->add('phoneRep1', TextType::class, [
                 'attr' => [
                     'placeholder' => "Numéro de téléphone du représentant 1"
                 ],
@@ -125,7 +125,11 @@ class AdherentAccountType extends AbstractType
                     'class' => 'radio-inline'
                 ],
             ])
-            ->add('volunteerComment', TextareaType::class)
+            ->add('volunteerComment', TextareaType::class, [
+                'attr' => [
+                    'placeholder' => "Plus d'informations sur vos disponibilités..."
+                ]
+            ])
             ->add('medicalCertificate', FileType::class, [
                 'attr' => [
                     'placeholder' => "Choisissez votre certificat médical"
