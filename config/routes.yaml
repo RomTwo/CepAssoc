@@ -98,6 +98,28 @@ admin_activityDetails:
     requirements:
         id: ([0-9]*)
 
+admin_activityAddAdherentToTimeSlot:
+    path: /admin/activities/addToTimeSlot
+    controller: App\Controller\administration\AdminActivitiesController::addToTimeSlot
+
+admin_activityDeleteAdherentFromTimeSlot:
+  path: /admin/activities/deleteFromTimeSlot/{activityId}/{timeSlotId}/{adherentId}
+  controller: App\Controller\administration\AdminActivitiesController::deleteFromTimeSlot
+  requirements:
+    activityId: ([0-9]*)
+    timeSlotId: ([0-9]*)
+    adherentId: ([0-9]*)
+
+admin_activityCopyAllEmails:
+    path: /admin/activities/activityCopyAllEmails
+    controller: App\Controller\administration\AdminActivitiesController::copyAllEmails
+
+admin_activityCopyTimeSlotEmails:
+  path: /admin/activities/activityCopyTimeSlotEmails
+  controller: App\Controller\administration\AdminActivitiesController::copyTimeSlotEmails
+
+
+    #--Categories
 admin_categories:
     path: /admin/categories
     controller: App\Controller\administration\AdminActivitiesController::index
@@ -170,5 +192,3 @@ error_404_unexist_route:
         _controller: App\Controller\ErrorController::error404
         requirements:
             catchAll: '.+'
-
-

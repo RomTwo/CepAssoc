@@ -2,33 +2,64 @@
 
 {% form_theme form 'bootstrap_4_layout.html.twig' %}
 
-{% block title %}Activities{% endblock %}
-
-{% block specification %}
-   Modifier une activité
+{% block title %}
+    {% if isEdition is defined %}
+        Modification de l'activité {{ activity.name }}
+    {% else %}
+        Ajouter une activité
+    {% endif %}
 {% endblock %}
 
 {% block body %}
-
     {{ form_start(form) }}
-        <h6> ADMINISTRATION </h6>
 
+    <div class="row">
 
-        {{ form_widget(form) }}
+        <div class="col">
+            Nom :
+            {{ form_widget(form.name) }}
+        </div>
+        <div class="col">
+            Prix :
+            {{ form_widget(form.price) }}
+        </div>
+        <div class="col">
+            Date de début :
+            {{ form_widget(form.startDate) }}
+        </div>
 
+    </div>
+
+    <br>
+    <div class="row">
+        <div class="col">
+            Type :
+            {{ form_widget(form.type) }}
+        </div>
+        <div class="col">
+            Catégorie :
+            {{ form_widget(form.category) }}
+        </div>
+
+    </div>
+
+    <div class="row">
         {{ form_row(form.timeSlot) }}
-        <a href="#" id="add_timeSlot" class="btn btn-default">Ajouter un créneau</a>
+    </div>
+    <br>
 
-        <button class="btn btn-primary">Enregistrer</button>
+    <a href="#" id="add_timeSlot" class="btn btn-outline-success">Ajouter un créneau</a>
+
+    <button class="btn btn-primary">Enregistrer</button>
     {{ form_end(form) }}
 
-
 {% endblock %}
+
 
 
 {% block javascripts %}
     <script type="text/javascript">
-        $(document).ready(function() {
+        $(document).ready(function () {
             // On récupère la balise <div> en question qui contient l'attribut « data-prototype » qui nous intéresse.
             var $container = $('div#admin_activity_time_slot_timeSlot');
 
@@ -36,8 +67,8 @@
             var index = $container.find(':input').length;
 
             // On ajoute un nouveau champ à chaque clic sur le lien d'ajout.
-            $('#add_timeSlot').click(function(e) {
-                addCategory($container);
+            $('#add_timeSlot').click(function (e) {
+                addTimeSlot($container);
 
                 e.preventDefault(); // évite qu'un # apparaisse dans l'URL
                 return false;
@@ -45,22 +76,22 @@
 
             // On ajoute un premier champ automatiquement s'il n'en existe pas déjà un (cas d'une nouvelle annonce par exemple).
             if (index == 0) {
-                addCategory($container);
+                addTimeSlot($container);
             } else {
                 // S'il existe déjà des catégories, on ajoute un lien de suppression pour chacune d'entre elles
-                $container.children('fieldset').each(function() {
+                $container.children('fieldset').each(function () {
                     addDeleteLink($(this));
                 });
             }
 
             // La fonction qui ajoute un formulaire CategoryType
-            function addCategory($container) {
+            function addTimeSlot($container) {
                 // Dans le contenu de l'attribut « data-prototype », on remplace :
                 // - le texte "__name__label__" qu'il contient par le label du champ
                 // - le texte "__name__" qu'il contient par le numéro du champ
                 var template = $container.attr('data-prototype')
-                    .replace(/__name__label__/g, 'Catégorie n°' + (index+1))
-                    .replace(/__name__/g,        index)
+                    .replace(/__name__label__/g, 'Créneau ' + (index + 1))
+                    .replace(/__name__/g, index)
                 ;
 
                 // On crée un objet jquery qui contient ce template
@@ -85,7 +116,7 @@
                 $prototype.append($deleteLink);
 
                 // Ajout du listener sur le clic du lien pour effectivement supprimer la catégorie
-                $deleteLink.click(function(e) {
+                $deleteLink.click(function (e) {
                     $prototype.remove();
 
                     e.preventDefault(); // évite qu'un # apparaisse dans l'URL

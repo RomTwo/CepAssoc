@@ -6,9 +6,7 @@ namespace App\Form;
 
 use App\Entity\Activity;
 use App\Entity\Category;
-use App\Entity\TimeSlot;
 use App\Repository\CategoryRepository;
-use App\Repository\TimeSlotRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
@@ -27,35 +25,22 @@ class AdminActivityTimeSlotType extends AbstractType
             ->add('price', NumberType::class)
             ->add('startDate',\Symfony\Component\Form\Extension\Core\Type\DateType::class)
             ->add('type',TextType::class)
-
-            ->add('categories', EntityType::class, [
+            ->add('category', EntityType::class, [
                 'class' => Category::class,
-                'query_builder' => function (CategoryRepository $er) {
-                    return $er->createQueryBuilder('categorie')
-                        ->orderBy('categorie.name', 'ASC');
-                },
                 'choice_label' => 'name',
                 "multiple" => false
             ])
-            /*->add('timeSlot', EntityType::class, [
-                'class'        => 'App\Entity\TimeSlot',
-                'choice_label' => 'getFullTime',
-                'label'        => 'Affectation des créneaux ',
-                'expanded'     => true,
-                'multiple'     => true,
-            ])*/
-            ->add('timeSlot', CollectionType::class, array(
+            ->add('timeSlot', CollectionType::class, [
                 'entry_type'   => TimeSlotType::class,
                 'allow_add'    => true,
                 'allow_delete' => true
-            ))
+            ])
            ;
 
     }
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => Category::class,
             'data_class' => Activity::class
         ]);
     }

@@ -260,12 +260,6 @@ class Adherent
     private $imageRight;
 
     /**
-     * @ORM\Column(type="boolean")
-     * @Groups({"competition"})
-     */
-    private $isRegisteredInFFG;
-
-    /**
      * @ORM\Column(type="string", nullable=true)
      * @Assert\File(
      *     maxSize = "2048k",
@@ -377,6 +371,11 @@ class Adherent
      * @ORM\ManyToMany(targetEntity="App\Entity\TimeSlot", inversedBy="adherents")
      */
     private $timeSlots;
+
+    /**
+     * @ORM\Column(type="string", length=100,options={"default":"EN ATTENTE"})
+     */
+    private $status;
 
     public function __construct()
     {
@@ -909,22 +908,6 @@ class Adherent
     /**
      * @return mixed
      */
-    public function getIsRegisteredInFFG()
-    {
-        return $this->isRegisteredInFFG;
-    }
-
-    /**
-     * @param mixed $isRegisteredInFFG
-     */
-    public function setIsRegisteredInFFG($isRegisteredInFFG): void
-    {
-        $this->isRegisteredInFFG = $isRegisteredInFFG;
-    }
-
-    /**
-     * @return mixed
-     */
     public function getMedicalCertificateDate()
     {
         return $this->medicalCertificateDate;
@@ -1212,6 +1195,22 @@ class Adherent
         return $this;
     }
 
+    public function getStatus(): ?string
+    {
+        return $this->status;
+    }
+
+    public function setStatus(string $status): self
+    {
+        $this->status = $status;
+
+        return $this;
+    }
 
 
+
+    public function __toString(): string
+    {
+        return $this->firstName();
+    }
 }
