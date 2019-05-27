@@ -2,16 +2,10 @@
 
 namespace App\Form;
 
-use App\Entity\Account;
-use App\Entity\Activity;
 use App\Entity\Adherent;
-use Faker\Provider\File;
-use function Sodium\add;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use App\Transformer\DateToStringTransformer;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
-use Symfony\Component\Form\Extension\Core\Type\CollectionType;
-use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
