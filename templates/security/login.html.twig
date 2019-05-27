@@ -22,53 +22,79 @@
                         <h1>Connexion</h1>
                     </div>
                     <hr class="d-md-flex align-items-center" color="green">
-                    <div class="justify-content-center">
-                        <form action="{{ path('security_connexion') }}" method="post">
+                    <div class="justify-content-center ">
+                        <div class="collapse show" id="collapseId">
+                            <form action="{{ path('security_connexion') }}" method="post">
+                                <div class="container-fluid">
+                                    {% if errors %}
+                                        <div class="row justify-content-center">
+                                            <span class="invalid-feedback d-block">
+                                                <span class="d-block">
+                                                    <span class="form-error-icon badge badge-danger text-uppercase">{{ 'Erreur' }}</span>
+                                                    <span class="form-error-message">{{ errors.messageKey|trans(errors.messageData, 'security') }}</span>
+                                                </span>
+                                            </span>
+                                        </div>
+                                    {% endif %}
+                                </div>
+                                <div class="container-fluid pt-2">
+                                    <div class="row">
+                                        <input type="email" name="email" id="inputEmail" class="form-control"
+                                               placeholder="Adresse mail"
+                                               required autofocus>
+                                    </div>
+                                </div>
+                                <div class="container-fluid mt-3">
+                                    <div class="row">
+                                        <input type="password" name="password" id="inputPassword" class="form-control"
+                                               placeholder="Mot de passe"
+                                               required>
+                                    </div>
+                                </div>
+                                <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
 
-                            <!-- Login form -->
-                            <label for="inputEmail" class="sr-only">Adresse mail : </label>
-                            <input type="email" name="email" id="inputEmail" class="form-control" placeholder="Adresse mail"
-                                   required autofocus>
-                            <label for="inputPassword" class="sr-only">Mot de passe : </label>
-                            <input type="password" name="password" id="inputPassword" class="form-control"
-                                   placeholder="Mot de passe"
-                                   required>
+                                <div class="container-fluid mt-3">
+                                    <div class="row justify-content-center">
+                                        <button class="btn btn-success btn-block" type="submit">Connexion</button>
+                                    </div>
+                                </div>
 
-                            <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
-
-                            <button class="btn btn-primary" type="submit">Connexion</button>
-
-                        </form>
-                        {% if errors %}
-                            <div class="row ml-1">
-                                <span class="invalid-feedback d-block">
-                                    <span class="d-block">
-                                        <span class="form-error-icon badge badge-danger text-uppercase">{{ 'Erreur' }}</span>
-                                        <span class="form-error-message">{{ errors.messageKey|trans(errors.messageData, 'security') }}</span>
-                                    </span>
-                                </span>
-                            </div>
-                        {% endif %}
-
-
-                        <!-- Forgot password form -->
-                        <div class=" row justify-content-between align-items-center pl-3 pr-3">
-                            <a data-toggle="collapse" href="#collapseId" role="button" aria-expanded="false"
-                               aria-controls="collapseId">Mot
-                                de passe oublié ?</a>
-                        </div>
-                        <div class="collapse" id="collapseId">
-                            <form class="form-inline" action="{{ path('account_forgot_password') }}" method="post">
-                                <input class="form-control" type="email" name="email" placeholder="Email" required>
-                                <input class="btn btn-success" type="submit" value="Envoyer">
-                                <input type="hidden" name="recaptcha_response" id="recaptchaResponse">
                             </form>
+
                         </div>
 
-                        <div class="row mt-2 ml-1">
-                            <p>Vous n'avez pas encore de compte ? <a href="{{ path('account_add') }}">Inscrivez-vous
-                                    !</a>
-                            </p>
+                        <div class="container pt-3">
+                            <div class="row justify-content-center align-items-center">
+                                <a data-toggle="collapse" href="#collapseId" role="button" aria-expanded="false"
+                                   aria-controls="collapseId">Mot
+                                    de passe oublié ?</a>
+                            </div>
+                        </div>
+
+                        <div class="collapse" id="collapseId">
+                            <div class="container-fluid pt-3">
+                                <form action="{{ path('account_forgot_password') }}" method="post">
+                                    <div class="row p-0">
+                                        <div class="col-9 p-0">
+                                            <input class="form-control" type="email" name="email"
+                                                   placeholder="Adresse mail de récupération" required>
+                                        </div>
+                                        <div class="col-3 p-0">
+                                            <input class="btn btn-primary btn-block" type="submit" value="Envoyer">
+                                        </div>
+                                        <input type="hidden" name="recaptcha_response" id="recaptchaResponse">
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+
+
+                        <div class="container-fluid pt-3">
+                            <div class="row justify-content-center">
+                                <p>Vous n'avez pas encore de compte ? <a href="{{ path('account_add') }}">Inscrivez-vous
+                                        !</a>
+                                </p>
+                            </div>
                         </div>
                     </div>
                 </div>

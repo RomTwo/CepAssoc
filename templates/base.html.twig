@@ -1,65 +1,52 @@
 <!DOCTYPE html>
 <html lang="fr">
 
-<head>
+    <head>
 
-    <meta charset="utf-8">
-    <meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport">
-    <meta content="" name="description">
-    <meta content="" name="author">
+        <meta charset="utf-8">
+        <meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport">
+        <meta content="" name="description">
+        <meta content="" name="author">
 
-    <title>CEP -
-        {% block title %}{% endblock %}
-    </title>
-    {{ encore_entry_link_tags('app') }}
-    {% block stylesheets %}{% endblock %}
+        <title>CEP -
+            {% block title %}{% endblock %}
+        </title>
+        {{ encore_entry_link_tags('app') }}
+        {% block stylesheets %}{% endblock %}
 
-    <style>
-        html {
-            height: 100%;
-        }
+        <style>
+            html{
+                height : 100%;
+            }
+            body {
+                padding-top: 56px;
+                display:flex;
+                flex-direction : column;
+                height : 100vh;
+                padding-top : 56px;
+            }
 
-        body {
-            padding-top: 56px;
-            display: flex;
-            flex-direction: column;
-            height: 100vh;
-            padding-top: 56px;
-        }
+            .content{
+                flex : 1 0 auto;
+                padding : 20px;
+            }
+            .footer{
+                flex-shrink : 0;
+                padding : 20px;
+            }
 
-        .content {
-            flex: 1 0 auto;
-            padding: 20px;
-        }
+            .navbar{
+                background-color: #8a020e !important;
+            }
+            footer{
+                background-color: #8a020e !important;
 
-        .footer {
-            flex-shrink: 0;
-            padding: 20px;
-        }
+            }
+            .btn-primary,.btn-primary:hover{
+                background-color: #c1030a !important;
+                border-color: #c1030a !important;
 
-        .container-title-card {
-            display: flex;
-            flex-direction: row;
-        }
-
-        .container-title-card > div {
-            width: 100%;
-        }
-
-        .navbar {
-            background-color: #8a020e !important;
-        }
-
-        footer {
-            background-color: #8a020e !important;
-
-        }
-
-        .btn-primary, .btn-primary:hover {
-            background-color: #c1030a !important;
-            border-color: #c1030a !important;
-
-        }
+            }
 
         .btn-primary:focus {
             box-shadow: 0 0 0 .2rem #ffc8ca !important;
@@ -106,20 +93,20 @@
     </div>
 </nav>
 
-<!-- Page Content -->
-<div class="container content">
-    {% include('notifications/notifications.html.twig') %}
+        <!-- Page Content -->
+        <div class="container-fluid content">
+            {% include('notifications/notifications.html.twig') %}
 
-    {% block body %}{% endblock %}
-</div>
-<footer class="py-2 footer">
-    <div class="container">
-        <p class="m-0 text-center text-white">Copyright &copy; Your Website 2019</p>
-    </div>
-</footer>
+            {% block body %}{% endblock %}
+        </div>
+        <footer class="py-2 footer">
+            <div class="container">
+                <p class="m-0 text-center text-white">Copyright &copy; Your Website 2019</p>
+            </div>
+        </footer>
 
-{{ encore_entry_script_tags('app') }}
-{{ encore_entry_script_tags('popup') }}
-{% block javascripts %}{% endblock %}
-</body>
+        {{ encore_entry_script_tags('app') }}
+        {{ encore_entry_script_tags('popup') }}
+        {% block javascripts %}{% endblock %}
+    </body>
 </html>

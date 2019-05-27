@@ -50,6 +50,13 @@ class Adherent
     private $birthDate;
 
     /**
+     * @ORM\Column(type="string")
+     * @Assert\NotNull(message="Veuiller remplir le champ nationalité")
+     * @Groups({"competition"})
+     */
+    private $nationality;
+
+    /**
      * @ORM\Column(type="boolean")
      * @Groups({"competition"})
      */
@@ -284,12 +291,6 @@ class Adherent
     private $medicalCertificateDate;
 
     /**
-     * @ORM\Column(type="string")
-     * @Groups({"competition"})
-     */
-    private $nationality;
-
-    /**
      * @ORM\Column(type="boolean")
      * @Groups({"competition"})
      */
@@ -347,7 +348,7 @@ class Adherent
      * )
      * @Groups({"competition"})
      */
-    private $healthQuestionnaire;
+    private $healthQuestionnaireFile;
 
     /**
      * @ORM\Column(type="boolean")
@@ -376,6 +377,11 @@ class Adherent
      * @ORM\Column(type="string", length=100,options={"default":"EN ATTENTE"})
      */
     private $status;
+
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\HealthQuestionnaire", cascade={"persist"})
+     */
+    private $healthQuestionnaire;
 
     public function __construct()
     {
@@ -1124,17 +1130,17 @@ class Adherent
     /**
      * @return mixed
      */
-    public function getHealthQuestionnaire()
+    public function getHealthQuestionnaireFile()
     {
-        return $this->healthQuestionnaire;
+        return $this->healthQuestionnaireFile;
     }
 
     /**
      * @param mixed $healthQuestionnaire
      */
-    public function setHealthQuestionnaire($healthQuestionnaire): void
+    public function setHealthQuestionnaireFile($healthQuestionnaireFile): void
     {
-        $this->healthQuestionnaire = $healthQuestionnaire;
+        $this->healthQuestionnaireFile = $healthQuestionnaireFile;
     }
 
     /**
@@ -1211,5 +1217,21 @@ class Adherent
     public function __toString(): string
     {
         return $this->firstName();
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getHealthQuestionnaire()
+    {
+        return $this->healthQuestionnaire;
+    }
+
+    /**
+     * @param mixed $healthQuestionnaire
+     */
+    public function setHealthQuestionnaire($healthQuestionnaire): void
+    {
+        $this->healthQuestionnaire = $healthQuestionnaire;
     }
 }

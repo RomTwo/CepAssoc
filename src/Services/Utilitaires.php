@@ -4,6 +4,8 @@
 namespace App\Services;
 
 use App\Entity\Adherent;
+use Dompdf\Dompdf;
+use Dompdf\Options;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 
 class Utilitaires
@@ -43,8 +45,8 @@ class Utilitaires
             $adherent->setBulletinN2Allianz($this->addFile($adherent->getBulletinN2Allianz()));
         }
 
-        if($adherent->getHealthQuestionnaire() != null){
-            $adherent->setHealthQuestionnaire($this->addFile($adherent->getHealthQuestionnaire()));
+        if($adherent->getHealthQuestionnaireFile() != null){
+            $adherent->setHealthQuestionnaireFile($this->addFile($adherent->getHealthQuestionnaireFile()));
         }
 
         return $adherent;

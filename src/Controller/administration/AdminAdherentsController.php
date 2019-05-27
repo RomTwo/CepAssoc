@@ -50,9 +50,6 @@ class AdminAdherentsController extends AbstractController
         return $this->render('administration/adherents/adherentsEdit.html.twig', [
             'adherent' => $adherent,
             'form' => $form->createView(),
-            "cityRep1" => $adherent->getCityRep1(),
-            "cityRep2" => $adherent->getCityRep2(),
-            "adherent" => $adherent,
         ]);
     }
 

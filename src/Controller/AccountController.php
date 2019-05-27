@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Account;
 use App\Entity\Activity;
 use App\Entity\Adherent;
+use App\Entity\HealthQuestionnaire;
 use App\Form\AccountType;
 use App\Services\CaptchaCheck;
 use App\Services\ForgotPassword;
@@ -15,7 +16,12 @@ use Dompdf\Options;
 use Firebase\JWT\JWT;
 use http\Header;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Form\Button;
+use Symfony\Component\Form\ClickableInterface;
+use Symfony\Component\Form\Extension\Core\Type\ButtonType;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
@@ -46,15 +52,13 @@ class AccountController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid() && $utilitaires->isValidateCity($request)) {
             if ($captchaCheck->captchaIsValid($request->request->get('recaptcha_response'))) {
-                $account->setCity($request->request->get("account_city"));
-                $adherent->setCityRep1($request->request->get("account_city"));
+            $account->setCity($request->request->get("account_city"));
+            $adherent->setCityRep1($request->request->get("account_city"));
                 if (!$this->findByEmail($account->getEmail())) {
-                    if ($request->request->get("registration")) {
+                    if ($account->getAddAccountAdherent()) {
                         if ($this->isValidate($adherent)) {
                             $utilitaires->setOtherFields($adherent);
                             $adherent->setRegistrationType("nouveau");
-
-
                         } else {
                             $msg = "Attention, il manque des informations pour devenir adhérent";
                             return $this->render('account/index.html.twig', array(
@@ -67,6 +71,11 @@ class AccountController extends AbstractController
                         }
                     } else {
                         $account->removeChild($adherent);
+                    }
+                    if (!$this->isValidateHealthQuestionnaire($adherent->getHealthQuestionnaire())) {
+                        $adherent->setHealthQuestionnaire(null);
+                    } else {
+                        $this->generatePDF($adherent);
                     }
                     $manager = $this->getDoctrine()->getManager();
                     $encoded = $encoder->encodePassword($account, $account->getPassword());
@@ -90,6 +99,7 @@ class AccountController extends AbstractController
             'activities' => $this->getDoctrine()
                 ->getRepository(Activity::class)
                 ->findAll(),
+            'days' => array('Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi')
         ));
     }
 
@@ -108,6 +118,7 @@ class AccountController extends AbstractController
 
         $form = $this->createForm(AccountType::class, $account);
         $form->remove('children');
+        $form->remove('addAccountAdherent');
         $form->add('newPassword', PasswordType::class, array(
             'mapped' => false,
             'label' => 'Mot de passe',
@@ -152,7 +163,6 @@ class AccountController extends AbstractController
                 $msg = "Votre mot de passe actuel est incorrect";
                 return $this->render('account/update.html.twig', array("form" => $form->createView(), "errorOldPassFalse" => $msg));
             }
-
             $manager->flush();
             $this->addFlash('success', "Votre compte a été modifié");
             return $this->redirectToRoute('home');
@@ -268,8 +278,40 @@ class AccountController extends AbstractController
         if ($adherent->getSex() == null) {
             return false;
         }
+        return true;
+    }
 
+    private function isValidateHealthQuestionnaire($healthQuestionnaire)
+    {
+        if ($healthQuestionnaire->getHasMemberOfFamilyDiedHeartAttack() == null) {
+            return false;
+        }
+
+        if ($healthQuestionnaire->getHasPainChest() == null) {
+            return false;
+        }
+
+        if ($healthQuestionnaire->getHasAsthma() == null) {
+            return false;
+        }
 
         return true;
+    }
+
+    public function generatePDF($adherent)
+    {
+        $html = $this->render('account/generateHealthQuestionnairePDF.html.twig', [
+            'adherent' => $adherent,
+        ])->getContent();//Cette ligne permet de générer l'HTML d'une page twig.
+        //L'option 'getContent()' permet quant à elle de générer cette page sans les informations
+        //fournis par domPDF comme des informations de requêtes...
+        $pdfOptions = new Options();
+        $dompdf = new Dompdf($pdfOptions);
+        $dompdf->loadHtml($html);
+        $dompdf->setPaper('A4', 'portrait');
+        $dompdf->render();
+        $filename = md5(uniqid()) . '.pdf';
+        file_put_contents('uploads/' . $filename, $dompdf->output());
+        $adherent->setHealthQuestionnaireFile($filename);
     }
 }

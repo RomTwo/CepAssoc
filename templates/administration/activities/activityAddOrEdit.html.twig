@@ -4,64 +4,113 @@
 
 {% block title %}
     {% if isEdition is defined %}
-        Modification de l'activité {{ activity.name }}
+        Modification de l'activité
+        {{ activity.name }}
     {% else %}
         Ajouter une activité
     {% endif %}
 {% endblock %}
 
 {% block body %}
+
     {{ form_start(form) }}
-
-    <div class="row">
-
-        <div class="col">
-            Nom :
-            {{ form_widget(form.name) }}
+    <div class="form-group row">
+        <div class="col-sm-6 row">
+            <label class="col-sm-2 col-form-label">Nom :</label>
+            <div class="col-sm-10">
+                {{ form_widget(form.name) }}
+            </div>
         </div>
-        <div class="col">
-            Prix :
-            {{ form_widget(form.price) }}
+    </div>
+    <div class="form-group row">
+        <div class="col-sm-6 row">
+            <label for="inputEmail3" class="col-sm-2 col-form-label">Prix :</label>
+            <div class="col-sm-10">
+                {{ form_widget(form.price) }}
+            </div>
         </div>
-        <div class="col">
-            Date de début :
-            {{ form_widget(form.startDate) }}
+    </div>
+    <div class="form-group row">
+        <div class="col-sm-6 row">
+            <label for="inputEmail3" class="col-sm-2 col-form-label"> Date de début :</label>
+            <div class="col-sm-10">
+                 {{ form_widget(form.startDate) }}
+            </div>
         </div>
+    </div>
+    <div class="form-group row">
+        <div class="col-sm-6 row">
+            <label for="inputEmail3" class="col-sm-2 col-form-label">Type :</label>
+            <div class="col-sm-10">
+                 {{ form_widget(form.type) }}
+            </div>
+        </div>
+    </div>
+    <div class="form-group row">
+        <div class="col-sm-6 row">
+            <label for="inputEmail3" class="col-sm-2 col-form-label"> Catégorie :</label>
+            <div class="col-sm-10">
+                 {{ form_widget(form.category) }}
+            </div>
+        </div>
+    </div>
+     <div class="form-group row">
+        <div class="col-sm-6 row">
+            <label for="inputEmail3" class="col-sm-2 col-form-label"> <strong>Créneaux :</strong></label>
+        </div>
+    </div>
+    <div id="collectionContainer" class ="form-group row" data-prototype="
+         {% filter escape %}
+             {{ include('administration/activities/prototype.html.twig', { 'form': form.timeSlot.vars.prototype }) }}
+         {% endfilter %}">
 
+        {% for timeSlotForm in form.timeSlot %}
+        <div class="col-sm-12 col-md-6 col-lg-4  form-group row timeslot">
+            <div class="col-sm-12 row" style="margin-bottom: 5px;">
+                <label for="inputEmail3" class="col-sm-3 col-form-label"> Jour :</label>
+                <div class="col-sm-9">
+                     {{ form_widget(timeSlotForm.day) }}
+                </div>
+            </div>
+            <div class="col-sm-12 row" style="margin-bottom: 5px;">
+                <label for="inputEmail3" class="col-sm-3 col-form-label"> Fin :</label>
+                <div class="col-sm-9">
+                     {{ form_widget(timeSlotForm.startTime) }}
+                </div>
+            </div>
+            <div class="col-sm-12 row" style="margin-bottom: 5px;">
+                <label for="inputEmail3" class="col-sm-3 col-form-label"> Début :</label>
+                <div class="col-sm-9">
+                    {{ form_widget(timeSlotForm.endTime) }}
+                </div>
+            </div>
+             <div class="col-sm-12 row" style="margin-bottom: 5px;">
+                <label for="inputEmail3" class="col-sm-3 col-form-label"> Ville :</label>
+                <div class="col-sm-9">
+                     {{ form_widget(timeSlotForm.city) }}
+                </div>
+            </div>
+        </div>
+        {% endfor %}
     </div>
 
-    <br>
-    <div class="row">
-        <div class="col">
-            Type :
-            {{ form_widget(form.type) }}
-        </div>
-        <div class="col">
-            Catégorie :
-            {{ form_widget(form.category) }}
-        </div>
 
-    </div>
-
-    {{ form_widget(form.timeSlot) }}
-    <br>
-
-    <a href="#" id="add_timeSlot" class="btn btn-outline-success">Ajouter un créneau</a>
+    <a class="btn btn-outline-success" href="#" id="add_timeSlot">Ajouter un créneau</a>
 
     <button class="btn btn-primary">Enregistrer</button>
+
+    <div hidden> {{ form_widget(form.timeSlot) }} </div>
     {{ form_end(form) }}
 
 {% endblock %}
-
 
 
 {% block javascripts %}
     {{ encore_entry_script_tags('date') }}
     {{ encore_entry_script_tags('time') }}
     <script type="text/javascript">
-        $(document).ready(function () {
-            // On récupère la balise <div> en question qui contient l'attribut « data-prototype » qui nous intéresse.
-            var $container = $('div#admin_activity_time_slot_timeSlot');
+        $(document).ready(function () { // On récupère la balise <div> en question qui contient l'attribut « data-prototype » qui nous intéresse.
+            var $container = $('div#collectionContainer');
 
             // On définit un compteur unique pour nommer les champs qu'on va ajouter dynamiquement
             var index = $container.find(':input').length;
@@ -76,10 +125,10 @@
 
             // On ajoute un premier champ automatiquement s'il n'en existe pas déjà un (cas d'une nouvelle annonce par exemple).
             if (index == 0) {
-                addTimeSlot($container);
-            } else {
-                // S'il existe déjà des catégories, on ajoute un lien de suppression pour chacune d'entre elles
-                $container.children('fieldset').each(function () {
+                //addTimeSlot($container);
+            } else { // S'il existe déjà des catégories, on ajoute un lien de suppression pour chacune d'entre elles
+
+                $container.children('.timeslot').each(function () {
                     addDeleteLink($(this));
                 });
             }
@@ -89,10 +138,9 @@
                 // Dans le contenu de l'attribut « data-prototype », on remplace :
                 // - le texte "__name__label__" qu'il contient par le label du champ
                 // - le texte "__name__" qu'il contient par le numéro du champ
-                var template = $container.attr('data-prototype')
-                    .replace(/__name__label__/g, 'Créneau ' + (index + 1))
-                    .replace(/__name__/g, index)
-                ;
+                var template = $container.attr('data-prototype').replace(/__name__label__/g, 'Créneau ' + (
+                    index + 1
+                )).replace(/__name__/g, index);
 
                 // On crée un objet jquery qui contient ce template
                 var $prototype = $(template);
@@ -108,10 +156,8 @@
             }
 
             // La fonction qui ajoute un lien de suppression d'une catégorie
-            function addDeleteLink($prototype) {
-                // Création du lien
-                var $deleteLink = $('<a href="#" class="btn btn-danger">Supprimer</a>');
-
+            function addDeleteLink($prototype) { // Création du lien
+                var $deleteLink = $('<div class="col-sm-12 row"><div class="col-sm-12 text-right"><a href="#" class="btn btn-danger">Supprimer</a></div></div> ');
                 // Ajout du lien
                 $prototype.append($deleteLink);
 
