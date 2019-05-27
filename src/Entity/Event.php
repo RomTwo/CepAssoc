@@ -5,6 +5,7 @@ namespace App\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\EventRepository")
@@ -20,37 +21,50 @@ class Event
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotNull(message="Veuiller renseigner le nom de l'évènement")
      */
     private $name;
 
     /**
-     * @ORM\Column(type="date")
+     * @ORM\Column(type="datetime")
+     * @Assert\NotNull(message="Veuiller renseigner la date de début")
+     * @Assert\DateTime(message="Le format de la date de début n'est pas correct")
      */
-    private $date;
+    private $startDate;
+
+    /**
+     * @ORM\Column(type="datetime")
+     * @Assert\NotNull(message="Veuiller renseigner la date de fin")
+     * @Assert\DateTime(message="Le format de la date de fin n'est pas correct")
+     */
+    private $endDate;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotNull(message="Veuiller renseigner l'adresse de l'évènement")
      */
     private $address;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="text")
+     * @Assert\NotNull(message="Veuiller remplir la description de l'évènement")
      */
     private $description;
 
     /**
-     * @ORM\Column(type="boolean")
-     */
-    private $AuthorizationOfOrganization;
-
-    /**
-     * @ORM\OneToMany(targetEntity="App\Entity\EventManagement", mappedBy="events")
+     * @ORM\OneToMany(targetEntity="App\Entity\EventManagement", mappedBy="event", cascade={"persist", "remove"})
      */
     private $eventManagements;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\Job", cascade={"persist"})
+     */
+    private $jobs;
 
     public function __construct()
     {
         $this->eventManagements = new ArrayCollection();
+        $this->jobs = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -70,17 +84,27 @@ class Event
         return $this;
     }
 
-    public function getDate(): ?\DateTimeInterface
+    public function getStartDate()
     {
-        return $this->date;
+        return $this->startDate;
     }
 
-    public function setDate(\DateTimeInterface $date): self
+    public function setStartDate($startDate)
     {
-        $this->date = $date;
-
-        return $this;
+        $this->startDate = $startDate;
     }
+
+
+    public function getEndDate()
+    {
+        return $this->endDate;
+    }
+
+    public function setEndDate($endDate)
+    {
+        $this->endDate = $endDate;
+    }
+
 
     public function getAddress(): ?string
     {
@@ -106,18 +130,6 @@ class Event
         return $this;
     }
 
-    public function getAuthorizationOfOrganization(): ?bool
-    {
-        return $this->AuthorizationOfOrganization;
-    }
-
-    public function setAuthorizationOfOrganization(bool $AuthorizationOfOrganization): self
-    {
-        $this->AuthorizationOfOrganization = $AuthorizationOfOrganization;
-
-        return $this;
-    }
-
     /**
      * @return Collection|EventManagement[]
      */
@@ -130,7 +142,6 @@ class Event
     {
         if (!$this->eventManagements->contains($eventManagement)) {
             $this->eventManagements[] = $eventManagement;
-            $eventManagement->setEvents($this);
         }
 
         return $this;
@@ -140,13 +151,35 @@ class Event
     {
         if ($this->eventManagements->contains($eventManagement)) {
             $this->eventManagements->removeElement($eventManagement);
-            // set the owning side to null (unless already changed)
-            if ($eventManagement->getEvents() === $this) {
-                $eventManagement->setEvents(null);
-            }
         }
 
         return $this;
     }
+
+    /**
+     * @return Collection|Job[]
+     */
+    public function getJobs(): Collection
+    {
+        return $this->jobs;
+    }
+
+    public function addJob(Job $job): self
+    {
+        if (!$this->eventManagements->contains($job)) {
+            $this->jobs[] = $job;
+        }
+        return $this;
+    }
+
+    public function removeJob(Job $job): self
+    {
+        if ($this->eventManagements->contains($job)) {
+            $this->jobs->removeElement($job);
+        }
+
+        return $this;
+    }
+
 
 }

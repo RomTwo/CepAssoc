@@ -170,6 +170,50 @@ admin_events:
     path: /admin/events
     controller: App\Controller\administration\AdminEventsController::index
 
+admin_event_update:
+    path: /admin/event/update/{id}
+    controller: App\Controller\administration\AdminEventsController::update
+    requirements:
+        id: ([0-9]*)
+
+admin_event_delete:
+    path: /admin/event/delete/{id}
+    controller: App\Controller\administration\AdminEventsController::delete
+    requirements:
+        id: ([0-9]*)
+
+    #--event management
+admin_event_manager_index:
+    path: /admin/event/manager/{id}
+    controller: App\Controller\administration\AdminEventManagerController::index
+    requirements:
+        id: ([0-9]*)
+
+admin_event_manager_add:
+    path: /admin/event/manager/add
+    controller: App\Controller\administration\AdminEventManagerController::add
+
+admin_event_manager_update:
+    path: /admin/event/manager/update
+    controller: App\Controller\administration\AdminEventManagerController::update
+
+admin_event_manager_delete:
+    path: /admin/event/manager/delete
+    controller: App\Controller\administration\AdminEventManagerController::delete
+
+admin_event_manager_events:
+    path: /admin/event/manager/events
+    controller: App\Controller\administration\AdminEventManagerController::events
+
+admin_event_manager_update_datetime:
+    path: /admin/event/manager/update/datetime
+    controller: App\Controller\administration\AdminEventManagerController::updateDatetime
+
+    #--jobs
+job_add:
+    path: /admin/job/add
+    controller: App\Controller\JobController::add
+
 
 ### Errors routing ###
 error_404:

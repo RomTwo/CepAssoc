@@ -1,0 +1,105 @@
+<div class="row mt-3">
+    <h3>Évènement : </h3>
+</div>
+{{ form_start(form) }}
+<div class="row mt-3">
+    <div class="col-2">
+        <label>Nom : </label>
+    </div>
+    <div class="col-auto">
+        {{ form_widget(form.name) }}
+    </div>
+    <div class="row ml-1">
+        {{ form_errors(form.name) }}
+    </div>
+</div>
+
+<div class="row mt-3">
+    <div class="col-2">
+        <label>Date de début : </label>
+    </div>
+    <div class="col-auto">
+        {{ form_widget(form.startDate) }}
+    </div>
+    <div class="row ml-1">
+        {{ form_errors(form.startDate) }}
+    </div>
+</div>
+
+<div class="row mt-3">
+    <div class="col-2">
+        <label>Date de fin : </label>
+    </div>
+    <div class="col-auto">
+        {{ form_widget(form.endDate) }}
+    </div>
+    <div class="row ml-1">
+        {{ form_errors(form.endDate) }}
+    </div>
+</div>
+
+<div class="row mt-3">
+    <div class="col-2">
+        <label>Adresse : </label>
+    </div>
+    <div class="col-auto">
+        {{ form_widget(form.address) }}
+    </div>
+    <div class="row ml-1">
+        {{ form_errors(form.address) }}
+    </div>
+</div>
+
+<div class="row mt-3">
+    <div class="col-2">
+        <label>Description : </label>
+    </div>
+    <div class="col-auto">
+        {{ form_widget(form.description) }}
+    </div>
+    <div class="row ml-1">
+        {{ form_errors(form.description) }}
+    </div>
+</div>
+
+
+<div class="row mt-3">
+    <h3>Organisation : </h3>
+</div>
+<div class="row mt-3">
+    <div class="col-2">
+        <label>Postes : </label>
+    </div>
+    <div class="col-auto">
+        {{ form_widget(form.jobs) }}
+    </div>
+    <div class="col-auto">
+        <a id="addJob" style="color: green;"><i class="fas fa-plus-circle fa-2x"></i></a>
+
+    </div>
+    <div class="row ml-1">
+        {{ form_errors(form.jobs) }}
+    </div>
+</div>
+
+
+{{ form_widget(form.submit) }}
+            {{ form_end(form) }}
+
+<div id="divAddJob">
+    <div class="row mt-3">
+        <h3>Ajouter un poste : </h3>
+    </div>
+    <div class="row mt-3">
+        <div class="col-2">
+            <label>Intitulé du poste : </label>
+        </div>
+        <div class="col-auto">
+            <form id="jobForm" class="form-inline" action="{{ path('job_add') }}" method="post">
+                <input id="jobName" type="text" name="jobName">
+                <input class="btn btn-success" type="submit" value="ajouter">
+            </form>
+        </div>
+    </div>
+</div>
+
