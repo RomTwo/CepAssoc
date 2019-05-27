@@ -2,61 +2,16 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="53b90c9e-e36e-447f-8cc9-26b01b488158" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/assets/css/colorDatepicker.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/js/calendar.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/js/datepicker.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/js/datetimepicker.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/js/datetimepickerEvent.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/js/event.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/documentations/Librarie_yarn_utilisées" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/documentations/datetimepicker" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/uploads/e46c19d6693e941a18d7d3682d8092fc.jpeg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Controller/JobController.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Controller/administration/AdminEventManagerController.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Entity/Job.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Form/EventManagerType.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Form/EventType.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Repository/JobRepository.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Services/CompareDatetime.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Transformer/DatetimeToStringTransformer.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Transformer/JobToStringTransformer.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/administration/eventManage/add.html.twig" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/administration/eventManage/describeModal.html.twig" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/administration/eventManage/index.html.twig" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/administration/eventManage/updateModal.html.twig" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/administration/events/addEventForm.html.twig" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/administration/events/modalDeleteEvent.html.twig" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/administration/events/updateEvent.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/CepAssoc.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/CepAssoc.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/css/app.scss" beforeDir="false" afterPath="$PROJECT_DIR$/assets/css/app.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.env" beforeDir="false" afterPath="$PROJECT_DIR$/.env" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/assets/css/dashboard_admin.scss" beforeDir="false" afterPath="$PROJECT_DIR$/assets/css/dashboard_admin.scss" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/assets/js/admin.js" beforeDir="false" afterPath="$PROJECT_DIR$/assets/js/admin.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/assets/js/app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/js/popup.js" beforeDir="false" afterPath="$PROJECT_DIR$/assets/js/popup.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/routes.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config/routes.yaml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/AccountController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/AccountController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/administration/AdminAdherentsController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/administration/AdminAdherentsController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/administration/AdminEventsController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/administration/AdminEventsController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/administration/AdminTimeSlotsController.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/administration/AdministrationController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/administration/AdministrationController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/DataFixtures/AppFixtures.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/DataFixtures/AppFixtures.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/Account.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Account.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/Event.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Event.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/EventManagement.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/EventManagement.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Repository/EventRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Repository/EventRepository.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Services/GenerateToken.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Services/GenerateToken.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/account/update.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/account/update.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/administration/accounts/edit.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/administration/accounts/edit.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/administration/activities/activities.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/administration/activities/activities.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/administration/activities/activityDetails.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/administration/activities/activityDetails.html.twig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/administration/adherents/adherents.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/administration/adherents/adherents.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/administration/events/events.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/administration/events/events.html.twig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/administration/home.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/administration/home.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/administration/layout_admin.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/administration/layout_admin.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/administration/timeSlots/timeSlots.html.twig" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/administration/timeSlots/timeSlotsAdd.html.twig" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webpack.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/webpack.config.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/base.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/base.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/home/index.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/home/index.html.twig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/yarn.lock" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -70,31 +25,6 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/assets/js/formulaire.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="416">
-              <caret line="285" column="16" selection-start-line="285" selection-start-column="16" selection-end-line="285" selection-end-column="16" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/yarn.lock">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-5367" />
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/package.json">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="435">
-              <caret line="33" column="28" selection-start-line="33" selection-start-column="28" selection-end-line="33" selection-end-column="28" />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Form/AdherentAccountType.php">
           <provider selected="true" editor-type-id="text-editor">
@@ -134,11 +64,61 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/DataFixtures/AppFixtures.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="352">
-              <caret line="489" column="44" lean-forward="true" selection-start-line="489" selection-start-column="44" selection-end-line="489" selection-end-column="44" />
+            <state relative-caret-position="335">
+              <caret line="163" selection-start-line="163" selection-end-line="163" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/.env">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="164">
+              <caret line="28" column="53" selection-start-line="28" selection-start-column="53" selection-end-line="28" selection-end-column="53" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/templates/administration/home.html.twig">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="229">
+              <caret line="16" column="9" selection-start-line="16" selection-start-column="9" selection-end-line="16" selection-end-column="9" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/templates/administration/adherents/adherents.html.twig">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="338">
+              <caret line="618" column="26" lean-forward="true" selection-start-line="618" selection-start-column="26" selection-end-line="618" selection-end-column="26" />
+              <folding>
+                <element signature="n#nav#0;n#!!top" />
+                <element signature="n#table#0;n#div#0;n#div#0;n#!!top" />
+                <element signature="e#2888#5035#0#Twig" />
+                <element signature="e#3384#4258#0#Twig" />
+                <element signature="n#td#4;n#tr#0;n#tbody#0;n#table#0;n#div#0;n#div#0;n#!!top" />
+                <element signature="n#button#0;n#td#5;n#tr#0;n#tbody#0;n#table#0;n#div#0;n#div#0;n#!!top" />
+                <element signature="n#div#1;n#div#0;n#!!top" />
+                <element signature="n#table#0;n#div#1;n#div#0;n#!!top" />
+                <element signature="n#div#2;n#div#0;n#!!top" />
+                <element signature="n#table#0;n#div#2;n#div#0;n#!!top" />
+                <element signature="n#div#0;n#div#0;n#div#0;n#div#3;n#div#0;n#!!top" />
+                <element signature="n#div#1;n#div#0;n#div#0;n#div#3;n#div#0;n#!!top" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/config/routes.yaml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-1988">
+              <caret line="35" column="6" selection-start-line="35" selection-end-line="35" selection-end-column="6" />
             </state>
           </provider>
         </entry>
@@ -148,18 +128,6 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="-44">
               <caret line="27" column="7" selection-start-line="27" selection-start-column="7" selection-end-line="27" selection-end-column="7" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Services/Utilitaires.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="240">
-              <caret line="17" selection-start-line="17" selection-end-line="17" />
-              <folding>
-                <element signature="e#33#57#0#PHP" expanded="true" />
-              </folding>
             </state>
           </provider>
         </entry>
@@ -175,8 +143,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>parent</find>
-      <find>many</find>
       <find>obte</find>
       <find>remove</find>
       <find>isvalidationRa</find>
@@ -205,6 +171,8 @@
       <find>setIsRe</find>
       <find>setDate</find>
       <find>setAuthorizationOfOrganization</find>
+      <find>&gt;&gt;&gt;&gt;&gt;&gt;&gt;</find>
+      <find>admin_time</find>
     </findStrings>
     <replaceStrings>
       <replace />
@@ -234,7 +202,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/public/build/app.js" />
         <option value="$PROJECT_DIR$/var/cache/dev/ContainerH3I66IZ/getAdherentTypeService.php" />
         <option value="$PROJECT_DIR$/var/cache/dev/Container2kYDBt0/getAdherentTypeService.php" />
         <option value="$PROJECT_DIR$/templates/home/index.html.twig" />
@@ -254,7 +221,6 @@
         <option value="$PROJECT_DIR$/templates/administration/plugin/competiteurs.html.twig" />
         <option value="$PROJECT_DIR$/config/services.yaml" />
         <option value="$PROJECT_DIR$/templates/administration/adherents/generateAdherentsPDF.html.twig" />
-        <option value="$PROJECT_DIR$/templates/administration/adherents/adherents.html.twig" />
         <option value="$PROJECT_DIR$/assets/js/registration.js" />
         <option value="$PROJECT_DIR$/assets/js/account.js" />
         <option value="$PROJECT_DIR$/webpack.config.js" />
@@ -274,7 +240,6 @@
         <option value="$PROJECT_DIR$/templates/administration/basePDF.html.twig" />
         <option value="$PROJECT_DIR$/src/Controller/SecurityController.php" />
         <option value="$PROJECT_DIR$/assets/css/app.scss" />
-        <option value="$PROJECT_DIR$/.env" />
         <option value="$PROJECT_DIR$/templates/account/generateHealthQuestionnairePDF.html.twig" />
         <option value="$PROJECT_DIR$/src/Entity/Adherent.php" />
         <option value="$PROJECT_DIR$/src/Form/AdherentType.php" />
@@ -285,6 +250,9 @@
         <option value="$PROJECT_DIR$/assets/js/app.js" />
         <option value="$PROJECT_DIR$/src/Controller/AccountController.php" />
         <option value="$PROJECT_DIR$/src/DataFixtures/AppFixtures.php" />
+        <option value="$PROJECT_DIR$/.env" />
+        <option value="$PROJECT_DIR$/templates/administration/home.html.twig" />
+        <option value="$PROJECT_DIR$/templates/administration/adherents/adherents.html.twig" />
       </list>
     </option>
   </component>
@@ -620,6 +588,11 @@
             <path>
               <item name="CepAssoc" type="b2602c69:ProjectViewProjectNode" />
               <item name="CepAssoc" type="462c0819:PsiDirectoryNode" />
+              <item name="config" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="CepAssoc" type="b2602c69:ProjectViewProjectNode" />
+              <item name="CepAssoc" type="462c0819:PsiDirectoryNode" />
               <item name="documentations" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -827,7 +800,7 @@
       <workItem from="1558938741099" duration="5390000" />
       <workItem from="1558946602309" duration="3979000" />
       <workItem from="1558952032996" duration="1661000" />
-      <workItem from="1558957968669" duration="1712000" />
+      <workItem from="1558957968669" duration="2543000" />
     </task>
     <task id="LOCAL-00001" summary="New routes and controllers added.">
       <created>1557132241841</created>
@@ -1095,11 +1068,18 @@
       <option name="project" value="LOCAL" />
       <updated>1558958246677</updated>
     </task>
-    <option name="localTasksCounter" value="39" />
+    <task id="LOCAL-00039" summary="Merge branch 'master' of https://github.com/RomTwo/CepAssoc&#10;&#10;# Conflicts:&#10;#&#9;.idea/workspace.xml&#10;#&#9;assets/js/app.js&#10;#&#9;package.json&#10;#&#9;src/Entity/Account.php&#10;#&#9;yarn.lock">
+      <created>1558960079556</created>
+      <option name="number" value="00039" />
+      <option name="presentableId" value="LOCAL-00039" />
+      <option name="project" value="LOCAL" />
+      <updated>1558960079556</updated>
+    </task>
+    <option name="localTasksCounter" value="40" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="205978000" />
+    <option name="totallyTimeSpent" value="206809000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1114,7 +1094,7 @@
     <frame x="0" y="0" width="1440" height="900" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.27181688" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.27181688" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -1126,8 +1106,8 @@
       <window_info anchor="bottom" id="TODO" order="6" weight="0.32891566" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Database Changes" order="8" />
-      <window_info anchor="bottom" id="Version Control" order="9" weight="0.32891566" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="10" sideWeight="0.49928468" visible="true" weight="0.28674698" />
+      <window_info anchor="bottom" id="Version Control" order="9" visible="true" weight="0.32891566" />
+      <window_info anchor="bottom" id="Terminal" order="10" sideWeight="0.49928468" weight="0.28674698" />
       <window_info anchor="bottom" id="Event Log" order="11" sideWeight="0.5007153" side_tool="true" weight="0.28674698" />
       <window_info anchor="bottom" id="Messages" order="12" weight="0.32891566" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
@@ -1234,12 +1214,10 @@
     <MESSAGE value="- Edit the health questionnaire to PDF" />
     <MESSAGE value="- Add the design of registration form&#10;- Add the design of connexion form&#10;- Edit the PDF of the healthQuestionnaire" />
     <MESSAGE value="- Fix error for the registration form" />
-    <option name="LAST_COMMIT_MESSAGE" value="- Fix error for the registration form" />
+    <MESSAGE value="Merge branch 'master' of https://github.com/RomTwo/CepAssoc&#10;&#10;# Conflicts:&#10;#&#9;.idea/workspace.xml&#10;#&#9;assets/js/app.js&#10;#&#9;package.json&#10;#&#9;src/Entity/Account.php&#10;#&#9;yarn.lock" />
+    <option name="LAST_COMMIT_MESSAGE" value="Merge branch 'master' of https://github.com/RomTwo/CepAssoc&#10;&#10;# Conflicts:&#10;#&#9;.idea/workspace.xml&#10;#&#9;assets/js/app.js&#10;#&#9;package.json&#10;#&#9;src/Entity/Account.php&#10;#&#9;yarn.lock" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/templates/administration/accounts/accounts.html.twig">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/var/cache/dev/ContainerCUjFVJC/getHealthQuestionnaireRepositoryService.php" />
     <entry file="file://$PROJECT_DIR$/src/Form/HealthQuestionnaireType.php">
       <provider selected="true" editor-type-id="text-editor">
@@ -1296,13 +1274,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/administration/adherents/adherents.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="8445">
-          <caret line="563" column="14" selection-start-line="563" selection-start-column="14" selection-end-line="563" selection-end-column="14" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Controller/administration/AdminAdherentsController.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="870">
@@ -1314,13 +1285,6 @@
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/assets/css/form.scss" />
-    <entry file="file://$PROJECT_DIR$/config/routes.yaml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="387">
-          <caret line="27" column="18" selection-start-line="27" selection-end-line="27" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/assets/images/gymnastic-low-poly-artwork-ballet.jpg">
       <provider selected="true" editor-type-id="images" />
     </entry>
@@ -1382,13 +1346,6 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/templates/base_without_navbar.html.twig">
       <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/.env">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="17" column="43" lean-forward="true" selection-start-line="17" selection-start-column="43" selection-end-line="17" selection-end-column="43" />
-        </state>
-      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/webpack.config.js">
       <provider selected="true" editor-type-id="text-editor">
@@ -1579,8 +1536,50 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/DataFixtures/AppFixtures.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="352">
-          <caret line="489" column="44" lean-forward="true" selection-start-line="489" selection-start-column="44" selection-end-line="489" selection-end-column="44" />
+        <state relative-caret-position="335">
+          <caret line="163" selection-start-line="163" selection-end-line="163" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.env">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="164">
+          <caret line="28" column="53" selection-start-line="28" selection-start-column="53" selection-end-line="28" selection-end-column="53" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/config/routes.yaml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1988">
+          <caret line="35" column="6" selection-start-line="35" selection-end-line="35" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/administration/home.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="229">
+          <caret line="16" column="9" selection-start-line="16" selection-start-column="9" selection-end-line="16" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/administration/adherents/adherents.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="338">
+          <caret line="618" column="26" lean-forward="true" selection-start-line="618" selection-start-column="26" selection-end-line="618" selection-end-column="26" />
+          <folding>
+            <element signature="n#nav#0;n#!!top" />
+            <element signature="n#table#0;n#div#0;n#div#0;n#!!top" />
+            <element signature="e#2888#5035#0#Twig" />
+            <element signature="e#3384#4258#0#Twig" />
+            <element signature="n#td#4;n#tr#0;n#tbody#0;n#table#0;n#div#0;n#div#0;n#!!top" />
+            <element signature="n#button#0;n#td#5;n#tr#0;n#tbody#0;n#table#0;n#div#0;n#div#0;n#!!top" />
+            <element signature="n#div#1;n#div#0;n#!!top" />
+            <element signature="n#table#0;n#div#1;n#div#0;n#!!top" />
+            <element signature="n#div#2;n#div#0;n#!!top" />
+            <element signature="n#table#0;n#div#2;n#div#0;n#!!top" />
+            <element signature="n#div#0;n#div#0;n#div#0;n#div#3;n#div#0;n#!!top" />
+            <element signature="n#div#1;n#div#0;n#div#0;n#div#3;n#div#0;n#!!top" />
+          </folding>
         </state>
       </provider>
     </entry>
