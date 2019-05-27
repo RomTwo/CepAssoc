@@ -1,0 +1,47 @@
+<div id="modal-view-event-update" class="modal modal-top fade calendar-modal">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <form id="updateEventManagerForm" action="{{ path('admin_event_manager_update') }}" method="post">
+                <div class="modal-body">
+                    <h4>Modification : </h4>
+                    <div id="errorUpdateEventManager">
+
+                    </div>
+                    <div>
+                        <label>Personne : </label>
+                        <select id="selectAccountUpdate" class="form-control" name="person"></select>
+                    </div>
+
+                    <div>
+                        <label>Date de début : </label>
+                        <input id="startUpdate" type="text" class="form-control dateTimePickerEvent" name="start">
+                    </div>
+
+                    <div>
+                        <label>Date de fin : </label>
+                        <input id="endUpdate" type="text" class="form-control dateTimePickerEvent" name="end">
+                    </div>
+
+                    <div>
+                        <label>Poste : </label>
+                        <select id="selectJobUpdate" class="form-control" name="job"></select>
+                    </div>
+
+                    <div>
+                        <label>Lieu d'intervention : </label>
+                        <input id="placeUpdate" type="text" class="form-control" name="place">
+                    </div>
+
+                    <input id="idEventManagerUpdate" type="hidden" name="idEventManager">
+                </div>
+
+
+                <div class="modal-footer">
+                    <input class="btn btn-success" type="submit" value="Modifier">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">Abandonner</button>
+                </div>
+
+            </form>
+        </div>
+    </div>
+</div>

@@ -82,7 +82,7 @@ string $email, string $city, string $password)
     {
         $a->setpaymentFeesArePaid(false);
         $a->setisRegisteredInGestGym(false);
-        $a->setIsRegisteredInFFG(false);
+        $a->setStatus("EN ATTENTE");
         $a->setMedicalCertificateDate(new \DateTime("01-09-2019"));
         $a->setNationality("France");
         $a->setIsFFGInsurance(false);
@@ -223,7 +223,7 @@ string $email, string $city, string $password)
             // champs defaut ::
             $adherent->setpaymentFeesArePaid(false);
             $adherent->setisRegisteredInGestGym(false);
-            $adherent->setIsRegisteredInFFG(false);
+            $adherent->setStatus("EN ATTENTE");
             $adherent->setIsMedicalCertificate(false);
             $adherent->setIsValidateMedical(false);
             $adherent->setMedicalCertificateDate(new \DateTime("01-09-2019"));
@@ -475,13 +475,11 @@ string $email, string $city, string $password)
             $event = new Event();
             array_push($events, $event);
             $event->setName("event".$i);
-            $event->setDate(new \DateTime("09-05-2019"));
+            $event->setStartDate(new \DateTime("09-05-2019"));
+            $event->setEndDate(new \DateTime("10-05-2019"));
+
             $event->setAddress("address of event".$i);
             $event->setDescription("Description of event".$i);
-            if(($i % 2) == 0)
-                $event->setAuthorizationOfOrganization(true);
-            else
-            $event->setAuthorizationOfOrganization(false);
             
             $manager->persist($events[$i]);
         }

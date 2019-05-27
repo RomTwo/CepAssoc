@@ -24,6 +24,7 @@ class AdministrationController extends AbstractController
     public function home(){
         return $this->render('administration/home.html.twig');
     }
+
     /**
      * Return and Print a list of the competitors (for the plugin)
      *
@@ -69,7 +70,7 @@ class AdministrationController extends AbstractController
             }
 
             $competiteurs = $manager->getRepository(Adherent::class)->findByIsRegisteredInGestGym(false);
-            
+
             $justSync= $this->getSerializeAdherents($adherentSynchonized);
             if ($competiteurs) {
                 $notSync = $this->getSerializeAdherents($competiteurs);
@@ -84,7 +85,7 @@ class AdministrationController extends AbstractController
 
     public function getSerializeAdherents($adherents){
         $classMetadataFactory = new ClassMetadataFactory(new AnnotationLoader(new AnnotationReader()));
-    
+
         $callback = function ($innerObject, $outerObject, string $attributeName, string $format = null, array $context = []) {
             return $innerObject instanceof \DateTime ? $innerObject->format('d-m-Y') : '';
         };

@@ -1,0 +1,11 @@
+-- Librairies utilisées (installé avec yarn):
+
+    * jquery                            --> librairie javascript
+    * moment                            --> gestion du temps (utile pour le datetimepicker)
+    * bootstrap                         --> framework css bootstrap 4
+    * datatables.net-bs4                --> gestion des datatables
+    * bootstrap-notify                  --> afficher les notifications
+    * @fortawesome                      --> icons présent dans l'application
+    * bootstrap-material-datetimepicker --> affichage d'un datetimepicker
+    * material-design-icon              --> icons présent sur le datetimepicker
+    * animate.css                       --> gestion des animation (pour les notifications)

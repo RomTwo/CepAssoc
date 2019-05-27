@@ -1,0 +1,46 @@
+-- Installation
+    L'installation a été réalisé avec le gestionnaire de dépendance Yarn.
+    Il faut installer 3 librairies :
+        * yarn add moment                             --> gestion du temps sur le datetimepicker
+        * yarn add material-design-icon               --> icones du datetimepicker
+        * yarn add bootstrap-material-datetimepicker  --> datetimepicker
+
+-- Configuration
+    Il faut inclure dans le fichier app.js (ou autre en fonction des fichiers js utilisé.
+    Ici on choisi de réaliser les inclusions dans ce fichiers car c'est notre fichier javascript principal).
+
+    -- JS :
+        * moment : global.moment = require('moment');
+        * datetimepicker : require('bootstrap-material-datetimepicker/js/bootstrap-material-datetimepicker.js');
+
+    -- CSS :
+        * icones : @import "~material-design-icons/iconfont/material-icons.css";
+        * datetimepicker : @import "~bootstrap-material-datetimepicker/css/bootstrap-material-datetimepicker.css";
+
+-- Utilisation
+    Deux fichiers JS sont disponible :
+        * datepicker.js      -->  format de la date :  DD-MM-YYYY (exemple : 22-06-2019)
+        * datetimepicker.js  -->  format de la date :  DD-MM-YYYY HH:mm (exemple : 22-06-2019 09:43)
+
+    Deux points d'entrés ont été ajouté dans le fichier webpack.config.js :
+        * 'date' --> correspond au datepicker
+        * 'datetime' --> correspond au datetimepicker
+
+    Pour les utilisers, il suffit de les inclures dans un block JS dans un fichier twig
+    (bien penser à inclure le fichier app.js si se n'est pas déjà fait afin d'inclure les librairies vu plus haut) :
+
+    Exemple : les fichiers JS et CSS correspondant au point d'entrée app (regroupant toutes les librairies de l'application ont été inclu dans le fichier template)
+
+    {# fichier event.html.twig #}
+
+     {# pour le datetimepicker #}
+
+     {% block javascripts %}
+         {{ encore_entry_script_tags('datetime') }}
+     {% endblock %}
+
+     {# OU (pour le datepicker) #}
+
+     {% block javascripts %}
+              {{ encore_entry_script_tags('date') }}
+     {% endblock %}

@@ -1,0 +1,37 @@
+{% extends 'administration/layout_admin.html.twig' %}
+
+{% block title %}Adherents{% endblock %}
+
+{% block specification %}
+    Gestion des évènements
+{% endblock %}
+
+{% block body %}
+    <!-- Form add personn on the event (Modal)-->
+    {% include('administration/eventManage/add.html.twig') %}
+
+    <!-- Data get by the JS code for write events in the calendar -->
+
+    <input id="idEvent" type="hidden" value="{{ idEvent }}">
+    <input id="url" type="hidden" value="{{ path('admin_event_manager_events') }}">
+    <input id="urlUpdateDate" type="hidden" value="{{ path('admin_event_manager_update_datetime') }}">
+    <input id="startDate" type="hidden" value="{{ startDate | date('Y-m-d H:i:s') }}">
+    <input id="endDate" type="hidden" value="{{ endDate | date('Y-m-d H:i:s') }}">
+
+
+    <!-- Describe event (Modal)-->
+    {% include('administration/eventManage/describeModal.html.twig') %}
+    {% include('administration/eventManage/updateModal.html.twig') %}
+
+
+    <!-- Print calendar -->
+    <div id='calendar'></div>
+
+{% endblock %}
+
+{% block javascripts %}
+    {{ encore_entry_script_tags('datetimeEvent') }}
+    {{ encore_entry_script_tags('calendar') }}
+{% endblock %}
+
+

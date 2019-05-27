@@ -51,7 +51,7 @@ class AccountController extends AbstractController
         $msg = null;
 
         if ($form->isSubmitted() && $form->isValid() && $utilitaires->isValidateCity($request)) {
-            //if ($captchaCheck->captchaIsValid($request->request->get('recaptcha_response'))) {
+            if ($captchaCheck->captchaIsValid($request->request->get('recaptcha_response'))) {
                 $account->setCity($request->request->get("account_city"));
                 $adherent->setCityRep1($request->request->get("account_city"));
                 if (!$this->findByEmail($account->getEmail())) {
@@ -88,9 +88,9 @@ class AccountController extends AbstractController
                 } else {
                     $msg = 'Cette adresse mail est déjà associé à un compte';
                 }
-            //} else {
-            //    $this->addFlash('error', 'Le captcha est invalide');
-            //}
+            } else {
+                $this->addFlash('error', 'Le captcha est invalide');
+            }
         }
 
         return $this->render('account/index.html.twig', array(
