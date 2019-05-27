@@ -56,7 +56,7 @@
                             {{ adherent.registrationDate|date('d-m-Y') }}
                         </td>
                         <td>
-                            {% if adherent.isRegisteredInFFG %}
+                            {% if adherent.status =="VALIDE" %}
                                 <span style="color:green">Inscription validée</span>
                             {% else %}
                                 <span style="color:red">Inscription non validée</span>
@@ -124,7 +124,7 @@
         </thead>
         <tbody>
             {% for adherent in adherents %}
-                {% if adherent.isRegisteredInFFG and adherent.isDeleted == false %}
+                {% if adherent.status =="VALIDE" and adherent.isDeleted == false %}
                     <tr role="row" class="odd">
                         <td>
                             {{ adherent.lastName }}
@@ -136,7 +136,7 @@
                             {{ adherent.registrationDate|date('d-m-Y') }}
                         </td>
                         <td>
-                            {% if adherent.isRegisteredInFFG %}
+                            {% if adherent.status=="VALIDE" %}
                                 <span style="color:green">Inscription validée</span>
                             {% else %}
                                 <span style="color:red">Inscription non validée</span>
@@ -204,7 +204,7 @@
         </thead>
         <tbody>
             {% for adherent in adherents %}
-                {% if not adherent.isRegisteredInFFG and adherent.isDeleted == false %}
+                {% if not (adherent.status =="VALIDE") and adherent.isDeleted == false %}
                     <tr role="row" class="odd">
                         <td>
                             {{ adherent.lastName }}
@@ -216,10 +216,15 @@
                             {{ adherent.registrationDate|date('d-m-Y') }}
                         </td>
                         <td>
-                            {% if adherent.isRegisteredInFFG %}
-                                <span style="color:green">Inscription validée</span>
-                            {% else %}
-                                <span style="color:red">Inscription non validée</span>
+
+                             {% if adherent.status == "EN ATTENTE" %}
+                             <span style="color:red">Inscription en attente</span>
+                             {% elseif adherent.status == "EN MANQUE DE DOCUMENT" %}
+                             <span style="color:#916319">Inscription en manque de document</span>
+                             {% elseif adherent.status == "EN MANQUE DE PAIEMENT" %}
+                             <span style="color:orangered">Inscription en manque de paiement</span>
+                             {% elseif adherent.status == "EN MANQUE DE DOCUMENT ET PAIEMENT" %}
+                             <span style="color:purple">Inscription en manque de document et paiement</span>
                             {% endif %}
                         </td>
                         <td>
@@ -271,8 +276,8 @@
 
                     <h6>TYPE D'INSCRIPTION : {{ adherent.registrationType }} </h6>
                     <h6>DATE DE DEPOT DU DOSSIER {{ adherent.registrationDate|date('d-m-Y') }}</h6>
-                    <p> Etat de l'inscription : 
-                        {% if adherent.isRegisteredInFFG %}
+                    <p> Etat de l'inscription :
+                        {% if adherent.status =="VALIDE" %}
                             <span style="color:green">Inscription validée</span>
                         {% else %}
                             <span style="color:red">Inscription non validée</span>
@@ -565,7 +570,7 @@
                 </div>
             </div>
             <div class="modal-footer">
-                        {% if not adherent.isRegisteredInFFG %}
+                        {% if not adherent.status == "VALIDE" %}
                             <a href="{{ path('admin_adherentsRegister', {id: adherent.id}) }}" class="btn btn-primary">Valider
                                 l'inscription</a>
                         {% endif %}
@@ -617,5 +622,12 @@
                 ]
             });
         });
+        function updateAdherent(idAdherent,selection)
+{
+
+var selection1= document.getElementById(selection).value;
+ window.location.href = "/admin/adherents/changeStatus/"+idAdherent+"/"+selection1;
+}
     </script>
+
 {% endblock %}

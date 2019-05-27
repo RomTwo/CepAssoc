@@ -53,6 +53,9 @@ class AccountController extends AbstractController
                         if($this->isValidate($adherent)){
                             $utilitaires->setOtherFields($adherent);
                             $adherent->setRegistrationType("nouveau");
+
+
+
                         }else{
                             $msg = "Attention, il manque des informations pour devenir adhérent";
                             return $this->render('account/index.html.twig', array(

@@ -137,7 +137,7 @@ class Activity
      * @return Collection|TimeSlot[]
      */
 
-    public function timeSlot(): Collection
+    public function getTimeSlot(): Collection
     {
         return $this->timeSlot;
     }
