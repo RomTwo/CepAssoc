@@ -38,8 +38,8 @@ class AccountType extends AbstractType
             )
             ->add('sex', ChoiceType::class, array(
                     'choices' => array(
-                        'M' => 'M',
-                        'F' => 'F'
+                        'Masculin' => 'M',
+                        'Feminin' => 'F'
                     ),
                     'expanded' => false,
                     'label' => 'Civilité : ',
@@ -89,6 +89,9 @@ class AccountType extends AbstractType
                     )
                 )
             )
+            ->add('addAccountAdherent', null, [
+                'label' => "Je suis un compétiteur"
+            ])
             ->add('children', CollectionType::class, [
                 'entry_type' => AdherentAccountType::class,
                 'delete_empty' => true,
@@ -101,7 +104,7 @@ class AccountType extends AbstractType
             ->add('valid', SubmitType::class, array(
                 'label' => 'S\'inscrire',
                 'attr' => array(
-                    'class' => 'btn btn-success'
+                    'class' => 'btn btn-success btn-block'
                 )
             ));
     }
@@ -113,33 +116,37 @@ class AccountType extends AbstractType
         $data = $form->getData();
 
         $children = $data->getChildren();
-        if($data->getFirstName() != null){
-            $children[0]->setFirstName($data->getFirstName());
-            $children[0]->setFirstNameRep1($data->getFirstName());
-        }
 
-        if($data->getLastName() != null){
-            $children[0]->setLastName($data->getLastName());
-            $children[0]->setLastNameRep1($data->getLastName());
-        }
+        //if($children == null){
+            if($data->getFirstName() != null){
+                $children[0]->setFirstName($data->getFirstName());
+                $children[0]->setFirstNameRep1($data->getFirstName());
+            }
 
-        $children[0]->setBirthDate($data->getBirthDate());
+            if($data->getLastName() != null){
+                $children[0]->setLastName($data->getLastName());
+                $children[0]->setLastNameRep1($data->getLastName());
+            }
 
-        if($data->getEmail() != null){
-            $children[0]->setEmailRep1($data->getEmail());
-        }
+            $children[0]->setBirthDate($data->getBirthDate());
 
-        if($data->getAddress() != null){
-            $children[0]->setAddressRep1($data->getAddress());
-        }
+            if($data->getEmail() != null){
+                $children[0]->setEmailRep1($data->getEmail());
+            }
 
-        if($data->getZipCode() != null){
-            $children[0]->setZipCodeRep1($data->getZipCode());
-        }
+            if($data->getAddress() != null){
+                $children[0]->setAddressRep1($data->getAddress());
+            }
 
-        if($data->getSex() != null){
-            $children[0]->setSex($data->getSex());
-        }
+            if($data->getZipCode() != null){
+                $children[0]->setZipCodeRep1($data->getZipCode());
+            }
+
+            if($data->getSex() != null){
+                $children[0]->setSex($data->getSex());
+            }
+        //}
+
     }
 
     public function configureOptions(OptionsResolver $resolver)

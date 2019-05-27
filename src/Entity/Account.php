@@ -122,6 +122,15 @@ class Account implements UserInterface
      */
     private $tokenForgetPass;
 
+    /**
+     * @Assert\Type("boolean")
+     */
+    private $addAccountAdherent;
+
+    /**
+     * @Assert\Type("boolean")
+     */
+    private $validateHealthQuestionnaire;
 
     /**
      * Account constructor.
@@ -389,4 +398,39 @@ class Account implements UserInterface
     {
         // TODO: Implement eraseCredentials() method.
     }
+
+    /**
+     * @return mixed
+     */
+    public function getAddAccountAdherent()
+    {
+        return $this->addAccountAdherent;
+    }
+
+    /**
+     * @param mixed $addAccountAdherent
+     */
+    public function setAddAccountAdherent($addAccountAdherent): void
+    {
+        $this->addAccountAdherent = $addAccountAdherent;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getValidateHealthQuestionnaire()
+    {
+        return $this->validateHealthQuestionnaire;
+    }
+
+    /**
+     * @param mixed $validateHealthQuestionnaire
+     */
+    public function setValidateHealthQuestionnaire($validateHealthQuestionnaire): void
+    {
+        $this->validateHealthQuestionnaire = $validateHealthQuestionnaire;
+    }
+
+
+
 }

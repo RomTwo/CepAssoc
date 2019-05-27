@@ -2,11 +2,67 @@
 <html>
 <head>
     <meta charset="UTF-8">
-
-
-
-    {{ encore_entry_link_tags('app') }}
     {% block stylesheets %}
+        <style>
+            .center {
+                text-align: center;
+            }
+
+            .blue {
+                color: #1986AF;
+            }
+
+            .red {
+                color: red;
+            }
+
+            .center-div {
+                margin: auto;
+                width: 60%;
+                border: 2px solid black;
+                padding: 10px;
+            }
+
+            .mt-15 {
+                margin-top: 15px;
+            }
+
+            .mb-50 {
+                margin-bottom: 50px;
+            }
+
+            .page_break {
+                page-break-before: always;
+            }
+
+            h1, h4 {
+                font-family: arial, sans-serif;
+            }
+
+            p {
+                font-family: arial, sans-serif;
+                font-size: 11px;
+            }
+
+            li {
+                font-family: arial, sans-serif;
+                font-size: 11px;
+                margin-bottom: 15px;
+            }
+
+            table {
+                font-family: arial, sans-serif;
+                font-size: 11px;
+                border-collapse: collapse;
+                width: 100%;
+            }
+
+            td, th {
+                border: 1px solid #dddddd;
+                text-align: left;
+                padding: 8px;
+            }
+        </style>
     {% endblock %}
 
 </head>
@@ -17,21 +73,12 @@
 
     {% endblock %}
 </h2>
-<hr/>
-<!-- vertical navbar -->
-
-    <div class="col">
-        <div class="container-fluid">
-            {% block body %}{% endblock %}
-        </div>
-    </div>
+{% block body %}{% endblock %}
 </div>
-
-{{ encore_entry_script_tags('app') }}
 
 
 {% block javascripts %}
-
+    {{ encore_entry_script_tags('app') }}
 {% endblock %}
 </body>
 </html>

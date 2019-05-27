@@ -4,7 +4,9 @@ namespace App\Form;
 
 use App\Entity\Adherent;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ButtonType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
@@ -95,12 +97,12 @@ class AdherentAccountType extends AbstractType
             ])
             ->add('professionRep1', TextType::class, [
                 'attr' => [
-                    'placeholder' => "Profession du représentant 1"
+                    'placeholder' => "Profession"
                 ],
             ])
             ->add('phoneRep1', TextType::class, [
                 'attr' => [
-                    'placeholder' => "Numéro de téléphone du représentant 1"
+                    'placeholder' => "Numéro de téléphone"
                 ],
             ])
             ->add('paymentType', ChoiceType::class, [
@@ -144,13 +146,14 @@ class AdherentAccountType extends AbstractType
                 'required' => false,
                 'data_class' => null,
             ])
-            ->add('healthQuestionnaire', FileType::class, [
+            ->add('healthQuestionnaireFile', FileType::class, [
                 'attr' => [
                     'placeholder' => "Choisissez le questionnaire de santé"
                 ],
                 'required' => false,
                 'data_class' => null,
-            ]);
+            ])
+            ->add('healthQuestionnaire', HealthQuestionnaireType::class);
     }
 
     public function configureOptions(OptionsResolver $resolver)

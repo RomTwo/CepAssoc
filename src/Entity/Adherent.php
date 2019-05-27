@@ -347,7 +347,7 @@ class Adherent
      * )
      * @Groups({"competition"})
      */
-    private $healthQuestionnaire;
+    private $healthQuestionnaireFile;
 
     /**
      * @ORM\Column(type="boolean")
@@ -376,6 +376,11 @@ class Adherent
      * @ORM\Column(type="string", length=100,options={"default":"EN ATTENTE"})
      */
     private $status;
+
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\HealthQuestionnaire", cascade={"persist"})
+     */
+    private $healthQuestionnaire;
 
     public function __construct()
     {
@@ -1124,17 +1129,17 @@ class Adherent
     /**
      * @return mixed
      */
-    public function getHealthQuestionnaire()
+    public function getHealthQuestionnaireFile()
     {
-        return $this->healthQuestionnaire;
+        return $this->healthQuestionnaireFile;
     }
 
     /**
      * @param mixed $healthQuestionnaire
      */
-    public function setHealthQuestionnaire($healthQuestionnaire): void
+    public function setHealthQuestionnaireFile($healthQuestionnaireFile): void
     {
-        $this->healthQuestionnaire = $healthQuestionnaire;
+        $this->healthQuestionnaireFile = $healthQuestionnaireFile;
     }
 
     /**
@@ -1204,13 +1209,25 @@ class Adherent
     {
         $this->status = $status;
 
-        return $this;
-    }
-
-
 
     public function __toString(): string
     {
         return $this->firstName();
+    }
+
+        /**
+         * @return mixed
+         */
+        public function getHealthQuestionnaire()
+    {
+        return $this->healthQuestionnaire;
+    }
+
+        /**
+         * @param mixed $healthQuestionnaire
+         */
+        public function setHealthQuestionnaire($healthQuestionnaire): void
+    {
+        $this->healthQuestionnaire = $healthQuestionnaire;
     }
 }

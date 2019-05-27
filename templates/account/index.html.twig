@@ -138,17 +138,17 @@
                     <h5 class="card-header">Informations complémentaires :</h5>
                     <div class="card-body">
                         <div class="container-fluid">
-                            <input class="form-check-input" type="checkbox" id="registration" name="registration"
-                                   value="registration">
-                            <label class="form-check-label" for="registration">
-                                Je suis compétiteur. <a><i class="fa fa-info-circle" data-toggle="tooltip"
-                                                           data-original-title="Cette étape est optionnelle, il est possible de rejoindre l'association ultérieurement au sein du site internet."></i></a>
-                            </label>
+                            <div class="row align-items-center">
+                                {{ form_widget(form.addAccountAdherent) }}
+                                <a><i class="fa fa-info-circle" data-toggle="tooltip"
+                                      data-original-title="Cette étape est optionnelle, il est possible de rejoindre l'association ultérieurement au sein du site internet."></i></a>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
             <input type="hidden" name="recaptcha_response" id="recaptchaResponse">
+            <input type="hidden" name="routeToIndex" id="routeToIndex" value="{{ path('security_connexion') }}">
         </div>
         <div id="accountStep2" class="justify-content-center">
             <div class="container-fluid mt-3">
@@ -181,7 +181,7 @@
                                         être
                                         rempli.
                                     </small>
-                                    {{ form_errors(form.children[0].phoneRep1) }}
+                                    {{ form_errors(form.children[0].professionRep1) }}
                                 </div>
                             </div>
                         </div>
@@ -235,7 +235,10 @@
                                     {{ form_widget(form.children[0].isGAFJudge) }}
                                 </div>
                                 <div class="col-auto">
-                                    Niveau : {{ form_widget(form.children[0].GAFJudgeLevel) }}
+                                    Niveau :
+                                </div>
+                                <div class="col-auto">
+                                    {{ form_widget(form.children[0].GAFJudgeLevel) }}
                                 </div>
                             </div>
                             <div class="row justify-content-start align-items-center mt-3">
@@ -243,7 +246,10 @@
                                     {{ form_widget(form.children[0].isGAMJudge) }}
                                 </div>
                                 <div class="col-auto">
-                                    Niveau : {{ form_widget(form.children[0].GAMJudgeLevel) }}
+                                    Niveau :
+                                </div>
+                                <div class="col-auto">
+                                    {{ form_widget(form.children[0].GAMJudgeLevel) }}
                                 </div>
                             </div>
                             <div class="row justify-content-start align-items-center mt-3">
@@ -251,7 +257,10 @@
                                     {{ form_widget(form.children[0].isTeamGYMJudge) }}
                                 </div>
                                 <div class="col-auto">
-                                    Niveau : {{ form_widget(form.children[0].teamGYMJudgeLevel) }}
+                                    Niveau :
+                                </div>
+                                <div class="col-auto">
+                                    {{ form_widget(form.children[0].teamGYMJudgeLevel) }}
                                 </div>
                             </div>
                         </div>
@@ -360,7 +369,7 @@
                                                     <td id="price{{ activity.id }}">{{ activity.price }}</td>
                                                     <td>{{ activity.startDate|date('d/m/y') }}</td>
                                                     <td>
-                                                        <input type="checkbox" id="checkbox{{ activity.id }}"
+                                                         <input type="checkbox" id="checkbox{{ activity.id }}"
                                                                name="selection"
                                                                value="{{ activity.id }}">
                                                     </td>
@@ -397,7 +406,11 @@
                                 </div>
                                 <div class="col-auto">
                                     {{ form_widget(form.children[0].paymentType) }}
-
+                                    <small id="paymentTypeHelp" class="form-text helper"><span
+                                                class="badge badge-danger">Erreur</span> Vous devez choisir parmi les
+                                        deux propositions.
+                                    </small>
+                                    {{ form_errors(form.children[0].paymentType) }}
                                 </div>
                             </div>
                         </div>
@@ -429,17 +442,26 @@
 
                             </div>
                             <h6>Questionnaire de santé : </h6>
-                            <div class="row align-items-center ml-2 mr-2">
+                            <div class="row align-items-center ml-2 mr-2 healthQuestionnaireEmpty">
                                 <div class="col-5">
-                                    {{ form_widget(form.children[0].healthQuestionnaire) }}
-                                    {{ form_errors(form.children[0].healthQuestionnaire) }}
+                                    {{ form_widget(form.children[0].healthQuestionnaireFile) }}
+                                    {{ form_errors(form.children[0].healthQuestionnaireFile) }}
                                 </div>
                                 <a><i class="fa fa-info-circle" data-toggle="tooltip"
                                       data-original-title="Le questionnaire de santé peut être rendu plus tard."></i></a>
                                 <div class="col-auto">
-                                    <a href="{{ asset('PDF/QuestionnaireDeSante.pdf') }}" class="btn btn-primary"
-                                       download>Obtenir
-                                        le questionnaire</a>
+                                    <button id="healthQuestionnaire" type="button" class="btn btn-primary btn-block">
+                                        Répondre au questionnaire
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="row align-items-center ml-2 mr-2 healthQuestionnaireValidated">
+                                <p>Vous avez déjà rempli le questionnaire de santé. Il sera possible de le télécharger
+                                    afin de le signer et le faire valider par l'association.</p>
+                                <div class="col-auto">
+                                    <button id="healthQuestionnaireModificate" type="button" class="btn btn-primary">
+                                        Modifier le questionnaire
+                                    </button>
                                 </div>
                             </div>
                         </div>
@@ -457,6 +479,11 @@
                                 photos me
                                 concernant pour enrichir
                                 la photothèque et le site internet du club.
+                                <small id="imageRightHelp" class="form-text helper"><span
+                                            class="badge badge-danger">Erreur</span> Vous devez choisir parmi les deux
+                                    propositions.
+                                </small>
+                                {{ form_errors(form.children[0].imageRight) }}
                             </div>
                             <div class="form-check mt-3">
                                 <input class="form-check-input" type="checkbox" id="acceptRules" name="acceptRules">
@@ -559,875 +586,160 @@
                                             target="_blank">la réglementation en ligne</a>
                                 </label>
                             </div>
-                            <div class="row justify-content-center mt-3">
-                                <button type="submit" id="buttonSubmit" class="btn btn-success">Confirmer l'inscription
+                            <div class="row justify-content-center mt-3 healthQuestionnaireEmpty">
+                                <button type="submit" class="btn btn-success buttonSubmit">Confirmer l'inscription
                                     de
                                     l'adhérent
+                                </button>
+                            </div>
+                            <div class="row justify-content-center mt-3 healthQuestionnaireValidated">
+                                <button type="submit" class="btn btn-success buttonSubmit">Confirmer l'inscription
+                                    de
+                                    l'adhérent et télécharger votre questionnaire de santé.
                                 </button>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-
         </div>
         <div id="accountStep7" class="justify-content-center">
-
+            <div class="container-fluid mt-3">
+                <div class="card shadow-sm">
+                    <h5 class="card-header">Questionnaire de santé : </h5>
+                    <div class="card-body">
+                        <div class="container-fluid">
+                            <div class="row align-items-center justify-content-center">
+                                <small id="healthQuestionnaireQuestionHelp" class="form-text helper"><span
+                                            class="badge badge-danger">Erreur</span> Attention, pour valider le
+                                    questionnaire, il faut que toutes les réponses soient remplies.
+                                </small>
+                            </div>
+                            <div class="row align-items-center pt-2">
+                                <div class="col-auto">
+                                    {{ healthQuestionnaireQuestion1 }}
+                                </div>
+                                <div id="healthQuestionnaireQuestion" class="col-auto">
+                                    {{ form_widget(form.children[0].healthQuestionnaire.hasMemberOfFamilyDiedHeartAttack) }}
+                                    {{ form_errors(form.children[0].healthQuestionnaire.hasMemberOfFamilyDiedHeartAttack) }}
+                                </div>
+                            </div>
+                            <div class="row align-items-center mt-2">
+                                <div class="col-auto">
+                                    {{ healthQuestionnaireQuestion2 }}
+                                </div>
+                                <div id="healthQuestionnaireQuestion" class="col-auto">
+                                    {{ form_widget(form.children[0].healthQuestionnaire.hasPainChest) }}
+                                    {{ form_errors(form.children[0].healthQuestionnaire.hasPainChest) }}
+                                </div>
+                            </div>
+                            <div class="row align-items-center mt-2">
+                                <div class="col-auto">
+                                    {{ healthQuestionnaireQuestion3 }}
+                                </div>
+                                <div id="healthQuestionnaireQuestion" class="col-auto">
+                                    {{ form_widget(form.children[0].healthQuestionnaire.hasAsthma) }}
+                                    {{ form_errors(form.children[0].healthQuestionnaire.hasAsthma) }}
+                                </div>
+                            </div>
+                            <div class="row align-items-center mt-2">
+                                <div class="col-auto">
+                                    {{ healthQuestionnaireQuestion4 }}
+                                </div>
+                                <div id="healthQuestionnaireQuestion" class="col-auto">
+                                    {{ form_widget(form.children[0].healthQuestionnaire.hasLossOfConsciousness) }}
+                                    {{ form_errors(form.children[0].healthQuestionnaire.hasLossOfConsciousness) }}
+                                </div>
+                            </div>
+                            <div class="row align-items-center mt-2">
+                                <div class="col-auto">
+                                    {{ healthQuestionnaireQuestion5 }}
+                                </div>
+                                <div id="healthQuestionnaireQuestion" class="col-auto">
+                                    {{ form_widget(form.children[0].healthQuestionnaire.hasResumptionOfSportWithoutDoctorConsent) }}
+                                    {{ form_errors(form.children[0].healthQuestionnaire.hasResumptionOfSportWithoutDoctorConsent) }}
+                                </div>
+                            </div>
+                            <div class="row align-items-center mt-2">
+                                <div class="col-auto">
+                                    {{ healthQuestionnaireQuestion6 }}
+                                </div>
+                                <div id="healthQuestionnaireQuestion" class="col-auto">
+                                    {{ form_widget(form.children[0].healthQuestionnaire.hasMedicalTreatment) }}
+                                    {{ form_errors(form.children[0].healthQuestionnaire.hasMedicalTreatment) }}
+                                </div>
+                            </div>
+                            <hr/>
+                            <div class="row align-items-center mt-2">
+                                <div class="col-auto">
+                                    {{ healthQuestionnaireQuestion7 }}
+                                </div>
+                                <div id="healthQuestionnaireQuestion" class="col-auto">
+                                    {{ form_widget(form.children[0].healthQuestionnaire.hasBoneProblem) }}
+                                    {{ form_errors(form.children[0].healthQuestionnaire.hasBoneProblem) }}
+                                </div>
+                            </div>
+                            <div class="row align-items-center mt-2">
+                                <div id="healthQuestionnaireQuestion" class="col-auto">
+                                    {{ healthQuestionnaireQuestion8 }}
+                                </div>
+                                <div id="healthQuestionnaireQuestion" class="col-auto">
+                                    {{ form_widget(form.children[0].healthQuestionnaire.hasHealthProblem) }}
+                                    {{ form_errors(form.children[0].healthQuestionnaire.hasHealthProblem) }}
+                                </div>
+                            </div>
+                            <div class="row align-items-center mt-2">
+                                <div id="healthQuestionnaireQuestion" class="col-auto">
+                                    {{ healthQuestionnaireQuestion9 }}
+                                </div>
+                                <div id="healthQuestionnaireQuestion" class="col-auto">
+                                    {{ form_widget(form.children[0].healthQuestionnaire.hasNeedMedicalAdvice) }}
+                                    {{ form_errors(form.children[0].healthQuestionnaire.hasNeedMedicalAdvice) }}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="container-fluid pt-3 pb-2">
+                <div class="row justify-content-between">
+                    <div class="col">
+                        <button id="validQuestionnaire" type="button" class="btn btn-success">Valider le questionnaire
+                        </button>
+                    </div>
+                    <div class="col">
+                        <button id="cancelQuestionnaire" type="button" class="btn btn-danger">Annuler le questionnaire
+                        </button>
+                    </div>
+                </div>
+            </div>
         </div>
-
-        <div class="container-fluid mt-3">
+        <div id="buttonBottom" class="container-fluid pt-3 pb-2">
             {{ form_widget(form.valid) }}
-            <button id="previous" type="button" class="btn btn-primary">Précédent</button>
-            <button id="next" type="button" class="btn btn-primary">Suivant</button>
-            <input id="accountStep" value="1" hidden>
+            <div class="row">
+                <div class="col-6">
+                    <button id="previous" type="button" class="btn btn-primary btn-block">Précédent</button>
+                </div>
+                <div class="col-6">
+                    <button id="next" type="button" class="btn btn-primary btn-block">Suivant</button>
+                </div>
+                <input id="accountStep" value="1" hidden>
+            </div>
         </div>
     </div>
     {{ form_end(form) }}
-    {#
-
-    <div id="accountStep1" class="justify-content-center">
-        <div class="container-fluid">
-            <div class="row mt-3">
-                <div class="col-auto">
-                    <label>Prénom : </label>
-                </div>
-                <div class="col-4">
-                    {{ form_widget(form.firstName) }}
-                </div>
-                <div class="col-auto">
-                    <label>Nom : </label>
-                </div>
-                <div class="col-4">
-                    {{ form_widget(form.lastName) }}
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-auto">
-                    <small id="firstNameHelp" class="form-text helper"><span
-                                class="badge badge-danger">Erreur</span> Le prenom doit être rempli.
-                    </small>
-                    {{ form_errors(form.firstName) }}
-                </div>
-                <div class="col-auto">
-                    <small id="lastNameHelp" class="form-text helper"><span
-                                class="badge badge-danger">Erreur</span> Le nom doit être rempli.
-                    </small>
-                    {{ form_errors(form.lastName) }}
-                </div>
-            </div>
-            <div class="row mt-3">
-                <div class="col-auto">
-                    <label>Civilité : </label>
-                </div>
-                <div class="col-auto">
-                    {{ form_widget(form.sex) }}
-                    <small id="sexHelp" class="form-text helper"><span
-                                class="badge badge-danger">Erreur</span> Vous devez choisir dans la liste.
-                    </small>
-                    {{ form_errors(form.sex) }}
-                </div>
-            </div>
-
-            <div class="row mt-3">
-                <div class="col-auto">
-                    <label>Date de naissance : </label>
-                </div>
-                <div class="col-auto">
-                    {{ form_widget(form.birthDate) }}
-                    <small id="birthDateHelp" class="form-text helper"><span
-                                class="badge badge-danger">Erreur</span> La date de naissance doit être
-                        rempli.
-                    </small>
-                    {{ form_errors(form.birthDate) }}
-                </div>
-            </div>
-
-            <div class="row mt-3">
-                <div class="col-auto">
-                    <label>Code postal : </label>
-                </div>
-                <div class="col-3">
-                    {{ form_widget(form.zipCode) }}
-                </div>
-                <div class="col-auto">
-                    <small id="zipCodeHelp" class="form-text helper"><span
-                                class="badge badge-danger">Erreur</span> Le zip code doit être rempli.
-                    </small>
-                    {{ form_errors(form.zipCode) }}
-                </div>
-            </div>
-            <div class="row mt-3">
-                <div class="col-auto">
-                    <p>Ville :</p>
-                </div>
-                <div class="col-auto">
-                    <select id="account_city" name="account_city" class="form-control">
-                    </select>
-                </div>
-                <div class="col-5">
-                    <small id="cityHelp" class="form-text helper"><span
-                                class="badge badge-danger">Erreur</span> Le zip code doit être rempli pour
-                        pouvoir choisir la ville.
-                    </small>
-                </div>
-            </div>
-            <div class="row mt-3">
-                <div class="col-auto">
-                    <label>Adresse : </label>
-                </div>
-                <div class="col-auto">
-                    {{ form_widget(form.address) }}
-                </div>
-                <div class="col-auto">
-                    <small id="addressHelp" class="form-text helper"><span
-                                class="badge badge-danger">Erreur</span> L'adresse doit être rempli.
-                    </small>
-                    {{ form_errors(form.address) }}
-                </div>
-            </div>
-
-            <div class="row mt-3">
-                <div class="col-auto">
-                    <label>Adresse mail : </label>
-                </div>
-                <div class="col-auto">
-                    {{ form_widget(form.email) }}
-                </div>
-                <div class="col-4">
-                    <small id="emailHelp" class="form-text helper"><span
-                                class="badge badge-danger">Erreur</span> L'adresse mail doit être rempli.
-                    </small>
-                    {% if errorMail %}
-                        <div class="row ml-3">
-                            <span class="invalid-feedback d-block">
-                                <span class="d-block">
-                                    <span class="form-error-icon badge badge-danger text-uppercase">{{ 'Erreur' }}</span>
-                                    <span class="form-error-message">{{ errorMail }}</span>
-                                </span>
-                            </span>
-                        </div>
-                    {% endif %}
-                </div>
-            </div>
-
-            <div class="row mt-3 mb-3">
-                <div class="col-auto">
-                    <label>Mot de passe : </label>
-                </div>
-                <div class="col-auto">
-                    {{ form_widget(form.password, {'attr': {'data-placement': "bottom"}}) }}
-                </div>
-                <div class="col-4">
-                    <small id="passwordHelp" class="form-text helper"><span
-                                class="badge badge-danger">Erreur</span> Le mot de passe doit être rempli.
-                    </small>
-                    {{ form_errors(form.password) }}
-                </div>
-            </div>
-            <div class="form-check mt-3">
-                <input class="form-check-input" type="checkbox" id="registration" name="registration"
-                       value="registration">
-                <label class="form-check-label" for="registration">
-                    Je suis compétiteur. <a><i class="fa fa-info-circle" data-toggle="tooltip"
-                                               data-original-title="Cette étape est optionnelle, il est possible de rejoindre l'association ultérieurement au sein du site internet."></i></a>
-                </label>
-            </div>
-            {{ form_widget(form.valid) }}
-            <input type="hidden" name="recaptcha_response" id="recaptchaResponse">
-        </div>
-    </div>
-
-    <div id="accountStep2">
-        <div class="row mt-3 mb-3">
-            <div class="col-auto">
-                <label>Numéro de téléphone : </label>
-            </div>
-            <div class="col-auto">
-                {{ form_widget(form.children[0].phoneRep1) }}
-            </div>
-            <div class="col-auto">
-                <small id="phoneRep1Help" class="form-text helper"><span
-                            class="badge badge-danger">Erreur</span> Le numéro de téléphone doit être
-                    rempli.
-                </small>
-                {{ form_errors(form.children[0].phoneRep1) }}
-            </div>
-        </div>
-        <div class="row mt-3 mb-3">
-            <div class="col-auto">
-                <label>Profession : </label>
-            </div>
-            <div class="col-auto">
-                {{ form_widget(form.children[0].professionRep1) }}
-            </div>
-            <div class="col-auto">
-                <small id="professionRep1Help" class="form-text helper"><span
-                            class="badge badge-danger">Erreur</span> Le numéro de téléphone doit être
-                    rempli.
-                </small>
-                {{ form_errors(form.children[0].phoneRep1) }}
-            </div>
-        </div>
-
-    </div>
-
-    <div id="accountStep3">
-        <div class="container mt-3">
-            <div class="pb-2">
-                <div class="container-fluid">
-                    <h4>Type d'inscription (facultatif) :</h4>
-                    <div class="row align-items-center">
-                            <div class="col-auto">
-                                <p>Souhaitez-vous suivre une formation juge ?</p>
-                            </div>
-                            <div class="col-auto">
-                                {{ form_widget(form.children[0].wantsAJudgeTraining) }}
-                            </div>
-                        <div class="col-auto">
-                            <input type="checkbox" id="juge" name="juge">
-                            <label for="juge">Juge</label>
-                        </div>
-                        <div class="col-auto">
-                            <input type="checkbox" id="volontaire" name="volontaire">
-                            <label for="volontaire">Bénévole</label>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div id="accountStep4">
-        <div class="container-fluid mt-3">
-            <div class="pb-2">
-                <div class="container-fluid">
-                    <h5>Juges :</h5>
-                    <p>Si vous êtes juges et si vous souhaitez juger pour le CEP cette année, merci
-                        de
-                        cocher les
-                        cases
-                        ci-dessous</p>
-                    <div class="row justify-content-start align-items-center mt-3">
-                        <div class="col-2">
-                            {{ form_widget(form.children[0].isGAFJudge) }}
-                        </div>
-                        <div class="col-auto">
-                            Niveau : {{ form_widget(form.children[0].GAFJudgeLevel) }}
-                        </div>
-                    </div>
-                    <div class="row justify-content-start align-items-center mt-3">
-                        <div class="col-2">
-                            {{ form_widget(form.children[0].isGAMJudge) }}
-                        </div>
-                        <div class="col-auto">
-                            Niveau : {{ form_widget(form.children[0].GAMJudgeLevel) }}
-                        </div>
-                    </div>
-                    <div class="row justify-content-start align-items-center mt-3">
-                        <div class="col-2">
-                            {{ form_widget(form.children[0].isTeamGYMJudge) }}
-                        </div>
-                        <div class="col-auto">
-                            Niveau : {{ form_widget(form.children[0].teamGYMJudgeLevel) }}
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div id="accountStep5">
-        <div class="container-fluid mt-3">
-            <div class="pb-2">
-                <div class="container-fluid">
-                    <h5>Volontaires :</h5>
-                    <p>Si vous souhaitez nous aider sur les activités et les actions mises en place
-                        par
-                        le club tout
-                        au long
-                        de l’année, merci de cocher les cases ci-dessous :</p>
-                    <div>
-                        Aide à l'entrainement :
-                        {{ form_widget(form.children[0].volunteerForTrainingHelp) }}
-                    </div>
-                    <div>
-                        Aide à la vie du club :
-                        {{ form_widget(form.children[0].volunteerForClubLife) }}
-                    </div>
-                    <div>
-                        Disponibilité :
-                        {{ form_widget(form.children[0].volunteerComment) }}
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div id="accountStep6">
-        <h4>Activités disponibles :</h4>
-        <nav>
-            <div class="nav nav-tabs" id="nav-tab" role="tablist">
-                <a class="nav-item nav-link active" id="nav-loisirs-tab" href="#nav-loisirs" data-toggle="tab"
-                   role="tab" aria-controls="nav-loisirs" aria-selected="true">Loisirs</a>
-                <a class="nav-item nav-link" id="nav-competitif-tab" href="#nav-competitif" data-toggle="tab"
-                   role="tab" aria-controls="nav-competitif" aria-selected="false">Compétitif</a>
-            </div>
-        </nav>
-        <div class="tab-content" id="nav-tabContent">
-            <div class="tab-pane fade show active" id="nav-loisirs" role="tabpanel" aria-labelledby="nav-home-tab">
-                <table id="activitiesSecteurLoisir" class="table table-bordered table-striped" style="width:100%">
-                    <thead>
-                    <tr>
-                        <th>Nom</th>
-                        <th>Créneaux</th>
-                        <th>Prix</th>
-                        <th>Date</th>
-                        <th>Selection</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    {% for activity in activities %}
-                        {% if activity.type == "SECTEUR LOISIRS" %}
-                            <tr id={{ activity.id }}>
-                                <td>{{ activity.name }}</td>
-                                <td>Samedi - De 10h à 12h</td>
-                                <td id="price{{ activity.id }}">{{ activity.price }}</td>
-                                <td>{{ activity.startDate|date('d/m/y') }}</td>
-                                <td>
-                                    <input type="checkbox" id="checkbox{{ activity.id }}" name="selection"
-                                           value="{{ activity.id }}">
-                                </td>
-                            </tr>
-                        {% endif %}
-                    {% endfor %}
-                    </tbody>
-                </table>
-            </div>
-            <div class="tab-pane fade" id="nav-competitif" role="tabpanel" aria-labelledby="nav-competitif-tab">
-                <table id="activitiesSecteurCompetitif" class="display" style="width:100%">
-                    <thead>
-                    <tr>
-                        <th>Nom</th>
-                        <th>Créneaux</th>
-                        <th>Prix</th>
-                        <th>Date</th>
-                        <th>Selection</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    {% for activity in activities %}
-                        {% if activity.type == "SECTEUR COMPETITIF" %}
-                            <tr id={{ activity.id }}>
-                                <td>{{ activity.name }}</td>
-                                <td>Samedi - De 10h à 12h</td>
-                                <td id="price{{ activity.id }}">{{ activity.price }}</td>
-                                <td>{{ activity.startDate|date('d/m/y') }}</td>
-                                <td>
-                                    <input type="checkbox" id="checkbox{{ activity.id }}" name="selection"
-                                           value="{{ activity.id }}">
-                                </td>
-                            </tr>
-                        {% endif %}
-                    {% endfor %}
-                    </tbody>
-                </table>
-            </div>
-        </div>
-
-    </div>
-    <div id="accountStep7">
-        <div class="row align-items-center">
-            <div class="col-auto">
-                <h6>Prix de l'abonnement : </h6>
-            </div>
-            <div class="col-auto">
-                <h4 id="prix">0</h4>
-            </div>
-            <h4>€</h4>
-        </div>
-        <div class="row align-items-center">
-            <div class="col-auto">
-                <h6>Moyens de paiement : </h6>
-            </div>
-            <div class="col-auto">
-                {{ form_widget(form.children[0].paymentType) }}
-
-            </div>
-        </div>
-        <h6>Droits d'image :</h6>
-        <div class="row align-items-center ml-2">
-            {{ form_widget(form.children[0].imageRight) }} le club à prendre et à diffuser des
-            photos me
-            concernant pour enrichir
-            la photothèque et le site internet du club.
-        </div>
-        <h6>Certificat medical : </h6>
-        <div class="row align-items-center ml-2 mr-2">
-            <div class="col-auto">
-                {{ form_widget(form.children[0].medicalCertificate) }}
-            </div>
-            <a><i class="fa fa-info-circle" data-toggle="tooltip"
-                  data-original-title="Le certificat médical peut être rendu plus tard."></i></a>
-        </div>
-        <h6>Bulletin N2 allianz : </h6>
-        <div class="row align-items-center ml-2 mr-2">
-            <div class="col-auto">
-                {{ form_widget(form.children[0].bulletinN2Allianz) }}
-            </div>
-            <a><i class="fa fa-info-circle" data-toggle="tooltip"
-                  data-original-title="Le bulletin peut être rendu plus tard."></i></a>
-
-        </div>
-        <h6>Questionnaire de santé : </h6>
-        <div class="row align-items-center ml-2 mr-2">
-            <div class="col-auto">
-                {{ form_widget(form.children[0].healthQuestionnaire) }}
-            </div>
-            <div class="col-auto">
-                <a href="{{ asset('PDF/QuestionnaireDeSante.pdf') }}" class="btn btn-success" download>Obtenir
-                    le questionnaire</a>
-            </div>
-            <a><i class="fa fa-info-circle" data-toggle="tooltip"
-                  data-original-title="Le questionnaire peut être rendu plus tard."></i></a>
-        </div>
-        <div class="form-check mt-3">
-            <input class="form-check-input" type="checkbox" id="acceptRules" name="acceptRules">
-            <label class="form-check-label" for="acceptRules">
-                J'accepte le réglement intérieur de l'association. <a href=""
-                                                                      data-toggle="modal"
-                                                                      data-target="#exampleModal">Voir
-                    le réglement</a>
-            </label>
-        </div>
-        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
-             aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-lg" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Réglement intérieur</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <h6>Les documents à fournir pour l’inscription sont les suivants : </h6>
-                        <ul>
-                            <li>Un certificat médical de non contre-indication à la pratique de la
-                                gymnastique de moins de 3 mois (sauf pour les
-                                renouvellements)**
-                            </li>
-                            <li>La fiche d’inscription dûment remplie</li>
-                            <li>Le règlement total de la cotisation (possibilité d’établir trois
-                                chèques à débit différé)
-                            </li>
-                            <li>Le règlement du forfait d’engagement en compétitions (pour les
-                                groupes
-                                compétitifs et Teamgym)
-                            </li>
-                            <li>Envoyer une photo par mail au cep.gymnastique@gmail.com (en
-                                précisant
-                                les nom, prénom et le groupe)
-                            </li>
-                            <li>Le bulletin N°2 Allianz fourni par le club le jour de
-                                l’inscription
-                            </li>
-                        </ul>
-                        <br/>
-                        <b>Séance d’essai : </b>
-                        <p>Chaque gymnaste a droit à une séance d’essai gratuite sous réserve de
-                            présentation d’un certificat médical. A l’issue
-                            de cette séance, le dossier devra impérativement être constitué.</p>
-                        <br/>
-                        <b>En cas d’abandon, aucun remboursement ne sera effectué.</b>
-                        <p> Pour
-                            information, les assurances partenaires de la FFGym proposent une
-                            assurance « Interruption Abonnement Sportif » (voir modalités sur le
-                            site de la FFGym)</p>
-                        <br/>
-                        <b>Aux parents ou responsables des adhérents mineurs :</b>
-                        <p>Les parents
-                            ou responsables des enfants doivent s’assurer de la présence des
-                            éducateurs du club et du déroulement effectif de l’entrainement avant de
-                            déposer leur enfant. Les parents doivent également
-                            récupérer leur enfant dans la salle dès la fin de l’entrainement. Le
-                            club décline toute responsabilité en cas d’accident en dehors des
-                            horaires d’entrainement. Toutes les informations à destination des
-                            membres du club ne sont pas données par voie postale. Elles sont
-                            transmises par affichage sur les panneaux réservés à cet effet dans la
-                            salle, par mail et sur le site internet : www.cep-gymnastique.com.</p>
-                        <br/>
-                        <b>Hygiène :</b>
-                        <p>Pour des raisons d’hygiène, les gymnastes doivent
-                            porter des chaussures (tongs, claquettes, chaussures de piscine, hors
-                            chaussons de gym) pour se déplacer dans les couloirs et dans les
-                            toilettes, et les retirer pour marcher sur les tapis de gymnastique.</p>
-                        <br/>
-                        <b>Périodes de congés scolaires :</b>
-                        <p>Les entrainements ne sont assurés
-                            que pendant les périodes scolaires et sont donc interrompus pendant
-                            les vacances scolaires. Des stages seront mis en place pendant les
-                            vacances scolaires. Tenues : Pour les compétitions, les gymnastes
-                            doivent avoir la tenue du club. Celui-ci se charge des commandes selon
-                            les tailles indiquées dans le formulaire de pré-inscription.</p>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="form-check mt-3">
-            <input class="form-check-input" type="checkbox" id="acceptRGPD" name="acceptRGPD">
-            <label class="form-check-label" for="acceptRGPD">
-                En soumettant ce formulaire, j’accepte que les informations saisies soient utilisées
-                dans le cadre de la
-                demande de licence à CEP GYM Poitiers et à son organisation. Pour en savoir plus sur la loi RGPD,
-                veuillez consulter <a href="https://www.cnil.fr/fr/reglement-europeen-protection-donnees"
-                                      target="_blank">la réglementation en ligne</a>
-            </label>
-        </div>
-        <button type="submit" id="buttonSubmit" class="btn btn-primary">Confirmer l'inscription de l'adhérent
-        </button>
-    </div>
-
-</div>
-{{ form_end(form) }}
-#}
-
 {% endblock %}
 
 
-    {% block javascripts %}
-        <script src="https://www.google.com/recaptcha/api.js?render={{ recaptcha_key_site }}"></script>
-        <script>
-            grecaptcha.ready(function () {
-                grecaptcha.execute('{{ recaptcha_key_site }}', {action: 'register'}).then(function (token) {
-                    var recaptchaResponse = document.getElementById('recaptchaResponse');
-                    recaptchaResponse.value = token;
-                });
+{% block javascripts %}
+    {{ encore_entry_script_tags('formulaire') }}
+    <script src="https://www.google.com/recaptcha/api.js?render={{ recaptcha_key_site }}"></script>
+    <script>
+        grecaptcha.ready(function () {
+            grecaptcha.execute('{{ recaptcha_key_site }}', {action: 'register'}).then(function (token) {
+                var recaptchaResponse = document.getElementById('recaptchaResponse');
+                recaptchaResponse.value = token;
             });
-
-
-            $(window).ready(function () {
-                $.ajax({
-                    url: 'https://datanova.legroupe.laposte.fr/api/records/1.0/search/',
-                    type: "POST",
-                    dataType: "json",
-                    data: {
-                        "dataset": "laposte_hexasmal",
-                        "refine.code_postal": $('#account_zipCode').val(),
-                    },
-                    success: function (data) {
-                        $('#account_city option').remove();
-                        for (var i in data["records"]) {
-                            commune = data["records"][i]["fields"]["nom_de_la_commune"];
-                            $('#account_city').append(new Option(commune, commune));
-                        }
-                    }
-                })
-
-                $("#accountStep").val(1);
-                $('#registration').prop('checked', false);
-                $('input[name=\'selection\']').prop('checked', false);
-                if (step7()) {
-                    $("#buttonSubmit").attr("enabled", true);
-                } else {
-                    $("#buttonSubmit").attr("disabled", true);
-
-                }
-
-                var groupColumn = 2;
-
-                $('#activitiesSecteurLoisir').DataTable({
-                    "columnDefs": [
-                        {"visible": false, "targets": groupColumn}
-                    ],
-                    "displayLength": 10,
-                    "drawCallback": function () {
-                        var api = this.api();
-                        var rows = api.rows({page: 'current'}).nodes();
-                        var last = null;
-
-                        api.column(groupColumn, {page: 'current'}).data().each(function (group, i) {
-                            if (last !== group) {
-                                $(rows).eq(i).before(
-                                    '<tr class="group"><td colspan="5">' + group + '</td></tr>'
-                                );
-
-                                last = group;
-                            }
-                        });
-                    },
-                    orderFixed: [2, 'asc'],
-                    "bInfo": false,
-                    "lengthChange": false,
-                    "language": {
-                        "sProcessing": "Traitement en cours...",
-                        "sSearch": "Rechercher&nbsp;:",
-                        "sLengthMenu": "Afficher _MENU_ &eacute;l&eacute;ments",
-                        "sInfo": "Affichage de l'&eacute;l&eacute;ment _START_ &agrave; _END_ sur _TOTAL_ &eacute;l&eacute;ments",
-                        "sInfoEmpty": "Affichage de l'&eacute;l&eacute;ment 0 &agrave; 0 sur 0 &eacute;l&eacute;ment",
-                        "sInfoFiltered": "(filtr&eacute; de _MAX_ &eacute;l&eacute;ments au total)",
-                        "sInfoPostFix": "",
-                        "sLoadingRecords": "Chargement en cours...",
-                        "sZeroRecords": "Aucun &eacute;l&eacute;ment &agrave; afficher",
-                        "sEmptyTable": "Aucune donn&eacute;e disponible dans le tableau",
-                        "oPaginate": {
-                            "sFirst": "Premier",
-                            "sPrevious": "Pr&eacute;c&eacute;dent",
-                            "sNext": "Suivant",
-                            "sLast": "Dernier"
-                        },
-                        "oAria": {
-                            "sSortAscending": ": activer pour trier la colonne par ordre croissant",
-                            "sSortDescending": ": activer pour trier la colonne par ordre d&eacute;croissant"
-                        },
-                        "select": {
-                            "rows": {
-                                _: "%d lignes séléctionnées",
-                                0: "Aucune ligne séléctionnée",
-                                1: "1 ligne séléctionnée"
-                            }
-                        }
-                    }
-                });
-
-                $('#activitiesSecteurCompetitif').DataTable({
-                    "lengthChange": false,
-                    "language": {
-                        "sProcessing": "Traitement en cours...",
-                        "sSearch": "Rechercher&nbsp;:",
-                        "sLengthMenu": "Afficher _MENU_ &eacute;l&eacute;ments",
-                        "sInfo": "Affichage de l'&eacute;l&eacute;ment _START_ &agrave; _END_ sur _TOTAL_ &eacute;l&eacute;ments",
-                        "sInfoEmpty": "Affichage de l'&eacute;l&eacute;ment 0 &agrave; 0 sur 0 &eacute;l&eacute;ment",
-                        "sInfoFiltered": "(filtr&eacute; de _MAX_ &eacute;l&eacute;ments au total)",
-                        "sInfoPostFix": "",
-                        "sLoadingRecords": "Chargement en cours...",
-                        "sZeroRecords": "Aucun &eacute;l&eacute;ment &agrave; afficher",
-                        "sEmptyTable": "Aucune donn&eacute;e disponible dans le tableau",
-                        "oPaginate": {
-                            "sFirst": "Premier",
-                            "sPrevious": "Pr&eacute;c&eacute;dent",
-                            "sNext": "Suivant",
-                            "sLast": "Dernier"
-                        },
-                        "oAria": {
-                            "sSortAscending": ": activer pour trier la colonne par ordre croissant",
-                            "sSortDescending": ": activer pour trier la colonne par ordre d&eacute;croissant"
-                        },
-                        "select": {
-                            "rows": {
-                                _: "%d lignes séléctionnées",
-                                0: "Aucune ligne séléctionnée",
-                                1: "1 ligne séléctionnée"
-                            }
-                        }
-                    }
-                });
-
-            });
-
-            $('#acceptRules, #acceptRGPD').on('change', function () {
-                if (step7()) {
-                    $("#buttonSubmit").removeAttr("disabled");
-                } else {
-                    $("#buttonSubmit").attr("disabled", true);
-
-                }
-            });
-
-            $('#registration').on('change', function () {
-                $(this).is(':checked') ? ($("#next").show(), $("#account_valid").hide()) : ($("#next").hide(), $("#account_valid").show());
-            });
-
-            $('#next').click(function () {
-                var numberOfStep = 6;
-                var value = parseInt($("#accountStep").val());
-                if (value < numberOfStep) {
-                    if (stepChoice("accountStep" + value)) {
-                        if (value == numberOfStep - 1) {
-                            $("#next").hide();
-                        }
-                        $("#previous").show();
-                        $("helper").hide();
-                        if (value == 2) {
-                            $('#juge').is(':checked') ? ($("#accountStep" + (value + 1)).show(), $("#accountStep").val(value + 1)) : $("#volontaire").is(':checked') ? ($("#accountStep" + (value + 2)).show(), $("#accountStep").val(value + 2)) : ($("#accountStep" + (value + 3)).show(), $("#accountStep").val(value + 3));
-                        } else if (value == 3) {
-                            $('#volontaire').is(':checked') ? ($("#accountStep" + (value + 1)).show(), $("#accountStep").val(value + 1)) : ($("#accountStep" + (value + 2)).show(), $("#accountStep").val(value + 2));
-                        } else {
-                            $("#accountStep" + (value + 1)).show();
-                            $("#accountStep").val(value + 1);
-                        }
-                        $("#accountStep" + (value)).hide();
-
-                    }
-                } else {
-                    $("#next").hide();
-                }
-            });
-
-            $('#previous').click(function () {
-                var value = parseInt($("#accountStep").val());
-                if (value > 1) {
-                    if (value == 2) {
-                        $("#previous").hide();
-                    }
-                    $("#next").show();
-                    if (value == 5) {
-                        $('#volontaire').is(':checked') ? ($("#accountStep" + (value - 1)).show(), $("#accountStep").val(value - 1)) : $("#juge").is(':checked') ? ($("#accountStep" + (value - 2)).show(), $("#accountStep").val(value - 2)) : ($("#accountStep" + (value - 3)).show(), $("#accountStep").val(value - 3));
-                    } else if (value == 4) {
-                        $('#juge').is(':checked') ? ($("#accountStep" + (value - 1)).show(), $("#accountStep").val(value - 1)) : ($("#accountStep" + (value - 2)).show(), $("#accountStep").val(value - 2));
-                    } else {
-                        $("#accountStep" + (value - 1)).show();
-                        $("#accountStep").val(value - 1);
-                    }
-                    $("#accountStep" + (value)).hide();
-                } else {
-                    $("#previous").hide();
-                }
-            });
-
-            $('#juge').on('change', function () {
-                $(this).is(':checked') ? $("#judgeDiv").show() : $("#judgeDiv").hide();
-            });
-
-            $('#volontaire').on('change', function () {
-                $(this).is(':checked') ? $("#volunteerDiv").show() : $("#volunteerDiv").hide();
-            });
-
-            $("input[name='selection']").on('change', function () {
-                var $prix = 0;
-
-                $.each($("input[name='selection']:checked"), function () {
-                    var $id = $(this).val();
-                    $prix = $prix + parseInt($("#price" + $id).text());
-                });
-                $("#prix").text($prix);
-            });
-
-            function stepChoice(step) {
-                switch (step) {
-                    case 'accountStep1':
-                        return step1();
-                    case 'accountStep2':
-                        return step2();
-                    case 'accountStep3':
-                        return true;
-                    case 'accountStep4':
-                        return true;
-                    case 'accountStep5':
-                        return true;
-                    case 'accountStep6':
-                        return true;
-                    case 'accountStep7':
-                        return step7();
-                    default:
-                        console.log('Sorry, we are out of ' + step + '.');
-                }
-            }
-
-            function step1() {
-                var bool = true;
-                (isEmpty('account[firstName]') ? ($("#firstNameHelp").show(), bool = false) : $("#firstNameHelp").hide());
-                (isEmpty('account[lastName]') ? ($("#lastNameHelp").show(), bool = false) : $("#lastNameHelp").hide());
-                (isEmpty('account[zipCode]') ? ($("#zipCodeHelp").show(), bool = false) : ((isValidationZipCode('account[zipCode]')) ? ($("#zipCodeHelp").show(), bool = false) : $("#zipCodeHelp").hide()));
-                (isValidationList('#account_city') ? ($("#cityHelp").show(), bool = false) : $("#cityHelp").hide());
-                (isEmpty('account[address]') ? ($("#addressHelp").show(), bool = false) : $("#addressHelp").hide());
-                (isEmpty('account[email]') ? ($("#emailHelp").show(), bool = false) : ((isValidationEmail('account[email]')) ? ($("#emailHelp").show(), bool = false) : $("#emailHelp").hide()));
-                (isEmpty('account[password]') ? ($("#passwordHelp").show(), bool = false) : ((isValidationPassword('account[password]')) ? ($("#passwordHelp").show(), bool = false) : $("#passwordHelp").hide()));
-                return bool;
-            }
-
-            function step2() {
-                var bool = true;
-                (isEmpty('account[children][0][phoneRep1]') ? ($("#phoneRep1Help").show(), bool = false) : ((isValidationPhoneNumber('account[children][0][phoneRep1]')) ? ($("#phoneRep1Help").show(), bool = false) : $("#phoneRep1Help").hide()));
-                (isEmpty('account[children][0][professionRep1]') ? ($("#professionRep1Help").show(), bool = false) : $("#professionRep1Help").hide())
-                return bool;
-            }
-
-            function step7() {
-                var bool = true;
-                if (isValidationRadio('acceptRules')) {
-                    bool = false;
-                }
-
-                if (isValidationRadio('acceptRGPD')) {
-                    bool = false;
-                }
-                return bool;
-            }
-
-            function isEmpty(nameInput) {
-                return !$('input[name="' + nameInput + '"]').val();
-            }
-
-            function isValidationRadio(nameRadio) {
-                return !$('input[name="' + nameRadio + '"]:checked').val();
-            }
-
-            function isValidationEmail(nameEmail) {
-                var pattern = new RegExp(/^[+a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/i);
-                if (pattern.test($('input[name="' + nameEmail + '"]').val())) {
-                    return false;
-                } else {
-                    return true;
-                }
-            }
-
-            function isValidationList(nameList) {
-                var bool = true;
-                $.each($(nameList + ' option:selected'), function () {
-                    bool = false;
-                });
-                return bool;
-            }
-
-            function isValidationZipCode(nameZipCode) {
-                var pattern = new RegExp(/^([0-9]{2}|(2A)|2B)[[0-9]{3}$/);
-                if (pattern.test($('input[name="' + nameZipCode + '"]').val())) {
-                    return false;
-                } else {
-                    return true;
-                }
-            }
-
-            function isValidationPhoneNumber(nameZipCode) {
-                var pattern = new RegExp(/^(?:(?:\+)33|0)\s*[1-9](?:[\s.-]*\d{2}){4}$/);
-                if (pattern.test($('input[name="' + nameZipCode + '"]').val())) {
-                    return false;
-                } else {
-                    return true;
-                }
-            }
-
-            function isValidationPassword(namePassword) {
-                var pattern = new RegExp(/^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[-+!*$@%_])([-+!*$@%_\w]{8,15})$/);
-                if (pattern.test($('input[name="' + namePassword + '"]').val())) {
-                    return false;
-                } else {
-                    return true;
-                }
-            }
-
-            $('#account_zipCode').focusout(function () {
-                $.ajax({
-                    url: 'https://datanova.legroupe.laposte.fr/api/records/1.0/search/',
-                    type: "POST",
-                    dataType: "json",
-                    data: {
-                        "dataset": "laposte_hexasmal",
-                        "refine.code_postal": $('#account_zipCode').val(),
-                    },
-                    success: function (data) {
-                        $('#account_city option').remove();
-                        for (var i in data["records"]) {
-                            commune = data["records"][i]["fields"]["nom_de_la_commune"];
-                            $('#account_city').append(new Option(commune, commune));
-                        }
-                    }
-                })
-            });
-
-            $(function () {
-                $('[data-toggle="tooltip"]').tooltip()
-            });
-        </script>
-    {% endblock %}
+        });
+    </script>
+{% endblock %}
