@@ -130,24 +130,6 @@ admin_categoryDelete:
     path: /admin/categories/delete/{id}
     controller: App\Controller\administration\AdminActivitiesController::delete
 
-
-    #--timeSlots
-admin_timeSlots:
-    path: /admin/timeSlots
-    controller: App\Controller\administration\AdminTimeSlotsController::index
-
-admin_timeSlotsEdit:
-    path: /admin/timeSlots/edit/{id}
-    controller: App\Controller\administration\AdminTimeSlotsController::edit
-    requirements:
-        id: ([0-9]*)
-
-admin_timeSlotsDelete:
-    path: /admin/timeSlots/delete/{id}
-    controller: App\Controller\administration\AdminTimeSlotsController::delete
-    requirements:
-        id: ([0-9]*)
-
     #--accounts
 admin_accounts:
     path: /admin/accounts
@@ -229,4 +211,4 @@ error_404_unexist_route:
     defaults:
         _controller: App\Controller\ErrorController::error404
         requirements:
-            catchAll: '.+'
+           catchAll: '.+'
