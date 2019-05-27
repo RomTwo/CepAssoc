@@ -141,7 +141,7 @@ $('#next').click(function () {
     var numberOfStep = 6;
     var value = parseInt($("#accountStep").val());
     if (value < numberOfStep) {
-        //if (stepChoice("accountStep" + value)) {
+        if (stepChoice("accountStep" + value)) {
         if (value == numberOfStep - 1) {
             $("#next").hide();
         }
@@ -158,7 +158,7 @@ $('#next').click(function () {
         $("#accountStep" + (value)).hide();
         window.scrollTo(0,0);
 
-        //}
+        }
     } else {
         $("#next").hide();
     }
@@ -290,7 +290,7 @@ function step2() {
     var bool = true;
     (isEmpty('account[children][0][phoneRep1]') ? ($("#phoneRep1Help").show(), bool = false) : ((isValidationPhoneNumber('account[children][0][phoneRep1]')) ? ($("#phoneRep1Help").show(), bool = false) : $("#phoneRep1Help").hide()));
     (isEmpty('account[children][0][professionRep1]') ? ($("#professionRep1Help").show(), bool = false) : $("#professionRep1Help").hide())
-    (isValidationList('account[children][0][nationality]') ? ($("#nationalityHelp").show(), bool = false) : $("#nationalityHelp").hide())
+    //(isValidationList('account[children][0][nationality]') ? ($("#nationalityHelp").show(), bool = false) : $("#nationalityHelp").hide())
     return bool;
 }
 

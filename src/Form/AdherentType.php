@@ -253,7 +253,7 @@ class AdherentType extends AbstractType
                 ],
                 'required' => false,
             ))
-            ->add('healthQuestionnaire', FileType::class, array(
+            ->add('healthQuestionnaireFile', FileType::class, array(
                 'attr' => [
                     'placeholder' => "Choisissez le questionnaire de santé"
                 ],

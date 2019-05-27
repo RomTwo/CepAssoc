@@ -50,6 +50,13 @@ class Adherent
     private $birthDate;
 
     /**
+     * @ORM\Column(type="string")
+     * @Assert\NotNull(message="Veuiller remplir le champ nationalité")
+     * @Groups({"competition"})
+     */
+    private $nationality;
+
+    /**
      * @ORM\Column(type="boolean")
      * @Groups({"competition"})
      */
@@ -282,12 +289,6 @@ class Adherent
      * @Groups({"competition"})
      */
     private $medicalCertificateDate;
-
-    /**
-     * @ORM\Column(type="string")
-     * @Groups({"competition"})
-     */
-    private $nationality;
 
     /**
      * @ORM\Column(type="boolean")
@@ -1209,24 +1210,27 @@ class Adherent
     {
         $this->status = $status;
 
+        return $this;
+    }
+
 
     public function __toString(): string
     {
         return $this->firstName();
     }
 
-        /**
-         * @return mixed
-         */
-        public function getHealthQuestionnaire()
+    /**
+     * @return mixed
+     */
+    public function getHealthQuestionnaire()
     {
         return $this->healthQuestionnaire;
     }
 
-        /**
-         * @param mixed $healthQuestionnaire
-         */
-        public function setHealthQuestionnaire($healthQuestionnaire): void
+    /**
+     * @param mixed $healthQuestionnaire
+     */
+    public function setHealthQuestionnaire($healthQuestionnaire): void
     {
         $this->healthQuestionnaire = $healthQuestionnaire;
     }
