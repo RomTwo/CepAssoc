@@ -4,13 +4,8 @@
     <bookmark url="file://$PROJECT_DIR$/src/Controller/AccountController.php" description="JWT::decode($token, $_ENV['PRIVATE_KEY'], array($_..." line="94" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="53b90c9e-e36e-447f-8cc9-26b01b488158" name="Default Changelist" comment="pull master">
+    <list default="true" id="53b90c9e-e36e-447f-8cc9-26b01b488158" name="Default Changelist" comment="add picker event">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/assets/css/dashboard_admin.scss" afterPath="$PROJECT_DIR$/assets/css/dashboard_admin.scss" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/assets/js/admin.js" afterPath="$PROJECT_DIR$/assets/js/admin.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/assets/js/datetimepicker.js" afterPath="$PROJECT_DIR$/assets/js/datetimepicker.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/administration/eventManage/index.html.twig" afterPath="$PROJECT_DIR$/templates/administration/eventManage/index.html.twig" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/administration/layout_admin.html.twig" afterPath="$PROJECT_DIR$/templates/administration/layout_admin.html.twig" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -47,8 +42,8 @@
       <file leaf-file-name="dashboard_admin.scss" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/assets/css/dashboard_admin.scss">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="315">
-              <caret line="21" column="2" lean-forward="false" selection-start-line="21" selection-start-column="2" selection-end-line="21" selection-end-column="2" />
+            <state relative-caret-position="165">
+              <caret line="11" column="0" lean-forward="true" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -505,14 +500,7 @@
       <workItem from="1558716883025" duration="5950000" />
       <workItem from="1558886686095" duration="1275000" />
       <workItem from="1558952371308" duration="62000" />
-      <workItem from="1558952941928" duration="2057000" />
-    </task>
-    <task id="LOCAL-00026" summary="change namespace controller admin account">
-      <created>1557816495712</created>
-      <option name="number" value="00026" />
-      <option name="presentableId" value="LOCAL-00026" />
-      <option name="project" value="LOCAL" />
-      <updated>1557816495712</updated>
+      <workItem from="1558952941928" duration="2130000" />
     </task>
     <task id="LOCAL-00027" summary="captcha system on registration web site">
       <created>1557828528949</created>
@@ -850,11 +838,18 @@
       <option name="project" value="LOCAL" />
       <updated>1558953924510</updated>
     </task>
-    <option name="localTasksCounter" value="75" />
+    <task id="LOCAL-00075" summary="add picker event">
+      <created>1558957910445</created>
+      <option name="number" value="00075" />
+      <option name="presentableId" value="LOCAL-00075" />
+      <option name="project" value="LOCAL" />
+      <updated>1558957910445</updated>
+    </task>
+    <option name="localTasksCounter" value="76" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="263430000" />
+    <option name="totallyTimeSpent" value="263503000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -931,7 +926,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Add new role (super_admin), add link administration in navbar, change the getRole() function in Account Entity" />
     <MESSAGE value="Add folder plugin in administration, add link to return on site in the administration part" />
     <MESSAGE value="Modify front admin account" />
     <MESSAGE value="resolve problem modals" />
@@ -956,7 +950,8 @@
     <MESSAGE value="continue event administration" />
     <MESSAGE value="terminate minimum functionnality admin event" />
     <MESSAGE value="pull master" />
-    <option name="LAST_COMMIT_MESSAGE" value="pull master" />
+    <MESSAGE value="add picker event" />
+    <option name="LAST_COMMIT_MESSAGE" value="add picker event" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1299,8 +1294,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/assets/css/dashboard_admin.scss">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="315">
-          <caret line="21" column="2" lean-forward="false" selection-start-line="21" selection-start-column="2" selection-end-line="21" selection-end-column="2" />
+        <state relative-caret-position="165">
+          <caret line="11" column="0" lean-forward="true" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
           <folding />
         </state>
       </provider>
