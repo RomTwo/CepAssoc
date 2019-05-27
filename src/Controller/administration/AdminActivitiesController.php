@@ -104,7 +104,7 @@ class AdminActivitiesController extends AbstractController
             return $this->redirectToRoute('admin_activities');
         }
 
-        return $this->render('administration/activities/activityAdd.html.twig', [
+        return $this->render('administration/activities/activityAddOrEdit.html.twig', [
             'activity' => $activity,
             'form' => $form->createView()]);
     }
@@ -128,9 +128,10 @@ class AdminActivitiesController extends AbstractController
             return $this->redirectToRoute('admin_activities');
         }
 
-        return $this->render('administration/activities/activityEdit.html.twig', [
+        return $this->render('administration/activities/activityAddOrEdit.html.twig', [
             'activity' => $activity,
-            'form' => $form->createView()
+            'form' => $form->createView(),
+            'isEdition' => true
         ]);
 
     }
@@ -254,7 +255,6 @@ class AdminActivitiesController extends AbstractController
                 }
             }
         }
-
         $jsonDatas[] = $allEmails;
         return new JsonResponse($jsonDatas);
     }
