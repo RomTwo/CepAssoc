@@ -149,7 +149,7 @@ class AdminActivitiesController extends AbstractController
 
     }
 
-    public function details(Request $request, $id)
+    public function details($id)
     {
         $repositoryAdherant=$this->getDoctrine()->getRepository(Adherent::class);
         $adherants=$repositoryAdherant->findAll();
