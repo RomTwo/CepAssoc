@@ -24,6 +24,15 @@ account_reset_password:
     path: /profile/resetPassword/{token}
     controller: App\Controller\AccountController::resetPassword
 
+### Event routing ###
+event_index:
+    path: /profile/events
+    controller: App\Controller\EventController::index
+
+event_participate:
+    path: /profile/participate/{id}
+    controller: App\Controller\EventController::participate
+
 ### Authentication routing ###
 security_connexion:
     path: /profile/login

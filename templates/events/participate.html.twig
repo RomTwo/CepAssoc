@@ -1,0 +1,60 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello SiteRegisterController!{% endblock %}
+
+
+
+{% block body %}
+    <div>
+        {{ form_start(form) }}
+        <div class="container mt-4">
+            <div class="form-group pb-4 pt-4">
+                <div class="container-fluid">
+                    <h4>Participer à l'évènement : </h4>
+
+                    <div class="row mt-3">
+                        <div class="col-2">
+                            <label>Disponibilité de départ : </label>
+                        </div>
+                        <div class="col-auto">
+                            {{ form_widget(form.startDate) }}
+                        </div>
+                        <div class="row ml-1">
+                            {{ form_errors(form.startDate) }}
+                        </div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-2">
+                            <label>Disponibilité de fin : </label>
+                        </div>
+                        <div class="col-auto">
+                            {{ form_widget(form.endDate) }}
+                        </div>
+                        <div class="row ml-1">
+                            {{ form_errors(form.endDate) }}
+                        </div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-2">
+                            <label>Tâche : </label>
+                        </div>
+                        <div class="col-auto">
+                            {{ form_widget(form.job) }}
+                        </div>
+                        <div class="row ml-1">
+                            {{ form_errors(form.job) }}
+                        </div>
+                    </div>
+                    {{ form_widget(form.submit) }}
+                </div>
+            </div>
+        </div>
+        {{ form_end(form) }}
+
+        <input id="startDate" type="hidden" value="{{ start | date("Y-m-d H:i") }}">
+        <input id="endDate" type="hidden" value="{{ end | date("Y-m-d H:i") }}">
+    </div>
+{% endblock %}
+{% block javascripts %}
+    {{ encore_entry_script_tags('datetimeEvent') }}
+{% endblock %}
