@@ -19,7 +19,6 @@ Encore
      */
     .addEntry('app', './assets/js/app.js')
     .addEntry('popup', './assets/js/popup.js')
-    .addEntry('adminAdherentsEdit', './assets/js/adminAdherentsEdit.js')
     .addEntry('event', './assets/js/event.js')
     .addEntry('datetime', './assets/js/datetimepicker.js')
     .addEntry('datetimeEvent', './assets/js/datetimepickerEvent.js')
