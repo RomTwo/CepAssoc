@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Controller\administration;
+
 use App\Entity\Adherent;
 use App\Form\AdminAdherentType;
 use Dompdf\Dompdf;
@@ -34,7 +35,7 @@ class AdminAdherentsController extends AbstractController
      */
     public function edit(Adherent $adherent, Request $request, Utilitaires $utilitaires)
     {
-        /*$entityManager = $this->getDoctrine()->getManager();
+        $entityManager = $this->getDoctrine()->getManager();
 
         $form = $this->createForm(AdminAdherentType::class, $adherent);
         $form->handleRequest($request);
@@ -52,8 +53,7 @@ class AdminAdherentsController extends AbstractController
             "cityRep1" => $adherent->getCityRep1(),
             "cityRep2" => $adherent->getCityRep2(),
             "adherent" => $adherent,
-        ]);*/
-        return $this->redirectToRoute("home");
+        ]);
     }
 
     /**
