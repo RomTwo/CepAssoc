@@ -1,0 +1,211 @@
+{% extends 'administration/basePDF.html.twig' %}
+{% block body %}
+    <div class="center">
+        <h1><b>Questionnaire de santé</b></h1>
+    </div>
+
+    <h4><b><u>Adherent :</u> {{ adherent.firstName }} {{ adherent.lastName }}</b></h4>
+
+    <p class="blue"><b>Voici votre récapitulatif</b></p>
+    <hr class="blue">
+    <table>
+        <tr>
+            <td><b>Durant les douze derniers mois :</b></td>
+            <td class="center"><b>Oui</b></td>
+            <td class="center"><b>Non</b></td>
+        </tr>
+        <tr>
+            <td>{{ healthQuestionnaireQuestion1 }}</td>
+            {% if adherent.healthQuestionnaire.hasMemberOfFamilyDiedHeartAttack %}
+                <td class="center">X</td>
+                <td class="center"></td>
+            {% else %}
+                <td class="center"></td>
+                <td class="center">X</td>
+            {% endif %}
+        </tr>
+        <tr>
+            <td>{{ healthQuestionnaireQuestion2 }}</td>
+            {% if adherent.healthQuestionnaire.hasPainChest %}
+                <td class="center">X</td>
+                <td class="center"></td>
+            {% else %}
+                <td class="center"></td>
+                <td class="center">X</td>
+            {% endif %}
+        </tr>
+        <tr>
+            <td>{{ healthQuestionnaireQuestion3 }}</td>
+            {% if adherent.healthQuestionnaire.hasAsthma %}
+                <td class="center">X</td>
+                <td class="center"></td>
+            {% else %}
+                <td class="center"></td>
+                <td class="center">X</td>
+            {% endif %}
+        </tr>
+        <tr>
+            <td>{{ healthQuestionnaireQuestion4 }}</td>
+            {% if adherent.healthQuestionnaire.hasLossOfConsciousness %}
+                <td class="center">X</td>
+                <td class="center"></td>
+            {% else %}
+                <td class="center"></td>
+                <td class="center">X</td>
+            {% endif %}
+        </tr>
+        <tr>
+            <td>{{ healthQuestionnaireQuestion5 }}</td>
+            {% if adherent.healthQuestionnaire.hasResumptionOfSportWithoutDoctorConsent %}
+                <td class="center">X</td>
+                <td class="center"></td>
+            {% else %}
+                <td class="center"></td>
+                <td class="center">X</td>
+            {% endif %}
+        </tr>
+        <tr>
+            <td>{{ healthQuestionnaireQuestion6 }}</td>
+            {% if adherent.healthQuestionnaire.hasMedicalTreatment %}
+                <td class="center">X</td>
+                <td class="center"></td>
+            {% else %}
+                <td class="center"></td>
+                <td class="center">X</td>
+            {% endif %}
+        </tr>
+        <tr>
+            <td><b>À ce jour :</b></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>{{ healthQuestionnaireQuestion7 }}</td>
+            {% if adherent.healthQuestionnaire.hasBoneProblem %}
+                <td class="center">X</td>
+                <td class="center"></td>
+            {% else %}
+                <td class="center"></td>
+                <td class="center">X</td>
+            {% endif %}
+        </tr>
+        <tr>
+            <td>{{ healthQuestionnaireQuestion8 }}</td>
+            {% if adherent.healthQuestionnaire.hasHealthProblem %}
+                <td class="center">X</td>
+                <td class="center"></td>
+            {% else %}
+                <td class="center"></td>
+                <td class="center">X</td>
+            {% endif %}
+        </tr>
+        <tr>
+            <td>{{ healthQuestionnaireQuestion9 }}</td>
+            {% if adherent.healthQuestionnaire.hasNeedMedicalAdvice %}
+                <td class="center">X</td>
+                <td class="center"></td>
+            {% else %}
+                <td class="center"></td>
+                <td class="center">X</td>
+            {% endif %}
+        </tr>
+    </table>
+    <p class="blue">Qui est concerné ?</p>
+    <hr class="blue">
+    <p>Le licencié qui demande à la FFG le renouvellement de sa licence.</p>
+
+    <p class="blue">Quand l'utiliser l'utiliser ?</p>
+    <hr class="blue">
+
+    <p>Le questionnaire est à utiliser <b>pendant les deux saisons</b> qui suivent celle pour laquelle un certificat
+        médical a été délivré.</p>
+
+    <table>
+        <tr>
+            <td>Exemple</td>
+            <td>Saison 2016/2017</td>
+            <td>Certificat médical</td>
+        </tr>
+        <tr>
+            <td></td>
+            <td>Saison 2017/2018</td>
+            <td>Questionnaire + Attestation</td>
+        </tr>
+        <tr>
+            <td></td>
+            <td>Saison 2018/2019</td>
+            <td>Questionnaire + Attestation</td>
+        </tr>
+        <tr>
+            <td></td>
+            <td>Saison 2019/2020</td>
+            <td>Certificat médical</td>
+        </tr>
+    </table>
+
+
+
+    <p class="red"><b>Attention : </b></p>
+    <ul>
+        <li class="red">Les réponses formulées relèvent de la seule responsabilité du licencié ou de son représentant
+            légal s'il est
+            mineur.
+        </li>
+        <li>Si vous avez répondu <b>NON</b> à toutes les questions :
+            <ul>
+                <li>Attestation ci-après à fournir à votre club, pour les saisons concernées - Pas de certificat
+                    médical.
+                </li>
+            </ul>
+        </li>
+        <li>Si vous avez répondu <b>OUI</b> à une ou plusieurs questions :
+            <ul>
+                <li>Le certificat médical est obligatoire pour l'obtention d'une licence</li>
+            </ul>
+        </li>
+    </ul>
+
+    <div class="page_break"></div>
+
+    <div class="center-div">
+        <div class="center padding-0">
+            <p><b>Attestation</b></p>
+            <p>(Pour les majeurs)</p>
+        </div>
+        <p>Je soussigné :</p>
+        <p>Nom : ............................. Prenom : .......................</p>
+        <p>Licence N° : ............................. Club : .......................</p>
+        <p>Atteste avoir renseigné le questionnaire de santé préalablement à ma demande de licence à la FFG pour la
+            saison {% if 'now'|date('m') < '7' %}
+                {{ 'now'|date('Y')-1 }} / {{ 'now'|date('Y') }}
+            {% else %}
+                {{ 'now'|date('Y') }} / {{ 'now'|date('Y')+1 }}
+            {% endif %}
+        </p>
+        <p>Atteste avoir répondu NON à toutes les questions.</p>
+        <p>Fait à ........................ le ......./....../.......</p>
+        <p class="mb-50"><u>Signature</u></p>
+    </div>
+
+    <div class="center-div mt-15">
+        <div class="center padding-0">
+            <p><b>Attestation</b></p>
+            <p>(Pour les mineurs)</p>
+        </div>
+        <p>Je soussigné :</p>
+        <p>Nom : ............................. Prenom : .......................</p>
+        <p>Représentant légal de l'enfant : ................................</p>
+        <p>Licence N° : ............................. Club : .......................</p>
+        <p>Atteste avoir renseigné le questionnaire de santé préalablement à ma demande de licence à la FFG pour la
+            saison {% if 'now'|date('m') < '7' %}
+                {{ 'now'|date('Y')-1 }} / {{ 'now'|date('Y') }}
+            {% else %}
+                {{ 'now'|date('Y') }} / {{ 'now'|date('Y')+1 }}
+            {% endif %}
+        </p>
+        <p>Atteste avoir répondu NON à toutes les questions.</p>
+        <p>Fait à ........................ le ......./....../.......</p>
+        <p class="mb-50"><u>Signature</u></p>
+    </div>
+
+{% endblock %}

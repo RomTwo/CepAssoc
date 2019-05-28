@@ -173,7 +173,7 @@ class AdminAdherentType extends AbstractType
                     'Oui' => true,
                 ],
             ])
-            ->add('healthQuestionnaire', FileType::class, array(
+            ->add('healthQuestionnaireFile', FileType::class, array(
                 'required' => false,
                 'data_class' => null,
             ));
@@ -190,7 +190,7 @@ class AdminAdherentType extends AbstractType
             }
         });
 
-        $builder->get('healthQuestionnaire')->addEventListener(FormEvents::SUBMIT, function (FormEvent $event) {
+        $builder->get('healthQuestionnaireFile')->addEventListener(FormEvents::SUBMIT, function (FormEvent $event) {
             if (null === $event->getData()) {
                 $event->setData($event->getForm()->getData());
             }
