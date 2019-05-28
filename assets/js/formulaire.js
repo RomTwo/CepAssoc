@@ -240,13 +240,16 @@ $('#volontaire').on('change', function () {
     $(this).is(':checked') ? $("#volunteerDiv").show() : $("#volunteerDiv").hide();
 });
 
-$("input[name='selection']").on('change', function () {
-    var $prix = 0;
+var $prix = 0;
 
-    $.each($("input[name='selection']:checked"), function () {
-        var $id = $(this).val();
+$("input[name='selection']").on('change', function () {
+
+    var $id = $(this).val();
+    if($(this).is(':checked')){
         $prix = $prix + parseInt($("#price" + $id).text());
-    });
+    }else{
+        $prix = $prix - parseInt($("#price" + $id).text());
+    }
     $("#prix").text($prix);
 });
 

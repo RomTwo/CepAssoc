@@ -176,11 +176,11 @@
         <p>Nom : <b>{{ adherent.lastName }}</b> Prenom : <b>{{ adherent.firstName }}</b></p>
         <p>Licence N° : ............................. Club : .......................</p>
         <p>Atteste avoir renseigné le questionnaire de santé préalablement à ma demande de licence à la FFG pour la
-            saison {% if 'now'|date('m') < '7' %}
+            saison <b>{% if 'now'|date('m') < '7' %}
                 {{ 'now'|date('Y')-1 }} / {{ 'now'|date('Y') }}
             {% else %}
                 {{ 'now'|date('Y') }} / {{ 'now'|date('Y')+1 }}
-            {% endif %}
+            {% endif %}</b>
         </p>
         <p>Atteste avoir répondu NON à toutes les questions.</p>
         <p>Fait à ........................ le <b>{{ 'now'|date('d') }}/{{ 'now'|date('m') }}/{{ 'now'|date('y') }}</b></p>
@@ -197,11 +197,11 @@
         <p>Représentant légal de l'enfant : ................................</p>
         <p>Licence N° : ............................. Club : .......................</p>
         <p>Atteste avoir renseigné le questionnaire de santé préalablement à ma demande de licence à la FFG pour la
-            saison {% if 'now'|date('m') < '7' %}
+            saison <b>{% if 'now'|date('m') < '7' %}
                 {{ 'now'|date('Y')-1 }} / {{ 'now'|date('Y') }}
             {% else %}
                 {{ 'now'|date('Y') }} / {{ 'now'|date('Y')+1 }}
-            {% endif %}
+                {% endif %}</b>
         </p>
         <p>Atteste avoir répondu NON à toutes les questions.</p>
         <p>Fait à ........................ le <b>{{ 'now'|date('d') }}/{{ 'now'|date('m') }}/{{ 'now'|date('y') }}</b></p>
