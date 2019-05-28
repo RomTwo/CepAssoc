@@ -785,6 +785,7 @@
 
 {% block javascripts %}
     {{ encore_entry_script_tags('formulaire') }}
+    {{ encore_entry_script_tags('date') }}
     <script src="https://www.google.com/recaptcha/api.js?render={{ recaptcha_key_site }}"></script>
     <script>
         grecaptcha.ready(function () {
