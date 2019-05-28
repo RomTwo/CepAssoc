@@ -1,7 +1,6 @@
 {% extends 'administration/layout_admin.html.twig' %}
 
-{% block title %}Adherents
-{% endblock %}
+{% block title %}Adherents{% endblock %}
 
 {% block body %}
 
@@ -92,6 +91,7 @@
             {% endfor %}
             </tbody>
             <tfoot>
+
             <tr>
                 <th rowspan="1" colspan="1">Nom</th>
                 <th rowspan="1" colspan="1">Prénom</th>
@@ -518,16 +518,6 @@
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <div class="col-5">
-                                        Règlement cotisation :
-                                    </div>
-                                    <div class="col">
-                                        {% if adherent.paymentFeesArePaid %}
-                                            <i class="fas fa-check"></i>
-                                        {% else %}
-                                            <i class="fas fa-times"></i>
-                                        {% endif %}
-                                    </div>
                                     <hr/>
                                     <h6>PARTIE RESERVE A L'ADMINISTRATION</h6>
                                     <div class="alert alert-secondary" role="alert">
@@ -558,13 +548,6 @@
                                         <div class="row">
                                             <div class="col-5">
                                                 Règlement cotisation :
-                                            </div>
-                                            <div class="col">
-                                                {% if adherent.paymentFeesArePaid %}
-                                                    <i class="fas fa-check"></i>
-                                                {% else %}
-                                                    <i class="fas fa-times"></i>
-                                                {% endif %}
                                             </div>
                                         </div>
                                         <div class="row">

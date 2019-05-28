@@ -135,12 +135,6 @@ class Adherent
     private $registrationDate;
 
     /**
-     * @ORM\Column(type="boolean")
-     * @Groups({"competition"})
-     */
-    private $paymentFeesArePaid;
-
-    /**
      * @ORM\Column(type="string")
      * @Groups({"competition"})
      */
@@ -593,18 +587,6 @@ class Adherent
     public function setRegistrationDate(\DateTimeInterface $registrationDate): self
     {
         $this->registrationDate = $registrationDate;
-
-        return $this;
-    }
-
-    public function getPaymentFeesArePaid(): ?bool
-    {
-        return $this->paymentFeesArePaid;
-    }
-
-    public function setPaymentFeesArePaid(bool $paymentFeesArePaid): self
-    {
-        $this->paymentFeesArePaid = $paymentFeesArePaid;
 
         return $this;
     }

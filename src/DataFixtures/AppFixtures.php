@@ -382,8 +382,8 @@ string $email, string $city, string $password)
         $this->loadCategory($categories[5], $manager, "Autres Activités");
         $this->loadCategory($categories[6], $manager, "Gymnastique Artistique Féminine (GAF)");
         $this->loadCategory($categories[7], $manager, "Gymnastique Artistique Masculine (GAM)");
-        $this->loadCategory($categories[8], $manager, "Gymnastique Artistique Féminine (GAF-GAM)");
-        $this->loadCategory($categories[9], $manager, "Gymnastique Artistique Féminine (Teamgym)");
+        $this->loadCategory($categories[8], $manager, "GAF-GAM");
+        $this->loadCategory($categories[9], $manager, "Teamgym");
 
 
         /*******************

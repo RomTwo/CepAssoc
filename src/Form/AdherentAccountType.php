@@ -378,10 +378,12 @@ class AdherentAccountType extends AbstractType
             ])
             ->add('healthQuestionnaireFile', FileType::class, [
                 'attr' => [
-                    'placeholder' => "Choisissez le questionnaire de santé"
+                    'placeholder' => "Choisissez le questionnaire de santé",
+                    'lang' => 'fr'
                 ],
                 'required' => false,
                 'data_class' => null,
+
             ])
             ->add('healthQuestionnaire', HealthQuestionnaireType::class);
     }

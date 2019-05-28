@@ -4,6 +4,8 @@
 namespace App\Services;
 
 use App\Entity\Adherent;
+use Dompdf\Dompdf;
+use Dompdf\Options;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 
 class Utilitaires
@@ -20,7 +22,6 @@ class Utilitaires
         $adherent->setRegistrationDate(new \DateTime());
         $adherent->setIsRegisteredInGestGym(false);
         $adherent->setJudge(false);
-        $adherent->setPaymentFeesArePaid(false);
         $adherent->setRegistrationCost(0);
         $adherent->setMedicalCertificateDate(new \DateTime("01-09-2019"));
         $adherent->setNationality("France");

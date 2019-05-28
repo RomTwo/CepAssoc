@@ -167,12 +167,6 @@ class AdminAdherentType extends AbstractType
                     'Oui' => true,
                 ],
             ])
-            ->add('paymentFeesArePaid',  ChoiceType::class, [
-                'choices' => [
-                    'Non' => false,
-                    'Oui' => true,
-                ],
-            ])
             ->add('healthQuestionnaireFile', FileType::class, array(
                 'required' => false,
                 'data_class' => null,

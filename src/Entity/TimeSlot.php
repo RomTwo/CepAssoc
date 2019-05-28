@@ -31,7 +31,7 @@ class TimeSlot
      *     message = "Le jour indiqué n'existe pas"
      * )
      */
-    private $day;
+    protected $day;
 
     /**
      * @ORM\Column(type="time")
