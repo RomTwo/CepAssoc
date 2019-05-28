@@ -367,35 +367,35 @@
                                     </div>
                                     <div class="col">
                                         <p>Juge GAM
-                                        {% if adherent.isGAMJudge %}
-                                            <i class="fas fa-check" style ="color : green"></i>
-                                            Niveau :
-                                            {{ adherent.GAMJudgeLevel }}
-                                        {% else %}
-                                            <i class="fas fa-times" style ="color : red"></i>
-                                        {% endif %}
+                                            {% if adherent.isGAMJudge %}
+                                                <i class="fas fa-check" style ="color : green"></i>
+                                                Niveau :
+                                                {{ adherent.GAMJudgeLevel }}
+                                            {% else %}
+                                                <i class="fas fa-times" style ="color : red"></i>
+                                            {% endif %}
                                         </p>
                                     </div>
                                     <div class="col">
                                         <p>Juge TEAMGYM
-                                        {% if adherent.isTEAMGYMJudge %}
-                                            <i class="fas fa-check"></i>
-                                            Niveau :
-                                            {{ adherent.TEAMGYMJudgeLevel }}
-                                        {% else %}
-                                            <i class="fas fa-times" style ="color : red"></i>
-                                        {% endif %}
+                                            {% if adherent.isTEAMGYMJudge %}
+                                                <i class="fas fa-check"></i>
+                                                Niveau :
+                                                {{ adherent.TEAMGYMJudgeLevel }}
+                                            {% else %}
+                                                <i class="fas fa-times" style ="color : red"></i>
+                                            {% endif %}
                                         </p>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col">
                                         <p>Je souhaite suivre une formation de juge :
-                                        {% if adherent.wantsAJudgeTraining %}
-                                            <i class="fas fa-check" style ="color : green"></i>
-                                        {% else %}
-                                            <i class="fas fa-times" style ="color : red"></i>
-                                        {% endif %}
+                                            {% if adherent.wantsAJudgeTraining %}
+                                                <i class="fas fa-check" style ="color : green"></i>
+                                            {% else %}
+                                                <i class="fas fa-times" style ="color : red"></i>
+                                            {% endif %}
                                         </p>
                                     </div>
                                 </div>
@@ -463,18 +463,6 @@
                                     </div>
                                     <div class="col-2">
                                         {% if adherent.healthQuestionnaire %}
-                                            <i class="fas fa-check" style ="color : green"></i>
-                                        {% else %}
-                                            <i class="fas fa-times" style ="color : red"></i>
-                                        {% endif %}
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-4">
-                                        Règlement cotisation :
-                                    </div>
-                                    <div class="col-2">
-                                        {% if adherent.paymentFeesArePaid %}
                                             <i class="fas fa-check" style ="color : green"></i>
                                         {% else %}
                                             <i class="fas fa-times" style ="color : red"></i>
