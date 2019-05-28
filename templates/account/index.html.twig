@@ -19,7 +19,9 @@
             <div class="col">
             </div>
         </div>
+        
         {{ form_start(form) }}
+    
         <div id="accountStep1" class="justify-content-center">
             <div class="container-fluid mt-3">
                 <div class="card shadow-sm">
@@ -347,7 +349,15 @@
                                             {% if activity.type == "SECTEUR LOISIRS" %}
                                                 <tr id={{ activity.id }}>
                                                     <td>{{ activity.name }}</td>
-                                                    <td>Samedi - De 10h à 12h</td>
+                                                    <td>
+                                                        {% for creneaux in activity.timeSlot %}
+                                                            <b>{{ days[creneaux.day] }}</b> de {{ creneaux.startTime|date('h\\hi') }}/{{ creneaux.endTime|date('h\\hi') }}
+                                                            {% if creneaux.city is not null %}
+                                                                à {{ creneaux.city }}
+                                                            {% endif %}
+                                                            <br/>
+                                                        {% endfor %}
+                                                    </td>
                                                     <td>{{ activity.category.name }}</td>
                                                     <td id="price{{ activity.id }}">{{ activity.price }}</td>
                                                     <td>{{ activity.startDate|date('d/m/y') }}</td>
@@ -378,12 +388,20 @@
                                             {% if activity.type == "SECTEUR COMPETITIF" %}
                                                 <tr id={{ activity.id }}>
                                                     <td>{{ activity.category.id }}</td>
-                                                    <td>Samedi - De 10h à 12h</td>
+                                                    <td>
+                                                        {% for creneaux in activity.timeSlot %}
+                                                            <b>{{ days[creneaux.day] }}</b> de {{ creneaux.startTime|date('h\\hi') }}/{{ creneaux.endTime|date('h\\hi') }}
+                                                            {% if creneaux.city is not null %}
+                                                                à {{ creneaux.city }}
+                                                            {% endif %}
+                                                            <br/>
+                                                        {% endfor %}
+                                                    </td>
                                                     <td>{{ activity.category.name }}</td>
                                                     <td id="price{{ activity.id }}">{{ activity.price }}</td>
                                                     <td>{{ activity.startDate|date('d/m/y') }}</td>
                                                     <td>
-                                                         <input type="checkbox" id="checkbox{{ activity.id }}"
+                                                        <input type="checkbox" id="checkbox{{ activity.id }}"
                                                                name="selection"
                                                                value="{{ activity.id }}">
                                                     </td>
@@ -438,7 +456,7 @@
                         <div class="container-fluid">
                             <h6>Certificat medical : </h6>
                             <div class="row align-items-center ml-2 mr-2">
-                                <div class="col-5">
+                                <div class="col-11">
                                     {{ form_widget(form.children[0].medicalCertificate) }}
                                     {{ form_errors(form.children[0].medicalCertificate) }}
                                 </div>
@@ -447,7 +465,7 @@
                             </div>
                             <h6>Bulletin N2 allianz : </h6>
                             <div class="row align-items-center ml-2 mr-2">
-                                <div class="col-5">
+                                <div class="col-11">
                                     {{ form_widget(form.children[0].bulletinN2Allianz) }}
                                     {{ form_errors(form.children[0].bulletinN2Allianz) }}
                                 </div>
@@ -457,14 +475,14 @@
                             </div>
                             <h6>Questionnaire de santé : </h6>
                             <div class="row align-items-center ml-2 mr-2 healthQuestionnaireEmpty">
-                                <div class="col-5">
+                                <div class="col-11 col-sm-8 col-md-8 col-lg-8">
                                     {{ form_widget(form.children[0].healthQuestionnaireFile) }}
                                     {{ form_errors(form.children[0].healthQuestionnaireFile) }}
                                 </div>
                                 <a><i class="fa fa-info-circle" data-toggle="tooltip"
                                       data-original-title="Le questionnaire de santé peut être rendu plus tard."></i></a>
                                 <div class="col-auto">
-                                    <button id="healthQuestionnaire" type="button" class="btn btn-primary btn-block">
+                                    <button id="healthQuestionnaire" type="button" class="btn btn-primary">
                                         Répondre au questionnaire
                                     </button>
                                 </div>
@@ -472,11 +490,13 @@
                             <div class="healthQuestionnaireValidated">
                                 <div class="row align-items-center ml-2 mr-2">
                                     <div class="col-5">
-                                        <p>Vous avez déjà rempli le questionnaire de santé. Il sera possible de le télécharger
+                                        <p>Vous avez déjà rempli le questionnaire de santé. Il sera possible de le
+                                            télécharger
                                             afin de le signer et le faire valider par l'association.</p>
                                     </div>
                                     <div class="col-5">
-                                        <button id="healthQuestionnaireModificate" type="button" class="btn btn-primary">
+                                        <button id="healthQuestionnaireModificate" type="button"
+                                                class="btn btn-primary">
                                             Modifier le questionnaire
                                         </button>
                                     </div>
@@ -734,11 +754,13 @@
             <div class="container-fluid pt-3 pb-2">
                 <div class="row justify-content-between">
                     <div class="col">
-                        <button id="validQuestionnaire" type="button" class="btn btn-success btn-block">Valider le questionnaire
+                        <button id="validQuestionnaire" type="button" class="btn btn-success btn-block">Valider le
+                            questionnaire
                         </button>
                     </div>
                     <div class="col">
-                        <button id="cancelQuestionnaire" type="button" class="btn btn-danger btn-block">Annuler le questionnaire
+                        <button id="cancelQuestionnaire" type="button" class="btn btn-danger btn-block">Annuler le
+                            questionnaire
                         </button>
                     </div>
                 </div>
