@@ -35,18 +35,19 @@ class AdminAdherentType extends AbstractType
             ])
             ->add('sex', ChoiceType::class, [
                 'choices' => [
-                    'Homme' => 'H',
+                    'Homme' => 'M',
                     'Femme' => 'F',
                 ],
                 'multiple' => false,
                 'expanded' => true,
             ])
             ->add('birthDate', DateType::class)
-            ->add('isGAFJudge', null, [
-                'attr' => [
-                    'value' => false,
+            ->add('isGAFJudge', ChoiceType::class, [
+                'choices'  => [
+                    'Oui' => true,
+                    'Non' => false,
                 ],
-                'required'   => false,
+                'expanded' => true,
             ])
             ->add('GAFJudgeLevel', NumberType::class, [
                 'attr' => [
@@ -54,11 +55,12 @@ class AdminAdherentType extends AbstractType
                 ],
                 'required'   => false,
             ])
-            ->add('isGAMJudge', null, [
-                'attr' => [
-                    'value' => false,
+            ->add('isGAMJudge', ChoiceType::class, [
+                'choices'  => [
+                    'Oui' => true,
+                    'Non' => false,
                 ],
-                'required'   => false,
+                'expanded' => true,
             ])
             ->add('GAMJudgeLevel', NumberType::class, [
                 'attr' => [
@@ -66,11 +68,12 @@ class AdminAdherentType extends AbstractType
                 ],
                 'required'   => false,
             ])
-            ->add('isTeamGYMJudge', null, [
-                'attr' => [
-                    'value' => false,
+            ->add('isTeamGYMJudge', ChoiceType::class, [
+                'choices'  => [
+                    'Oui' => true,
+                    'Non' => false,
                 ],
-                'required'   => false,
+                'expanded' => true,
             ])
             ->add('teamGYMJudgeLevel', NumberType::class, [
                 'attr' => [
@@ -78,11 +81,12 @@ class AdminAdherentType extends AbstractType
                 ],
                 'required'   => false,
             ])
-            ->add('wantsAJudgeTraining', ChoiceType::class, [
-                'choices' => [
-                    'Non' => false,
+            ->add('wantsAJudgeTraining',ChoiceType::class, [
+                'choices'  => [
                     'Oui' => true,
+                    'Non' => false,
                 ],
+                'expanded' => true,
             ])
             ->add('volunteerForTrainingHelp', ChoiceType::class, [
                 'choices' => [
@@ -153,6 +157,7 @@ class AdminAdherentType extends AbstractType
                 'expanded' => true,
             ])
             ->add('medicalCertificate', FileType::class, array(
+                'label' => "Certificat medical : ",
                 'required' => false,
                 'data_class' => null,
             ))
@@ -160,19 +165,6 @@ class AdminAdherentType extends AbstractType
                 'required' => false,
                 'data_class' => null,
             ))
-            // Admin fields
-            ->add('hasMedicalCertificate',  ChoiceType::class, [
-                'choices' => [
-                    'Non' => false,
-                    'Oui' => true,
-                ],
-            ])
-            ->add('paymentFeesArePaid',  ChoiceType::class, [
-                'choices' => [
-                    'Non' => false,
-                    'Oui' => true,
-                ],
-            ])
             ->add('healthQuestionnaireFile', FileType::class, array(
                 'required' => false,
                 'data_class' => null,
