@@ -828,6 +828,13 @@
         <script>
             $(window).ready(function () {
 
+                if (final()) {
+                    $(".buttonSubmit").removeAttr("disabled");
+                } else {
+                    $(".buttonSubmit").attr("disabled", true);
+
+                }
+
                 if ($('#adherent_cityRep1').val() == null) {
                     $.ajax({
                         url: 'https://datanova.legroupe.laposte.fr/api/records/1.0/search/',
@@ -967,9 +974,9 @@
 
             $('#acceptRules, #acceptRGPD').on('change', function () {
                 if (final()) {
-                    $("#buttonSubmit").removeAttr("disabled");
+                    $(".buttonSubmit").removeAttr("disabled");
                 } else {
-                    $("#buttonSubmit").attr("disabled", true);
+                    $(".buttonSubmit").attr("disabled", true);
                 }
             });
 
@@ -1234,6 +1241,7 @@
                 $("#registrationStep5").hide();
                 $("#buttonBottom").hide();
             });
+
 
             $('#cancelQuestionnaire').click(function () {
                 $('div #healthQuestionnaireQuestion > div > div > input').each(function () {

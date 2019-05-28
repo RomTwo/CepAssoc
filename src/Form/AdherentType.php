@@ -259,7 +259,9 @@ class AdherentType extends AbstractType
                 ],
                 'required' => false,
             ))
-            ->add('healthQuestionnaire', HealthQuestionnaireType::class)
+            ->add('healthQuestionnaire', HealthQuestionnaireType::class, array(
+                'required' => false,
+            ))
             ->add('nationality', ChoiceType::class, [
                 'choices' => [
                     'AFGHANISTAN' => 'AFGHANISTAN',
@@ -496,6 +498,7 @@ class AdherentType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => Adherent::class,
+            'cascade_validation' => true,
         ]);
 
         $resolver->setRequired(array(
