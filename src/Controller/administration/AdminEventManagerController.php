@@ -19,7 +19,6 @@ class AdminEventManagerController extends AbstractController
     public function index($id)
     {
         $event = $this->getDoctrine()->getRepository(Event::class)->find($id);
-
         if ($event !== null) {
             $newEventManagers = new EventManagement();
             $form = $this->createForm(EventManagerType::class, $newEventManagers, array(
@@ -66,6 +65,10 @@ class AdminEventManagerController extends AbstractController
                 return JsonResponse::create("Le poste n'existe pas", 404);
             } elseif (!$compareDatetime->isSuperior($start, $end)) {
                 return JsonResponse::create("La date de départ doit être inférieur à la date de fin", 400);
+            } elseif (!$compareDatetime->isSuperior($event->getStartDate(), $start)) {
+                return JsonResponse::create("La date de départ doit être supérieur à la date de début de l'évènement", 400);
+            } elseif (!$compareDatetime->isSuperior($end, $event->getEndDate())) {
+                return JsonResponse::create("La date de fin doit être inférieur à la date de fin de l'évènement", 400);
             }
 
             $eventManager = new EventManagement();
@@ -111,6 +114,10 @@ class AdminEventManagerController extends AbstractController
                 return JsonResponse::create("Le poste n'existe pas", 404);
             } elseif (!$compareDatetime->isSuperior($start, $end)) {
                 return JsonResponse::create("La date de départ doit être inférieur à la date de fin", 400);
+            } elseif (!$compareDatetime->isSuperior($eventManager->getEvent()->getStartDate(), $start)) {
+                return JsonResponse::create("La date de départ doit être supérieur à la date de début de l'évènement", 400);
+            } elseif (!$compareDatetime->isSuperior($end, $eventManager->getEvent()->getEndDate())) {
+                return JsonResponse::create("La date de fin doit être inférieur à la date de fin de l'évènement", 400);
             }
 
             $eventManager->setAccount($account);
