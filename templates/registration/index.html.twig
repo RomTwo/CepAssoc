@@ -464,15 +464,15 @@
                     </div>
                 </div>
             </div>
+
         </div>
         <div id="registrationStep5">
-            <div class="card shadow-sm">
-                <h5 class="card-header">Abonnement :</h5>
-                <div class="card-body">
+            <div class="container-fluid mt-3">
+                <div class="form-group pb-2">
                     <div class="container-fluid">
                         <div class="row align-items-center">
                             <div class="col-auto">
-                                <h6>Prix de l'abonnement : </h6>
+                                <h4>Prix de l'abonnement : </h4>
                             </div>
                             <div class="col-auto">
                                 <h4 id="prix">0</h4>
@@ -825,6 +825,7 @@
 
 
     {% block javascripts %}
+        {{ encore_entry_script_tags('date') }}
         <script>
             $(window).ready(function () {
 

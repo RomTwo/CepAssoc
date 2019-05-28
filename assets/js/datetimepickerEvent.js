@@ -4,3 +4,5 @@ $('.dateTimePickerEvent').bootstrapMaterialDatePicker({
     minDate: moment($('#startDate').val()),
     maxDate: moment($('#endDate').val())
 });
+
+

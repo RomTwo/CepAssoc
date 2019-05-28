@@ -51,9 +51,9 @@ class AccountController extends AbstractController
         $msg = null;
 
         if ($form->isSubmitted() && $form->isValid() && $utilitaires->isValidateCity($request)) {
-            if ($captchaCheck->captchaIsValid($request->request->get('recaptcha_response')) ||true) {
-                $account->setCity($request->request->get("account_city"));
-                $adherent->setCityRep1($request->request->get("account_city"));
+            if ($captchaCheck->captchaIsValid($request->request->get('recaptcha_response')) || true) {
+            $account->setCity($request->request->get("account_city"));
+            $adherent->setCityRep1($request->request->get("account_city"));
                 if (!$this->findByEmail($account->getEmail())) {
                     if ($account->getAddAccountAdherent()) {
                         if ($this->isValidate($adherent)) {
@@ -278,8 +278,6 @@ class AccountController extends AbstractController
         if ($adherent->getSex() == null) {
             return false;
         }
-
-
         return true;
     }
 

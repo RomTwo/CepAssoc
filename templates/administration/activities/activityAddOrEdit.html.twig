@@ -20,7 +20,7 @@
             <div class="col-sm-10">
                 {{ form_widget(form.name) }}
             </div>
-        </div>        
+        </div>
     </div>
     <div class="form-group row">
         <div class="col-sm-6 row">
@@ -28,7 +28,7 @@
             <div class="col-sm-10">
                 {{ form_widget(form.price) }}
             </div>
-        </div>        
+        </div>
     </div>
     <div class="form-group row">
         <div class="col-sm-6 row">
@@ -36,7 +36,7 @@
             <div class="col-sm-10">
                  {{ form_widget(form.startDate) }}
             </div>
-        </div>        
+        </div>
     </div>
     <div class="form-group row">
         <div class="col-sm-6 row">
@@ -44,7 +44,7 @@
             <div class="col-sm-10">
                  {{ form_widget(form.type) }}
             </div>
-        </div>        
+        </div>
     </div>
     <div class="form-group row">
         <div class="col-sm-6 row">
@@ -52,7 +52,7 @@
             <div class="col-sm-10">
                  {{ form_widget(form.category) }}
             </div>
-        </div>        
+        </div>
     </div>
      <div class="form-group row">
         <div class="col-sm-12 row">
@@ -77,23 +77,23 @@
                 <div class="col-sm-8">
                      {{ form_widget(timeSlotForm.startTime) }}
                 </div>
-            </div>     
+            </div>
             <div class="col-sm-12 row" style="margin-bottom: 5px;">
                 <label for="inputEmail3" class="col-sm-4 col-form-label"> Début :</label>
                 <div class="col-sm-8">
                     {{ form_widget(timeSlotForm.endTime) }}
                 </div>
-            </div>    
+            </div>
              <div class="col-sm-12 row" style="margin-bottom: 5px;">
                 <label for="inputEmail3" class="col-sm-4 col-form-label"> Ville :</label>
                 <div class="col-sm-8">
                      {{ form_widget(timeSlotForm.city) }}
                 </div>
-            </div>     
+            </div>
         </div>
         {% endfor %}
     </div>
-    
+
 
     <a class="btn btn-outline-success" href="#" id="add_timeSlot">Ajouter un créneau</a>
 
@@ -106,6 +106,8 @@
 
 
 {% block javascripts %}
+    {{ encore_entry_script_tags('date') }}
+    {{ encore_entry_script_tags('time') }}
     <script type="text/javascript">
         $(document).ready(function () { // On récupère la balise <div> en question qui contient l'attribut « data-prototype » qui nous intéresse.
             var $container = $('div#collectionContainer');
@@ -121,12 +123,11 @@
                 return false;
             });
 
-            
             // On ajoute un premier champ automatiquement s'il n'en existe pas déjà un (cas d'une nouvelle annonce par exemple).
             if (index == 0) {
                 //addTimeSlot($container);
             } else { // S'il existe déjà des catégories, on ajoute un lien de suppression pour chacune d'entre elles
-                
+
                 $container.children('.timeslot').each(function () {
                     addDeleteLink($(this));
                 });
