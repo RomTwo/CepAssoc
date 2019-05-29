@@ -9,390 +9,279 @@
 {% endblock %}
 
 {% block body %}
-
-    {{ form_start(form) }}
-    <h6> ADMINISTRATION </h6>
-
+    <style>
+        .custom-file-input:lang(en) ~ .custom-file-label::after {
+            content: "Ouvrir";
+        }
+    </style>
     <div class="row">
-        <div class="form-group">
-            <div class="col">
-                <label for="">Certificat médical ou attestation </label>
+        {{ form_start(form) }}
+        <div class="form-group row">
+            <div class="col-sm-12 row">
+                <label class="col-sm-12 col-form-label"> Certificat médical :</label>
                 {% if adherent.medicalCertificate is null %}
-                    {{ form_widget(form.medicalCertificate) }}
-                {% else %}
-                    <div class="col">
-                        <a target="_blank" rel="noopener noreferrer"
-                           href="{{ asset('uploads/' ~ adherent.medicalCertificate) }}" class="btn btn-success">PDF</a>
+                    <div class="col-sm-12">
+                        {{ form_widget(form.medicalCertificate) }}
                     </div>
-                    <button class="btn btn-primary" type="button" data-toggle="collapse"
-                            data-target="#medicalCertificate" aria-expanded="false" aria-controls="collapseExample">
-                        Modifier
-                    </button>
-                    <div class="collapse" id="medicalCertificate">
+
+                {% else %}
+                    <div class="col-sm-3">
+                        <a target="_blank" rel="noopener noreferrer"
+                           href="{{ asset('uploads/' ~ adherent.medicalCertificate) }}" class="btn btn-success">Télécharger le document</a>
+                    </div>
+                    <div class="col-sm-9">
                         {{ form_widget(form.medicalCertificate) }}
                     </div>
                 {% endif %}
             </div>
-
         </div>
-        <div class="form-group">
-            <div class="col">
-                <label for="">Bulletin N°2 Allianz </label>
+        <div class="form-group row">
+            <div class="col-sm-12 row">
+                <label class="col-sm-12 col-form-label">Bulletin N°2 Allianz :</label>
                 {% if adherent.bulletinN2Allianz is null %}
-                    {{ form_widget(form.bulletinN2Allianz) }}
-                {% else %}
-                    <div class="col">
-                        <a target="_blank" rel="noopener noreferrer"
-                           href="{{ asset('uploads/' ~ adherent.bulletinN2Allianz) }}" class="btn btn-success">PDF</a>
+                    <div class="col-sm-12">
+                        {{ form_widget(form.bulletinN2Allianz) }}
                     </div>
-                    <button class="btn btn-primary" type="button" data-toggle="collapse"
-                            data-target="#bulletinN2Allianz" aria-expanded="false" aria-controls="collapseExample">
-                        Modifier
-                    </button>
-                    <div class="collapse" id="bulletinN2Allianz">
+
+                {% else %}
+                    <div class="col-sm-3">
+                        <a target="_blank" rel="noopener noreferrer"
+                           href="{{ asset('uploads/' ~ adherent.bulletinN2Allianz) }}" class="btn btn-success">Télécharger le document</a>
+                    </div>
+                    <div class="col-sm-9">
                         {{ form_widget(form.bulletinN2Allianz) }}
                     </div>
                 {% endif %}
             </div>
         </div>
-        <div class="form-group">
-            <div class="col">
-                <label for="">Questionnaire de santé </label>
+        <div class="form-group row">
+            <div class="col-sm-12 row">
+                <label class="col-sm-12 col-form-label">Questionnaire de santé :</label>
                 {% if adherent.healthQuestionnaireFile is null %}
-                    {{ form_widget(form.healthQuestionnaireFile) }}
-                {% else %}
-                    <div class="col">
-                        <a target="_blank" rel="noopener noreferrer"
-                           href="{{ asset('uploads/' ~ adherent.healthQuestionnaireFile) }}" class="btn btn-success">PDF</a>
+                    <div class="col-sm-12">
+                        {{ form_widget(form.healthQuestionnaireFile) }}
                     </div>
-                    <button class="btn btn-primary" type="button" data-toggle="collapse"
-                            data-target="#healthQuestionnaireFile" aria-expanded="false" aria-controls="collapseExample">
-                        Modifier
-                    </button>
-                    <div class="collapse" id="healthQuestionnaireFile">
+
+                {% else %}
+                    <div class="col-sm-3">
+                        <a target="_blank" rel="noopener noreferrer"
+                           href="{{ asset('uploads/' ~ adherent.healthQuestionnaireFile) }}" class="btn btn-success">Télécharger le document</a>
+                    </div>
+                    <div class="col-sm-9">
                         {{ form_widget(form.healthQuestionnaireFile) }}
                     </div>
                 {% endif %}
             </div>
         </div>
-        <div class="form-group">
-            <div class="col">
-                <label for="">Dossier traité par </label>
-            </div>
-            <div class="col">
-                <label for="">Engagement compétition </label>
-            </div>
-        </div>
-    </div>
-    <hr/>
-
-    <h6> INFORMATIONS FOURNIES PAR L'ADHERENT </h6>
-
-    <h6> Type d'inscription </h6>
-    <div class="col">
-        <div class="row">
-            <div class="col-3">
-                <div class="row">
+        <p><strong>INFORMATIONS FOURNIES PAR L'ADHERENT</strong></p>
+        <div class="form-group row">
+            <div class="col-sm-6 row">
+                <label class="col-sm-5 col-form-label">Type d'inscription :</label>
+                <div class="col-sm-7">
                     {{ form_widget(form.registrationType) }}
                 </div>
             </div>
-        </div>
-    </div>
-
-    <h6> Etat d'inscription </h6>
-    <div class="col">
-        <div class="row">
-            <div class="col-3">
-                <div class="row">
+            <div class="col-sm-6 row">
+                <label class="col-sm-5 col-form-label">Etat d'inscription :</label>
+                <div class="col-sm-7">
                     {{ form_widget(form.status) }}
                 </div>
             </div>
-        </div>
-    </div>
 
-    <hr/>
-    <h6> Civilité </h6>
-    <div class="col">
-        <div class="row">
-            <div class="col-3">
-                <div class="row">
-                    <label for="">Nom </label>
+            <div class="col-sm-6 row">
+                <label class="col-sm-3 col-form-label">Nom :</label>
+                <div class="col-sm-9">
                     {{ form_widget(form.lastName) }}
                 </div>
             </div>
-            <div class="col-3">
-                <div class="row">
-                    <label for="">Prénom </label>
+            <div class="col-sm-6 row">
+                <label class="col-sm-3 col-form-label">Prenom :</label>
+                <div class="col-sm-9">
                     {{ form_widget(form.firstName) }}
                 </div>
             </div>
-        </div>
-    </div>
-
-    <div class="col">
-        <div class="row">
-            <div class="col-3">
-                <div class="row">
-                    {{ form_row(form.sex) }}
+            <div class="col-sm-6 row">
+                <label class="col-sm-3 col-form-label">Sexe :</label>
+                <div class="col-sm-9">
+                    {{ form_widget(form.sex) }}
                 </div>
             </div>
-
-        </div>
-    </div>
-
-    <div class="col">
-        <div class="row">
-            <div class="col-3">
-                <div class="row">
-                    <label for="">Date de naissance </label>
+            <div class="col-sm-6 row">
+                <label class="col-sm-3 col-form-label">Date de naissance :</label>
+                <div class="col-sm-9">
                     {{ form_widget(form.birthDate) }}
                 </div>
             </div>
         </div>
-    </div>
-
-    <hr/>
-    <h6> Représentant légal ou adhérent </h6>
-    <div class="col">
-        <div class="row">
-            <div class="col-3">
-                <div class="row">
-                    <label for="">Nom </label>
+        <div class="form-group row">
+            <div class="col-sm-6 row">
+                <p class="col-sm-12"><strong>Représentant légal 1 ou adhérent (si majeur) :</strong></p>
+                <label class="col-sm-5 col-form-label">Nom :</label>
+                <div class="col-sm-7">
                     {{ form_widget(form.lastNameRep1) }}
                 </div>
-            </div>
-            <div class="col-3">
-                <div class="row">
-                    <label for="">Prénom </label>
+
+                <label class="col-sm-5 col-form-label">Prenom :</label>
+                <div class="col-sm-7">
                     {{ form_widget(form.firstNameRep1) }}
                 </div>
-            </div>
-            <div class="col-3">
-                <div class="row">
-                    <label for="">Adresse mail </label>
+
+                <label class="col-sm-5 col-form-label">Email :</label>
+                <div class="col-sm-7">
                     {{ form_widget(form.emailRep1) }}
                 </div>
-            </div>
-        </div>
-    </div>
 
-    <br/>
-    <div class="col">
-        <div class="row">
-            <div class="col-3">
-                <div class="row">
-                    <label for="">Code postal </label>
-                    {{ form_widget(form.zipCodeRep1) }}
-                </div>
-            </div>
-            <div class="col-3">
-                <div class="row">
-                    <label for="">Ville </label>
-                    <select id="admin_adherent_cityRep1" name="admin_adherent_cityRep1" class="form-control">
-                        {% if adherent.cityRep1 is defined and adherent.cityRep1 is not null %}
-                            <option value={{ adherent.cityRep1 }} selected>{{ adherent.cityRep1 }}</option>
-                        {% endif %}
-                    </select>
-                </div>
-            </div>
-            <div class="col-3">
-                <div class="row">
-                    <label for="">Adresse </label>
-                    {{ form_widget(form.addressRep1) }}
-                </div>
-            </div>
-
-        </div>
-    </div>
-
-    <br/>
-    <div class="col">
-        <div class="row">
-            <div class="col-3">
-                <div class="row">
-                    <label for="">Profession </label>
-                    {{ form_widget(form.professionRep1) }}
-                </div>
-            </div>
-            <div class="col-3">
-                <div class="row">
-                    <label for="">Numéro de téléphone </label>
+                <label class="col-sm-5 col-form-label">Téléphone :</label>
+                <div class="col-sm-7">
                     {{ form_widget(form.phoneRep1) }}
                 </div>
-            </div>
-        </div>
-    </div>
 
-    <hr/>
-    <h6> Représentant légal 2 </h6>
-    <div class="col">
-        <div class="row">
-            <div class="col-3">
-                <div class="row">
-                    <label for="">Nom </label>
+                <label class="col-sm-5 col-form-label">Code postal :</label>
+                <div class="col-sm-7">
+                    {{ form_widget(form.zipCodeRep1) }}
+                </div>
+
+                <label class="col-sm-5 col-form-label">Ville :</label>
+                <select id="admin_adherent_cityRep1" name="admin_adherent_cityRep1" class="form-control col-sm-7">
+                    {% if adherent.cityRep1 is defined and adherent.cityRep1 is not null %}
+                        <option value={{ adherent.cityRep1 }} selected>{{ adherent.cityRep1 }}</option>
+                    {% endif %}
+                </select>
+
+                <label class="col-sm-5 col-form-label">Adresse :</label>
+                <div class="col-sm-7">
+                    {{ form_widget(form.addressRep1) }}
+                </div>
+
+                <label class="col-sm-5 col-form-label">Profession :</label>
+                <div class="col-sm-7">
+                    {{ form_widget(form.professionRep1) }}
+                </div>
+
+
+
+            </div>
+            <div class="col-sm-6 row">
+                <p class="col-sm-12"><strong> Représentant légal 2 :</strong></p>
+                <label class="col-sm-5 col-form-label">Nom :</label>
+                <div class="col-sm-7">
                     {{ form_widget(form.lastNameRep2) }}
                 </div>
-            </div>
-            <div class="col-3">
-                <div class="row">
-                    <label for="">Prénom </label>
+
+                <label class="col-sm-5 col-form-label">Prenom :</label>
+                <div class="col-sm-7">
                     {{ form_widget(form.firstNameRep2) }}
                 </div>
-            </div>
-            <div class="col-3">
-                <div class="row">
-                    <label for="">Adresse mail </label>
+
+                <label class="col-sm-5 col-form-label">Email :</label>
+                <div class="col-sm-7">
                     {{ form_widget(form.emailRep2) }}
                 </div>
-            </div>
-        </div>
-    </div>
 
-    <br/>
-    <div class="col">
-        <div class="row">
-            <div class="col-3">
-                <div class="row">
-                    <label for="">Code postal </label>
+                <label class="col-sm-5 col-form-label">Téléphone :</label>
+                <div class="col-sm-7">
+                    {{ form_widget(form.phoneRep2) }}
+                </div>
+
+                <label class="col-sm-5 col-form-label">Code postal :</label>
+                <div class="col-sm-7">
                     {{ form_widget(form.zipCodeRep2) }}
                 </div>
-            </div>
-            <div class="col-3">
-                <div class="row">
-                    <label for="">Ville </label>
-                    <select id="admin_adherent_cityRep2" name="admin_adherent_cityRep2" class="form-control">
-                        {% if adherent.cityRep2 is defined and adherent.cityRep2 is not null %}
-                            <option value={{ adherent.cityRep2 }} selected>{{ adherent.cityRep2 }}</option>
-                        {% endif %}
-                    </select>
-                </div>
-            </div>
-            <div class="col-3">
-                <div class="row">
-                    <label for="">Adresse </label>
+
+                <label class="col-sm-5 col-form-label">Ville :</label>
+                <select id="admin_adherent_cityRep2" name="admin_adherent_cityRep2" class="form-control col-sm-7">
+                    {% if adherent.cityRep1 is defined and adherent.cityRep1 is not null %}
+                        <option value={{ adherent.cityRep2 }} selected>{{ adherent.cityRep2 }}</option>
+                    {% endif %}
+                </select>
+
+                <label class="col-sm-5 col-form-label">Adresse :</label>
+                <div class="col-sm-7">
                     {{ form_widget(form.addressRep2) }}
                 </div>
-            </div>
-        </div>
-    </div>
 
-    <br/>
-    <div class="col">
-        <div class="row">
-            <div class="col-3">
-                <div class="row">
-                    <label for="">Profession </label>
+                <label class="col-sm-5 col-form-label">Profession :</label>
+                <div class="col-sm-7">
                     {{ form_widget(form.professionRep2) }}
                 </div>
             </div>
-            <div class="col-3">
-                <div class="row">
-                    <label for="">Numéro de téléphone </label>
-                    {{ form_widget(form.phoneRep2) }}
-                </div>
-            </div>
         </div>
-    </div>
-
-    <hr/>
-    <h6> Juge </h6>
-    <div class="col">
-        <div class="row">
-            <div class="col-3">
-                <div class="row">
-                    <label for="">Juge </label>
-                    {{ form_widget(form.wantsAJudgeTraining) }}
-                </div>
-            </div>
-        </div>
-    </div>
-    </div>
-
-    <br/>
-    <div class="col">
-        <div class="row">
-            <div class="col-3">
-                <div class="row">
+        <div class="form-group row">
+            <div class="col-sm-6 row">
+                <label class="col-sm-4 col-form-label">Je suis un juge GAF :</label>
+                <div class="col-sm-2">
                     {{ form_widget(form.isGAFJudge) }}
                 </div>
-                <br/>
-                <div class="row">
-                    <label for="">Niveau </label>
+                <label class="col-sm-4 col-form-label">de niveau :</label>
+                <div class="col-sm-2">
                     {{ form_widget(form.GAFJudgeLevel) }}
                 </div>
             </div>
-
-            <div class="col-3">
-                <div class="row">
+        </div>
+        <div class="form-group row">
+            <div class="col-sm-6 row">
+                <label class="col-sm-4 col-form-label">Je suis un juge GAF :</label>
+                <div class="col-sm-2">
                     {{ form_widget(form.isGAMJudge) }}
                 </div>
-                <br/>
-                <div class="row">
-                    <label for="">Niveau </label>
+                <label class="col-sm-4 col-form-label">de niveau :</label>
+                <div class="col-sm-2">
                     {{ form_widget(form.GAMJudgeLevel) }}
                 </div>
             </div>
-
-            <div class="col-3">
-                <div class="row">
+        </div>
+        <div class="form-group row">
+            <div class="col-sm-6 row">
+                <label class="col-sm-4 col-form-label">Je suis un juge GAF :</label>
+                <div class="col-sm-2">
                     {{ form_widget(form.isTeamGYMJudge) }}
                 </div>
-                <br/>
-                <div class="row">
-                    <label for="">Niveau </label>
+                <label class="col-sm-4 col-form-label">de niveau :</label>
+                <div class="col-sm-2">
                     {{ form_widget(form.teamGYMJudgeLevel) }}
                 </div>
             </div>
         </div>
-    </div>
 
-    <hr/>
-    <h6> Bénévolat </h6>
-    <div class="col">
-        <div class="row">
-            <div class="col-3">
-                <div class="row">
-                    <label for="">Aide à l'entraînement </label>
+        <div class="form-group row">
+            <div class="col-sm-6 row">
+                <label class="col-sm-5 col-form-label">Je souhaite devenir un juge :</label>
+                <div class="col-sm-7">
+                    {{ form_widget(form.wantsAJudgeTraining) }}
+                </div>
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-sm-6 row">
+                <label class="col-sm-5 col-form-label">Aide à l'entraînement :</label>
+                <div class="col-sm-7">
                     {{ form_widget(form.volunteerForTrainingHelp) }}
                 </div>
             </div>
-            <div class="col-3">
-                <div class="row">
-                    <label for="">Aide à la vie du club </label>
+            <div class="col-sm-6 row">
+                <label class="col-sm-5 col-form-label">Aide à la vie du club :</label>
+                <div class="col-sm-7">
                     {{ form_widget(form.volunteerForClubLife) }}
                 </div>
             </div>
         </div>
-    </div>
-
-    <hr/>
-    <h6> Moyen de règlement </h6>
-    <div class="col">
-        <div class="row">
-            <div class="col-3">
-                <div class="row">
+        <div class="form-group row">
+            <div class="col-sm-6 row">
+                <label class="col-sm-5 col-form-label">Moyen de règlement :</label>
+                <div class="col-sm-7">
                     {{ form_widget(form.paymentType) }}
                 </div>
             </div>
-        </div>
-    </div>
-
-    <hr/>
-    <h6> Droit à l'image </h6>
-    <div class="col">
-        <div class="row">
-            <div class="col-3">
-                <div class="row">
+            <div class="col-sm-6 row">
+                <label class="col-sm-5 col-form-label">Droit à l'image  :</label>
+                <div class="col-sm-7">
                     {{ form_widget(form.imageRight) }}
                 </div>
             </div>
         </div>
+        <button class="btn btn-primary">Enregistrer</button>
+        {{ form_end(form) }}
     </div>
-
-    <br/>
-    {{ form_widget(form) }}
-    <button class="btn btn-primary">Enregistrer</button>
-    {{ form_end(form) }}
 
 {% endblock %}
 
@@ -417,7 +306,6 @@
                 }
             })
         });
-
         $('#admin_adherent_zipCodeRep2').focusout( function(){
             $.ajax({
                 url:'https://datanova.legroupe.laposte.fr/api/records/1.0/search/',
@@ -439,4 +327,3 @@
         });
     </script>
 {% endblock %}
- 

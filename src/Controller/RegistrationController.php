@@ -100,15 +100,39 @@ class RegistrationController extends AbstractController
 
     private function isValidateHealthQuestionnaire($healthQuestionnaire)
     {
-        if ($healthQuestionnaire->getHasMemberOfFamilyDiedHeartAttack() == null) {
+        if ($healthQuestionnaire->getHasMemberOfFamilyDiedHeartAttack() === null) {
             return false;
         }
 
-        if ($healthQuestionnaire->getHasPainChest() == null) {
+        if ($healthQuestionnaire->getHasPainChest() === null) {
             return false;
         }
 
-        if ($healthQuestionnaire->getHasAsthma() == null) {
+        if ($healthQuestionnaire->getHasAsthma() === null) {
+            return false;
+        }
+
+        if ($healthQuestionnaire->getHasLossOfConsciousness() === null) {
+            return false;
+        }
+
+        if ($healthQuestionnaire->getHasResumptionOfSportWithoutDoctorConsent() === null) {
+            return false;
+        }
+
+        if ($healthQuestionnaire->getHasMedicalTreatment() === null) {
+            return false;
+        }
+
+        if ($healthQuestionnaire->getHasBoneProblem() === null) {
+            return false;
+        }
+
+        if ($healthQuestionnaire->getHasHealthProblem() === null) {
+            return false;
+        }
+
+        if ($healthQuestionnaire->getHasNeedMedicalAdvice() === null) {
             return false;
         }
 
