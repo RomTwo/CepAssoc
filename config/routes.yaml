@@ -78,9 +78,6 @@ admin_editStatus:
     requirements:
         id: ([0-9]*)
 
-
-        
-
 admin_adherentsDelete:
     path: /admin/adherents/delete/{id}
     controller: App\Controller\administration\AdminAdherentsController::delete
