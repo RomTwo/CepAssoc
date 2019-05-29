@@ -72,6 +72,15 @@ admin_adherentsEdit:
     requirements:
         id: ([0-9]*)
 
+admin_editStatus:
+    path: /admin/adherents/editStatus/{id}
+    controller: App\Controller\administration\AdminAdherentsController::editStatus
+    requirements:
+        id: ([0-9]*)
+
+
+        
+
 admin_adherentsDelete:
     path: /admin/adherents/delete/{id}
     controller: App\Controller\administration\AdminAdherentsController::delete

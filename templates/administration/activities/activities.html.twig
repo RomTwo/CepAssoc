@@ -69,20 +69,19 @@
                     </td>
                     <!-- Button trigger modal -->
                     <td>
-                        <a class="btn btn-primary" href="{{ path('admin_activityDetails', {id: activity.id}) }}"
-                           data-toggle="tooltip" data-placement="top" title="Details de l'activité">
-                            <i
-                                    class="far fa-calendar-alt"></i></a>
+                        <a class="btn btn-primary" href="{{ path('admin_activityDetails', {id: activity.id}) }}" data-toggle="tooltip" data-placement="top" title="Details de l'activité">
+                            <i class="far fa-calendar-alt"></i>
+                        </a>
 
-                        <a class="btn btn-warning" href="{{ path('admin_activityEdit', {id: activity.id}) }}"
-                           data-toggle="tooltip" data-placement="top" title="Modifier l'activité ou ajouter un créneau"><i
-                                    class="far fa-edit"></i></a>
+                        <a class="btn btn-warning" href="{{ path('admin_activityEdit', {id: activity.id}) }}" data-toggle="tooltip" data-placement="top" title="Modifier l'activité ou ajouter un créneau">
+                            <i class="far fa-edit"></i>
+                        </a>
                         <span data-toggle="modal" data-target="#modalDeleteActivity{{ activity.id }}">
-                                <button type="button" class="btn btn-danger" data-toggle="tooltip" data-placement="top"
-                                        title="Supprimer l'activité">
-                                    <i class="far fa-trash-alt"></i>
-                                </button>
-                            </span>
+                            <button type="button" class="btn btn-danger" data-toggle="tooltip" data-placement="top"
+                                    title="Supprimer l'activité">
+                                <i class="far fa-trash-alt"></i>
+                            </button>
+                        </span>
 
                     </td>
                 </tr>
@@ -109,6 +108,7 @@
                             </div>
                         </div>
                     </div>
+                    </div>
                     {% endfor %}
                     {% endfor %}
                 </tbody>
@@ -120,9 +120,7 @@
 
 {% block javascripts %}
     <script type="text/javascript">
-        $(function () {
-            $('[data-toggle="tooltip"]').tooltip()
-        })
+        
 
         $(document).ready(function () {
 
