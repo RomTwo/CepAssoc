@@ -7,9 +7,7 @@ use App\Entity\Category;
 use App\Entity\Adherent;
 use App\Entity\TimeSlot;
 use App\Form\AdminActivityTimeSlotType;
-use App\Form\AdminCategoryType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 
 class AdminActivitiesController extends AbstractController
@@ -153,57 +151,6 @@ class AdminActivitiesController extends AbstractController
         $this->getDoctrine()->getManager()->flush();
 
         return $this->redirectToRoute('admin_activityDetails', ["id" => $activityId]);
-    }
-
-    public function copyTimeSlotEmails(Request $request){
-        $jsonDatas = array();
-
-        $allEmails = "";
-        $timeSlotId = $request->request->get("timeSlotId");
-
-        dump($timeSlotId);
-
-        $repositoryTimeSlot = $this->getDoctrine()->getRepository(TimeSlot::class);
-
-        // getting the timeSlot
-        $timeSlot = $repositoryTimeSlot->findOneBy(["id" => $timeSlotId]);
-
-        $adherents = $timeSlot->getAdherents()->toArray();
-        foreach($adherents as $adherent){
-            $allEmails .= $adherent->getEmailRep1() . "; ";
-        }
-
-        $jsonDatas[] = $allEmails;
-        return new JsonResponse($jsonDatas);
-    }
-
-    public function copyAllEmails(Request $request){
-        $jsonDatas = array();
-
-        $allEmails = "";
-        $activityId = (int)$request->request->get('activityId');
-
-        $repositoryActivity = $this->getDoctrine()->getRepository(Activity::class);
-
-        // getting the activity
-        $activity = $repositoryActivity->find($activityId);
-
-        // getting all the timeSlots connected to the activity
-        $timeSlots = $activity->getTimeSlot();
-
-        $adherentsCopied = array();
-        foreach($timeSlots as $timeSlot){
-            // for each timeSlot we get the adherents
-            $adherents = $timeSlot->getAdherents()->toArray();
-            foreach($adherents as $adherent){
-                if(!in_array($adherent, $adherentsCopied)) {
-                    $allEmails .= $adherent->getEmailRep1() . "; ";
-                    $adherentsCopied[] = $adherent;
-                }
-            }
-        }
-        $jsonDatas[] = $allEmails;
-        return new JsonResponse($jsonDatas);
     }
 
 }

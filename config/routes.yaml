@@ -123,14 +123,6 @@ admin_activityDeleteAdherentFromTimeSlot:
     timeSlotId: ([0-9]*)
     adherentId: ([0-9]*)
 
-admin_activityCopyAllEmails:
-    path: /admin/activities/activityCopyAllEmails
-    controller: App\Controller\administration\AdminActivitiesController::copyAllEmails
-
-admin_activityCopyTimeSlotEmails:
-  path: /admin/activities/activityCopyTimeSlotEmails
-  controller: App\Controller\administration\AdminActivitiesController::copyTimeSlotEmails
-
 
     #--Categories
 admin_categories:
