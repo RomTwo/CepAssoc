@@ -2,13 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="53b90c9e-e36e-447f-8cc9-26b01b488158" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.env" beforeDir="false" afterPath="$PROJECT_DIR$/.env" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/RegistrationController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/RegistrationController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/DataFixtures/AppFixtures.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/DataFixtures/AppFixtures.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/Adherent.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Adherent.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Services/Utilitaires.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Services/Utilitaires.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/home/index.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/home/index.html.twig" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Controller/administration/AdminActivitiesCategoryController.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Repository/StatusRepository.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/js/admin.js" beforeDir="false" afterPath="$PROJECT_DIR$/assets/js/admin.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/routes.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config/routes.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/administration/AdminActivitiesController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/administration/AdminActivitiesController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/administration/AdminAdherentsController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/administration/AdminAdherentsController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/administration/activities/activities.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/administration/activities/activities.html.twig" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -25,67 +25,83 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Entity/Adherent.php">
+        <entry file="file://$PROJECT_DIR$/templates/base.html.twig">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="17">
-              <caret line="46" column="39" selection-start-line="46" selection-start-column="39" selection-end-line="46" selection-end-column="39" />
+            <state relative-caret-position="748">
+              <caret line="44" column="6" selection-start-line="44" selection-start-column="6" selection-end-line="44" selection-end-column="6" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/config/routes.yaml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1955">
+              <caret line="115" column="24" selection-start-line="115" selection-start-column="24" selection-end-line="115" selection-end-column="24" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Form/TimeSlotType.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="391">
+              <caret line="27" column="10" selection-start-line="27" selection-start-column="10" selection-end-line="27" selection-end-column="10" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/templates/administration/activities/activityDetails.html.twig">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="2754">
+              <caret line="162" selection-start-line="162" selection-end-line="162" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Controller/administration/AdminAccountsController.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="102">
+              <caret line="11" column="6" selection-start-line="11" selection-start-column="6" selection-end-line="11" selection-end-column="6" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/templates/administration/activities/categoryAdd.html.twig">
+          <provider selected="true" editor-type-id="text-editor" />
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/templates/administration/activities/categoryEdit.html.twig">
+          <provider selected="true" editor-type-id="text-editor" />
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/templates/administration/accounts/accounts.html.twig">
+          <provider selected="true" editor-type-id="text-editor">
+            <state>
+              <caret selection-end-column="53" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/Controller/RegistrationController.php">
+        <entry file="file://$PROJECT_DIR$/templates/administration/layout_admin.html.twig">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="141">
-              <caret line="83" column="9" lean-forward="true" selection-start-line="83" selection-start-column="9" selection-end-line="83" selection-end-column="9" />
-              <folding>
-                <element signature="e#34#57#0#PHP" expanded="true" />
-              </folding>
+            <state relative-caret-position="153">
+              <caret line="120" column="29" selection-start-line="120" selection-start-column="29" selection-end-line="120" selection-end-column="29" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Controller/HomeController.php">
+        <entry file="file://$PROJECT_DIR$/templates/administration/home.html.twig">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="334">
-              <caret line="55" column="20" lean-forward="true" selection-start-line="55" selection-start-column="20" selection-end-line="55" selection-end-column="20" />
-              <folding>
-                <element signature="e#34#57#0#PHP" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Services/Utilitaires.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="204">
-              <caret line="12" column="1" selection-start-line="12" selection-start-column="1" selection-end-line="12" selection-end-column="1" />
-              <folding>
-                <element signature="e#33#57#0#PHP" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/templates/home/index.html.twig">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="107">
-              <caret line="95" column="45" lean-forward="true" selection-start-line="95" selection-start-column="45" selection-end-line="95" selection-end-column="45" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Controller/administration/AdminActivitiesController.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-2066">
-              <caret line="43" selection-start-line="43" selection-end-line="43" />
-              <folding>
-                <element signature="e#49#73#0#PHP" expanded="true" />
-              </folding>
+            <state relative-caret-position="255">
+              <caret line="15" column="10" selection-start-line="15" selection-start-column="10" selection-end-line="15" selection-end-column="10" />
             </state>
           </provider>
         </entry>
@@ -101,6 +117,14 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
+      <find>getF</find>
+      <find>name</find>
+      <find>id</find>
+      <find>autocom</find>
+      <find>for</find>
+      <find>$adhe</find>
+      <find>statut</find>
+      <find>activity</find>
       <find>timeSlot</find>
       <find>index</find>
       <find>getTim</find>
@@ -122,14 +146,6 @@
       <find>timeSlo</find>
       <find>time</find>
       <find>payme</find>
-      <find>health</find>
-      <find>decode</find>
-      <find>encode</find>
-      <find>affil</find>
-      <find>setPayMENTfEES</find>
-      <find>endfor</find>
-      <find>sex</find>
-      <find>md5</find>
       <find>ajouter</find>
     </findStrings>
   </component>
@@ -166,7 +182,12 @@
         <option value="$PROJECT_DIR$/src/Form/TimeSlotType.php" />
         <option value="$PROJECT_DIR$/src/Controller/administration/AdminTimeSlotsController.php" />
         <option value="$PROJECT_DIR$/templates/administration/timeSlots/timeSlots.html.twig" />
+        <option value="$PROJECT_DIR$/src/Services/Utilitaires.php" />
+        <option value="$PROJECT_DIR$/src/Controller/RegistrationController.php" />
         <option value="$PROJECT_DIR$/src/Controller/HomeController.php" />
+        <option value="$PROJECT_DIR$/src/DataFixtures/AppFixtures.php" />
+        <option value="$PROJECT_DIR$/.env" />
+        <option value="$PROJECT_DIR$/templates/home/index.html.twig" />
         <option value="$PROJECT_DIR$/templates/administration/activities/activityEdit.html.twig" />
         <option value="$PROJECT_DIR$/templates/administration/activities/activityAdd.html.twig" />
         <option value="$PROJECT_DIR$/templates/administration/activities/activitiesDetails.html.twig" />
@@ -175,6 +196,7 @@
         <option value="$PROJECT_DIR$/src/Form/AdminActivityDetailsForm.php" />
         <option value="$PROJECT_DIR$/src/Form/AdminActivityType.php" />
         <option value="$PROJECT_DIR$/templates/administration/base.html.twig" />
+        <option value="$PROJECT_DIR$/src/Entity/Adherent.php" />
         <option value="$PROJECT_DIR$/src/Form/AdherentAutocompleteTransformer.php" />
         <option value="$PROJECT_DIR$/src/Form/AdminActivityDetailsType.php" />
         <option value="$PROJECT_DIR$/src/Form/AdherentAutocompleteTransformerType.php" />
@@ -182,19 +204,13 @@
         <option value="$PROJECT_DIR$/src/Entity/TimeSlot.php" />
         <option value="$PROJECT_DIR$/templates/administration/activities/activityDetails.html.twig" />
         <option value="$PROJECT_DIR$/templates/administration/activities/activities.html.twig" />
+        <option value="$PROJECT_DIR$/src/Controller/administration/AdminActivitiesController.php" />
         <option value="$PROJECT_DIR$/src/Form/AdminActivityTimeSlotType.php" />
         <option value="$PROJECT_DIR$/src/Controller/administration/AdminAdherentsController.php" />
         <option value="$PROJECT_DIR$/templates/administration/adherents/adherents.html.twig" />
         <option value="$PROJECT_DIR$/config/routes.yaml" />
         <option value="$PROJECT_DIR$/templates/administration/layout_admin.html.twig" />
         <option value="$PROJECT_DIR$/templates/administration/home.html.twig" />
-        <option value="$PROJECT_DIR$/.env" />
-        <option value="$PROJECT_DIR$/src/Entity/Adherent.php" />
-        <option value="$PROJECT_DIR$/templates/home/index.html.twig" />
-        <option value="$PROJECT_DIR$/src/DataFixtures/AppFixtures.php" />
-        <option value="$PROJECT_DIR$/src/Controller/RegistrationController.php" />
-        <option value="$PROJECT_DIR$/src/Services/Utilitaires.php" />
-        <option value="$PROJECT_DIR$/src/Controller/administration/AdminActivitiesController.php" />
       </list>
     </option>
   </component>
@@ -411,6 +427,22 @@
             <path>
               <item name="CepAssoc" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
               <item name="C:\Users\DsMata\Desktop\lastProject\CepAssoc" type="442cc68d:ScopeViewTreeModel$RootNode" />
+              <item name="assets" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+            </path>
+            <path>
+              <item name="CepAssoc" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
+              <item name="C:\Users\DsMata\Desktop\lastProject\CepAssoc" type="442cc68d:ScopeViewTreeModel$RootNode" />
+              <item name="assets" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="js" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+            </path>
+            <path>
+              <item name="CepAssoc" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
+              <item name="C:\Users\DsMata\Desktop\lastProject\CepAssoc" type="442cc68d:ScopeViewTreeModel$RootNode" />
+              <item name="config" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+            </path>
+            <path>
+              <item name="CepAssoc" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
+              <item name="C:\Users\DsMata\Desktop\lastProject\CepAssoc" type="442cc68d:ScopeViewTreeModel$RootNode" />
               <item name="src" type="9f88c78c:ScopeViewTreeModel$FileNode" />
             </path>
             <path>
@@ -423,7 +455,8 @@
               <item name="CepAssoc" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
               <item name="C:\Users\DsMata\Desktop\lastProject\CepAssoc" type="442cc68d:ScopeViewTreeModel$RootNode" />
               <item name="src" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="DataFixtures" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="Controller" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="administration" type="9f88c78c:ScopeViewTreeModel$FileNode" />
             </path>
             <path>
               <item name="CepAssoc" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
@@ -440,25 +473,26 @@
             <path>
               <item name="CepAssoc" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
               <item name="C:\Users\DsMata\Desktop\lastProject\CepAssoc" type="442cc68d:ScopeViewTreeModel$RootNode" />
-              <item name="src" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="Security" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-            </path>
-            <path>
-              <item name="CepAssoc" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
-              <item name="C:\Users\DsMata\Desktop\lastProject\CepAssoc" type="442cc68d:ScopeViewTreeModel$RootNode" />
-              <item name="src" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="Services" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="templates" type="9f88c78c:ScopeViewTreeModel$FileNode" />
             </path>
             <path>
               <item name="CepAssoc" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
               <item name="C:\Users\DsMata\Desktop\lastProject\CepAssoc" type="442cc68d:ScopeViewTreeModel$RootNode" />
               <item name="templates" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="account" type="9f88c78c:ScopeViewTreeModel$FileNode" />
             </path>
             <path>
               <item name="CepAssoc" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
               <item name="C:\Users\DsMata\Desktop\lastProject\CepAssoc" type="442cc68d:ScopeViewTreeModel$RootNode" />
               <item name="templates" type="9f88c78c:ScopeViewTreeModel$FileNode" />
               <item name="administration" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+            </path>
+            <path>
+              <item name="CepAssoc" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
+              <item name="C:\Users\DsMata\Desktop\lastProject\CepAssoc" type="442cc68d:ScopeViewTreeModel$RootNode" />
+              <item name="templates" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="administration" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="accounts" type="9f88c78c:ScopeViewTreeModel$FileNode" />
             </path>
             <path>
               <item name="CepAssoc" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
@@ -478,7 +512,20 @@
               <item name="CepAssoc" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
               <item name="C:\Users\DsMata\Desktop\lastProject\CepAssoc" type="442cc68d:ScopeViewTreeModel$RootNode" />
               <item name="templates" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="administration" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="events" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+            </path>
+            <path>
+              <item name="CepAssoc" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
+              <item name="C:\Users\DsMata\Desktop\lastProject\CepAssoc" type="442cc68d:ScopeViewTreeModel$RootNode" />
+              <item name="templates" type="9f88c78c:ScopeViewTreeModel$FileNode" />
               <item name="home" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+            </path>
+            <path>
+              <item name="CepAssoc" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
+              <item name="C:\Users\DsMata\Desktop\lastProject\CepAssoc" type="442cc68d:ScopeViewTreeModel$RootNode" />
+              <item name="templates" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="registration" type="9f88c78c:ScopeViewTreeModel$FileNode" />
             </path>
           </expand>
           <select />
@@ -547,7 +594,6 @@
       <workItem from="1558593919262" duration="5109000" />
       <workItem from="1558642122149" duration="3940000" />
       <workItem from="1558679469526" duration="8223000" />
-      <workItem from="1559111782647" duration="212000" />
     </task>
     <task id="LOCAL-00001" summary="Default Changelist">
       <created>1557400976745</created>
@@ -801,18 +847,11 @@
       <option name="project" value="LOCAL" />
       <updated>1558952558170</updated>
     </task>
-    <task id="LOCAL-00037" summary="commit after pull">
-      <created>1559112332133</created>
-      <option name="number" value="00037" />
-      <option name="presentableId" value="LOCAL-00037" />
-      <option name="project" value="LOCAL" />
-      <updated>1559112332133</updated>
-    </task>
-    <option name="localTasksCounter" value="38" />
+    <option name="localTasksCounter" value="37" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="234658000" />
+    <option name="totallyTimeSpent" value="223324000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -831,7 +870,7 @@
       <window_info id="Structure" order="2" weight="0.24962178" />
       <window_info anchor="bottom" id="Event Log" order="0" sideWeight="0.295764" side_tool="true" weight="0.05728314" />
       <window_info anchor="bottom" id="Version Control" order="1" sideWeight="0.6505295" weight="0.22094926" />
-      <window_info anchor="bottom" id="Terminal" order="2" sideWeight="0.70423603" visible="true" weight="0.34697217" />
+      <window_info anchor="bottom" id="Terminal" order="2" sideWeight="0.70423603" weight="0.2749591" />
       <window_info anchor="bottom" id="Message" order="3" />
       <window_info anchor="bottom" id="Find" order="4" sideWeight="0.49546143" visible="true" weight="0.24549918" />
       <window_info anchor="bottom" id="Run" order="5" />
@@ -944,14 +983,77 @@
     <MESSAGE value="beginning of copying mails ..." />
     <MESSAGE value="workspace" />
     <MESSAGE value="Suppression de la route admin_adherentsRegister et de la fonctio register du controlleur AdminAdherentsController.php&#10;Modification de la vue adherents.html.twig" />
-    <MESSAGE value="commit after pull" />
-    <option name="LAST_COMMIT_MESSAGE" value="commit after pull" />
+    <option name="LAST_COMMIT_MESSAGE" value="Suppression de la route admin_adherentsRegister et de la fonctio register du controlleur AdminAdherentsController.php&#10;Modification de la vue adherents.html.twig" />
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/src/Controller/RegistrationController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="158">
+          <caret line="84" selection-start-line="84" selection-end-line="84" />
+          <folding>
+            <element signature="e#34#57#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Form/AccountAdminType.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="16" column="33" selection-start-line="16" selection-start-column="33" selection-end-line="16" selection-end-column="43" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Form/AdherentAccountType.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1036">
+          <caret line="111" column="9" selection-start-line="111" selection-start-column="9" selection-end-line="111" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Form/AdminCategoryType.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="13" column="6" selection-start-line="13" selection-start-column="6" selection-end-line="13" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/assets/js/account.js" />
+    <entry file="file://$PROJECT_DIR$/templates/administration/adherents/generateAdherentsPDF.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="82">
+          <caret line="176" column="30" selection-start-line="176" selection-start-column="30" selection-end-line="176" selection-end-column="30" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/administration/basePDF.html.twig">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Form/AdherentAutocompleteTransformerType.php" />
+    <entry file="file://$PROJECT_DIR$/templates/administration/adherents/adherentsEdit.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="133">
+          <caret line="87" column="18" selection-start-line="87" selection-start-column="18" selection-end-line="87" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/Entity/Activity.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="121">
           <caret line="139" column="26" selection-start-line="139" selection-start-column="20" selection-end-line="139" selection-end-column="26" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Entity/Adherent.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="17">
+          <caret line="46" column="39" selection-start-line="46" selection-start-column="39" selection-end-line="46" selection-end-column="39" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Entity/TimeSlot.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2958">
+          <caret line="180" column="27" selection-start-line="180" selection-start-column="20" selection-end-line="180" selection-end-column="27" />
         </state>
       </provider>
     </entry>
@@ -995,11 +1097,28 @@
     <entry file="file://$PROJECT_DIR$/documentations/Système de connexion deconnexion">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
+    <entry file="file://$PROJECT_DIR$/templates/home/index.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="107">
+          <caret line="95" column="45" selection-start-line="95" selection-start-column="45" selection-end-line="95" selection-end-column="45" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/templates/administration/base.html.twig" />
     <entry file="file://$PROJECT_DIR$/documentations/Gestion_des_popups">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="85">
           <caret line="5" column="47" lean-forward="true" selection-start-line="5" selection-start-column="47" selection-end-line="5" selection-end-column="47" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Controller/HomeController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="334">
+          <caret line="55" column="20" selection-start-line="55" selection-start-column="20" selection-end-line="55" selection-end-column="20" />
+          <folding>
+            <element signature="e#34#57#0#PHP" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1032,7 +1151,34 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Form/AdminActivityDetailsType.php" />
+    <entry file="file://$PROJECT_DIR$/src/Form/AdherentType.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-207">
+          <caret line="216" column="24" selection-start-line="216" selection-start-column="24" selection-end-line="216" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/Form/AdminActivityType.php" />
+    <entry file="file://$PROJECT_DIR$/src/Controller/administration/AdminActivitiesController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-2066">
+          <caret line="43" selection-start-line="43" selection-end-line="43" />
+          <folding>
+            <element signature="e#49#73#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Form/AdminAdherentType.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="99">
+          <caret line="168" column="14" selection-start-line="168" selection-start-column="14" selection-end-line="168" selection-end-column="14" />
+          <folding>
+            <element signature="e#28#52#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/templates/administration/activities/activityAddOrEdit.html.twig">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1564">
@@ -1040,7 +1186,52 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/templates/administration/adherents/adherents.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="388">
+          <caret line="568" column="42" selection-start-line="568" selection-start-column="42" selection-end-line="568" selection-end-column="42" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Controller/administration/AdminAdherentsController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="6" column="10" selection-start-line="6" selection-start-column="4" selection-end-line="6" selection-end-column="10" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/Controller/administration/AdminTimeSlotsController.php" />
+    <entry file="file://$PROJECT_DIR$/src/DataFixtures/AppFixtures.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1781">
+          <caret line="568" column="89" selection-start-line="568" selection-start-column="89" selection-end-line="568" selection-end-column="89" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Services/Utilitaires.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="187">
+          <caret line="11" column="1" selection-start-line="11" selection-start-column="1" selection-end-line="11" selection-end-column="1" />
+          <folding>
+            <element signature="e#33#57#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/base.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="748">
+          <caret line="44" column="6" selection-start-line="44" selection-start-column="6" selection-end-line="44" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/config/routes.yaml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1955">
+          <caret line="115" column="24" selection-start-line="115" selection-start-column="24" selection-end-line="115" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/Form/TimeSlotType.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="391">
@@ -1052,6 +1243,13 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2754">
           <caret line="162" selection-start-line="162" selection-end-line="162" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Controller/administration/AdminAccountsController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="11" column="6" selection-start-line="11" selection-start-column="6" selection-end-line="11" selection-end-column="6" />
         </state>
       </provider>
     </entry>
@@ -1075,189 +1273,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/base.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="748">
-          <caret line="44" column="6" selection-start-line="44" selection-start-column="6" selection-end-line="44" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/templates/administration/layout_admin.html.twig">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="153">
           <caret line="120" column="29" selection-start-line="120" selection-start-column="29" selection-end-line="120" selection-end-column="29" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/administration/adherents/adherents.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="7854">
-          <caret line="462" column="42" selection-start-line="462" selection-start-column="42" selection-end-line="462" selection-end-column="42" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Form/AdherentAccountType.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="5627">
-          <caret line="343" column="9" selection-start-line="343" selection-start-column="9" selection-end-line="343" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Form/AdminAdherentType.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2601">
-          <caret line="164" column="14" selection-start-line="164" selection-start-column="14" selection-end-line="164" selection-end-column="14" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/administration/adherents/adherentsEdit.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1360">
-          <caret line="80" column="18" selection-start-line="80" selection-start-column="18" selection-end-line="80" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Controller/administration/AdminAdherentsController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="6" column="10" selection-start-line="6" selection-start-column="4" selection-end-line="6" selection-end-column="10" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Form/AdherentType.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3400">
-          <caret line="210" column="24" selection-start-line="210" selection-start-column="19" selection-end-line="210" selection-end-column="24" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Controller/SecurityController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="38">
-          <caret line="12" column="6" selection-start-line="12" selection-start-column="6" selection-end-line="12" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Entity/HealthQuestionnaire.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="138">
-          <caret line="9" column="6" selection-start-line="9" selection-start-column="6" selection-end-line="9" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Entity/TimeSlot.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="381">
-          <caret line="180" column="27" selection-start-line="180" selection-start-column="20" selection-end-line="180" selection-end-column="27" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/.env">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
-          <caret line="28" column="45" selection-start-line="28" selection-start-column="45" selection-end-line="28" selection-end-column="45" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/administration/adherents/generateAdherentsPDF.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="405">
-          <caret line="176" column="30" selection-start-line="176" selection-start-column="30" selection-end-line="176" selection-end-column="30" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Controller/AccountController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1489">
-          <caret line="231" column="33" selection-start-line="231" selection-start-column="33" selection-end-line="231" selection-end-column="33" />
-          <folding>
-            <element signature="e#34#57#0#PHP" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/config/routes.yaml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="405">
-          <caret line="115" column="24" selection-start-line="115" selection-start-column="24" selection-end-line="115" selection-end-column="24" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Controller/administration/AdminAccountsController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="289">
-          <caret line="26" column="34" selection-start-line="26" selection-start-column="34" selection-end-line="26" selection-end-column="34" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Controller/administration/AdminEventManagerController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="16" column="6" selection-start-line="16" selection-start-column="6" selection-end-line="16" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/DataFixtures/AppFixtures.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-356">
-          <caret line="343" column="20" selection-start-line="343" selection-start-column="20" selection-end-line="343" selection-end-column="20" />
-          <folding>
-            <element signature="e#36#60#0#PHP" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Controller/administration/AdminActivitiesController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-2066">
-          <caret line="43" selection-start-line="43" selection-end-line="43" />
-          <folding>
-            <element signature="e#49#73#0#PHP" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Services/Utilitaires.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
-          <caret line="12" column="1" selection-start-line="12" selection-start-column="1" selection-end-line="12" selection-end-column="1" />
-          <folding>
-            <element signature="e#33#57#0#PHP" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/home/index.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="107">
-          <caret line="95" column="45" lean-forward="true" selection-start-line="95" selection-start-column="45" selection-end-line="95" selection-end-column="45" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Entity/Adherent.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="46" column="39" selection-start-line="46" selection-start-column="39" selection-end-line="46" selection-end-column="39" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Controller/HomeController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="334">
-          <caret line="55" column="20" lean-forward="true" selection-start-line="55" selection-start-column="20" selection-end-line="55" selection-end-column="20" />
-          <folding>
-            <element signature="e#34#57#0#PHP" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Controller/RegistrationController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="141">
-          <caret line="83" column="9" lean-forward="true" selection-start-line="83" selection-start-column="9" selection-end-line="83" selection-end-column="9" />
-          <folding>
-            <element signature="e#34#57#0#PHP" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
