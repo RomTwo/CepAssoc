@@ -49,7 +49,7 @@ class AdminEventManagerController extends AbstractController
             $start = $request->request->get('start');
             $end = $request->request->get('end');
             $jobId = $request->request->get('job');
-            $place = $request->request->get('place');
+            $description = $request->request->get('description');
 
             $manager = $this->getDoctrine()->getManager();
 
@@ -77,7 +77,7 @@ class AdminEventManagerController extends AbstractController
             $eventManager->setStartDate(new \DateTime($start));
             $eventManager->setEndDate(new \DateTime($end));
             $eventManager->setJob($job->getName());
-            $eventManager->setPlace($place);
+            $eventManager->setDescription($description);
 
             $errors = $validator->validate($eventManager);
             if (count($errors) > 0) {
@@ -98,7 +98,7 @@ class AdminEventManagerController extends AbstractController
             $start = $request->request->get('start');
             $end = $request->request->get('end');
             $jobId = $request->request->get('job');
-            $place = $request->request->get('place');
+            $description = $request->request->get('description');
 
             $manager = $this->getDoctrine()->getManager();
 
@@ -124,7 +124,7 @@ class AdminEventManagerController extends AbstractController
             $eventManager->setStartDate(new \DateTime($start));
             $eventManager->setEndDate(new \DateTime($end));
             $eventManager->setJob($job->getName());
-            $eventManager->setPlace($place);
+            $eventManager->setDescription($description);
 
             $errors = $validator->validate($eventManager);
             if (count($errors) > 0) {
@@ -171,7 +171,7 @@ class AdminEventManagerController extends AbstractController
                     'title' => $e->getAccount()->getFullName() . ', ' . $e->getJob(),
                     'person' => $e->getAccount()->getFullName(),
                     'job' => $e->getJob(),
-                    'place' => $e->getPlace(),
+                    'description' => $e->getDescription(),
                     'start' => $e->getStartDate()->format('Y-m-d H:i:s'),
                     'end' => $e->getEndDate()->format('Y-m-d H:i:s'),
                 )

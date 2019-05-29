@@ -24,7 +24,7 @@ class Account implements UserInterface
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255)s
      * @Assert\NotNull(message="Veuiller remplir le champ nom")
      * @Assert\Regex(
      *     pattern = "/^[a-zA-ZÀ-ú\-\s]*$/",

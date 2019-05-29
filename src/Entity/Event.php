@@ -56,6 +56,8 @@ class Event
      */
     private $eventManagements;
 
+
+
     /**
      * @ORM\ManyToMany(targetEntity="App\Entity\Job", cascade={"persist"})
      */

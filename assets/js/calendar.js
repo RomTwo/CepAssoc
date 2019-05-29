@@ -53,7 +53,7 @@ $(function () {
         eventClick: function (info) {
             $('#person').text(info.person);
             $('#job').text(info.job);
-            $('#place').text(info.place);
+            $('#description').text(info.description);
             $('#start').text(moment(info.start).format('DD-MM-YYYY HH:mm:ss'));
             $('#end').text(moment(info.end).format('DD-MM-YYYY HH:mm:ss'));
             $('#idEventManager').val(info.id);
@@ -162,7 +162,7 @@ $('#updateEvent').click(function () {
     // Fill all field form with data
     $('#startUpdate').val($('#start').text());
     $('#endUpdate').val($('#end').text());
-    $('#placeUpdate').val($('#place').text());
+    $('#descriptionUpdate').val($('#description').text());
     $('#idEventManagerUpdate').val($('#idEventManager').val());
     $('#modal-view-event-update').modal();
 });

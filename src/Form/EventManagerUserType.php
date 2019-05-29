@@ -56,7 +56,7 @@ class EventManagerUserType extends AbstractType
     {
         $resolver->setRequired('jobsEvent');
         $resolver->setDefaults([
-            'data_class' => EventManagement::class,
+            'data_class' => null,
         ]);
     }
 }

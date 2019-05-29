@@ -33,6 +33,10 @@ event_participate:
     path: /profile/participate/{id}
     controller: App\Controller\EventController::participate
 
+event_participate_infos:
+    path: /profile/participate/infos/{id}
+    controller: App\Controller\EventController::participateInfo
+
 ### Authentication routing ###
 security_connexion:
     path: /profile/login
