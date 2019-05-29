@@ -2,6 +2,7 @@
 
 namespace App\DataFixtures;
 
+use App\Entity\TimeSlot;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
 use App\Entity\Account;
@@ -75,12 +76,11 @@ string $email, string $city, string $password)
         $a->setIsGAMJudge($isGAMJudge);
         $a->setGAMJudgeLevel($gamJudgeLevel);
         $a->setIsTeamGYMJudge($isTeamGYMJudge);
-        $a->setTeamGYMJudgeLevel($isTeamGYMJudge);
+        $a->setTeamGYMJudgeLevel($teamGYMJudgeLevel);
     }
 
     private function loadAdherent5(Adherent $a, ObjectManager $o)
     {
-        $a->setpaymentFeesArePaid(false);
         $a->setisRegisteredInGestGym(false);
         $a->setStatus("EN ATTENTE");
         $a->setMedicalCertificateDate(new \DateTime("01-09-2019"));
@@ -109,8 +109,16 @@ string $email, string $city, string $password)
         $a->setStartDate($startDate);
         $a->setType($type);
         $a->setCategory($category);
+    }
 
-        //$o->persist($a);
+    private function loadTimeSlot(ObjectManager $o, int $day, \DateTime $startTime, \DateTime $endTime, Activity $activity, string $city){
+        $t = new TimeSlot();
+        $t->setDay($day);
+        $t->setStartTime($startTime);
+        $t->setEndTime($endTime);
+        $t->setCity($city);
+        $t->addActivity($activity);
+        $o->persist($t);
     }
 
     public function load(ObjectManager $manager)
@@ -138,110 +146,19 @@ string $email, string $city, string $password)
 
 
         $this->loadAccount($accounts[0], $manager, "Jean Luc", "Boulanger", "M", new \DateTime("18-10-1975"), 86000, "22 Rue de la Fièvre", "jeanB@gmail.com", "Poitiers", "toto");
-        $a = $this->loadAccount($accounts[1], $manager,"Norris", "Gaulin", "M", new \DateTime("17-03-1943"), 86440, "111 Boulevard du Lac", "norris-gaulin@outlook.com", "Migne-auxances", "toto");
-        $a = $this->loadAccount($accounts[2], $manager,"Aimée Rouze", "Boulanger", "F", new \DateTime("21-11-1983"), 86000, "1 Avenue de Gaulle", "aime.rouze@gmail.com", "Poitiers", "toto");
-        $a = $this->loadAccount($accounts[3], $manager,"Tempesete", "Lafontaine", "F", new \DateTime("14-11-1953"), 86360, "17 Rue Charles Tempestier", "jeanB@gmail.com", "Chasseneuil-du-Poitou", "toto");
-        $a = $this->loadAccount($accounts[4], $manager,"Slainie", "Giroud", "F", new \DateTime("13-02-1953"), 86580, "4 Allée Mansart", "slainieG86@gmail.com", "Vouneuil-sous-biard", "toto");
-        $a = $this->loadAccount($accounts[5], $manager,"Porter", "Fluet", "M", new \DateTime("07-07-1947"), 86280, "78 Rue de la Rivière", "fluetporter@free.fr", "Saint-Benoit", "toto");
-        $a = $this->loadAccount($accounts[6], $manager,"Antoinette", "Berthiaume", "F", new \DateTime("20-01-1989"), 86240, "14 Avenue Claude Chenou", "antoinette.berthiaume@live.fxs", "Smarves", "toto");
-        $a = $this->loadAccount($accounts[7], $manager,"Camille", "Dubé", "F", new \DateTime("04-07-1995"), 86550, "11 Rue des Bons Samaritins", "camille.dube@etu.univ-poitirs.fr", "Mignalloux-beauvoir", "toto");
-        $a = $this->loadAccount($accounts[8], $manager,"Leroy", "Tachel", "M", new \DateTime("15-12-1977"), 86000, "2 Rue de l'Université", "l.tachelB@gmail.com", "Poitiers", "toto");
-        $a = $this->loadAccount($accounts[9], $manager,"Raoul", "St-Jean", "M", new \DateTime("18-07-1997"), 86000, "3 Avenue René Monory", "raoul.s.j@gmail.com", "Poitiers", "toto");
+        $this->loadAccount($accounts[1], $manager,"Norris", "Gaulin", "M", new \DateTime("17-03-1943"), 86440, "111 Boulevard du Lac", "norris-gaulin@outlook.com", "Migne-auxances", "toto");
+        $this->loadAccount($accounts[2], $manager,"Aimée Rouze", "Boulanger", "F", new \DateTime("21-11-1983"), 86000, "1 Avenue de Gaulle", "aime.rouze@gmail.com", "Poitiers", "toto");
+        $this->loadAccount($accounts[3], $manager,"Tempesete", "Lafontaine", "F", new \DateTime("14-11-1953"), 86360, "17 Rue Charles Tempestier", "jeanB@gmail.com", "Chasseneuil-du-Poitou", "toto");
+        $this->loadAccount($accounts[4], $manager,"Slainie", "Giroud", "F", new \DateTime("13-02-1953"), 86580, "4 Allée Mansart", "slainieG86@gmail.com", "Vouneuil-sous-biard", "toto");
+        $this->loadAccount($accounts[5], $manager,"Porter", "Fluet", "M", new \DateTime("07-07-1947"), 86280, "78 Rue de la Rivière", "fluetporter@free.fr", "Saint-Benoit", "toto");
+        $this->loadAccount($accounts[6], $manager,"Antoinette", "Berthiaume", "F", new \DateTime("20-01-1989"), 86240, "14 Avenue Claude Chenou", "antoinette.berthiaume@live.fxs", "Smarves", "toto");
+        $this->loadAccount($accounts[7], $manager,"Camille", "Dubé", "F", new \DateTime("04-07-1995"), 86550, "11 Rue des Bons Samaritins", "camille.dube@etu.univ-poitirs.fr", "Mignalloux-beauvoir", "toto");
+        $this->loadAccount($accounts[8], $manager,"Leroy", "Tachel", "M", new \DateTime("15-12-1977"), 86000, "2 Rue de l'Université", "l.tachelB@gmail.com", "Poitiers", "toto");
+        $this->loadAccount($accounts[9], $manager,"Raoul", "St-Jean", "M", new \DateTime("18-07-1997"), 86000, "3 Avenue René Monory", "raoul.s.j@gmail.com", "Poitiers", "toto");
 
         /*******************
          * Loading adherents
          *******************/
-        /*for ($i = 0; $i < $adherentsNumber; $i++) {
-            $adherent = new Adherent();
-            array_push($adherents, $adherent);
-            $adherent->setFirstName('adherent');
-            $adherent->setLastName($i);
-
-            if(($i % 2) == 0)
-                $adherent->setSex('F');
-            else
-                $adherent->setSex('H');
-
-            $adherent->setBirthDate(new \DateTime("07-05-2019"));
-            $adherent->setFirstNameRep1("dede");
-            $adherent->setFirstNameRep2("dede");
-            $adherent->setLastNameRep1("dede");
-            $adherent->setLastNameRep2("dede");
-            $adherent->setZipCodeRep1(75000);
-            $adherent->setZipCodeRep2(75000);
-            $adherent->setAddressRep1($i."rue Castor");
-            $adherent->setAddressRep2($i."rue Castor");
-            $adherent->setEmailRep1("adherent".$i."@gmail.com");
-            $adherent->setEmailRep2("adherent".$i."@gmail.com");
-            $adherent->setCityRep1("Paris");
-            $adherent->setCityRep2("Paris");
-            $adherent->setProfessionRep1("profession1");
-            $adherent->setProfessionRep2("profession2");
-            $adherent->setPhoneRep1("0000000000");
-            $adherent->setPhoneRep2("0000000000");
-            if(($i % 2) == 0)
-                $adherent->setJudge(true);
-            else
-                $adherent->setJudge(false);
-
-            if(($i % 3) == 0)
-                $adherent->setIsGAFJudge(true);
-            else
-                $adherent->setIsGAFJudge(false);
-            
-            $adherent->setGAFJudgeLevel($i);
-            
-            if(($i % 4) == 0)
-                $adherent->setIsGAMJudge(true);
-            else
-                $adherent->setIsGAMJudge(false);
-            
-            $adherent->setGAMJudgeLevel($i);
-
-            if(($i % 4) == 0)
-                $adherent->setIsTeamGYMJudge(true);
-            else
-                $adherent->setIsTeamGYMJudge(false);
-            
-            $adherent->setTeamGYMJudgeLevel($i);
-
-            if(($i % 3) == 0)
-                $adherent->setWantsAJudgeTraining(true);
-            else
-                $adherent->setWantsAJudgeTraining(false);
-
-
-            //$adherent->setRegistrationType("nouveau");
-            $adherent->setRegistrationCost(0);
-            $adherent->setRegistrationDate(new \DateTime("01-09-2019"));
-            $adherent->setVolunteerForTrainingHelp("Jamais");
-            $adherent->setVolunteerForClubLife("Jamais");
-            $adherent->setImageRight(false);
-            $adherent->setPaymentType("cheque");
-
-
-            // champs defaut ::
-            $adherent->setpaymentFeesArePaid(false);
-            $adherent->setisRegisteredInGestGym(false);
-            $adherent->setStatus("EN ATTENTE");
-            $adherent->setIsMedicalCertificate(false);
-            $adherent->setIsValidateMedical(false);
-            $adherent->setMedicalCertificateDate(new \DateTime("01-09-2019"));
-            $adherent->setNationality("France");
-            $adherent->setIsFFGInsurance(false);
-            $adherent->setIsAllowEmail(false);
-            $adherent->setIsLicenceHolderOtherClub(false);
-            $adherent->setMaidenName("");
-
-
-            $adherent->setHasBulletinN2Allianz(false);
-            $adherent->setHasCompetitionCommitment(false);
-            $adherent->setIsMutated(false);
-            $adherent->setIsDeleted(false);
-
-            $manager->persist($adherents[$i]);
-        }*/
-
         for ($i = 0; $i < $adherentsNumber; $i++) {
             $adherent = new Adherent();
             array_push($adherents, $adherent);
@@ -464,8 +381,8 @@ string $email, string $city, string $password)
         $this->loadCategory($categories[5], $manager, "Autres Activités");
         $this->loadCategory($categories[6], $manager, "Gymnastique Artistique Féminine (GAF)");
         $this->loadCategory($categories[7], $manager, "Gymnastique Artistique Masculine (GAM)");
-        $this->loadCategory($categories[8], $manager, "Gymnastique Artistique Féminine (GAF-GAM)");
-        $this->loadCategory($categories[9], $manager, "Gymnastique Artistique Féminine (Teamgym)");
+        $this->loadCategory($categories[8], $manager, "GAF-GAM");
+        $this->loadCategory($categories[9], $manager, "Teamgym");
 
 
         /*******************
@@ -511,23 +428,10 @@ string $email, string $city, string $password)
         /*******************
          * Loading Activities
          *******************/
-        // simple loading. one activity for each category
-
-        /*******************
-         * Loading Activities
-         *******************/
-        // simple loading. one activity for each category
 
         for ($i = 0; $i < $activitiesNumber; $i++) {
             $activity = new Activity();
             array_push($activities, $activity);
-
-            /*$activity->setName("activity".$i);
-            $activity->setPrice(10 + $i*10);
-            $activity->setStartDate(new \DateTime("09-05-2019"));
-            $activity->setType("type of activity".$i);
-            $activity->setCategory($categories[$i]);*/
-
             $manager->persist($activities[$i]);
         }
 
@@ -564,8 +468,8 @@ string $email, string $city, string $password)
         $this->loadActivity($activities[17], $manager, "Gym Adultes aux Agrès", 125, new \DateTime("12-09-2018"), "SECTEUR LOISIRS", $categories[5]);
         $this->loadActivity($activities[18], $manager, "Gym Santé Bien-Etre", 125, new \DateTime("12-09-2018"), "SECTEUR LOISIRS", $categories[5]);
         $this->loadActivity($activities[19], $manager, "Fitness", 125, new \DateTime("12-09-2018"), "SECTEUR LOISIRS", $categories[5]);
-        $this->loadActivity($activities[20], $manager, "Gym Spectacle", -1, new \DateTime("01-01-2011"), "SECTEUR LOISIRS", $categories[5]);
-        $this->loadActivity($activities[21], $manager, "Pilates", -1, new \DateTime("01-01-2011"), "SECTEUR LOISIRS", $categories[5]);
+        $this->loadActivity($activities[20], $manager, "Gym Spectacle", 0, new \DateTime("01-01-2011"), "SECTEUR LOISIRS", $categories[5]);
+        $this->loadActivity($activities[21], $manager, "Pilates", 0, new \DateTime("01-01-2011"), "SECTEUR LOISIRS", $categories[5]);
 
         $this->loadActivity($activities[21], $manager, "Poussines 1 (2012)", 205, new \DateTime("03-09-2018"), "SECTEUR LOISIRS", $categories[6]);
         $this->loadActivity($activities[22], $manager, "Poussines 2 (2011 et 2010)", 225, new \DateTime("03-09-2018"), "SECTEUR LOISIRS", $categories[6]);
@@ -578,14 +482,166 @@ string $email, string $city, string $password)
         $this->loadActivity($activities[29], $manager, "Groupe Performance", 240, new \DateTime("03-09-2018"), "SECTEUR LOISIRS", $categories[6]);
 
 
-        $this->loadActivity($activities[30], $manager, "Poussins (2012 à 2010)", -1, new \DateTime("03-09-2018"), "SECTEUR LOISIRS", $categories[7]);
-        $this->loadActivity($activities[31], $manager, "Benjamins/Minimes/Cadets (2009 à 2004)", -1, new \DateTime("03-09-2018"), "SECTEUR LOISIRS", $categories[7]);
-        $this->loadActivity($activities[32], $manager, "Juniors/Seniors (2003 et avant)", -1, new \DateTime("03-09-2018"), "SECTEUR LOISIRS", $categories[7]);
+        $this->loadActivity($activities[30], $manager, "Poussins (2012 à 2010)", 0, new \DateTime("03-09-2018"), "SECTEUR LOISIRS", $categories[7]);
+        $this->loadActivity($activities[31], $manager, "Benjamins/Minimes/Cadets (2009 à 2004)", 0, new \DateTime("03-09-2018"), "SECTEUR LOISIRS", $categories[7]);
+        $this->loadActivity($activities[32], $manager, "Juniors/Seniors (2003 et avant)", 0, new \DateTime("03-09-2018"), "SECTEUR LOISIRS", $categories[7]);
 
         $this->loadActivity($activities[33], $manager, "GAF-GAM", 325, new \DateTime("03-09-2018"), "SECTEUR LOISIRS", $categories[8]);
 
-        $this->loadActivity($activities[34], $manager, "Découvertes / Evolution (2006 et avant) / Adultes", -1, new \DateTime("06-09-2018"), "SECTEUR LOISIRS", $categories[9]);
+        $this->loadActivity($activities[34], $manager, "Découvertes / Evolution (2006 et avant) / Adultes", 0, new \DateTime("06-09-2018"), "SECTEUR LOISIRS", $categories[9]);
         $this->loadActivity($activities[35], $manager, "Détente / Passion", 250, new \DateTime("07-09-2018"), "SECTEUR LOISIRS", $categories[9]);
+
+
+        /*****************************************************************
+         * LOADING TIMESLOTS AND AFFECTING THEM TO CORRESPONDING ACTIVITY
+         *****************************************************************/
+        // TimeSlot of activity 0 Baby Gym 2017
+        $this->loadTimeSlot($manager, 6, new \DateTime('09:15'), new \DateTime('10:00'), $activities[0], "");
+
+        // TimeSlot of activity 1 Baby Gym 2016 ... 2015
+        $this->loadTimeSlot($manager, 3, new \DateTime('17:00'), new \DateTime('17:45'), $activities[1], "");
+        $this->loadTimeSlot($manager, 6, new \DateTime('09:15'), new \DateTime('10:00'), $activities[1], "");
+
+        // TimeSlot of activity 2 Baby Gym 2013
+        $this->loadTimeSlot($manager, 3, new \DateTime('18:00'), new \DateTime('19:00'), $activities[2], "");
+        $this->loadTimeSlot($manager, 6, new \DateTime('10:15'), new \DateTime('11:10'), $activities[2], "");
+        $this->loadTimeSlot($manager, 4, new \DateTime('17:30'), new \DateTime('18:30'), $activities[2], "");
+
+        // TimeSlot of activity 3 Eveil Gym 2013
+        $this->loadTimeSlot($manager, 3, new \DateTime('13:30'), new \DateTime('14:30'), $activities[3], "");
+        $this->loadTimeSlot($manager, 6, new \DateTime('11:30'), new \DateTime('12:30'), $activities[3], "");
+
+        // TimeSlot of activity 4 Baby Gym 2017 et 2016
+        $this->loadTimeSlot($manager, 2, new \DateTime('17:30'), new \DateTime('18:15'), $activities[4], "Fontaine-le-comte");
+
+        // TimeSlot of activity 5 Baby Gym 2015 à 2013
+        $this->loadTimeSlot($manager, 2, new \DateTime('16:30'), new \DateTime('17:30'), $activities[5], "Fontaine-le-comte");
+
+        // TimeSlot of activity 6 EG1
+        $this->loadTimeSlot($manager, 3, new \DateTime('14:00'), new \DateTime('15:15'), $activities[6], "");
+        $this->loadTimeSlot($manager, 3, new \DateTime('15:30'), new \DateTime('16:45'), $activities[6], "");
+        $this->loadTimeSlot($manager, 4, new \DateTime('17:15'), new \DateTime('18:30'), $activities[6], "");
+        $this->loadTimeSlot($manager, 6, new \DateTime('13:30'), new \DateTime('14:45'), $activities[6], "");
+
+        // TimeSlot of activity 7 EG2
+        $this->loadTimeSlot($manager, 3, new \DateTime('15:30'), new \DateTime('16:45'), $activities[7], "");
+        $this->loadTimeSlot($manager, 3, new \DateTime('17:00'), new \DateTime('18:15'), $activities[7], "");
+        $this->loadTimeSlot($manager, 4, new \DateTime('17:15'), new \DateTime('18:30'), $activities[7], "");
+        $this->loadTimeSlot($manager, 6, new \DateTime('13:30'), new \DateTime('14:45'), $activities[7], "");
+
+        // TimeSlot of activity 8 EG3
+        $this->loadTimeSlot($manager, 4, new \DateTime('18:30'), new \DateTime('20:00'), $activities[8], "");
+        $this->loadTimeSlot($manager, 6, new \DateTime('13:30'), new \DateTime('14:45'), $activities[8], "");
+
+        // TimeSlot of activity 9 EG4
+        $this->loadTimeSlot($manager, 3, new \DateTime('19:00'), new \DateTime('20:30'), $activities[9], "");
+        $this->loadTimeSlot($manager, 6, new \DateTime('15:00'), new \DateTime('16:15'), $activities[9], "");
+
+        // TimeSlot of activity 10 EGM
+        $this->loadTimeSlot($manager, 3, new \DateTime('15:30'), new \DateTime('17:00'), $activities[10], "");
+
+        // TimeSlot of activity 11 EG5
+        $this->loadTimeSlot($manager, 1, new \DateTime('16:45'), new \DateTime('18:15'), $activities[11], "Fontaine-le-Comte");
+
+        // TimeSlot of activity 12 EG6
+        $this->loadTimeSlot($manager, 1, new \DateTime('18:15'), new \DateTime('19:40'), $activities[12], "");
+
+        // TimeSlot of activity 13 EG7
+        $this->loadTimeSlot($manager, 4, new \DateTime('16:30'), new \DateTime('17:45'), $activities[13], "Fontaine-le-Compte");
+
+        // TimeSlot of activity 14 Adultes
+        $this->loadTimeSlot($manager, 3, new \DateTime('19:45'), new \DateTime('21:15'), $activities[14], "");
+
+        // TimeSlot of activity 15 Renforcement musculaire
+        $this->loadTimeSlot($manager, 3, new \DateTime('19:00'), new \DateTime('20:00'), $activities[15], "");
+
+        // TimeSlot of activity 16 Freestyle Gym
+        $this->loadTimeSlot($manager, 6, new \DateTime('15:00'), new \DateTime('16:30'), $activities[16], "");
+
+        // TimeSlot of activity 17 Gym Adultes aux Agrès
+        $this->loadTimeSlot($manager, 0, new \DateTime('10:00'), new \DateTime('12:00'), $activities[17], "");
+
+        // TimeSlot of activity 18 Gym Santé Bien-Etre
+        $this->loadTimeSlot($manager, 6, new \DateTime('11:30'), new \DateTime('12:30'), $activities[18], "");
+
+        // TimeSlot of activity 19 Fitness
+        $this->loadTimeSlot($manager, 1, new \DateTime('19:00'), new \DateTime('20:00'), $activities[19], "");
+
+
+        // TimeSlot of activity 22 Poussines 1
+        $this->loadTimeSlot($manager, 1, new \DateTime('17:30'), new \DateTime('19:00'), $activities[22], "");
+        $this->loadTimeSlot($manager, 4, new \DateTime('17:30'), new \DateTime('19:00'), $activities[22], "");
+
+        // TimeSlot of activity 23 Poussines 2
+        $this->loadTimeSlot($manager, 1, new \DateTime('17:30'), new \DateTime('19:30'), $activities[23], "");
+        $this->loadTimeSlot($manager, 4, new \DateTime('17:00'), new \DateTime('19:00'), $activities[23], "");
+
+        // TimeSlot of activity 24 Benjamines/Minimes 1
+        $this->loadTimeSlot($manager, 2, new \DateTime('17:30'), new \DateTime('19:30'), $activities[24], "");
+        $this->loadTimeSlot($manager, 4, new \DateTime('17:30'), new \DateTime('19:30'), $activities[24], "");
+
+        // TimeSlot of activity 25 Benjamines/Minimes 2
+        $this->loadTimeSlot($manager, 1, new \DateTime('17:30'), new \DateTime('19:30'), $activities[25], "");
+        $this->loadTimeSlot($manager, 3, new \DateTime('18:30'), new \DateTime('20:30'), $activities[25], "");
+        $this->loadTimeSlot($manager, 5, new \DateTime('20:00'), new \DateTime('22:00'), $activities[25], "");
+
+        // TimeSlot of activity 26 Toutes Catégories 1
+        $this->loadTimeSlot($manager, 2, new \DateTime('18:30'), new \DateTime('20:30'), $activities[26], "");
+        $this->loadTimeSlot($manager, 5, new \DateTime('19:30'), new \DateTime('21:30'), $activities[26], "");
+
+        // TimeSlot of activity 27 Toutes Catégories 2
+        $this->loadTimeSlot($manager, 1, new \DateTime('19:00'), new \DateTime('21:00'), $activities[27], "");
+        $this->loadTimeSlot($manager, 5, new \DateTime('19:00'), new \DateTime('21:00'), $activities[27], "");
+
+        // TimeSlot of activity 28 Toutes Catégories 3
+        $this->loadTimeSlot($manager, 2, new \DateTime('19:15'), new \DateTime('21:15'), $activities[28], "");
+        $this->loadTimeSlot($manager, 3, new \DateTime('18:30'), new \DateTime('20:30'), $activities[28], "");
+        $this->loadTimeSlot($manager, 5, new \DateTime('20:00'), new \DateTime('22:00'), $activities[28], "");
+
+        // TimeSlot of activity 29 Groupe Performance
+        $this->loadTimeSlot($manager, 1, new \DateTime('19:30'), new \DateTime('21:00'), $activities[29], "");
+        $this->loadTimeSlot($manager, 2, new \DateTime('18:00'), new \DateTime('20:30'), $activities[29], "");
+        $this->loadTimeSlot($manager, 3, new \DateTime('18:00'), new \DateTime('20:30'), $activities[29], "");
+        $this->loadTimeSlot($manager, 5, new \DateTime('18:30'), new \DateTime('20:00'), $activities[29], "");
+        $this->loadTimeSlot($manager, 6, new \DateTime('10:30'), new \DateTime('13:00'), $activities[29], "");
+
+
+        // TimeSlot of activity 31 Benjamins/Minimes/Cadets
+        $this->loadTimeSlot($manager, 1, new \DateTime('17:45'), new \DateTime('19:45'), $activities[31], "");
+        $this->loadTimeSlot($manager, 4, new \DateTime('17:45'), new \DateTime('19:45'), $activities[31], "");
+        $this->loadTimeSlot($manager, 5, new \DateTime('17:45'), new \DateTime('19:45'), $activities[31], "");
+        $this->loadTimeSlot($manager, 6, new \DateTime('10:30'), new \DateTime('13:00'), $activities[31], "");
+
+        // TimeSlot of activity 32 Juniors/Seniors
+        $this->loadTimeSlot($manager, 1, new \DateTime('19:30'), new \DateTime('21:30'), $activities[32], "");
+        $this->loadTimeSlot($manager, 4, new \DateTime('19:30'), new \DateTime('21:30'), $activities[32], "");
+        $this->loadTimeSlot($manager, 5, new \DateTime('19:30'), new \DateTime('21:30'), $activities[32], "");
+        $this->loadTimeSlot($manager, 6, new \DateTime('10:30'), new \DateTime('13:00'), $activities[32], "");
+
+        // TimeSlot of activity 33 Horaires aménagés (Isaac de l'Etoile)
+        // Multi-créneaux ?
+        //$this->loadTimeSlot($manager, 6, new \DateTime('09:15'), new \DateTime('10:00'), $activities[33], "");
+
+        // TimeSlot of activity 34 Découverte / Evolution  - / Adultes
+        $this->loadTimeSlot($manager, 4, new \DateTime('19:30'), new \DateTime('21:30'), $activities[34], "");
+
+        // TimeSlot of activity 35 Détente passion
+        $this->loadTimeSlot($manager, 5, new \DateTime('20:00'), new \DateTime('22:00'), $activities[35], "");
+
+
+        /*$manager->persist($t);
+        $t->setDay(6);
+        $t->setStartTime(new \DateTime('12:30'));
+        $t->setEndTime(new \DateTime('12:30'));
+
+        $activities[0]->addTimeSlot($t);*/
+
+        //$t->setCity();
+
+        //array_push($activities, $activity);
+        //$manager->persist($activities[$i]);
+
+
 
         // ADDING BETWEEN ONE AND THREE ACTIVITIES TO EACH ADHERENTS
         for ($i = 0; $i < $adherentsNumber; $i++) {

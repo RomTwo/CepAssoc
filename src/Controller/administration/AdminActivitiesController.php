@@ -7,9 +7,7 @@ use App\Entity\Category;
 use App\Entity\Adherent;
 use App\Entity\TimeSlot;
 use App\Form\AdminActivityTimeSlotType;
-use App\Form\AdminCategoryType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 
 class AdminActivitiesController extends AbstractController
@@ -28,59 +26,6 @@ class AdminActivitiesController extends AbstractController
             'activities' =>$activities
         ]);
 
-    }
-
-    public function edit(Category $category, Request $request)
-    {
-        $form = $this->createForm(AdminCategoryType::class, $category);
-
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->flush();
-
-            return $this->redirectToRoute('admin_activities');
-        }
-
-        return $this->render('administration/activities/categoryEdit.html.twig', [
-            'category' => $category,
-            'form' => $form->createView()
-        ]);
-
-
-    }
-    public function add(Request $request)
-    {
-        $category = new Category();
-        $form = $this->createForm(AdminCategoryType::class,$category);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($category);
-            $em->flush();
-
-            return $this->redirectToRoute('admin_activities');
-        }
-
-
-        return $this->render('administration/activities/categoryAdd.html.twig', [
-            'category' => $category,
-            'form' => $form->createView()]);
-    }
-
-    public function delete (Request $request,$id)
-    {
-        $repository = $this->getDoctrine()->getRepository(Category::class);
-        $category = $repository->find($id);
-
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->remove($category);
-            $entityManager->flush();
-            $this->addFlash('sucess',"Category supprimée avec succès");
-            return $this->redirectToRoute('admin_activities');
     }
 
     public function addActivity(Request $request)
@@ -206,57 +151,6 @@ class AdminActivitiesController extends AbstractController
         $this->getDoctrine()->getManager()->flush();
 
         return $this->redirectToRoute('admin_activityDetails', ["id" => $activityId]);
-    }
-
-    public function copyTimeSlotEmails(Request $request){
-        $jsonDatas = array();
-
-        $allEmails = "";
-        $timeSlotId = $request->request->get("timeSlotId");
-
-        dump($timeSlotId);
-
-        $repositoryTimeSlot = $this->getDoctrine()->getRepository(TimeSlot::class);
-
-        // getting the timeSlot
-        $timeSlot = $repositoryTimeSlot->findOneBy(["id" => $timeSlotId]);
-
-        $adherents = $timeSlot->getAdherents()->toArray();
-        foreach($adherents as $adherent){
-            $allEmails .= $adherent->getEmailRep1() . "; ";
-        }
-
-        $jsonDatas[] = $allEmails;
-        return new JsonResponse($jsonDatas);
-    }
-
-    public function copyAllEmails(Request $request){
-        $jsonDatas = array();
-
-        $allEmails = "";
-        $activityId = (int)$request->request->get('activityId');
-
-        $repositoryActivity = $this->getDoctrine()->getRepository(Activity::class);
-
-        // getting the activity
-        $activity = $repositoryActivity->find($activityId);
-
-        // getting all the timeSlots connected to the activity
-        $timeSlots = $activity->getTimeSlot();
-
-        $adherentsCopied = array();
-        foreach($timeSlots as $timeSlot){
-            // for each timeSlot we get the adherents
-            $adherents = $timeSlot->getAdherents()->toArray();
-            foreach($adherents as $adherent){
-                if(!in_array($adherent, $adherentsCopied)) {
-                    $allEmails .= $adherent->getEmailRep1() . "; ";
-                    $adherentsCopied[] = $adherent;
-                }
-            }
-        }
-        $jsonDatas[] = $allEmails;
-        return new JsonResponse($jsonDatas);
     }
 
 }

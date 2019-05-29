@@ -51,13 +51,16 @@ class HomeController extends AbstractController
                 else{
                     // Adding the child to the user
                     $account->addChild($adherent);
+
+                    // changing the adherent affiliate code
+                    $adherent->setAffiliateCode(md5(uniqid()));
+
                     $this->addFlash('success', "Adhérent rajouté avec succès");
                     $entityManager = $this->getDoctrine()->getManager();
                     $entityManager->flush();
                 }
 
             }
-            //return $this->render('home/index.html.twig', ['adherents' => $adherents, 'form' => $form->createView()]);
         }
 
         return $this->render('home/index.html.twig', ['adherents' => $adherents, 'form' => $form->createView()]);
