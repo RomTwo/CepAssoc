@@ -6,9 +6,10 @@ namespace App\Services;
 use App\Entity\Adherent;
 use Dompdf\Dompdf;
 use Dompdf\Options;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 
-class Utilitaires
+class Utilitaires extends AbstractController
 {
 
     private $params;
@@ -34,6 +35,7 @@ class Utilitaires
         $adherent->setHasBulletinN2Allianz(false);
         $adherent->setHasHealthQuestionnaire(false);
         $adherent->setStatus("EN ATTENTE");
+        $adherent->setAffiliateCode($this->generateAffiliateCode());
 
         if($adherent->getMedicalCertificate() != null){
             $adherent->setMedicalCertificate($this->addFile($adherent->getMedicalCertificate()));
@@ -78,6 +80,30 @@ class Utilitaires
         $fileName = md5(uniqid()).'.'.$file->guessExtension();
         $file->move($this->params->get('upload_directory'), $fileName);
         return $fileName;
+    }
+
+    private function generateAffiliateCode()
+    {
+        $repository = $this->getDoctrine()->getRepository(Adherent::class);
+        $code = ""; // code that will be returned
+        $adherentWithSameCode = -1; // this will contain an Adherent Entity instance having a certain given affiliateCode equals to $code
+        $codeLength = 32;
+
+        $characters = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'; //characters list for code generation
+        $charactersLength = strlen($characters);
+
+        while ($adherentWithSameCode != null) {
+
+            // generating a new code
+            $code = "";
+            for ($nbLetter = 0; $nbLetter < $codeLength; $nbLetter++) {  // our code contain 5 characters !
+                $code .= $characters[rand(0, $charactersLength - 1)];
+            }
+
+            $adherentWithSameCode = $repository->findOneBy(['affiliateCode' => $code]);
+        }
+
+        return $code;
     }
 
 }
