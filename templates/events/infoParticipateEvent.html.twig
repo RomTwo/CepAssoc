@@ -22,7 +22,7 @@
                     <td>le {{ event.startDate | date("d/m/Y") }} à {{ event.startDate | date("H:i") }}</td>
                     <td>le {{ event.endDate | date("d/m/Y") }} à {{ event.endDate | date("H:i") }}</td>
                     <td>{{ event.job }}</td>
-                    <td>{{ event.place }}</td>
+                    <td>{{ event.description }}</td>
                 </tr>
             {% endfor %}
             </tbody>
