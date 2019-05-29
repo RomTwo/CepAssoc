@@ -4,14 +4,7 @@
     <bookmark url="file://$PROJECT_DIR$/src/Controller/AccountController.php" description="JWT::decode($token, $_ENV['PRIVATE_KEY'], array($_..." line="94" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="53b90c9e-e36e-447f-8cc9-26b01b488158" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/templates/administration/category/categories.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/administration/AdminActivitiesCategoryController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/administration/AdminActivitiesCategoryController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/administration/activities/activities.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/administration/activities/activities.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/administration/activities/categoryAdd.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/administration/category/categoryAdd.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/administration/activities/categoryEdit.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/administration/category/categoryEdit.html.twig" afterDir="false" />
-    </list>
+    <list default="true" id="53b90c9e-e36e-447f-8cc9-26b01b488158" name="Default Changelist" comment="test" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -23,43 +16,20 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Controller/administration/AdminActivitiesCategoryController.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="206">
-              <caret line="23" column="64" selection-start-line="23" selection-start-column="64" selection-end-line="23" selection-end-column="64" />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/templates/administration/category/categories.html.twig">
+        <entry file="file://$PROJECT_DIR$/src/Entity/Category.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="330">
-              <caret line="72" column="50" selection-start-line="72" selection-start-column="50" selection-end-line="72" selection-end-column="50" />
+            <state relative-caret-position="255">
+              <caret line="22" column="7" lean-forward="true" selection-start-line="22" selection-start-column="7" selection-end-line="22" selection-end-column="7" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/templates/administration/category/categoryEdit.html.twig">
-          <provider selected="true" editor-type-id="text-editor" />
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/templates/administration/activities/activities.html.twig">
+        <entry file="file://$PROJECT_DIR$/src/Entity/Activity.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="239">
-              <caret line="17" column="46" selection-start-line="17" selection-start-column="46" selection-end-line="17" selection-end-column="46" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/config/routes.yaml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="271">
-              <caret line="147" selection-start-line="147" selection-end-line="147" selection-end-column="20" />
+            <state relative-caret-position="176">
+              <caret line="43" column="81" selection-start-line="43" selection-start-column="81" selection-end-line="43" selection-end-column="81" />
             </state>
           </provider>
         </entry>
@@ -129,8 +99,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/documentations/Librarie_yarn_utilisées" />
-        <option value="$PROJECT_DIR$/documentations/datetimepicker" />
         <option value="$PROJECT_DIR$/src/Repository/EventRepository.php" />
         <option value="$PROJECT_DIR$/src/Entity/Job.php" />
         <option value="$PROJECT_DIR$/src/Transformer/JobToStringTransformer.php" />
@@ -180,6 +148,8 @@
         <option value="$PROJECT_DIR$/templates/administration/activities/activities.html.twig" />
         <option value="$PROJECT_DIR$/src/Controller/administration/AdminActivitiesCategoryController.php" />
         <option value="$PROJECT_DIR$/templates/administration/category/categories.html.twig" />
+        <option value="$PROJECT_DIR$/src/Entity/Activity.php" />
+        <option value="$PROJECT_DIR$/src/Entity/Category.php" />
       </list>
     </option>
   </component>
@@ -369,6 +339,12 @@
               <item name="CepAssoc" type="b2602c69:ProjectViewProjectNode" />
               <item name="CepAssoc" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="Entity" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="CepAssoc" type="b2602c69:ProjectViewProjectNode" />
+              <item name="CepAssoc" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="Form" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -516,20 +492,6 @@
       <workItem from="1558952371308" duration="62000" />
       <workItem from="1558952941928" duration="2286000" />
       <workItem from="1559024387016" duration="606000" />
-    </task>
-    <task id="LOCAL-00035" summary="new theme for forms, change design of register form">
-      <created>1557909230452</created>
-      <option name="number" value="00035" />
-      <option name="presentableId" value="LOCAL-00035" />
-      <option name="project" value="LOCAL" />
-      <updated>1557909230452</updated>
-    </task>
-    <task id="LOCAL-00036" summary="Modify front and add link for return at the login form (when the user is on the register form)">
-      <created>1557909853576</created>
-      <option name="number" value="00036" />
-      <option name="presentableId" value="LOCAL-00036" />
-      <option name="project" value="LOCAL" />
-      <updated>1557909853576</updated>
     </task>
     <task id="LOCAL-00037" summary="print of error messages in register, login and modify user profil is finish">
       <created>1557910967466</created>
@@ -860,11 +822,25 @@
       <option name="project" value="LOCAL" />
       <updated>1559121650495</updated>
     </task>
-    <option name="localTasksCounter" value="84" />
+    <task id="LOCAL-00084" summary="adding categorie in activities view.">
+      <created>1559124803627</created>
+      <option name="number" value="00084" />
+      <option name="presentableId" value="LOCAL-00084" />
+      <option name="project" value="LOCAL" />
+      <updated>1559124803627</updated>
+    </task>
+    <task id="LOCAL-00085" summary="adding delete on cascade category">
+      <created>1559125521378</created>
+      <option name="number" value="00085" />
+      <option name="presentableId" value="LOCAL-00085" />
+      <option name="project" value="LOCAL" />
+      <updated>1559125521378</updated>
+    </task>
+    <option name="localTasksCounter" value="86" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="276617000" />
+    <option name="totallyTimeSpent" value="277540000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -880,10 +856,10 @@
     <editor active="true" />
     <layout>
       <window_info id="Favorites" order="0" side_tool="true" />
-      <window_info active="true" content_ui="combo" id="Project" order="1" visible="true" weight="0.25195312" />
+      <window_info content_ui="combo" id="Project" order="1" visible="true" weight="0.25195312" />
       <window_info id="Structure" order="2" weight="0.25" />
-      <window_info anchor="bottom" id="Event Log" order="0" sideWeight="0.50130206" side_tool="true" visible="true" weight="0.30727023" />
-      <window_info anchor="bottom" id="Version Control" order="1" sideWeight="0.4986979" weight="0.33333334" />
+      <window_info active="true" anchor="bottom" id="Event Log" order="0" sideWeight="0.50130206" side_tool="true" visible="true" weight="0.30727023" />
+      <window_info anchor="bottom" id="Version Control" order="1" sideWeight="0.4986979" visible="true" weight="0.33333334" />
       <window_info anchor="bottom" id="Terminal" order="2" />
       <window_info anchor="bottom" id="Message" order="3" />
       <window_info anchor="bottom" id="Find" order="4" weight="0.32784638" />
@@ -955,8 +931,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="add font-awesome-free" />
-    <MESSAGE value="update size of valid check icon" />
     <MESSAGE value="modifs fixtures, add a role, delete captcha on login form, update link admin in function of a new role" />
     <MESSAGE value="update database for event system" />
     <MESSAGE value="Add an event and job" />
@@ -980,23 +954,11 @@
     <MESSAGE value="Merge branch 'master' of https://github.com/RomTwo/CepAssoc into khaledBML&#10;&#10;# Conflicts:&#10;#&#9;.idea/workspace.xml&#10;#&#9;src/Controller/AccountController.php&#10;#&#9;templates/administration/adherents/adherents.html.twig" />
     <MESSAGE value="pull before" />
     <MESSAGE value="push to master adding new controller adminActivitiesCategoryController" />
-    <option name="LAST_COMMIT_MESSAGE" value="push to master adding new controller adminActivitiesCategoryController" />
+    <MESSAGE value="adding categorie in activities view." />
+    <MESSAGE value="adding delete on cascade category" />
+    <option name="LAST_COMMIT_MESSAGE" value="adding delete on cascade category" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/templates/administration/accounts/edit.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="518">
-          <caret line="122" column="56" selection-start-line="122" selection-start-column="56" selection-end-line="122" selection-end-column="56" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Services/CompareDatetime.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="210">
-          <caret line="14" column="1" lean-forward="true" selection-start-line="14" selection-start-column="1" selection-end-line="14" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/templates/administration/eventManage/updateModal.html.twig">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="420">
@@ -1327,6 +1289,20 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="330">
           <caret line="72" column="50" selection-start-line="72" selection-start-column="50" selection-end-line="72" selection-end-column="50" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Entity/Activity.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="176">
+          <caret line="43" column="81" selection-start-line="43" selection-start-column="81" selection-end-line="43" selection-end-column="81" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Entity/Category.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="22" column="7" lean-forward="true" selection-start-line="22" selection-start-column="7" selection-end-line="22" selection-end-column="7" />
         </state>
       </provider>
     </entry>
