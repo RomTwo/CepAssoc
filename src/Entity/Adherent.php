@@ -135,12 +135,6 @@ class Adherent
     private $registrationDate;
 
     /**
-     * @ORM\Column(type="boolean")
-     * @Groups({"competition"})
-     */
-    private $paymentFeesArePaid;
-
-    /**
      * @ORM\Column(type="string")
      * @Groups({"competition"})
      */
@@ -340,12 +334,6 @@ class Adherent
 
     /**
      * @ORM\Column(type="string", nullable=true)
-     * @Assert\File(
-     *     maxSize = "2048k",
-     *     maxSizeMessage = "La taille du fichier est au-dessus de la limite",
-     *     mimeTypes = {"application/pdf", "application/x-pdf"},
-     *     mimeTypesMessage = "Le fichier doit être sous format PDF"
-     * )
      * @Groups({"competition"})
      */
     private $healthQuestionnaireFile;
@@ -593,18 +581,6 @@ class Adherent
     public function setRegistrationDate(\DateTimeInterface $registrationDate): self
     {
         $this->registrationDate = $registrationDate;
-
-        return $this;
-    }
-
-    public function getPaymentFeesArePaid(): ?bool
-    {
-        return $this->paymentFeesArePaid;
-    }
-
-    public function setPaymentFeesArePaid(bool $paymentFeesArePaid): self
-    {
-        $this->paymentFeesArePaid = $paymentFeesArePaid;
 
         return $this;
     }
