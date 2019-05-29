@@ -9,6 +9,7 @@ use App\Transformer\DatetimeToStringTransformer;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use \Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -44,7 +45,16 @@ class EventType extends AbstractType
                             ->orderBy('j.name', 'ASC');
                     },
                     'expanded' => true,
-                    'multiple' => true
+                    'multiple' => true,
+                )
+            )
+            ->add('documents', CollectionType::class, array(
+                    'entry_type' => DocumentType::class,
+                    'label' => false,
+                    'by_reference' => false,
+                    'allow_add' => true,
+                    'allow_delete' => true,
+                    'required' => false
                 )
             )
             ->add('submit', SubmitType::class);

@@ -3,9 +3,6 @@
 
 namespace App\Services;
 
-use App\Entity\Adherent;
-use Dompdf\Dompdf;
-use Dompdf\Options;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 
 class Utilitaires

@@ -46,37 +46,37 @@ class AdminAdherentType extends AbstractType
                 'attr' => [
                     'value' => false,
                 ],
-                'required'   => false,
+                'required' => false,
             ])
             ->add('GAFJudgeLevel', NumberType::class, [
                 'attr' => [
                     'value' => 0,
                 ],
-                'required'   => false,
+                'required' => false,
             ])
             ->add('isGAMJudge', null, [
                 'attr' => [
                     'value' => false,
                 ],
-                'required'   => false,
+                'required' => false,
             ])
             ->add('GAMJudgeLevel', NumberType::class, [
                 'attr' => [
                     'value' => 0,
                 ],
-                'required'   => false,
+                'required' => false,
             ])
             ->add('isTeamGYMJudge', null, [
                 'attr' => [
                     'value' => false,
                 ],
-                'required'   => false,
+                'required' => false,
             ])
             ->add('teamGYMJudgeLevel', NumberType::class, [
                 'attr' => [
                     'value' => 0,
                 ],
-                'required'   => false,
+                'required' => false,
             ])
             ->add('wantsAJudgeTraining', ChoiceType::class, [
                 'choices' => [
@@ -136,7 +136,7 @@ class AdminAdherentType extends AbstractType
             ->add('professionRep2')
             ->add('phoneRep1', NumberType::class)
             ->add('phoneRep2')
-            ->add('paymentType', ChoiceType::class,[
+            ->add('paymentType', ChoiceType::class, [
                 'choices' => [
                     'Espèces' => "especes",
                     'Chèque' => "cheque",
@@ -161,13 +161,13 @@ class AdminAdherentType extends AbstractType
                 'data_class' => null,
             ))
             // Admin fields
-            ->add('hasMedicalCertificate',  ChoiceType::class, [
+            ->add('hasMedicalCertificate', ChoiceType::class, [
                 'choices' => [
                     'Non' => false,
                     'Oui' => true,
                 ],
             ])
-            ->add('paymentFeesArePaid',  ChoiceType::class, [
+            ->add('paymentFeesArePaid', ChoiceType::class, [
                 'choices' => [
                     'Non' => false,
                     'Oui' => true,
