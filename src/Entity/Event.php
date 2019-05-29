@@ -61,10 +61,16 @@ class Event
      */
     private $jobs;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Document", mappedBy="event")
+     */
+    private $documents;
+
     public function __construct()
     {
         $this->eventManagements = new ArrayCollection();
         $this->jobs = new ArrayCollection();
+        $this->documents = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -176,6 +182,31 @@ class Event
     {
         if ($this->eventManagements->contains($job)) {
             $this->jobs->removeElement($job);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getDocuments()
+    {
+        return $this->documents;
+    }
+
+    public function setDocuments(Document $document = null)
+    {
+        if (!$this->documents->contains($document)) {
+            $this->documents[] = $document;
+        }
+        return $this;
+    }
+
+    public function removeDocuments(Document $document)
+    {
+        if ($this->documents->contains($document)) {
+            $this->documents->removeElement($document);
         }
 
         return $this;

@@ -5,7 +5,6 @@ namespace App\Controller;
 use App\Entity\Account;
 use App\Entity\Activity;
 use App\Entity\Adherent;
-use App\Entity\HealthQuestionnaire;
 use App\Form\AccountType;
 use App\Services\CaptchaCheck;
 use App\Services\ForgotPassword;
@@ -16,16 +15,10 @@ use Dompdf\Options;
 use Firebase\JWT\JWT;
 use http\Header;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\Form\Button;
-use Symfony\Component\Form\ClickableInterface;
-use Symfony\Component\Form\Extension\Core\Type\ButtonType;
-use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
-use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
-use Symfony\Component\Validator\Validation;
 
 class AccountController extends AbstractController
 {
