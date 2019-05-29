@@ -2,16 +2,10 @@
 
 namespace App\Form;
 
-use App\Entity\Account;
-use App\Entity\Activity;
 use App\Entity\Adherent;
-use Faker\Provider\File;
-use function Sodium\add;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use App\Transformer\DateToStringTransformer;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
-use Symfony\Component\Form\Extension\Core\Type\CollectionType;
-use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
@@ -42,9 +36,10 @@ class AdherentType extends AbstractType
                 ),
                 'expanded' => false,
             ])
-            ->add('birthDate', DateType::class, [
-                'widget' => 'choice',
-                'years' => range(date('Y'), date('Y') - 100),
+            ->add('birthDate', TextType::class, [
+                'attr' => array(
+                    'class' => 'datepicker'
+                )
             ])
             ->add('isGAFJudge', null, [
                 'attr' => [
@@ -237,9 +232,6 @@ class AdherentType extends AbstractType
             ])
             ->add('volunteerComment', TextareaType::class, [
                 'required' => false,
-                'attr' => [
-                    'placeholder' => "Plus d'informations sur vos disponibilités..."
-                ]
             ])
             ->add('medicalCertificate', FileType::class, array(
                 'attr' => [
@@ -492,6 +484,7 @@ class AdherentType extends AbstractType
                 ],
                 'data' => 'FRANCE'
             ]);
+        $builder->get('birthDate')->addModelTransformer(new DateToStringTransformer());
     }
 
     public function configureOptions(OptionsResolver $resolver)

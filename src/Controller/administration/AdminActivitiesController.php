@@ -30,59 +30,6 @@ class AdminActivitiesController extends AbstractController
 
     }
 
-    public function edit(Category $category, Request $request)
-    {
-        $form = $this->createForm(AdminCategoryType::class, $category);
-
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->flush();
-
-            return $this->redirectToRoute('admin_activities');
-        }
-
-        return $this->render('administration/activities/categoryEdit.html.twig', [
-            'category' => $category,
-            'form' => $form->createView()
-        ]);
-
-
-    }
-    public function add(Request $request)
-    {
-        $category = new Category();
-        $form = $this->createForm(AdminCategoryType::class,$category);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($category);
-            $em->flush();
-
-            return $this->redirectToRoute('admin_activities');
-        }
-
-
-        return $this->render('administration/activities/categoryAdd.html.twig', [
-            'category' => $category,
-            'form' => $form->createView()]);
-    }
-
-    public function delete (Request $request,$id)
-    {
-        $repository = $this->getDoctrine()->getRepository(Category::class);
-        $category = $repository->find($id);
-
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->remove($category);
-            $entityManager->flush();
-            $this->addFlash('sucess',"Category supprimée avec succès");
-            return $this->redirectToRoute('admin_activities');
-    }
-
     public function addActivity(Request $request)
     {
         $activity = new Activity();

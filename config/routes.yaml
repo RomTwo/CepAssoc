@@ -24,6 +24,15 @@ account_reset_password:
     path: /profile/resetPassword/{token}
     controller: App\Controller\AccountController::resetPassword
 
+### Event routing ###
+event_index:
+    path: /profile/events
+    controller: App\Controller\EventController::index
+
+event_participate:
+    path: /profile/participate/{id}
+    controller: App\Controller\EventController::participate
+
 ### Authentication routing ###
 security_connexion:
     path: /profile/login
@@ -63,6 +72,15 @@ admin_adherentsEdit:
     requirements:
         id: ([0-9]*)
 
+admin_editStatus:
+    path: /admin/adherents/editStatus/{id}
+    controller: App\Controller\administration\AdminAdherentsController::editStatus
+    requirements:
+        id: ([0-9]*)
+
+
+        
+
 admin_adherentsDelete:
     path: /admin/adherents/delete/{id}
     controller: App\Controller\administration\AdminAdherentsController::delete
@@ -70,6 +88,10 @@ admin_adherentsDelete:
         id: ([0-9]*)
 
     #--activities
+admin_activities_moderator:
+    path: /admin/activities/views
+    controller: App\Controller\administration\AdminActivitiesController::index
+
 admin_activities:
     path: /admin/activities
     controller: App\Controller\administration\AdminActivitiesController::index
@@ -116,19 +138,19 @@ admin_activityCopyTimeSlotEmails:
     #--Categories
 admin_categories:
     path: /admin/categories
-    controller: App\Controller\administration\AdminActivitiesController::index
+    controller: App\Controller\administration\AdminActivitiesCategoryController::index
 
 admin_categoryEdit:
     path: /admin/categories/edit/{id}
-    controller: App\Controller\administration\AdminActivitiesController::edit
+    controller: App\Controller\administration\AdminActivitiesCategoryController::editCategory
 
 admin_categoryAdd:
     path: /admin/categories/add
-    controller: App\Controller\administration\AdminActivitiesController::add
+    controller: App\Controller\administration\AdminActivitiesCategoryController::addCategory
 
 admin_categoryDelete:
     path: /admin/categories/delete/{id}
-    controller: App\Controller\administration\AdminActivitiesController::delete
+    controller: App\Controller\administration\AdminActivitiesCategoryController::deleteCategory
 
     #--accounts
 admin_accounts:

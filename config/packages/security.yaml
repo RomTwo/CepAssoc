@@ -35,6 +35,6 @@ security:
          - { path: ^/profile/siteInscription, roles: IS_AUTHENTICATED_ANONYMOUSLY }
          - { path: ^/profile/forgotPassword, roles: IS_AUTHENTICATED_ANONYMOUSLY }
          - { path: ^/profile/resetPassword/, roles: IS_AUTHENTICATED_ANONYMOUSLY }
-         - { path: ^/admin/activities, roles: ROLE_MODERATOR }
+         - { path: ^/admin/activities/views, roles: ROLE_MODERATOR }
          - { path: ^/admin, roles: ROLE_ADMIN }
          - { path: ^/profile, roles: ROLE_USER }
