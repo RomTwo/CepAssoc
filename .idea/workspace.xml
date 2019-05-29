@@ -5,42 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="53b90c9e-e36e-447f-8cc9-26b01b488158" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/assets/js/timepicker.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Controller/EventController.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Controller/administration/AdminActivitiesCategoryController.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Form/EventManagerUserType.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Transformer/DateToStringTransformer.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Transformer/TimeToStringTransformer.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/events/index.html.twig" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/events/participate.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.env" beforeDir="false" afterPath="$PROJECT_DIR$/.env" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/administration/category/categories.html.twig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/js/admin.js" beforeDir="false" afterPath="$PROJECT_DIR$/assets/js/admin.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/js/datetimepicker.js" beforeDir="false" afterPath="$PROJECT_DIR$/assets/js/datetimepicker.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/js/datetimepickerEvent.js" beforeDir="false" afterPath="$PROJECT_DIR$/assets/js/datetimepickerEvent.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/packages/security.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config/packages/security.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/routes.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config/routes.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/AccountController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/AccountController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/administration/AdminActivitiesController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/administration/AdminActivitiesController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/administration/AdminAdherentsController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/administration/AdminAdherentsController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/administration/AdminEventManagerController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/administration/AdminEventManagerController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/DataFixtures/AppFixtures.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/DataFixtures/AppFixtures.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/EventManagement.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/EventManagement.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/TimeSlot.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/TimeSlot.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Form/AccountAdminType.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Form/AccountAdminType.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Form/AdherentType.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Form/AdherentType.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Form/AdminActivityTimeSlotType.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Form/AdminActivityTimeSlotType.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Services/CompareDatetime.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Services/CompareDatetime.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/account/index.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/account/index.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/account/update.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/account/update.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/administration/accounts/edit.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/administration/accounts/edit.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/administration/AdminActivitiesCategoryController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/administration/AdminActivitiesCategoryController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/administration/activities/activities.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/administration/activities/activities.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/administration/adherents/adherents.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/administration/adherents/adherents.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/administration/layout_admin.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/administration/layout_admin.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/base.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/base.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webpack.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/webpack.config.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/yarn.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/administration/activities/categoryAdd.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/administration/category/categoryAdd.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/administration/activities/categoryEdit.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/administration/category/categoryEdit.html.twig" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -53,11 +23,43 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Controller/administration/AdminActivitiesCategoryController.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="206">
+              <caret line="23" column="64" selection-start-line="23" selection-start-column="64" selection-end-line="23" selection-end-column="64" />
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/templates/administration/category/categories.html.twig">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="330">
+              <caret line="72" column="50" selection-start-line="72" selection-start-column="50" selection-end-line="72" selection-end-column="50" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/templates/administration/category/categoryEdit.html.twig">
+          <provider selected="true" editor-type-id="text-editor" />
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/templates/administration/activities/activities.html.twig">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="239">
+              <caret line="17" column="46" selection-start-line="17" selection-start-column="46" selection-end-line="17" selection-end-column="46" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/config/routes.yaml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="152">
-              <caret line="143" column="10" selection-start-line="143" selection-start-column="10" selection-end-line="143" selection-end-column="37" />
+            <state relative-caret-position="271">
+              <caret line="147" selection-start-line="147" selection-end-line="147" selection-end-column="20" />
             </state>
           </provider>
         </entry>
@@ -127,8 +129,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/templates/account/update.html.twig" />
-        <option value="$PROJECT_DIR$/src/Transformer/DatetimeToStringTransformer.php" />
         <option value="$PROJECT_DIR$/documentations/Librarie_yarn_utilisées" />
         <option value="$PROJECT_DIR$/documentations/datetimepicker" />
         <option value="$PROJECT_DIR$/src/Repository/EventRepository.php" />
@@ -174,10 +174,12 @@
         <option value="$PROJECT_DIR$/src/DataFixtures/AppFixtures.php" />
         <option value="$PROJECT_DIR$/src/Entity/Adherent.php" />
         <option value="$PROJECT_DIR$/src/Controller/administration/AdminCatgeoryActivitiesController.php" />
-        <option value="$PROJECT_DIR$/src/Controller/administration/AdminActivitiesCategoryController.php" />
         <option value="$PROJECT_DIR$/src/Controller/administration/AdminActivitiesController.php" />
         <option value="$PROJECT_DIR$/config/routes.yaml" />
         <option value="$PROJECT_DIR$/templates/administration/activities/activityAddOrEdit.html.twig" />
+        <option value="$PROJECT_DIR$/templates/administration/activities/activities.html.twig" />
+        <option value="$PROJECT_DIR$/src/Controller/administration/AdminActivitiesCategoryController.php" />
+        <option value="$PROJECT_DIR$/templates/administration/category/categories.html.twig" />
       </list>
     </option>
   </component>
@@ -361,6 +363,12 @@
               <item name="CepAssoc" type="b2602c69:ProjectViewProjectNode" />
               <item name="CepAssoc" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="DataFixtures" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="CepAssoc" type="b2602c69:ProjectViewProjectNode" />
+              <item name="CepAssoc" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="Form" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -401,7 +409,7 @@
   <component name="PropertiesComponent">
     <property name="SearchEverywhereHistoryKey" value="&#9;FILE&#9;file:///Users/romainpoitevin/PhpStormProjects/CepAssoc/templates/administration/base.html.twig" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/Controller/administration" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/templates/administration/category" />
     <property name="nodejs_interpreter_path" value="node" />
     <property name="nodejs_package_manager_path" value="yarn" />
     <property name="php.override.implement.member.chooser.php.doc" value="NONE" />
@@ -409,6 +417,7 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Lenovo\PhpstormProjects\CepAssoc\templates\administration\category" />
       <recent name="C:\Users\Lenovo\PhpstormProjects\CepAssoc\src\Controller\administration" />
       <recent name="$PROJECT_DIR$/templates/home" />
     </key>
@@ -507,20 +516,6 @@
       <workItem from="1558952371308" duration="62000" />
       <workItem from="1558952941928" duration="2286000" />
       <workItem from="1559024387016" duration="606000" />
-    </task>
-    <task id="LOCAL-00033" summary="add globals variable twig for the site key google recaptcha">
-      <created>1557867265463</created>
-      <option name="number" value="00033" />
-      <option name="presentableId" value="LOCAL-00033" />
-      <option name="project" value="LOCAL" />
-      <updated>1557867265463</updated>
-    </task>
-    <task id="LOCAL-00034" summary="Add notifications when the user change his password (when he has forgotten his password)">
-      <created>1557867810606</created>
-      <option name="number" value="00034" />
-      <option name="presentableId" value="LOCAL-00034" />
-      <option name="project" value="LOCAL" />
-      <updated>1557867810606</updated>
     </task>
     <task id="LOCAL-00035" summary="new theme for forms, change design of register form">
       <created>1557909230452</created>
@@ -851,11 +846,25 @@
       <option name="project" value="LOCAL" />
       <updated>1559117182184</updated>
     </task>
-    <option name="localTasksCounter" value="82" />
+    <task id="LOCAL-00082" summary="pull before">
+      <created>1559121462481</created>
+      <option name="number" value="00082" />
+      <option name="presentableId" value="LOCAL-00082" />
+      <option name="project" value="LOCAL" />
+      <updated>1559121462482</updated>
+    </task>
+    <task id="LOCAL-00083" summary="push to master adding new controller adminActivitiesCategoryController">
+      <created>1559121650495</created>
+      <option name="number" value="00083" />
+      <option name="presentableId" value="LOCAL-00083" />
+      <option name="project" value="LOCAL" />
+      <updated>1559121650495</updated>
+    </task>
+    <option name="localTasksCounter" value="84" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="274043000" />
+    <option name="totallyTimeSpent" value="276617000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -874,10 +883,10 @@
       <window_info active="true" content_ui="combo" id="Project" order="1" visible="true" weight="0.25195312" />
       <window_info id="Structure" order="2" weight="0.25" />
       <window_info anchor="bottom" id="Event Log" order="0" sideWeight="0.50130206" side_tool="true" visible="true" weight="0.30727023" />
-      <window_info anchor="bottom" id="Version Control" order="1" sideWeight="0.4986979" visible="true" weight="0.33333334" />
+      <window_info anchor="bottom" id="Version Control" order="1" sideWeight="0.4986979" weight="0.33333334" />
       <window_info anchor="bottom" id="Terminal" order="2" />
       <window_info anchor="bottom" id="Message" order="3" />
-      <window_info anchor="bottom" id="Find" order="4" weight="0.3282353" />
+      <window_info anchor="bottom" id="Find" order="4" weight="0.32784638" />
       <window_info anchor="bottom" id="Run" order="5" />
       <window_info anchor="bottom" id="Debug" order="6" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="7" weight="0.25" />
@@ -946,8 +955,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="no hidden nav admin" />
-    <MESSAGE value="add font-awesome" />
     <MESSAGE value="add font-awesome-free" />
     <MESSAGE value="update size of valid check icon" />
     <MESSAGE value="modifs fixtures, add a role, delete captcha on login form, update link admin in function of a new role" />
@@ -971,25 +978,15 @@
     <MESSAGE value="resolving problem view adherants" />
     <MESSAGE value="Pull" />
     <MESSAGE value="Merge branch 'master' of https://github.com/RomTwo/CepAssoc into khaledBML&#10;&#10;# Conflicts:&#10;#&#9;.idea/workspace.xml&#10;#&#9;src/Controller/AccountController.php&#10;#&#9;templates/administration/adherents/adherents.html.twig" />
-    <option name="LAST_COMMIT_MESSAGE" value="Merge branch 'master' of https://github.com/RomTwo/CepAssoc into khaledBML&#10;&#10;# Conflicts:&#10;#&#9;.idea/workspace.xml&#10;#&#9;src/Controller/AccountController.php&#10;#&#9;templates/administration/adherents/adherents.html.twig" />
+    <MESSAGE value="pull before" />
+    <MESSAGE value="push to master adding new controller adminActivitiesCategoryController" />
+    <option name="LAST_COMMIT_MESSAGE" value="push to master adding new controller adminActivitiesCategoryController" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/assets/css/account.scss" />
-    <entry file="file://$PROJECT_DIR$/node_modules/bootstrap-material-datetimepicker/css/bootstrap-material-datetimepicker.css" />
-    <entry file="file://$PROJECT_DIR$/src/Entity/Job.php" />
-    <entry file="file://$PROJECT_DIR$/config/packages/security.yaml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="540">
-          <caret line="36" column="82" selection-start-line="36" selection-start-column="82" selection-end-line="36" selection-end-column="82" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/templates/administration/accounts/edit.html.twig">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="518">
           <caret line="122" column="56" selection-start-line="122" selection-start-column="56" selection-end-line="122" selection-end-column="56" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -997,7 +994,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="210">
           <caret line="14" column="1" lean-forward="true" selection-start-line="14" selection-start-column="1" selection-end-line="14" selection-end-column="1" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1012,7 +1008,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="345">
           <caret line="33" column="9" lean-forward="true" selection-start-line="33" selection-start-column="9" selection-end-line="33" selection-end-column="9" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1074,7 +1069,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="90">
           <caret line="6" lean-forward="true" selection-start-line="6" selection-end-line="6" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1115,7 +1109,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="45">
           <caret line="3" column="3" selection-start-line="3" selection-start-column="3" selection-end-line="3" selection-end-column="3" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1147,7 +1140,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="15">
           <caret line="12" lean-forward="true" selection-start-line="12" selection-end-line="12" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1155,7 +1147,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="225">
           <caret line="15" column="24" selection-start-line="15" selection-start-column="24" selection-end-line="15" selection-end-column="24" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1223,13 +1214,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/DataFixtures/AppFixtures.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-6553">
-          <caret line="83" selection-start-line="83" selection-end-line="83" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/config/packages/doctrine.yaml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-85" />
@@ -1291,13 +1275,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Controller/administration/AdminActivitiesCategoryController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="484">
-          <caret line="77" selection-start-line="77" selection-end-line="77" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Controller/administration/AdminActivitiesController.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-276">
@@ -1312,10 +1289,44 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/DataFixtures/AppFixtures.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-9541">
+          <caret line="83" selection-start-line="83" selection-end-line="83" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/administration/activities/categoryEdit.html.twig">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/administration/category/categoryEdit.html.twig">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/administration/activities/activities.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="239">
+          <caret line="17" column="46" selection-start-line="17" selection-start-column="46" selection-end-line="17" selection-end-column="46" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Controller/administration/AdminActivitiesCategoryController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="206">
+          <caret line="23" column="64" selection-start-line="23" selection-start-column="64" selection-end-line="23" selection-end-column="64" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/config/routes.yaml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="152">
-          <caret line="143" column="10" selection-start-line="143" selection-start-column="10" selection-end-line="143" selection-end-column="37" />
+        <state relative-caret-position="271">
+          <caret line="147" selection-start-line="147" selection-end-line="147" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/administration/category/categories.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="330">
+          <caret line="72" column="50" selection-start-line="72" selection-start-column="50" selection-end-line="72" selection-end-column="50" />
         </state>
       </provider>
     </entry>

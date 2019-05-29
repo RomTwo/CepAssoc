@@ -17,15 +17,12 @@ class AdminActivitiesCategoryController extends AbstractController
 
     public function index()
     {
-        $repositoryActivity=$this->getDoctrine()->getRepository(Activity::class);
-        $activities=$repositoryActivity->findAll();
 
         $repositoryCategory=$this->getDoctrine()->getRepository(Category::class);
         $categories=$repositoryCategory->findAll();
 
-        return $this->render('administration/activities/activities.html.twig', [
+        return $this->render('administration/category/categories.html.twig', [
             'categories' => $categories,
-            'activities' =>$activities
         ]);
 
     }
@@ -44,7 +41,7 @@ class AdminActivitiesCategoryController extends AbstractController
             return $this->redirectToRoute('admin_activities');
         }
 
-        return $this->render('administration/activities/categoryEdit.html.twig', [
+        return $this->render('administration/category/categoryEdit.html.twig', [
             'category' => $category,
             'form' => $form->createView()
         ]);
@@ -66,7 +63,7 @@ class AdminActivitiesCategoryController extends AbstractController
         }
 
 
-        return $this->render('administration/activities/categoryAdd.html.twig', [
+        return $this->render('administration/category/categoryAdd.html.twig', [
             'category' => $category,
             'form' => $form->createView()]);
     }
