@@ -45,15 +45,15 @@
                         <div class="text-right">
                             <a class="btn btn-primary btn-sm" href="#">Voir plus</a>
 
-                            <button class="btn btn-primary btn-sm" data-target="#modal" data-toggle="modal" type="button">Code d'affiliation</button>
+                            <button class="btn btn-primary btn-sm" data-target="#modal{{ adherent.id }}" data-toggle="modal" type="button">Code d'affiliation</button>
                             <!-- Modal -->
-                            <div aria-hidden="true" aria-labelledby="modalLabel" class="modal fade" id="modal" role="dialog" tabindex="-1">
+                            <div aria-hidden="true" aria-labelledby="modalLabel" class="modal fade" id="modal{{ adherent.id }}" role="dialog" tabindex="-1">
                                 <div class="modal-dialog" role="document">
                                     <div class="modal-content">
                                         <div class="modal-header">
                                             <h5 class="modal-title" id="modalLabel">Code d'affiliation :
                                                 {{adherent.lastName}}
-                                                {{adherent.firstName}}</h5>
+                                                {{adherent.firstName}} </h5>
 
                                             <button aria-label="Close" class="close" data-dismiss="modal" type="button">
                                                 <span aria-hidden="true">&times;</span>

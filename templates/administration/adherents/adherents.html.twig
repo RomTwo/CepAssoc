@@ -24,23 +24,23 @@
                     style="width: 119px;" aria-sort="ascending"
                     aria-label="lastName: activate to sort column descending">Nom
                 </th>
-                <th class="sorting_asc" tabindex="1" aria-controls="example" rowspan="1" colspan="1"
+                <th class="sorting_asc" tabindex="0" aria-controls="example" rowspan="1" colspan="1"
                     style="width: 119px;" aria-sort="ascending"
                     aria-label="firstName: activate to sort column descending">Prénom
                 </th>
-                <th class="sorting_asc" tabindex="2" aria-controls="example" rowspan="1" colspan="1"
+                <th class="sorting_asc" tabindex="0" aria-controls="example" rowspan="1" colspan="1"
                     style="width: 119px;" aria-sort="ascending"
                     aria-label="firstName: activate to sort column descending">Date d'inscription
                 </th>
-                <th class="sorting_asc" tabindex="3" aria-controls="example" rowspan="1" colspan="1"
+                <th class="sorting_asc" tabindex="0" aria-controls="example" rowspan="1" colspan="1"
                     style="width: 119px;" aria-sort="ascending"
                     aria-label="firstName: activate to sort column descending">Statut de l'inscription
                 </th>
-                <th class="sorting_asc" tabindex="4" aria-controls="example" rowspan="1" colspan="1"
+                <th class="sorting_asc" tabindex="0" aria-controls="example" rowspan="1" colspan="1"
                     style="width: 119px;" aria-sort="ascending"
                     aria-label="firstName: activate to sort column descending">Inscription dans GestGym
                 </th>
-                <th class="sorting_asc" tabindex="5" aria-controls="example" rowspan="1" colspan="1"
+                <th class="sorting_asc" tabindex="0" aria-controls="example" rowspan="1" colspan="1"
                     style="width: 119px;" aria-sort="ascending"
                     aria-label="firstName: activate to sort column descending">Voir détails
                 </th>
@@ -60,53 +60,17 @@
                             {{ adherent.registrationDate|date('d-m-Y') }}
                         </td>
                         <td>
-                            <span data-toggle="modal" data-target="#changeStatut{{ adherent.id }}">
-                                <a href="#"  data-toggle="tooltip" data-placement="top" title="Changer le statut">
-                                    {% if adherent.status == "EN ATTENTE" %}
-                                        <span style="color:red">Inscription en attente</span>
-                                    {% elseif adherent.status == "EN MANQUE DE DOCUMENT" %}
-                                        <span style="color:#916319">En manque de document(s)</span>
-                                    {% elseif adherent.status == "EN MANQUE DE PAIEMENT" %}
-                                        <span style="color:orangered">En attente paiement</span>
-                                    {% elseif adherent.status == "EN MANQUE DE DOCUMENT ET PAIEMENT" %}
-                                        <span style="color:purple">En manque de document(s) et en attente de paiement</span>
-                                    {% elseif adherent.status == "VALIDE" %}
-                                        <span style="color:green">Inscription validée</span>
-                                    {% endif %}
-                                </a>
-                            </span>
-                            
-                            <div class="modal fade" id="changeStatut{{ adherent.id }}" tabindex="-1" role="dialog" aria-labelledby="changeStatutLabel{{ adherent.id }}" aria-hidden="true">
-                                <div class="modal-dialog" role="document">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title" id="changeStatutLabel{{ adherent.id }}">Changer le statut</h5>
-                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                <span aria-hidden="true">&times;</span>
-                                            </button>
-                                        </div>
-                                        <form action="{{ path('admin_editStatus', {id: adherent.id}) }}">
-                                            <div class="modal-body">
-                                                    <select name="status" id="status" class="form-control">
-                                                        <option {% if adherent.status == "EN ATTENTE" %}selected{% endif %} value="EN ATTENTE">EN ATTENTE</option>
-                                                        <option {% if adherent.status == "EN MANQUE DE DOCUMENT" %}selected{% endif %} value="EN MANQUE DE DOCUMENT">EN MANQUE DE DOCUMENT</option>
-                                                        <option {% if adherent.status == "EN MANQUE DE PAIEMENT" %}selected{% endif %} value="EN MANQUE DE PAIEMENT">EN MANQUE DE PAIEMENT</option>
-                                                        <option {% if adherent.status == "EN MANQUE DE DOCUMENT ET PAIEMENT" %}selected{% endif %} value="EN MANQUE DE DOCUMENT ET PAIEMENT">EN MANQUE DE DOCUMENT ET PAIEMENT</option>
-                                                        <option {% if adherent.status == "VALIDE" %}selected{% endif %} value="VALIDE">VALIDE</option>
-                                                    </select>
-                                                
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-secondary" data-dismiss="modal" data-toggle="modal">
-                                                    Annuler
-                                                </button>
-                                                <input type="submit" class="btn btn-success" value="Valider">
-                                              
-                                            </div>
-                                        </form>
-                                    </div>
-                                </div>
-                            </div>
+                            {% if adherent.status == "EN ATTENTE" %}
+                                <span style="color:red">Inscription en attente</span>
+                            {% elseif adherent.status == "EN MANQUE DE DOCUMENT" %}
+                                <span style="color:#916319">En manque de document(s)</span>
+                            {% elseif adherent.status == "EN MANQUE DE PAIEMENT" %}
+                                <span style="color:orangered">En attente paiement</span>
+                            {% elseif adherent.status == "EN MANQUE DE DOCUMENT ET PAIEMENT" %}
+                                <span style="color:purple">En manque de document(s) et en attente de paiement</span>
+                            {% elseif adherent.status == "VALIDE" %}
+                                <span style="color:green">Inscription validée</span>
+                            {% endif %}
                         </td>
                         <td>
                             {% if adherent.isRegisteredInGestGym %}
@@ -116,23 +80,11 @@
                             {% endif %}
                         </td>
                         <td>
-                            <a class="btn btn-success" href="{{ path('admin_adherentsPDF', {id: adherent.id}) }}" data-toggle="tooltip" data-placement="top" title="Télécharger le PDF de l'adhérent">
-                                <i class="far fa-file-pdf"></i>
-                            </a>
-                            <a class="btn btn-warning" href="{{ path('admin_adherentsEdit', {id: adherent.id}) }}" data-toggle="tooltip" data-placement="top" title="Modifier l'adhérent">
-                                <i class="far fa-edit"></i>
-                            </a>
-                            
-                            <span data-toggle="modal" data-target="#exampleModal{{ adherent.id }}">
-                                <button type="button" class="btn btn-primary" data-toggle="tooltip" data-placement="top"
-                                        title="Voir plus">
-                                    <i class="far fa-eye"></i>
-                                </button>
-                            </span>
-                            <a class="btn btn-danger" href="{{ path('admin_adherentsDelete', {id: adherent.id}) }}" data-toggle="tooltip" data-placement="top" title="Supprimer l'adhérent">
-                                <i class="far fa-trash-alt"></i>
-                            </a>
 
+                            <button class="btn btn-primary btn-sm" data-target="#exampleModal{{ adherent.id }}"
+                                    data-toggle="modal" type="button">
+                                Voir plus
+                            </button>
                         </td>
                     </tr>
                 {% endif %}
@@ -179,7 +131,7 @@
                 </th>
                 <th class="sorting_asc" tabindex="0" aria-controls="example" rowspan="1" colspan="1"
                     style="width: 119px;" aria-sort="ascending"
-                    aria-label="firstName: activate to sort column descending">Actions
+                    aria-label="firstName: activate to sort column descending">Voir détails
                 </th>
             </tr>
             </thead>
@@ -197,50 +149,9 @@
                             {{ adherent.registrationDate|date('d-m-Y') }}
                         </td>
                         <td>
-                            <span data-toggle="modal" data-target="#changeStatut{{ adherent.id }}">
-                                <a href="#"  data-toggle="tooltip" data-placement="top" title="Changer le statut">
-                                    {% if adherent.status == "VALIDE" %}
-                                        <span style="color:green">Inscription validée</span>
-                                    {% endif %}
-                                </a>
-                            </span>
-                            <span data-toggle="modal" data-target="#changeStatut{{ adherent.id }}">
-                                <button type="button" class="btn btn-primary" data-toggle="tooltip" data-placement="top"
-                                        title="Changer le statut">
-                                    <i class="fas fa-tasks"></i>
-                                </button>
-                            </span>
-                            <div class="modal fade" id="changeStatut{{ adherent.id }}" tabindex="-1" role="dialog" aria-labelledby="changeStatutLabel{{ adherent.id }}" aria-hidden="true">
-                                <div class="modal-dialog" role="document">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title" id="changeStatutLabel{{ adherent.id }}">Changer le statut</h5>
-                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                <span aria-hidden="true">&times;</span>
-                                            </button>
-                                        </div>
-                                        <form action="{{ path('admin_editStatus', {id: adherent.id}) }}">
-                                            <div class="modal-body">
-                                                    <select name="status" id="status" class="form-control">
-                                                        <option {% if adherent.status == "EN ATTENTE" %}selected{% endif %} value="EN ATTENTE">EN ATTENTE</option>
-                                                        <option {% if adherent.status == "EN MANQUE DE DOCUMENT" %}selected{% endif %} value="EN MANQUE DE DOCUMENT">EN MANQUE DE DOCUMENT</option>
-                                                        <option {% if adherent.status == "EN MANQUE DE PAIEMENT" %}selected{% endif %} value="EN MANQUE DE PAIEMENT">EN MANQUE DE PAIEMENT</option>
-                                                        <option {% if adherent.status == "EN MANQUE DE DOCUMENT ET PAIEMENT" %}selected{% endif %} value="EN MANQUE DE DOCUMENT ET PAIEMENT">EN MANQUE DE DOCUMENT ET PAIEMENT</option>
-                                                        <option {% if adherent.status == "VALIDE" %}selected{% endif %} value="VALIDE">VALIDE</option>
-                                                    </select>
-                                                
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-secondary" data-dismiss="modal" data-toggle="modal">
-                                                    Annuler
-                                                </button>
-                                                <input type="submit" class="btn btn-success" value="Valider">
-                                              
-                                            </div>
-                                        </form>
-                                    </div>
-                                </div>
-                            </div>
+                            {% if adherent.status=="VALIDE" %}
+                                <span style="color:green">Inscription validée</span>
+                            {% endif %}
                         </td>
                         <td>
                             {% if adherent.isRegisteredInGestGym %}
@@ -250,26 +161,12 @@
                             {% endif %}
                         </td>
                         <td>
-                            <a class="btn btn-success" href="{{ path('admin_adherentsPDF', {id: adherent.id}) }}" data-toggle="tooltip" data-placement="top" title="Télécharger le PDF de l'adhérent">
-                                <i class="far fa-file-pdf"></i>
-                            </a>
-                            <a class="btn btn-warning" href="{{ path('admin_adherentsEdit', {id: adherent.id}) }}" data-toggle="tooltip" data-placement="top" title="Modifier l'adhérent">
-                                <i class="far fa-edit"></i>
-                            </a>
-                            
-                            <span data-toggle="modal" data-target="#exampleModal{{ adherent.id }}">
-                                <button type="button" class="btn btn-primary" data-toggle="tooltip" data-placement="top"
-                                        title="Voir plus">
-                                    <i class="far fa-eye"></i>
-                                </button>
-                            </span>
-                            <a class="btn btn-danger" href="{{ path('admin_adherentsDelete', {id: adherent.id}) }}" data-toggle="tooltip" data-placement="top" title="Supprimer l'adhérent">
-                                <i class="far fa-trash-alt"></i>
-                            </a>
 
+                            <button type="button" class="btn btn-primary btn-sm" data-toggle="modal"
+                                    data-target="#exampleModal{{ adherent.id }}">
+                                Voir plus
+                            </button>
                         </td>
-                            
-                    
                     </tr>
                 {% endif %}
             {% endfor %}
@@ -331,52 +228,17 @@
                             {{ adherent.registrationDate|date('d-m-Y') }}
                         </td>
                         <td>
-                            <span data-toggle="modal" data-target="#changeStatut{{ adherent.id }}">
-                                <a href="#"  data-toggle="tooltip" data-placement="top" title="Changer le statut">
-                                    {% if adherent.status == "EN ATTENTE" %}
-                                        <span style="color:red">Inscription en attente</span>
-                                    {% elseif adherent.status == "EN MANQUE DE DOCUMENT" %}
-                                        <span style="color:#916319">En manque de document(s)</span>
-                                    {% elseif adherent.status == "EN MANQUE DE PAIEMENT" %}
-                                        <span style="color:orangered">En attente paiement</span>
-                                    {% elseif adherent.status == "EN MANQUE DE DOCUMENT ET PAIEMENT" %}
-                                        <span style="color:purple">En manque de document(s) et en attente de paiement</span>
-                                    {% elseif adherent.status == "VALIDE" %}
-                                        <span style="color:green">Inscription validée</span>
-                                    {% endif %}
-                                </a>
-                            </span>
-                            <div class="modal fade" id="changeStatut{{ adherent.id }}" tabindex="-1" role="dialog" aria-labelledby="changeStatutLabel{{ adherent.id }}" aria-hidden="true">
-                                <div class="modal-dialog" role="document">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title" id="changeStatutLabel{{ adherent.id }}">Changer le statut</h5>
-                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                <span aria-hidden="true">&times;</span>
-                                            </button>
-                                        </div>
-                                        <form action="{{ path('admin_editStatus', {id: adherent.id}) }}">
-                                            <div class="modal-body">
-                                                    <select name="status" id="status" class="form-control">
-                                                        <option {% if adherent.status == "EN ATTENTE" %}selected{% endif %} value="EN ATTENTE">EN ATTENTE</option>
-                                                        <option {% if adherent.status == "EN MANQUE DE DOCUMENT" %}selected{% endif %} value="EN MANQUE DE DOCUMENT">EN MANQUE DE DOCUMENT</option>
-                                                        <option {% if adherent.status == "EN MANQUE DE PAIEMENT" %}selected{% endif %} value="EN MANQUE DE PAIEMENT">EN MANQUE DE PAIEMENT</option>
-                                                        <option {% if adherent.status == "EN MANQUE DE DOCUMENT ET PAIEMENT" %}selected{% endif %} value="EN MANQUE DE DOCUMENT ET PAIEMENT">EN MANQUE DE DOCUMENT ET PAIEMENT</option>
-                                                        <option {% if adherent.status == "VALIDE" %}selected{% endif %} value="VALIDE">VALIDE</option>
-                                                    </select>
-                                                
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-secondary" data-dismiss="modal" data-toggle="modal">
-                                                    Annuler
-                                                </button>
-                                                <input type="submit" class="btn btn-success" value="Valider">
-                                              
-                                            </div>
-                                        </form>
-                                    </div>
-                                </div>
-                            </div>
+                            {% if adherent.status == "EN ATTENTE" %}
+                                <span style="color:red">Inscription en attente</span>
+                            {% elseif adherent.status == "EN MANQUE DE DOCUMENT" %}
+                                <span style="color:#916319">En manque de document(s)</span>
+                            {% elseif adherent.status == "EN MANQUE DE PAIEMENT" %}
+                                <span style="color:orangered">En attente paiement</span>
+                            {% elseif adherent.status == "EN MANQUE DE DOCUMENT ET PAIEMENT" %}
+                                <span style="color:purple">En manque de document(s) et en attente de paiement</span>
+                            {% elseif adherent.status == "VALIDE" %}
+                                <span style="color:green">Inscription validée</span>
+                            {% endif %}
                         </td>
                         <td>
                             {% if adherent.isRegisteredInGestGym %}
@@ -386,23 +248,11 @@
                             {% endif %}
                         </td>
                         <td>
-                            <a class="btn btn-success" href="{{ path('admin_adherentsPDF', {id: adherent.id}) }}" data-toggle="tooltip" data-placement="top" title="Télécharger le PDF de l'adhérent">
-                                <i class="far fa-file-pdf"></i>
-                            </a>
-                            <a class="btn btn-warning" href="{{ path('admin_adherentsEdit', {id: adherent.id}) }}" data-toggle="tooltip" data-placement="top" title="Modifier l'adhérent">
-                                <i class="far fa-edit"></i>
-                            </a>
-                            
-                            <span data-toggle="modal" data-target="#exampleModal{{ adherent.id }}">
-                                <button type="button" class="btn btn-primary" data-toggle="tooltip" data-placement="top"
-                                        title="Voir plus">
-                                    <i class="far fa-eye"></i>
-                                </button>
-                            </span>
-                            <a class="btn btn-danger" href="{{ path('admin_adherentsDelete', {id: adherent.id}) }}" data-toggle="tooltip" data-placement="top" title="Supprimer l'adhérent">
-                                <i class="far fa-trash-alt"></i>
-                            </a>
 
+                            <button class="btn btn-primary btn-sm" data-target="#exampleModal{{ adherent.id }}"
+                                    data-toggle="modal" type="button">
+                                Voir plus
+                            </button>
                         </td>
                     </tr>
                 {% endif %}
@@ -637,7 +487,16 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                          <button class="btn btn-secondary" data-dismiss="modal" type="button">Fermer</button>
+                        {% if not adherent.status == "VALIDE" %}
+                            <a href="{{ path('admin_adherentsRegister', {id: adherent.id}) }}" class="btn btn-primary">Valider
+                                l'inscription</a>
+                        {% endif %}
+
+                        <a href="{{ path('admin_adherentsPDF', {id: adherent.id}) }}" class="btn btn-danger">Télécharger le PDF</a>
+                        <a href="{{ path('admin_adherentsEdit', {id: adherent.id}) }}" class="btn btn-secondary">Modifier</a>
+                        <a href="{{ path('admin_adherentsDelete', {id: adherent.id}) }}" class="btn btn-secondary">Supprimer</a>
+
+                        <button class="btn btn-secondary" data-dismiss="modal" type="button">Fermer</button>
                     </div>
                 </div>
             </div>
