@@ -78,6 +78,12 @@ admin_editStatus:
     requirements:
         id: ([0-9]*)
 
+admin_editStatusGESTGYM:
+    path: /admin/adherents/editStatusGESTGYM/{id}
+    controller: App\Controller\administration\AdminAdherentsController::editStatusGESTGYM
+    requirements:
+        id: ([0-9]*)
+
 admin_adherentsDelete:
     path: /admin/adherents/delete/{id}
     controller: App\Controller\administration\AdminAdherentsController::delete
