@@ -16,11 +16,7 @@
     <tr role="row">
         <th class="sorting_asc" tabindex="0" aria-controls="example" rowspan="1" colspan="1"
             style="width: 119px;" aria-sort="ascending"
-            aria-label="lastName: activate to sort column descending">Nom
-        </th>
-        <th class="sorting_asc" tabindex="1" aria-controls="example" rowspan="1" colspan="1"
-            style="width: 119px;" aria-sort="ascending"
-            aria-label="firstName: activate to sort column descending">Prénom
+            aria-label="lastName: activate to sort column descending">Nom/Prénom
         </th>
         <th class="sorting_asc" tabindex="2" aria-controls="example" rowspan="1" colspan="1"
             style="width: 119px;" aria-sort="ascending"
@@ -45,10 +41,7 @@
         {% if adherent.isDeleted == false %}
             <tr role="row" class="odd">
                 <td>
-                    {{ adherent.lastName }}
-                </td>
-                <td>
-                    {{ adherent.firstName }}
+                    {{ adherent.lastName }}  {{ adherent.firstName }}
                 </td>
                 <td>
                     {{ adherent.registrationDate|date('d-m-Y') }}
@@ -173,8 +166,7 @@
     <tfoot>
 
     <tr>
-        <th rowspan="1" colspan="1">Nom</th>
-        <th rowspan="1" colspan="1">Prénom</th>
+        <th rowspan="1" colspan="1">Nom/Prénom</th>
         <th rowspan="1" colspan="1">Date d'inscription</th>
         <th rowspan="1" colspan="1">Statut de l'inscription</th>
         <th rowspan="1" colspan="1">Inscription dans GestGym</th>

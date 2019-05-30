@@ -44,6 +44,8 @@ class AdminAdherentsController extends AbstractController
             $adherent->setCityRep1($request->request->get("admin_adherent_cityRep1"));
             $utilitaires->setFiles($adherent);
             $entityManager->flush();
+            $this->addFlash('success', $adherent->getFirstName() . " " .$adherent->getLastName() . " a été modifié avec succès");        
+            
             return $this->redirectToRoute('admin_adherents');
         }
 
@@ -62,10 +64,17 @@ class AdminAdherentsController extends AbstractController
     {
         $repository = $this->getDoctrine()->getRepository(Adherent::class);
         $entityManager = $this->getDoctrine()->getManager();
-
         $adherent = $repository->findOneById($id);
-        $adherent->setIsDeleted(true);
-        $entityManager->flush();
+
+        if ($adherent != null) {
+            $adherent->setIsDeleted(true);
+            $entityManager->flush();
+            $this->addFlash('success', $adherent->getFirstName() . " " .$adherent->getLastName() . " a été supprimé de la liste des adhérents");
+
+        }else{
+            $this->addFlash('error', "L'adhérent n'existe pas");
+        }
+
 
         return $this->redirectToRoute("admin_adherents");
     }
@@ -81,8 +90,16 @@ class AdminAdherentsController extends AbstractController
         $entityManager = $this->getDoctrine()->getManager();
 
         $adherent = $repository->findOneById($id);
-        $adherent->setStatus($request->query->get('status'));
-        $entityManager->flush();
+        $new_status = $request->query->get('status');
+
+        if ($adherent != null && $new_status != null) {
+            $adherent->setStatus($new_status);
+            $entityManager->flush();
+            $this->addFlash('success', "Le statut de " . $adherent->getFirstName() . " " .$adherent->getLastName() . " est maintenant de : " . $new_status);
+        }else{
+            $this->addFlash('error', "Erreur dans la requête.");        
+        }
+
 
         return $this->redirectToRoute("admin_adherents");
     }
@@ -96,10 +113,16 @@ class AdminAdherentsController extends AbstractController
     {
         $repository = $this->getDoctrine()->getRepository(Adherent::class);
         $entityManager = $this->getDoctrine()->getManager();
-
         $adherent = $repository->findOneById($id);
-        $adherent->setIsRegisteredInGestGym($request->query->get('status'));
-        $entityManager->flush();
+        $new_status = $request->query->get('status');
+
+        if ($adherent != null && $new_status != null) {
+            $adherent->setIsRegisteredInGestGym($new_status);
+            $entityManager->flush();
+            $this->addFlash('success', "Le statut GESTGYM de " . $adherent->getFirstName() . " " .$adherent->getLastName() . " est maintenant de : " . $new_status);
+        }else{
+            $this->addFlash('error', "Erreur dans la requête.");        
+        }
 
         return $this->redirectToRoute("admin_adherents");
     }
@@ -113,16 +136,24 @@ class AdminAdherentsController extends AbstractController
     {
         $repository = $this->getDoctrine()->getRepository(Adherent::class);
         $adherent = $repository->find($id);
-        $html = $this->render('administration/adherents/generateAdherentsPDF.html.twig', [
-            'adherent' => $adherent,
-        ]);
-        $pdfOptions = new Options();
-        $dompdf = new Dompdf($pdfOptions);
-        $dompdf->loadHtml($html);
-        $dompdf->setPaper('A4', 'portrait');
-        $dompdf->render();
-        $dompdf->stream($adherent->getFirstName() . "_" . $adherent->getLastName() . ".pdf", [
-            "Attachment" => true
-        ]);
+
+        if ($adherent != null) {
+            $html = $this->render('administration/adherents/generateAdherentsPDF.html.twig', [
+                'adherent' => $adherent,
+            ]);
+            $pdfOptions = new Options();
+            $dompdf = new Dompdf($pdfOptions);
+            $dompdf->loadHtml($html);
+            $dompdf->setPaper('A4', 'portrait');
+            $dompdf->render();
+            $dompdf->stream($adherent->getFirstName() . "_" . $adherent->getLastName() . ".pdf", [
+                "Attachment" => true
+            ]);
+        }else{
+           
+            $this->addFlash('error', "Erreur dans la requête.");        
+            return $this->redirectToRoute("admin_adherents");
+        }
+        
     }
 }
