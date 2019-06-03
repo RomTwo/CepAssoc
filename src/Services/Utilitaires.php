@@ -19,8 +19,6 @@ class Utilitaires
         $adherent->setRegistrationDate(new \DateTime());
         $adherent->setIsRegisteredInGestGym(false);
         $adherent->setJudge(false);
-        $adherent->setPaymentFeesArePaid(false);
-        $adherent->setRegistrationCost(0);
         $adherent->setMedicalCertificateDate(new \DateTime("01-09-2019"));
         $adherent->setNationality("France");
         $adherent->setIsFFGInsurance(false);
@@ -33,6 +31,7 @@ class Utilitaires
         $adherent->setHasBulletinN2Allianz(false);
         $adherent->setHasHealthQuestionnaire(false);
         $adherent->setStatus("EN ATTENTE");
+        $adherent->setAffiliateCode(md5(uniqid()));
 
         if($adherent->getMedicalCertificate() != null){
             $adherent->setMedicalCertificate($this->addFile($adherent->getMedicalCertificate()));
@@ -54,12 +53,12 @@ class Utilitaires
             $adherent->setMedicalCertificate($this->addFile($adherent->getMedicalCertificate()));
         }
 
-        if($adherent->getBulletinN2Allianz() != null && !is_string($adherent->getMedicalCertificate())){
+        if($adherent->getBulletinN2Allianz() != null && !is_string($adherent->getBulletinN2Allianz())){
             $adherent->setBulletinN2Allianz($this->addFile($adherent->getBulletinN2Allianz()));
         }
 
-        if($adherent->getHealthQuestionnaire() != null && !is_string($adherent->getMedicalCertificate())){
-            $adherent->setHealthQuestionnaire($this->addFile($adherent->getHealthQuestionnaire()));
+        if($adherent->getHealthQuestionnaireFile() != null && !is_string($adherent->getHealthQuestionnaireFile())){
+            $adherent->setHealthQuestionnaireFile($this->addFile($adherent->getHealthQuestionnaireFile()));
         }
 
         return $adherent;

@@ -41,7 +41,6 @@ class RegistrationController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid() && $utilitaires->isValidateCity($request->request->get("adherent_cityRep1"))) {
             $utilitaires->setOtherFields($adherent);
-            $adherent->setAffiliateCode($this->generateAffiliateCode());
             $adherent->setCityRep1($request->request->get("adherent_cityRep1"));
 
             $account = $this->getDoctrine()->getRepository(Account::class)->find($user->getId());
@@ -72,41 +71,41 @@ class RegistrationController extends AbstractController
 
     }
 
-    private function generateAffiliateCode()
-    {
-        $repository = $this->getDoctrine()->getRepository(Adherent::class);
-        $code = ""; // code that will be returned
-        $adherentWithSameCode = -1; // this will contain an Adherent Entity instance having a certain given affiliateCode equals to $code
-
-        $characters = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'; //characters list for code generation
-        $charactersLength = strlen($characters);
-
-        while ($adherentWithSameCode != null) {
-
-            // generating a new code
-            $code = "";
-            for ($nbLetter = 0; $nbLetter < 5; $nbLetter++) {  // our code contain 5 characters !
-                //$code .= chr(rand(65, 90));   // 65-90 range for upper case characters
-                $code .= $characters[rand(0, $charactersLength - 1)];
-            }
-
-            $adherentWithSameCode = $repository->findOneBy(['affiliateCode' => $code]);
-        }
-
-        return $code;
-    }
-
     private function isValidateHealthQuestionnaire($healthQuestionnaire)
     {
-        if ($healthQuestionnaire->getHasMemberOfFamilyDiedHeartAttack() == null) {
+        if ($healthQuestionnaire->getHasMemberOfFamilyDiedHeartAttack() === null) {
             return false;
         }
 
-        if ($healthQuestionnaire->getHasPainChest() == null) {
+        if ($healthQuestionnaire->getHasPainChest() === null) {
             return false;
         }
 
-        if ($healthQuestionnaire->getHasAsthma() == null) {
+        if ($healthQuestionnaire->getHasAsthma() === null) {
+            return false;
+        }
+
+        if ($healthQuestionnaire->getHasLossOfConsciousness() === null) {
+            return false;
+        }
+
+        if ($healthQuestionnaire->getHasResumptionOfSportWithoutDoctorConsent() === null) {
+            return false;
+        }
+
+        if ($healthQuestionnaire->getHasMedicalTreatment() === null) {
+            return false;
+        }
+
+        if ($healthQuestionnaire->getHasBoneProblem() === null) {
+            return false;
+        }
+
+        if ($healthQuestionnaire->getHasHealthProblem() === null) {
+            return false;
+        }
+
+        if ($healthQuestionnaire->getHasNeedMedicalAdvice() === null) {
             return false;
         }
 

@@ -24,7 +24,7 @@ class Category
     private $name;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Activity", mappedBy="category")
+     * @ORM\OneToMany(targetEntity="App\Entity\Activity", mappedBy="category",cascade={"all"})
      */
     private $activities;
 

@@ -1,221 +1,214 @@
 {% extends 'administration/basePDF.html.twig' %}
 {% block body %}
     <center>
-        <h2>Fiche adhérent</h2>
+    <h2>Fiche adhérent</h2>
     </center>
-    <div class="modal-body">
-        <div class="container-fluid">
+        <div class="modal-body">
+            <div class="container-fluid">
 
-            <h6>TYPE D'INSCRIPTION : {{ adherent.registrationType }} </h6>
-            <h6>DATE DE DEPOT DU DOSSIER {{ adherent.registrationDate|date('d-m-Y') }}</h6>
+                <h6>TYPE D'INSCRIPTION : {{adherent.registrationType}} </h6>
+                <h6>DATE DE DEPOT DU DOSSIER {{adherent.registrationDate|date('d-m-Y')}}</h6>
 
-            <hr/>
+                <hr/>
 
-            <div class="alert alert-secondary" role="alert">
-                <div class="row">
-                    <div class="col">
-                        Id : {{ adherent.id }}
+                <div class="alert alert-secondary" role="alert">
+                    <div class="row">
+                        <div class="col">
+                            Id : {{ adherent.id }}
+                        </div>
+                        <div class="col">
+                            Nom : {{adherent.lastName}}
+                        </div>
+                        <div class="col">
+                            Prénom : {{adherent.firstName}}
+                        </div>
                     </div>
-                    <div class="col">
-                        Nom : {{ adherent.lastName }}
-                    </div>
-                    <div class="col">
-                        Prénom : {{ adherent.firstName }}
+                    <div class="row">
+                        <div class="col">
+                            Sexe : {{adherent.sex}}
+                        </div>
+                        <div class="col">
+                            Date de naissance : {{adherent.birthDate|date('d-m-Y')}}
+                        </div>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col">
-                        Sexe : {{ adherent.sex }}
-                    </div>
-                    <div class="col">
-                        Date de naissance : {{ adherent.birthDate|date('d-m-Y') }}
-                    </div>
+                <div class="alert alert-secondary" role="alert">
+                    <table>
+                        <thead>
+                        <tr>
+                            <th></th>
+                            <th>Adhérent ou représentant légal</th>
+                            <th>Représentant légal 2</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>Nom/Prénom</td>
+                            <td>{{adherent.firstNameRep1}} {{adherent.lastNameRep1}}</td>
+                            <td>{{adherent.firstNameRep2}} {{adherent.lastNameRep2}}</td>
+                        </tr>
+                        <tr>
+                            <td>Profession</td>
+                            <td>{{adherent.professionRep1}}</td>
+                            <td>{{adherent.professionRep2}}</td>
+                        </tr>
+                        <tr>
+                            <td>Adresse</td>
+                            <td>{{adherent.addressRep1}}</td>
+                            <td>{{adherent.addressRep2}}</td>
+                        </tr>
+                        <tr>
+                            <td>Code postal/Ville</td>
+                            <td>{{adherent.zipCodeRep1}} {{adherent.cityRep1}}</td>
+                            <td>{{adherent.zipCodeRep2}} {{adherent.cityRep1}}</td>
+                        </tr>
+                        <tr>
+                            <td>Téléphone</td>
+                            <td>{{adherent.phoneRep1}}</td>
+                            <td>{{adherent.phoneRep2}}</td>
+                        </tr>
+                        <tr>
+                            <td>Email</td>
+                            <td>{{adherent.emailRep1}}</td>
+                            <td>{{adherent.emailRep2}}</td>
+                        </tr>
+                        </tbody>
+                    </table>
                 </div>
-            </div>
-            <div class="alert alert-secondary" role="alert">
-                <table>
-                    <thead>
-                    <tr>
-                        <th></th>
-                        <th>Adhérent ou représentant légal</th>
-                        <th>Représentant légal 2</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr>
-                        <td>Nom/Prénom</td>
-                        <td>{{ adherent.firstNameRep1 }} {{ adherent.lastNameRep1 }}</td>
-                        <td>{{ adherent.firstNameRep2 }} {{ adherent.lastNameRep2 }}</td>
-                    </tr>
-                    <tr>
-                        <td>Profession</td>
-                        <td>{{ adherent.professionRep1 }}</td>
-                        <td>{{ adherent.professionRep2 }}</td>
-                    </tr>
-                    <tr>
-                        <td>Adresse</td>
-                        <td>{{ adherent.addressRep1 }}</td>
-                        <td>{{ adherent.addressRep2 }}</td>
-                    </tr>
-                    <tr>
-                        <td>Code postal/Ville</td>
-                        <td>{{ adherent.zipCodeRep1 }} {{ adherent.cityRep1 }}</td>
-                        <td>{{ adherent.zipCodeRep2 }} {{ adherent.cityRep1 }}</td>
-                    </tr>
-                    <tr>
-                        <td>Téléphone</td>
-                        <td>{{ adherent.phoneRep1 }}</td>
-                        <td>{{ adherent.phoneRep2 }}</td>
-                    </tr>
-                    <tr>
-                        <td>Email</td>
-                        <td>{{ adherent.emailRep1 }}</td>
-                        <td>{{ adherent.emailRep2 }}</td>
-                    </tr>
-                    </tbody>
-                </table>
-            </div>
-            <hr/>
-            <h6>JUGES</h6>
-            <div class="alert alert-secondary" role="alert">
-                <div class="row">
-                    <div class="col">
-                        Juge GAF
-                        {% if adherent.isGAFJudge %}
-                            <i class="fas fa-check"></i>
-                            Niveau : {{ adherent.GAFJudgeLevel }}
-                        {% else %}
-                            <i class="fas fa-times"></i>
-                        {% endif %}
+                <hr/>
+                <h6>JUGES</h6>
+                <div class="alert alert-secondary" role="alert">
+                    <div class="row">
+                        <div class="col">
+                            Juge GAF
+                            {% if adherent.isGAFJudge %}
+                                <i class="fas fa-check"></i>
+                                Niveau : {{adherent.GAFJudgeLevel}}
+                            {% else %}
+                                <i class="fas fa-times"></i>
+                            {% endif %}
 
+                        </div>
+                        <div class="col">
+                            Juge GAM
+                            {% if adherent.isGAMJudge %}
+                                <i class="fas fa-check"></i>
+                                Niveau : {{adherent.GAMJudgeLevel}}
+                            {% else %}
+                                <i class="fas fa-times"></i>
+                            {% endif %}
+                        </div>
+                        <div class="col">
+                            Juge TEAMGYM
+                            {% if adherent.isTEAMGYMJudge %}
+                                <i class="fas fa-check"></i>
+                                Niveau : {{adherent.TEAMGYMJudgeLevel}}
+                            {% else %}
+                                <i class="fas fa-times"></i>
+                            {% endif %}
+                        </div>
                     </div>
-                    <div class="col">
-                        Juge GAM
-                        {% if adherent.isGAMJudge %}
-                            <i class="fas fa-check"></i>
-                            Niveau : {{ adherent.GAMJudgeLevel }}
-                        {% else %}
-                            <i class="fas fa-times"></i>
-                        {% endif %}
-                    </div>
-                    <div class="col">
-                        Juge TEAMGYM
-                        {% if adherent.isTEAMGYMJudge %}
-                            <i class="fas fa-check"></i>
-                            Niveau : {{ adherent.TEAMGYMJudgeLevel }}
-                        {% else %}
-                            <i class="fas fa-times"></i>
-                        {% endif %}
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col">
-                        Je souhaite suivre une formation de juge :
-                        {% if adherent.wantsAJudgeTraining %}
-                            <i class="fas fa-check"></i>
-                        {% else %}
-                            <i class="fas fa-times"></i>
-                        {% endif %}
-                    </div>
-                </div>
-            </div>
-            <hr/>
-            <br>
-            <h6>BENEVOLES</h6>
-            <div class="alert alert-secondary" role="alert">
-                <div class="row">
-                    <div class="col">
-                        Aide à l'entraînement : {{ adherent.volunteerForTrainingHelp }}
+                    <div class="row">
+                        <div class="col">
+                            Je souhaite suivre une formation de juge :
+                            {% if adherent.wantsAJudgeTraining %}
+                                <i class="fas fa-check"></i>
+                            {% else %}
+                                <i class="fas fa-times"></i>
+                            {% endif %}
+                        </div>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col">
-                        Aide à la vie du club : {{ adherent.volunteerForClubLife }}
+                <hr/>
+                <br>
+                <h6>BENEVOLES</h6>
+                <div class="alert alert-secondary" role="alert">
+                    <div class="row">
+                        <div class="col">
+                            Aide à l'entraînement : {{adherent.volunteerForTrainingHelp}}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            Aide à la vie du club : {{adherent.volunteerForClubLife}}
+                        </div>
                     </div>
                 </div>
-            </div>
-            <hr/>
-            <h6>MONTANT DE LA COTISATION : <span style="color:red"> {{ adherent.registrationCost }} €</span></h6>
-            <div class="alert alert-secondary" role="alert">
-                <div class="row">
-                    <div class="col">
-                        Mode de règlement : {{ adherent.paymentType }}
+                <hr/>
+                <h6>MONTANT DE LA COTISATION : <span style="color:red"> {{adherent.registrationCost}} €</span> </h6>
+                <div class="alert alert-secondary" role="alert">
+                    <div class="row">
+                        <div class="col">
+                            Mode de règlement : {{adherent.paymentType}}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            Engagement compétition :
+                        </div>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col">
-                        Engagement compétition :
+                <hr/>
+                <h6>DROIT A L'IMAGE</h6>
+                <div class="alert alert-secondary" role="alert">
+                    <div class="row">
+                        <div class="col">
+                            J'autorise le club à prendre et à diffuser des photos me concernant pour enrichir la
+                            photothèque et le site internet du club :
+                            {% if adherent.imageRight %}
+                                <i class="fas fa-check"></i>
+                            {% else %}
+                                <i class="fas fa-times"></i>
+                            {% endif %}
+                        </div>
                     </div>
                 </div>
-            </div>
-            <hr/>
-            <h6>DROIT A L'IMAGE</h6>
-            <div class="alert alert-secondary" role="alert">
-                <div class="row">
-                    <div class="col">
-                        J'autorise le club à prendre et à diffuser des photos me concernant pour enrichir la
-                        photothèque et le site internet du club :
-                        {% if adherent.imageRight %}
-                            <i class="fas fa-check"></i>
-                        {% else %}
-                            <i class="fas fa-times"></i>
-                        {% endif %}
+                <hr/>
+                <h6>PARTIE RESERVE A L'ADMINISTRATION</h6>
+                <div class="alert alert-secondary" role="alert">
+                    <div class="row">
+                        <div class="col">
+                            Bulletin N°2 Allianz :
+                        </div>
                     </div>
-                </div>
-            </div>
-            <hr/>
-            <h6>PARTIE RESERVE A L'ADMINISTRATION</h6>
-            <div class="alert alert-secondary" role="alert">
-                <div class="row">
-                    <div class="col">
-                        Bulletin N°2 Allianz :
+                    <div class="row">
+                        <div class="col-5">
+                            Règlement cotisation :
+                        </div>
                     </div>
-                </div>
-                <div class="row">
-                    <div class="col-5">
-                        Règlement cotisation :
+                    <div class="row">
+                        <div class="col">
+                            Engagement compétition :
+                        </div>
                     </div>
-                    <div class="col">
-                        {% if adherent.paymentFeesArePaid %}
-                            <i class="fas fa-check"></i>
-                        {% else %}
-                            <i class="fas fa-times"></i>
-                        {% endif %}
+                    <div class="row">
+                        <div class="col">
+                            Mutation :
+                        </div>
                     </div>
-                </div>
-                <div class="row">
-                    <div class="col">
-                        Engagement compétition :
+                    <div class="row">
+                        <div class="col">
+                            Dossier traité par :
+                        </div>
                     </div>
-                </div>
-                <div class="row">
-                    <div class="col">
-                        Mutation :
+                    <div class="row">
+                        <div class="col-5">
+                            Saisie dans Gest'Gym :
+                        </div>
+                        <div class="col">
+                            {% if adherent.isRegisteredInGestGym %}
+                                <i class="fas fa-check"></i>
+                            {% else %}
+                                <i class="fas fa-times"></i>
+                            {% endif %}
+                        </div>
                     </div>
-                </div>
-                <div class="row">
-                    <div class="col">
-                        Dossier traité par :
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-5">
-                        Saisie dans Gest'Gym :
-                    </div>
-                    <div class="col">
-                        {% if adherent.isRegisteredInGestGym %}
-                            <i class="fas fa-check"></i>
-                        {% else %}
-                            <i class="fas fa-times"></i>
-                        {% endif %}
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col">
-                        Licence 2019 :
+                    <div class="row">
+                        <div class="col">
+                            Licence 2019 :
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
 {% endblock %}
