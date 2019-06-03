@@ -4,7 +4,6 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
-use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\DocumentRepository")
@@ -14,7 +13,6 @@ class Document
     /**
      * @ORM\Id()
      * @ORM\Column(type="string", length=255)
-     * @Groups({"doc"})
      */
     private $id;
 
@@ -26,7 +24,6 @@ class Document
      *     mimeTypes = {"application/pdf", "application/x-pdf"},
      *     mimeTypesMessage = "Le fichier doit être sous format PDF"
      * )
-     * @Groups({"doc"})
      */
     private $name;
 

@@ -4,18 +4,9 @@
     <bookmark url="file://$PROJECT_DIR$/src/Controller/AccountController.php" description="JWT::decode($token, $_ENV['PRIVATE_KEY'], array($_..." line="87" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="53b90c9e-e36e-447f-8cc9-26b01b488158" name="Default Changelist" comment="pull master">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Controller/DocumentController.php" />
+    <list default="true" id="53b90c9e-e36e-447f-8cc9-26b01b488158" name="Default Changelist" comment="event files, error msg job add, files add">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/assets/js/event.js" afterPath="$PROJECT_DIR$/assets/js/event.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/config/routes.yaml" afterPath="$PROJECT_DIR$/config/routes.yaml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Controller/JobController.php" afterPath="$PROJECT_DIR$/src/Controller/JobController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Controller/administration/AdminEventsController.php" afterPath="$PROJECT_DIR$/src/Controller/administration/AdminEventsController.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Entity/Document.php" afterPath="$PROJECT_DIR$/src/Entity/Document.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Entity/Event.php" afterPath="$PROJECT_DIR$/src/Entity/Event.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Form/EventType.php" afterPath="$PROJECT_DIR$/src/Form/EventType.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Services/Utilitaires.php" afterPath="$PROJECT_DIR$/src/Services/Utilitaires.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/administration/events/addEventForm.html.twig" afterPath="$PROJECT_DIR$/templates/administration/events/addEventForm.html.twig" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -28,7 +19,20 @@
     <pharConfigPath>$PROJECT_DIR$/composer.json</pharConfigPath>
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300" />
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file leaf-file-name="Document.php" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/Entity/Document.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="90">
+              <caret line="6" column="0" lean-forward="true" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="0" />
+              <folding>
+                <element signature="e#30#62#0#PHP" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -143,13 +147,13 @@
         <option value="$PROJECT_DIR$/src/Services/Utilitaires.php" />
         <option value="$PROJECT_DIR$/src/Controller/administration/AdminEventsController.php" />
         <option value="$PROJECT_DIR$/src/Entity/Adherent.php" />
-        <option value="$PROJECT_DIR$/src/Entity/Document.php" />
         <option value="$PROJECT_DIR$/src/Controller/administration/AdministrationController.php" />
         <option value="$PROJECT_DIR$/config/routes.yaml" />
         <option value="$PROJECT_DIR$/src/Controller/DocumentController.php" />
         <option value="$PROJECT_DIR$/src/Controller/JobController.php" />
         <option value="$PROJECT_DIR$/templates/administration/events/addEventForm.html.twig" />
         <option value="$PROJECT_DIR$/assets/js/event.js" />
+        <option value="$PROJECT_DIR$/src/Entity/Document.php" />
       </list>
     </option>
   </component>
@@ -543,13 +547,6 @@
       <workItem from="1559062077780" duration="2473000" />
       <workItem from="1559112796963" duration="17579000" />
     </task>
-    <task id="LOCAL-00033" summary="add globals variable twig for the site key google recaptcha">
-      <created>1557867265463</created>
-      <option name="number" value="00033" />
-      <option name="presentableId" value="LOCAL-00033" />
-      <option name="project" value="LOCAL" />
-      <updated>1557867265463</updated>
-    </task>
     <task id="LOCAL-00034" summary="Add notifications when the user change his password (when he has forgotten his password)">
       <created>1557867810606</created>
       <option name="number" value="00034" />
@@ -886,11 +883,18 @@
       <option name="project" value="LOCAL" />
       <updated>1559123573642</updated>
     </task>
-    <option name="localTasksCounter" value="82" />
+    <task id="LOCAL-00082" summary="event files, error msg job add, files add">
+      <created>1559566608735</created>
+      <option name="number" value="00082" />
+      <option name="presentableId" value="LOCAL-00082" />
+      <option name="project" value="LOCAL" />
+      <updated>1559566608736</updated>
+    </task>
+    <option name="localTasksCounter" value="83" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="319932000" />
+    <option name="totallyTimeSpent" value="319989000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -977,7 +981,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="delete account, begin update an account" />
     <MESSAGE value="Finish admin account part" />
     <MESSAGE value="no hidden nav admin" />
     <MESSAGE value="add font-awesome" />
@@ -1002,7 +1005,8 @@
     <MESSAGE value="role moderator" />
     <MESSAGE value="merge with master" />
     <MESSAGE value="user event" />
-    <option name="LAST_COMMIT_MESSAGE" value="user event" />
+    <MESSAGE value="event files, error msg job add, files add" />
+    <option name="LAST_COMMIT_MESSAGE" value="event files, error msg job add, files add" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1323,16 +1327,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Entity/Document.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="343">
-          <caret line="35" column="7" lean-forward="true" selection-start-line="35" selection-start-column="7" selection-end-line="35" selection-end-column="7" />
-          <folding>
-            <element signature="e#30#62#0#PHP" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Controller/administration/AdminEventManagerController.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="390">
@@ -1388,6 +1382,16 @@
         <state relative-caret-position="540">
           <caret line="36" column="3" lean-forward="false" selection-start-line="36" selection-start-column="3" selection-end-line="36" selection-end-column="3" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Entity/Document.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="6" column="0" lean-forward="true" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="0" />
+          <folding>
+            <element signature="e#30#62#0#PHP" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
