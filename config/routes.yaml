@@ -211,6 +211,10 @@ job_add:
     path: /admin/job/add
     controller: App\Controller\JobController::add
 
+    #--documents
+document_add_admin_event:
+    path: /admin/event/document/delete
+    controller: App\Controller\DocumentController::delete
 
 ### Errors routing ###
 error_404:

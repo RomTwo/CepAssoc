@@ -52,7 +52,7 @@ class EventType extends AbstractType
                 'required' => false,
                 'data_class' => null,
             ))
-            ->add('submit', SubmitType::class);
+            ->add('submit', SubmitType::class, array('label' => 'Valider'));
         $builder->get('startDate')->addModelTransformer(new DatetimeToStringTransformer());
         $builder->get('endDate')->addModelTransformer(new DatetimeToStringTransformer());
 

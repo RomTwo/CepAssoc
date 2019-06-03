@@ -63,7 +63,7 @@ class Event
     private $jobs;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Document", mappedBy="event")
+     * @ORM\OneToMany(targetEntity="App\Entity\Document", mappedBy="event", cascade={"persist", "remove"})
      * @ORM\JoinColumn(nullable=true)
      */
     private $documents;
@@ -190,28 +190,35 @@ class Event
     }
 
     /**
-     * @return mixed
+     * @return Collection|Document[]
      */
-    public function getDocuments()
+    public function getDocuments(): Collection
     {
         return $this->documents;
     }
 
-    public function setDocuments(Document $document = null)
+    public function setDocuments(Document $document = null): self
     {
         if (!$this->documents->contains($document)) {
             $this->documents[] = $document;
         }
+        $document->setEvent($this);
+
         return $this;
     }
 
-    public function removeDocuments(Document $document)
+    public function removeDocuments(Document $document): self
     {
         if ($this->documents->contains($document)) {
             $this->documents->removeElement($document);
         }
 
         return $this;
+    }
+
+    public function clearDocuments()
+    {
+        $this->documents->clear();
     }
 
 
