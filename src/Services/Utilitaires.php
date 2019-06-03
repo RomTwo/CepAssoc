@@ -81,6 +81,4 @@ class Utilitaires
         return $fileName;
     }
 
-
-
 }

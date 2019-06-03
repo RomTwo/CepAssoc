@@ -1,19 +1,17 @@
 {% extends 'administration/basePDF.html.twig' %}
 {% block body %}
-    <h2>Fiche adhérent</h2>
-        <div class="modal-body">
-            <div class="container-fluid">
+    <div class="center">
+        <h1>Récapitulatif de l'adhérent</h1>
+        <h2><u>{{adherent.firstName}} {{adherent.lastName}}</u></h2>
+    </div>
 
-                <h6>TYPE D'INSCRIPTION : {{adherent.registrationType}} </h6>
-                <h6>DATE DE DEPOT DU DOSSIER {{adherent.registrationDate|date('d-m-Y')}}</h6>
+                <p>TYPE D'INSCRIPTION : <b>{{adherent.registrationType}}</b></p>
+                <p>DATE DE DEPOT DU DOSSIER : <b>{{adherent.registrationDate|date('d-m-Y')}}</b></p>
 
                 <hr/>
 
                 <div class="alert alert-secondary" role="alert">
                     <div class="row">
-                        <div class="col">
-                            Id : {{ adherent.id }}
-                        </div>
                         <div class="col">
                             Nom : {{adherent.lastName}}
                         </div>
@@ -58,7 +56,7 @@
                         <tr>
                             <td>Code postal/Ville</td>
                             <td>{{adherent.zipCodeRep1}} {{adherent.cityRep1}}</td>
-                            <td>{{adherent.zipCodeRep2}} {{adherent.cityRep1}}</td>
+                            <td>{{adherent.zipCodeRep2}} {{adherent.cityRep2}}</td>
                         </tr>
                         <tr>
                             <td>Téléphone</td>
