@@ -29,6 +29,14 @@
                         <div class="row justify-content-center">
                             Description : {{ event.description }}
                         </div>
+                        <div>
+                            {% for file in event.documents %}
+                                <div class="row justify-content-center">
+                                    <a target="_blank" rel="noopener noreferrer"
+                                       href="{{ asset('uploads/' ~ file.id) }}">{{ file.name }}</a>
+                                </div>
+                            {% endfor %}
+                        </div>
                     </div>
                 </div>
             </div>

@@ -21,6 +21,7 @@
                 <th>Fin</th>
                 <th>Adresse</th>
                 <th>Description</th>
+                <th>Fichier(s) associé(s)</th>
                 <th>Action</th>
             </tr>
             </thead>
@@ -32,6 +33,14 @@
                     <td>le {{ eventFollow.endDate | date("d/m/Y H:i") }}</td>
                     <td>{{ eventFollow.address }}</td>
                     <td>{{ eventFollow.description }}</td>
+                    <td>
+                        {% for file in eventFollow.documents %}
+                            <div class="row">
+                                <a target="_blank" rel="noopener noreferrer"
+                                   href="{{ asset('uploads/' ~ file.id) }}">{{ file.name }}</a>
+                            </div>
+                        {% endfor %}
+                    </td>
                     <td>
                         <button type="button" class="btn btn-primary" data-toggle="modal"
                                 data-target="#modalViewEvent{{ eventFollow.id }}">
@@ -51,6 +60,7 @@
                 <th>Fin</th>
                 <th>Adresse</th>
                 <th>Description</th>
+                <th>Fichier(s) associé(s)</th>
                 <th>Action</th>
             </tr>
             </tfoot>
@@ -67,6 +77,7 @@
                 <th>Fin</th>
                 <th>Adresse</th>
                 <th>Description</th>
+                <th>Fichier(s) associé(s)</th>
                 <th>Action</th>
             </tr>
             </thead>
@@ -78,6 +89,14 @@
                     <td>le {{ event.endDate | date("d/m/Y H:i") }}</td>
                     <td>{{ event.address }}</td>
                     <td>{{ event.description }}</td>
+                    <td>
+                        {% for file in event.documents %}
+                            <div class="row">
+                                <a target="_blank" rel="noopener noreferrer"
+                                   href="{{ asset('uploads/' ~ file.id) }}">{{ file.name }}</a>
+                            </div>
+                        {% endfor %}
+                    </td>
                     <td>
                         <button type="button" class="btn btn-primary" data-toggle="modal"
                                 data-target="#modalViewEvent{{ event.id }}">
@@ -96,6 +115,7 @@
                 <th>Fin</th>
                 <th>Adresse</th>
                 <th>Description</th>
+                <th>Fichier(s) associé(s)</th>
                 <th>Action</th>
             </tr>
             </tfoot>
