@@ -351,7 +351,7 @@ class Adherent
     private $isDeleted;
 
     /**
-     * @ORM\Column(type="string", length=5, nullable=true)
+     * @ORM\Column(type="string", length=32, nullable=true)
      * @Groups({"competition"})
      */
     private $affiliateCode;

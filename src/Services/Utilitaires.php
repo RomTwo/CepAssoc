@@ -34,6 +34,7 @@ class Utilitaires
         $adherent->setHasBulletinN2Allianz(false);
         $adherent->setHasHealthQuestionnaire(false);
         $adherent->setStatus("EN ATTENTE");
+        $adherent->setAffiliateCode(md5(uniqid()));
 
         if($adherent->getMedicalCertificate() != null){
             $adherent->setMedicalCertificate($this->addFile($adherent->getMedicalCertificate()));
