@@ -189,7 +189,12 @@ else
     }
 
     public function getAdherentsNumber(){
-        return sizeof($this->adherents);
+        $cpt = 0;
+        for ($i=0; $i < sizeof($this->adherents); $i++) { 
+           if(!$this->adherents[$i]->getIsDeleted())
+            $cpt= $cpt +1;
+        }
+        return $cpt;
     }
 
     public function contains($adherent){
