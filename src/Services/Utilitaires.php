@@ -72,8 +72,9 @@ class Utilitaires
         return true;
     }
 
-    private function addFile($file){
-        $fileName = md5(uniqid()).'.'.$file->guessExtension();
+    public function addFile($file)
+    {
+        $fileName = md5(uniqid()) . '.' . $file->guessExtension();
         $file->move($this->params->get('upload_directory'), $fileName);
         return $fileName;
     }

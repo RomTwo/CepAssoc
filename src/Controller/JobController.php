@@ -3,7 +3,6 @@
 namespace App\Controller;
 
 use App\Entity\Job;
-use Firebase\JWT\JWT;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -25,7 +24,7 @@ class JobController extends AbstractController
 
         $manager = $this->getDoctrine()->getManager();
         if ($manager->getRepository(Job::class)->findOneBy(array('name' => $name))) {
-            return JsonResponse::create('Ce poste existe déjà', 409);
+            return JsonResponse::create("Ce poste existe déjà", 409);
         }
 
         $job = new Job();

@@ -57,10 +57,10 @@ class EventManagement
     private $job;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @ORM\Column(type="text", nullable=true)
      * @Groups({"event"})
      */
-    private $place;
+    private $description;
 
     /**
      * EventManagement constructor.
@@ -116,16 +116,24 @@ class EventManagement
         $this->job = $job;
     }
 
-
-    public function getPlace()
+    /**
+     * @return mixed
+     */
+    public function getDescription()
     {
-        return $this->place;
+        return $this->description;
     }
 
-    public function setPlace($place)
+    /**
+     * @param mixed $description
+     */
+    public function setDescription($description)
     {
-        $this->place = $place;
+        $this->description = $description;
     }
+
+
+
 
     /**
      * @return mixed

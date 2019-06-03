@@ -33,33 +33,37 @@ class Document
      */
     private $event;
 
-    public function getId(): ?int
+    /**
+     * Document constructor.
+     * @param $id
+     * @param $name
+     */
+    public function __construct($id, $name)
+    {
+        $this->id = $id;
+        $this->name = $name;
+    }
+
+
+    public function getId(): ?string
     {
         return $this->id;
     }
 
-    public function getOriginName(): ?string
+    /**
+     * @return mixed
+     */
+    public function getName()
     {
-        return $this->originName;
+        return $this->name;
     }
 
-    public function setOriginName(string $originName): self
+    /**
+     * @param mixed $name
+     */
+    public function setName($name)
     {
-        $this->originName = $originName;
-
-        return $this;
-    }
-
-    public function getCryptName(): ?string
-    {
-        return $this->cryptName;
-    }
-
-    public function setCryptName(string $cryptName): self
-    {
-        $this->cryptName = $cryptName;
-
-        return $this;
+        $this->name = $name;
     }
 
     /**
