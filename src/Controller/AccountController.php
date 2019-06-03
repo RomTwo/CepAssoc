@@ -6,6 +6,7 @@ use App\Entity\Account;
 use App\Entity\Activity;
 use App\Entity\Adherent;
 use App\Entity\HealthQuestionnaire;
+use App\Entity\TimeSlot;
 use App\Form\AccountType;
 use App\Services\CaptchaCheck;
 use App\Services\ForgotPassword;
@@ -59,6 +60,7 @@ class AccountController extends AbstractController
                         if ($this->isValidate($adherent)) {
                             $utilitaires->setOtherFields($adherent);
                             $adherent->setRegistrationType("nouveau");
+                            $this->setPrice($adherent,$request->request->get("selection"));
                         } else {
                             $msg = "Attention, il manque des informations pour devenir adhérent";
                             return $this->render('account/index.html.twig', array(
@@ -322,7 +324,7 @@ class AccountController extends AbstractController
         return true;
     }
 
-    public function generatePDF($adherent)
+    private function generatePDF($adherent)
     {
         $html = $this->render('account/generateHealthQuestionnairePDF.html.twig', [
             'adherent' => $adherent,
@@ -337,5 +339,23 @@ class AccountController extends AbstractController
         $filename = md5(uniqid()) . '.pdf';
         file_put_contents('uploads/' . $filename, $dompdf->output());
         $adherent->setHealthQuestionnaireFile($filename);
+    }
+
+    private function setPrice($adherent,$data)
+    {
+        $activities = array();
+        foreach ($data as $value) {
+            $timeSlot = $this->getDoctrine()->getRepository(TimeSlot::class)->find($value);
+            if(!in_array($timeSlot->getActivity()->getId(), $activities, true)){
+                array_push($activities, $timeSlot->getActivity()->getId());
+            }
+            $timeSlot->addAdherent($adherent);
+        }
+        $price = 0;
+        foreach ($activities as $value){
+            $activity = $this->getDoctrine()->getRepository(Activity::class)->find($value);
+            $price += $activity->getPrice();
+        }
+        $adherent->setRegistrationCost($price);
     }
 }

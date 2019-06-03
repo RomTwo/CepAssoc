@@ -81,7 +81,6 @@ string $email, string $city, string $password)
 
     private function loadAdherent5(Adherent $a, ObjectManager $o)
     {
-        $a->setpaymentFeesArePaid(false);
         $a->setisRegisteredInGestGym(false);
         $a->setStatus("EN ATTENTE");
         $a->setMedicalCertificateDate(new \DateTime("01-09-2019"));
@@ -118,7 +117,7 @@ string $email, string $city, string $password)
         $t->setStartTime($startTime);
         $t->setEndTime($endTime);
         $t->setCity($city);
-        $t->addActivity($activity);
+        $t->setActivity($activity);
         $o->persist($t);
     }
 

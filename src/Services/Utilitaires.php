@@ -22,7 +22,6 @@ class Utilitaires
         $adherent->setRegistrationDate(new \DateTime());
         $adherent->setIsRegisteredInGestGym(false);
         $adherent->setJudge(false);
-        $adherent->setRegistrationCost(0);
         $adherent->setMedicalCertificateDate(new \DateTime("01-09-2019"));
         $adherent->setNationality("France");
         $adherent->setIsFFGInsurance(false);
@@ -80,5 +79,7 @@ class Utilitaires
         $file->move($this->params->get('upload_directory'), $fileName);
         return $fileName;
     }
+
+
 
 }

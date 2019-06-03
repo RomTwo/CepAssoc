@@ -396,26 +396,22 @@
                                     <tbody>
                                     {% for activity in activities %}
                                         {% if activity.type == "SECTEUR LOISIRS" %}
-                                            <tr id={{ activity.id }}>
-                                                <td>{{ activity.name }}</td>
-                                                <td>
-                                                    {% for creneaux in activity.timeSlot %}
-                                                        <b>{{ days[creneaux.day] }}</b> de {{ creneaux.startTime|date('h\\hi') }}/{{ creneaux.endTime|date('h\\hi') }}
-                                                        {% if creneaux.city is not null %}
-                                                            à {{ creneaux.city }}
-                                                        {% endif %}
-                                                        <br/>
-                                                    {% endfor %}
-                                                </td>
-                                                <td>{{ activity.category.name }}</td>
-                                                <td id="price{{ activity.id }}">{{ activity.price }}</td>
-                                                <td>{{ activity.startDate|date('d/m/y') }}</td>
-                                                <td>
-                                                    <input type="checkbox" id="checkbox{{ activity.id }}"
-                                                           name="selection"
-                                                           value="{{ activity.id }}">
-                                                </td>
-                                            </tr>
+                                            {% for creneau in activity.timeSlot %}
+                                                <tr id={{ creneau.id }} value={{ activity.id }}>
+                                                    <td >{{ activity.name }}</td>
+                                                    <td>
+                                                        {{ creneau.getFullTime() }}
+                                                    </td>
+                                                    <td>{{ activity.category.name }}</td>
+                                                    <td id="price{{ activity.id }}" value="{{ activity.price }}">{{ activity.price }}</td>
+                                                    <td>{{ activity.startDate|date('d/m/y') }}</td>
+                                                    <td>
+                                                        <input type="checkbox"
+                                                               name="selection[]"
+                                                               value="{{ creneau.id }}">
+                                                    </td>
+                                                </tr>
+                                            {% endfor %}
                                         {% endif %}
                                     {% endfor %}
                                 </table>
@@ -435,26 +431,22 @@
                                     <tbody>
                                     {% for activity in activities %}
                                         {% if activity.type == "SECTEUR COMPETITIF" %}
-                                            <tr id={{ activity.id }}>
-                                                <td>{{ activity.category.id }}</td>
-                                                <td>
-                                                    {% for creneaux in activity.timeSlot %}
-                                                        <b>{{ days[creneaux.day] }}</b> de {{ creneaux.startTime|date('h\\hi') }}/{{ creneaux.endTime|date('h\\hi') }}
-                                                        {% if creneaux.city is not null %}
-                                                            à {{ creneaux.city }}
-                                                        {% endif %}
-                                                        <br/>
-                                                    {% endfor %}
-                                                </td>
-                                                <td>{{ activity.category.name }}</td>
-                                                <td id="price{{ activity.id }}">{{ activity.price }}</td>
-                                                <td>{{ activity.startDate|date('d/m/y') }}</td>
-                                                <td>
-                                                    <input type="checkbox" id="checkbox{{ activity.id }}"
-                                                           name="selection"
-                                                           value="{{ activity.id }}">
-                                                </td>
-                                            </tr>
+                                            {% for creneau in activity.timeSlot %}
+                                                <tr id={{ creneau.id }} value={{ activity.id }}>
+                                                    <td >{{ activity.name }}</td>
+                                                    <td>
+                                                        {{ creneau.getFullTime() }}
+                                                    </td>
+                                                    <td>{{ activity.category.name }}</td>
+                                                    <td id="price{{ activity.id }}" value="{{ activity.price }}">{{ activity.price }}</td>
+                                                    <td>{{ activity.startDate|date('d/m/y') }}</td>
+                                                    <td>
+                                                        <input type="checkbox"
+                                                               name="selection[]"
+                                                               value="{{ creneau.id }}">
+                                                    </td>
+                                                </tr>
+                                            {% endfor %}
                                         {% endif %}
                                     {% endfor %}
                                     </tbody>
@@ -1032,14 +1024,14 @@
                 var val = $(this).is(':checked') ? $("#volunteerDiv").show() : $("#volunteerDiv").hide();
             });
 
-            $("input[name='selection']").on('change', function () {
-                var $prix = 0;
+            var $timeSlot = [];
 
-                $.each($("input[name='selection']:checked"), function () {
-                    var $id = $(this).val();
-                    $prix = $prix + parseInt($("#price" + $id).text());
-                });
-                $("#prix").text($prix);
+            $("input[name='selection[]']").on('change', function () {
+                if($(this).is(':checked')){
+                    $timeSlot.push($(this).parent().parent().attr('value'));
+                }else{
+                    $timeSlot.splice($timeSlot.indexOf($(this).parent().parent().attr('value')), 1);
+                }
             });
 
             function stepChoice(step) {
@@ -1051,7 +1043,7 @@
                     case 'step3':
                         return step3();
                     case 'step4':
-                        return true;
+                        return step4();
                     default:
                         console.log('Sorry, we are out of ' + step + '.');
                 }
@@ -1137,6 +1129,18 @@
                 (isEmpty('adherent[zipCodeRep2]') ? $("#zipCodeRep2Help").hide() : ((isValidationZipCode('adherent[zipCodeRep2]')) ? ($("#zipCodeRep2Help").show(), bool = false) : $("#zipCodeRep2Help").hide()));
                 (isEmpty('adherent[phoneRep2]') ? $("#phoneRep2Help").hide() : ((isValidationPhoneNumber('adherent[phoneRep2]')) ? ($("#phoneRep2Help").show(), bool = false) : $("#phoneRep2Help").hide()));
                 return bool;
+            }
+
+            function step4(){
+                var $prix = 0;
+                var $unique = $timeSlot.filter(function(itm, i, $timeSlot) {
+                    return i == $timeSlot.indexOf(itm);
+                });
+                $($unique).each(function( index ) {
+                    $prix = $prix + parseInt($("#price"+$unique[index]).attr('value'));
+                });
+                $("#prix").text($prix);
+                return true;
             }
 
             function final() {

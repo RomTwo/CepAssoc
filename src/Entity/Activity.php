@@ -47,7 +47,7 @@ class Activity
     private $category;
 
     /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\TimeSlot", inversedBy="activities")
+     * @ORM\OneToMany(targetEntity="App\Entity\TimeSlot", mappedBy="activity")
      */
     private $timeSlot;
 
