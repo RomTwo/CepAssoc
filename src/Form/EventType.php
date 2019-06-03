@@ -48,15 +48,10 @@ class EventType extends AbstractType
                     'multiple' => true,
                 )
             )
-            ->add('documents', CollectionType::class, array(
-                    'entry_type' => DocumentType::class,
-                    'label' => false,
-                    'by_reference' => false,
-                    'allow_add' => true,
-                    'allow_delete' => true,
-                    'required' => false
-                )
-            )
+            ->add('documents', DocumentType::class, array(
+                'required' => false,
+                'data_class' => null,
+            ))
             ->add('submit', SubmitType::class);
         $builder->get('startDate')->addModelTransformer(new DatetimeToStringTransformer());
         $builder->get('endDate')->addModelTransformer(new DatetimeToStringTransformer());

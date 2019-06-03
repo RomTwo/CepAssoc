@@ -15,7 +15,8 @@ class Utilitaires
         $this->params = $params;
     }
 
-    public function setOtherFields($adherent){
+    public function setOtherFields($adherent)
+    {
         $adherent->setRegistrationDate(new \DateTime());
         $adherent->setIsRegisteredInGestGym(false);
         $adherent->setJudge(false);
@@ -33,47 +34,50 @@ class Utilitaires
         $adherent->setStatus("EN ATTENTE");
         $adherent->setAffiliateCode(md5(uniqid()));
 
-        if($adherent->getMedicalCertificate() != null){
+        if ($adherent->getMedicalCertificate() != null) {
             $adherent->setMedicalCertificate($this->addFile($adherent->getMedicalCertificate()));
         }
 
-        if($adherent->getBulletinN2Allianz() != null){
+        if ($adherent->getBulletinN2Allianz() != null) {
             $adherent->setBulletinN2Allianz($this->addFile($adherent->getBulletinN2Allianz()));
         }
 
-        if($adherent->getHealthQuestionnaireFile() != null){
+        if ($adherent->getHealthQuestionnaireFile() != null) {
             $adherent->setHealthQuestionnaireFile($this->addFile($adherent->getHealthQuestionnaireFile()));
         }
 
         return $adherent;
     }
 
-    public function setFiles($adherent){
-        if($adherent->getMedicalCertificate() != null && !is_string($adherent->getMedicalCertificate())){
+    public function setFiles($adherent)
+    {
+        if ($adherent->getMedicalCertificate() != null && !is_string($adherent->getMedicalCertificate())) {
             $adherent->setMedicalCertificate($this->addFile($adherent->getMedicalCertificate()));
         }
 
-        if($adherent->getBulletinN2Allianz() != null && !is_string($adherent->getBulletinN2Allianz())){
+        if ($adherent->getBulletinN2Allianz() != null && !is_string($adherent->getBulletinN2Allianz())) {
             $adherent->setBulletinN2Allianz($this->addFile($adherent->getBulletinN2Allianz()));
         }
 
-        if($adherent->getHealthQuestionnaireFile() != null && !is_string($adherent->getHealthQuestionnaireFile())){
+        if ($adherent->getHealthQuestionnaireFile() != null && !is_string($adherent->getHealthQuestionnaireFile())) {
             $adherent->setHealthQuestionnaireFile($this->addFile($adherent->getHealthQuestionnaireFile()));
         }
 
         return $adherent;
     }
 
-    public function isValidateCity($name){
-        if($name == null){
+    public function isValidateCity($name)
+    {
+        if ($name == null) {
             return false;
         }
 
         return true;
     }
 
-    private function addFile($file){
-        $fileName = md5(uniqid()).'.'.$file->guessExtension();
+    private function addFile($file)
+    {
+        $fileName = md5(uniqid()) . '.' . $file->guessExtension();
         $file->move($this->params->get('upload_directory'), $fileName);
         return $fileName;
     }

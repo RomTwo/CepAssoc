@@ -90,7 +90,7 @@
         <label>Fichiers associés : </label>
     </div>
     <div class="col-auto">
-        {{ form_widget(form.documents) }}
+        {{ form_widget(form.documents, {'full_name': 'documents'}) }}
     </div>
     <div class="row ml-1">
         {{ form_errors(form.documents) }}

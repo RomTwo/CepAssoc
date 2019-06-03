@@ -6,6 +6,7 @@ use App\Form\EventType;
 use App\Entity\Event;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 class AdminEventsController extends AbstractController
 {
@@ -17,12 +18,24 @@ class AdminEventsController extends AbstractController
         $form = $this->createForm(EventType::class, $event);
         $form->handleRequest($request);
 
+            print_r($form->getData());
         if ($form->isSubmitted() && $form->isValid()) {
             $manager = $this->getDoctrine()->getManager();
+            $files = $event->getDocuments()->toArray();
+            var_dump($files);
+            var_dump(count($files['name']));
+            if (count($files['name']) > 0) {
+                foreach ($files as $file) {
+                    $manager->persist($file);
+                }
+            } else {
+                $event->setDocuments(null);
+            }
             $manager->persist($event);
             $manager->flush();
             $this->addFlash('success', 'évènement ajouté');
-            return $this->redirectToRoute('admin_events');
+            //return $this->redirectToRoute('admin_events');
+            return new Response("dsq");
         }
 
         return $this->render('administration/events/events.html.twig', array(

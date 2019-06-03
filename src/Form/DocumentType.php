@@ -14,10 +14,9 @@ class DocumentType extends AbstractType
     {
         $builder
             ->add('name', FileType::class, array(
-                    'attr' => array(
-                        'placeholder' => "Choisissez votre certificat médical"
-                    ),
-                    'multiple' => true
+                    'multiple' => true,
+                    'label' => false,
+                    'required' => false
                 )
             );
     }

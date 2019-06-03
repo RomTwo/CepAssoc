@@ -57,7 +57,6 @@ class Event
     private $eventManagements;
 
 
-
     /**
      * @ORM\ManyToMany(targetEntity="App\Entity\Job", cascade={"persist"})
      */
@@ -65,6 +64,7 @@ class Event
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Document", mappedBy="event")
+     * @ORM\JoinColumn(nullable=true)
      */
     private $documents;
 
