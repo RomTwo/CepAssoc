@@ -5,6 +5,7 @@ twig:
   form_themes: ['themes/form.html.twig']
   globals:
     recaptcha_key_site: '%env(RECAPTCHA_KEY_SITE)%'
+    maps_key: '%env(MAPS_KEY)%'
     healthQuestionnaireQuestion1: Un membre de votre famille est-il décédé subitement d'une crise cardiaque ou inexpliquée ?
     healthQuestionnaireQuestion2: Avez-vous ressenti une douleur dans la poitrine, des palpitations, un essoufflement inhabituel ou un malaise ?
     healthQuestionnaireQuestion3: Avez-vous eu un épisode de respiration sifflante (asthme) ?

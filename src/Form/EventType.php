@@ -7,7 +7,9 @@ use App\Entity\Job;
 use App\Repository\JobRepository;
 use App\Transformer\DatetimeToStringTransformer;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use \Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -43,10 +45,14 @@ class EventType extends AbstractType
                             ->orderBy('j.name', 'ASC');
                     },
                     'expanded' => true,
-                    'multiple' => true
+                    'multiple' => true,
                 )
             )
-            ->add('submit', SubmitType::class);
+            ->add('documents', DocumentType::class, array(
+                'required' => false,
+                'data_class' => null,
+            ))
+            ->add('submit', SubmitType::class, array('label' => 'Valider'));
         $builder->get('startDate')->addModelTransformer(new DatetimeToStringTransformer());
         $builder->get('endDate')->addModelTransformer(new DatetimeToStringTransformer());
 

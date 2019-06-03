@@ -6,55 +6,124 @@
 
 {% block body %}
     <div>
-        {{ form_start(form) }}
+
         <div class="container mt-4">
             <div class="form-group pb-4 pt-4">
                 <div class="container-fluid">
-                    <h4>Participer à l'évènement : </h4>
+                    <form action="{{ path('event_participate', {id:event.id}) }}" method="post">
+                        <h4>Participer à l'évènement : </h4>
 
-                    <div class="row mt-3">
-                        <div class="col-2">
-                            <label>Disponibilité de départ : </label>
+                        {% if errors is defined and errors is not null %}
+                            <div class="row ml-1">
+                            <span class="invalid-feedback d-block">
+                                <span class="d-block">
+                                    <span class="form-error-icon badge badge-danger text-uppercase">Erreur : </span>
+                                    <span class="form-error-message">{{ errors }}</span>
+                                </span>
+                            </span>
+                            </div>
+                        {% endif %}
+
+
+                        <div class="formMain">
+                            <div class="formBlock">
+                                <div class="row mt-3">
+                                    <div class="col-2">
+                                        <label>Disponibilité de départ : </label>
+                                    </div>
+                                    <div class="col-auto">
+                                        <input type="text" name="start0" class="dateTimePickerEvent form-control">
+                                    </div>
+                                </div>
+                                <div class="row mt-3">
+                                    <div class="col-2">
+                                        <label>Disponibilité de fin : </label>
+                                    </div>
+                                    <div class="col-auto">
+                                        <input type="text" name="end0" class="dateTimePickerEvent form-control">
+                                    </div>
+                                </div>
+                                <div class="row mt-3">
+                                    <div class="col-2">
+                                        <label>Tâche : </label>
+                                    </div>
+                                    <div class="col-auto">
+                                        <select class="form-control" name="job0">
+                                            {% for job in jobsEvent %}
+                                                <option value="{{ job.id }}">{{ job.name }}</option>
+                                            {% endfor %}
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                        <div class="col-auto">
-                            {{ form_widget(form.startDate) }}
+                        <div class="row mt-3">
+                            <div class="col-3">
+                                <button id="addAvailibility" class="btn btn-primary" type="button"
+                                        data-toggle="collapse"
+                                        data-target="#modalViewEventFollow"
+                                        aria-expanded="false" aria-controls="addEvent">
+                                    Ajouter une disponibilité
+                                </button>
+                            </div>
                         </div>
-                        <div class="row ml-1">
-                            {{ form_errors(form.startDate) }}
+
+                        <div class="row mt-3 ml-1">
+                            <input type="submit" value="Participer" class="btn btn-success">
                         </div>
-                    </div>
-                    <div class="row mt-3">
-                        <div class="col-2">
-                            <label>Disponibilité de fin : </label>
-                        </div>
-                        <div class="col-auto">
-                            {{ form_widget(form.endDate) }}
-                        </div>
-                        <div class="row ml-1">
-                            {{ form_errors(form.endDate) }}
-                        </div>
-                    </div>
-                    <div class="row mt-3">
-                        <div class="col-2">
-                            <label>Tâche : </label>
-                        </div>
-                        <div class="col-auto">
-                            {{ form_widget(form.job) }}
-                        </div>
-                        <div class="row ml-1">
-                            {{ form_errors(form.job) }}
-                        </div>
-                    </div>
-                    {{ form_widget(form.submit) }}
+                    </form>
                 </div>
             </div>
         </div>
-        {{ form_end(form) }}
+        <input id="startDate" type="hidden" value="{{ event.startDate | date("Y-m-d H:i") }}">
+        <input id="endDate" type="hidden" value="{{ event.endDate | date("Y-m-d H:i") }}">
 
-        <input id="startDate" type="hidden" value="{{ start | date("Y-m-d H:i") }}">
-        <input id="endDate" type="hidden" value="{{ end | date("Y-m-d H:i") }}">
     </div>
 {% endblock %}
 {% block javascripts %}
+    {{ encore_entry_script_tags('datetimeEvent') }}
+
+    <script>
+        $(document).ready(function () {
+            // When the user clic on the add availibility button
+            $('#addAvailibility').click(function () {
+                // Get number of child of main div in form
+                let nb = $('.formMain').children().length;
+
+                // Clone the form with à new class
+                let clone = $('.formBlock').clone().attr('class', 'formBlock' + nb);
+
+                // Add the new form in the main div
+                $('.formMain').append(clone);
+
+                // Change name, id, and clear the datepicker fields (concerns inputs)
+                $('.' + clone.attr('class') + ' :input').each(function () {
+                    // delete the last character of the name input
+                    let last = ($(this).attr("name")).substring(0, ($(this).attr("name")).length - 1);
+
+                    // Change the name input
+                    $(this).attr("name", last + nb);
+
+                    // Change the id input
+                    $(this).attr("id", $(this).attr("id") + nb);
+
+                    // Reset data in datepicker inputs
+                    if ($(this).attr("class") === 'dateTimePickerEvent form-control') {
+                        $(this).val('');
+                    }
+
+                });
+
+                // Initialize a new fields who content a datepicker
+                $('.dateTimePickerEvent').bootstrapMaterialDatePicker({
+                    format: 'DD-MM-YYYY HH:mm',
+                    lang: 'fr',
+                    minDate: moment($('#startDate').val()),
+                    maxDate: moment($('#endDate').val())
+                });
+
+            });
+        });
+    </script>
     {{ encore_entry_script_tags('datetimeEvent') }}
 {% endblock %}

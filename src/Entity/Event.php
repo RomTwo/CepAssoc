@@ -56,15 +56,23 @@ class Event
      */
     private $eventManagements;
 
+
     /**
      * @ORM\ManyToMany(targetEntity="App\Entity\Job", cascade={"persist"})
      */
     private $jobs;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Document", mappedBy="event", cascade={"persist", "remove"})
+     * @ORM\JoinColumn(nullable=true)
+     */
+    private $documents;
+
     public function __construct()
     {
         $this->eventManagements = new ArrayCollection();
         $this->jobs = new ArrayCollection();
+        $this->documents = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -179,6 +187,38 @@ class Event
         }
 
         return $this;
+    }
+
+    /**
+     * @return Collection|Document[]
+     */
+    public function getDocuments(): Collection
+    {
+        return $this->documents;
+    }
+
+    public function setDocuments(Document $document = null): self
+    {
+        if (!$this->documents->contains($document)) {
+            $this->documents[] = $document;
+        }
+        $document->setEvent($this);
+
+        return $this;
+    }
+
+    public function removeDocuments(Document $document): self
+    {
+        if ($this->documents->contains($document)) {
+            $this->documents->removeElement($document);
+        }
+
+        return $this;
+    }
+
+    public function clearDocuments()
+    {
+        $this->documents->clear();
     }
 
 

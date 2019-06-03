@@ -1,180 +1,209 @@
 {% extends 'administration/layout_admin.html.twig' %}
 
 {% block title %}Adherents{% endblock %}
+{% block title %}Adherents
+{% endblock %}
 
 {% block body %}
 
-<div class="text-right" style="margin-bottom : 20px;">
-    <button id="all_adherents" class="btn btn-outline-dark">Tous les adhérents</button>
-    <button id="valid_adherents" class="btn btn-outline-dark">Adhérent validés</button>
-    <button id="wait_adherents" class="btn btn-outline-dark">Adhérent en attente</button>
-</div>
+    <div class="row justify-content-end" style="margin-bottom : 20px;">
+        <div class="col-sm-3 text-right">
+            <button class="btn btn-outline-dark" id="filter">Filtrer</button>
+        </div>
+        <div class="col-sm-3 ">
+            <select class="form-control" id="statusAdherent" name="statusAdherent">
+                <option selected value="">Tous les adhérens</option>
+                <option value="validée">Adhérents validés</option>
+                <option value="Inscription en attente">En attente</option>
+                <option value="document(s)">En manque de document(s)</option>
+                <option value="paiement">En manque de paiement</option>
+            </select>
+        </div>
+    </div>
 
-<table id="allAdherentsTable" class="table table-striped table-bordered" style="width: 100%;" role="grid"
-        aria-describedby="example_info">
-    <thead>
-    <tr role="row">
-        <th class="sorting_asc" tabindex="0" aria-controls="example" rowspan="1" colspan="1"
-            style="width: 119px;" aria-sort="ascending"
-            aria-label="lastName: activate to sort column descending">Nom/Prénom
-        </th>
-        <th class="sorting_asc" tabindex="2" aria-controls="example" rowspan="1" colspan="1"
-            style="width: 119px;" aria-sort="ascending"
-            aria-label="firstName: activate to sort column descending">Date d'inscription
-        </th>
-        <th class="sorting_asc" tabindex="3" aria-controls="example" rowspan="1" colspan="1"
-            style="width: 119px;" aria-sort="ascending"
-            aria-label="firstName: activate to sort column descending">Statut de l'inscription
-        </th>
-        <th class="sorting_asc" tabindex="4" aria-controls="example" rowspan="1" colspan="1"
-            style="width: 119px;" aria-sort="ascending"
-            aria-label="firstName: activate to sort column descending">Inscription dans GestGym
-        </th>
-        <th class="sorting_asc" tabindex="5" aria-controls="example" rowspan="1" colspan="1"
-            style="width: 119px;" aria-sort="ascending"
-            aria-label="firstName: activate to sort column descending">Voir détails
-        </th>
-    </tr>
-    </thead>
-    <tbody>
-    {% for adherent in adherents %}
-        {% if adherent.isDeleted == false %}
-            <tr role="row" class="odd">
-                <td>
-                    {{ adherent.lastName }}  {{ adherent.firstName }}
-                </td>
-                <td>
-                    {{ adherent.registrationDate|date('d-m-Y') }}
-                </td>
-                <td>
-                    <span data-toggle="modal" data-target="#changeStatut{{ adherent.id }}">
-                        <a href="#"  data-toggle="tooltip" data-placement="top" title="Changer le statut">
-                            {% if adherent.status == "EN ATTENTE" %}
-                                <span style="color:red">Inscription en attente</span>
-                            {% elseif adherent.status == "EN MANQUE DE DOCUMENT" %}
-                                <span style="color:#916319">En manque de document(s)</span>
-                            {% elseif adherent.status == "EN MANQUE DE PAIEMENT" %}
-                                <span style="color:orangered">En attente paiement</span>
-                            {% elseif adherent.status == "EN MANQUE DE DOCUMENT ET PAIEMENT" %}
-                                <span style="color:purple">En manque de document(s) et en attente de paiement</span>
-                            {% elseif adherent.status == "VALIDE" %}
-                                <span style="color:green">Inscription validée</span>
-                            {% endif %}
+    <table aria-describedby="example_info" class="table table-striped table-bordered" id="allAdherentsTable" role="grid"
+           style="width: 100%;">
+        <thead>
+        <tr role="row">
+            <th aria-controls="example" aria-label="lastName: activate to sort column descending" aria-sort="ascending"
+                class="sorting_asc" colspan="1" rowspan="1" style="width: 119px;" tabindex="0">Nom/Prénom
+            </th>
+            <th aria-controls="example" aria-label="firstName: activate to sort column descending" aria-sort="ascending"
+                class="sorting_asc" colspan="1" rowspan="1" style="width: 119px;" tabindex="2">Date d'inscription
+            </th>
+            <th aria-controls="example" aria-label="firstName: activate to sort column descending" aria-sort="ascending"
+                class="sorting_asc" colspan="1" rowspan="1" style="width: 119px;" tabindex="3">Statut de l'inscription
+            </th>
+            <th aria-controls="example" aria-label="firstName: activate to sort column descending" aria-sort="ascending"
+                class="sorting_asc" colspan="1" rowspan="1" style="width: 119px;" tabindex="4">Inscription dans GestGym
+            </th>
+            <th aria-controls="example" aria-label="firstName: activate to sort column descending" aria-sort="ascending"
+                class="sorting_asc" colspan="1" rowspan="1" style="width: 119px;" tabindex="5">Voir détails
+            </th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for adherent in adherents %}
+            {% if adherent.isDeleted == false %}
+                <tr class="odd" role="row">
+                    <td>
+                        {{ adherent.lastName }}
+                        {{ adherent.firstName }}
+                    </td>
+                    <td>
+                        {{ adherent.registrationDate|date('d-m-Y') }}
+                    </td>
+                    <td>
+                            <span data-target="#changeStatut{{ adherent.id }}" data-toggle="modal">
+                                <a data-placement="top" data-toggle="tooltip" href="#" title="Changer le statut">
+                                    {% if adherent.status == "EN ATTENTE" %}
+                                        <span style="color:red">Inscription en attente</span>
+                                    {% elseif adherent.status == "EN MANQUE DE DOCUMENT" %}
+                                        <span style="color:#916319">En manque de document(s)</span>
+                                    {% elseif adherent.status == "EN MANQUE DE PAIEMENT" %}
+                                        <span style="color:orangered">En attente paiement</span>
+                                    {% elseif adherent.status == "EN MANQUE DE DOCUMENT ET PAIEMENT" %}
+                                        <span style="color:purple">En manque de document(s) et en attente de paiement</span>
+                                    {% elseif adherent.status == "VALIDE" %}
+                                        <span style="color:green">Inscription validée</span>
+                                    {% endif %}
+                                </a>
+                            </span>
+                    </td>
+                    <td>
+                            <span data-target="#changeStatutGESTGYM{{ adherent.id }}" data-toggle="modal">
+                                <a data-placement="top" data-toggle="tooltip" href="#" title="Changer le statut">
+                                    {% if adherent.isRegisteredInGestGym %}
+                                        <span style="color:green">Effectuée</span>
+                                    {% else %}
+                                        <span style="color:red">Non effectuée</span>
+                                    {% endif %}
+                                </a>
+                            </span>
+
+                    </td>
+                    <td>
+                        <a class="btn btn-success" href="{{ path('admin_adherentsPDF', {id: adherent.id}) }}"
+                           data-toggle="tooltip" data-placement="top" title="Télécharger le PDF de l'adhérent">
+                            <i class="far fa-file-pdf"></i>
                         </a>
-                    </span>
-                </td>
-                <td>
-                    <span data-toggle="modal" data-target="#changeStatutGESTGYM{{ adherent.id }}">
-                        <a href="#"  data-toggle="tooltip" data-placement="top" title="Changer le statut">
-                            {% if adherent.isRegisteredInGestGym %}
-                                <span style="color:green">Effectuée</span>
-                            {% else %}
-                                <span style="color:red">Non effectuée</span>
-                            {% endif %}
+                        <a class="btn btn-warning" href="{{ path('admin_adherentsEdit', {id: adherent.id}) }}"
+                           data-toggle="tooltip" data-placement="top" title="Modifier l'adhérent">
+                            <i class="far fa-edit"></i>
                         </a>
-                    </span>
 
-                </td>
-                <td>
-                    <a class="btn btn-success" href="{{ path('admin_adherentsPDF', {id: adherent.id}) }}" data-toggle="tooltip" data-placement="top" title="Télécharger le PDF de l'adhérent">
-                        <i class="far fa-file-pdf"></i>
-                    </a>
-                    <a class="btn btn-warning" href="{{ path('admin_adherentsEdit', {id: adherent.id}) }}" data-toggle="tooltip" data-placement="top" title="Modifier l'adhérent">
-                        <i class="far fa-edit"></i>
-                    </a>
-
-                    <span data-toggle="modal" data-target="#exampleModal{{ adherent.id }}">
-                        <button type="button" class="btn btn-primary" data-toggle="tooltip" data-placement="top"
-                                title="Voir plus">
-                            <i class="far fa-eye"></i>
-                        </button>
-                    </span>
-                    <a class="btn btn-danger" href="{{ path('admin_adherentsDelete', {id: adherent.id}) }}" data-toggle="tooltip" data-placement="top" title="Supprimer l'adhérent">
-                        <i class="far fa-trash-alt"></i>
-                    </a>
-
-                </td>
-            </tr>
-            <!-- MODAL changement de statut -->
-            <div class="modal fade" id="changeStatut{{ adherent.id }}" tabindex="-1" role="dialog" aria-labelledby="changeStatutLabel{{ adherent.id }}" aria-hidden="true">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="changeStatutLabel{{ adherent.id }}">Changer le statut</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <form action="{{ path('admin_editStatus', {id: adherent.id}) }}">
-                            <div class="modal-body">
-                                    <select name="status" id="status" class="form-control">
-                                        <option {% if adherent.status == "EN ATTENTE" %}selected{% endif %} value="EN ATTENTE">EN ATTENTE</option>
-                                        <option {% if adherent.status == "EN MANQUE DE DOCUMENT" %}selected{% endif %} value="EN MANQUE DE DOCUMENT">EN MANQUE DE DOCUMENT</option>
-                                        <option {% if adherent.status == "EN MANQUE DE PAIEMENT" %}selected{% endif %} value="EN MANQUE DE PAIEMENT">EN MANQUE DE PAIEMENT</option>
-                                        <option {% if adherent.status == "EN MANQUE DE DOCUMENT ET PAIEMENT" %}selected{% endif %} value="EN MANQUE DE DOCUMENT ET PAIEMENT">EN MANQUE DE DOCUMENT ET PAIEMENT</option>
-                                        <option {% if adherent.status == "VALIDE" %}selected{% endif %} value="VALIDE">VALIDE</option>
-                                    </select>
-                                
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal" data-toggle="modal">
-                                    Annuler
+                        <span data-target="#exampleModal{{ adherent.id }}" data-toggle="modal">
+                                <button class="btn btn-primary" data-placement="top" data-toggle="tooltip"
+                                        title="Voir plus" type="button">
+                                    <i class="far fa-eye"></i>
                                 </button>
-                                <input type="submit" class="btn btn-success" value="Valider">
-                                
+                </span>
+                        <a class="btn btn-danger" href="{{ path('admin_adherentsDelete', {id: adherent.id}) }}"
+                           data-toggle="tooltip" data-placement="top" title="Supprimer l'adhérent">
+                            <i class="far fa-trash-alt"></i>
+                        </a>
+
+                    </td>
+                </tr>
+                <!-- MODAL changement de statut -->
+                <div aria-hidden="true" aria-labelledby="changeStatutLabel{{ adherent.id }}" class="modal fade"
+                     id="changeStatut{{ adherent.id }}" role="dialog" tabindex="-1">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="changeStatutLabel{{ adherent.id }}">Changer le statut</h5>
+                                <button aria-label="Close" class="close" data-dismiss="modal" type="button">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
                             </div>
-                        </form>
+                            <form action="{{ path('admin_editStatus', {id: adherent.id}) }}">
+                                <div class="modal-body">
+                                    <select class="form-control" id="status" name="status">
+                                        <option {% if adherent.status == "EN ATTENTE" %} selected {% endif %}
+                                                value="EN ATTENTE">EN ATTENTE
+                                        </option>
+                                        <option {% if adherent.status == "EN MANQUE DE DOCUMENT" %} selected {% endif %}
+                                                value="EN MANQUE DE DOCUMENT">EN MANQUE DE DOCUMENT
+                                        </option>
+                                        <option {% if adherent.status == "EN MANQUE DE PAIEMENT" %} selected {% endif %}
+                                                value="EN MANQUE DE PAIEMENT">EN MANQUE DE PAIEMENT
+                                        </option>
+                                        <option {% if adherent.status == "EN MANQUE DE DOCUMENT ET PAIEMENT" %} selected {% endif %}
+                                                value="EN MANQUE DE DOCUMENT ET PAIEMENT">EN MANQUE DE DOCUMENT ET
+                                            PAIEMENT
+                                        </option>
+                                        <option {% if adherent.status == "VALIDE" %} selected {% endif %}
+                                                value="VALIDE">VALIDE
+                                        </option>
+                                    </select>
+
+                                </div>
+                                <div class="modal-footer">
+                                    <button class="btn btn-secondary" data-dismiss="modal" data-toggle="modal"
+                                            type="button">
+                                        Annuler
+                                    </button>
+                                    <input class="btn btn-success" type="submit" value="Valider">
+
+                                </div>
+                            </form>
+                        </div>
                     </div>
                 </div>
-            </div>
-            
-             <!-- MODAL changement de statut GESTGYM -->
-            <div class="modal fade" id="changeStatutGESTGYM{{ adherent.id }}" tabindex="-1" role="dialog" aria-labelledby="changeStatutGESTGYMLabel{{ adherent.id }}" aria-hidden="true">
-                        <div class="modal-dialog" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="changeStatutGESTGYMLabel{{ adherent.id }}">Changer le statut</h5>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
-                                <form action="{{ path('admin_editStatusGESTGYM', {id: adherent.id}) }}">
-                                    <div class="modal-body">
-                                            <select name="status" id="status" class="form-control">
-                                                <option {% if adherent.isRegisteredInGestGym == true %}selected{% endif %} value="1">Effectuée</option>
-                                                <option {% if adherent.isRegisteredInGestGym == false %}selected{% endif %} value="0">Non effectuée</option>
-                                            </select>
-                                        
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-dismiss="modal" data-toggle="modal">
-                                            Annuler
-                                        </button>
-                                        <input type="submit" class="btn btn-success" value="Valider">
-                                        
-                                    </div>
-                                </form>
+
+                <!-- MODAL changement de statut GESTGYM -->
+                <div aria-hidden="true" aria-labelledby="changeStatutGESTGYMLabel{{ adherent.id }}" class="modal fade"
+                     id="changeStatutGESTGYM{{ adherent.id }}" role="dialog" tabindex="-1">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="changeStatutGESTGYMLabel{{ adherent.id }}">Changer le
+                                    statut</h5>
+                                <button aria-label="Close" class="close" data-dismiss="modal" type="button">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
                             </div>
+                            <form action="{{ path('admin_editStatusGESTGYM', {id: adherent.id}) }}">
+                                <div class="modal-body">
+                                    <select class="form-control" id="status" name="status">
+                                        <option {% if adherent.isRegisteredInGestGym == true %} selected {% endif %}
+                                                value="1">Effectuée
+                                        </option>
+                                        <option {% if adherent.isRegisteredInGestGym == false %} selected {% endif %}
+                                                value="0">Non effectuée
+                                        </option>
+                                    </select>
+
+                                </div>
+                                <div class="modal-footer">
+                                    <button class="btn btn-secondary" data-dismiss="modal" data-toggle="modal"
+                                            type="button">
+                                        Annuler
+                                    </button>
+                                    <input class="btn btn-success" type="submit" value="Valider">
+
+                                </div>
+                            </form>
                         </div>
                     </div>
-        
-        
-        
-        {% endif %}
-    {% endfor %}
-    </tbody>
-    <tfoot>
+                </div>
 
-    <tr>
-        <th rowspan="1" colspan="1">Nom/Prénom</th>
-        <th rowspan="1" colspan="1">Date d'inscription</th>
-        <th rowspan="1" colspan="1">Statut de l'inscription</th>
-        <th rowspan="1" colspan="1">Inscription dans GestGym</th>
-        <th rowspan="1" colspan="1">Voir détails</th>
-    </tr>
-    </tfoot>
-</table>
-   
+
+            {% endif %}
+        {% endfor %}
+        </tbody>
+        <tfoot>
+
+        <tr>
+            <th colspan="1" rowspan="1">Nom/Prénom</th>
+            <th colspan="1" rowspan="1">Date d'inscription</th>
+            <th colspan="1" rowspan="1">Statut de l'inscription</th>
+            <th colspan="1" rowspan="1">Inscription dans GestGym</th>
+            <th colspan="1" rowspan="1">Voir détails</th>
+        </tr>
+        </tfoot>
+    </table>
+
 
     <!-- Modals -->
     {% for adherent in adherents %}
@@ -190,16 +219,21 @@
                     </div>
                     <div class="modal-body">
                         <div class="container-fluid">
-                            <p>TYPE D'INSCRIPTION : {{ adherent.registrationType }} </p>
-                            <p>DATE DE DEPOT DU DOSSIER : {{ adherent.registrationDate|date('d-m-Y') }}</p>
-                            <p> Etat de l'inscription :
+                            <p>TYPE D'INSCRIPTION :
+                                {{ adherent.registrationType }}
+                            </p>
+                            <p>DATE DE DEPOT DU DOSSIER :
+                                {{ adherent.registrationDate|date('d-m-Y') }}</p>
+                            <p>
+                                Etat de l'inscription :
                                 {% if adherent.status =="VALIDE" %}
                                     <span style="color:green">Inscription validée</span>
                                 {% else %}
                                     <span style="color:red">Inscription non validée</span>
                                 {% endif %}
                             </p>
-                            <p> Inscription dans GestGym :
+                            <p>
+                                Inscription dans GestGym :
                                 {% if adherent.isRegisteredInGestGym %}
                                     <span style="color:green">Effectuée</span>
                                 {% else %}
@@ -231,21 +265,29 @@
                             <div class="alert alert-secondary" role="alert">
                                 <div class="row">
                                     <div class="col">
-                                        <p><strong>Adhérent ou représentant légal 1</strong></p>
-                                        <p>{{ adherent.firstNameRep1 }} {{ adherent.lastNameRep1 }}</p>
+                                        <p>
+                                            <strong>Adhérent ou représentant légal 1</strong>
+                                        </p>
+                                        <p>{{ adherent.firstNameRep1 }}
+                                            {{ adherent.lastNameRep1 }}</p>
                                         <p>{{ adherent.professionRep1 }}</p>
                                         <p>{{ adherent.addressRep1 }}</p>
-                                        <p>{{ adherent.zipCodeRep1 }} {{ adherent.cityRep1 }}</p>
+                                        <p>{{ adherent.zipCodeRep1 }}
+                                            {{ adherent.cityRep1 }}</p>
                                         <p>{{ adherent.phoneRep1 }}</p>
                                         <p>{{ adherent.emailRep1 }}</p>
                                     </div>
                                     <div class="col">
-                                        <p><strong>Adhérent ou représentant légal 2</strong></p>
+                                        <p>
+                                            <strong>Adhérent ou représentant légal 2</strong>
+                                        </p>
                                         {% if adherent.firstNameRep2 %}
-                                            <p>{{ adherent.firstNameRep2 }} {{ adherent.lastNameRep2 }}</p>
+                                            <p>{{ adherent.firstNameRep2 }}
+                                                {{ adherent.lastNameRep2 }}</p>
                                             <p>{{ adherent.professionRep2 }}</p>
                                             <p>{{ adherent.addressRep2 }}</p>
-                                            <p>{{ adherent.zipCodeRep2 }} {{ adherent.cityRep2 }}</p>
+                                            <p>{{ adherent.zipCodeRep2 }}
+                                                {{ adherent.cityRep2 }}</p>
                                             <p>{{ adherent.phoneRep2 }}</p>
                                             <p>{{ adherent.emailRep2 }}</p>
                                         {% else %}
@@ -255,28 +297,30 @@
                                     </div>
                                 </div>
                             </div>
-                            <p><strong>JUGES</strong></p>
+                            <p>
+                                <strong>JUGES</strong>
+                            </p>
                             <div class="alert alert-secondary" role="alert">
                                 <div class="row">
                                     <div class="col">
                                         <p>Juge GAF :
                                             {% if adherent.isGAFJudge %}
-                                                <i class="fas fa-check" style ="color : green"></i>
+                                                <i class="fas fa-check" style="color : green"></i>
                                                 Niveau :
                                                 {{ adherent.GAFJudgeLevel }}
                                             {% else %}
-                                                <i class="fas fa-times" style ="color : red"></i>
+                                                <i class="fas fa-times" style="color : red"></i>
                                             {% endif %}
                                         </p>
                                     </div>
                                     <div class="col">
                                         <p>Juge GAM
                                             {% if adherent.isGAMJudge %}
-                                                <i class="fas fa-check" style ="color : green"></i>
+                                                <i class="fas fa-check" style="color : green"></i>
                                                 Niveau :
                                                 {{ adherent.GAMJudgeLevel }}
                                             {% else %}
-                                                <i class="fas fa-times" style ="color : red"></i>
+                                                <i class="fas fa-times" style="color : red"></i>
                                             {% endif %}
                                         </p>
                                     </div>
@@ -287,7 +331,7 @@
                                                 Niveau :
                                                 {{ adherent.TEAMGYMJudgeLevel }}
                                             {% else %}
-                                                <i class="fas fa-times" style ="color : red"></i>
+                                                <i class="fas fa-times" style="color : red"></i>
                                             {% endif %}
                                         </p>
                                     </div>
@@ -296,28 +340,37 @@
                                     <div class="col">
                                         <p>Je souhaite suivre une formation de juge :
                                             {% if adherent.wantsAJudgeTraining %}
-                                                <i class="fas fa-check" style ="color : green"></i>
+                                                <i class="fas fa-check" style="color : green"></i>
                                             {% else %}
-                                                <i class="fas fa-times" style ="color : red"></i>
+                                                <i class="fas fa-times" style="color : red"></i>
                                             {% endif %}
                                         </p>
                                     </div>
                                 </div>
                             </div>
-                            <p><strong>BENEVOLES</strong></p>
+                            <p>
+                                <strong>BENEVOLES</strong>
+                            </p>
                             <div class="alert alert-secondary" role="alert">
                                 <div class="row">
                                     <div class="col">
-                                        <p>Aide à l'entraînement : {{ adherent.volunteerForTrainingHelp }}</p>
+                                        <p>Aide à l'entraînement :
+                                            {{ adherent.volunteerForTrainingHelp }}</p>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col">
-                                        <p>Aide à la vie du club : {{ adherent.volunteerForClubLife }}</p>
+                                        <p>Aide à la vie du club :
+                                            {{ adherent.volunteerForClubLife }}</p>
                                     </div>
                                 </div>
                             </div>
-                            <p><strong>MONTANT DE LA COTISATION : <span style="color:red">{{ adherent.registrationCost }} €</span></strong></p>
+                            <p>
+                                <strong>MONTANT DE LA COTISATION :
+                                    <span style="color:red">{{ adherent.registrationCost }}
+                                        €</span>
+                                </strong>
+                            </p>
                             <div class="alert alert-secondary" role="alert">
                                 <div class="row">
                                     <div class="col">
@@ -332,7 +385,9 @@
                                 </div>
                             </div>
 
-                            <p><strong>DROIT A L'IMAGE</strong></p>
+                            <p>
+                                <strong>DROIT A L'IMAGE</strong>
+                            </p>
                             <div class="alert alert-secondary" role="alert">
                                 <div class="row">
                                     <div class="col">
@@ -340,14 +395,16 @@
                                         enrichir la
                                         photothèque et le site internet du club :
                                         {% if adherent.imageRight %}
-                                            <i class="fas fa-check" style ="color : green"></i>
+                                            <i class="fas fa-check" style="color : green"></i>
                                         {% else %}
-                                            <i class="fas fa-times" style ="color : red"></i>
+                                            <i class="fas fa-times" style="color : red"></i>
                                         {% endif %}
                                     </div>
                                 </div>
                             </div>
-                            <p><strong>PARTIE RESERVE A L'ADMINISTRATION</strong></p>
+                            <p>
+                                <strong>PARTIE RESERVE A L'ADMINISTRATION</strong>
+                            </p>
                             <div class="alert alert-secondary" role="alert">
                                 <div class="row">
                                     <div class="col-4">
@@ -355,9 +412,9 @@
                                     </div>
                                     <div class="col-2">
                                         {% if adherent.bulletinN2Allianz %}
-                                            <i class="fas fa-check" style ="color : green"></i>
+                                            <i class="fas fa-check" style="color : green"></i>
                                         {% else %}
-                                            <i class="fas fa-times" style ="color : red"></i>
+                                            <i class="fas fa-times" style="color : red"></i>
                                         {% endif %}
                                     </div>
                                 </div>
@@ -367,9 +424,9 @@
                                     </div>
                                     <div class="col-2">
                                         {% if adherent.healthQuestionnaire %}
-                                            <i class="fas fa-check" style ="color : green"></i>
+                                            <i class="fas fa-check" style="color : green"></i>
                                         {% else %}
-                                            <i class="fas fa-times" style ="color : red"></i>
+                                            <i class="fas fa-times" style="color : red"></i>
                                         {% endif %}
                                     </div>
                                 </div>
@@ -379,9 +436,9 @@
                                     </div>
                                     <div class="col-2">
                                         {% if adherent.isRegisteredInGestGym %}
-                                            <i class="fas fa-check" style ="color : green"></i>
+                                            <i class="fas fa-check" style="color : green"></i>
                                         {% else %}
-                                            <i class="fas fa-times" style ="color : red"></i>
+                                            <i class="fas fa-times" style="color : red"></i>
                                         {% endif %}
                                     </div>
                                 </div>
@@ -391,85 +448,39 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                          <button class="btn btn-secondary" data-dismiss="modal" type="button">Fermer</button>
+                        <button class="btn btn-secondary" data-dismiss="modal" type="button">Fermer</button>
                     </div>
                 </div>
             </div>
         </div>
     {% endfor %}
 
-    {% endblock %}
+{% endblock %}
 
-    {% block javascripts %}
-        <script type="text/javascript">
-            $(document).ready(function () {
-                 var table = $('#allAdherentsTable').DataTable({
-                    language: window.datatable_french,
-                    responsive: true,
-                    columnDefs: [
-                        {
-                            responsivePriority: 10001,
-                            targets: 3
-                        }, {
-                            responsivePriority: 1,
-                            targets: 4
-                        }, {
-                            responsivePriority: 1,
-                            targets: 0
-                        },
-                    ]
-                });
+{% block javascripts %}
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var table = $('#allAdherentsTable').DataTable({
+                language: window.datatable_french,
+                responsive: true,
+                columnDefs: [
+                    {
+                        responsivePriority: 10001,
+                        targets: 3
+                    }, {
+                        responsivePriority: 1,
+                        targets: 4
+                    }, {
+                        responsivePriority: 1,
+                        targets: 0
+                    },
+                ]
+            });
 
-            
-            $('#all_adherents').on( 'click', function () {
-                table.column(2).search("").draw();
+            $('#filter').on('click', function () {
+                table.column(2).search($("#statusAdherent option:selected").val()).draw();
             });
-            $('#valid_adherents').on( 'click', function () {
-                table.column(2).search("validée").draw();
-            });
-            $('#wait_adherents').on( 'click', function () {
-                table.column(2).search("Inscription en attente").draw();
-            });
- /*
-                $('#registeredAdherentsTable').DataTable({
-                    language: window.datatable_french,
-                    responsive: true,
-                    columnDefs: [
-                        {
-                            responsivePriority: 10001,
-                            targets: 4
-                        }, {
-                            responsivePriority: 1,
-                            targets: 5
-                        }, {
-                            responsivePriority: 1,
-                            targets: 0
-                        }, {
-                            responsivePriority: 1,
-                            targets: 1
-                        },
-                    ]
-                });
-                $('#nonRegisteredAdherentsTable').DataTable({
-                    language: window.datatable_french,
-                    responsive: true,
-                    columnDefs: [
-                        {
-                            responsivePriority: 10001,
-                            targets: 4
-                        }, {
-                            responsivePriority: 1,
-                            targets: 5
-                        }, {
-                            responsivePriority: 1,
-                            targets: 0
-                        }, {
-                            responsivePriority: 1,
-                            targets: 1
-                        },
-                    ]
-                });
-                */
-            });
-        </script>
-    {% endblock %}
+
+        });
+    </script>
+{% endblock %}a

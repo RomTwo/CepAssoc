@@ -33,6 +33,10 @@ event_participate:
     path: /profile/participate/{id}
     controller: App\Controller\EventController::participate
 
+event_participate_infos:
+    path: /profile/participate/infos/{id}
+    controller: App\Controller\EventController::participateInfo
+
 ### Authentication routing ###
 security_connexion:
     path: /profile/login
@@ -133,19 +137,19 @@ admin_activityDeleteAdherentFromTimeSlot:
     #--Categories
 admin_categories:
     path: /admin/categories
-    controller: App\Controller\administration\AdminActivitiesCategoryController::index
+    controller: App\Controller\administration\AdminActivitiesController::index
 
 admin_categoryEdit:
     path: /admin/categories/edit/{id}
-    controller: App\Controller\administration\AdminActivitiesCategoryController::editCategory
+    controller: App\Controller\administration\AdminActivitiesController::edit
 
 admin_categoryAdd:
     path: /admin/categories/add
-    controller: App\Controller\administration\AdminActivitiesCategoryController::addCategory
+    controller: App\Controller\administration\AdminActivitiesController::add
 
 admin_categoryDelete:
     path: /admin/categories/delete/{id}
-    controller: App\Controller\administration\AdminActivitiesCategoryController::deleteCategory
+    controller: App\Controller\administration\AdminActivitiesController::delete
 
     #--accounts
 admin_accounts:
@@ -213,6 +217,10 @@ job_add:
     path: /admin/job/add
     controller: App\Controller\JobController::add
 
+    #--documents
+document_add_admin_event:
+    path: /admin/event/document/delete
+    controller: App\Controller\DocumentController::delete
 
 ### Errors routing ###
 error_404:

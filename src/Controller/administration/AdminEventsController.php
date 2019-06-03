@@ -2,15 +2,17 @@
 
 namespace App\Controller\administration;
 
+use App\Entity\Document;
 use App\Form\EventType;
 use App\Entity\Event;
+use App\Services\Utilitaires;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 
 class AdminEventsController extends AbstractController
 {
 
-    public function index(Request $request)
+    public function index(Request $request, Utilitaires $utilitaires)
     {
         $events = $this->getDoctrine()->getRepository(Event::class)->findAll();
         $event = new Event();
@@ -19,6 +21,16 @@ class AdminEventsController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $manager = $this->getDoctrine()->getManager();
+            $files = $event->getDocuments()->toArray();
+            $event->clearDocuments();
+
+            if (count($files['name']) > 0) {
+                for ($i = 0; $i < count($files['name']); $i++) {
+                    $doc = new Document($utilitaires->addFile($files['name'][$i]), $files['name'][$i]->getClientOriginalName());
+                    $event->setDocuments($doc);
+                }
+            }
+
             $manager->persist($event);
             $manager->flush();
             $this->addFlash('success', 'évènement ajouté');
@@ -32,7 +44,7 @@ class AdminEventsController extends AbstractController
         );
     }
 
-    public function update(Request $request, $id)
+    public function update(Request $request, $id, Utilitaires $utilitaires)
     {
         $manager = $this->getDoctrine()->getManager();
         $event = $manager->getRepository(Event::class)->find($id);
@@ -42,6 +54,16 @@ class AdminEventsController extends AbstractController
             $form->handleRequest($request);
 
             if ($form->isSubmitted() && $form->isValid()) {
+                $files = $event->getDocuments()->toArray();
+                $event->clearDocuments();
+
+                if (count($files['name']) > 0) {
+                    for ($i = 0; $i < count($files['name']); $i++) {
+                        $doc = new Document($utilitaires->addFile($files['name'][$i]), $files['name'][$i]->getClientOriginalName());
+                        $event->setDocuments($doc);
+                    }
+                }
+
                 $manager->flush();
                 $this->addFlash('success', "L'évènement vient d'être modifié");
                 return $this->redirectToRoute('admin_events');
@@ -52,6 +74,7 @@ class AdminEventsController extends AbstractController
         }
         return $this->render('administration/events/updateEvent.html.twig', array(
             'form' => $form->createView(),
+            'files' => $event->getDocuments()
         ));
     }
 

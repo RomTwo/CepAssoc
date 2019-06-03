@@ -82,6 +82,45 @@
     </div>
 </div>
 
+<div class="row mt-3">
+    <h3>Informations : </h3>
+</div>
+{% if files is defined and files is not null %}
+    <div class="row mt-3">
+        <div class="col-2">
+            <label>Fichiers existants : </label>
+        </div>
+
+        <div class="col-auto">
+            {% for file in files %}
+                <div class="fileContainer row mb-1" data-id="{{ file.id }}" data-test="{{ file.name }}">
+                    <div class="col-8">
+                        <p>{{ file.name }}</p>
+                    </div>
+                    <div class="col-auto">
+                        <button type="button" class="btn btn-danger delDoc" data-id="{{ file.id }}"
+                                data-url="{{ path('document_add_admin_event') }}">
+                            <i class="far fa-trash-alt"></i>
+                        </button>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endif %}
+
+<div class="row mt-3">
+    <div class="col-2">
+        <label>Ajout de fichiers : </label>
+    </div>
+
+    <div class="col-auto">
+        {{ form_widget(form.documents, {'full_name': 'documents'}) }}
+    </div>
+    <div class="row ml-1">
+        {{ form_errors(form.documents) }}
+    </div>
+</div>
 
 {{ form_widget(form.submit) }}
             {{ form_end(form) }}
@@ -96,7 +135,7 @@
         </div>
         <div class="col-auto">
             <form id="jobForm" class="form-inline" action="{{ path('job_add') }}" method="post">
-                <input id="jobName" type="text" name="jobName">
+                <input id="jobName" class="form-control mr-1" type="text" name="jobName">
                 <input class="btn btn-success" type="submit" value="ajouter">
             </form>
         </div>
