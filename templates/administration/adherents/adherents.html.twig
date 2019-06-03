@@ -409,31 +409,28 @@
                     columnDefs: [
                         {
                             responsivePriority: 10001,
+                            targets: 3
+                        }, {
+                            responsivePriority: 1,
                             targets: 4
                         }, {
                             responsivePriority: 1,
-                            targets: 5
-                        }, {
-                            responsivePriority: 1,
                             targets: 0
-                        }, {
-                            responsivePriority: 1,
-                            targets: 1
                         },
                     ]
                 });
 
             
             $('#all_adherents').on( 'click', function () {
-                table.column(3).search("").draw();
+                table.column(2).search("").draw();
             });
             $('#valid_adherents').on( 'click', function () {
-                table.column(3).search("validée").draw();
+                table.column(2).search("validée").draw();
             });
             $('#wait_adherents').on( 'click', function () {
-                table.column(3).search("Inscription en attente").draw();
+                table.column(2).search("Inscription en attente").draw();
             });
- 
+ /*
                 $('#registeredAdherentsTable').DataTable({
                     language: window.datatable_french,
                     responsive: true,
@@ -472,6 +469,7 @@
                         },
                     ]
                 });
+                */
             });
         </script>
     {% endblock %}
