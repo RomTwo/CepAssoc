@@ -127,24 +127,6 @@ class AdminAdherentsController extends AbstractController
         return $this->redirectToRoute("admin_adherents");
     }
 
-
-    /**
-     * Edit the statut of the adherent
-     * @param $id is the id of the $adherent we want to remove
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse
-     */
-    public function editStatus(Request $request,$id)
-    {
-        $repository = $this->getDoctrine()->getRepository(Adherent::class);
-        $entityManager = $this->getDoctrine()->getManager();
-
-        $adherent = $repository->findOneById($id);
-        $adherent->setStatus($request->query->get('status'));
-        $entityManager->flush();
-
-        return $this->redirectToRoute("admin_adherents");
-    }
-
     /**
      * generate a pdf containing the adherent data
      * @param $id is the id of the adherent whose data we want to print
