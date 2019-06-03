@@ -41,6 +41,22 @@ class AdminEventManagerController extends AbstractController
         );
     }
 
+    public function indexFilter($id)
+    {
+        $event = $this->getDoctrine()->getRepository(Event::class)->find($id);
+        if (is_null($event)) {
+            $this->addFlash('error', "L'évènement n'existe pas");
+            return $this->redirectToRoute('admin_events');
+        }
+
+        $eventManagers = $this->getDoctrine()->getRepository(EventManagement::class)->findBy(array('event' => $event));
+
+        return $this->render('administration/eventManage/filter.html.twig', array(
+                'eventManagers' => $eventManagers
+            )
+        );
+    }
+
     public function add(Request $request, ValidatorInterface $validator, CompareDatetime $compareDatetime)
     {
         if ($request->isMethod('POST')) {
