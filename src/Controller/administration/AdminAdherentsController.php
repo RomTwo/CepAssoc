@@ -139,7 +139,7 @@ class AdminAdherentsController extends AbstractController
         if ($adherent != null) {
             $html = $this->render('administration/adherents/generateAdherentsPDF.html.twig', [
                 'adherent' => $adherent,
-            ]);
+            ])->getContent();
             $pdfOptions = new Options();
             $dompdf = new Dompdf($pdfOptions);
             $dompdf->loadHtml($html);

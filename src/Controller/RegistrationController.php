@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Account;
 use App\Entity\Activity;
 use App\Entity\Adherent;
+use App\Entity\TimeSlot;
 use App\Form\AdherentType;
 use App\Services\Utilitaires;
 use Dompdf\Dompdf;
@@ -51,6 +52,7 @@ class RegistrationController extends AbstractController
             } else {
                 $this->generatePDF($adherent);
             }
+            $this->setPrice($adherent,$request->request->get("selection"));
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($adherent);
             $entityManager->flush();
@@ -112,7 +114,7 @@ class RegistrationController extends AbstractController
         return true;
     }
 
-    public function generatePDF($adherent)
+    private function generatePDF($adherent)
     {
         $html = $this->render('account/generateHealthQuestionnairePDF.html.twig', [
             'adherent' => $adherent,
@@ -127,6 +129,24 @@ class RegistrationController extends AbstractController
         $filename = md5(uniqid()) . '.pdf';
         file_put_contents('uploads/' . $filename, $dompdf->output());
         $adherent->setHealthQuestionnaireFile($filename);
+    }
+
+    private function setPrice($adherent,$data)
+    {
+        $activities = array();
+        foreach ($data as $value) {
+            $timeSlot = $this->getDoctrine()->getRepository(TimeSlot::class)->find($value);
+            if(!in_array($timeSlot->getActivity()->getId(), $activities, true)){
+                array_push($activities, $timeSlot->getActivity()->getId());
+            }
+            $timeSlot->addAdherent($adherent);
+        }
+        $price = 0;
+        foreach ($activities as $value){
+            $activity = $this->getDoctrine()->getRepository(Activity::class)->find($value);
+            $price += $activity->getPrice();
+        }
+        $adherent->setRegistrationCost($price);
     }
 
 }

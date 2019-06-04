@@ -31,7 +31,7 @@ $(window).ready(function () {
                 }
             }
         }
-    })
+    });
 
     var groupColumn = 2;
 
@@ -141,7 +141,7 @@ $('#next').click(function () {
     var numberOfStep = 6;
     var value = parseInt($("#accountStep").val());
     if (value < numberOfStep) {
-        //if (stepChoice("accountStep" + value)) {
+        if (stepChoice("accountStep" + value)) {
             if (value == numberOfStep - 1) {
                 $("#next").hide();
             }
@@ -158,7 +158,7 @@ $('#next').click(function () {
             $("#accountStep" + (value)).hide();
             window.scrollTo(0, 0);
 
-        //}
+        }
     } else {
         $("#next").hide();
     }
@@ -240,17 +240,14 @@ $('#volontaire').on('change', function () {
     $(this).is(':checked') ? $("#volunteerDiv").show() : $("#volunteerDiv").hide();
 });
 
-var $prix = 0;
+var $timeSlot = [];
 
-$("input[name='selection']").on('change', function () {
-
-    var $id = $(this).val();
+$("input[name='selection[]']").on('change', function () {
     if($(this).is(':checked')){
-        $prix = $prix + parseInt($("#price" + $id).text());
+        $timeSlot.push($(this).parent().parent().attr('value'));
     }else{
-        $prix = $prix - parseInt($("#price" + $id).text());
+        $timeSlot.splice($timeSlot.indexOf($(this).parent().parent().attr('value')), 1);
     }
-    $("#prix").text($prix);
 });
 
 function stepChoice(step) {
@@ -264,7 +261,7 @@ function stepChoice(step) {
         case 'accountStep4':
             return true;
         case 'accountStep5':
-            return true;
+            return step5();
         case 'accountStep6':
             return true;
         case 'accountStep7':
@@ -294,6 +291,18 @@ function step2() {
     (isEmpty('account[children][0][professionRep1]') ? ($("#professionRep1Help").show(), bool = false) : $("#professionRep1Help").hide())
     //(isValidationList('account[children][0][nationality]') ? ($("#nationalityHelp").show(), bool = false) : $("#nationalityHelp").hide())
     return bool;
+}
+
+function step5(){
+    var $prix = 0;
+    var $unique = $timeSlot.filter(function(itm, i, $timeSlot) {
+        return i == $timeSlot.indexOf(itm);
+    });
+    $($unique).each(function( index ) {
+        $prix = $prix + parseInt($("#price"+$unique[index]).attr('value'));
+    });
+    $("#prix").text($prix);
+    return true;
 }
 
 function step7() {

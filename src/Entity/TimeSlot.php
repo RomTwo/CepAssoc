@@ -49,9 +49,10 @@ class TimeSlot
     private $city;
 
     /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\Activity", mappedBy="timeSlot")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Activity", inversedBy="timeSlot")
+     * @ORM\JoinColumn(nullable=true)
      */
-    private $activities;
+    private $activity;
 
     /**
      * @ORM\ManyToMany(targetEntity="App\Entity\Adherent", mappedBy="timeSlots")
@@ -60,7 +61,7 @@ class TimeSlot
 
     public function __construct()
     {
-        $this->activities = new ArrayCollection();
+        $this->activity = new Activity();
         $this->adherents = new ArrayCollection();
     }
 
@@ -135,9 +136,9 @@ class TimeSlot
                 break;
         }
 if($this->getCity()!=null)
-       return $day." ".$this->getStartTime()->format(' H:i')."/".$this->getEndTime()->format(' H:i')." à ".$this->getCity();
+       return $day." de ".$this->getStartTime()->format(' H:i')."/".$this->getEndTime()->format(' H:i')." à ".$this->getCity();
 else
-    return $day." ".$this->getStartTime()->format(' H:i')."/".$this->getEndTime()->format(' H:i');
+    return $day." de ".$this->getStartTime()->format(' H:i')."/".$this->getEndTime()->format(' H:i');
     }
 
     public function setCity(string $city): self
@@ -147,30 +148,14 @@ else
         return $this;
     }
 
-    /**
-     * @return Collection|Activity[]
-     */
-    public function getActivities(): Collection
+    public function getActivity(): ?Activity
     {
-        return $this->activities;
+        return $this->activity;
     }
 
-    public function addActivity(Activity $activity): self
+    public function setActivity(?Activity $activity): self
     {
-        if (!$this->activities->contains($activity)) {
-            $this->activities[] = $activity;
-            $activity->addTimeSlot($this);
-        }
-
-        return $this;
-    }
-
-    public function removeActivity(Activity $activity): self
-    {
-        if ($this->activities->contains($activity)) {
-            $this->activities->removeElement($activity);
-            $activity->removeTimeSlot($this);
-        }
+        $this->activity = $activity;
 
         return $this;
     }
