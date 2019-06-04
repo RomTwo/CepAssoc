@@ -19,18 +19,18 @@
         <div class="form-group row">
             <div class="col-sm-12 row">
                 <label class="col-sm-12 col-form-label"> Certificat médical :</label>
-                {% if adherent.medicalCertificate is null %}
+                {% if adherent.medicalCertificateFile is null %}
                     <div class="col-sm-12">
-                        {{ form_widget(form.medicalCertificate) }}
+                        {{ form_widget(form.medicalCertificateFile) }}
                     </div>
 
                 {% else %}
                     <div class="col-sm-3">
                         <a target="_blank" rel="noopener noreferrer"
-                           href="{{ asset('uploads/' ~ adherent.medicalCertificate) }}" class="btn btn-success">Télécharger le document</a>
+                           href="{{ asset('uploads/' ~ adherent.medicalCertificateFile.id) }}" class="btn btn-success" download="{{ adherent.medicalCertificateFile.name }}">Télécharger le document</a>
                     </div>
                     <div class="col-sm-9">
-                        {{ form_widget(form.medicalCertificate) }}
+                        {{ form_widget(form.medicalCertificateFile) }}
                     </div>
                 {% endif %}
             </div>
@@ -38,18 +38,18 @@
         <div class="form-group row">
             <div class="col-sm-12 row">
                 <label class="col-sm-12 col-form-label">Bulletin N°2 Allianz :</label>
-                {% if adherent.bulletinN2Allianz is null %}
+                {% if adherent.bulletinN2AllianzFile is null %}
                     <div class="col-sm-12">
-                        {{ form_widget(form.bulletinN2Allianz) }}
+                        {{ form_widget(form.bulletinN2AllianzFile) }}
                     </div>
 
                 {% else %}
                     <div class="col-sm-3">
                         <a target="_blank" rel="noopener noreferrer"
-                           href="{{ asset('uploads/' ~ adherent.bulletinN2Allianz) }}" class="btn btn-success">Télécharger le document</a>
+                           href="{{ asset('uploads/' ~ adherent.bulletinN2AllianzFile.id) }}" class="btn btn-success" download="{{ adherent.bulletinN2AllianzFile.name }}">Télécharger le document</a>
                     </div>
                     <div class="col-sm-9">
-                        {{ form_widget(form.bulletinN2Allianz) }}
+                        {{ form_widget(form.bulletinN2AllianzFile) }}
                     </div>
                 {% endif %}
             </div>
@@ -65,7 +65,7 @@
                 {% else %}
                     <div class="col-sm-3">
                         <a target="_blank" rel="noopener noreferrer"
-                           href="{{ asset('uploads/' ~ adherent.healthQuestionnaireFile) }}" class="btn btn-success">Télécharger le document</a>
+                           href="{{ asset('uploads/' ~ adherent.healthQuestionnaireFile.id) }}" class="btn btn-success" download="{{ adherent.healthQuestionnaireFile.name }}">Télécharger le document</a>
                     </div>
                     <div class="col-sm-9">
                         {{ form_widget(form.healthQuestionnaireFile) }}

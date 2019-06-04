@@ -261,16 +261,10 @@ class Adherent
     private $imageRight;
 
     /**
-     * @ORM\Column(type="string", nullable=true)
-     * @Assert\File(
-     *     maxSize = "2048k",
-     *     maxSizeMessage = "La taille du fichier est au-dessus de la limite",
-     *     mimeTypes = {"application/pdf", "application/x-pdf"},
-     *     mimeTypesMessage = "Le fichier doit être sous format PDF"
-     * )
+     * @ORM\OneToOne(targetEntity="App\Entity\Document", cascade={"persist"})
      * @Groups({"competition"})
      */
-    private $medicalCertificate;
+    private $medicalCertificateFile;
 
     /**
      * @ORM\Column(type="boolean")
@@ -315,16 +309,10 @@ class Adherent
     private $volunteerComment;
 
     /**
-     * @ORM\Column(type="string", nullable=true)
-     * @Assert\File(
-     *     maxSize = "2048k",
-     *     maxSizeMessage = "La taille du fichier est au-dessus de la limite",
-     *     mimeTypes = {"application/pdf", "application/x-pdf"},
-     *     mimeTypesMessage = "Le fichier doit être sous format PDF"
-     * )
+     * @ORM\OneToOne(targetEntity="App\Entity\Document", cascade={"persist"})
      * @Groups({"competition"})
      */
-    private $bulletinN2Allianz;
+    private $bulletinN2AllianzFile;
 
     /**
      * @ORM\Column(type="boolean")
@@ -333,7 +321,7 @@ class Adherent
     private $hasBulletinN2Allianz;
 
     /**
-     * @ORM\Column(type="string", nullable=true)
+     * @ORM\OneToOne(targetEntity="App\Entity\Document", cascade={"persist"})
      * @Groups({"competition"})
      */
     private $healthQuestionnaireFile;
@@ -1044,17 +1032,17 @@ class Adherent
     /**
      * @return mixed
      */
-    public function getMedicalCertificate()
+    public function getMedicalCertificateFile()
     {
-        return $this->medicalCertificate;
+        return $this->medicalCertificateFile;
     }
 
     /**
-     * @param mixed $medicalCertificate
+     * @param mixed $medicalCertificateFile
      */
-    public function setMedicalCertificate($medicalCertificate): void
+    public function setMedicalCertificateFile($medicalCertificateFile): void
     {
-        $this->medicalCertificate = $medicalCertificate;
+        $this->medicalCertificateFile = $medicalCertificateFile;
     }
 
     public function setTreatedBy(?string $treatedBy): self
@@ -1091,17 +1079,17 @@ class Adherent
     /**
      * @return mixed
      */
-    public function getBulletinN2Allianz()
+    public function getBulletinN2AllianzFile()
     {
-        return $this->bulletinN2Allianz;
+        return $this->bulletinN2AllianzFile;
     }
 
     /**
-     * @param mixed $bulletinN2Allianz
+     * @param mixed $bulletinN2AllianzFile
      */
-    public function setBulletinN2Allianz($bulletinN2Allianz): void
+    public function setBulletinN2AllianzFile($bulletinN2AllianzFile): void
     {
-        $this->bulletinN2Allianz = $bulletinN2Allianz;
+        $this->bulletinN2AllianzFile = $bulletinN2AllianzFile;
     }
 
     /**

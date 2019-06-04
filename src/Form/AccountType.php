@@ -87,7 +87,7 @@ class AccountType extends AbstractType
                 )
             )
             ->add('addAccountAdherent', null, [
-                'label' => "Je suis un compétiteur",
+                'label' => "Je suis gymnaste",
                 'data' => false,
             ])
             ->add('children', CollectionType::class, [

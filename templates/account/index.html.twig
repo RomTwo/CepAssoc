@@ -172,33 +172,33 @@
                                     {{ form_errors(form.children[0].phoneRep1) }}
                                 </div>
                             </div>
-                            <div class="row mt-3 mb-3">
-                                <div class="col-auto">
-                                    <label>Profession : </label>
-                                </div>
-                                <div class="col">
-                                    {{ form_widget(form.children[0].professionRep1) }}
-                                    <small id="professionRep1Help" class="form-text helper"><span
-                                                class="badge badge-danger">Erreur</span> Le numéro de téléphone doit
-                                        être
-                                        rempli.
-                                    </small>
-                                    {{ form_errors(form.children[0].professionRep1) }}
-                                </div>
+                        </div>
+                        <div class="row mt-3 mb-3">
+                            <div class="col-auto">
+                                <label>Profession : </label>
                             </div>
-                            <div class="row mt-3 mb-3">
-                                <div class="col-auto">
-                                    <label>Nationalité : </label>
-                                </div>
-                                <div class="col">
-                                    {{ form_widget(form.children[0].nationality) }}
-                                    <small id="nationalityHelp" class="form-text helper"><span
-                                                class="badge badge-danger">Erreur</span> La nationalité doit
-                                        être
-                                        choisie.
-                                    </small>
-                                    {{ form_errors(form.children[0].nationality) }}
-                                </div>
+                            <div class="col">
+                                {{ form_widget(form.children[0].professionRep1) }}
+                                <small id="professionRep1Help" class="form-text helper"><span
+                                            class="badge badge-danger">Erreur</span> Le numéro de téléphone doit
+                                    être
+                                    rempli.
+                                </small>
+                                {{ form_errors(form.children[0].professionRep1) }}
+                            </div>
+                        </div>
+                        <div class="row mt-3 mb-3">
+                            <div class="col-auto">
+                                <label>Nationalité : </label>
+                            </div>
+                            <div class="col">
+                                {{ form_widget(form.children[0].nationality) }}
+                                <small id="nationalityHelp" class="form-text helper"><span
+                                            class="badge badge-danger">Erreur</span> La nationalité doit
+                                    être
+                                    choisie.
+                                </small>
+                                {{ form_errors(form.children[0].nationality) }}
                             </div>
                         </div>
                     </div>
@@ -350,12 +350,13 @@
                                             {% if activity.type == "SECTEUR LOISIRS" %}
                                                 {% for creneau in activity.timeSlot %}
                                                     <tr id={{ creneau.id }} value={{ activity.id }}>
-                                                        <td >{{ activity.name }}</td>
+                                                        <td>{{ activity.name }}</td>
                                                         <td>
                                                             {{ creneau.getFullTime() }}
                                                         </td>
                                                         <td>{{ activity.category.name }}</td>
-                                                        <td id="price{{ activity.id }}" value="{{ activity.price }}">{{ activity.price }}</td>
+                                                        <td id="price{{ activity.id }}"
+                                                            value="{{ activity.price }}">{{ activity.price }}</td>
                                                         <td>{{ activity.startDate|date('d/m/y') }}</td>
                                                         <td>
                                                             <input type="checkbox"
@@ -386,12 +387,13 @@
                                             {% if activity.type == "SECTEUR COMPETITIF" %}
                                                 {% for creneau in activity.timeSlot %}
                                                     <tr id={{ creneau.id }} value={{ activity.id }}>
-                                                        <td >{{ activity.name }}</td>
+                                                        <td>{{ activity.name }}</td>
                                                         <td>
                                                             {{ creneau.getFullTime() }}
                                                         </td>
                                                         <td>{{ activity.category.name }}</td>
-                                                        <td id="price{{ activity.id }}" value="{{ activity.price }}">{{ activity.price }}</td>
+                                                        <td id="price{{ activity.id }}"
+                                                            value="{{ activity.price }}">{{ activity.price }}</td>
                                                         <td>{{ activity.startDate|date('d/m/y') }}</td>
                                                         <td>
                                                             <input type="checkbox"
@@ -452,8 +454,8 @@
                             <h6>Certificat medical : </h6>
                             <div class="row align-items-center ml-2 mr-2">
                                 <div class="col-11">
-                                    {{ form_widget(form.children[0].medicalCertificate) }}
-                                    {{ form_errors(form.children[0].medicalCertificate) }}
+                                    {{ form_widget(form.children[0].medicalCertificateFile) }}
+                                    {{ form_errors(form.children[0].medicalCertificateFile) }}
                                 </div>
                                 <a><i class="fa fa-info-circle" data-toggle="tooltip"
                                       data-original-title="Le certificat médical peut être rendu plus tard."></i></a>
@@ -461,8 +463,8 @@
                             <h6>Bulletin N2 allianz : </h6>
                             <div class="row align-items-center ml-2 mr-2">
                                 <div class="col-11">
-                                    {{ form_widget(form.children[0].bulletinN2Allianz) }}
-                                    {{ form_errors(form.children[0].bulletinN2Allianz) }}
+                                    {{ form_widget(form.children[0].bulletinN2AllianzFile) }}
+                                    {{ form_errors(form.children[0].bulletinN2AllianzFile) }}
                                 </div>
                                 <a><i class="fa fa-info-circle" data-toggle="tooltip"
                                       data-original-title="Le bulletin peut être rendu plus tard."></i></a>
