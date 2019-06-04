@@ -4,10 +4,8 @@
     <bookmark url="file://$PROJECT_DIR$/src/Controller/AccountController.php" description="JWT::decode($token, $_ENV['PRIVATE_KEY'], array($_..." line="87" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="53b90c9e-e36e-447f-8cc9-26b01b488158" name="Default Changelist" comment="add tooltip and modify the admin account view">
+    <list default="true" id="53b90c9e-e36e-447f-8cc9-26b01b488158" name="Default Changelist" comment="modal add job">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/assets/js/event.js" afterPath="$PROJECT_DIR$/assets/js/event.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/administration/events/addEventForm.html.twig" afterPath="$PROJECT_DIR$/templates/administration/events/addEventForm.html.twig" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -496,14 +494,7 @@
       <workItem from="1559112796963" duration="17579000" />
       <workItem from="1559569891834" duration="2374000" />
       <workItem from="1559630871034" duration="68000" />
-      <workItem from="1559631240018" duration="6126000" />
-    </task>
-    <task id="LOCAL-00045" summary="no hidden nav admin">
-      <created>1558005639223</created>
-      <option name="number" value="00045" />
-      <option name="presentableId" value="LOCAL-00045" />
-      <option name="project" value="LOCAL" />
-      <updated>1558005639223</updated>
+      <workItem from="1559631240018" duration="6155000" />
     </task>
     <task id="LOCAL-00046" summary="add font-awesome">
       <created>1558005737339</created>
@@ -841,11 +832,18 @@
       <option name="project" value="LOCAL" />
       <updated>1559637677876</updated>
     </task>
-    <option name="localTasksCounter" value="94" />
+    <task id="LOCAL-00094" summary="modal add job">
+      <created>1559638751791</created>
+      <option name="number" value="00094" />
+      <option name="presentableId" value="LOCAL-00094" />
+      <option name="project" value="LOCAL" />
+      <updated>1559638751791</updated>
+    </task>
+    <option name="localTasksCounter" value="95" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="330933000" />
+    <option name="totallyTimeSpent" value="330962000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -922,7 +920,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Add an event and job" />
     <MESSAGE value="update and delete an event" />
     <MESSAGE value="script in file .js, update event" />
     <MESSAGE value="add assert" />
@@ -947,7 +944,8 @@
     <MESSAGE value="filter admin event" />
     <MESSAGE value="modify serialize competitor" />
     <MESSAGE value="add tooltip and modify the admin account view" />
-    <option name="LAST_COMMIT_MESSAGE" value="add tooltip and modify the admin account view" />
+    <MESSAGE value="modal add job" />
+    <option name="LAST_COMMIT_MESSAGE" value="modal add job" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
