@@ -16,7 +16,7 @@ class AppFixtures extends Fixture
 {
 
     private function loadAccount(Account $a, ObjectManager $o, string $firstName, string $lastName, string $sex, \DateTime $birthDate, int $zipCode, string $address,
-string $email, string $city, string $password)
+                                 string $email, string $city, string $password)
     {
         $a->setFirstName($firstName);
         $a->setLastName($lastName);
@@ -103,7 +103,8 @@ string $email, string $city, string $password)
         $o->persist($c);
     }
 
-    private function loadActivity(Activity $a, ObjectManager $o, string $name, float $priece, \DateTime $startDate, string $type, Category $category){
+    private function loadActivity(Activity $a, ObjectManager $o, string $name, float $priece, \DateTime $startDate, string $type, Category $category)
+    {
         $a->setName($name);
         $a->setPrice($priece);
         $a->setStartDate($startDate);
@@ -111,7 +112,8 @@ string $email, string $city, string $password)
         $a->setCategory($category);
     }
 
-    private function loadTimeSlot(ObjectManager $o, int $day, \DateTime $startTime, \DateTime $endTime, Activity $activity, string $city){
+    private function loadTimeSlot(ObjectManager $o, int $day, \DateTime $startTime, \DateTime $endTime, Activity $activity, string $city)
+    {
         $t = new TimeSlot();
         $t->setDay($day);
         $t->setStartTime($startTime);
@@ -128,7 +130,7 @@ string $email, string $city, string $password)
         $categoriesNumber = 10;
         $eventsNumber = 5;
         $activitiesNumber = 36;
-        
+
         $accounts = array();
         $adherents = array();
         $categories = array();
@@ -145,16 +147,16 @@ string $email, string $city, string $password)
         }
 
 
-        $this->loadAccount($accounts[0], $manager, "Jean Luc", "Boulanger", "M", new \DateTime("18-10-1975"), 86000, "22 Rue de la Fièvre", "jeanB@gmail.com", "Poitiers", "toto");
-        $this->loadAccount($accounts[1], $manager,"Norris", "Gaulin", "M", new \DateTime("17-03-1943"), 86440, "111 Boulevard du Lac", "norris-gaulin@outlook.com", "Migne-auxances", "toto");
-        $this->loadAccount($accounts[2], $manager,"Aimée Rouze", "Boulanger", "F", new \DateTime("21-11-1983"), 86000, "1 Avenue de Gaulle", "aime.rouze@gmail.com", "Poitiers", "toto");
-        $this->loadAccount($accounts[3], $manager,"Tempesete", "Lafontaine", "F", new \DateTime("14-11-1953"), 86360, "17 Rue Charles Tempestier", "jeanB@gmail.com", "Chasseneuil-du-Poitou", "toto");
-        $this->loadAccount($accounts[4], $manager,"Slainie", "Giroud", "F", new \DateTime("13-02-1953"), 86580, "4 Allée Mansart", "slainieG86@gmail.com", "Vouneuil-sous-biard", "toto");
-        $this->loadAccount($accounts[5], $manager,"Porter", "Fluet", "M", new \DateTime("07-07-1947"), 86280, "78 Rue de la Rivière", "fluetporter@free.fr", "Saint-Benoit", "toto");
-        $this->loadAccount($accounts[6], $manager,"Antoinette", "Berthiaume", "F", new \DateTime("20-01-1989"), 86240, "14 Avenue Claude Chenou", "antoinette.berthiaume@live.fxs", "Smarves", "toto");
-        $this->loadAccount($accounts[7], $manager,"Camille", "Dubé", "F", new \DateTime("04-07-1995"), 86550, "11 Rue des Bons Samaritins", "camille.dube@etu.univ-poitirs.fr", "Mignalloux-beauvoir", "toto");
-        $this->loadAccount($accounts[8], $manager,"Leroy", "Tachel", "M", new \DateTime("15-12-1977"), 86000, "2 Rue de l'Université", "l.tachelB@gmail.com", "Poitiers", "toto");
-        $this->loadAccount($accounts[9], $manager,"Raoul", "St-Jean", "M", new \DateTime("18-07-1997"), 86000, "3 Avenue René Monory", "raoul.s.j@gmail.com", "Poitiers", "toto");
+        $this->loadAccount($accounts[0], $manager, "Jean Luc", "Chenes", "M", new \DateTime("18-10-1975"), 86000, "22 Rue de la Fièvre", "jeanB@gmail.com", "Poitiers", "Didier@86");
+        $this->loadAccount($accounts[1], $manager, "Norris", "Gaulin", "M", new \DateTime("17-03-1943"), 86440, "111 Boulevard du Lac", "norris-gaulin@outlook.com", "Migne-auxances", "Didier@86");
+        $this->loadAccount($accounts[2], $manager, "Aimée Rouze", "Dupont", "F", new \DateTime("21-11-1983"), 86000, "1 Avenue de Gaulle", "aime.rouze@gmail.com", "Poitiers", "Didier@86");
+        $this->loadAccount($accounts[3], $manager, "Tempesete", "Lafontaine", "F", new \DateTime("14-11-1953"), 86360, "17 Rue Charles Tempestier", "jeanB@gmail.com", "Chasseneuil-du-Poitou", "Didier@86");
+        $this->loadAccount($accounts[4], $manager, "Slainie", "Giroud", "F", new \DateTime("13-02-1953"), 86580, "4 Allée Mansart", "slainieG86@gmail.com", "Vouneuil-sous-biard", "Didier@86");
+        $this->loadAccount($accounts[5], $manager, "Porter", "Fluet", "M", new \DateTime("07-07-1947"), 86280, "78 Rue de la Rivière", "fluetporter@free.fr", "Saint-Benoit", "Didier@86");
+        $this->loadAccount($accounts[6], $manager, "Antoinette", "Berthiaume", "F", new \DateTime("20-01-1989"), 86240, "14 Avenue Claude Chenou", "antoinette.berthiaume@live.fxs", "Smarves", "Didier@86");
+        $this->loadAccount($accounts[7], $manager, "Camille", "Dubé", "F", new \DateTime("04-07-1995"), 86550, "11 Rue des Bons Samaritins", "camille.dube@etu.univ-poitirs.fr", "Mignalloux-beauvoir", "Didier@86");
+        $this->loadAccount($accounts[8], $manager, "Leroy", "Tachel", "M", new \DateTime("15-12-1977"), 86000, "2 Rue de l'Université", "l.tachelB@gmail.com", "Poitiers", "Didier@86");
+        $this->loadAccount($accounts[9], $manager, "Raoul", "St-Jean", "M", new \DateTime("18-07-1997"), 86000, "3 Avenue René Monory", "raoul.s.j@gmail.com", "Poitiers", "Didier@86");
 
         /*******************
          * Loading adherents
@@ -168,7 +170,7 @@ string $email, string $city, string $password)
         $this->loadAdherent1($adherents[0], $manager, "Arthur", "Belge", "M", new \DateTime("01-12-2003"));
         $this->loadAdherent2($adherents[0], $manager, "Martin", "Belge", 86000, "5 Rue René Descartes", "martin.belge@gmail.com", "Poitiers", "Charpentier", "0654789574");
         $this->loadAdherent3($adherents[0], $manager, "Agnès", "Belge", 86000, "5 Rue René Descartes", "agnes.belge@gmail.com", "Poitiers", "Développeur", "0798754125");
-        $this->loadAdherent4($adherents[0], $manager, 0, 0, 0, 0,0, 0, 0, 0);
+        $this->loadAdherent4($adherents[0], $manager, 0, 0, 0, 0, 0, 0, 0, 0);
         $this->loadAdherent5($adherents[0], $manager);
 
         $adherents[0]->setRegistrationCost(0);
@@ -188,7 +190,7 @@ string $email, string $city, string $password)
         $this->loadAdherent1($adherents[1], $manager, "Charlotte", "Fraise", "F", new \DateTime("01-12-2015"));
         $this->loadAdherent2($adherents[1], $manager, "Aurélie", "Fraise", 86360, "114 bis Avennue Pascal Vert", "aurelie.fraise@gmail.com", "Chasseneuil-du-Poitou", "Menuisier", "0741254628");
         $this->loadAdherent3($adherents[1], $manager, "Maxime", "Fraise", 86360, "114 bis Avennue Pascal Vert", "maxime.fraise@hotmail.com", "Chasseneuil-du-Poitou", "Enseignant", "0325487514");
-        $this->loadAdherent4($adherents[1], $manager, 0, 0, 0, 0,0, 0, 0, 0);
+        $this->loadAdherent4($adherents[1], $manager, 0, 0, 0, 0, 0, 0, 0, 0);
         $this->loadAdherent5($adherents[1], $manager);
 
         $adherents[1]->setRegistrationCost(0);
@@ -207,7 +209,7 @@ string $email, string $city, string $password)
         /* ADHERENT 2 */
         $this->loadAdherent1($adherents[2], $manager, "Salomon", "Dupuit", "M", new \DateTime("08-01-2017"));
         $this->loadAdherent2($adherents[2], $manager, "Gildas", "Dupuit", 75008, "1 Avenue Champs Elysées", "gildas.dupuit@gmail.com", "Paris", "Plombier", "0147587412");
-        $this->loadAdherent4($adherents[2], $manager, 0, 0, 0, 0,0, 0, 0, 0);
+        $this->loadAdherent4($adherents[2], $manager, 0, 0, 0, 0, 0, 0, 0, 0);
         $this->loadAdherent5($adherents[2], $manager);
 
         $adherents[2]->setRegistrationCost(0);
@@ -224,7 +226,7 @@ string $email, string $city, string $password)
         /* ADHERENT 3 */
         $this->loadAdherent1($adherents[3], $manager, "René", "Tourcoing", "M", new \DateTime("01-12-1995"));
         $this->loadAdherent2($adherents[3], $manager, "Martin", "Belge", 86000, "14 Rue Henry Sucré ", "rene.tourcoing@gmail.com", "Poitiers", "Charpentier", "0654789574");
-        $this->loadAdherent4($adherents[3], $manager, 0, 0, 0, 0,0, 0, 0, 0);
+        $this->loadAdherent4($adherents[3], $manager, 0, 0, 0, 0, 0, 0, 0, 0);
         $this->loadAdherent5($adherents[3], $manager);
 
         $adherents[3]->setRegistrationCost(0);
@@ -242,7 +244,7 @@ string $email, string $city, string $password)
         $this->loadAdherent1($adherents[4], $manager, "Khaled", "Ratatouille", "M", new \DateTime("01-12-2003"));
         $this->loadAdherent2($adherents[4], $manager, "Marine", "Ratatouille", 86360, "XLIM Chasseneuil", "marineR@gmail.com", "Chasseneuil-du-Poitou", "Chroniqueuse", "0128547841");
         $this->loadAdherent3($adherents[4], $manager, "Gilbert", "Ratattouille", 86360, "XLIM Chasseneuil", "gigi26@gmail.com", "Chasseneuil-du-Poitou", "Youtubeur", "0451245674");
-        $this->loadAdherent4($adherents[4], $manager, 0, 0, 0, 0,0, 0, 0, 0);
+        $this->loadAdherent4($adherents[4], $manager, 0, 0, 0, 0, 0, 0, 0, 0);
         $this->loadAdherent5($adherents[4], $manager);
 
         $adherents[4]->setRegistrationCost(0);
@@ -260,7 +262,7 @@ string $email, string $city, string $password)
         $this->loadAdherent1($adherents[5], $manager, "Clause", "Hermel", "F", new \DateTime("01-12-2003"));
         $this->loadAdherent2($adherents[5], $manager, "Junior", "Hermel", 86000, "5 Rue René Descartes", "martin.belge@gmail.com", "Poitiers", "Agent d'entretien", "0654789574");
         $this->loadAdherent3($adherents[5], $manager, "Judith", "Parker", 86000, "5 Rue René Descartes", "agnes.belge@gmail.com", "Poitiers", "Basketteur professionnelle", "0798754125");
-        $this->loadAdherent4($adherents[5], $manager, 0, 0, 0, 0,0, 0, 0, 0);
+        $this->loadAdherent4($adherents[5], $manager, 0, 0, 0, 0, 0, 0, 0, 0);
         $this->loadAdherent5($adherents[5], $manager);
 
         $adherents[5]->setRegistrationCost(0);
@@ -278,7 +280,7 @@ string $email, string $city, string $password)
         $this->loadAdherent1($adherents[6], $manager, "Marion", "Lachaise", "F", new \DateTime("01-12-2003"));
         $this->loadAdherent2($adherents[6], $manager, "Omarion", "Lachaise", 86000, "8 Rue de L'avoine", "marion.lachaise@gmail.com", "Poitiers", "Juriste d'affaires", "0654789574");
         $this->loadAdherent3($adherents[6], $manager, "Tartiflette", "Lachaise", 86000, "8 Rue de L'avoine", "tartiflette.lachaise@gmail.com", "Poitiers", "Commerçante", "0798754125");
-        $this->loadAdherent4($adherents[6], $manager, 0, 0, 0, 0,0, 0, 0, 0);
+        $this->loadAdherent4($adherents[6], $manager, 0, 0, 0, 0, 0, 0, 0, 0);
         $this->loadAdherent5($adherents[6], $manager);
 
         $adherents[6]->setRegistrationCost(0);
@@ -296,7 +298,7 @@ string $email, string $city, string $password)
         $this->loadAdherent1($adherents[7], $manager, "Mickael", "Bellard", "M", new \DateTime("01-12-2003"));
         $this->loadAdherent2($adherents[7], $manager, "Suzanne", "Bellard", 86000, "3 Rue de la Nuitée", "suzanne.bel@live.fr", "Poitiers", "Enseignant", "0654789574");
         $this->loadAdherent3($adherents[7], $manager, "Romaric", "Bellard", 75000, "5 Avenue Montainge", "r.bellard@outlook.com", "Paris", "Magasinier", "0798754125");
-        $this->loadAdherent4($adherents[7], $manager, 0, 0, 0, 0,0, 0, 0, 0);
+        $this->loadAdherent4($adherents[7], $manager, 0, 0, 0, 0, 0, 0, 0, 0);
         $this->loadAdherent5($adherents[7], $manager);
 
         $adherents[7]->setRegistrationCost(0);
@@ -313,7 +315,7 @@ string $email, string $city, string $password)
         /* ADHERENT 8 */
         $this->loadAdherent1($adherents[8], $manager, "Rachelle", "Lenglen", "F", new \DateTime("01-12-1995"));
         $this->loadAdherent2($adherents[8], $manager, "Rachelle", "Lenglen", 86000, "3 bis Rue François Mittérand", "rlenglenn@free.fr", "Poitiers", "Etudiante", "0654789574");
-        $this->loadAdherent4($adherents[8], $manager, 0, 0, 0, 0,0, 0, 0, 0);
+        $this->loadAdherent4($adherents[8], $manager, 0, 0, 0, 0, 0, 0, 0, 0);
         $this->loadAdherent5($adherents[8], $manager);
 
         $adherents[8]->setRegistrationCost(0);
@@ -331,7 +333,7 @@ string $email, string $city, string $password)
         $this->loadAdherent1($adherents[9], $manager, "Alexandre", "Chevalier", "M", new \DateTime("01-12-2003"));
         $this->loadAdherent2($adherents[9], $manager, "Damien", "Chevalier", 86000, "5 Rue René Descartes", "d.chevalier358@gmail.com", "Poitiers", "Cuisinier", "0654789574");
         $this->loadAdherent3($adherents[9], $manager, "Roxane", "Chevalier", 86000, "5 Rue René Descartes", "rocane.chevalier@outlook.com", "Poitiers", "Livreuse en restauration", "0798754125");
-        $this->loadAdherent4($adherents[9], $manager, 0, 0, 0, 0,0, 0, 0, 0);
+        $this->loadAdherent4($adherents[9], $manager, 0, 0, 0, 0, 0, 0, 0, 0);
         $this->loadAdherent5($adherents[9], $manager);
 
         $adherents[9]->setRegistrationCost(0);
@@ -368,16 +370,22 @@ string $email, string $city, string $password)
         /*******************
          * Loading Events
          *******************/
-        for ($i = 0; $i < $categoriesNumber; $i++) {
+        $names = array("Championnat de france", "Assemblée générale", "Championnat départemental");
+        $start = array("09-06-2019", "09-07-2019", "15-06-2019");
+        $end = array("12-06-2019", "11-07-2019", "18-06-2019");
+        $adresse = array("9 rue des chênes 86000 Poitiers", "9 rue des chênes 86000 Poitiers", "9 rue des chênes 86000 Poitiers");
+        $description = array("Championnat de france 2019", "Assemblée générale du club", "Championnat départemental de la vienne");
+
+        for ($i = 0; $i < 3; $i++) {
             $event = new Event();
             array_push($events, $event);
-            $event->setName("event".$i);
-            $event->setStartDate(new \DateTime("09-05-2019"));
-            $event->setEndDate(new \DateTime("10-05-2019"));
+            $event->setName($names[$i]);
+            $event->setStartDate(new \DateTime($start[$i]));
+            $event->setEndDate(new \DateTime($end[$i]));
 
-            $event->setAddress("address of event".$i);
-            $event->setDescription("Description of event".$i);
-            
+            $event->setAddress($adresse[$i]);
+            $event->setDescription($description[$i]);
+
             $manager->persist($events[$i]);
         }
 
@@ -421,26 +429,26 @@ string $email, string $city, string $password)
             array_push($activities, $activity);
         }*/
 
-        $this->loadActivity($activities[0], $manager, "Baby Gym (nés en 2017)", 160, new \DateTime("15-09-2018"), "SECTEUR LOISIRS", $categories[0] );
-        $this->loadActivity($activities[1], $manager, "Baby Gym (nés en 2016 + de juillet à décembre 2015)", 160, new \DateTime("15-09-2018"), "SECTEUR LOISIRS", $categories[0] );
-        $this->loadActivity($activities[2], $manager, "Baby Gym (nés de janvier à juin 2015 + 2014)", 160, new \DateTime("15-09-2018"), "SECTEUR LOISIRS", $categories[0] );
-        $this->loadActivity($activities[3], $manager, "Eveil Gym (nés en 2013)", 160, new \DateTime("15-09-2018"), "SECTEUR LOISIRS", $categories[0] );
+        $this->loadActivity($activities[0], $manager, "Baby Gym (nés en 2017)", 160, new \DateTime("15-09-2018"), "SECTEUR LOISIRS", $categories[0]);
+        $this->loadActivity($activities[1], $manager, "Baby Gym (nés en 2016 + de juillet à décembre 2015)", 160, new \DateTime("15-09-2018"), "SECTEUR LOISIRS", $categories[0]);
+        $this->loadActivity($activities[2], $manager, "Baby Gym (nés de janvier à juin 2015 + 2014)", 160, new \DateTime("15-09-2018"), "SECTEUR LOISIRS", $categories[0]);
+        $this->loadActivity($activities[3], $manager, "Eveil Gym (nés en 2013)", 160, new \DateTime("15-09-2018"), "SECTEUR LOISIRS", $categories[0]);
 
 
-        $this->loadActivity($activities[4], $manager, "Baby Gym (nés en 2017 et 2016)", 120, new \DateTime("11-09-2018"), "SECTEUR LOISIRS", $categories[1] );
-        $this->loadActivity($activities[5], $manager, "Baby Gym (nés de 2015 à 2013)", 120, new \DateTime("11-09-2018"), "SECTEUR LOISIRS", $categories[1] );
+        $this->loadActivity($activities[4], $manager, "Baby Gym (nés en 2017 et 2016)", 120, new \DateTime("11-09-2018"), "SECTEUR LOISIRS", $categories[1]);
+        $this->loadActivity($activities[5], $manager, "Baby Gym (nés de 2015 à 2013)", 120, new \DateTime("11-09-2018"), "SECTEUR LOISIRS", $categories[1]);
 
 
-        $this->loadActivity($activities[6], $manager, "EG1 (2012 à 2007)", 180, new \DateTime("15-09-2018"), "SECTEUR LOISIRS", $categories[2] );
-        $this->loadActivity($activities[7], $manager, "EG2 (2012 à 2007)", 180, new \DateTime("15-09-2018"), "SECTEUR LOISIRS", $categories[2] );
-        $this->loadActivity($activities[8], $manager, "EG3 (2006 et avant)", 180, new \DateTime("15-09-2018"), "SECTEUR LOISIRS", $categories[2] );
-        $this->loadActivity($activities[9], $manager, "EG4 (2009 et avant)", 205, new \DateTime("15-09-2018"), "SECTEUR LOISIRS", $categories[2] );
+        $this->loadActivity($activities[6], $manager, "EG1 (2012 à 2007)", 180, new \DateTime("15-09-2018"), "SECTEUR LOISIRS", $categories[2]);
+        $this->loadActivity($activities[7], $manager, "EG2 (2012 à 2007)", 180, new \DateTime("15-09-2018"), "SECTEUR LOISIRS", $categories[2]);
+        $this->loadActivity($activities[8], $manager, "EG3 (2006 et avant)", 180, new \DateTime("15-09-2018"), "SECTEUR LOISIRS", $categories[2]);
+        $this->loadActivity($activities[9], $manager, "EG4 (2009 et avant)", 205, new \DateTime("15-09-2018"), "SECTEUR LOISIRS", $categories[2]);
 
-        $this->loadActivity($activities[10], $manager, "EGM (2012 et avant)", 180, new \DateTime("12-09-2018"), "SECTEUR LOISIRS", $categories[3] );
+        $this->loadActivity($activities[10], $manager, "EGM (2012 et avant)", 180, new \DateTime("12-09-2018"), "SECTEUR LOISIRS", $categories[3]);
 
-        $this->loadActivity($activities[11], $manager, "EG5 (2012 à 2010)", 165, new \DateTime("10-09-2018"), "SECTEUR LOISIRS", $categories[4] );
-        $this->loadActivity($activities[12], $manager, "EG6 (2009 et avant)", 165, new \DateTime("10-09-2018"), "SECTEUR LOISIRS", $categories[4] );
-        $this->loadActivity($activities[13], $manager, "EG7 (2012 et avant)", 165, new \DateTime("13-09-2018"), "SECTEUR LOISIRS", $categories[4] );
+        $this->loadActivity($activities[11], $manager, "EG5 (2012 à 2010)", 165, new \DateTime("10-09-2018"), "SECTEUR LOISIRS", $categories[4]);
+        $this->loadActivity($activities[12], $manager, "EG6 (2009 et avant)", 165, new \DateTime("10-09-2018"), "SECTEUR LOISIRS", $categories[4]);
+        $this->loadActivity($activities[13], $manager, "EG7 (2012 et avant)", 165, new \DateTime("13-09-2018"), "SECTEUR LOISIRS", $categories[4]);
 
         $this->loadActivity($activities[14], $manager, "Adultes", 125, new \DateTime("12-09-2018"), "SECTEUR LOISIRS", $categories[5]);
         $this->loadActivity($activities[15], $manager, "Renforcement musculaire", 125, new \DateTime("12-09-2018"), "SECTEUR LOISIRS", $categories[5]);
@@ -622,21 +630,20 @@ string $email, string $city, string $password)
         //$manager->persist($activities[$i]);
 
 
-
         // ADDING BETWEEN ONE AND THREE ACTIVITIES TO EACH ADHERENTS
         for ($i = 0; $i < $adherentsNumber; $i++) {
 
-            $numberOfActivity = rand(1,3);
+            $numberOfActivity = rand(1, 3);
 
-            for($j = 0; $j < $numberOfActivity; $j++){
+            for ($j = 0; $j < $numberOfActivity; $j++) {
                 // get random index from array $activities
                 $activityIndex = array_rand($activities);
- 
+
                 // get the value for the random index
                 $activity = $activities[$activityIndex];
 
             }
-            
+
         }
         $manager->flush();
     }

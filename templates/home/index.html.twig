@@ -14,6 +14,9 @@
             <h1 class="my-4">
                 Mes inscriptions
             </h1>
+            {% if adherents | length == 0%}
+                <p>Aucune inscription effectuée</p>
+            {% endif %}
 
             {% for adherent in adherents %}
                 <div class="card text-left" style="margin-bottom : 20px;">
