@@ -177,8 +177,6 @@ string $email, string $city, string $password)
         $adherents[0]->setVolunteerForClubLife("Jamais");
         $adherents[0]->setImageRight(false);
         $adherents[0]->setPaymentType("cheque");
-        $adherents[0]->setMedicalCertificate(false);
-        $adherents[0]->setBulletinN2Allianz(false);
         $adherents[0]->setHasMedicalCertificate(false);
         $adherents[0]->setHasHealthQuestionnaire(false);
 
@@ -199,8 +197,6 @@ string $email, string $city, string $password)
         $adherents[1]->setVolunteerForClubLife("Jamais");
         $adherents[1]->setImageRight(false);
         $adherents[1]->setPaymentType("cheque");
-        $adherents[1]->setMedicalCertificate(false);
-        $adherents[1]->setBulletinN2Allianz(false);
         $adherents[1]->setHasMedicalCertificate(false);
         $adherents[1]->setHasHealthQuestionnaire(false);
 
@@ -220,8 +216,6 @@ string $email, string $city, string $password)
         $adherents[2]->setVolunteerForClubLife("Jamais");
         $adherents[2]->setImageRight(false);
         $adherents[2]->setPaymentType("cheque");
-        $adherents[2]->setMedicalCertificate(false);
-        $adherents[2]->setBulletinN2Allianz(false);
         $adherents[2]->setHasMedicalCertificate(false);
         $adherents[2]->setHasHealthQuestionnaire(false);
 
@@ -239,8 +233,6 @@ string $email, string $city, string $password)
         $adherents[3]->setVolunteerForClubLife("Jamais");
         $adherents[3]->setImageRight(false);
         $adherents[3]->setPaymentType("cheque");
-        $adherents[3]->setMedicalCertificate(false);
-        $adherents[3]->setBulletinN2Allianz(false);
         $adherents[3]->setHasMedicalCertificate(false);
         $adherents[3]->setHasHealthQuestionnaire(false);
 
@@ -259,8 +251,6 @@ string $email, string $city, string $password)
         $adherents[4]->setVolunteerForClubLife("Jamais");
         $adherents[4]->setImageRight(false);
         $adherents[4]->setPaymentType("cheque");
-        $adherents[4]->setMedicalCertificate(false);
-        $adherents[4]->setBulletinN2Allianz(false);
         $adherents[4]->setHasMedicalCertificate(false);
         $adherents[4]->setHasHealthQuestionnaire(false);
 
@@ -279,8 +269,6 @@ string $email, string $city, string $password)
         $adherents[5]->setVolunteerForClubLife("Jamais");
         $adherents[5]->setImageRight(false);
         $adherents[5]->setPaymentType("cheque");
-        $adherents[5]->setMedicalCertificate(false);
-        $adherents[5]->setBulletinN2Allianz(false);
         $adherents[5]->setHasMedicalCertificate(false);
         $adherents[5]->setHasHealthQuestionnaire(false);
 
@@ -299,8 +287,6 @@ string $email, string $city, string $password)
         $adherents[6]->setVolunteerForClubLife("Jamais");
         $adherents[6]->setImageRight(false);
         $adherents[6]->setPaymentType("cheque");
-        $adherents[6]->setMedicalCertificate(false);
-        $adherents[6]->setBulletinN2Allianz(false);
         $adherents[6]->setHasMedicalCertificate(false);
         $adherents[6]->setHasHealthQuestionnaire(false);
 
@@ -319,8 +305,6 @@ string $email, string $city, string $password)
         $adherents[7]->setVolunteerForClubLife("Jamais");
         $adherents[7]->setImageRight(false);
         $adherents[7]->setPaymentType("cheque");
-        $adherents[7]->setMedicalCertificate(false);
-        $adherents[7]->setBulletinN2Allianz(false);
         $adherents[7]->setHasMedicalCertificate(false);
         $adherents[7]->setHasHealthQuestionnaire(false);
 
@@ -338,8 +322,6 @@ string $email, string $city, string $password)
         $adherents[8]->setVolunteerForClubLife("Jamais");
         $adherents[8]->setImageRight(false);
         $adherents[8]->setPaymentType("cheque");
-        $adherents[8]->setMedicalCertificate(false);
-        $adherents[8]->setBulletinN2Allianz(false);
         $adherents[8]->setHasMedicalCertificate(false);
         $adherents[8]->setHasHealthQuestionnaire(false);
 
@@ -358,8 +340,6 @@ string $email, string $city, string $password)
         $adherents[9]->setVolunteerForClubLife("Jamais");
         $adherents[9]->setImageRight(false);
         $adherents[9]->setPaymentType("cheque");
-        $adherents[9]->setMedicalCertificate(false);
-        $adherents[9]->setBulletinN2Allianz(false);
         $adherents[9]->setHasMedicalCertificate(false);
         $adherents[9]->setHasHealthQuestionnaire(false);
 
