@@ -233,13 +233,13 @@ class AdherentType extends AbstractType
             ->add('volunteerComment', TextareaType::class, [
                 'required' => false,
             ])
-            ->add('medicalCertificate', FileType::class, array(
+            ->add('medicalCertificateFile', FileType::class, array(
                 'attr' => [
                     'placeholder' => "Choisissez votre certificat médical"
                 ],
                 'required' => false,
             ))
-            ->add('bulletinN2Allianz', FileType::class, array(
+            ->add('bulletinN2AllianzFile', FileType::class, array(
                 'attr' => [
                     'placeholder' => "Choisissez votre bulletin N2 Allianz "
                 ],

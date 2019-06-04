@@ -33,6 +33,8 @@ class Document
      */
     private $event;
 
+
+
     /**
      * Document constructor.
      * @param $id

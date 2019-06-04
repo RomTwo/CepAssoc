@@ -3,6 +3,7 @@
 
 namespace App\Services;
 
+use App\Entity\Document;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 
 class Utilitaires
@@ -33,32 +34,32 @@ class Utilitaires
         $adherent->setStatus("EN ATTENTE");
         $adherent->setAffiliateCode(md5(uniqid()));
 
-        if($adherent->getMedicalCertificate() != null){
-            $adherent->setMedicalCertificate($this->addFile($adherent->getMedicalCertificate()));
+        if($adherent->getMedicalCertificateFile() != null){
+            $adherent->setMedicalCertificateFile(new Document($this->addFile($adherent->getMedicalCertificateFile()), $adherent->getMedicalCertificateFile()->getClientOriginalName()));
         }
 
-        if($adherent->getBulletinN2Allianz() != null){
-            $adherent->setBulletinN2Allianz($this->addFile($adherent->getBulletinN2Allianz()));
+        if($adherent->getBulletinN2AllianzFile() != null){
+            $adherent->setBulletinN2AllianzFile(new Document($this->addFile($adherent->getBulletinN2AllianzFile()), $adherent->getBulletinN2AllianzFile()->getClientOriginalName()));
         }
 
         if($adherent->getHealthQuestionnaireFile() != null){
-            $adherent->setHealthQuestionnaireFile($this->addFile($adherent->getHealthQuestionnaireFile()));
+            $adherent->setHealthQuestionnaireFile(new Document($this->addFile($adherent->getHealthQuestionnaireFile()), $adherent->getHealthQuestionnaireFile()->getClientOriginalName()));
         }
 
         return $adherent;
     }
 
     public function setFiles($adherent){
-        if($adherent->getMedicalCertificate() != null && !is_string($adherent->getMedicalCertificate())){
-            $adherent->setMedicalCertificate($this->addFile($adherent->getMedicalCertificate()));
+        if($adherent->getMedicalCertificateFile() != null && !$adherent->getMedicalCertificateFile() instanceof Document){
+            $adherent->setMedicalCertificateFile(new Document($this->addFile($adherent->getMedicalCertificateFile()), $adherent->getMedicalCertificateFile()->getClientOriginalName()));
         }
 
-        if($adherent->getBulletinN2Allianz() != null && !is_string($adherent->getBulletinN2Allianz())){
-            $adherent->setBulletinN2Allianz($this->addFile($adherent->getBulletinN2Allianz()));
+        if($adherent->getBulletinN2AllianzFile() != null && !$adherent->getBulletinN2AllianzFile() instanceof Document){
+            $adherent->setBulletinN2AllianzFile(new Document($this->addFile($adherent->getBulletinN2AllianzFile()), $adherent->getBulletinN2AllianzFile()->getClientOriginalName()));
         }
 
-        if($adherent->getHealthQuestionnaireFile() != null && !is_string($adherent->getHealthQuestionnaireFile())){
-            $adherent->setHealthQuestionnaireFile($this->addFile($adherent->getHealthQuestionnaireFile()));
+        if($adherent->getHealthQuestionnaireFile() != null && !$adherent->getHealthQuestionnaireFile() instanceof Document){
+            $adherent->setHealthQuestionnaireFile(new Document($this->addFile($adherent->getHealthQuestionnaireFile()), $adherent->getHealthQuestionnaireFile()->getClientOriginalName()));
         }
 
         return $adherent;
@@ -74,9 +75,8 @@ class Utilitaires
 
     public function addFile($file)
     {
-        $fileName = md5(uniqid()) . '.' . $file->guessExtension();
-        $file->move($this->params->get('upload_directory'), $fileName);
-        return $fileName;
+        $fileId = md5(uniqid());
+        $file->move($this->params->get('upload_directory'), $fileId);
+        return $fileId;
     }
-
 }

@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Account;
 use App\Entity\Activity;
 use App\Entity\Adherent;
+use App\Entity\Document;
 use App\Entity\TimeSlot;
 use App\Form\AdherentType;
 use App\Services\Utilitaires;
@@ -49,6 +50,7 @@ class RegistrationController extends AbstractController
             $account->addChild($adherent);
             if (!$this->isValidateHealthQuestionnaire($adherent->getHealthQuestionnaire())) {
                 $adherent->setHealthQuestionnaire(null);
+                //$adherent->setHealthQuestionnaireFile();
             } else {
                 $this->generatePDF($adherent);
             }
@@ -116,6 +118,7 @@ class RegistrationController extends AbstractController
 
     private function generatePDF($adherent)
     {
+
         $html = $this->render('account/generateHealthQuestionnairePDF.html.twig', [
             'adherent' => $adherent,
         ])->getContent();//Cette ligne permet de générer l'HTML d'une page twig.
@@ -126,27 +129,29 @@ class RegistrationController extends AbstractController
         $dompdf->loadHtml($html);
         $dompdf->setPaper('A4', 'portrait');
         $dompdf->render();
-        $filename = md5(uniqid()) . '.pdf';
-        file_put_contents('uploads/' . $filename, $dompdf->output());
-        $adherent->setHealthQuestionnaireFile($filename);
+        $fileId = md5(uniqid());
+        file_put_contents('uploads/' . $fileId, $dompdf->output());
+        $adherent->setHealthQuestionnaireFile(new Document($fileId, $adherent->getFirstName()."_".$adherent->getLastName()."_QuestionnaireDeSante_CEPPoitiers.pdf"));
     }
 
     private function setPrice($adherent,$data)
     {
-        $activities = array();
-        foreach ($data as $value) {
-            $timeSlot = $this->getDoctrine()->getRepository(TimeSlot::class)->find($value);
-            if(!in_array($timeSlot->getActivity()->getId(), $activities, true)){
-                array_push($activities, $timeSlot->getActivity()->getId());
+        if($data != null){
+            $activities = array();
+            foreach ($data as $value) {
+                $timeSlot = $this->getDoctrine()->getRepository(TimeSlot::class)->find($value);
+                if(!in_array($timeSlot->getActivity()->getId(), $activities, true)){
+                    array_push($activities, $timeSlot->getActivity()->getId());
+                }
+                $timeSlot->addAdherent($adherent);
             }
-            $timeSlot->addAdherent($adherent);
+            $price = 0;
+            foreach ($activities as $value){
+                $activity = $this->getDoctrine()->getRepository(Activity::class)->find($value);
+                $price += $activity->getPrice();
+            }
+            $adherent->setRegistrationCost($price);
         }
-        $price = 0;
-        foreach ($activities as $value){
-            $activity = $this->getDoctrine()->getRepository(Activity::class)->find($value);
-            $price += $activity->getPrice();
-        }
-        $adherent->setRegistrationCost($price);
     }
 
 }
