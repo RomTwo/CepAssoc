@@ -2,7 +2,9 @@
 
 namespace App\Controller\administration;
 
+use App\Entity\Account;
 use App\Entity\Adherent;
+use App\Entity\Document;
 use App\Form\AdminAdherentType;
 use Dompdf\Dompdf;
 use Dompdf\Options;
@@ -36,16 +38,17 @@ class AdminAdherentsController extends AbstractController
     public function edit(Adherent $adherent, Request $request, Utilitaires $utilitaires)
     {
         $entityManager = $this->getDoctrine()->getManager();
+        $oldAdherent = $entityManager->getRepository(Adherent::class)->find($adherent->getId());
 
         $form = $this->createForm(AdminAdherentType::class, $adherent);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid() && $utilitaires->isValidateCity($request->request->get("admin_adherent_cityRep1"))) {
             $adherent->setCityRep1($request->request->get("admin_adherent_cityRep1"));
-            $utilitaires->setFiles($adherent);
+            $utilitaires->setFiles($oldAdherent, $adherent);
             $entityManager->flush();
-            $this->addFlash('success', $adherent->getFirstName() . " " .$adherent->getLastName() . " a été modifié avec succès");        
-            
+            $this->addFlash('success', $adherent->getFirstName() . " " . $adherent->getLastName() . " a été modifié avec succès");
+
             return $this->redirectToRoute('admin_adherents');
         }
 
@@ -69,9 +72,9 @@ class AdminAdherentsController extends AbstractController
         if ($adherent != null) {
             $adherent->setIsDeleted(true);
             $entityManager->flush();
-            $this->addFlash('success', $adherent->getFirstName() . " " .$adherent->getLastName() . " a été supprimé de la liste des adhérents");
+            $this->addFlash('success', $adherent->getFirstName() . " " . $adherent->getLastName() . " a été supprimé de la liste des adhérents");
 
-        }else{
+        } else {
             $this->addFlash('error', "L'adhérent n'existe pas");
         }
 
@@ -84,7 +87,7 @@ class AdminAdherentsController extends AbstractController
      * @param $id is the id of the $adherent we want to remove
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
-    public function editStatus(Request $request,$id)
+    public function editStatus(Request $request, $id)
     {
         $repository = $this->getDoctrine()->getRepository(Adherent::class);
         $entityManager = $this->getDoctrine()->getManager();
@@ -95,21 +98,21 @@ class AdminAdherentsController extends AbstractController
         if ($adherent != null && $new_status != null) {
             $adherent->setStatus($new_status);
             $entityManager->flush();
-            $this->addFlash('success', "Le statut de " . $adherent->getFirstName() . " " .$adherent->getLastName() . " est maintenant de : " . $new_status);
-        }else{
-            $this->addFlash('error', "Erreur dans la requête.");        
+            $this->addFlash('success', "Le statut de " . $adherent->getFirstName() . " " . $adherent->getLastName() . " est maintenant de : " . $new_status);
+        } else {
+            $this->addFlash('error', "Erreur dans la requête.");
         }
 
 
         return $this->redirectToRoute("admin_adherents");
     }
 
-     /**
+    /**
      * Edit the GESTGYM statut of the adherent
      * @param $id is the id of the $adherent we want to remove
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
-    public function editStatusGESTGYM(Request $request,$id)
+    public function editStatusGESTGYM(Request $request, $id)
     {
         $repository = $this->getDoctrine()->getRepository(Adherent::class);
         $entityManager = $this->getDoctrine()->getManager();
@@ -119,9 +122,9 @@ class AdminAdherentsController extends AbstractController
         if ($adherent != null && $new_status != null) {
             $adherent->setIsRegisteredInGestGym($new_status);
             $entityManager->flush();
-            $this->addFlash('success', "Le statut GESTGYM de " . $adherent->getFirstName() . " " .$adherent->getLastName() . " est maintenant de : " . $new_status);
-        }else{
-            $this->addFlash('error', "Erreur dans la requête.");        
+            $this->addFlash('success', "Le statut GESTGYM de " . $adherent->getFirstName() . " " . $adherent->getLastName() . " est maintenant de : " . $new_status);
+        } else {
+            $this->addFlash('error', "Erreur dans la requête.");
         }
 
         return $this->redirectToRoute("admin_adherents");
@@ -148,11 +151,11 @@ class AdminAdherentsController extends AbstractController
             $dompdf->stream($adherent->getFirstName() . "_" . $adherent->getLastName() . ".pdf", [
                 "Attachment" => true
             ]);
-        }else{
-           
-            $this->addFlash('error', "Erreur dans la requête.");        
+        } else {
+
+            $this->addFlash('error', "Erreur dans la requête.");
             return $this->redirectToRoute("admin_adherents");
         }
-        
+
     }
 }

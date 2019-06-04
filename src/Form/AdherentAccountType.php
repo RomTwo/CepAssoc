@@ -362,14 +362,14 @@ class AdherentAccountType extends AbstractType
                     'placeholder' => "Plus d'informations sur vos disponibilités..."
                 ]
             ])
-            ->add('medicalCertificate', FileType::class, [
+            ->add('medicalCertificateFile', FileType::class, [
                 'attr' => [
                     'placeholder' => "Choisissez votre certificat médical"
                 ],
                 'required' => false,
                 'data_class' => null,
             ])
-            ->add('bulletinN2Allianz', FileType::class, [
+            ->add('bulletinN2AllianzFile', FileType::class, [
                 'attr' => [
                     'placeholder' => "Choisissez votre bulletin N2 Allianz "
                 ],
@@ -379,7 +379,7 @@ class AdherentAccountType extends AbstractType
             ->add('healthQuestionnaireFile', FileType::class, [
                 'attr' => [
                     'placeholder' => "Choisissez le questionnaire de santé",
-                    'lang' => 'fr'
+                    'lang' => 'fr',
                 ],
                 'required' => false,
                 'data_class' => null,

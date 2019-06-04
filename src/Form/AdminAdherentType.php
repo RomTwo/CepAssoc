@@ -3,6 +3,7 @@
 namespace App\Form;
 
 use App\Entity\Adherent;
+use App\Entity\Document;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
@@ -115,7 +116,6 @@ class AdminAdherentType extends AbstractType
                 'choices' => [
                     'Renouvellement' => 'renouvellement',
                     'Nouvelle inscription' => 'nouveau',
-                    'Mutation' => 'mutation'
                 ],
                 'multiple' => false,
                 'expanded' => true,
@@ -156,25 +156,33 @@ class AdminAdherentType extends AbstractType
                 'multiple' => false,
                 'expanded' => true,
             ])
-            ->add('medicalCertificate', FileType::class, array(
-                'label' => "Certificat medical : ",
+            ->add('medicalCertificateFile', FileType::class, array(
+                'attr' => [
+                    'placeholder' => $builder->getData()->getMedicalCertificateFile() != null ? $builder->getData()->getMedicalCertificateFile()->getName() : "",
+                ],
                 'required' => false,
-                'data_class' => null,
+                'data_class' => Document::class,
             ))
-            ->add('bulletinN2Allianz', FileType::class, array(
+            ->add('bulletinN2AllianzFile', FileType::class, array(
+                'attr' => [
+                    'placeholder' => $builder->getData()->getBulletinN2AllianzFile() != null ? $builder->getData()->getBulletinN2AllianzFile()->getName() : "",
+                ],
                 'required' => false,
-                'data_class' => null,
+                'data_class' => Document::class,
             ))
             ->add('healthQuestionnaireFile', FileType::class, array(
+                'attr' => [
+                    'placeholder' => $builder->getData()->getHealthQuestionnaireFile() != null ? $builder->getData()->getHealthQuestionnaireFile()->getName() : "",
+                ],
                 'required' => false,
-                'data_class' => null,
+                'data_class' => Document::class,
             ));
-        $builder->get('medicalCertificate')->addEventListener(FormEvents::SUBMIT, function (FormEvent $event) {
+        $builder->get('medicalCertificateFile')->addEventListener(FormEvents::SUBMIT, function (FormEvent $event) {
             if (null === $event->getData()) {
                 $event->setData($event->getForm()->getData());
             }
         });
-        $builder->get('bulletinN2Allianz')->addEventListener(FormEvents::SUBMIT, function (FormEvent $event) {
+        $builder->get('bulletinN2AllianzFile')->addEventListener(FormEvents::SUBMIT, function (FormEvent $event) {
             if (null === $event->getData()) {
                 $event->setData($event->getForm()->getData());
             }
