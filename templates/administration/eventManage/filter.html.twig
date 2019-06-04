@@ -13,11 +13,18 @@
         </a>
     </div>
 
-    <div class="row justify-content-left mb-4 ml-1">
-        <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#addEvent"
-                aria-expanded="false" aria-controls="addEvent">
-            Filtres
-        </button>
+    <div class="row justify-content-left mb-4">
+        <div class="col-1">
+            <button class="btn btn-primary ml-2" type="button" data-toggle="collapse" data-target="#addEvent"
+                    aria-expanded="false" aria-controls="addEvent">
+                Filtres
+            </button>
+        </div>
+        <div class="col-auto" hidden>
+            <button class="btn btn-primary">
+                Ajouter un évènement
+            </button>
+        </div>
     </div>
 
     <div class="collapse pb-4" id="addEvent">
@@ -42,7 +49,7 @@
             <th>Fin</th>
             <th>Poste</th>
             <th>Description</th>
-            <th>Action</th>
+            <th hidden>Action</th>
         </tr>
         </thead>
         <tbody>
@@ -53,17 +60,17 @@
                 <td>le {{ em.endDate | date("d/m/Y") }} à {{ em.endDate | date("H:i") }}</td>
                 <td>{{ em.job }}</td>
                 <td>{{ em.description }}</td>
-                <td>
+                <td hidden>
                     <button type="button" class="btn btn-primary" data-toggle="modal"
-                            data-target="#modal-view-event">
+                            data-target="#modal-view-event-desc{{ em.id }}">
                         <i class="far fa-eye"></i>
                     </button>
                     <button type="button" class="btn btn-warning" data-toggle="modal"
                             data-target="#modal-edit-event">
                         <i class="far fa-edit"></i>
                     </button>
-                    <button type="button" class="btn btn-danger" data-toggle="modal"
-                            data-target="#modal-delete-event">
+                    <button id="deleteEvent" type="button" class="btn btn-danger"
+                            value="{{ path('admin_event_manager_delete') }}">
                         <i class="far fa-trash-alt"></i>
                     </button>
                 </td>
@@ -77,10 +84,17 @@
             <th>Fin</th>
             <th>Poste</th>
             <th>Description</th>
-            <th>Action</th>
+            <th hidden>Action</th>
         </tr>
         </tfoot>
     </table>
+
+    {% for em in eventManagers %}
+        {% include('administration/eventManage/viewEventFilter.html.twig') %}
+    {% endfor %}
+
+
+
 {% endblock %}
 
 {% block javascripts %}

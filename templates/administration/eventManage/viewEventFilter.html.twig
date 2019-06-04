@@ -1,0 +1,30 @@
+<div id="modal-view-event-desc{{ em.id }}" class="modal modal-top fade calendar-modal">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-body">
+                <h4>Description : </h4>
+                <div>
+                    <div>
+                        <p>Personne : {{ em.account.firstName }}</p>
+                    </div>
+                    <div>
+                        <p>Poste occupé : {{ em.job }}</p>
+                    </div>
+                    <div>
+                        <p>Description du poste : {{ em.description }} </p>
+                    </div>
+                    <div>
+                        <p>Date de début : le {{ em.startDate | date("d/m/Y") }} à {{ em.startDate | date("H:i") }}</p>
+                    </div>
+                    <div>
+                        <p>Date de fin: le {{ em.endDate | date("d/m/Y") }} à {{ em.endDate | date("H:i") }}</p>
+                    </div>
+                </div>
+                <input id="idEventManager" type="hidden">
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
