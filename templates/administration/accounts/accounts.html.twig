@@ -27,10 +27,23 @@
                 <td>{{ account.email }}</td>
                 <td>{{ account.getRoles() | join }}</td>
                 <td>
-                    <button type="button" class="btn btn-primary btn-sm" data-toggle="modal"
-                            data-target="#modalAccount{{ account.id }}">
-                        Voir plus
-                    </button>
+                    <span data-target="#modalAccount{{ account.id }}" data-toggle="modal">
+                        <button type="button" class="btn btn-primary" data-placement="top" data-toggle="tooltip"
+                                title="Voir plus">
+                            <i class="far fa-eye"></i>
+                        </button>
+                    </span>
+
+                    <a href="{{ path('admin_accounts_edit', {'id': account.id}) }}" role="button"
+                       class="btn btn-warning" data-toggle="tooltip" data-placement="top" title="Modifier le compte"><i
+                                class="far fa-edit"></i></a>
+
+                    <span data-dismiss="modal" data-toggle="modal" data-target="#modalDeleteAccount{{ account.id }}">
+                        <button type="button" class="btn btn-danger" data-toggle="tooltip" data-placement="top"
+                                title="Supprimer le compte">
+                            <i class="far fa-trash-alt"></i>
+                        </button>
+                    </span>
                 </td>
             </tr>
         {% endfor %}
@@ -62,10 +75,10 @@
     </table>
 
 
-<!-- Modal -->
-{% for account in accounts %}
-    {% include('administration/accounts/modalAccount.html.twig') %}
-{% endfor %}
+    <!-- Modal -->
+    {% for account in accounts %}
+        {% include('administration/accounts/modalAccount.html.twig') %}
+    {% endfor %}
 
 {% endblock %}
 
@@ -76,11 +89,11 @@
     <script type="text/javascript">
         $(document).ready(function () {
             $('#accounts').DataTable({
-                language : window.datatable_french,
+                language: window.datatable_french,
                 responsive: true,
                 columnDefs: [
-                    { responsivePriority: 10001, targets: 2 },
-                    { responsivePriority: 10001, targets: 3 },
+                    {responsivePriority: 10001, targets: 2},
+                    {responsivePriority: 10001, targets: 3},
                 ]
             });
         });

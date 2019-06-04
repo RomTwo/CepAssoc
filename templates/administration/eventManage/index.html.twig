@@ -20,6 +20,11 @@
 
 
     <!-- Describe event (Modal)-->
+    <div class="row justify-content-center mb-4">
+        <a href="{{ path('admin_event_manager_index_filter', {id: idEvent}) }}" class="btn btn-primary">
+            Visualisation détaillée
+        </a>
+    </div>
     {% include('administration/eventManage/describeModal.html.twig') %}
     {% include('administration/eventManage/updateModal.html.twig') %}
 

@@ -43,6 +43,7 @@ class Activity
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Category", inversedBy="activities")
      * @ORM\JoinColumn(nullable=false)
+     * @Groups({"competition"})
      */
     private $category;
 

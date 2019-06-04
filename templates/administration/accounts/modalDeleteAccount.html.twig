@@ -13,8 +13,7 @@
                 Êtes-vous sûr de vouloir supprimer ce compte ?
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal" data-toggle="modal"
-                        data-target="#modalAccount{{ account.id }}">Non
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Non
                 </button>
                 <a href="{{ path('admin_accounts_delete', {'id': account.id}) }}" role="button" class="btn btn-primary">Oui</a>
             </div>

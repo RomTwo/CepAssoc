@@ -9,6 +9,7 @@ use phpDocumentor\Reflection\Types\String_;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Serializer\Serializer;
 use Symfony\Component\Serializer\Normalizer\DateTimeNormalizer;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 
 /**
@@ -51,6 +52,7 @@ class TimeSlot
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Activity", inversedBy="timeSlot")
      * @ORM\JoinColumn(nullable=true)
+     * @Groups({"competition"})
      */
     private $activity;
 

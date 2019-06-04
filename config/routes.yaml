@@ -143,10 +143,6 @@ admin_categoryEdit:
     path: /admin/categories/edit/{id}
     controller: App\Controller\administration\AdminActivitiesCategoryController::edit
 
-admin_categoryAdd:
-    path: /admin/categories/add
-    controller: App\Controller\administration\AdminActivitiesCategoryController::add
-
 admin_categoryDelete:
     path: /admin/categories/delete/{id}
     controller: App\Controller\administration\AdminActivitiesCategoryController::delete
@@ -189,6 +185,12 @@ admin_event_delete:
 admin_event_manager_index:
     path: /admin/event/manager/{id}
     controller: App\Controller\administration\AdminEventManagerController::index
+    requirements:
+        id: ([0-9]*)
+
+admin_event_manager_index_filter:
+    path: /admin/event/manager/filter/{id}
+    controller: App\Controller\administration\AdminEventManagerController::indexFilter
     requirements:
         id: ([0-9]*)
 

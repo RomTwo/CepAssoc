@@ -358,6 +358,7 @@ class Adherent
 
     /**
      * @ORM\ManyToMany(targetEntity="App\Entity\TimeSlot", inversedBy="adherents")
+     * @Groups({"competition"})
      */
     private $timeSlots;
 
@@ -1210,4 +1211,5 @@ class Adherent
     {
         $this->healthQuestionnaire = $healthQuestionnaire;
     }
+
 }

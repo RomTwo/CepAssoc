@@ -127,6 +127,7 @@ class AdminAdherentsController extends AbstractController
         return $this->redirectToRoute("admin_adherents");
     }
 
+
     /**
      * generate a pdf containing the adherent data
      * @param $id is the id of the adherent whose data we want to print
