@@ -6,7 +6,7 @@
 
 {% block body %}
     <div
-        class="row">
+            class="row">
 
         <!-- Blog Entries Column -->
         <div class="col-md-8">
@@ -18,15 +18,15 @@
             {% for adherent in adherents %}
                 <div class="card text-left" style="margin-bottom : 20px;">
                     <div class="card-header">
-                        <div style ="display : flex; flex-direction: row;">
-                            <div style =" width: 100%">
+                        <div style="display : flex; flex-direction: row;">
+                            <div style=" width: 100%">
                                 <strong>
-                                    {{adherent.firstName}}
-                                    {{adherent.lastName}}
+                                    {{ adherent.firstName }}
+                                    {{ adherent.lastName }}
                                 </strong>
 
                             </div>
-                            <div class="text-right" style ="width: 100%">
+                            <div class="text-right" style="width: 100%">
                                 Statut :
                                 {% if adherent.isDeleted == true %}
                                     <span style="color:green">Inscription rejeté !</span>
@@ -41,23 +41,33 @@
                         </div>
                     </div>
                     <div class="card-body">
-                        <p>Date d'inscription :{{adherent.registrationDate|date('d-m-Y')}}</p>
+                        <p>Date d'inscription :{{ adherent.registrationDate|date('d-m-Y') }}</p>
                         <div class="text-right">
                             {% if adherent.healthQuestionnaireFile is not null %}
-                                <a class="btn btn-success" href="{{ asset('uploads/' ~ adherent.healthQuestionnaireFile.id) }}" data-toggle="tooltip" data-placement="top" title="Télécharger le questionnaire de santé de l'adhérent" download="{{ adherent.healthQuestionnaireFile.name }}">
+                                <a class="btn btn-success"
+                                   href="{{ asset('uploads/' ~ adherent.healthQuestionnaireFile.id) }}"
+                                   data-toggle="tooltip" data-placement="top"
+                                   title="Télécharger le questionnaire de santé de l'adhérent"
+                                   download="{{ adherent.healthQuestionnaireFile.name }}">
                                     <i class="far fa-file-pdf"></i>
                                 </a>
                             {% endif %}
-                            <a class="btn btn-primary btn-sm" href="#">Voir plus</a>
-                            <button class="btn btn-primary btn-sm" data-target="#modal{{ adherent.id }}" data-toggle="modal" type="button">Code d'affiliation</button>
+                            <button class="btn btn-primary btn-sm" data-toggle="modal"
+                                    data-target="#exampleModal{{ adherent.id }}">Voir plus
+                            </button>
+
+                            <button class="btn btn-primary btn-sm" data-target="#modal{{ adherent.id }}"
+                                    data-toggle="modal" type="button">Code d'affiliation
+                            </button>
                             <!-- Modal -->
-                            <div aria-hidden="true" aria-labelledby="modalLabel" class="modal fade" id="modal{{ adherent.id }}" role="dialog" tabindex="-1">
+                            <div aria-hidden="true" aria-labelledby="modalLabel" class="modal fade"
+                                 id="modal{{ adherent.id }}" role="dialog" tabindex="-1">
                                 <div class="modal-dialog" role="document">
                                     <div class="modal-content">
                                         <div class="modal-header">
                                             <h5 class="modal-title" id="modalLabel">Code d'affiliation :
-                                                {{adherent.lastName}}
-                                                {{adherent.firstName}} </h5>
+                                                {{ adherent.lastName }}
+                                                {{ adherent.firstName }} </h5>
 
                                             <button aria-label="Close" class="close" data-dismiss="modal" type="button">
                                                 <span aria-hidden="true">&times;</span>
@@ -65,14 +75,20 @@
                                         </div>
                                         <div class="modal-body">
                                             <div class="input-group mb-3">
-                                                <input readonly type="text" class="form-control" value="{{ adherent.affiliateCode }}" aria-describedby="basic-addon2" id="cible{{ adherent.id }}">
+                                                <input readonly type="text" class="form-control"
+                                                       value="{{ adherent.affiliateCode }}"
+                                                       aria-describedby="basic-addon2" id="cible{{ adherent.id }}">
                                                 <div class="input-group-append">
-                                                    <button class="btn btn-outline-secondary" type="button" onclick="myFunction(this.id)" id="{{ adherent.id }}">Copier</button>
+                                                    <button class="btn btn-outline-secondary" type="button"
+                                                            onclick="myFunction(this.id)" id="{{ adherent.id }}">Copier
+                                                    </button>
                                                 </div>
                                             </div>
 
                                             <div class="text-right">
-                                                <button class="btn btn-secondary" data-dismiss="modal" type="button">Fermer</button>
+                                                <button class="btn btn-secondary" data-dismiss="modal" type="button">
+                                                    Fermer
+                                                </button>
                                             </div>
                                         </div>
                                     </div>
@@ -82,12 +98,16 @@
                     </div>
                 </div>
 
+                {% include('home/descAdherent.html.twig') %}
+
             {% endfor %}
 
 
             <!-- Button for add Code -->
             <div class="text-right">
-                <button aria-controls="collapseExample" aria-expanded="false" class="btn btn-primary btn-sm" data-target="#collapseCode" data-toggle="collapse" style="margin-top:20px; margin-bottom:20px" type="button">
+                <button aria-controls="collapseExample" aria-expanded="false" class="btn btn-primary btn-sm"
+                        data-target="#collapseCode" data-toggle="collapse" style="margin-top:20px; margin-bottom:20px"
+                        type="button">
                     Ajouter un enfant via un code d'affiliation
                 </button>
             </div>
@@ -114,13 +134,14 @@
 
         <!-- Sidebar Widgets Column -->
         <div
-            class="col-md-4">
+                class="col-md-4">
 
             <!-- Side Widget -->
             <div class="card my-4">
                 <h5 class="card-header">Twitter</h5>
                 <div class="card-body">
-                    <a class="twitter-timeline" data-chrome="nofooter noborders noheader" data-height="400" data-lang="fr" href="https://twitter.com/CepGym86?ref_src=twsrc%5Etfw">Tweets by CepGym86</a>
+                    <a class="twitter-timeline" data-chrome="nofooter noborders noheader" data-height="400"
+                       data-lang="fr" href="https://twitter.com/CepGym86?ref_src=twsrc%5Etfw">Tweets by CepGym86</a>
                     <script async charset="utf-8" src="https://platform.twitter.com/widgets.js"></script>
 
                 </div>
@@ -129,7 +150,8 @@
                 <h5 class="card-header">Facebook</h5>
                 <div class="card-body">
                     <div id="fb-root"></div>
-                    <div class="fb-page" data-href="https://www.facebook.com/CEP-Poitiers-Gymnastique-202545186848/" data-show-facepile="false" data-tabs="timeline,events,messages"></div>
+                    <div class="fb-page" data-href="https://www.facebook.com/CEP-Poitiers-Gymnastique-202545186848/"
+                         data-show-facepile="false" data-tabs="timeline,events,messages"></div>
                 </div>
             </div>
         </div>
@@ -140,7 +162,8 @@
 
 {% block javascripts %}
 
-    <script async crossorigin="anonymous" defer src="https://connect.facebook.net/fr_FR/sdk.js#xfbml=1&version=v3.3&appId=2034147173517190&autoLogAppEvents=1"></script>
+    <script async crossorigin="anonymous" defer
+            src="https://connect.facebook.net/fr_FR/sdk.js#xfbml=1&version=v3.3&appId=2034147173517190&autoLogAppEvents=1"></script>
 
 
     <script>

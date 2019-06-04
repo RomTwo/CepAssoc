@@ -40,15 +40,13 @@ class HomeController extends AbstractController
             // get the child associated to this affiliate code
             $adherent = $this->getDoctrine()->getRepository(Adherent::class)->findOneBy(['affiliateCode' => $code]);
 
-            if($adherent == null){
+            if ($adherent == null) {
                 $this->addFlash('error', "La clé que vous avez entré ne correspond à aucun adhérent");
-            }
-            else{
+            } else {
                 // if the user already had the child, we do nothing and we mention it
-                if($adherents->contains($adherent)){
+                if ($adherents->contains($adherent)) {
                     $this->addFlash('error', "Vous suivez déjà l'adhérent correspondant au code entré");
-                }
-                else{
+                } else {
                     // Adding the child to the user
                     $account->addChild($adherent);
 
