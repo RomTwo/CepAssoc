@@ -40,47 +40,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/templates/administration/adherents/adherents.html.twig">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="433">
+            <state relative-caret-position="1140">
               <caret line="76" column="44" selection-start-line="76" selection-start-column="44" selection-end-line="76" selection-end-column="44" />
-              <folding>
-                <element signature="e#157#186#0#HTML" expanded="true" />
-                <element signature="e#981#1001#0#HTML" expanded="true" />
-                <element signature="e#1223#1244#0#HTML" expanded="true" />
-                <element signature="e#1468#1489#0#HTML" expanded="true" />
-                <element signature="e#1721#1742#0#HTML" expanded="true" />
-                <element signature="e#1979#2000#0#HTML" expanded="true" />
-                <element signature="e#2238#2259#0#HTML" expanded="true" />
-                <element signature="e#3115#3132#0#HTML" expanded="true" />
-                <element signature="e#3301#3322#0#HTML" expanded="true" />
-                <element signature="e#3493#3516#0#HTML" expanded="true" />
-                <element signature="e#3694#3714#0#HTML" expanded="true" />
-                <element signature="e#3896#3915#0#HTML" expanded="true" />
-                <element signature="e#4458#4477#0#HTML" expanded="true" />
-                <element signature="e#4588#4605#0#HTML" expanded="true" />
-                <element signature="e#6871#6878#1#HTML" expanded="true" />
-                <element signature="e#10001#10008#1#HTML" expanded="true" />
-                <element signature="e#12593#12600#1#HTML" expanded="true" />
-                <element signature="e#13255#13274#0#HTML" expanded="true" />
-                <element signature="e#13387#13404#0#HTML" expanded="true" />
-                <element signature="e#13718#13737#0#HTML" expanded="true" />
-                <element signature="e#13840#13857#0#HTML" expanded="true" />
-                <element signature="e#17821#17842#0#HTML" expanded="true" />
-                <element signature="e#18109#18128#0#HTML" expanded="true" />
-                <element signature="e#18529#18550#0#HTML" expanded="true" />
-                <element signature="e#18817#18836#0#HTML" expanded="true" />
-                <element signature="e#19515#19534#0#HTML" expanded="true" />
-                <element signature="e#20067#20088#0#HTML" expanded="true" />
-                <element signature="e#20221#20240#0#HTML" expanded="true" />
-                <element signature="e#21519#21536#0#HTML" expanded="true" />
-                <element signature="e#23065#23086#0#HTML" expanded="true" />
-                <element signature="e#23211#23230#0#HTML" expanded="true" />
-                <element signature="e#24042#24063#0#HTML" expanded="true" />
-                <element signature="e#24188#24207#0#HTML" expanded="true" />
-                <element signature="e#24763#24784#0#HTML" expanded="true" />
-                <element signature="e#24909#24928#0#HTML" expanded="true" />
-                <element signature="e#25484#25505#0#HTML" expanded="true" />
-                <element signature="e#25630#25649#0#HTML" expanded="true" />
-              </folding>
             </state>
           </provider>
         </entry>
@@ -88,8 +49,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/Controller/administration/AdminActivitiesCategoryController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="285">
-              <caret line="27" column="5" lean-forward="true" selection-start-line="27" selection-start-column="5" selection-end-line="27" selection-end-column="5" />
+            <state relative-caret-position="495">
+              <caret line="41" column="9" lean-forward="true" selection-start-line="41" selection-start-column="9" selection-end-line="41" selection-end-column="9" />
             </state>
           </provider>
         </entry>
@@ -97,7 +58,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/config/routes.yaml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="378">
+            <state relative-caret-position="2205">
               <caret line="147" column="68" selection-start-line="147" selection-start-column="68" selection-end-line="147" selection-end-column="68" />
             </state>
           </provider>
@@ -403,175 +364,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope">
-        <subPane subId="Project Files">
-          <expand>
-            <path>
-              <item name="Root" type="cbb8eebc:String" user="Root" />
-              <item name="CepAssoc" type="cbb8eebc:String" user="CepAssoc" />
-            </path>
-          </expand>
-          <select />
-        </subPane>
-        <subPane subId="Scope 'Project Files'; set:Project Files; class com.intellij.psi.search.scope.ProjectFilesScope">
-          <expand>
-            <path>
-              <item name="CepAssoc" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
-              <item name="~/PhpstormProjects/CepAssoc" type="442cc68d:ScopeViewTreeModel$RootNode" />
-            </path>
-            <path>
-              <item name="CepAssoc" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
-              <item name="~/PhpstormProjects/CepAssoc" type="442cc68d:ScopeViewTreeModel$RootNode" />
-              <item name=".idea" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-            </path>
-            <path>
-              <item name="CepAssoc" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
-              <item name="~/PhpstormProjects/CepAssoc" type="442cc68d:ScopeViewTreeModel$RootNode" />
-              <item name="assets" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-            </path>
-            <path>
-              <item name="CepAssoc" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
-              <item name="~/PhpstormProjects/CepAssoc" type="442cc68d:ScopeViewTreeModel$RootNode" />
-              <item name="assets" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="css" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-            </path>
-            <path>
-              <item name="CepAssoc" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
-              <item name="~/PhpstormProjects/CepAssoc" type="442cc68d:ScopeViewTreeModel$RootNode" />
-              <item name="assets" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="js" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-            </path>
-            <path>
-              <item name="CepAssoc" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
-              <item name="~/PhpstormProjects/CepAssoc" type="442cc68d:ScopeViewTreeModel$RootNode" />
-              <item name="config" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-            </path>
-            <path>
-              <item name="CepAssoc" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
-              <item name="~/PhpstormProjects/CepAssoc" type="442cc68d:ScopeViewTreeModel$RootNode" />
-              <item name="config" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="packages" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-            </path>
-            <path>
-              <item name="CepAssoc" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
-              <item name="~/PhpstormProjects/CepAssoc" type="442cc68d:ScopeViewTreeModel$RootNode" />
-              <item name="documentations" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-            </path>
-            <path>
-              <item name="CepAssoc" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
-              <item name="~/PhpstormProjects/CepAssoc" type="442cc68d:ScopeViewTreeModel$RootNode" />
-              <item name="src" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-            </path>
-            <path>
-              <item name="CepAssoc" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
-              <item name="~/PhpstormProjects/CepAssoc" type="442cc68d:ScopeViewTreeModel$RootNode" />
-              <item name="src" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="Controller" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-            </path>
-            <path>
-              <item name="CepAssoc" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
-              <item name="~/PhpstormProjects/CepAssoc" type="442cc68d:ScopeViewTreeModel$RootNode" />
-              <item name="src" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="Controller" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="administration" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-            </path>
-            <path>
-              <item name="CepAssoc" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
-              <item name="~/PhpstormProjects/CepAssoc" type="442cc68d:ScopeViewTreeModel$RootNode" />
-              <item name="src" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="DataFixtures" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-            </path>
-            <path>
-              <item name="CepAssoc" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
-              <item name="~/PhpstormProjects/CepAssoc" type="442cc68d:ScopeViewTreeModel$RootNode" />
-              <item name="src" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="Entity" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-            </path>
-            <path>
-              <item name="CepAssoc" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
-              <item name="~/PhpstormProjects/CepAssoc" type="442cc68d:ScopeViewTreeModel$RootNode" />
-              <item name="src" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="Form" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-            </path>
-            <path>
-              <item name="CepAssoc" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
-              <item name="~/PhpstormProjects/CepAssoc" type="442cc68d:ScopeViewTreeModel$RootNode" />
-              <item name="src" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="Migrations" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-            </path>
-            <path>
-              <item name="CepAssoc" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
-              <item name="~/PhpstormProjects/CepAssoc" type="442cc68d:ScopeViewTreeModel$RootNode" />
-              <item name="src" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="Repository" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-            </path>
-            <path>
-              <item name="CepAssoc" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
-              <item name="~/PhpstormProjects/CepAssoc" type="442cc68d:ScopeViewTreeModel$RootNode" />
-              <item name="src" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="Security" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-            </path>
-            <path>
-              <item name="CepAssoc" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
-              <item name="~/PhpstormProjects/CepAssoc" type="442cc68d:ScopeViewTreeModel$RootNode" />
-              <item name="src" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="Services" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-            </path>
-            <path>
-              <item name="CepAssoc" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
-              <item name="~/PhpstormProjects/CepAssoc" type="442cc68d:ScopeViewTreeModel$RootNode" />
-              <item name="templates" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-            </path>
-            <path>
-              <item name="CepAssoc" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
-              <item name="~/PhpstormProjects/CepAssoc" type="442cc68d:ScopeViewTreeModel$RootNode" />
-              <item name="templates" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="account" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-            </path>
-            <path>
-              <item name="CepAssoc" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
-              <item name="~/PhpstormProjects/CepAssoc" type="442cc68d:ScopeViewTreeModel$RootNode" />
-              <item name="templates" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="administration" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-            </path>
-            <path>
-              <item name="CepAssoc" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
-              <item name="~/PhpstormProjects/CepAssoc" type="442cc68d:ScopeViewTreeModel$RootNode" />
-              <item name="templates" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="error" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-            </path>
-            <path>
-              <item name="CepAssoc" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
-              <item name="~/PhpstormProjects/CepAssoc" type="442cc68d:ScopeViewTreeModel$RootNode" />
-              <item name="templates" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="home" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-            </path>
-            <path>
-              <item name="CepAssoc" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
-              <item name="~/PhpstormProjects/CepAssoc" type="442cc68d:ScopeViewTreeModel$RootNode" />
-              <item name="templates" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="registration" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-            </path>
-            <path>
-              <item name="CepAssoc" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
-              <item name="~/PhpstormProjects/CepAssoc" type="442cc68d:ScopeViewTreeModel$RootNode" />
-              <item name="templates" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="security" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-            </path>
-            <path>
-              <item name="CepAssoc" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
-              <item name="~/PhpstormProjects/CepAssoc" type="442cc68d:ScopeViewTreeModel$RootNode" />
-              <item name="tests" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-            </path>
-            <path>
-              <item name="CepAssoc" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
-              <item name="~/PhpstormProjects/CepAssoc" type="442cc68d:ScopeViewTreeModel$RootNode" />
-              <item name="translations" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-            </path>
-          </expand>
-          <select />
-        </subPane>
-      </pane>
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -737,6 +529,175 @@
               <item name="CepAssoc" type="462c0819:PsiDirectoryNode" />
               <item name="templates" type="462c0819:PsiDirectoryNode" />
               <item name="security" type="462c0819:PsiDirectoryNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+      <pane id="Scope">
+        <subPane subId="Project Files">
+          <expand>
+            <path>
+              <item name="Root" type="cbb8eebc:String" user="Root" />
+              <item name="CepAssoc" type="cbb8eebc:String" user="CepAssoc" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+        <subPane subId="Scope 'Project Files'; set:Project Files; class com.intellij.psi.search.scope.ProjectFilesScope">
+          <expand>
+            <path>
+              <item name="CepAssoc" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
+              <item name="~/PhpstormProjects/CepAssoc" type="442cc68d:ScopeViewTreeModel$RootNode" />
+            </path>
+            <path>
+              <item name="CepAssoc" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
+              <item name="~/PhpstormProjects/CepAssoc" type="442cc68d:ScopeViewTreeModel$RootNode" />
+              <item name=".idea" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+            </path>
+            <path>
+              <item name="CepAssoc" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
+              <item name="~/PhpstormProjects/CepAssoc" type="442cc68d:ScopeViewTreeModel$RootNode" />
+              <item name="assets" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+            </path>
+            <path>
+              <item name="CepAssoc" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
+              <item name="~/PhpstormProjects/CepAssoc" type="442cc68d:ScopeViewTreeModel$RootNode" />
+              <item name="assets" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="css" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+            </path>
+            <path>
+              <item name="CepAssoc" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
+              <item name="~/PhpstormProjects/CepAssoc" type="442cc68d:ScopeViewTreeModel$RootNode" />
+              <item name="assets" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="js" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+            </path>
+            <path>
+              <item name="CepAssoc" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
+              <item name="~/PhpstormProjects/CepAssoc" type="442cc68d:ScopeViewTreeModel$RootNode" />
+              <item name="config" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+            </path>
+            <path>
+              <item name="CepAssoc" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
+              <item name="~/PhpstormProjects/CepAssoc" type="442cc68d:ScopeViewTreeModel$RootNode" />
+              <item name="config" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="packages" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+            </path>
+            <path>
+              <item name="CepAssoc" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
+              <item name="~/PhpstormProjects/CepAssoc" type="442cc68d:ScopeViewTreeModel$RootNode" />
+              <item name="documentations" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+            </path>
+            <path>
+              <item name="CepAssoc" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
+              <item name="~/PhpstormProjects/CepAssoc" type="442cc68d:ScopeViewTreeModel$RootNode" />
+              <item name="src" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+            </path>
+            <path>
+              <item name="CepAssoc" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
+              <item name="~/PhpstormProjects/CepAssoc" type="442cc68d:ScopeViewTreeModel$RootNode" />
+              <item name="src" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="Controller" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+            </path>
+            <path>
+              <item name="CepAssoc" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
+              <item name="~/PhpstormProjects/CepAssoc" type="442cc68d:ScopeViewTreeModel$RootNode" />
+              <item name="src" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="Controller" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="administration" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+            </path>
+            <path>
+              <item name="CepAssoc" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
+              <item name="~/PhpstormProjects/CepAssoc" type="442cc68d:ScopeViewTreeModel$RootNode" />
+              <item name="src" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="DataFixtures" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+            </path>
+            <path>
+              <item name="CepAssoc" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
+              <item name="~/PhpstormProjects/CepAssoc" type="442cc68d:ScopeViewTreeModel$RootNode" />
+              <item name="src" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="Entity" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+            </path>
+            <path>
+              <item name="CepAssoc" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
+              <item name="~/PhpstormProjects/CepAssoc" type="442cc68d:ScopeViewTreeModel$RootNode" />
+              <item name="src" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="Form" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+            </path>
+            <path>
+              <item name="CepAssoc" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
+              <item name="~/PhpstormProjects/CepAssoc" type="442cc68d:ScopeViewTreeModel$RootNode" />
+              <item name="src" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="Migrations" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+            </path>
+            <path>
+              <item name="CepAssoc" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
+              <item name="~/PhpstormProjects/CepAssoc" type="442cc68d:ScopeViewTreeModel$RootNode" />
+              <item name="src" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="Repository" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+            </path>
+            <path>
+              <item name="CepAssoc" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
+              <item name="~/PhpstormProjects/CepAssoc" type="442cc68d:ScopeViewTreeModel$RootNode" />
+              <item name="src" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="Security" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+            </path>
+            <path>
+              <item name="CepAssoc" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
+              <item name="~/PhpstormProjects/CepAssoc" type="442cc68d:ScopeViewTreeModel$RootNode" />
+              <item name="src" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="Services" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+            </path>
+            <path>
+              <item name="CepAssoc" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
+              <item name="~/PhpstormProjects/CepAssoc" type="442cc68d:ScopeViewTreeModel$RootNode" />
+              <item name="templates" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+            </path>
+            <path>
+              <item name="CepAssoc" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
+              <item name="~/PhpstormProjects/CepAssoc" type="442cc68d:ScopeViewTreeModel$RootNode" />
+              <item name="templates" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="account" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+            </path>
+            <path>
+              <item name="CepAssoc" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
+              <item name="~/PhpstormProjects/CepAssoc" type="442cc68d:ScopeViewTreeModel$RootNode" />
+              <item name="templates" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="administration" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+            </path>
+            <path>
+              <item name="CepAssoc" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
+              <item name="~/PhpstormProjects/CepAssoc" type="442cc68d:ScopeViewTreeModel$RootNode" />
+              <item name="templates" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="error" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+            </path>
+            <path>
+              <item name="CepAssoc" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
+              <item name="~/PhpstormProjects/CepAssoc" type="442cc68d:ScopeViewTreeModel$RootNode" />
+              <item name="templates" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="home" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+            </path>
+            <path>
+              <item name="CepAssoc" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
+              <item name="~/PhpstormProjects/CepAssoc" type="442cc68d:ScopeViewTreeModel$RootNode" />
+              <item name="templates" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="registration" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+            </path>
+            <path>
+              <item name="CepAssoc" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
+              <item name="~/PhpstormProjects/CepAssoc" type="442cc68d:ScopeViewTreeModel$RootNode" />
+              <item name="templates" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="security" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+            </path>
+            <path>
+              <item name="CepAssoc" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
+              <item name="~/PhpstormProjects/CepAssoc" type="442cc68d:ScopeViewTreeModel$RootNode" />
+              <item name="tests" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+            </path>
+            <path>
+              <item name="CepAssoc" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
+              <item name="~/PhpstormProjects/CepAssoc" type="442cc68d:ScopeViewTreeModel$RootNode" />
+              <item name="translations" type="9f88c78c:ScopeViewTreeModel$FileNode" />
             </path>
           </expand>
           <select />
@@ -1211,7 +1172,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="306982000" />
+    <option name="totallyTimeSpent" value="306985000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1227,7 +1188,7 @@
     <editor active="true" />
     <layout>
       <window_info id="Favorites" order="0" side_tool="true" />
-      <window_info active="true" content_ui="combo" id="Project" order="1" visible="true" weight="0.30758226" />
+      <window_info active="true" content_ui="combo" id="Project" order="1" visible="true" weight="0.3118741" />
       <window_info id="Structure" order="2" weight="0.25" />
       <window_info anchor="bottom" id="Event Log" order="0" sideWeight="0.5028612" side_tool="true" weight="0.28674698" />
       <window_info anchor="bottom" id="Version Control" order="1" sideWeight="0.49713877" weight="0.28674698" />
@@ -1630,13 +1591,6 @@
     <entry file="file://$PROJECT_DIR$/.env.test">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/.env">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="420">
-          <caret line="28" selection-start-line="28" selection-end-line="28" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/templates/administration/home.html.twig">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="210">
@@ -1681,61 +1635,29 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/templates/administration/adherents/adherents.html.twig">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="433">
+        <state relative-caret-position="1140">
           <caret line="76" column="44" selection-start-line="76" selection-start-column="44" selection-end-line="76" selection-end-column="44" />
-          <folding>
-            <element signature="e#157#186#0#HTML" expanded="true" />
-            <element signature="e#981#1001#0#HTML" expanded="true" />
-            <element signature="e#1223#1244#0#HTML" expanded="true" />
-            <element signature="e#1468#1489#0#HTML" expanded="true" />
-            <element signature="e#1721#1742#0#HTML" expanded="true" />
-            <element signature="e#1979#2000#0#HTML" expanded="true" />
-            <element signature="e#2238#2259#0#HTML" expanded="true" />
-            <element signature="e#3115#3132#0#HTML" expanded="true" />
-            <element signature="e#3301#3322#0#HTML" expanded="true" />
-            <element signature="e#3493#3516#0#HTML" expanded="true" />
-            <element signature="e#3694#3714#0#HTML" expanded="true" />
-            <element signature="e#3896#3915#0#HTML" expanded="true" />
-            <element signature="e#4458#4477#0#HTML" expanded="true" />
-            <element signature="e#4588#4605#0#HTML" expanded="true" />
-            <element signature="e#6871#6878#1#HTML" expanded="true" />
-            <element signature="e#10001#10008#1#HTML" expanded="true" />
-            <element signature="e#12593#12600#1#HTML" expanded="true" />
-            <element signature="e#13255#13274#0#HTML" expanded="true" />
-            <element signature="e#13387#13404#0#HTML" expanded="true" />
-            <element signature="e#13718#13737#0#HTML" expanded="true" />
-            <element signature="e#13840#13857#0#HTML" expanded="true" />
-            <element signature="e#17821#17842#0#HTML" expanded="true" />
-            <element signature="e#18109#18128#0#HTML" expanded="true" />
-            <element signature="e#18529#18550#0#HTML" expanded="true" />
-            <element signature="e#18817#18836#0#HTML" expanded="true" />
-            <element signature="e#19515#19534#0#HTML" expanded="true" />
-            <element signature="e#20067#20088#0#HTML" expanded="true" />
-            <element signature="e#20221#20240#0#HTML" expanded="true" />
-            <element signature="e#21519#21536#0#HTML" expanded="true" />
-            <element signature="e#23065#23086#0#HTML" expanded="true" />
-            <element signature="e#23211#23230#0#HTML" expanded="true" />
-            <element signature="e#24042#24063#0#HTML" expanded="true" />
-            <element signature="e#24188#24207#0#HTML" expanded="true" />
-            <element signature="e#24763#24784#0#HTML" expanded="true" />
-            <element signature="e#24909#24928#0#HTML" expanded="true" />
-            <element signature="e#25484#25505#0#HTML" expanded="true" />
-            <element signature="e#25630#25649#0#HTML" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/config/routes.yaml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="378">
+        <state relative-caret-position="2205">
           <caret line="147" column="68" selection-start-line="147" selection-start-column="68" selection-end-line="147" selection-end-column="68" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.env">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="420">
+          <caret line="28" selection-start-line="28" selection-end-line="28" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Controller/administration/AdminActivitiesCategoryController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="285">
-          <caret line="27" column="5" lean-forward="true" selection-start-line="27" selection-start-column="5" selection-end-line="27" selection-end-column="5" />
+        <state relative-caret-position="495">
+          <caret line="41" column="9" lean-forward="true" selection-start-line="41" selection-start-column="9" selection-end-line="41" selection-end-column="9" />
         </state>
       </provider>
     </entry>
