@@ -4,13 +4,10 @@
     <bookmark url="file://$PROJECT_DIR$/src/Controller/AccountController.php" description="JWT::decode($token, $_ENV['PRIVATE_KEY'], array($_..." line="87" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="53b90c9e-e36e-447f-8cc9-26b01b488158" name="Default Changelist" comment="merge with master">
+    <list default="true" id="53b90c9e-e36e-447f-8cc9-26b01b488158" name="Default Changelist" comment="Correct bugs">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/DataFixtures/AppFixtures.php" afterPath="$PROJECT_DIR$/src/DataFixtures/AppFixtures.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Entity/Account.php" afterPath="$PROJECT_DIR$/src/Entity/Account.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/administration/events/events.html.twig" afterPath="$PROJECT_DIR$/templates/administration/events/events.html.twig" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/administration/events/updateEvent.html.twig" afterPath="$PROJECT_DIR$/templates/administration/events/updateEvent.html.twig" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/home/index.html.twig" afterPath="$PROJECT_DIR$/templates/home/index.html.twig" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/account/generateHealthQuestionnairePDF.html.twig" afterPath="$PROJECT_DIR$/templates/account/generateHealthQuestionnairePDF.html.twig" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/administration/activities/activities.html.twig" afterPath="$PROJECT_DIR$/templates/administration/activities/activities.html.twig" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -24,51 +21,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="events.html.twig" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/templates/administration/events/events.html.twig">
+      <file leaf-file-name="activities.html.twig" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/templates/administration/activities/activities.html.twig">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="105">
-              <caret line="7" column="93" lean-forward="false" selection-start-line="7" selection-start-column="93" selection-end-line="7" selection-end-column="93" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="addEventForm.html.twig" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/templates/administration/events/addEventForm.html.twig">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="3">
-              <caret line="2" column="6" lean-forward="false" selection-start-line="2" selection-start-column="6" selection-end-line="2" selection-end-column="6" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="modalDeleteEvent.html.twig" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/templates/administration/events/modalDeleteEvent.html.twig">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="updateEvent.html.twig" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/templates/administration/events/updateEvent.html.twig">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="30">
-              <caret line="2" column="41" lean-forward="false" selection-start-line="2" selection-start-column="41" selection-end-line="2" selection-end-column="41" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Account.php" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/Entity/Account.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1945">
-              <caret line="155" column="43" lean-forward="true" selection-start-line="155" selection-start-column="43" selection-end-line="155" selection-end-column="43" />
+            <state relative-caret-position="720">
+              <caret line="48" column="48" lean-forward="false" selection-start-line="48" selection-start-column="48" selection-end-line="48" selection-end-column="48" />
               <folding />
             </state>
           </provider>
@@ -146,8 +103,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/templates/administration/eventManage/updateModal.html.twig" />
-        <option value="$PROJECT_DIR$/templates/administration/eventManage/describeModal.html.twig" />
         <option value="$PROJECT_DIR$/templates/administration/eventManage/add.html.twig" />
         <option value="$PROJECT_DIR$/src/Controller/EventController.php" />
         <option value="$PROJECT_DIR$/templates/administration/adherents/generateAdherentsPDF.html.twig" />
@@ -197,6 +152,8 @@
         <option value="$PROJECT_DIR$/templates/administration/events/events.html.twig" />
         <option value="$PROJECT_DIR$/templates/administration/events/updateEvent.html.twig" />
         <option value="$PROJECT_DIR$/src/Entity/Account.php" />
+        <option value="$PROJECT_DIR$/templates/account/generateHealthQuestionnairePDF.html.twig" />
+        <option value="$PROJECT_DIR$/templates/administration/activities/activities.html.twig" />
       </list>
     </option>
   </component>
@@ -412,6 +369,12 @@
               <item name="CepAssoc" type="b2602c69:ProjectViewProjectNode" />
               <item name="CepAssoc" type="2a2b976b:PhpTreeStructureProvider$1" />
               <item name="templates" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="account" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
+            <path>
+              <item name="CepAssoc" type="b2602c69:ProjectViewProjectNode" />
+              <item name="CepAssoc" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="templates" type="2a2b976b:PhpTreeStructureProvider$1" />
               <item name="administration" type="2a2b976b:PhpTreeStructureProvider$1" />
             </path>
             <path>
@@ -420,6 +383,13 @@
               <item name="templates" type="2a2b976b:PhpTreeStructureProvider$1" />
               <item name="administration" type="2a2b976b:PhpTreeStructureProvider$1" />
               <item name="accounts" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
+            <path>
+              <item name="CepAssoc" type="b2602c69:ProjectViewProjectNode" />
+              <item name="CepAssoc" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="templates" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="administration" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="activities" type="2a2b976b:PhpTreeStructureProvider$1" />
             </path>
             <path>
               <item name="CepAssoc" type="b2602c69:ProjectViewProjectNode" />
@@ -586,14 +556,7 @@
       <workItem from="1559630871034" duration="68000" />
       <workItem from="1559631240018" duration="6155000" />
       <workItem from="1559650882370" duration="2036000" />
-      <workItem from="1559653278418" duration="2022000" />
-    </task>
-    <task id="LOCAL-00053" summary="update size of valid check icon">
-      <created>1558338502950</created>
-      <option name="number" value="00053" />
-      <option name="presentableId" value="LOCAL-00053" />
-      <option name="project" value="LOCAL" />
-      <updated>1558338502950</updated>
+      <workItem from="1559653278418" duration="2696000" />
     </task>
     <task id="LOCAL-00054" summary="update size of valid check icon">
       <created>1558339982995</created>
@@ -931,11 +894,18 @@
       <option name="project" value="LOCAL" />
       <updated>1559653342966</updated>
     </task>
-    <option name="localTasksCounter" value="102" />
+    <task id="LOCAL-00102" summary="Correct bugs">
+      <created>1559656170951</created>
+      <option name="number" value="00102" />
+      <option name="presentableId" value="LOCAL-00102" />
+      <option name="project" value="LOCAL" />
+      <updated>1559656170952</updated>
+    </task>
+    <option name="localTasksCounter" value="103" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="341364000" />
+    <option name="totallyTimeSpent" value="342038000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1012,7 +982,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="add datetimepicker" />
     <MESSAGE value="add datatransformer for convert datetime in string and string in datetime" />
     <MESSAGE value="delete comment" />
     <MESSAGE value="change datetimepicker" />
@@ -1037,7 +1006,8 @@
     <MESSAGE value="pull master" />
     <MESSAGE value="voir plus at home" />
     <MESSAGE value="merge with master" />
-    <option name="LAST_COMMIT_MESSAGE" value="merge with master" />
+    <MESSAGE value="Correct bugs" />
+    <option name="LAST_COMMIT_MESSAGE" value="Correct bugs" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1046,21 +1016,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/templates/events/modalViewEvent.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="570">
-          <caret line="38" column="30" lean-forward="true" selection-start-line="38" selection-start-column="30" selection-end-line="38" selection-end-column="30" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Controller/administration/AdminAdherentsController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="195">
-          <caret line="19" column="27" lean-forward="true" selection-start-line="19" selection-start-column="27" selection-end-line="19" selection-end-column="27" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/config/routes.yaml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="399">
@@ -1385,26 +1340,18 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/administration/events/events.html.twig">
+    <entry file="file://$PROJECT_DIR$/templates/account/generateHealthQuestionnairePDF.html.twig">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="105">
-          <caret line="7" column="93" lean-forward="false" selection-start-line="7" selection-start-column="93" selection-end-line="7" selection-end-column="93" />
+        <state relative-caret-position="390">
+          <caret line="26" column="12" lean-forward="false" selection-start-line="26" selection-start-column="12" selection-end-line="26" selection-end-column="12" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/administration/events/addEventForm.html.twig">
+    <entry file="file://$PROJECT_DIR$/src/Entity/Account.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3">
-          <caret line="2" column="6" lean-forward="false" selection-start-line="2" selection-start-column="6" selection-end-line="2" selection-end-column="6" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/administration/events/modalDeleteEvent.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        <state relative-caret-position="1945">
+          <caret line="155" column="43" lean-forward="false" selection-start-line="155" selection-start-column="43" selection-end-line="155" selection-end-column="43" />
           <folding />
         </state>
       </provider>
@@ -1417,10 +1364,34 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Entity/Account.php">
+    <entry file="file://$PROJECT_DIR$/templates/administration/events/modalDeleteEvent.html.twig">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1945">
-          <caret line="155" column="43" lean-forward="true" selection-start-line="155" selection-start-column="43" selection-end-line="155" selection-end-column="43" />
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/administration/events/addEventForm.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3">
+          <caret line="2" column="6" lean-forward="false" selection-start-line="2" selection-start-column="6" selection-end-line="2" selection-end-column="6" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/administration/events/events.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="105">
+          <caret line="7" column="93" lean-forward="false" selection-start-line="7" selection-start-column="93" selection-end-line="7" selection-end-column="93" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/administration/activities/activities.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="720">
+          <caret line="48" column="48" lean-forward="false" selection-start-line="48" selection-start-column="48" selection-end-line="48" selection-end-column="48" />
           <folding />
         </state>
       </provider>
