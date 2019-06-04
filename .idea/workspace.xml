@@ -4,14 +4,8 @@
     <bookmark url="file://$PROJECT_DIR$/src/Controller/AccountController.php" description="JWT::decode($token, $_ENV['PRIVATE_KEY'], array($_..." line="87" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="53b90c9e-e36e-447f-8cc9-26b01b488158" name="Default Changelist" comment="filter admin event">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/CepAssoc.iml" afterPath="$PROJECT_DIR$/.idea/CepAssoc.iml" />
+    <list default="true" id="53b90c9e-e36e-447f-8cc9-26b01b488158" name="Default Changelist" comment="modify serialize competitor">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Controller/administration/AdministrationController.php" afterPath="$PROJECT_DIR$/src/Controller/administration/AdministrationController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Entity/Activity.php" afterPath="$PROJECT_DIR$/src/Entity/Activity.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Entity/Adherent.php" afterPath="$PROJECT_DIR$/src/Entity/Adherent.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Entity/Category.php" afterPath="$PROJECT_DIR$/src/Entity/Category.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Entity/TimeSlot.php" afterPath="$PROJECT_DIR$/src/Entity/TimeSlot.php" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -24,7 +18,18 @@
     <pharConfigPath>$PROJECT_DIR$/composer.json</pharConfigPath>
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300" />
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file leaf-file-name="AdministrationController.php" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/Controller/administration/AdministrationController.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="390">
+              <caret line="41" column="56" lean-forward="true" selection-start-line="41" selection-start-column="56" selection-end-line="41" selection-end-column="56" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -85,7 +90,7 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="master" />
+        <entry key="$PROJECT_DIR$" value="romain" />
       </map>
     </option>
     <push-targets>
@@ -502,14 +507,7 @@
       <workItem from="1559112796963" duration="17579000" />
       <workItem from="1559569891834" duration="2374000" />
       <workItem from="1559630871034" duration="68000" />
-      <workItem from="1559631240018" duration="2758000" />
-    </task>
-    <task id="LOCAL-00042" summary="resolve problem modals">
-      <created>1557929776205</created>
-      <option name="number" value="00042" />
-      <option name="presentableId" value="LOCAL-00042" />
-      <option name="project" value="LOCAL" />
-      <updated>1557929776205</updated>
+      <workItem from="1559631240018" duration="2969000" />
     </task>
     <task id="LOCAL-00043" summary="delete account, begin update an account">
       <created>1557951779821</created>
@@ -847,11 +845,18 @@
       <option name="project" value="LOCAL" />
       <updated>1559572016427</updated>
     </task>
-    <option name="localTasksCounter" value="91" />
+    <task id="LOCAL-00091" summary="modify serialize competitor">
+      <created>1559634883570</created>
+      <option name="number" value="00091" />
+      <option name="presentableId" value="LOCAL-00091" />
+      <option name="project" value="LOCAL" />
+      <updated>1559634883570</updated>
+    </task>
+    <option name="localTasksCounter" value="92" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="327565000" />
+    <option name="totallyTimeSpent" value="327776000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -928,7 +933,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="modifs fixtures, add a role, delete captcha on login form, update link admin in function of a new role" />
     <MESSAGE value="update database for event system" />
     <MESSAGE value="Add an event and job" />
     <MESSAGE value="update and delete an event" />
@@ -953,7 +957,8 @@
     <MESSAGE value="merge master" />
     <MESSAGE value="delete function editStatus" />
     <MESSAGE value="filter admin event" />
-    <option name="LAST_COMMIT_MESSAGE" value="filter admin event" />
+    <MESSAGE value="modify serialize competitor" />
+    <option name="LAST_COMMIT_MESSAGE" value="modify serialize competitor" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1109,16 +1114,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Entity/Document.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="555">
-          <caret line="37" column="17" lean-forward="true" selection-start-line="37" selection-start-column="17" selection-end-line="37" selection-end-column="17" />
-          <folding>
-            <element signature="e#30#62#0#PHP" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/templates/administration/events/addEventForm.html.twig">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="273">
@@ -1267,7 +1262,7 @@
         <state relative-caret-position="-202">
           <caret line="143" column="5" lean-forward="false" selection-start-line="143" selection-start-column="5" selection-end-line="143" selection-end-column="5" />
           <folding>
-            <element signature="e#30#78#0#PHP" expanded="true" />
+            <element signature="e#30#78#0#PHP" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1277,7 +1272,7 @@
         <state relative-caret-position="501">
           <caret line="112" column="20" lean-forward="false" selection-start-line="112" selection-start-column="20" selection-end-line="112" selection-end-column="33" />
           <folding>
-            <element signature="e#30#78#0#PHP" expanded="true" />
+            <element signature="e#30#78#0#PHP" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1310,10 +1305,20 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/Entity/Document.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="600">
+          <caret line="40" column="43" lean-forward="true" selection-start-line="40" selection-start-column="43" selection-end-line="40" selection-end-column="43" />
+          <folding>
+            <element signature="e#30#62#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/Controller/administration/AdministrationController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="375">
-          <caret line="40" column="38" lean-forward="false" selection-start-line="40" selection-start-column="38" selection-end-line="40" selection-end-column="38" />
+        <state relative-caret-position="390">
+          <caret line="41" column="56" lean-forward="true" selection-start-line="41" selection-start-column="56" selection-end-line="41" selection-end-column="56" />
           <folding />
         </state>
       </provider>
