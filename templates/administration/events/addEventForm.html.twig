@@ -74,7 +74,8 @@
         {{ form_widget(form.jobs) }}
     </div>
     <div class="col-auto">
-        <a id="addJob" style="color: green;"><i class="fas fa-plus-circle fa-2x"></i></a>
+        <a id="addJob" style="color: green;" data-target="#modal-add-job" data-toggle="modal"><i
+                    class="fas fa-plus-circle fa-2x"></i></a>
 
     </div>
     <div class="row ml-1">
@@ -125,20 +126,27 @@
 {{ form_widget(form.submit) }}
             {{ form_end(form) }}
 
-<div id="divAddJob">
-    <div class="row mt-3">
-        <h3>Ajouter un poste : </h3>
-    </div>
-    <div class="row mt-3">
-        <div class="col-2">
-            <label>Intitulé du poste : </label>
-        </div>
-        <div class="col-auto">
-            <form id="jobForm" class="form-inline" action="{{ path('job_add') }}" method="post">
-                <input id="jobName" class="form-control mr-1" type="text" name="jobName">
-                <input class="btn btn-success" type="submit" value="ajouter">
+
+<div id="modal-add-job" class="modal modal-top fade calendar-modal">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <form id="jobForm" action="{{ path('job_add') }}" method="post">
+                <div class="modal-body">
+                    <h4>Ajouter un poste</h4>
+                    <div id="errorAddJob">
+
+                    </div>
+                    <div>
+                        <label>Nom du poste : </label>
+                        <input id="jobName" class="form-control mr-1" type="text" name="jobName">
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <input class="btn btn-success" type="submit" value="ajouter">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+                </div>
             </form>
         </div>
     </div>
 </div>
-
