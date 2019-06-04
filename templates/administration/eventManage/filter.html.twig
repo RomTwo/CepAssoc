@@ -53,7 +53,20 @@
                 <td>le {{ em.endDate | date("d/m/Y") }} à {{ em.endDate | date("H:i") }}</td>
                 <td>{{ em.job }}</td>
                 <td>{{ em.description }}</td>
-                <td></td>
+                <td>
+                    <button type="button" class="btn btn-primary" data-toggle="modal"
+                            data-target="#modal-view-event">
+                        <i class="far fa-eye"></i>
+                    </button>
+                    <button type="button" class="btn btn-warning" data-toggle="modal"
+                            data-target="#modal-edit-event">
+                        <i class="far fa-edit"></i>
+                    </button>
+                    <button type="button" class="btn btn-danger" data-toggle="modal"
+                            data-target="#modal-delete-event">
+                        <i class="far fa-trash-alt"></i>
+                    </button>
+                </td>
             </tr>
         {% endfor %}
         </tbody>
