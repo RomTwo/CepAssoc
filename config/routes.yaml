@@ -143,10 +143,6 @@ admin_categoryEdit:
     path: /admin/categories/edit/{id}
     controller: App\Controller\administration\AdminActivitiesCategoryController::edit
 
-admin_categoryAdd:
-    path: /admin/categories/add
-    controller: App\Controller\administration\AdminActivitiesCategoryController::add
-
 admin_categoryDelete:
     path: /admin/categories/delete/{id}
     controller: App\Controller\administration\AdminActivitiesCategoryController::delete

@@ -15,14 +15,27 @@ use Symfony\Component\HttpFoundation\Request;
 class AdminActivitiesCategoryController extends AbstractController
 {
 
-    public function index()
+    public function index(Request $request)
     {
 
         $repositoryCategory = $this->getDoctrine()->getRepository(Category::class);
         $categories = $repositoryCategory->findAll();
+        $category = new Category();
+        $form = $this->createForm(AdminCategoryType::class, $category);
 
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($category);
+            $entityManager->flush();
+            $this->addFlash('success', "La catégorie " . $category->getName() . "a été ajoutée.");
+
+            return $this->redirectToRoute('admin_categories');
+        }
         return $this->render('administration/category/categories.html.twig', [
             'categories' => $categories,
+            'form' => $form->createView()
         ]);
 
     }
@@ -37,9 +50,11 @@ class AdminActivitiesCategoryController extends AbstractController
 
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->flush();
+            $this->addFlash('success', "La catégorie " . $category->getName() . "a été modifiée.");
 
-            return $this->redirectToRoute('admin_activities');
+            return $this->redirectToRoute('admin_categories');
         }
+ 
 
         return $this->render('administration/category/categoryEdit.html.twig', [
             'category' => $category,
@@ -48,37 +63,20 @@ class AdminActivitiesCategoryController extends AbstractController
 
 
     }
-
-    public function add(Request $request)
-    {
-        $category = new Category();
-        $form = $this->createForm(AdminCategoryType::class, $category);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($category);
-            $em->flush();
-
-            return $this->redirectToRoute('admin_activities');
-        }
-
-
-        return $this->render('administration/category/categoryAdd.html.twig', [
-            'category' => $category,
-            'form' => $form->createView()]);
-    }
-
     public function delete(Request $request, $id)
     {
         $repository = $this->getDoctrine()->getRepository(Category::class);
         $category = $repository->find($id);
 
-        $entityManager = $this->getDoctrine()->getManager();
-        $entityManager->remove($category);
-        $entityManager->flush();
-        $this->addFlash('sucess', "Category supprimée avec succès");
-        return $this->redirectToRoute('admin_activities');
+        if($category){
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->remove($category);
+            $entityManager->flush();
+            $this->addFlash('sucess', "Categorie supprimée avec succès");
+        }else{
+            $this->addFlash('error', "Categorie invalide");
+        }
+        return $this->redirectToRoute('admin_categories');
     }
 
 
