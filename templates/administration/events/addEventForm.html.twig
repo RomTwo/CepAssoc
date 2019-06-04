@@ -74,9 +74,10 @@
         {{ form_widget(form.jobs) }}
     </div>
     <div class="col-auto">
-        <a id="addJob" style="color: green;" data-target="#modal-add-job" data-toggle="modal"><i
-                    class="fas fa-plus-circle fa-2x"></i></a>
-
+        <span data-target="#modal-add-job" data-toggle="modal">
+            <a id="addJob" style="color: green;" data-placement="right" data-toggle="tooltip" title="Ajouter un poste"><i
+                        class="fas fa-plus-circle fa-2x"></i></a>
+        </span>
     </div>
     <div class="row ml-1">
         {{ form_errors(form.jobs) }}
