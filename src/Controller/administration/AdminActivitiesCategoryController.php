@@ -27,7 +27,7 @@ class AdminActivitiesCategoryController extends AbstractController
 
     }
 
-    public function editCategory(Category $category, Request $request)
+    public function edit(Category $category, Request $request)
     {
         $form = $this->createForm(AdminCategoryType::class, $category);
 
@@ -48,7 +48,7 @@ class AdminActivitiesCategoryController extends AbstractController
 
 
     }
-    public function addCategory(Request $request)
+    public function add(Request $request)
     {
         $category = new Category();
         $form = $this->createForm(AdminCategoryType::class,$category);
@@ -68,7 +68,7 @@ class AdminActivitiesCategoryController extends AbstractController
             'form' => $form->createView()]);
     }
 
-    public function deleteCategory (Request $request,$id)
+    public function delete(Request $request,$id)
     {
         $repository = $this->getDoctrine()->getRepository(Category::class);
         $category = $repository->find($id);
