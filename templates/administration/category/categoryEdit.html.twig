@@ -11,12 +11,10 @@
 {% block body %}
 
 {{ form_start(form) }}
-<h6> ADMINISTRATION </h6>
-
-
-    {{ form_widget(form) }}
-    <button class="btn btn-primary">Enregistrer</button>
-    {{ form_end(form) }}
+    <p><strong>Modifier une catégorie : </strong></p>
+    <div class="container-fluid">
+        {% include('administration/category/addCategoryForm.html.twig')  with {'label_submit': 'Modifier la catégorie'} %}
+    </div>
 
 
 {% endblock %}

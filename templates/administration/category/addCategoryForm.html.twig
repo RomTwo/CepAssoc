@@ -1,0 +1,15 @@
+{{ form_start(form) }}
+<div class="form-group row">
+    <div class="col-sm-6 row">
+        <label class="col-sm-5 col-form-label">Nom catégorie :</label>
+        <div class="col-sm-7">
+            {{ form_widget(form.name) }}
+        </div>
+    </div>
+    
+    <div class="col-sm-6">{{ form_errors(form.name) }}</div>
+    <div class="col-sm-6">
+        <button class="btn btn-primary">{{label_submit}}</button>
+    </div>
+</div>
+{{ form_end(form) }}
