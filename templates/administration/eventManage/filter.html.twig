@@ -13,6 +13,27 @@
         </a>
     </div>
 
+    <div class="row justify-content-left mb-4 ml-1">
+        <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#addEvent"
+                aria-expanded="false" aria-controls="addEvent">
+            Filtres
+        </button>
+    </div>
+
+    <div class="collapse pb-4" id="addEvent">
+        <div class="card card-body">
+            <div class="container-fluid">
+                <h4>Postes</h4>
+                <div class="checkboxJob">
+                    {% for job in jobs %}
+                        <input class="job" type="checkbox" data-id="{{ job.id }}"
+                               value="{{ job.name }}">{{ job.name }}
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+
     <table id="eventManagers" class="table table-striped table-bordered" style="width:100%">
         <thead>
         <tr>
@@ -55,5 +76,23 @@
         $(document).ready(function () {
             $('#eventManagers').DataTable();
         });
+
+        // Filter datatable
+        $(document).ready(function () {
+            $('.job').click(function () {
+                let val = "";
+                $('.checkboxJob > input').each(function () {
+                    if ($(this).is(":checked")) {
+                        val += $(this).val() + "|";
+                    }
+                });
+
+                val = val.substring(0, (val).length - 1);
+
+                let check = ".job[data-id='" + $(this).attr("data-id") + "']";
+                $('#eventManagers').DataTable().column(3).search(val, true, false).draw();
+            });
+        });
+
     </script>
 {% endblock %}

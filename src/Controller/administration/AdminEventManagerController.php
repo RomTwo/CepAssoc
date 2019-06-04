@@ -52,7 +52,8 @@ class AdminEventManagerController extends AbstractController
         $eventManagers = $this->getDoctrine()->getRepository(EventManagement::class)->findBy(array('event' => $event));
 
         return $this->render('administration/eventManage/filter.html.twig', array(
-                'eventManagers' => $eventManagers
+                'eventManagers' => $eventManagers,
+                'jobs' => $event->getJobs()
             )
         );
     }
