@@ -9,6 +9,8 @@ use App\Entity\TimeSlot;
 use App\Form\AdminActivityTimeSlotType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Validator\Constraints\Date;
+use Symfony\Component\Validator\Constraints\Time;
 
 class AdminActivitiesController extends AbstractController
 {
@@ -38,17 +40,18 @@ class AdminActivitiesController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
 
+
             $timeSlotsArray = $activity->getTimeSlot()->toArray();
+            $em->persist($activity);
 
             foreach($timeSlotsArray as $timeSlot){
+                $timeSlot->setActivity($activity);
                 $em->persist($timeSlot);
             }
 
-            $em->persist($activity);
             $em->flush();
             return $this->redirectToRoute('admin_activities');
         }
-
         return $this->render('administration/activities/activityAddOrEdit.html.twig', [
             'activity' => $activity,
             'form' => $form->createView()]);
@@ -65,6 +68,7 @@ class AdminActivitiesController extends AbstractController
             $timeSlotsArray = $activity->getTimeSlot()->toArray();
 
             foreach($timeSlotsArray as $timeSlot){
+                $timeSlot->setActivity($activity);
                 $entityManager->persist($timeSlot);
             }
 

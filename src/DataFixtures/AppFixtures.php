@@ -117,7 +117,7 @@ string $email, string $city, string $password)
         $t->setStartTime($startTime);
         $t->setEndTime($endTime);
         $t->setCity($city);
-        $t->addActivity($activity);
+        $t->setActivity($activity);
         $o->persist($t);
     }
 

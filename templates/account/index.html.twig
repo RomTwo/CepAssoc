@@ -345,30 +345,28 @@
                                         </tr>
                                         </thead>
                                         <tbody>
+
                                         {% for activity in activities %}
                                             {% if activity.type == "SECTEUR LOISIRS" %}
-                                                <tr id={{ activity.id }}>
-                                                    <td>{{ activity.name }}</td>
-                                                    <td>
-                                                        {% for creneaux in activity.timeSlot %}
-                                                            <b>{{ days[creneaux.day] }}</b> de {{ creneaux.startTime|date('h\\hi') }}/{{ creneaux.endTime|date('h\\hi') }}
-                                                            {% if creneaux.city is not null %}
-                                                                à {{ creneaux.city }}
-                                                            {% endif %}
-                                                            <br/>
-                                                        {% endfor %}
-                                                    </td>
-                                                    <td>{{ activity.category.name }}</td>
-                                                    <td id="price{{ activity.id }}">{{ activity.price }}</td>
-                                                    <td>{{ activity.startDate|date('d/m/y') }}</td>
-                                                    <td>
-                                                        <input type="checkbox" id="checkbox{{ activity.id }}"
-                                                               name="selection"
-                                                               value="{{ activity.id }}">
-                                                    </td>
-                                                </tr>
+                                                {% for creneau in activity.timeSlot %}
+                                                    <tr id={{ creneau.id }} value={{ activity.id }}>
+                                                        <td >{{ activity.name }}</td>
+                                                        <td>
+                                                            {{ creneau.getFullTime() }}
+                                                        </td>
+                                                        <td>{{ activity.category.name }}</td>
+                                                        <td id="price{{ activity.id }}" value="{{ activity.price }}">{{ activity.price }}</td>
+                                                        <td>{{ activity.startDate|date('d/m/y') }}</td>
+                                                        <td>
+                                                            <input type="checkbox"
+                                                                   name="selection[]"
+                                                                   value="{{ creneau.id }}">
+                                                        </td>
+                                                    </tr>
+                                                {% endfor %}
                                             {% endif %}
                                         {% endfor %}
+                                        </tbody>
                                     </table>
                                 </div>
                                 <div class="tab-pane fade" id="nav-competitif" role="tabpanel"
@@ -386,28 +384,25 @@
                                         <tbody>
                                         {% for activity in activities %}
                                             {% if activity.type == "SECTEUR COMPETITIF" %}
-                                                <tr id={{ activity.id }}>
-                                                    <td>{{ activity.category.id }}</td>
-                                                    <td>
-                                                        {% for creneaux in activity.timeSlot %}
-                                                            <b>{{ days[creneaux.day] }}</b> de {{ creneaux.startTime|date('h\\hi') }}/{{ creneaux.endTime|date('h\\hi') }}
-                                                            {% if creneaux.city is not null %}
-                                                                à {{ creneaux.city }}
-                                                            {% endif %}
-                                                            <br/>
-                                                        {% endfor %}
-                                                    </td>
-                                                    <td>{{ activity.category.name }}</td>
-                                                    <td id="price{{ activity.id }}">{{ activity.price }}</td>
-                                                    <td>{{ activity.startDate|date('d/m/y') }}</td>
-                                                    <td>
-                                                        <input type="checkbox" id="checkbox{{ activity.id }}"
-                                                               name="selection"
-                                                               value="{{ activity.id }}">
-                                                    </td>
-                                                </tr>
+                                                {% for creneau in activity.timeSlot %}
+                                                    <tr id={{ creneau.id }} value={{ activity.id }}>
+                                                        <td >{{ activity.name }}</td>
+                                                        <td>
+                                                            {{ creneau.getFullTime() }}
+                                                        </td>
+                                                        <td>{{ activity.category.name }}</td>
+                                                        <td id="price{{ activity.id }}" value="{{ activity.price }}">{{ activity.price }}</td>
+                                                        <td>{{ activity.startDate|date('d/m/y') }}</td>
+                                                        <td>
+                                                            <input type="checkbox"
+                                                                   name="selection[]"
+                                                                   value="{{ creneau.id }}">
+                                                        </td>
+                                                    </tr>
+                                                {% endfor %}
                                             {% endif %}
                                         {% endfor %}
+
                                         </tbody>
                                     </table>
                                 </div>

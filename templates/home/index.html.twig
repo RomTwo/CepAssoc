@@ -43,8 +43,12 @@
                     <div class="card-body">
                         <p>Date d'inscription :{{adherent.registrationDate|date('d-m-Y')}}</p>
                         <div class="text-right">
+                            {% if adherent.healthQuestionnaireFile is not null %}
+                                <a class="btn btn-success" href="{{ asset('uploads/' ~ adherent.healthQuestionnaireFile) }}" data-toggle="tooltip" data-placement="top" title="Télécharger le questionnaire de santé de l'adhérent" download>
+                                    <i class="far fa-file-pdf"></i>
+                                </a>
+                            {% endif %}
                             <a class="btn btn-primary btn-sm" href="#">Voir plus</a>
-
                             <button class="btn btn-primary btn-sm" data-target="#modal{{ adherent.id }}" data-toggle="modal" type="button">Code d'affiliation</button>
                             <!-- Modal -->
                             <div aria-hidden="true" aria-labelledby="modalLabel" class="modal fade" id="modal{{ adherent.id }}" role="dialog" tabindex="-1">
