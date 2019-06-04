@@ -7,6 +7,7 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\CategoryRepository")
@@ -23,6 +24,7 @@ class Category
     /**
      * @ORM\Column(type="string", length=255)
      * @Assert\NotNull(message="Veuiller renseigner le nom de la catégorie")
+     * @Groups({"competition"})
      */
     private $name;
 
@@ -60,6 +62,7 @@ class Category
     {
         return $this->activities;
     }
+
     public function getActivity(): Collection
     {
         return $this->activities;

@@ -1,0 +1,59 @@
+{% extends 'administration/layout_admin.html.twig' %}
+
+{% block title %}Adherents{% endblock %}
+
+{% block specification %}
+    Gestion des évènements
+{% endblock %}
+
+{% block body %}
+    <div class="row justify-content-center mb-4">
+        <a href="{{ path('admin_event_manager_index', {id: app.request.get('id')}) }}" class="btn btn-primary">
+            Visualisation Globale
+        </a>
+    </div>
+
+    <table id="eventManagers" class="table table-striped table-bordered" style="width:100%">
+        <thead>
+        <tr>
+            <th>Personne</th>
+            <th>Début</th>
+            <th>Fin</th>
+            <th>Poste</th>
+            <th>Description</th>
+            <th>Action</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for em in eventManagers %}
+            <tr>
+                <td>{{ em.account.firstName }}</td>
+                <td>le {{ em.startDate | date("d/m/Y") }} à {{ em.startDate | date("H:i") }}</td>
+                <td>le {{ em.endDate | date("d/m/Y") }} à {{ em.endDate | date("H:i") }}</td>
+                <td>{{ em.job }}</td>
+                <td>{{ em.description }}</td>
+                <td></td>
+            </tr>
+        {% endfor %}
+        </tbody>
+        <tfoot>
+        <tr>
+            <th>Personne</th>
+            <th>Début</th>
+            <th>Fin</th>
+            <th>Poste</th>
+            <th>Description</th>
+            <th>Action</th>
+        </tr>
+        </tfoot>
+    </table>
+{% endblock %}
+
+{% block javascripts %}
+    <script>
+        // Active datatable
+        $(document).ready(function () {
+            $('#eventManagers').DataTable();
+        });
+    </script>
+{% endblock %}
