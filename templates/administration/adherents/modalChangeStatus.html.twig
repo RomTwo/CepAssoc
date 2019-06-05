@@ -1,0 +1,44 @@
+<div aria-hidden="true" aria-labelledby="changeStatutLabel{{ adherent.id }}" class="modal fade"
+     id="changeStatut{{ adherent.id }}" role="dialog" tabindex="-1">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="changeStatutLabel{{ adherent.id }}">Changer le statut</h5>
+                <button aria-label="Close" class="close" data-dismiss="modal" type="button">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form action="{{ path('admin_editStatus', {id: adherent.id}) }}">
+                <div class="modal-body">
+                    <select class="form-control" id="status" name="status">
+                        <option {% if adherent.status == "EN ATTENTE" %} selected {% endif %}
+                                value="EN ATTENTE">EN ATTENTE
+                        </option>
+                        <option {% if adherent.status == "EN MANQUE DE DOCUMENT" %} selected {% endif %}
+                                value="EN MANQUE DE DOCUMENT">EN MANQUE DE DOCUMENT
+                        </option>
+                        <option {% if adherent.status == "EN MANQUE DE PAIEMENT" %} selected {% endif %}
+                                value="EN MANQUE DE PAIEMENT">EN MANQUE DE PAIEMENT
+                        </option>
+                        <option {% if adherent.status == "EN MANQUE DE DOCUMENT ET PAIEMENT" %} selected {% endif %}
+                                value="EN MANQUE DE DOCUMENT ET PAIEMENT">EN MANQUE DE DOCUMENT ET
+                            PAIEMENT
+                        </option>
+                        <option {% if adherent.status == "VALIDE" %} selected {% endif %}
+                                value="VALIDE">VALIDE
+                        </option>
+                    </select>
+
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" data-dismiss="modal" data-toggle="modal"
+                            type="button">
+                        Annuler
+                    </button>
+                    <input class="btn btn-success" type="submit" value="Valider">
+
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

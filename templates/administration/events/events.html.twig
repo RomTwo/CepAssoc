@@ -53,6 +53,8 @@
                     </button>
                 </td>
             </tr>
+            <!-- Modal delete event -->
+            {% include('administration/events/modalDeleteEvent.html.twig') %}
         {% endfor %}
         </tbody>
         <tfoot>
@@ -81,13 +83,6 @@
         </tr>
         </tbody>
     </table>
-
-    <!-- Modal -->
-    {% for event in events %}
-        {% include('administration/events/modalDeleteEvent.html.twig') %}
-    {% endfor %}
-
-
 
 {% endblock %}
 
