@@ -4,37 +4,8 @@
     <bookmark url="file://$PROJECT_DIR$/src/Controller/AccountController.php" description="JWT::decode($token, $_ENV['PRIVATE_KEY'], array($_..." line="85" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="53b90c9e-e36e-447f-8cc9-26b01b488158" name="Default Changelist" comment="title modification">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Migrations/Version20190528143138.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Migrations/Version20190528143844.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Migrations/Version20190529071531.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Migrations/Version20190529071621.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Migrations/Version20190529071654.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Migrations/Version20190529072343.php" afterPath="" />
+    <list default="true" id="53b90c9e-e36e-447f-8cc9-26b01b488158" name="Default Changelist" comment="delete unused librairy">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Controller/AccountController.php" afterPath="$PROJECT_DIR$/src/Controller/AccountController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Controller/EventController.php" afterPath="$PROJECT_DIR$/src/Controller/EventController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Controller/HomeController.php" afterPath="$PROJECT_DIR$/src/Controller/HomeController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Controller/RegistrationController.php" afterPath="$PROJECT_DIR$/src/Controller/RegistrationController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Controller/SecurityController.php" afterPath="$PROJECT_DIR$/src/Controller/SecurityController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Controller/administration/AdminAccountsController.php" afterPath="$PROJECT_DIR$/src/Controller/administration/AdminAccountsController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Controller/administration/AdminActivitiesCategoryController.php" afterPath="$PROJECT_DIR$/src/Controller/administration/AdminActivitiesCategoryController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Controller/administration/AdminActivitiesController.php" afterPath="$PROJECT_DIR$/src/Controller/administration/AdminActivitiesController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Controller/administration/AdminAdherentsController.php" afterPath="$PROJECT_DIR$/src/Controller/administration/AdminAdherentsController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Controller/administration/AdministrationController.php" afterPath="$PROJECT_DIR$/src/Controller/administration/AdministrationController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/DataFixtures/AppFixtures.php" afterPath="$PROJECT_DIR$/src/DataFixtures/AppFixtures.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Form/AccountAdminType.php" afterPath="$PROJECT_DIR$/src/Form/AccountAdminType.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Form/AccountType.php" afterPath="$PROJECT_DIR$/src/Form/AccountType.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Form/AdherentAccountType.php" afterPath="$PROJECT_DIR$/src/Form/AdherentAccountType.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Form/AdminActivityTimeSlotType.php" afterPath="$PROJECT_DIR$/src/Form/AdminActivityTimeSlotType.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Form/AdminCategoryType.php" afterPath="$PROJECT_DIR$/src/Form/AdminCategoryType.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Form/EventManagerType.php" afterPath="$PROJECT_DIR$/src/Form/EventManagerType.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Form/EventManagerUserType.php" afterPath="$PROJECT_DIR$/src/Form/EventManagerUserType.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Form/EventType.php" afterPath="$PROJECT_DIR$/src/Form/EventType.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Security/LoginFormAuthentificator.php" afterPath="$PROJECT_DIR$/src/Security/LoginFormAuthentificator.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Services/GenerateToken.php" afterPath="$PROJECT_DIR$/src/Services/GenerateToken.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Transformer/ArrayToStringTransformer.php" afterPath="$PROJECT_DIR$/src/Transformer/ArrayToStringTransformer.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Transformer/JobToStringTransformer.php" afterPath="$PROJECT_DIR$/src/Transformer/JobToStringTransformer.php" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -348,6 +319,17 @@
             <path>
               <item name="CepAssoc" type="b2602c69:ProjectViewProjectNode" />
               <item name="CepAssoc" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="public" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
+            <path>
+              <item name="CepAssoc" type="b2602c69:ProjectViewProjectNode" />
+              <item name="CepAssoc" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="public" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="build" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
+            <path>
+              <item name="CepAssoc" type="b2602c69:ProjectViewProjectNode" />
+              <item name="CepAssoc" type="2a2b976b:PhpTreeStructureProvider$1" />
               <item name="src" type="2a2b976b:PhpTreeStructureProvider$1" />
             </path>
             <path>
@@ -509,13 +491,6 @@
       <workItem from="1559653278418" duration="2696000" />
       <workItem from="1559669992976" duration="126000" />
       <workItem from="1559723533786" duration="42000" />
-    </task>
-    <task id="LOCAL-00056" summary="modifs fixtures, add a role, delete captcha on login form, update link admin in function of a new role">
-      <created>1558353902900</created>
-      <option name="number" value="00056" />
-      <option name="presentableId" value="LOCAL-00056" />
-      <option name="project" value="LOCAL" />
-      <updated>1558353902900</updated>
     </task>
     <task id="LOCAL-00057" summary="pull master">
       <created>1558354661324</created>
@@ -853,11 +828,18 @@
       <option name="project" value="LOCAL" />
       <updated>1559727305438</updated>
     </task>
-    <option name="localTasksCounter" value="105" />
+    <task id="LOCAL-00105" summary="delete unused librairy">
+      <created>1559727666860</created>
+      <option name="number" value="00105" />
+      <option name="presentableId" value="LOCAL-00105" />
+      <option name="project" value="LOCAL" />
+      <updated>1559727666860</updated>
+    </task>
+    <option name="localTasksCounter" value="106" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="346159000" />
+    <option name="totallyTimeSpent" value="346223000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -944,7 +926,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="change datetimepicker" />
     <MESSAGE value="documentation datetimepicker et listes des dépendances yarn utilisées" />
     <MESSAGE value="add calendar" />
     <MESSAGE value="continue event administration" />
@@ -969,7 +950,8 @@
     <MESSAGE value="Correct bugs" />
     <MESSAGE value="delete style attributes in html" />
     <MESSAGE value="title modification" />
-    <option name="LAST_COMMIT_MESSAGE" value="title modification" />
+    <MESSAGE value="delete unused librairy" />
+    <option name="LAST_COMMIT_MESSAGE" value="delete unused librairy" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
