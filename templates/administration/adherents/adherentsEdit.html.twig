@@ -27,7 +27,8 @@
                 {% else %}
                     <div class="col-sm-3">
                         <a target="_blank" rel="noopener noreferrer"
-                           href="{{ asset('uploads/' ~ adherent.medicalCertificateFile.id) }}" class="btn btn-success" download="{{ adherent.medicalCertificateFile.name }}">Télécharger le document</a>
+                           href="{{ asset('uploads/' ~ adherent.medicalCertificateFile.id) }}" class="btn btn-success"
+                           download="{{ adherent.medicalCertificateFile.name }}">Télécharger le document</a>
                     </div>
                     <div class="col-sm-9">
                         {{ form_widget(form.medicalCertificateFile) }}
@@ -46,7 +47,8 @@
                 {% else %}
                     <div class="col-sm-3">
                         <a target="_blank" rel="noopener noreferrer"
-                           href="{{ asset('uploads/' ~ adherent.bulletinN2AllianzFile.id) }}" class="btn btn-success" download="{{ adherent.bulletinN2AllianzFile.name }}">Télécharger le document</a>
+                           href="{{ asset('uploads/' ~ adherent.bulletinN2AllianzFile.id) }}" class="btn btn-success"
+                           download="{{ adherent.bulletinN2AllianzFile.name }}">Télécharger le document</a>
                     </div>
                     <div class="col-sm-9">
                         {{ form_widget(form.bulletinN2AllianzFile) }}
@@ -65,7 +67,8 @@
                 {% else %}
                     <div class="col-sm-3">
                         <a target="_blank" rel="noopener noreferrer"
-                           href="{{ asset('uploads/' ~ adherent.healthQuestionnaireFile.id) }}" class="btn btn-success" download="{{ adherent.healthQuestionnaireFile.name }}">Télécharger le document</a>
+                           href="{{ asset('uploads/' ~ adherent.healthQuestionnaireFile.id) }}" class="btn btn-success"
+                           download="{{ adherent.healthQuestionnaireFile.name }}">Télécharger le document</a>
                     </div>
                     <div class="col-sm-9">
                         {{ form_widget(form.healthQuestionnaireFile) }}
@@ -157,7 +160,6 @@
                 <div class="col-sm-7">
                     {{ form_widget(form.professionRep1) }}
                 </div>
-
 
 
             </div>
@@ -273,7 +275,7 @@
                 </div>
             </div>
             <div class="col-sm-6 row">
-                <label class="col-sm-5 col-form-label">Droit à l'image  :</label>
+                <label class="col-sm-5 col-form-label">Droit à l'image :</label>
                 <div class="col-sm-7">
                     {{ form_widget(form.imageRight) }}
                 </div>
@@ -287,17 +289,16 @@
 
 {% block javascripts %}
     <script>
-        $('#admin_adherent_zipCodeRep1').focusout( function(){
+        $('#admin_adherent_zipCodeRep1').focusout(function () {
             $.ajax({
-                url:'https://datanova.legroupe.laposte.fr/api/records/1.0/search/',
+                url: 'https://datanova.legroupe.laposte.fr/api/records/1.0/search/',
                 type: "POST",
                 dataType: "json",
                 data: {
                     "dataset": "laposte_hexasmal",
                     "refine.code_postal": $('#admin_adherent_zipCodeRep1').val(),
                 },
-                success: function (data)
-                {
+                success: function (data) {
                     $('#admin_adherent_cityRep1 option').remove();
                     for (let i in data["records"]) {
                         commune = data["records"][i]["fields"]["nom_de_la_commune"];
@@ -306,17 +307,16 @@
                 }
             })
         });
-        $('#admin_adherent_zipCodeRep2').focusout( function(){
+        $('#admin_adherent_zipCodeRep2').focusout(function () {
             $.ajax({
-                url:'https://datanova.legroupe.laposte.fr/api/records/1.0/search/',
+                url: 'https://datanova.legroupe.laposte.fr/api/records/1.0/search/',
                 type: "POST",
                 dataType: "json",
                 data: {
                     "dataset": "laposte_hexasmal",
                     "refine.code_postal": $('#admin_adherent_zipCodeRep2').val(),
                 },
-                success: function (data)
-                {
+                success: function (data) {
                     $('#admin_adherent_cityRep2 option').remove();
                     for (let i in data["records"]) {
                         commune = data["records"][i]["fields"]["nom_de_la_commune"];

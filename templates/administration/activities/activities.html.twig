@@ -5,7 +5,7 @@
 
 {% block body %}
 
-    <div class="row justify-content-end" style="margin-bottom : 20px;">
+    <div class="row justify-content-end mb-4">
         <div class="col-auto text-right">
             {% if is_granted('ROLE_ADMIN') %}
                 <a href="{{ path('admin_activityAdd') }}" class="btn btn-outline-dark">Ajouter une activité</a>
@@ -19,34 +19,28 @@
 
     <div class="tab-content" id="pills-tabContent">
         <div aria-labelledby="pills-all" class="tab-pane fade show active" id="content-all" role="tabpanel">
-            <table aria-describedby="example_info" class="table table-striped table-bordered" id="example" role="grid"
-                   style="width: 100%;">
+            <table aria-describedby="example_info" class="table table-striped table-bordered w-100" id="example"
+                   role="grid">
                 <thead>
                 <tr role="row">
                     <th aria-controls="example" aria-label="lastName: activate to sort column descending"
-                        aria-sort="ascending" class="sorting_asc" colspan="1" rowspan="1" style="width: 119px;"
-                        tabindex="0">Activités
+                        aria-sort="ascending" class="sorting_asc" colspan="1" rowspan="1" tabindex="0">Activités
                     </th>
                     <th aria-controls="example" aria-label="lastName: activate to sort column descending"
-                        aria-sort="ascending" class="sorting_asc" colspan="1" rowspan="1" style="width: 119px;"
-                        tabindex="0">Créneaux
+                        aria-sort="ascending" class="sorting_asc" colspan="1" rowspan="1" tabindex="0">Créneaux
                     </th>
                     <th aria-controls="example" aria-label="lastName: activate to sort column descending"
-                        aria-sort="ascending" class="sorting_asc" colspan="1" rowspan="1" style="width: 119px;"
-                        tabindex="0">Cotisation
+                        aria-sort="ascending" class="sorting_asc" colspan="1" rowspan="1" tabindex="0">Cotisation
                     </th>
                     <th aria-controls="example" aria-label="lastName: activate to sort column descending"
-                        aria-sort="ascending" class="sorting_asc" colspan="1" rowspan="1" style="width: 119px;"
-                        tabindex="0">Date de début
+                        aria-sort="ascending" class="sorting_asc" colspan="1" rowspan="1" tabindex="0">Date de début
                     </th>
                     <th aria-controls="example" aria-label="lastName: activate to sort column descending"
-                        aria-sort="ascending" class="sorting_asc" colspan="1" rowspan="1" style="width: 119px;"
-                        tabindex="0">Cotisation
+                        aria-sort="ascending" class="sorting_asc" colspan="1" rowspan="1" tabindex="0">Cotisation
                     </th>
                     {% if is_granted('ROLE_ADMIN') %}
                         <th aria-controls="example" aria-label="lastName: activate to sort column descending"
-                            aria-sort="ascending" class="sorting_asc" colspan="1" rowspan="1" style="width: 119px;"
-                            tabindex="0">Actions
+                            aria-sort="ascending" class="sorting_asc" colspan="1" rowspan="1" tabindex="0">Actions
                         </th>
                     {% endif %}
                 </tr>
@@ -63,8 +57,8 @@
                                 {% endfor %}
                             </td>
                             <td>
-                                <font style="text-transform: uppercase;">
-                                    <span style="size: 300px !important "><strong>{{ category.name }}</strong></span>
+                                <font class="text-uppercase">
+                                    <span><strong>{{ category.name }}</strong></span>
                                 </font>
                             </td>
                             <td>{{ activity.startDate|date('d-m-Y') }}</td>
