@@ -167,7 +167,7 @@
 
             $( ".timeSlotAdherentsEmailsButton" ).each(function( index ) {
                 $(this).on('click',function(){
-                    var allEmails = "";
+                    let allEmails = "";
                     $(this).closest(".card").find(".email").each(function(){
                         allEmails+= $(this).text().trim() + ";";
                     });
@@ -177,7 +177,7 @@
             });
 
             $('#allEmails').on('click', function (event) {
-                var allEmails = "";
+                let allEmails = "";
                 $(this).closest("main").find(".email").each(function(){
                     allEmails+= $(this).text().trim() + ";";
                 });

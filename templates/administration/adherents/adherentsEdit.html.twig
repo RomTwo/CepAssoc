@@ -299,7 +299,7 @@
                 success: function (data)
                 {
                     $('#admin_adherent_cityRep1 option').remove();
-                    for (var i in data["records"]) {
+                    for (let i in data["records"]) {
                         commune = data["records"][i]["fields"]["nom_de_la_commune"];
                         $('#admin_adherent_cityRep1').append(new Option(commune, commune));
                     }
@@ -318,7 +318,7 @@
                 success: function (data)
                 {
                     $('#admin_adherent_cityRep2 option').remove();
-                    for (var i in data["records"]) {
+                    for (let i in data["records"]) {
                         commune = data["records"][i]["fields"]["nom_de_la_commune"];
                         $('#admin_adherent_cityRep2').append(new Option(commune, commune));
                     }

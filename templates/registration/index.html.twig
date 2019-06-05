@@ -398,12 +398,13 @@
                                         {% if activity.type == "SECTEUR LOISIRS" %}
                                             {% for creneau in activity.timeSlot %}
                                                 <tr id={{ creneau.id }} value={{ activity.id }}>
-                                                    <td >{{ activity.name }}</td>
+                                                    <td>{{ activity.name }}</td>
                                                     <td>
                                                         {{ creneau.getFullTime() }}
                                                     </td>
                                                     <td>{{ activity.category.name }}</td>
-                                                    <td id="price{{ activity.id }}" value="{{ activity.price }}">{{ activity.price }}</td>
+                                                    <td id="price{{ activity.id }}"
+                                                        value="{{ activity.price }}">{{ activity.price }}</td>
                                                     <td>{{ activity.startDate|date('d/m/y') }}</td>
                                                     <td>
                                                         <input type="checkbox"
@@ -433,12 +434,13 @@
                                         {% if activity.type == "SECTEUR COMPETITIF" %}
                                             {% for creneau in activity.timeSlot %}
                                                 <tr id={{ creneau.id }} value={{ activity.id }}>
-                                                    <td >{{ activity.name }}</td>
+                                                    <td>{{ activity.name }}</td>
                                                     <td>
                                                         {{ creneau.getFullTime() }}
                                                     </td>
                                                     <td>{{ activity.category.name }}</td>
-                                                    <td id="price{{ activity.id }}" value="{{ activity.price }}">{{ activity.price }}</td>
+                                                    <td id="price{{ activity.id }}"
+                                                        value="{{ activity.price }}">{{ activity.price }}</td>
                                                     <td>{{ activity.startDate|date('d/m/y') }}</td>
                                                     <td>
                                                         <input type="checkbox"
@@ -846,7 +848,7 @@
                         },
                         success: function (data) {
                             $('#adherent_cityRep1 option').remove();
-                            for (var i in data["records"]) {
+                            for (let i in data["records"]) {
                                 commune = data["records"][i]["fields"]["nom_de_la_commune"];
                                 $('#adherent_cityRep1').append(new Option(commune, commune));
                             }
@@ -865,7 +867,7 @@
                         },
                         success: function (data) {
                             $('#adherent_cityRep2 option').remove();
-                            for (var i in data["records"]) {
+                            for (let i in data["records"]) {
                                 commune = data["records"][i]["fields"]["nom_de_la_commune"];
                                 $('#adherent_cityRep2').append(new Option(commune, commune));
                             }
@@ -883,7 +885,7 @@
                 }
             });
 
-            var groupColumn = 2;
+            let groupColumn = 2;
 
             $('#activitiesSecteurLoisir').DataTable({
                 "columnDefs": [
@@ -891,9 +893,9 @@
                 ],
                 "displayLength": 10,
                 "drawCallback": function () {
-                    var api = this.api();
-                    var rows = api.rows({page: 'current'}).nodes();
-                    var last = null;
+                    let api = this.api();
+                    let rows = api.rows({page: 'current'}).nodes();
+                    let last = null;
 
                     api.column(groupColumn, {page: 'current'}).data().each(function (group, i) {
                         if (last !== group) {
@@ -981,7 +983,7 @@
             });
 
             $('#nextRegistration').click(function () {
-                var value = parseInt(document.getElementById('step').value);
+                let value = parseInt(document.getElementById('step').value);
                 if (value < 5) {
                     if (stepChoice("step" + value)) {
                         if (value == 4) {
@@ -1001,7 +1003,7 @@
             });
 
             $('#previousRegistration').click(function () {
-                var value = parseInt(document.getElementById('step').value);
+                let value = parseInt(document.getElementById('step').value);
                 if (value > 1) {
                     if (value == 2) {
                         $("#previousRegistration").hide();
@@ -1017,20 +1019,20 @@
 
 
             $('#juge').on('change', function () {
-                var val = $(this).is(':checked') ? $("#judgeDiv").show() : $("#judgeDiv").hide();
+                let val = $(this).is(':checked') ? $("#judgeDiv").show() : $("#judgeDiv").hide();
             });
 
             $('#volontaire').on('change', function () {
-                var val = $(this).is(':checked') ? $("#volunteerDiv").show() : $("#volunteerDiv").hide();
+                let val = $(this).is(':checked') ? $("#volunteerDiv").show() : $("#volunteerDiv").hide();
             });
 
-            var $timeSlot = [];
+            let timeSlot = [];
 
             $("input[name='selection[]']").on('change', function () {
-                if($(this).is(':checked')){
-                    $timeSlot.push($(this).parent().parent().attr('value'));
-                }else{
-                    $timeSlot.splice($timeSlot.indexOf($(this).parent().parent().attr('value')), 1);
+                if ($(this).is(':checked')) {
+                    timeSlot.push($(this).parent().parent().attr('value'));
+                } else {
+                    timeSlot.splice(timeSlot.indexOf($(this).parent().parent().attr('value')), 1);
                 }
             });
 
@@ -1050,7 +1052,7 @@
             }
 
             function step1() {
-                var bool = true;
+                let bool = true;
 
                 if (isValidationRadio('adherent[registrationType]')) {
                     $("#registrationTypeHelp").show();
@@ -1077,7 +1079,7 @@
             }
 
             function step3() {
-                var bool = true;
+                let bool = true;
 
                 (isEmpty('adherent[firstNameRep1]') ? ($("#firstNameRep1Help").show(), bool = false) : $("#firstNameRep1Help").hide());
                 (isEmpty('adherent[lastNameRep1]') ? ($("#lastNameRep1Help").show(), bool = false) : $("#lastNameRep1Help").hide());
@@ -1131,20 +1133,20 @@
                 return bool;
             }
 
-            function step4(){
-                var $prix = 0;
-                var $unique = $timeSlot.filter(function(itm, i, $timeSlot) {
-                    return i == $timeSlot.indexOf(itm);
+            function step4() {
+                let prix = 0;
+                let unique = timeSlot.filter(function (itm, i, timeSlot) {
+                    return i == timeSlot.indexOf(itm);
                 });
-                $($unique).each(function( index ) {
-                    $prix = $prix + parseInt($("#price"+$unique[index]).attr('value'));
+                $(unique).each(function (index) {
+                    prix = prix + parseInt($("#price" + unique[index]).attr('value'));
                 });
-                $("#prix").text($prix);
+                $("#prix").text(prix);
                 return true;
             }
 
             function final() {
-                var bool = true;
+                let bool = true;
                 if (isValidationRadio('acceptRules')) {
                     bool = false;
                 }
@@ -1165,7 +1167,7 @@
             }
 
             function isValidationList(nameList) {
-                var bool = true;
+                let bool = true;
                 $.each($(nameList + ' option:selected'), function () {
                     bool = false;
                 });
@@ -1173,7 +1175,7 @@
             }
 
             function isValidationEmail(nameEmail) {
-                var pattern = new RegExp(/^[+a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/i);
+                let pattern = new RegExp(/^[+a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/i);
                 if (pattern.test($('input[name="' + nameEmail + '"]').val())) {
                     return false;
                 } else {
@@ -1182,7 +1184,7 @@
             }
 
             function isValidationZipCode(nameZipCode) {
-                var pattern = new RegExp(/^([0-9]{2}|(2A)|2B)[[0-9]{3}$/);
+                let pattern = new RegExp(/^([0-9]{2}|(2A)|2B)[[0-9]{3}$/);
                 if (pattern.test($('input[name="' + nameZipCode + '"]').val())) {
                     return false;
                 } else {
@@ -1191,7 +1193,7 @@
             }
 
             function isValidationPhoneNumber(nameZipCode) {
-                var pattern = new RegExp(/^(?:(?:\+)33|0)\s*[1-9](?:[\s.-]*\d{2}){4}$/);
+                let pattern = new RegExp(/^(?:(?:\+)33|0)\s*[1-9](?:[\s.-]*\d{2}){4}$/);
                 if (pattern.test($('input[name="' + nameZipCode + '"]').val())) {
                     return false;
                 } else {
@@ -1210,7 +1212,7 @@
                     },
                     success: function (data) {
                         $('#adherent_cityRep1 option').remove();
-                        for (var i in data["records"]) {
+                        for (let i in data["records"]) {
                             commune = data["records"][i]["fields"]["nom_de_la_commune"];
                             $('#adherent_cityRep1').append(new Option(commune, commune));
                         }
@@ -1229,7 +1231,7 @@
                     },
                     success: function (data) {
                         $('#adherent_cityRep2 option').remove();
-                        for (var i in data["records"]) {
+                        for (let i in data["records"]) {
                             commune = data["records"][i]["fields"]["nom_de_la_commune"];
                             $('#adherent_cityRep2').append(new Option(commune, commune));
                         }
@@ -1238,7 +1240,7 @@
             });
 
             $(".custom-file-input").on("change", function () {
-                var fileName = $(this).val().split("\\").pop();
+                let fileName = $(this).val().split("\\").pop();
                 $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
             });
 
@@ -1268,7 +1270,7 @@
             });
 
             $('#validQuestionnaire').click(function () {
-                var bool = true;
+                let bool = true;
                 $('div #healthQuestionnaireQuestion > div > div > input').each(function () {
                     if (isValidationRadio($(this).attr('name'))) {
                         bool = false;

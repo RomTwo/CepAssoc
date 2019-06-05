@@ -22,8 +22,8 @@ $(window).ready(function () {
         },
         success: function (data) {
             $('#account_city option').remove();
-            var communeExists = [];
-            for (var i in data["records"]) {
+            let communeExists = [];
+            for (let i in data["records"]) {
                 commune = data["records"][i]["fields"]["nom_de_la_commune"];
                 if ($.inArray(commune, communeExists) == -1) {
                     communeExists.push(commune);
@@ -33,7 +33,7 @@ $(window).ready(function () {
         }
     });
 
-    var groupColumn = 2;
+    let groupColumn = 2;
 
     $('#activitiesSecteurLoisir').DataTable({
         "columnDefs": [
@@ -42,9 +42,9 @@ $(window).ready(function () {
 
         "displayLength": 10,
         "drawCallback": function () {
-            var api = this.api();
-            var rows = api.rows({page: 'current'}).nodes();
-            var last = null;
+            let api = this.api();
+            let rows = api.rows({page: 'current'}).nodes();
+            let last = null;
 
             api.column(groupColumn, {page: 'current'}).data().each(function (group, i) {
                 if (last !== group) {
@@ -138,8 +138,8 @@ $('#account_addAccountAdherent').on('change', function () {
 });
 
 $('#next').click(function () {
-    var numberOfStep = 6;
-    var value = parseInt($("#accountStep").val());
+    let numberOfStep = 6;
+    let value = parseInt($("#accountStep").val());
     if (value < numberOfStep) {
         if (stepChoice("accountStep" + value)) {
             if (value == numberOfStep - 1) {
@@ -165,7 +165,7 @@ $('#next').click(function () {
 });
 
 $('#previous').click(function () {
-    var value = parseInt($("#accountStep").val());
+    let value = parseInt($("#accountStep").val());
     if (value > 1) {
         if (value == 2) {
             $("#previous").hide();
@@ -211,7 +211,7 @@ $('#cancelQuestionnaire').click(function () {
 });
 
 $('#validQuestionnaire').click(function () {
-        var bool = true;
+        let bool = true;
         $('div #healthQuestionnaireQuestion > div > div > input').each(function () {
             if (isValidationRadio($(this).attr('name'))) {
                 bool = false;
@@ -240,7 +240,7 @@ $('#volontaire').on('change', function () {
     $(this).is(':checked') ? $("#volunteerDiv").show() : $("#volunteerDiv").hide();
 });
 
-var $timeSlot = [];
+let $timeSlot = [];
 
 $("input[name='selection[]']").on('change', function () {
     if($(this).is(':checked')){
@@ -274,7 +274,7 @@ function stepChoice(step) {
 }
 
 function step1() {
-    var bool = true;
+    let bool = true;
     (isEmpty('account[firstName]') ? ($("#firstNameHelp").show(), bool = false) : $("#firstNameHelp").hide());
     (isEmpty('account[lastName]') ? ($("#lastNameHelp").show(), bool = false) : $("#lastNameHelp").hide());
     (isEmpty('account[zipCode]') ? ($("#zipCodeHelp").show(), bool = false) : ((isValidationZipCode('account[zipCode]')) ? ($("#zipCodeHelp").show(), bool = false) : $("#zipCodeHelp").hide()));
@@ -286,7 +286,7 @@ function step1() {
 }
 
 function step2() {
-    var bool = true;
+    let bool = true;
     (isEmpty('account[children][0][phoneRep1]') ? ($("#phoneRep1Help").show(), bool = false) : ((isValidationPhoneNumber('account[children][0][phoneRep1]')) ? ($("#phoneRep1Help").show(), bool = false) : $("#phoneRep1Help").hide()));
     (isEmpty('account[children][0][professionRep1]') ? ($("#professionRep1Help").show(), bool = false) : $("#professionRep1Help").hide())
     //(isValidationList('account[children][0][nationality]') ? ($("#nationalityHelp").show(), bool = false) : $("#nationalityHelp").hide())
@@ -294,8 +294,8 @@ function step2() {
 }
 
 function step5(){
-    var $prix = 0;
-    var $unique = $timeSlot.filter(function(itm, i, $timeSlot) {
+    let $prix = 0;
+    let $unique = $timeSlot.filter(function(itm, i, $timeSlot) {
         return i == $timeSlot.indexOf(itm);
     });
     $($unique).each(function( index ) {
@@ -306,14 +306,14 @@ function step5(){
 }
 
 function step7() {
-    var bool = true;
+    let bool = true;
     (isValidationList('account[children][0][paymentType]') ? ($("#paymentTypeHelp").show(), bool = false) : $("#paymentTypeHelp").hide());
     (isValidationList('account[children][0][imageRight]') ? ($("#imageRightHelp").show(), bool = false) : $("#imageRightHelp").hide())
     return bool;
 }
 
 function final() {
-    var bool = true;
+    let bool = true;
     if (isValidationRadio('acceptRules')) {
         bool = false;
     }
@@ -334,7 +334,7 @@ function isValidationRadio(nameRadio) {
 }
 
 function isValidationEmail(nameEmail) {
-    var pattern = new RegExp(/^[+a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/i);
+    let pattern = new RegExp(/^[+a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/i);
     if (pattern.test($('input[name="' + nameEmail + '"]').val())) {
         return false;
     } else {
@@ -343,7 +343,7 @@ function isValidationEmail(nameEmail) {
 }
 
 function isValidationList(nameList) {
-    var bool = true;
+    let bool = true;
     $.each($(nameList + ' option:selected'), function () {
         bool = false;
     });
@@ -351,7 +351,7 @@ function isValidationList(nameList) {
 }
 
 function isValidationZipCode(nameZipCode) {
-    var pattern = new RegExp(/^([0-9]{2}|(2A)|2B)[[0-9]{3}$/);
+    let pattern = new RegExp(/^([0-9]{2}|(2A)|2B)[[0-9]{3}$/);
     if (pattern.test($('input[name="' + nameZipCode + '"]').val())) {
         return false;
     } else {
@@ -360,7 +360,7 @@ function isValidationZipCode(nameZipCode) {
 }
 
 function isValidationPhoneNumber(nameZipCode) {
-    var pattern = new RegExp(/^(?:(?:\+)33|0)\s*[1-9](?:[\s.-]*\d{2}){4}$/);
+    let pattern = new RegExp(/^(?:(?:\+)33|0)\s*[1-9](?:[\s.-]*\d{2}){4}$/);
     if (pattern.test($('input[name="' + nameZipCode + '"]').val())) {
         return false;
     } else {
@@ -369,7 +369,7 @@ function isValidationPhoneNumber(nameZipCode) {
 }
 
 function isValidationPassword(namePassword) {
-    var pattern = new RegExp(/^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[-+!*$@%_])([-+!*$@%_\w]{8,15})$/);
+    let pattern = new RegExp(/^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[-+!*$@%_])([-+!*$@%_\w]{8,15})$/);
     if (pattern.test($('input[name="' + namePassword + '"]').val())) {
         return false;
     } else {
@@ -388,8 +388,8 @@ $('#account_zipCode').focusout(function () {
         },
         success: function (data) {
             $('#account_city option').remove();
-            var communeExists = [];
-            for (var i in data["records"]) {
+            let communeExists = [];
+            for (let i in data["records"]) {
                 commune = data["records"][i]["fields"]["nom_de_la_commune"];
                 if ($.inArray(commune, communeExists) == -1) {
                     communeExists.push(commune);
