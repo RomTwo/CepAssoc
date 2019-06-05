@@ -22,21 +22,30 @@ class Activity
     /**
      * @ORM\Column(type="string", length=255)
      * @Groups({"competition"})
+     * @Assert\NotNull(message="Veuiller renseigner le nom")
      */
     private $name;
 
     /**
      * @ORM\Column(type="float")
+     * @Assert\NotNull(message="Veuiller renseigner le prix")
+     * @Assert\Type(
+     *     type="double",
+     *     message="Veuillez saisir un prix correct"
+     * )
      */
     private $price;
 
     /**
      * @ORM\Column(type="date")
+     * @Assert\NotNull(message="Veuiller renseigner la date")
+     * @Assert\DateTime(message="Le format de la date de début n'est pas correct")
      */
     private $startDate;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotNull(message="Veuiller renseigner le type")
      */
     private $type;
 

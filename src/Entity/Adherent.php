@@ -23,35 +23,35 @@ class Adherent
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Assert\NotNull(message="Veuiller remplir le champ nom")
+     * @Assert\NotNull(message="Veuiller renseigner un nom")
      * @Groups({"competition"})
      */
     private $firstName;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Assert\NotNull(message="Veuiller remplir le champ nom")
+     * @Assert\NotNull(message="Veuiller renseigner un prénom")
      * @Groups({"competition"})
      */
     private $lastName;
 
     /**
      * @ORM\Column(type="string", length=10)
-     * @Assert\NotNull(message="Veuiller remplir le champ genre")
+     * @Assert\NotNull(message="Veuiller renseigner un genre")
      * @Groups({"competition"})
      */
     private $sex;
 
     /**
      * @ORM\Column(type="date")
-     * @Assert\NotNull(message="Veuiller remplir le champ nom")
+     * @Assert\NotNull(message="Veuiller renseigner une date de naissance")
      * @Groups({"competition"})
      */
     private $birthDate;
 
     /**
      * @ORM\Column(type="string")
-     * @Assert\NotNull(message="Veuiller remplir le champ nationalité")
+     * @Assert\NotNull(message="Veuiller renseigner une nationalité")
      * @Groups({"competition"})
      */
     private $nationality;
@@ -210,7 +210,7 @@ class Adherent
 
     /**
      * @ORM\Column(type="integer")
-     * @Assert\NotNull(message="Veuiller remplir le champ code postal")
+     * @Assert\NotNull(message="Veuiller renseigner un code postal")
      * @Assert\Regex(
      *     pattern = "/^([0-9]{2}|(2A)|2B)[[0-9]{3}$/",
      *     match = true,

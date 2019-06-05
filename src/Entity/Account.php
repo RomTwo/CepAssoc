@@ -25,7 +25,7 @@ class Account implements UserInterface
 
     /**
      * @ORM\Column(type="string", length=255)s
-     * @Assert\NotNull(message="Veuiller remplir le champ nom")
+     * @Assert\NotNull(message="Veuiller renseigner un nom")
      * @Assert\Regex(
      *     pattern = "/^[a-zA-ZÀ-ú\-\s]*$/",
      *     match = true,
@@ -37,7 +37,7 @@ class Account implements UserInterface
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Assert\NotNull(message="Veuiller remplir le champ prénom")
+     * @Assert\NotNull(message="Veuiller renseigner un prénom")
      * @Assert\Regex(
      *     pattern = "/^[a-zA-ZÀ-ú\-\s]*$/",
      *     match = true,
@@ -49,7 +49,7 @@ class Account implements UserInterface
 
     /**
      * @ORM\Column(type="string", length=1)
-     * @Assert\NotNull(message="Veuiller remplir le champ sexe")
+     * @Assert\NotNull(message="Veuiller renseigner un genre")
      * @Assert\Regex(
      *     pattern = "/^M|F$/",
      *     match = true,
@@ -60,14 +60,15 @@ class Account implements UserInterface
 
     /**
      * @ORM\Column(type="date")
-     * @Assert\NotNull(message="Veuiller remplir le champ date de naissance")
+     * @Assert\NotNull(message="Veuiller renseigner une date de naissance")
      * message = "la date de naissance n'est pas correct"
+     * @Assert\DateTime(message="Le format de la date de naissance n'est pas correct")
      */
     private $birthDate;
 
     /**
      * @ORM\Column(type="string", length=5)
-     * @Assert\NotNull(message="Veuiller remplir le champ code postal")
+     * @Assert\NotNull(message="Veuiller renseigner un code postal")
      * @Assert\Regex(
      *     pattern = "/^([0-9]{2}|(2A)|2B)[[0-9]{3}$/",
      *     match = true,
@@ -78,13 +79,13 @@ class Account implements UserInterface
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Assert\NotNull(message="Veuiller remplir le champ adresse")
+     * @Assert\NotNull(message="Veuiller renseigner une adresse postale")
      */
     private $address;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Assert\NotNull(message="Veuiller remplir le champ email")
+     * @Assert\NotNull(message="Veuiller renseigner un email")
      * @Assert\Email(message = "l'adresse mail n'est pas correct")
      */
     private $email;
@@ -96,7 +97,7 @@ class Account implements UserInterface
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Assert\NotNull(message="Veuiller remplir le champ mot de passe")
+     * @Assert\NotNull(message="Veuiller renseigner un mot de passe")
      * @Assert\Regex(
      *     pattern = "/^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[-+!*$@%_])([-+!*$@%_\w]{8,15})$/",
      *     match = true,

@@ -19,7 +19,7 @@ class Job
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Assert\NotNull(message="Veuiller remplir le champ nom")
+     * @Assert\NotNull(message="Veuiller renseigner le nom du poste")
      */
     private $name;
 
