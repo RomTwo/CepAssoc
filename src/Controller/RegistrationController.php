@@ -54,7 +54,7 @@ class RegistrationController extends AbstractController
             } else {
                 $this->generatePDF($adherent);
             }
-            $this->setPrice($adherent,$request->request->get("selection"));
+            $this->setPrice($adherent, $utilitaires->delimiter($request->request->get("idsOfTimeSlots")));
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($adherent);
             $entityManager->flush();
