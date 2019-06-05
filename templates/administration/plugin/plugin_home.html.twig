@@ -9,9 +9,9 @@
         <div class="col-md-6 col-sm-12">
             <h3>Initialisation</h3>
             <p id="lbl_init">Aucune initialisation en cours.</p>
-            <i class=" fas fa-check-circle fa-10x" id="init_valid" style="display: none; color:green"></i>
+            <i class=" fas fa-check-circle fa-10x text-success" id="init_valid" style="display: none;"></i>
             <i class=" fas fa-times-circle fa-10x" id="init_error" style="display:none;"></i>
-            <img id="spinner_init" src="{{ asset('build/spinner.gif') }}" style="display:none; color:red">
+            <img class="text-danger" id="spinner_init" src="{{ asset('build/spinner.gif') }}" style="display:none;">
 
             <button hidden id="init"></button>
             <div hidden id="competiteur">
@@ -25,8 +25,8 @@
         <div class="col-md-6  col-sm-12">
             <h3>Synchronisation</h3>
             <p id="lbl_sync">Aucune synchronisation en cours.</p>
-            <i class=" fas fa-check-circle fa-10x" id="sync_valid" style="display:none; color:green;"></i>
-            <i class=" fas fa-times-circle fa-10x" id="sync_error" style="display:none; color:red;"></i>
+            <i class=" fas fa-check-circle fa-10x text-success" id="sync_valid" style="display:none;"></i>
+            <i class=" fas fa-times-circle fa-10x text-danger" id="sync_error" style="display:none;"></i>
 
 
             <img id="spinner_sync" src="{{ asset('build/spinner.gif') }}" style="display:none;">
