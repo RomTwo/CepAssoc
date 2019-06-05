@@ -6,7 +6,11 @@
 
 {% block body %}
 
-{{ form_start(form) }}
+    <div class="text-right mb-4">
+        <a href="{{ path('admin_categories') }}" class="btn btn-warning">Retour</a>
+    </div>
+
+    {{ form_start(form) }}
     <p><strong>Modifier une catégorie : </strong></p>
     <div class="container-fluid">
         {% include('administration/category/addCategoryForm.html.twig')  with {'label_submit': 'Modifier la catégorie'} %}

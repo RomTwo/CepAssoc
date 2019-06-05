@@ -10,6 +10,9 @@
 {% endblock %}
 
 {% block body %}
+    <div class="text-right mb-4">
+        <a href="{{ path('admin_activities') }}" class="btn btn-warning">Retour</a>
+    </div>
 
     {{ form_start(form) }}
     <div class="form-group row">

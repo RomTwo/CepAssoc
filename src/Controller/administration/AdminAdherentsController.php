@@ -132,6 +132,7 @@ class AdminAdherentsController extends AbstractController
     /**
      * generate a pdf containing the adherent data
      * @param $id is the id of the adherent whose data we want to print
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
     public function generatePDF($id)
     {
@@ -151,7 +152,6 @@ class AdminAdherentsController extends AbstractController
                 "Attachment" => true
             ]);
         } else {
-
             $this->addFlash('error', "Erreur dans la requête.");
             return $this->redirectToRoute("admin_adherents");
         }

@@ -12,6 +12,10 @@
         <a href="{{ path('admin_activities') }}" class="btn btn-warning">Retour</a>
     </div>
 
+    {% if timeSlots | length == 0 %}
+        <p>Aucuns créneaux d'affecté pour cette activité</p>
+    {% endif %}
+
     {% for timeSlot in timeSlots %}
         <div class="card mb-4">
             <div class="card-header">

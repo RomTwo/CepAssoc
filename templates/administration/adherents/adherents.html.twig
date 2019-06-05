@@ -97,10 +97,12 @@
                                     <i class="far fa-eye"></i>
                                 </button>
                         </span>
-                        <a class="btn btn-danger" href="{{ path('admin_adherentsDelete', {id: adherent.id}) }}"
-                           data-toggle="tooltip" data-placement="top" title="Supprimer l'adhérent">
-                            <i class="far fa-trash-alt"></i>
-                        </a>
+                        <span data-target="#modalDeleteAdherent{{ adherent.id }}" data-toggle="modal">
+                            <button class="btn btn-danger" data-toggle="tooltip" data-placement="top"
+                                    title="Supprimer l'adhérent">
+                                <i class="far fa-trash-alt"></i>
+                            </button>
+                        </span>
 
                     </td>
                 </tr>
@@ -188,6 +190,7 @@
                 </div>
 
 
+                {% include('administration/adherents/modalDeleteAdherent.html.twig') %}
             {% endif %}
         {% endfor %}
         </tbody>

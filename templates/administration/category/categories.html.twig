@@ -5,6 +5,10 @@
 
 {% block body %}
 
+    <div class="text-right mb-4">
+        <a href="{{ path('admin_activities') }}" class="btn btn-warning">Retour</a>
+    </div>
+
     <p><strong>Ajouter une catégorie : </strong></p>
     <div class="container-fluid">
         {% include('administration/category/addCategoryForm.html.twig') with {'label_submit': 'Ajouter une catégorie'} %}

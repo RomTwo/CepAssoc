@@ -3,24 +3,18 @@
 {% block title %}Gestion de l'évènement{% endblock %}
 
 {% block body %}
-    <div class="row justify-content-center mb-4">
-        <a href="{{ path('admin_event_manager_index', {id: app.request.get('id')}) }}" class="btn btn-primary">
+    <div class="text-right mb-4">
+        <button class="btn btn-outline-dark ml-2" type="button" data-toggle="collapse" data-target="#addEvent"
+                aria-expanded="false" aria-controls="addEvent">
+            Filtres
+        </button>
+        <a href="{{ path('admin_event_manager_index', {id: app.request.get('id')}) }}" class="btn btn-outline-dark">
             Visualisation Globale
         </a>
-    </div>
-
-    <div class="row justify-content-left mb-4">
-        <div class="col-1">
-            <button class="btn btn-primary ml-2" type="button" data-toggle="collapse" data-target="#addEvent"
-                    aria-expanded="false" aria-controls="addEvent">
-                Filtres
-            </button>
-        </div>
-        <div class="col-auto" hidden>
-            <button class="btn btn-primary">
-                Ajouter un évènement
-            </button>
-        </div>
+        <button hidden class="btn btn-outline-dark">
+            Ajouter un évènement
+        </button>
+        <a href="{{ path('admin_events') }}" class="btn btn-warning">Retour</a>
     </div>
 
     <div class="collapse pb-4" id="addEvent">

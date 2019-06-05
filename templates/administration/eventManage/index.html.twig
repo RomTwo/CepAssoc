@@ -16,11 +16,13 @@
 
 
     <!-- Describe event (Modal)-->
-    <div class="row justify-content-center mb-4">
-        <a href="{{ path('admin_event_manager_index_filter', {id: idEvent}) }}" class="btn btn-primary">
+    <div class="text-right mb-4">
+        <a href="{{ path('admin_event_manager_index_filter', {id: idEvent}) }}" class="btn btn-outline-dark">
             Visualisation détaillée
         </a>
+        <a href="{{ path('admin_events') }}" class="btn btn-warning">Retour</a>
     </div>
+
     {% include('administration/eventManage/describeModal.html.twig') %}
     {% include('administration/eventManage/updateModal.html.twig') %}
 

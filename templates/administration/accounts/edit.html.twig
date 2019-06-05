@@ -3,8 +3,13 @@
 {% block title %}Modifier le compte{% endblock %}
 
 {% block body %}
-    {{ form_start(form) }}
 
+    <div class="text-right mb-4">
+        <a href="{{ path('admin_accounts') }}" class="btn btn-warning">Retour</a>
+    </div>
+
+
+    {{ form_start(form) }}
 
     <div class="form-group pb-3">
         <div class="container-fluid">
