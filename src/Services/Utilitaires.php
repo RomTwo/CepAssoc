@@ -79,4 +79,13 @@ class Utilitaires
         $file->move($this->params->get('upload_directory'), $fileId);
         return $fileId;
     }
+
+    public
+    function delimiter($data){
+        if($data != null){
+            $idsOfTimeSlot = explode("/", $data, -1);
+            return $idsOfTimeSlot;
+        }
+
+    }
 }

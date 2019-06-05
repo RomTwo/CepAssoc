@@ -55,7 +55,7 @@ class AccountController extends AbstractController
                         if ($this->isValidate($adherent)) {
                             $utilitaires->setOtherFields($adherent);
                             $adherent->setRegistrationType("nouveau");
-                            $this->setPrice($adherent,$request->request->get("selection"));
+                            $this->setPrice($adherent, $utilitaires->delimiter($request->request->get("idsOfTimeSlots")));
                         } else {
                             $msg = "Attention, il manque des informations pour devenir adhérent";
                             return $this->render('account/index.html.twig', array(
@@ -74,6 +74,7 @@ class AccountController extends AbstractController
                     } else {
                         $this->generatePDF($adherent);
                     }
+
                     $manager = $this->getDoctrine()->getManager();
                     $encoded = $encoder->encodePassword($account, $account->getPassword());
                     $account->setPassword($encoded);
@@ -106,7 +107,8 @@ class AccountController extends AbstractController
      * @param UserPasswordEncoderInterface $encoder
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|Response
      */
-    public function update(Request $request, UserPasswordEncoderInterface $encoder, Utilitaires $utilitaires)
+    public
+    function update(Request $request, UserPasswordEncoderInterface $encoder, Utilitaires $utilitaires)
     {
         $manager = $this->getDoctrine()->getManager();
         $currentUserEmail = $this->get('session')->get('_security.last_username');
@@ -176,7 +178,8 @@ class AccountController extends AbstractController
      * @param CaptchaCheck $captchaCheck
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
-    public function forgotPassword(Request $request, ForgotPassword $forgotPasswordEmail, GenerateToken $generateToken, CaptchaCheck $captchaCheck)
+    public
+    function forgotPassword(Request $request, ForgotPassword $forgotPasswordEmail, GenerateToken $generateToken, CaptchaCheck $captchaCheck)
     {
         if ($request->isMethod('POST') && $request->request->has('recaptcha_response')) {
             if ($this->findByEmail($request->request->get('email'))) {
@@ -215,7 +218,8 @@ class AccountController extends AbstractController
      * @param $token
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|Response
      */
-    public function resetPassword(Request $request, UserPasswordEncoderInterface $encoder, $token)
+    public
+    function resetPassword(Request $request, UserPasswordEncoderInterface $encoder, $token)
     {
         try {
             JWT::decode($token, $_ENV['PRIVATE_KEY'], array($_ENV['ALG']));
@@ -259,7 +263,8 @@ class AccountController extends AbstractController
      * @param string $email
      * @return bool
      */
-    private function findByEmail(string $email)
+    private
+    function findByEmail(string $email)
     {
         $account = $this->getDoctrine()->getRepository(Account::class)->findBy(
             array(
@@ -270,7 +275,8 @@ class AccountController extends AbstractController
         return $account != null ? true : false;
     }
 
-    private function isValidate($adherent)
+    private
+    function isValidate($adherent)
     {
         if ($adherent->getSex() == null) {
             return false;
@@ -278,7 +284,8 @@ class AccountController extends AbstractController
         return true;
     }
 
-    private function isValidateHealthQuestionnaire($healthQuestionnaire)
+    private
+    function isValidateHealthQuestionnaire($healthQuestionnaire)
     {
         if ($healthQuestionnaire->getHasMemberOfFamilyDiedHeartAttack() === null) {
             return false;
@@ -319,7 +326,8 @@ class AccountController extends AbstractController
         return true;
     }
 
-    private function generatePDF($adherent)
+    private
+    function generatePDF($adherent)
     {
         $html = $this->render('account/generateHealthQuestionnairePDF.html.twig', [
             'adherent' => $adherent,
@@ -333,22 +341,23 @@ class AccountController extends AbstractController
         $dompdf->render();
         $fileId = md5(uniqid());
         file_put_contents('uploads/' . $fileId, $dompdf->output());
-        $adherent->setHealthQuestionnaireFile(new Document($fileId, $adherent->getFirstName()."_".$adherent->getLastName()."_QuestionnaireDeSante_CEPPoitiers.pdf"));
+        $adherent->setHealthQuestionnaireFile(new Document($fileId, $adherent->getFirstName() . "_" . $adherent->getLastName() . "_QuestionnaireDeSante_CEPPoitiers.pdf"));
     }
 
-    private function setPrice($adherent,$data)
+    private
+    function setPrice($adherent, $idsOfTimeSlot)
     {
-        if($data != null){
+        if ($idsOfTimeSlot != null) {
             $activities = array();
-            foreach ($data as $value) {
+            foreach ($idsOfTimeSlot as $value) {
                 $timeSlot = $this->getDoctrine()->getRepository(TimeSlot::class)->find($value);
-                if(!in_array($timeSlot->getActivity()->getId(), $activities, true)){
+                if (!in_array($timeSlot->getActivity()->getId(), $activities, true)) {
                     array_push($activities, $timeSlot->getActivity()->getId());
                 }
                 $timeSlot->addAdherent($adherent);
             }
             $price = 0;
-            foreach ($activities as $value){
+            foreach ($activities as $value) {
                 $activity = $this->getDoctrine()->getRepository(Activity::class)->find($value);
                 $price += $activity->getPrice();
             }
