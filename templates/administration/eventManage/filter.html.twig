@@ -13,6 +13,34 @@
         </a>
     </div>
 
+    <div class="row justify-content-left mb-4">
+        <div class="col-1">
+            <button class="btn btn-primary ml-2" type="button" data-toggle="collapse" data-target="#addEvent"
+                    aria-expanded="false" aria-controls="addEvent">
+                Filtres
+            </button>
+        </div>
+        <div class="col-auto" hidden>
+            <button class="btn btn-primary">
+                Ajouter un évènement
+            </button>
+        </div>
+    </div>
+
+    <div class="collapse pb-4" id="addEvent">
+        <div class="card card-body">
+            <div class="container-fluid">
+                <h4>Postes</h4>
+                <div class="checkboxJob">
+                    {% for job in jobs %}
+                        <input class="job" type="checkbox" data-id="{{ job.id }}"
+                               value="{{ job.name }}">{{ job.name }}
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+
     <table id="eventManagers" class="table table-striped table-bordered" style="width:100%">
         <thead>
         <tr>
@@ -21,7 +49,7 @@
             <th>Fin</th>
             <th>Poste</th>
             <th>Description</th>
-            <th>Action</th>
+            <th hidden>Action</th>
         </tr>
         </thead>
         <tbody>
@@ -32,7 +60,20 @@
                 <td>le {{ em.endDate | date("d/m/Y") }} à {{ em.endDate | date("H:i") }}</td>
                 <td>{{ em.job }}</td>
                 <td>{{ em.description }}</td>
-                <td></td>
+                <td hidden>
+                    <button type="button" class="btn btn-primary" data-toggle="modal"
+                            data-target="#modal-view-event-desc{{ em.id }}">
+                        <i class="far fa-eye"></i>
+                    </button>
+                    <button type="button" class="btn btn-warning" data-toggle="modal"
+                            data-target="#modal-edit-event">
+                        <i class="far fa-edit"></i>
+                    </button>
+                    <button id="deleteEvent" type="button" class="btn btn-danger"
+                            value="{{ path('admin_event_manager_delete') }}">
+                        <i class="far fa-trash-alt"></i>
+                    </button>
+                </td>
             </tr>
         {% endfor %}
         </tbody>
@@ -43,10 +84,17 @@
             <th>Fin</th>
             <th>Poste</th>
             <th>Description</th>
-            <th>Action</th>
+            <th hidden>Action</th>
         </tr>
         </tfoot>
     </table>
+
+    {% for em in eventManagers %}
+        {% include('administration/eventManage/viewEventFilter.html.twig') %}
+    {% endfor %}
+
+
+
 {% endblock %}
 
 {% block javascripts %}
@@ -55,5 +103,23 @@
         $(document).ready(function () {
             $('#eventManagers').DataTable();
         });
+
+        // Filter datatable
+        $(document).ready(function () {
+            $('.job').click(function () {
+                let val = "";
+                $('.checkboxJob > input').each(function () {
+                    if ($(this).is(":checked")) {
+                        val += $(this).val() + "|";
+                    }
+                });
+
+                val = val.substring(0, (val).length - 1);
+
+                let check = ".job[data-id='" + $(this).attr("data-id") + "']";
+                $('#eventManagers').DataTable().column(3).search(val, true, false).draw();
+            });
+        });
+
     </script>
 {% endblock %}

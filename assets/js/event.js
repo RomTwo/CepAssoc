@@ -2,13 +2,6 @@ $(document).ready(function () {
     $('#events').DataTable();
 });
 
-$(document).ready(function () {
-    $('#divAddJob').hide();
-    $('#addJob').click(function () {
-        $('#divAddJob').toggle("slide");
-    })
-});
-
 
 $('#jobForm').submit(function (e) {
     e.preventDefault();
@@ -26,11 +19,11 @@ $('#jobForm').submit(function (e) {
                 "</div>";
 
             $('#jobName').val('');
-            $('#divAddJob').hide();
+            $('#modal-add-job').modal('hide');
             $('#event_jobs').append(div);
         },
         error: function (error) {
-            $.notification('fa fa-exclamation-circle', 'Erreur : ', error.responseJSON, 'danger');
+            $('#errorAddJob').append($.createErrorMsg(error.responseJSON));
             $('#jobName').val('');
         }
     })
@@ -57,3 +50,14 @@ $(function () {
         })
     });
 });
+
+$.createErrorMsg = function (msg) {
+    return "<div class='row ml-1'>" +
+        "<span class='invalid-feedback d-block'>" +
+        "<span class='d-block'>" +
+        "<span class='form-error-icon badge badge-danger text-uppercase'>Erreur</span>" +
+        "<span class='form-error-message'>" + msg + "</span>" +
+        "</span>" +
+        "</span>" +
+        "</div>";
+};

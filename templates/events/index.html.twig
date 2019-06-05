@@ -13,7 +13,7 @@
 
     <div class="collapse pt-4 pb-4" id="modalViewEventFollow">
         <!-- DataTable event follow -->
-        <table id="events" class="table table-striped table-bordered" style="width:100%">
+        <table class="events table table-striped table-bordered" style="width:100%">
             <thead>
             <tr>
                 <th>Nom</th>
@@ -69,7 +69,7 @@
 
     <!-- DataTable Events -->
     <div id="allEvent">
-        <table id="events" class="table table-striped table-bordered" style="width:100%">
+        <table  class="events table table-striped table-bordered" style="width:100%">
             <thead>
             <tr>
                 <th>Nom</th>
@@ -130,57 +130,10 @@
 {% endblock %}
 
     {% block javascripts %}
-        {# Include maps javascript api #}
-        <script src="https://maps.googleapis.com/maps/api/js?key={{ maps_key }}&libraries=places&callback=initMap" async
-                defer></script>
-
-        {# Load maps on web application, search event address #}
         <script>
-            var map;
-            var service;
-            var infowindow;
-
-            function initMap() {
-                var sydney = new google.maps.LatLng(-33.867, 151.195);
-
-                infowindow = new google.maps.InfoWindow();
-
-                map = new google.maps.Map(
-                    document.getElementById('map'), {center: sydney, zoom: 15});
-
-                var request = {
-                    query: 'Poitiers',
-                    fields: ['name', 'geometry'],
-                };
-
-                service = new google.maps.places.PlacesService(map);
-
-                service.findPlaceFromQuery(request, function (results, status) {
-                    if (status === google.maps.places.PlacesServiceStatus.OK) {
-                        for (var i = 0; i < results.length; i++) {
-                            createMarker(results[i]);
-                        }
-
-                        map.setCenter(results[0].geometry.location);
-                    }
-                });
-            }
-
-            function createMarker(place) {
-                var marker = new google.maps.Marker({
-                    map: map,
-                    position: place.geometry.location
-                });
-
-                google.maps.event.addListener(marker, 'click', function () {
-                    infowindow.setContent(place.name);
-                    infowindow.open(map, this);
-                });
-            }
-
             // Active datatable
             $(document).ready(function () {
-                $('#events').DataTable();
+                $('.events').DataTable();
             });
 
             // Manage the event button

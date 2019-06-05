@@ -7,8 +7,10 @@
 
     <div class="row justify-content-end" style="margin-bottom : 20px;">
         <div class="col-auto text-right">
-            <a href="{{ path('admin_activityAdd') }}" class="btn btn-outline-dark">Ajouter une activité</a>
-            <a href="{{ path('admin_categories') }}" class="btn btn-outline-dark">Gérer les Catégories</a>
+            {% if is_granted('ROLE_ADMIN') %}
+                <a href="{{ path('admin_activityAdd') }}" class="btn btn-outline-dark">Ajouter une activité</a>
+                <a href="{{ path('admin_categories') }}" class="btn btn-outline-dark">Gérer les Catégories</a>
+            {% endif %}
 
         </div>
     </div>
@@ -51,69 +53,76 @@
                 </thead>
                 <tbody>
                 {% for category in categories %}
-                {% for activity in category.activities %}
-                <tr class="odd" role="row">
-                    <td>{{ activity.name }}</td>
-                    <td>
-                        {% for slot in activity.timeSlot %}
-                            {{ slot.getFullTime }}
-                            <br>
-                        {% endfor %}
-                    </td>
-                    <td>
-                        <font style="text-transform: uppercase;">
-                            <span style="size: 300px !important "><strong>{{ category.name }}</strong></span>
-                        </font>
-                    </td>
-                    <td>{{ activity.startDate|date('d-m-Y') }}</td>
-                    <td>
-                        {{ activity.price }}
-                        €
-                    </td>
-                    <!-- Button trigger modal -->
-                    <td>
-                        <a class="btn btn-primary" href="{{ path('admin_activityDetails', {id: activity.id}) }}" data-toggle="tooltip" data-placement="top" title="Details de l'activité">
-                            <i class="far fa-calendar-alt"></i>
-                        </a>
+                    {% for activity in category.activities %}
+                        <tr class="odd" role="row">
+                            <td>{{ activity.name }}</td>
+                            <td>
+                                {% for slot in activity.timeSlot %}
+                                    {{ slot.getFullTime }}
+                                    <br>
+                                {% endfor %}
+                            </td>
+                            <td>
+                                <font style="text-transform: uppercase;">
+                                    <span style="size: 300px !important "><strong>{{ category.name }}</strong></span>
+                                </font>
+                            </td>
+                            <td>{{ activity.startDate|date('d-m-Y') }}</td>
+                            <td>
+                                {{ activity.price }}
+                                €
+                            </td>
+                            <!-- Button trigger modal -->
+                            {% if is_granted('ROLE_ADMIN') %}
+                                <td>
+                                    <a class="btn btn-primary"
+                                       href="{{ path('admin_activityDetails', {id: activity.id}) }}"
+                                       data-toggle="tooltip" data-placement="top" title="Details de l'activité">
+                                        <i class="far fa-calendar-alt"></i>
+                                    </a>
 
-                        <a class="btn btn-warning" href="{{ path('admin_activityEdit', {id: activity.id}) }}" data-toggle="tooltip" data-placement="top" title="Modifier l'activité ou ajouter un créneau">
-                            <i class="far fa-edit"></i>
-                        </a>
-                        <span data-toggle="modal" data-target="#modalDeleteActivity{{ activity.id }}">
+                                    <a class="btn btn-warning"
+                                       href="{{ path('admin_activityEdit', {id: activity.id}) }}" data-toggle="tooltip"
+                                       data-placement="top" title="Modifier l'activité ou ajouter un créneau">
+                                        <i class="far fa-edit"></i>
+                                    </a>
+                                    <span data-toggle="modal" data-target="#modalDeleteActivity{{ activity.id }}">
                             <button type="button" class="btn btn-danger" data-toggle="tooltip" data-placement="top"
                                     title="Supprimer l'activité">
                                 <i class="far fa-trash-alt"></i>
                             </button>
                         </span>
 
-                    </td>
-                </tr>
-                <div class="modal fade" id="modalDeleteActivity{{ activity.id }}" tabindex="-1" role="dialog"
-                     aria-labelledby="modalDeleteActivityLabel{{ activity.id }}" aria-hidden="true">
-                    <div class="modal-dialog" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="modalDeleteActivityLabel{{ activity.id }}">Attention</h5>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                            <div class="modal-body">
-                                Êtes-vous sûr de vouloir supprimer cet activitée ?
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal"
-                                        data-toggle="modal">
-                                    Non
-                                </button>
-                                <a href="{{ path('admin_activityDelete', {id: activity.id}) }}" role="button"
-                                   class="btn btn-primary">Oui</a>
+                                </td>
+                            {% endif %}
+                        </tr>
+                        <div class="modal fade" id="modalDeleteActivity{{ activity.id }}" tabindex="-1" role="dialog"
+                             aria-labelledby="modalDeleteActivityLabel{{ activity.id }}" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="modalDeleteActivityLabel{{ activity.id }}">
+                                            Attention</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        Êtes-vous sûr de vouloir supprimer cet activitée ?
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal"
+                                                data-toggle="modal">
+                                            Non
+                                        </button>
+                                        <a href="{{ path('admin_activityDelete', {id: activity.id}) }}" role="button"
+                                           class="btn btn-primary">Oui</a>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    </div>
                     {% endfor %}
-                    {% endfor %}
+                {% endfor %}
                 </tbody>
             </table>
         </div>
@@ -123,7 +132,7 @@
 
 {% block javascripts %}
     <script type="text/javascript">
-        
+
 
         $(document).ready(function () {
 

@@ -144,7 +144,7 @@ class Account implements UserInterface
     {
         $this->children = new ArrayCollection();
         $this->eventManagements = new ArrayCollection();
-        $this->roles = array('ROLE_SUPER_ADMIN');
+        $this->roles = array('ROLE_USER');
     }
 
 

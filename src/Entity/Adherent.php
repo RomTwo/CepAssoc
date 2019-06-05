@@ -1200,4 +1200,14 @@ class Adherent
         $this->healthQuestionnaire = $healthQuestionnaire;
     }
 
+    public function getActivity()
+    {
+        $act = array();
+        foreach ($this->timeSlots as $timeSlot) {
+            array_push($act, $timeSlot->getActivity()->getName());
+        }
+
+        return array_unique($act);
+    }
+
 }
