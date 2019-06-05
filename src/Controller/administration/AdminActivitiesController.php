@@ -9,8 +9,6 @@ use App\Entity\TimeSlot;
 use App\Form\AdminActivityTimeSlotType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Validator\Constraints\Date;
-use Symfony\Component\Validator\Constraints\Time;
 
 class AdminActivitiesController extends AbstractController
 {

@@ -2,9 +2,7 @@
 
 namespace App\Controller\administration;
 
-use App\Entity\Account;
 use App\Entity\Adherent;
-use App\Entity\Document;
 use App\Form\AdminAdherentType;
 use Dompdf\Dompdf;
 use Dompdf\Options;

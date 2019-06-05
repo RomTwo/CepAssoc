@@ -2,7 +2,6 @@
 
 namespace App\Form;
 
-use App\Entity\EventManagement;
 use App\Entity\Job;
 use App\Transformer\DatetimeToStringTransformer;
 use App\Transformer\JobToStringTransformer;

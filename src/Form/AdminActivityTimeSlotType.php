@@ -1,12 +1,9 @@
 <?php
 
-
 namespace App\Form;
-
 
 use App\Entity\Activity;
 use App\Entity\Category;
-use App\Repository\CategoryRepository;
 use App\Transformer\DateToStringTransformer;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;

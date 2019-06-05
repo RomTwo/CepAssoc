@@ -13,7 +13,6 @@ use Dompdf\Dompdf;
 use Dompdf\Options;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
-use \DateTime;
 
 class RegistrationController extends AbstractController
 {
@@ -131,22 +130,22 @@ class RegistrationController extends AbstractController
         $dompdf->render();
         $fileId = md5(uniqid());
         file_put_contents('uploads/' . $fileId, $dompdf->output());
-        $adherent->setHealthQuestionnaireFile(new Document($fileId, $adherent->getFirstName()."_".$adherent->getLastName()."_QuestionnaireDeSante_CEPPoitiers.pdf"));
+        $adherent->setHealthQuestionnaireFile(new Document($fileId, $adherent->getFirstName() . "_" . $adherent->getLastName() . "_QuestionnaireDeSante_CEPPoitiers.pdf"));
     }
 
-    private function setPrice($adherent,$data)
+    private function setPrice($adherent, $data)
     {
-        if($data != null){
+        if ($data != null) {
             $activities = array();
             foreach ($data as $value) {
                 $timeSlot = $this->getDoctrine()->getRepository(TimeSlot::class)->find($value);
-                if(!in_array($timeSlot->getActivity()->getId(), $activities, true)){
+                if (!in_array($timeSlot->getActivity()->getId(), $activities, true)) {
                     array_push($activities, $timeSlot->getActivity()->getId());
                 }
                 $timeSlot->addAdherent($adherent);
             }
             $price = 0;
-            foreach ($activities as $value){
+            foreach ($activities as $value) {
                 $activity = $this->getDoctrine()->getRepository(Activity::class)->find($value);
                 $price += $activity->getPrice();
             }

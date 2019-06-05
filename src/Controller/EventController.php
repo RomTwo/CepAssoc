@@ -6,11 +6,9 @@ use App\Entity\Account;
 use App\Entity\Event;
 use App\Entity\EventManagement;
 use App\Entity\Job;
-use App\Form\EventManagerUserType;
 use App\Services\CompareDatetime;
 use \Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
 
 class EventController extends AbstractController
 {

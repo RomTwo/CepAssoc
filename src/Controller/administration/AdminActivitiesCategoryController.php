@@ -2,14 +2,9 @@
 
 namespace App\Controller\administration;
 
-use App\Entity\Activity;
 use App\Entity\Category;
-use App\Entity\Adherent;
-use App\Entity\TimeSlot;
-use App\Form\AdminActivityTimeSlotType;
 use App\Form\AdminCategoryType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 
 class AdminActivitiesCategoryController extends AbstractController

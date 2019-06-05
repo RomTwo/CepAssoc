@@ -3,7 +3,6 @@
 namespace App\Form;
 
 use App\Entity\Account;
-use App\Entity\Adherent;
 use App\Transformer\DateToStringTransformer;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;

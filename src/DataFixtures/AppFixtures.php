@@ -10,7 +10,6 @@ use App\Entity\Adherent;
 use App\Entity\Category;
 use App\Entity\Event;
 use App\Entity\Activity;
-use phpDocumentor\Reflection\Types\Integer;
 
 class AppFixtures extends Fixture
 {

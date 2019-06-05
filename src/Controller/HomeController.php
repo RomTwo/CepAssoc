@@ -4,9 +4,6 @@ namespace App\Controller;
 
 use App\Entity\Account;
 use App\Entity\Adherent;
-use App\Form\AdherentFirstType;
-use App\Form\AdherentSecondType;
-use App\Form\AdherentThirdType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Form\Extension\Core\Type\TextType;

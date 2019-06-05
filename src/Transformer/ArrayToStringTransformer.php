@@ -3,7 +3,6 @@
 namespace App\Transformer;
 
 use Symfony\Component\Form\DataTransformerInterface;
-use Symfony\Component\Form\Exception\TransformationFailedException;
 
 class ArrayToStringTransformer implements DataTransformerInterface
 {
