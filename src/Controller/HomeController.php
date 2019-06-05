@@ -37,7 +37,7 @@ class HomeController extends AbstractController
             // get the child associated to this affiliate code
             $adherent = $this->getDoctrine()->getRepository(Adherent::class)->findOneBy(['affiliateCode' => $code]);
 
-            if ($adherent == null) {
+            if (is_null($adherent)) {
                 $this->addFlash('error', "La clé que vous avez entré ne correspond à aucun adhérent");
             } else {
                 // if the user already had the child, we do nothing and we mention it
@@ -58,6 +58,10 @@ class HomeController extends AbstractController
             }
         }
 
-        return $this->render('home/index.html.twig', ['adherents' => $adherents, 'form' => $form->createView()]);
+        return $this->render('home/index.html.twig', array(
+                'adherents' => $adherents,
+                'form' => $form->createView()
+            )
+        );
     }
 }

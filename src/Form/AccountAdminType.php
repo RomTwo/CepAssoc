@@ -59,7 +59,10 @@ class AccountAdminType extends AbstractType
                     'expanded' => false
                 )
             )
-            ->add('valid', SubmitType::class, array('label' => 'Modifier'));
+            ->add('valid', SubmitType::class, array(
+                    'label' => 'Modifier'
+                )
+            );
 
         $builder->get('roles')->addModelTransformer(new ArrayToStringTransformer());
         $builder->get('birthDate')->addModelTransformer(new DateToStringTransformer());

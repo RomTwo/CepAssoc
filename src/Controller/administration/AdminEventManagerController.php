@@ -19,13 +19,19 @@ class AdminEventManagerController extends AbstractController
     public function index($id)
     {
         $event = $this->getDoctrine()->getRepository(Event::class)->find($id);
-        if ($event !== null) {
+        if ($event) {
             $newEventManagers = new EventManagement();
             $form = $this->createForm(EventManagerType::class, $newEventManagers, array(
-                'action' => $this->generateUrl('admin_event_manager_add'),
-                'method' => 'post',
-                'jobsEvent' => $event->getJobs()));
-            $form->add('idEvent', HiddenType::class, array('data' => $id, 'mapped' => false));
+                    'action' => $this->generateUrl('admin_event_manager_add'),
+                    'method' => 'post',
+                    'jobsEvent' => $event->getJobs()
+                )
+            );
+            $form->add('idEvent', HiddenType::class, array(
+                    'data' => $id,
+                    'mapped' => false
+                )
+            );
 
         } else {
             $this->addFlash('error', "L'évènement n'existe pas");
@@ -49,7 +55,10 @@ class AdminEventManagerController extends AbstractController
             return $this->redirectToRoute('admin_events');
         }
 
-        $eventManagers = $this->getDoctrine()->getRepository(EventManagement::class)->findBy(array('event' => $event));
+        $eventManagers = $this->getDoctrine()->getRepository(EventManagement::class)->findBy(array(
+                'event' => $event
+            )
+        );
 
         return $this->render('administration/eventManage/filter.html.twig', array(
                 'eventManagers' => $eventManagers,
@@ -160,7 +169,7 @@ class AdminEventManagerController extends AbstractController
         $manager = $this->getDoctrine()->getManager();
         $eventManager = $manager->getRepository(EventManagement::class)->find($id);
 
-        if ($eventManager === null) {
+        if (is_null($eventManager)) {
             return JsonResponse::create("L'évènement n'existe pas", 404);
         }
         $manager->remove($eventManager);
@@ -175,7 +184,7 @@ class AdminEventManagerController extends AbstractController
 
         $event = $this->getDoctrine()->getRepository(Event::class)->find($id);
 
-        if ($event === null) {
+        if (is_null($event)) {
             return JsonResponse::create("L'évènement n'existe pas", 404);
         }
 

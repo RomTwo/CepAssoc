@@ -21,10 +21,11 @@ class AdminActivitiesController extends AbstractController
         $repositoryCategory = $this->getDoctrine()->getRepository(Category::class);
         $categories = $repositoryCategory->findAll();
 
-        return $this->render('administration/activities/activities.html.twig', [
-            'categories' => $categories,
-            'activities' => $activities
-        ]);
+        return $this->render('administration/activities/activities.html.twig', array(
+                'categories' => $categories,
+                'activities' => $activities
+            )
+        );
 
     }
 
@@ -51,9 +52,11 @@ class AdminActivitiesController extends AbstractController
             $this->addFlash('success', "L'activité viens d'être ajoutée");
             return $this->redirectToRoute('admin_activities');
         }
-        return $this->render('administration/activities/activityAddOrEdit.html.twig', [
-            'activity' => $activity,
-            'form' => $form->createView()]);
+        return $this->render('administration/activities/activityAddOrEdit.html.twig', array(
+                'activity' => $activity,
+                'form' => $form->createView()
+            )
+        );
     }
 
     public function editActivity(Activity $activity, Request $request)
@@ -76,11 +79,12 @@ class AdminActivitiesController extends AbstractController
             return $this->redirectToRoute('admin_activities');
         }
 
-        return $this->render('administration/activities/activityAddOrEdit.html.twig', [
-            'activity' => $activity,
-            'form' => $form->createView(),
-            'isEdition' => true
-        ]);
+        return $this->render('administration/activities/activityAddOrEdit.html.twig', array(
+                'activity' => $activity,
+                'form' => $form->createView(),
+                'isEdition' => true
+            )
+        );
 
     }
 
@@ -107,7 +111,12 @@ class AdminActivitiesController extends AbstractController
         $activity = $repositoryActivity->findOneBy(['id' => $id]);
         $timeSlots = $activity->getTimeSlot();
 
-        return $this->render('administration/activities/activityDetails.html.twig', ['timeSlots' => $timeSlots, 'activity' => $activity, 'adherents' => $adherants]);
+        return $this->render('administration/activities/activityDetails.html.twig', array(
+                'timeSlots' => $timeSlots,
+                'activity' => $activity,
+                'adherents' => $adherants
+            )
+        );
     }
 
     public function addToTimeSlot(Request $request)
@@ -139,7 +148,10 @@ class AdminActivitiesController extends AbstractController
         $em->flush();
 
         $this->addFlash("success", "Ajout(s) effectués");
-        return $this->redirectToRoute('admin_activityDetails', ["id" => $activityId]);
+        return $this->redirectToRoute('admin_activityDetails', array(
+                "id" => $activityId
+            )
+        );
     }
 
     public function deleteFromTimeSlot($activityId, $timeSlotId, $adherentId)
@@ -154,7 +166,10 @@ class AdminActivitiesController extends AbstractController
 
         $this->getDoctrine()->getManager()->flush();
 
-        return $this->redirectToRoute('admin_activityDetails', ["id" => $activityId]);
+        return $this->redirectToRoute('admin_activityDetails', array(
+                "id" => $activityId
+            )
+        );
     }
 
 }

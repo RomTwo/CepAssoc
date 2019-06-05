@@ -31,12 +31,17 @@ class AdministrationController extends AbstractController
     public function competiteurs()
     {
         $manager = $this->getDoctrine()->getManager();
-        $competiteurs = $manager->getRepository(Adherent::class)->findByIsRegisteredInGestGym(false);
+        $competiteurs = $manager->getRepository(Adherent::class)->findBy(array(
+                'isRegisteredInGestGym' => false,
+                'isDeleted' => false
+            )
+        );
 
         if ($competiteurs) {
             return $this->render('administration/plugin/plugin_home.html.twig', array(
-                "comp" => $this->getSerializeAdherents($competiteurs)
-            ));
+                    "comp" => $this->getSerializeAdherents($competiteurs)
+                )
+            );
         }
         return $this->render('administration/plugin/plugin_home.html.twig');
     }
@@ -56,14 +61,26 @@ class AdministrationController extends AbstractController
                 array_push($adherentSynchonized, $adherent);
             }
 
-            $competiteurs = $manager->getRepository(Adherent::class)->findByIsRegisteredInGestGym(false);
+            $competiteurs = $manager->getRepository(Adherent::class)->findBy(array(
+                    'isRegisteredInGestGym' => false,
+                    'isDeleted' => false
+                )
+            );
 
             $justSync = $this->getSerializeAdherents($adherentSynchonized);
             if ($competiteurs) {
                 $notSync = $this->getSerializeAdherents($competiteurs);
-                return new JsonResponse(['notSync' => $notSync, 'justSync' => $justSync], 200);
+                return new JsonResponse(array(
+                    'notSync' => $notSync,
+                    'justSync' => $justSync
+                ), 200
+                );
             }
-            return new JsonResponse(['notSync' => [], 'justSync' => $justSync], 200);
+            return new JsonResponse(array(
+                'notSync' => array(),
+                'justSync' => $justSync
+            ), 200
+            );
 
         } else {
             return new Response ("", 500);
@@ -74,12 +91,12 @@ class AdministrationController extends AbstractController
     {
         $classMetadataFactory = new ClassMetadataFactory(new AnnotationLoader(new AnnotationReader()));
 
-        $callback = function ($innerObject, $outerObject, string $attributeName, string $format = null, array $context = []) {
+        $callback = function ($innerObject) {
             return $innerObject instanceof \DateTime ? $innerObject->format('d-m-Y') : '';
         };
 
         $defaultContext = [
-            AbstractNormalizer::CIRCULAR_REFERENCE_HANDLER => function ($object, $format, $context) {
+            AbstractNormalizer::CIRCULAR_REFERENCE_HANDLER => function ($object) {
                 return $object->getName();
             },
         ];
@@ -93,7 +110,10 @@ class AdministrationController extends AbstractController
         );
         $encoder = new JsonEncoder();
         $serializer = new Serializer(array($normalizer), array($encoder));
-        return $serializer->serialize($adherents, 'json', ['groups' => 'competition']);
+        return $serializer->serialize($adherents, 'json', array(
+                'groups' => 'competition'
+            )
+        );
     }
 
 }

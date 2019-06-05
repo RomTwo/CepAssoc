@@ -47,6 +47,6 @@ window.datatable_french = {
 
 $(function () {
     $('[data-toggle="tooltip"]').tooltip()
-})
+});
 
   

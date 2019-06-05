@@ -16,7 +16,7 @@ class TimeToStringTransformer implements DataTransformerInterface
      */
     public function transform($time)
     {
-        if (null === $time) {
+        if (is_null($time)) {
             return '';
         }
 
@@ -36,7 +36,7 @@ class TimeToStringTransformer implements DataTransformerInterface
      */
     public function reverseTransform($stringTime)
     {
-        if (null === $stringTime) {
+        if (is_null($stringTime)) {
             return NULL;
         }
 

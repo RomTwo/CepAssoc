@@ -31,12 +31,13 @@ class RegistrationController extends AbstractController
         );
 
         $form = $this->createForm(AdherentType::class, $adherent, array(
-            'firstNameRep1' => $account->getFirstName(),
-            'lastNameRep1' => $account->getLastName(),
-            'emailRep1' => $account->getEmail(),
-            'addressRep1' => $account->getAddress(),
-            'zipCodeRep1' => $account->getZipCode(),
-        ));
+                'firstNameRep1' => $account->getFirstName(),
+                'lastNameRep1' => $account->getLastName(),
+                'emailRep1' => $account->getEmail(),
+                'addressRep1' => $account->getAddress(),
+                'zipCodeRep1' => $account->getZipCode(),
+            )
+        );
 
         $form->handleRequest($request);
 
@@ -47,9 +48,8 @@ class RegistrationController extends AbstractController
             $account = $this->getDoctrine()->getRepository(Account::class)->find($user->getId());
 
             $account->addChild($adherent);
-            if (!$this->isValidateHealthQuestionnaire($adherent->getHealthQuestionnaire())) {
+            if (!$utilitaires->isValidateHealthQuestionnaire($adherent->getHealthQuestionnaire())) {
                 $adherent->setHealthQuestionnaire(null);
-                //$adherent->setHealthQuestionnaireFile();
             } else {
                 $this->generatePDF($adherent);
             }
@@ -63,61 +63,20 @@ class RegistrationController extends AbstractController
             return $this->redirectToRoute('registration');
         }
 
-        return $this->render('registration/index.html.twig', [
-            'form' => $form->createView(),
-            'activities' => $this->getDoctrine()
-                ->getRepository(Activity::class)
-                ->findAll(),
-            'cityRep1' => $account->getCity(),
-            'days' => array('Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi')
-        ]);
-
+        return $this->render('registration/index.html.twig', array(
+                'form' => $form->createView(),
+                'activities' => $this->getDoctrine()
+                    ->getRepository(Activity::class)
+                    ->findAll(),
+                'cityRep1' => $account->getCity(),
+                'days' => array('Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi')
+            )
+        );
     }
 
-    private function isValidateHealthQuestionnaire($healthQuestionnaire)
-    {
-        if ($healthQuestionnaire->getHasMemberOfFamilyDiedHeartAttack() === null) {
-            return false;
-        }
-
-        if ($healthQuestionnaire->getHasPainChest() === null) {
-            return false;
-        }
-
-        if ($healthQuestionnaire->getHasAsthma() === null) {
-            return false;
-        }
-
-        if ($healthQuestionnaire->getHasLossOfConsciousness() === null) {
-            return false;
-        }
-
-        if ($healthQuestionnaire->getHasResumptionOfSportWithoutDoctorConsent() === null) {
-            return false;
-        }
-
-        if ($healthQuestionnaire->getHasMedicalTreatment() === null) {
-            return false;
-        }
-
-        if ($healthQuestionnaire->getHasBoneProblem() === null) {
-            return false;
-        }
-
-        if ($healthQuestionnaire->getHasHealthProblem() === null) {
-            return false;
-        }
-
-        if ($healthQuestionnaire->getHasNeedMedicalAdvice() === null) {
-            return false;
-        }
-
-        return true;
-    }
 
     private function generatePDF($adherent)
     {
-
         $html = $this->render('account/generateHealthQuestionnairePDF.html.twig', [
             'adherent' => $adherent,
         ])->getContent();//Cette ligne permet de générer l'HTML d'une page twig.
@@ -135,7 +94,7 @@ class RegistrationController extends AbstractController
 
     private function setPrice($adherent, $data)
     {
-        if ($data != null) {
+        if ($data) {
             $activities = array();
             foreach ($data as $value) {
                 $timeSlot = $this->getDoctrine()->getRepository(TimeSlot::class)->find($value);

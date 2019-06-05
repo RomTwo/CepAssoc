@@ -39,7 +39,7 @@ class AdminAccountsController extends AbstractController
         $oldRole = $account->getRoles();
         $errorRole = null;
 
-        if ($account !== null) {
+        if ($account) {
             $form = $this->createForm(AccountAdminType::class, $account);
             $form->handleRequest($request);
 
@@ -75,7 +75,7 @@ class AdminAccountsController extends AbstractController
         $manager = $this->getDoctrine()->getManager();
         $account = $manager->getRepository(Account::class)->find($id);
 
-        if ($account !== null) {
+        if ($account) {
             $manager->remove($account);
             $manager->flush();
             $this->addFlash('success', "Le compte vient d'être supprimé");

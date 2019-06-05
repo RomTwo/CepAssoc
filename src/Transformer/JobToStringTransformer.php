@@ -17,7 +17,7 @@ class JobToStringTransformer implements DataTransformerInterface
      */
     public function transform($stringJob)
     {
-        if (null === $stringJob) {
+        if (is_null($stringJob)) {
             return NULL;
         }
 
@@ -41,7 +41,7 @@ class JobToStringTransformer implements DataTransformerInterface
      */
     public function reverseTransform($job)
     {
-        if (null === $job) {
+        if (is_null($job)) {
             return '';
         }
 

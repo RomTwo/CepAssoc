@@ -16,7 +16,8 @@ class Utilitaires
         $this->params = $params;
     }
 
-    public function setOtherFields($adherent){
+    public function setOtherFields($adherent)
+    {
         $adherent->setRegistrationDate(new \DateTime());
         $adherent->setIsRegisteredInGestGym(false);
         $adherent->setJudge(false);
@@ -34,39 +35,59 @@ class Utilitaires
         $adherent->setStatus("EN ATTENTE");
         $adherent->setAffiliateCode(md5(uniqid()));
 
-        if($adherent->getMedicalCertificateFile() != null){
+        if (!$adherent->getMedicalCertificateFile()) {
             $adherent->setMedicalCertificateFile(new Document($this->addFile($adherent->getMedicalCertificateFile()), $adherent->getMedicalCertificateFile()->getClientOriginalName()));
         }
 
-        if($adherent->getBulletinN2AllianzFile() != null){
+        if (!$adherent->getBulletinN2AllianzFile()) {
             $adherent->setBulletinN2AllianzFile(new Document($this->addFile($adherent->getBulletinN2AllianzFile()), $adherent->getBulletinN2AllianzFile()->getClientOriginalName()));
         }
 
-        if($adherent->getHealthQuestionnaireFile() != null){
+        if (!$adherent->getHealthQuestionnaireFile()) {
             $adherent->setHealthQuestionnaireFile(new Document($this->addFile($adherent->getHealthQuestionnaireFile()), $adherent->getHealthQuestionnaireFile()->getClientOriginalName()));
         }
 
         return $adherent;
     }
 
-    public function setFiles($adherent){
-        if($adherent->getMedicalCertificateFile() != null && !$adherent->getMedicalCertificateFile() instanceof Document){
+    public function setFiles($adherent)
+    {
+        if (!$adherent->getMedicalCertificateFile() && !$adherent->getMedicalCertificateFile() instanceof Document) {
             $adherent->setMedicalCertificateFile(new Document($this->addFile($adherent->getMedicalCertificateFile()), $adherent->getMedicalCertificateFile()->getClientOriginalName()));
         }
 
-        if($adherent->getBulletinN2AllianzFile() != null && !$adherent->getBulletinN2AllianzFile() instanceof Document){
+        if (!$adherent->getBulletinN2AllianzFile() && !$adherent->getBulletinN2AllianzFile() instanceof Document) {
             $adherent->setBulletinN2AllianzFile(new Document($this->addFile($adherent->getBulletinN2AllianzFile()), $adherent->getBulletinN2AllianzFile()->getClientOriginalName()));
         }
 
-        if($adherent->getHealthQuestionnaireFile() != null && !$adherent->getHealthQuestionnaireFile() instanceof Document){
+        if (!$adherent->getHealthQuestionnaireFile() && !$adherent->getHealthQuestionnaireFile() instanceof Document) {
             $adherent->setHealthQuestionnaireFile(new Document($this->addFile($adherent->getHealthQuestionnaireFile()), $adherent->getHealthQuestionnaireFile()->getClientOriginalName()));
         }
 
         return $adherent;
     }
 
-    public function isValidateCity($name){
-        if($name == null){
+    public function isValidateCity($name)
+    {
+        if ($name == null) {
+            return false;
+        }
+
+        return true;
+    }
+
+    public function isValidateHealthQuestionnaire($healthQuestionnaire)
+    {
+        if (is_null($healthQuestionnaire->getHasMemberOfFamilyDiedHeartAttack()) ||
+            is_null($healthQuestionnaire->getHasPainChest()) ||
+            is_null($healthQuestionnaire->getHasAsthma()) ||
+            is_null($healthQuestionnaire->getHasLossOfConsciousness()) ||
+            is_null($healthQuestionnaire->getHasResumptionOfSportWithoutDoctorConsent()) ||
+            is_null($healthQuestionnaire->getHasMedicalTreatment()) ||
+            is_null($healthQuestionnaire->getHasBoneProblem()) ||
+            is_null($healthQuestionnaire->getHasHealthProblem()) ||
+            is_null($healthQuestionnaire->getHasNeedMedicalAdvice())
+        ) {
             return false;
         }
 
@@ -81,8 +102,9 @@ class Utilitaires
     }
 
     public
-    function delimiter($data){
-        if($data != null){
+    function delimiter($data)
+    {
+        if (!$data) {
             $idsOfTimeSlot = explode("/", $data, -1);
             return $idsOfTimeSlot;
         }
