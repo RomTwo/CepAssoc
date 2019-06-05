@@ -136,23 +136,6 @@
                     bInfo: false,
                     bAutoWidth: false,
                     pageLength: 4
-                    /*
-                    columnDefs: [
-                        {
-                            responsivePriority: 10001,
-                            targets: 4
-                        }, {
-                            responsivePriority: 1,
-                            targets: 5
-                        }, {
-                            responsivePriority: 1,
-                            targets: 0
-                        }, {
-                            responsivePriority: 1,
-                            targets: 1
-                        },
-                    ]
-                    */
                 });
             });
 
@@ -167,7 +150,7 @@
 
             $( ".timeSlotAdherentsEmailsButton" ).each(function( index ) {
                 $(this).on('click',function(){
-                    var allEmails = "";
+                    let allEmails = "";
                     $(this).closest(".card").find(".email").each(function(){
                         allEmails+= $(this).text().trim() + ";";
                     });
@@ -177,7 +160,7 @@
             });
 
             $('#allEmails').on('click', function (event) {
-                var allEmails = "";
+                let allEmails = "";
                 $(this).closest("main").find(".email").each(function(){
                     allEmails+= $(this).text().trim() + ";";
                 });

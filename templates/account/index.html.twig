@@ -789,7 +789,7 @@
     <script>
         grecaptcha.ready(function () {
             grecaptcha.execute('{{ recaptcha_key_site }}', {action: 'register'}).then(function (token) {
-                var recaptchaResponse = document.getElementById('recaptchaResponse');
+                let recaptchaResponse = document.getElementById('recaptchaResponse');
                 recaptchaResponse.value = token;
             });
         });

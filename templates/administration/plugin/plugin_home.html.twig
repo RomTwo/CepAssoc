@@ -9,9 +9,9 @@
         <div class="col-md-6 col-sm-12">
             <h3>Initialisation</h3>
             <p id="lbl_init">Aucune initialisation en cours.</p>
-            <i class=" fas fa-check-circle fa-10x" id="init_valid" style="display: none; color:green"></i>
+            <i class=" fas fa-check-circle fa-10x text-success" id="init_valid" style="display: none;"></i>
             <i class=" fas fa-times-circle fa-10x" id="init_error" style="display:none;"></i>
-            <img id="spinner_init" src="{{ asset('build/spinner.gif') }}" style="display:none; color:red">
+            <img class="text-danger" id="spinner_init" src="{{ asset('build/spinner.gif') }}" style="display:none;">
 
             <button hidden id="init"></button>
             <div hidden id="competiteur">
@@ -25,11 +25,11 @@
         <div class="col-md-6  col-sm-12">
             <h3>Synchronisation</h3>
             <p id="lbl_sync">Aucune synchronisation en cours.</p>
-            <i class=" fas fa-check-circle fa-10x" id="sync_valid" style="display:none; color:green;"></i>
-            <i class=" fas fa-times-circle fa-10x" id="sync_error" style="display:none; color:red;"></i>
+            <i class=" fas fa-check-circle fa-10x text-success" id="sync_valid" style="display:none;"></i>
+            <i class=" fas fa-times-circle fa-10x text-danger" id="sync_error" style="display:none;"></i>
 
 
-            <img id="spinner_sync" src="{{ asset('build/spinner.gif') }}" style="display:none;" >
+            <img id="spinner_sync" src="{{ asset('build/spinner.gif') }}" style="display:none;">
             <button hidden id="a"></button>
             <button hidden id="sync"></button>
             <div hidden id="ids"></div>
@@ -42,68 +42,68 @@
 {% block javascripts %}
     <script>
 
-        document.getElementById("init").addEventListener("click", function () {
-            document.getElementById("lbl_init").textContent = "Initialisation en cours.";
-            document.getElementById("lbl_init").style.color = "black";
+        $("#init").on("click", function () {
+            $("#lbl_init").text("Initialisation en cours.");
+            $("#lbl_init").css("color", "black");
 
-            document.getElementById("spinner_init").style.display = "inline";
-            document.getElementById("init_valid").style.display = "none";
-            document.getElementById("init_error").style.display = "none";
+            $("#spinner_init").css("display", "inline");
+            $("#init_valid").css("display", "none");
+            $("#init_error").css("display", "none");
 
             setTimeout(function () {
-                document.getElementById("lbl_init").textContent = "Initialisation terminée.";
-                document.getElementById("spinner_init").style.display = "none";
-                document.getElementById("init_valid").style.display = "inline";
-                document.getElementById("lbl_init").style.color = "green";
+                $("#lbl_init").text("Initialisation terminée.");
+                $("#spinner_init").css("display", "none");
+                $("#init_valid").css("display", "inline");
+                $("#lbl_init").css("color", "green");
             }, 2000);
 
 
         });
 
-        document.getElementById("sync").addEventListener("click", function () {
-            document.getElementById("lbl_sync").textContent = "Synchronisation en cours ...";
-            document.getElementById("lbl_sync").style.color = "black";
-            document.getElementById("spinner_sync").style.display = "inline";
-            document.getElementById("sync_valid").style.display = "none";
-            document.getElementById("sync_error").style.display = "none";
+        $("#sync").on("click", function () {
+            $("#lbl_sync").text("Synchronisation en cours ...");
+            $("#lbl_sync").css("color", "black");
+            $("#spinner_sync").css("display", "inline");
+            $("#sync_valid").css("display", "none");
+            $("#sync_error").css("display", "none");
 
 
             $.ajax({
-                url: '{{path('admin_adherent_update_state')}}',
+                url: '{{ path('admin_adherent_update_state') }}',
                 type: "POST",
                 dataType: "json",
                 data: {
-                    "ids": document.getElementById("ids").textContent
+                    "ids": $("#ids").text()
                 },
-                complete: function (jqXHR, textStatus) {
+                complete: function (jqXHR) {
                     switch (jqXHR.status) {
                         case 200:
-                            var datas = JSON.parse(jqXHR.responseText);
+                            let datas = JSON.parse(jqXHR.responseText);
 
-                            document.getElementById("competiteur").textContent = datas.notSync;
+                            $("#competiteur").text(datas.notSync);
 
-                            document.getElementById("a").click();
+                            $("#a").click();
 
                             setTimeout(function () {
                                 const justSync = JSON.parse(datas.justSync);
                                 justSync.forEach(function (user) {
-                                    var p = document.createElement("p");
+                                    let p = document.createElement("p");
                                     p.textContent = user.firstName + " " + user.lastName + " a été marqué comme inscrit sur GestGym.";
-                                    document.getElementById("spinner_sync").after(p);
+                                    $("#spinner_sync").after(p);
                                 })
-                                document.getElementById("lbl_sync").textContent = "Synchronisation terminée.";
-                                document.getElementById("lbl_sync").style.color = "green";
-                                document.getElementById("spinner_sync").style.display = "none";
-                                document.getElementById("sync_valid").style.display = "inline";
+                                $("#lbl_sync").text("Synchronisation terminée.");
+                                $("#lbl_sync").css("color", "green");
+                                $("#spinner_sync").css("display", "none");
+                                $("#sync_valid").css("display", "inline");
 
                             }, 2000);
 
                             break;
                         default:
                             setTimeout(function () {
-                                document.getElementById("lbl_sync").textContent = "Erreur. Synchronisation annulée.";
-                                document.getElementById("spinner_sync").style.display = "none";
-                                document.getElementById("lbl_sync").style.color = "red";
+                                $("#lbl_sync").text("Erreur. Synchronisation annulée.");
+                                $("#spinner_sync").css("display", "none");
+                                $("#lbl_sync").css("color", "red");
                             }, 2000);
 
 

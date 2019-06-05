@@ -110,10 +110,10 @@
     {{ encore_entry_script_tags('time') }}
     <script type="text/javascript">
         $(document).ready(function () { // On récupère la balise <div> en question qui contient l'attribut « data-prototype » qui nous intéresse.
-            var $container = $('div#collectionContainer');
+            let $container = $('div#collectionContainer');
 
             // On définit un compteur unique pour nommer les champs qu'on va ajouter dynamiquement
-            var index = $container.find(':input').length;
+            let index = $container.find(':input').length;
 
             // On ajoute un nouveau champ à chaque clic sur le lien d'ajout.
             $('#add_timeSlot').click(function (e) {
@@ -138,12 +138,12 @@
                 // Dans le contenu de l'attribut « data-prototype », on remplace :
                 // - le texte "__name__label__" qu'il contient par le label du champ
                 // - le texte "__name__" qu'il contient par le numéro du champ
-                var template = $container.attr('data-prototype').replace(/__name__label__/g, 'Créneau ' + (
+                let template = $container.attr('data-prototype').replace(/__name__label__/g, 'Créneau ' + (
                     index + 1
                 )).replace(/__name__/g, index);
 
                 // On crée un objet jquery qui contient ce template
-                var $prototype = $(template);
+                let $prototype = $(template);
 
                 // On ajoute au prototype un lien pour pouvoir supprimer la catégorie
                 addDeleteLink($prototype);
@@ -157,7 +157,7 @@
 
             // La fonction qui ajoute un lien de suppression d'une catégorie
             function addDeleteLink($prototype) { // Création du lien
-                var $deleteLink = $('<div class="col-sm-12 row"><div class="col-sm-12 text-right"><a href="#" class="btn btn-danger">Supprimer</a></div></div> ');
+                let $deleteLink = $('<div class="col-sm-12 row"><div class="col-sm-12 text-right"><a href="#" class="btn btn-danger">Supprimer</a></div></div> ');
                 // Ajout du lien
                 $prototype.append($deleteLink);
 
