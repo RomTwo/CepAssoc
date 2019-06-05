@@ -38,14 +38,12 @@ class TimeSlot
     /**
      * @ORM\Column(type="time")
      * @Assert\NotNull(message="Veuiller renseigner le date de début")
-     * @Assert\Time
      */
     private $startTime;
 
     /**
      * @ORM\Column(type="time")
      * @Assert\NotNull(message="Veuiller renseigner la date de fin")
-     * @Assert\Time
      */
     private $endTime;
 

@@ -6,129 +6,129 @@
     {{ form_start(form) }}
 
 
-        <div class="form-group pb-3">
-            <div class="container-fluid">
-                <div class="row mt-3">
-                    <div class="col-2">
-                        <label>Prénom : </label>
-                    </div>
-                    <div class="col-auto">
-                        {{ form_widget(form.firstName) }}
-                    </div>
-                    <div class="row ml-1">
-                        {{ form_errors(form.firstName) }}
-                    </div>
+    <div class="form-group pb-3">
+        <div class="container-fluid">
+            <div class="row mt-3">
+                <div class="col-2">
+                    <label>Prénom : </label>
                 </div>
-
-                <div class="row mt-3">
-                    <div class="col-2">
-                        <label>Nom : </label>
-                    </div>
-                    <div class="col-auto">
-                        {{ form_widget(form.lastName) }}
-                    </div>
-                    <div class="row ml-1">
-                        {{ form_errors(form.lastName) }}
-                    </div>
+                <div class="col-auto">
+                    {{ form_widget(form.firstName) }}
                 </div>
-
-                <div class="row mt-3">
-                    <div class="col-2">
-                        <label>Civilité : </label>
-                    </div>
-                    <div class="col-auto">
-                        {{ form_widget(form.sex) }}
-                    </div>
-                    <div class="row ml-1">
-                        {{ form_errors(form.sex) }}
-                    </div>
+                <div class="row ml-1">
+                    {{ form_errors(form.firstName) }}
                 </div>
+            </div>
 
-                <div class="row mt-3">
-                    <div class="col-2">
-                        <label>Date de naissance : </label>
-                    </div>
-                    <div class="col-auto">
-                        {{ form_widget(form.birthDate) }}
-                    </div>
-                    <div class="row ml-1">
-                        {{ form_errors(form.birthDate) }}
-                    </div>
+            <div class="row mt-3">
+                <div class="col-2">
+                    <label>Nom : </label>
                 </div>
-
-                <div class="row mt-3">
-                    <div class="col-2">
-                        <label>Adresse postal : </label>
-                    </div>
-                    <div class="col-auto">
-                        {{ form_widget(form.address) }}
-                    </div>
-                    <div class="row ml-1">
-                        {{ form_errors(form.address) }}
-                    </div>
+                <div class="col-auto">
+                    {{ form_widget(form.lastName) }}
                 </div>
-
-                <div class="row mt-3">
-                    <div class="col-2">
-                        <label>Code postal : </label>
-                    </div>
-                    <div class="col-auto">
-                        {{ form_widget(form.zipCode) }}
-                    </div>
-                    <div class="row ml-1">
-                        {{ form_errors(form.zipCode) }}
-                    </div>
+                <div class="row ml-1">
+                    {{ form_errors(form.lastName) }}
                 </div>
+            </div>
 
-                <div class="row mt-3">
-                    <div class="col-2">
-                        <label>Ville : </label>
-                    </div>
-                    <div class="col-auto">
-                        {{ form_widget(form.city) }}
-                    </div>
-                    <div class="row ml-1">
-                        {{ form_errors(form.city) }}
-                    </div>
+            <div class="row mt-3">
+                <div class="col-2">
+                    <label>Civilité : </label>
                 </div>
-
-                <div class="row mt-3">
-                    <div class="col-2">
-                        <label>Email : </label>
-                    </div>
-                    <div class="col-auto">
-                        {{ form_widget(form.email) }}
-                    </div>
-                    <div class="row ml-1">
-                        {{ form_errors(form.email) }}
-                    </div>
+                <div class="col-auto">
+                    {{ form_widget(form.sex) }}
                 </div>
+                <div class="row ml-1">
+                    {{ form_errors(form.sex) }}
+                </div>
+            </div>
 
-                <div class="row mt-3">
-                    <div class="col-2">
-                        <label>Role : </label>
-                    </div>
-                    <div class="col-auto">
-                        {{ form_widget(form.roles) }}
-                    </div>
+            <div class="row mt-3">
+                <div class="col-2">
+                    <label>Date de naissance : </label>
+                </div>
+                <div class="col-auto">
+                    {{ form_widget(form.birthDate) }}
+                </div>
+                <div class="row ml-1">
+                    {{ form_errors(form.birthDate) }}
+                </div>
+            </div>
+
+            <div class="row mt-3">
+                <div class="col-2">
+                    <label>Adresse postal : </label>
+                </div>
+                <div class="col-auto">
+                    {{ form_widget(form.address) }}
+                </div>
+                <div class="row ml-1">
+                    {{ form_errors(form.address) }}
+                </div>
+            </div>
+
+            <div class="row mt-3">
+                <div class="col-2">
+                    <label>Code postal : </label>
+                </div>
+                <div class="col-auto">
+                    {{ form_widget(form.zipCode) }}
+                </div>
+                <div class="row ml-1">
+                    {{ form_errors(form.zipCode) }}
+                </div>
+            </div>
+
+            <div class="row mt-3">
+                <div class="col-2">
+                    <label>Ville : </label>
+                </div>
+                <div class="col-auto">
+                    {{ form_widget(form.city) }}
+                </div>
+                <div class="row ml-1">
+                    {{ form_errors(form.city) }}
+                </div>
+            </div>
+
+            <div class="row mt-3">
+                <div class="col-2">
+                    <label>Email : </label>
+                </div>
+                <div class="col-auto">
+                    {{ form_widget(form.email) }}
+                </div>
+                <div class="row ml-1">
+                    {{ form_errors(form.email) }}
+                </div>
+            </div>
+
+            <div class="row mt-3">
+                <div class="col-2">
+                    <label>Role : </label>
+                </div>
+                <div class="col-auto">
+                    {{ form_widget(form.roles) }}
+                </div>
+                <div class="row ml-1">
+                    {{ form_errors(form.roles) }}
+                </div>
+                {% if errorRole %}
                     <div class="row ml-1">
-                        {{ form_errors(form.roles) }}
-                    </div>
-                    {% if errorRole %}
-                        <div class="row ml-1">
                                 <span class="invalid-feedback d-block">
                                     <span class="d-block">
                                         <span class="form-error-icon badge badge-danger text-uppercase">Erreur</span>
                                         <span class="form-error-message">{{ errorRole }}</span>
                                     </span>
                                 </span>
-                        </div>
-                    {% endif %}
-                </div>
-
-                {{ form_widget(form.valid) }}
+                    </div>
+                {% endif %}
             </div>
+
+            {{ form_widget(form.valid) }}
         </div>
+    </div>
 
     {{ form_end(form) }}
 {% endblock %}
