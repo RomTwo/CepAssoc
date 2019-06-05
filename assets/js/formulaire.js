@@ -39,8 +39,7 @@ $(window).ready(function () {
         "columnDefs": [
             {"visible": false, "targets": groupColumn},
         ],
-
-        "displayLength": 10,
+        "pageLength": 10,
         "drawCallback": function () {
             var api = this.api();
             var rows = api.rows({page: 'current'}).nodes();
@@ -240,13 +239,16 @@ $('#volontaire').on('change', function () {
     $(this).is(':checked') ? $("#volunteerDiv").show() : $("#volunteerDiv").hide();
 });
 
-var $timeSlot = [];
+var $activity = new Map();
+var $timeSlot = new Map();
 
 $("input[name='selection[]']").on('change', function () {
     if($(this).is(':checked')){
-        $timeSlot.push($(this).parent().parent().attr('value'));
+        $activity.set($(this).parent().parent().attr('value'), parseInt($("#price"+$(this).parent().parent().attr('value')).attr('value')));
+        $timeSlot.set($(this).parent().parent().attr('id'),$(this).parent().parent().attr('value'));
     }else{
-        $timeSlot.splice($timeSlot.indexOf($(this).parent().parent().attr('value')), 1);
+        $activity.delete($(this).parent().parent().attr('value'));
+        $timeSlot.delete($(this).parent().parent().attr('id'));
     }
 });
 
@@ -294,13 +296,15 @@ function step2() {
 }
 
 function step5(){
+    var $idsOfTimeSlots = "";
     var $prix = 0;
-    var $unique = $timeSlot.filter(function(itm, i, $timeSlot) {
-        return i == $timeSlot.indexOf(itm);
-    });
-    $($unique).each(function( index ) {
-        $prix = $prix + parseInt($("#price"+$unique[index]).attr('value'));
-    });
+    for (var [key, value] of $timeSlot){
+        $idsOfTimeSlots += key + "/";
+    }
+    for (var [key, value] of $activity) {
+        $prix = $prix + value;
+    }
+    $("#idsOfTimeSlots").val($idsOfTimeSlots);
     $("#prix").text($prix);
     return true;
 }

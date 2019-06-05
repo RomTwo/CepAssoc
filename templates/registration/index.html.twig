@@ -415,6 +415,7 @@
                                         {% endif %}
                                     {% endfor %}
                                 </table>
+                                <input type="hidden" id="idsOfTimeSlots" name="idsOfTimeSlots" value="">
                             </div>
                             <div class="tab-pane fade" id="nav-competitif" role="tabpanel"
                                  aria-labelledby="nav-competitif-tab">
@@ -881,95 +882,95 @@
                     $("#buttonSubmit").attr("disabled", true);
 
                 }
-            });
 
-            var groupColumn = 2;
+                var groupColumn = 2;
 
-            $('#activitiesSecteurLoisir').DataTable({
-                "columnDefs": [
-                    {"visible": false, "targets": groupColumn}
-                ],
-                "displayLength": 10,
-                "drawCallback": function () {
-                    var api = this.api();
-                    var rows = api.rows({page: 'current'}).nodes();
-                    var last = null;
+                $('#activitiesSecteurLoisir').DataTable({
+                    "columnDefs": [
+                        {"visible": false, "targets": groupColumn}
+                    ],
+                    "pageLength": 10,
+                    "drawCallback": function () {
+                        var api = this.api();
+                        var rows = api.rows({page: 'current'}).nodes();
+                        var last = null;
 
-                    api.column(groupColumn, {page: 'current'}).data().each(function (group, i) {
-                        if (last !== group) {
-                            $(rows).eq(i).before(
-                                '<tr class="group"><td colspan="5">' + group + '</td></tr>'
-                            );
+                        api.column(groupColumn, {page: 'current'}).data().each(function (group, i) {
+                            if (last !== group) {
+                                $(rows).eq(i).before(
+                                    '<tr class="group"><td colspan="5">' + group + '</td></tr>'
+                                );
 
-                            last = group;
-                        }
-                    });
-                },
-                orderFixed: [2, 'asc'],
-                "bInfo": false,
-                "lengthChange": false,
-                "language": {
-                    "sProcessing": "Traitement en cours...",
-                    "sSearch": "Rechercher&nbsp;:",
-                    "sLengthMenu": "Afficher _MENU_ &eacute;l&eacute;ments",
-                    "sInfo": "Affichage de l'&eacute;l&eacute;ment _START_ &agrave; _END_ sur _TOTAL_ &eacute;l&eacute;ments",
-                    "sInfoEmpty": "Affichage de l'&eacute;l&eacute;ment 0 &agrave; 0 sur 0 &eacute;l&eacute;ment",
-                    "sInfoFiltered": "(filtr&eacute; de _MAX_ &eacute;l&eacute;ments au total)",
-                    "sInfoPostFix": "",
-                    "sLoadingRecords": "Chargement en cours...",
-                    "sZeroRecords": "Aucun &eacute;l&eacute;ment &agrave; afficher",
-                    "sEmptyTable": "Aucune donn&eacute;e disponible dans le tableau",
-                    "oPaginate": {
-                        "sFirst": "Premier",
-                        "sPrevious": "Pr&eacute;c&eacute;dent",
-                        "sNext": "Suivant",
-                        "sLast": "Dernier"
+                                last = group;
+                            }
+                        });
                     },
-                    "oAria": {
-                        "sSortAscending": ": activer pour trier la colonne par ordre croissant",
-                        "sSortDescending": ": activer pour trier la colonne par ordre d&eacute;croissant"
-                    },
-                    "select": {
-                        "rows": {
-                            _: "%d lignes séléctionnées",
-                            0: "Aucune ligne séléctionnée",
-                            1: "1 ligne séléctionnée"
-                        }
-                    }
-                }
-            });
-
-            $('#activitiesSecteurCompetitif').DataTable({
-                "lengthChange": false,
-                "language": {
-                    "sProcessing": "Traitement en cours...",
-                    "sSearch": "Rechercher&nbsp;:",
-                    "sLengthMenu": "Afficher _MENU_ &eacute;l&eacute;ments",
-                    "sInfo": "Affichage de l'&eacute;l&eacute;ment _START_ &agrave; _END_ sur _TOTAL_ &eacute;l&eacute;ments",
-                    "sInfoEmpty": "Affichage de l'&eacute;l&eacute;ment 0 &agrave; 0 sur 0 &eacute;l&eacute;ment",
-                    "sInfoFiltered": "(filtr&eacute; de _MAX_ &eacute;l&eacute;ments au total)",
-                    "sInfoPostFix": "",
-                    "sLoadingRecords": "Chargement en cours...",
-                    "sZeroRecords": "Aucun &eacute;l&eacute;ment &agrave; afficher",
-                    "sEmptyTable": "Aucune donn&eacute;e disponible dans le tableau",
-                    "oPaginate": {
-                        "sFirst": "Premier",
-                        "sPrevious": "Pr&eacute;c&eacute;dent",
-                        "sNext": "Suivant",
-                        "sLast": "Dernier"
-                    },
-                    "oAria": {
-                        "sSortAscending": ": activer pour trier la colonne par ordre croissant",
-                        "sSortDescending": ": activer pour trier la colonne par ordre d&eacute;croissant"
-                    },
-                    "select": {
-                        "rows": {
-                            _: "%d lignes séléctionnées",
-                            0: "Aucune ligne séléctionnée",
-                            1: "1 ligne séléctionnée"
+                    orderFixed: [2, 'asc'],
+                    "bInfo": false,
+                    "lengthChange": false,
+                    "language": {
+                        "sProcessing": "Traitement en cours...",
+                        "sSearch": "Rechercher&nbsp;:",
+                        "sLengthMenu": "Afficher _MENU_ &eacute;l&eacute;ments",
+                        "sInfo": "Affichage de l'&eacute;l&eacute;ment _START_ &agrave; _END_ sur _TOTAL_ &eacute;l&eacute;ments",
+                        "sInfoEmpty": "Affichage de l'&eacute;l&eacute;ment 0 &agrave; 0 sur 0 &eacute;l&eacute;ment",
+                        "sInfoFiltered": "(filtr&eacute; de _MAX_ &eacute;l&eacute;ments au total)",
+                        "sInfoPostFix": "",
+                        "sLoadingRecords": "Chargement en cours...",
+                        "sZeroRecords": "Aucun &eacute;l&eacute;ment &agrave; afficher",
+                        "sEmptyTable": "Aucune donn&eacute;e disponible dans le tableau",
+                        "oPaginate": {
+                            "sFirst": "Premier",
+                            "sPrevious": "Pr&eacute;c&eacute;dent",
+                            "sNext": "Suivant",
+                            "sLast": "Dernier"
+                        },
+                        "oAria": {
+                            "sSortAscending": ": activer pour trier la colonne par ordre croissant",
+                            "sSortDescending": ": activer pour trier la colonne par ordre d&eacute;croissant"
+                        },
+                        "select": {
+                            "rows": {
+                                _: "%d lignes séléctionnées",
+                                0: "Aucune ligne séléctionnée",
+                                1: "1 ligne séléctionnée"
+                            }
                         }
                     }
-                }
+                });
+
+                $('#activitiesSecteurCompetitif').DataTable({
+                    "lengthChange": false,
+                    "language": {
+                        "sProcessing": "Traitement en cours...",
+                        "sSearch": "Rechercher&nbsp;:",
+                        "sLengthMenu": "Afficher _MENU_ &eacute;l&eacute;ments",
+                        "sInfo": "Affichage de l'&eacute;l&eacute;ment _START_ &agrave; _END_ sur _TOTAL_ &eacute;l&eacute;ments",
+                        "sInfoEmpty": "Affichage de l'&eacute;l&eacute;ment 0 &agrave; 0 sur 0 &eacute;l&eacute;ment",
+                        "sInfoFiltered": "(filtr&eacute; de _MAX_ &eacute;l&eacute;ments au total)",
+                        "sInfoPostFix": "",
+                        "sLoadingRecords": "Chargement en cours...",
+                        "sZeroRecords": "Aucun &eacute;l&eacute;ment &agrave; afficher",
+                        "sEmptyTable": "Aucune donn&eacute;e disponible dans le tableau",
+                        "oPaginate": {
+                            "sFirst": "Premier",
+                            "sPrevious": "Pr&eacute;c&eacute;dent",
+                            "sNext": "Suivant",
+                            "sLast": "Dernier"
+                        },
+                        "oAria": {
+                            "sSortAscending": ": activer pour trier la colonne par ordre croissant",
+                            "sSortDescending": ": activer pour trier la colonne par ordre d&eacute;croissant"
+                        },
+                        "select": {
+                            "rows": {
+                                _: "%d lignes séléctionnées",
+                                0: "Aucune ligne séléctionnée",
+                                1: "1 ligne séléctionnée"
+                            }
+                        }
+                    }
+                });
             });
 
             $('#acceptRules, #acceptRGPD').on('change', function () {
@@ -1024,13 +1025,16 @@
                 var val = $(this).is(':checked') ? $("#volunteerDiv").show() : $("#volunteerDiv").hide();
             });
 
-            var $timeSlot = [];
+            var $activity = new Map();
+            var $timeSlot = new Map();
 
             $("input[name='selection[]']").on('change', function () {
                 if($(this).is(':checked')){
-                    $timeSlot.push($(this).parent().parent().attr('value'));
+                    $activity.set($(this).parent().parent().attr('value'), parseInt($("#price"+$(this).parent().parent().attr('value')).attr('value')));
+                    $timeSlot.set($(this).parent().parent().attr('id'),$(this).parent().parent().attr('value'));
                 }else{
-                    $timeSlot.splice($timeSlot.indexOf($(this).parent().parent().attr('value')), 1);
+                    $activity.delete($(this).parent().parent().attr('value'));
+                    $timeSlot.delete($(this).parent().parent().attr('id'));
                 }
             });
 
@@ -1132,13 +1136,16 @@
             }
 
             function step4(){
+                var $idsOfTimeSlots = "";
                 var $prix = 0;
-                var $unique = $timeSlot.filter(function(itm, i, $timeSlot) {
-                    return i == $timeSlot.indexOf(itm);
-                });
-                $($unique).each(function( index ) {
-                    $prix = $prix + parseInt($("#price"+$unique[index]).attr('value'));
-                });
+                for (var [key, value] of $timeSlot){
+                    $idsOfTimeSlots += key + "/";
+                    alert($idsOfTimeSlots);
+                }
+                for (var [key, value] of $activity) {
+                    $prix = $prix + value;
+                }
+                $("#idsOfTimeSlots").val($idsOfTimeSlots);
                 $("#prix").text($prix);
                 return true;
             }
