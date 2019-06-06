@@ -1,0 +1,23 @@
+<div class="modal fade" id="modalDeleteAdherent{{ adherent.id }}" tabindex="-1" role="dialog"
+     aria-labelledby="modalDeleteAdherentLabel{{ adherent.id }}"
+     aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalDeleteAdherentLabel{{ adherent.id }}">Attention</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Êtes-vous sûr de vouloir supprimer cet adhérent ?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Non
+                </button>
+                <a href="{{ path('admin_adherentsDelete', {id: adherent.id}) }}" role="button"
+                   class="btn btn-primary">Oui</a>
+            </div>
+        </div>
+    </div>
+</div>

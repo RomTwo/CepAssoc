@@ -7,7 +7,6 @@ use App\Transformer\ArrayToStringTransformer;
 use App\Transformer\DateToStringTransformer;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
-use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -60,7 +59,10 @@ class AccountAdminType extends AbstractType
                     'expanded' => false
                 )
             )
-            ->add('valid', SubmitType::class, array('label' => 'Modifier'));
+            ->add('valid', SubmitType::class, array(
+                    'label' => 'Modifier'
+                )
+            );
 
         $builder->get('roles')->addModelTransformer(new ArrayToStringTransformer());
         $builder->get('birthDate')->addModelTransformer(new DateToStringTransformer());

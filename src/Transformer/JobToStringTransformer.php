@@ -3,7 +3,6 @@
 namespace App\Transformer;
 
 use App\Entity\Job;
-use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\Form\DataTransformerInterface;
 use Symfony\Component\Form\Exception\TransformationFailedException;
 
@@ -18,7 +17,7 @@ class JobToStringTransformer implements DataTransformerInterface
      */
     public function transform($stringJob)
     {
-        if (null === $stringJob) {
+        if (is_null($stringJob)) {
             return NULL;
         }
 
@@ -42,7 +41,7 @@ class JobToStringTransformer implements DataTransformerInterface
      */
     public function reverseTransform($job)
     {
-        if (null === $job) {
+        if (is_null($job)) {
             return '';
         }
 

@@ -6,11 +6,9 @@ use App\Entity\Account;
 use App\Entity\Event;
 use App\Entity\EventManagement;
 use App\Entity\Job;
-use App\Form\EventManagerUserType;
 use App\Services\CompareDatetime;
 use \Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
 
 class EventController extends AbstractController
 {
@@ -21,9 +19,10 @@ class EventController extends AbstractController
         $eventsFollow = $this->getDoctrine()->getRepository(Event::class)->findByUser($account);
 
         return $this->render('events/index.html.twig', array(
-            'events' => $events,
-            'eventsFollow' => $eventsFollow
-        ));
+                'events' => $events,
+                'eventsFollow' => $eventsFollow
+            )
+        );
     }
 
     public function participate(Request $request, $id, CompareDatetime $compareDatetime)
@@ -91,10 +90,11 @@ class EventController extends AbstractController
             }
         }
         return $this->render('events/participate.html.twig', array(
-            'event' => $event,
-            'errors' => $errors,
-            'jobsEvent' => $event->getJobs()
-        ));
+                'event' => $event,
+                'errors' => $errors,
+                'jobsEvent' => $event->getJobs()
+            )
+        );
     }
 
     public function participateInfo($id)
@@ -106,9 +106,10 @@ class EventController extends AbstractController
         }
 
         $eventManager = $this->getDoctrine()->getRepository(EventManagement::class)->findBy(array(
-            'account' => $account,
-            'event' => $id
-        ));
+                'account' => $account,
+                'event' => $id
+            )
+        );
 
         if (is_null($eventManager)) {
             $this->addFlash('error', "L'évènement n'existe pas");
@@ -116,8 +117,9 @@ class EventController extends AbstractController
         }
 
         return $this->render('events/infoParticipateEvent.html.twig', array(
-            'eventManagers' => $eventManager,
-        ));
+                'eventManagers' => $eventManager,
+            )
+        );
 
     }
 

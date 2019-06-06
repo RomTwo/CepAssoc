@@ -2,14 +2,9 @@
 
 namespace App\Controller\administration;
 
-use App\Entity\Activity;
 use App\Entity\Category;
-use App\Entity\Adherent;
-use App\Entity\TimeSlot;
-use App\Form\AdminActivityTimeSlotType;
 use App\Form\AdminCategoryType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 
 class AdminActivitiesCategoryController extends AbstractController
@@ -33,10 +28,11 @@ class AdminActivitiesCategoryController extends AbstractController
 
             return $this->redirectToRoute('admin_categories');
         }
-        return $this->render('administration/category/categories.html.twig', [
-            'categories' => $categories,
-            'form' => $form->createView()
-        ]);
+        return $this->render('administration/category/categories.html.twig', array(
+                'categories' => $categories,
+                'form' => $form->createView()
+            )
+        );
 
     }
 
@@ -54,26 +50,28 @@ class AdminActivitiesCategoryController extends AbstractController
 
             return $this->redirectToRoute('admin_categories');
         }
- 
 
-        return $this->render('administration/category/categoryEdit.html.twig', [
-            'category' => $category,
-            'form' => $form->createView()
-        ]);
+
+        return $this->render('administration/category/categoryEdit.html.twig', array(
+                'category' => $category,
+                'form' => $form->createView()
+            )
+        );
 
 
     }
+
     public function delete(Request $request, $id)
     {
         $repository = $this->getDoctrine()->getRepository(Category::class);
         $category = $repository->find($id);
 
-        if($category){
+        if ($category) {
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($category);
             $entityManager->flush();
             $this->addFlash('sucess', "Categorie supprimée avec succès");
-        }else{
+        } else {
             $this->addFlash('error', "Categorie invalide");
         }
         return $this->redirectToRoute('admin_categories');

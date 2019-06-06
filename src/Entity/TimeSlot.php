@@ -26,6 +26,7 @@ class TimeSlot
 
     /**
      * @ORM\Column(type="integer")
+     * @Assert\NotNull(message="Veuiller renseigner le jour")
      * @Assert\Regex(
      *     pattern = "/0|1|2|3|4|5|6/",
      *     match = true,
@@ -36,11 +37,13 @@ class TimeSlot
 
     /**
      * @ORM\Column(type="time")
+     * @Assert\NotNull(message="Veuiller renseigner le date de début")
      */
     private $startTime;
 
     /**
      * @ORM\Column(type="time")
+     * @Assert\NotNull(message="Veuiller renseigner la date de fin")
      */
     private $endTime;
 
@@ -112,35 +115,36 @@ class TimeSlot
     {
         return $this->city;
     }
+
     public function getFullTime(): ?string
     {
         switch ($this->getDay()) {
             case 1:
-                $day="Lundi";
+                $day = "Lundi";
                 break;
             case 2:
-               $day="Mardi";
+                $day = "Mardi";
                 break;
             case 3:
-               $day="Mercredi";
+                $day = "Mercredi";
                 break;
             case 4:
-                $day="Jeudi";
+                $day = "Jeudi";
                 break;
             case 5:
-                $day="Vendredi";
+                $day = "Vendredi";
                 break;
             case 6:
-                $day="Samedi";
+                $day = "Samedi";
                 break;
             case 0:
-                $day="Dimanche";
+                $day = "Dimanche";
                 break;
         }
-if($this->getCity()!=null)
-       return $day." de ".$this->getStartTime()->format(' H:i')."/".$this->getEndTime()->format(' H:i')." à ".$this->getCity();
-else
-    return $day." de ".$this->getStartTime()->format(' H:i')."/".$this->getEndTime()->format(' H:i');
+        if ($this->getCity() != null)
+            return $day . " de " . $this->getStartTime()->format(' H:i') . "/" . $this->getEndTime()->format(' H:i') . " à " . $this->getCity();
+        else
+            return $day . " de " . $this->getStartTime()->format(' H:i') . "/" . $this->getEndTime()->format(' H:i');
     }
 
     public function setCity(string $city): self
@@ -190,16 +194,18 @@ else
         return $this;
     }
 
-    public function getAdherentsNumber(){
+    public function getAdherentsNumber()
+    {
         $cpt = 0;
-        for ($i=0; $i < sizeof($this->adherents); $i++) { 
-           if(!$this->adherents[$i]->getIsDeleted())
-            $cpt= $cpt +1;
+        for ($i = 0; $i < sizeof($this->adherents); $i++) {
+            if (!$this->adherents[$i]->getIsDeleted())
+                $cpt = $cpt + 1;
         }
         return $cpt;
     }
 
-    public function contains($adherent){
+    public function contains($adherent)
+    {
         return $this->adherents->contains($adherent);
     }
 }

@@ -14,7 +14,7 @@
                 </p>
             </div>
             <div class="col text-center">
-                <h1 class="text-light">Inscription</h1>
+                <h1 class="text-light">Création d'un compte</h1>
             </div>
             <div class="col">
             </div>
@@ -142,8 +142,8 @@
                         <div class="container-fluid">
                             <div class="row align-items-center">
                                 {{ form_widget(form.addAccountAdherent) }}
-                                <a><i class="fa fa-info-circle" data-toggle="tooltip"
-                                      data-original-title="Cette étape est optionnelle, il est possible de rejoindre l'association ultérieurement au sein du site internet."></i></a>
+                                <a class="ml-1"><i class="fa fa-info-circle" data-toggle="tooltip"
+                                                   data-original-title="Cette étape est optionnelle, il est possible de rejoindre l'association ultérieurement au sein du site internet."></i></a>
                             </div>
                         </div>
                     </div>
@@ -332,8 +332,8 @@
                                 <div class="tab-pane fade show active" id="nav-loisirs" role="tabpanel"
                                      aria-labelledby="nav-home-tab">
                                     <table id="activitiesSecteurLoisir"
-                                           class="table table-bordered table-striped table-responsive-lg"
-                                           style="width:100%">
+                                           name="activitiesSecteurLoisir"
+                                           class="table table-bordered table-striped table-responsive-lg w-100">
                                         <thead>
                                         <tr>
                                             <th>Nom</th>
@@ -369,10 +369,11 @@
                                         {% endfor %}
                                         </tbody>
                                     </table>
+                                    <input type="hidden" id="idsOfTimeSlots" name="idsOfTimeSlots" value="">
                                 </div>
                                 <div class="tab-pane fade" id="nav-competitif" role="tabpanel"
                                      aria-labelledby="nav-competitif-tab">
-                                    <table id="activitiesSecteurCompetitif" class="display" style="width:100%">
+                                    <table id="activitiesSecteurCompetitif w-100" class="display">
                                         <thead>
                                         <tr>
                                             <th>Nom</th>
@@ -787,7 +788,7 @@
     <script>
         grecaptcha.ready(function () {
             grecaptcha.execute('{{ recaptcha_key_site }}', {action: 'register'}).then(function (token) {
-                var recaptchaResponse = document.getElementById('recaptchaResponse');
+                let recaptchaResponse = document.getElementById('recaptchaResponse');
                 recaptchaResponse.value = token;
             });
         });

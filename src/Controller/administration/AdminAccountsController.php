@@ -6,7 +6,6 @@ use App\Entity\Account;
 use App\Form\AccountAdminType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class AdminAccountsController extends AbstractController
@@ -40,7 +39,7 @@ class AdminAccountsController extends AbstractController
         $oldRole = $account->getRoles();
         $errorRole = null;
 
-        if ($account !== null) {
+        if ($account) {
             $form = $this->createForm(AccountAdminType::class, $account);
             $form->handleRequest($request);
 
@@ -76,7 +75,7 @@ class AdminAccountsController extends AbstractController
         $manager = $this->getDoctrine()->getManager();
         $account = $manager->getRepository(Account::class)->find($id);
 
-        if ($account !== null) {
+        if ($account) {
             $manager->remove($account);
             $manager->flush();
             $this->addFlash('success', "Le compte vient d'être supprimé");

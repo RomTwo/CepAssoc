@@ -44,7 +44,7 @@ class AdminAdherentType extends AbstractType
             ])
             ->add('birthDate', DateType::class)
             ->add('isGAFJudge', ChoiceType::class, [
-                'choices'  => [
+                'choices' => [
                     'Oui' => true,
                     'Non' => false,
                 ],
@@ -54,10 +54,10 @@ class AdminAdherentType extends AbstractType
                 'attr' => [
                     'value' => 0,
                 ],
-                'required'   => false,
+                'required' => false,
             ])
             ->add('isGAMJudge', ChoiceType::class, [
-                'choices'  => [
+                'choices' => [
                     'Oui' => true,
                     'Non' => false,
                 ],
@@ -67,10 +67,10 @@ class AdminAdherentType extends AbstractType
                 'attr' => [
                     'value' => 0,
                 ],
-                'required'   => false,
+                'required' => false,
             ])
             ->add('isTeamGYMJudge', ChoiceType::class, [
-                'choices'  => [
+                'choices' => [
                     'Oui' => true,
                     'Non' => false,
                 ],
@@ -80,10 +80,10 @@ class AdminAdherentType extends AbstractType
                 'attr' => [
                     'value' => 0,
                 ],
-                'required'   => false,
+                'required' => false,
             ])
-            ->add('wantsAJudgeTraining',ChoiceType::class, [
-                'choices'  => [
+            ->add('wantsAJudgeTraining', ChoiceType::class, [
+                'choices' => [
                     'Oui' => true,
                     'Non' => false,
                 ],
@@ -140,7 +140,7 @@ class AdminAdherentType extends AbstractType
             ->add('professionRep2')
             ->add('phoneRep1', NumberType::class)
             ->add('phoneRep2')
-            ->add('paymentType', ChoiceType::class,[
+            ->add('paymentType', ChoiceType::class, [
                 'choices' => [
                     'Espèces' => "especes",
                     'Chèque' => "cheque",
@@ -158,41 +158,42 @@ class AdminAdherentType extends AbstractType
             ])
             ->add('medicalCertificateFile', FileType::class, array(
                 'attr' => [
-                    'placeholder' => $builder->getData()->getMedicalCertificateFile() != null ? $builder->getData()->getMedicalCertificateFile()->getName() : "",
+                    'placeholder' => $builder->getData()->getMedicalCertificateFile() ? $builder->getData()->getMedicalCertificateFile()->getName() : "",
                 ],
                 'required' => false,
                 'data_class' => Document::class,
             ))
             ->add('bulletinN2AllianzFile', FileType::class, array(
                 'attr' => [
-                    'placeholder' => $builder->getData()->getBulletinN2AllianzFile() != null ? $builder->getData()->getBulletinN2AllianzFile()->getName() : "",
+                    'placeholder' => $builder->getData()->getBulletinN2AllianzFile() ? $builder->getData()->getBulletinN2AllianzFile()->getName() : "",
                 ],
                 'required' => false,
                 'data_class' => Document::class,
             ))
             ->add('healthQuestionnaireFile', FileType::class, array(
                 'attr' => [
-                    'placeholder' => $builder->getData()->getHealthQuestionnaireFile() != null ? $builder->getData()->getHealthQuestionnaireFile()->getName() : "",
+                    'placeholder' => $builder->getData()->getHealthQuestionnaireFile() ? $builder->getData()->getHealthQuestionnaireFile()->getName() : "",
                 ],
                 'required' => false,
                 'data_class' => Document::class,
             ));
         $builder->get('medicalCertificateFile')->addEventListener(FormEvents::SUBMIT, function (FormEvent $event) {
-            if (null === $event->getData()) {
+            if (is_null($event->getData())) {
                 $event->setData($event->getForm()->getData());
             }
         });
         $builder->get('bulletinN2AllianzFile')->addEventListener(FormEvents::SUBMIT, function (FormEvent $event) {
-            if (null === $event->getData()) {
+            if (is_null($event->getData())) {
                 $event->setData($event->getForm()->getData());
             }
         });
         $builder->get('healthQuestionnaireFile')->addEventListener(FormEvents::SUBMIT, function (FormEvent $event) {
-            if (null === $event->getData()) {
+            if (is_null($event->getData())) {
                 $event->setData($event->getForm()->getData());
             }
         });
     }
+
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([

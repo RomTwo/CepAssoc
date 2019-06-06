@@ -49,7 +49,7 @@ class AdminEventsController extends AbstractController
         $manager = $this->getDoctrine()->getManager();
         $event = $manager->getRepository(Event::class)->find($id);
 
-        if ($event !== null) {
+        if ($event) {
             $form = $this->createForm(EventType::class, $event);
             $form->handleRequest($request);
 
@@ -83,7 +83,7 @@ class AdminEventsController extends AbstractController
         $manager = $this->getDoctrine()->getManager();
         $event = $manager->getRepository(Event::class)->find($id);
 
-        if ($event !== null) {
+        if ($event) {
             $manager->remove($event);
             $manager->flush();
             $this->addFlash('success', "L'évènement vient d'être supprimé");

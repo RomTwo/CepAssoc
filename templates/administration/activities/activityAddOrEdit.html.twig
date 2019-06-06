@@ -1,7 +1,5 @@
 {% extends 'administration/layout_admin.html.twig' %}
 
-{% form_theme form 'bootstrap_4_layout.html.twig' %}
-
 {% block title %}
     {% if isEdition is defined %}
         Modification de l'activité
@@ -12,6 +10,9 @@
 {% endblock %}
 
 {% block body %}
+    <div class="text-right mb-4">
+        <a href="{{ path('admin_activities') }}" class="btn btn-warning">Retour</a>
+    </div>
 
     {{ form_start(form) }}
     <div class="form-group row">
@@ -21,6 +22,9 @@
                 {{ form_widget(form.name) }}
             </div>
         </div>
+        <div class="col-sm-6">
+            {{ form_errors(form.name) }}
+        </div>
     </div>
     <div class="form-group row">
         <div class="col-sm-6 row">
@@ -29,68 +33,88 @@
                 {{ form_widget(form.price) }}
             </div>
         </div>
+        <div class="col-sm-6">
+            {{ form_errors(form.price) }}
+        </div>
     </div>
     <div class="form-group row">
         <div class="col-sm-6 row">
             <label for="inputEmail3" class="col-sm-2 col-form-label"> Date de début :</label>
             <div class="col-sm-10">
-                 {{ form_widget(form.startDate) }}
+                {{ form_widget(form.startDate) }}
             </div>
+        </div>
+        <div class="col-sm-6">
+            {{ form_errors(form.startDate) }}
         </div>
     </div>
     <div class="form-group row">
         <div class="col-sm-6 row">
             <label for="inputEmail3" class="col-sm-2 col-form-label">Type :</label>
             <div class="col-sm-10">
-                 {{ form_widget(form.type) }}
+                {{ form_widget(form.type) }}
             </div>
+        </div>
+        <div class="col-sm-6">
+            {{ form_widget(form.type) }}
         </div>
     </div>
     <div class="form-group row">
         <div class="col-sm-6 row">
             <label for="inputEmail3" class="col-sm-2 col-form-label"> Catégorie :</label>
             <div class="col-sm-10">
-                 {{ form_widget(form.category) }}
+                {{ form_widget(form.category) }}
             </div>
         </div>
+        <div class="col-sm-6">
+            {{ form_errors(form.category) }}
+        </div>
     </div>
-     <div class="form-group row">
+    <div class="form-group row">
         <div class="col-sm-12 row">
             <label for="inputEmail3" class="col-sm-12 col-form-label"> <strong>Créneaux :</strong></label>
-        </div>        
+        </div>
     </div>
-    <div id="collectionContainer" class ="form-group row" data-prototype="
+    <div id="collectionContainer" class="form-group row" data-prototype="
          {% filter escape %}
              {{ include('administration/activities/prototype.html.twig', { 'form': form.timeSlot.vars.prototype }) }}
          {% endfilter %}">
 
         {% for timeSlotForm in form.timeSlot %}
-        <div class="col-sm-12 col-md-6 col-lg-4  form-group row timeslot">
-            <div class="col-sm-12 row" style="margin-bottom: 5px;">
-                <label for="inputEmail3" class="col-sm-4 col-form-label"> Jour :</label>
-                <div class="col-sm-8">
-                     {{ form_widget(timeSlotForm.day) }}
+            <div class="col-sm-12 col-md-6 col-lg-4  form-group row timeslot">
+                <div class="col-sm-12 row mb-2">
+                    <label for="inputEmail3" class="col-sm-4 col-form-label"> Jour :</label>
+                    <div class="col-sm-8">
+                        {{ form_widget(timeSlotForm.day) }}
+                    </div>
+
+                </div>
+                <div class="col-sm-12 row mb-2">
+                    <label for="inputEmail3" class="col-sm-4 col-form-label"> Fin :</label>
+                    <div class="col-sm-8">
+                        {{ form_widget(timeSlotForm.startTime) }}
+                    </div>
+                    <div>
+                        {{ form_errors(timeSlotForm.startTime) }}
+                    </div>
+                </div>
+                <div class="col-sm-12 row mb-2">
+                    <label for="inputEmail3" class="col-sm-4 col-form-label"> Début :</label>
+                    <div class="col-sm-8">
+                        {{ form_widget(timeSlotForm.endTime) }}
+                    </div>
+                    <div class="col-sm-8">
+                        {{ form_errors(timeSlotForm.endTime) }}
+                    </div>
+
+                </div>
+                <div class="col-sm-12 row mb-2">
+                    <label for="inputEmail3" class="col-sm-4 col-form-label"> Ville :</label>
+                    <div class="col-sm-8">
+                        {{ form_widget(timeSlotForm.city) }}
+                    </div>
                 </div>
             </div>
-            <div class="col-sm-12 row" style="margin-bottom: 5px;">
-                <label for="inputEmail3" class="col-sm-4 col-form-label"> Fin :</label>
-                <div class="col-sm-8">
-                     {{ form_widget(timeSlotForm.startTime) }}
-                </div>
-            </div>
-            <div class="col-sm-12 row" style="margin-bottom: 5px;">
-                <label for="inputEmail3" class="col-sm-4 col-form-label"> Début :</label>
-                <div class="col-sm-8">
-                    {{ form_widget(timeSlotForm.endTime) }}
-                </div>
-            </div>
-             <div class="col-sm-12 row" style="margin-bottom: 5px;">
-                <label for="inputEmail3" class="col-sm-4 col-form-label"> Ville :</label>
-                <div class="col-sm-8">
-                     {{ form_widget(timeSlotForm.city) }}
-                </div>
-            </div>
-        </div>
         {% endfor %}
     </div>
 
@@ -110,10 +134,10 @@
     {{ encore_entry_script_tags('time') }}
     <script type="text/javascript">
         $(document).ready(function () { // On récupère la balise <div> en question qui contient l'attribut « data-prototype » qui nous intéresse.
-            var $container = $('div#collectionContainer');
+            let $container = $('div#collectionContainer');
 
             // On définit un compteur unique pour nommer les champs qu'on va ajouter dynamiquement
-            var index = $container.find(':input').length;
+            let index = $container.find(':input').length;
 
             // On ajoute un nouveau champ à chaque clic sur le lien d'ajout.
             $('#add_timeSlot').click(function (e) {
@@ -138,12 +162,12 @@
                 // Dans le contenu de l'attribut « data-prototype », on remplace :
                 // - le texte "__name__label__" qu'il contient par le label du champ
                 // - le texte "__name__" qu'il contient par le numéro du champ
-                var template = $container.attr('data-prototype').replace(/__name__label__/g, 'Créneau ' + (
+                let template = $container.attr('data-prototype').replace(/__name__label__/g, 'Créneau ' + (
                     index + 1
                 )).replace(/__name__/g, index);
 
                 // On crée un objet jquery qui contient ce template
-                var $prototype = $(template);
+                let $prototype = $(template);
 
                 // On ajoute au prototype un lien pour pouvoir supprimer la catégorie
                 addDeleteLink($prototype);
@@ -157,7 +181,7 @@
 
             // La fonction qui ajoute un lien de suppression d'une catégorie
             function addDeleteLink($prototype) { // Création du lien
-                var $deleteLink = $('<div class="col-sm-12 row"><div class="col-sm-12 text-right"><a href="#" class="btn btn-danger">Supprimer</a></div></div> ');
+                let $deleteLink = $('<div class="col-sm-12 row"><div class="col-sm-12 text-right"><a href="#" class="btn btn-danger">Supprimer</a></div></div> ');
                 // Ajout du lien
                 $prototype.append($deleteLink);
 

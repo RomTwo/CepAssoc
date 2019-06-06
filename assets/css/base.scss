@@ -1,0 +1,40 @@
+html {
+  height: 100%;
+}
+
+body {
+  padding-top: 56px;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  padding-top: 56px;
+}
+
+.content {
+  flex: 1 0 auto;
+  padding: 20px;
+}
+
+.footer {
+  flex-shrink: 0;
+  padding: 20px;
+}
+
+.navbar {
+  background-color: #8a020e !important;
+}
+
+footer {
+  background-color: #8a020e !important;
+
+}
+
+.btn-primary, .btn-primary:hover {
+  background-color: #c1030a !important;
+  border-color: #c1030a !important;
+
+}
+
+.btn-primary:focus {
+  box-shadow: 0 0 0 .2rem #ffc8ca !important;
+}
