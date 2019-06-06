@@ -30,6 +30,7 @@ Encore
     .addEntry('base', './assets/js/base.js')
     .addEntry('basePDF', './assets/js/basePDF.js')
     .addEntry('layout_admin', './assets/js/layout_admin.js')
+    .addEntry('registration', './assets/js/registration.js')
 
     // When enabled, Webpack "splits" your files into smaller pieces for greater optimization.
     .splitEntryChunks()
