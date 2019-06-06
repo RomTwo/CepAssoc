@@ -12,12 +12,23 @@ use Symfony\Component\HttpFoundation\Response;
 class JobController extends AbstractController
 {
 
+    /**
+     * Return all job present in the database
+     *
+     * @return object[]
+     */
     public function index()
     {
         $manager = $this->getDoctrine()->getManager();
         return $manager->getRepository(Job::class)->findAll();
     }
 
+    /**
+     * Add job with ajax request
+     *
+     * @param Request $request
+     * @return Response|static
+     */
     public function add(Request $request)
     {
         $name = $request->request->get('jobName');

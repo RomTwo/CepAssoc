@@ -18,6 +18,11 @@ use Symfony\Component\HttpFoundation\Request;
 class AdministrationController extends AbstractController
 {
 
+    /**
+     * Print the home page of the administration part
+     *
+     * @return Response
+     */
     public function home()
     {
         return $this->render('administration/home.html.twig');
@@ -87,14 +92,22 @@ class AdministrationController extends AbstractController
         }
     }
 
+    /**
+     * Return the list of adherent serialize in json
+     *
+     * @param $adherents
+     * @return bool|float|int|string
+     */
     public function getSerializeAdherents($adherents)
     {
         $classMetadataFactory = new ClassMetadataFactory(new AnnotationLoader(new AnnotationReader()));
 
+        // Convert the datetime in string format : d-m-Y
         $callback = function ($innerObject) {
             return $innerObject instanceof \DateTime ? $innerObject->format('d-m-Y') : '';
         };
 
+        // Manage the circular reference (the relationnship between entities)
         $defaultContext = [
             AbstractNormalizer::CIRCULAR_REFERENCE_HANDLER => function ($object) {
                 return $object->getName();

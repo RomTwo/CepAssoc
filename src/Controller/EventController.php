@@ -12,6 +12,10 @@ use Symfony\Component\HttpFoundation\Request;
 
 class EventController extends AbstractController
 {
+    /**
+     * Return all event
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
     public function index()
     {
         $account = $this->getCurrentUser();
@@ -25,6 +29,14 @@ class EventController extends AbstractController
         );
     }
 
+    /**
+     * Registered the userf participation on an event
+     *
+     * @param Request $request
+     * @param $id
+     * @param CompareDatetime $compareDatetime
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     */
     public function participate(Request $request, $id, CompareDatetime $compareDatetime)
     {
 
@@ -97,6 +109,11 @@ class EventController extends AbstractController
         );
     }
 
+    /**
+     * Return all event where the user is registered
+     * @param $id
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     */
     public function participateInfo($id)
     {
         $account = $this->getCurrentUser();
@@ -123,7 +140,12 @@ class EventController extends AbstractController
 
     }
 
-    function getCurrentUser()
+
+    /**
+     * Return the current user connected on the application (return user entity)
+     * @return null|object
+     */
+    public function getCurrentUser()
     {
         $currentUserEmail = $this->get('session')->get('_security.last_username');
         $account = $this->getDoctrine()->getRepository(Account::class)->findOneBy(array('email' => $currentUserEmail));

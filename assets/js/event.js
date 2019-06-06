@@ -1,8 +1,10 @@
+// Initialize the datatable
 $(document).ready(function () {
     $('#events').DataTable();
 });
 
 
+// This function permit to add job in event and add the checkbox field in form of event.
 $('#jobForm').submit(function (e) {
     e.preventDefault();
     let form_data = $(this).serialize();
@@ -29,6 +31,7 @@ $('#jobForm').submit(function (e) {
     })
 });
 
+// Permit to delete a document in event update part
 $(function () {
     $('.delDoc').click(function (e) {
         e.preventDefault();
@@ -51,6 +54,7 @@ $(function () {
     });
 });
 
+// Create an error message for the form (same format of bootstrap error message)
 $.createErrorMsg = function (msg) {
     return "<div class='row ml-1'>" +
         "<span class='invalid-feedback d-block'>" +
