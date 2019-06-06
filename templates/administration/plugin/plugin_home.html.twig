@@ -27,9 +27,9 @@
             <p id="lbl_sync">Aucune synchronisation en cours.</p>
             <i class=" fas fa-check-circle fa-10x text-success" id="sync_valid" style="display:none;"></i>
             <i class=" fas fa-times-circle fa-10x text-danger" id="sync_error" style="display:none;"></i>
-
-
             <img id="spinner_sync" src="{{ asset('build/spinner.gif') }}" style="display:none;">
+
+            <!-- Balises à ne pas supprimer ! elle servent a faire le lien entre le plugin et l'application web-->
             <button hidden id="a"></button>
             <button hidden id="sync"></button>
             <div hidden id="ids"></div>
@@ -41,7 +41,9 @@
 
 {% block javascripts %}
     <script>
-
+        /*
+        Ajout d'un listener sur la balise avec l'id init. Sera uniquement déclenché lorsque le javascript injecté par  le plugin l'activera (avec un .click() )
+        */
         $("#init").on("click", function () {
             $("#lbl_init").text("Initialisation en cours.");
             $("#lbl_init").css("color", "black");
@@ -50,6 +52,7 @@
             $("#init_valid").css("display", "none");
             $("#init_error").css("display", "none");
 
+            //timeout pour simuler un effet de traitement (effet PLACEBO)
             setTimeout(function () {
                 $("#lbl_init").text("Initialisation terminée.");
                 $("#spinner_init").css("display", "none");
@@ -60,30 +63,36 @@
 
         });
 
+        /*
+        Ajout d'un listener sur la balise avec l'id sync. Sera uniquement déclenché lorsque le javascript injecté par plugin l'activera (avec un .click() )
+        */
         $("#sync").on("click", function () {
+            //Changement de l'affichage
             $("#lbl_sync").text("Synchronisation en cours ...");
             $("#lbl_sync").css("color", "black");
             $("#spinner_sync").css("display", "inline");
             $("#sync_valid").css("display", "none");
             $("#sync_error").css("display", "none");
 
-
+            //envoi d'une requete afin de passer les adhérent de non inscrit a GestGym à inscrits.
             $.ajax({
                 url: '{{ path('admin_adherent_update_state') }}',
                 type: "POST",
                 dataType: "json",
                 data: {
+                    //Récupération des ids des adhérent. Ils ont été ajoutés par le plugin
                     "ids": $("#ids").text()
                 },
                 complete: function (jqXHR) {
                     switch (jqXHR.status) {
                         case 200:
+                            //Actualisation de la liste des adhérents (aussi appelés compétiteurs) 
                             let datas = JSON.parse(jqXHR.responseText);
-
                             $("#competiteur").text(datas.notSync);
-
+                            //Déclenchement du listener géré par le plugin (qui indique que tous c'est bien passé)
                             $("#a").click();
 
+                            //Modification de l'affichage
                             setTimeout(function () {
                                 const justSync = JSON.parse(datas.justSync);
                                 justSync.forEach(function (user) {
