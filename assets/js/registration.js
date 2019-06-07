@@ -311,7 +311,6 @@ function step4() {
     let $prix = 0;
     for (let [key, value] of $timeSlot) {
         $idsOfTimeSlots += key + "/";
-        alert($idsOfTimeSlots);
     }
     for (let [key, value] of $activity) {
         $prix = $prix + value;
