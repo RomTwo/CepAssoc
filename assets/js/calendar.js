@@ -1,44 +1,44 @@
 // Print a calendar
 $(function () {
     $('#calendar').fullCalendar({
-        locale: 'fr',
-        themeSystem: 'bootstrap4',
-        defaultView: 'agendaWeek',
-        timeFormat: 'H:mm',
+        locale: 'fr',               // Language use by the calendar
+        themeSystem: 'bootstrap4',  // theme use by the calendar
+        defaultView: 'agendaWeek',  // default view
+        timeFormat: 'H:mm',         // format of print date
         slotLabelFormat: ['H:mm'],
         businessHours: false,
-        editable: true,
+        editable: true,             // Allow to move the timeslot on the calendar
         allDaySlot: false,
-        header: {
+        header: {                   // Postion of the buttons
             left: 'title',
             right: 'agendaWeek,agendaDay',
             center: 'prev,next'
         },
-        visibleRange: function () {
+        visibleRange: function () {                     // Visible date on the calendar in function of the begin and end date of the event
             return {
                 start: moment($('#startDate').val()),
                 end: moment($('#endDate').val()),
             };
         },
-        validRange: function () {
+        validRange: function () {                       // Valid date where we can add a timeslot in function of the begin and end date of the event
             return {
                 start: moment($('#startDate').val()),
                 end: moment($('#endDate').val()),
             };
         },
-        dayRender: function (dayRenderInfo) {
+        dayRender: function (dayRenderInfo) {           // Change the color of day (not working)
             console.log(dayRenderInfo);
             if (moment(dayRenderInfo.date).isBetween($('#startDate').val(), $('#endDate').val(), null, '[]') !== true) {
                 dayRenderInfo.el.css('background-color', 'red');
             }
         },
-        buttonText: {
+        buttonText: {                  // Text of buttons
             today: "Ajourd'hui",
             month: 'Mois',
             week: 'Semaine',
             day: 'Jours'
         },
-        eventSources: [
+        eventSources: [                 // Get and print timeslots (send an ajax request at controller to get all timeslots for the event)
             {
                 url: $('#url').val(),
                 type: 'GET',
@@ -48,9 +48,9 @@ $(function () {
             }
         ],
         dayClick: function () {
-            $('#modal-view-event-add').modal();
+            $('#modal-view-event-add').modal();    // Action when the user click on the day calendar (appear a modal to add a timeslot)
         },
-        eventClick: function (info) {
+        eventClick: function (info) {              // Action when the user click on timeslot (appear modal where there is a description of the timeslot and many actions : edit, delete
             $('#person').text(info.person);
             $('#job').text(info.job);
             $('#description').text(info.description);
@@ -60,17 +60,17 @@ $(function () {
 
             $('#modal-view-event-desc').modal();
         },
-        eventResize: function (info) {
+        eventResize: function (info) {       // Action when the user resize a timeslot (update date of the timeslot, ajax request)
             $.updateDatetime(info);
         },
-        eventDrop: function (info) {
+        eventDrop: function (info) {        // Action when the user move a timeslot (update date of the timeslot, ajax request)
             $.updateDatetime(info);
         },
     })
 });
 
 // Add an event on calendar
-$('#addEventManager').submit(function (e) {
+$('#addEventManager').submit(function (e) {     // send ajax request when the user submit the timeslot add form
     e.preventDefault();
     let form_data = $(this).serialize();
     $.ajax({
@@ -91,7 +91,7 @@ $('#addEventManager').submit(function (e) {
 });
 
 // Submit the update form
-$('#updateEventManagerForm').submit(function (e) {
+$('#updateEventManagerForm').submit(function (e) {  // send ajax request when the user submit the timeslot update form
     e.preventDefault();
     let form_data = $(this).serialize();
     $.ajax({
@@ -111,7 +111,7 @@ $('#updateEventManagerForm').submit(function (e) {
 });
 
 // Delete an event on calendar
-$('#deleteEvent').click(function () {
+$('#deleteEvent').click(function () {   // send ajax request when the user delete a timeslot
     $.ajax({
         url: $('#deleteEvent').val(),
         type: 'POST',
@@ -188,6 +188,7 @@ $.updateDatetime = function (object) {
     })
 };
 
+// Create an error message for the form (same format of bootstrap error message)
 $.createErrorMsg = function (msg) {
     return "<div class='row ml-1'>" +
         "<span class='invalid-feedback d-block'>" +

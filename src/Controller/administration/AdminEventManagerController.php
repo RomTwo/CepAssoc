@@ -16,6 +16,12 @@ use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 class AdminEventManagerController extends AbstractController
 {
+    /**
+     * Return the form to add an event and an informations on the event
+     *
+     * @param $id
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     */
     public function index($id)
     {
         $event = $this->getDoctrine()->getRepository(Event::class)->find($id);
@@ -47,6 +53,12 @@ class AdminEventManagerController extends AbstractController
         );
     }
 
+    /**
+     * Return all timeslot add by users in this event and all jobs availaible for this event
+     *
+     * @param $id
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     */
     public function indexFilter($id)
     {
         $event = $this->getDoctrine()->getRepository(Event::class)->find($id);
@@ -67,9 +79,20 @@ class AdminEventManagerController extends AbstractController
         );
     }
 
+    /**
+     * This function is call by an ajax request. It's permit to add an event dynamically
+     *
+     * @param Request $request
+     * @param ValidatorInterface $validator
+     * @param CompareDatetime $compareDatetime
+     * @return JsonResponse
+     */
     public function add(Request $request, ValidatorInterface $validator, CompareDatetime $compareDatetime)
     {
+        // Check if the request is POST type
         if ($request->isMethod('POST')) {
+
+            // Get all parameters of the form
             $eventId = $request->request->get('idEvent');
             $personId = $request->request->get('person');
             $start = $request->request->get('start');
@@ -83,6 +106,7 @@ class AdminEventManagerController extends AbstractController
             $event = $manager->getRepository(Event::class)->find($eventId);
             $job = $manager->getRepository(Job::class)->find($jobId);
 
+            // Check if the datas is correct
             if (is_null($event)) {
                 return JsonResponse::create("L'évènement n'existe pas", 404);
             } elseif (is_null($account)) {
@@ -97,6 +121,7 @@ class AdminEventManagerController extends AbstractController
                 return JsonResponse::create("La date de fin doit être inférieur à la date de fin de l'évènement", 400);
             }
 
+            // Create an entity with informations entry by the user
             $eventManager = new EventManagement();
             $eventManager->setEvent($event);
             $eventManager->setAccount($account);
@@ -105,6 +130,7 @@ class AdminEventManagerController extends AbstractController
             $eventManager->setJob($job->getName());
             $eventManager->setDescription($description);
 
+            // Call all assert of the entity for check if all datas is correct
             $errors = $validator->validate($eventManager);
             if (count($errors) > 0) {
                 return JsonResponse::create($errors, 400);
@@ -112,13 +138,24 @@ class AdminEventManagerController extends AbstractController
             $manager->persist($eventManager);
             $manager->flush();
         }
-
+        // Return a success message if all it's good
         return JsonResponse::create('Ajout effectué', 200);
     }
 
+    /**
+     * This method is call by an ajax request. It's permit to update an event dynamically
+     *
+     * @param Request $request
+     * @param ValidatorInterface $validator
+     * @param CompareDatetime $compareDatetime
+     * @return JsonResponse
+     */
     public function update(Request $request, ValidatorInterface $validator, CompareDatetime $compareDatetime)
     {
+        // Check if the request is POST type
         if ($request->isMethod('POST')) {
+
+            // Get all parameters of the form
             $eventManagerId = $request->request->get('idEventManager');
             $personId = $request->request->get('person');
             $start = $request->request->get('start');
@@ -132,6 +169,7 @@ class AdminEventManagerController extends AbstractController
             $account = $manager->getRepository(Account::class)->find($personId);
             $job = $manager->getRepository(Job::class)->find($jobId);
 
+            // Check if the datas is correct
             if (is_null($eventManager)) {
                 return JsonResponse::create("L'évènement n'existe pas sur le calendrier", 404);
             } elseif (is_null($account)) {
@@ -152,16 +190,23 @@ class AdminEventManagerController extends AbstractController
             $eventManager->setJob($job->getName());
             $eventManager->setDescription($description);
 
+            // Call all assert of the entity for check if all datas is correct
             $errors = $validator->validate($eventManager);
             if (count($errors) > 0) {
                 return JsonResponse::create($errors, 400);
             }
-
             $manager->flush();
         }
+        // Return a success message if all it's good
         return JsonResponse::create('Mise à jour effectuée', 200);
     }
 
+    /**
+     * This method is call by an ajax request. It's permit to delete an event dynamically
+     *
+     * @param Request $request
+     * @return JsonResponse
+     */
     public function delete(Request $request)
     {
         $id = $request->request->get('id');
@@ -178,6 +223,13 @@ class AdminEventManagerController extends AbstractController
         return JsonResponse::create('Suppression terminée', 200);
     }
 
+    /**
+     * This method is call by an ajax request. This method return all timeslot add by users in this event and all jobs
+     * availaible for this event at json format to fill the js calendar.
+     *
+     * @param Request $request
+     * @return JsonResponse
+     */
     public function events(Request $request)
     {
         $id = $request->query->get('id');
@@ -207,8 +259,18 @@ class AdminEventManagerController extends AbstractController
 
     }
 
+    /**
+     * This method is call by an ajax request. It's permit to update just a date of event.
+     * This method is used when the user move the timeslot on the calendar with your mouse.
+     *
+     * @param Request $request
+     * @param ValidatorInterface $validator
+     * @param CompareDatetime $compareDatetime
+     * @return JsonResponse
+     */
     public function updateDatetime(Request $request, ValidatorInterface $validator, CompareDatetime $compareDatetime)
     {
+        // Get all data of the form
         $id = $request->request->get('id');
         $start = $request->request->get('start');
         $end = $request->request->get('end');
@@ -216,6 +278,7 @@ class AdminEventManagerController extends AbstractController
         $manager = $this->getDoctrine()->getManager();
         $eventManager = $manager->getRepository(EventManagement::class)->find($id);
 
+        // Check if dates is corrects
         if (!$compareDatetime->isSuperior($start, $end)) {
             return JsonResponse::create("La date de départ doit être inférieur à la date de fin", 400);
         } else if (is_null($eventManager)) {
@@ -225,6 +288,7 @@ class AdminEventManagerController extends AbstractController
         $eventManager->setStartDate(new \DateTime($start));
         $eventManager->setEndDate(new \DateTime($end));
 
+        // Invoke assert of the entity for check the type of data
         $errors = $validator->validate($eventManager);
         if (count($errors) > 0) {
             return JsonResponse::create($errors, 400);

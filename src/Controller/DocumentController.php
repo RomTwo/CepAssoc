@@ -10,6 +10,12 @@ use Symfony\Component\HttpFoundation\Request;
 
 class DocumentController extends AbstractController
 {
+    /**
+     * Delete a document (picture, files...) with ajax request
+     *
+     * @param Request $request
+     * @return JsonResponse
+     */
     public function delete(Request $request)
     {
         $id = $request->request->get('id');

@@ -35,15 +35,15 @@ class Utilitaires
         $adherent->setStatus("EN ATTENTE");
         $adherent->setAffiliateCode(md5(uniqid()));
 
-        if (!$adherent->getMedicalCertificateFile()) {
+        if ($adherent->getMedicalCertificateFile()) {
             $adherent->setMedicalCertificateFile(new Document($this->addFile($adherent->getMedicalCertificateFile()), $adherent->getMedicalCertificateFile()->getClientOriginalName()));
         }
 
-        if (!$adherent->getBulletinN2AllianzFile()) {
+        if ($adherent->getBulletinN2AllianzFile()) {
             $adherent->setBulletinN2AllianzFile(new Document($this->addFile($adherent->getBulletinN2AllianzFile()), $adherent->getBulletinN2AllianzFile()->getClientOriginalName()));
         }
 
-        if (!$adherent->getHealthQuestionnaireFile()) {
+        if ($adherent->getHealthQuestionnaireFile()) {
             $adherent->setHealthQuestionnaireFile(new Document($this->addFile($adherent->getHealthQuestionnaireFile()), $adherent->getHealthQuestionnaireFile()->getClientOriginalName()));
         }
 
@@ -52,15 +52,15 @@ class Utilitaires
 
     public function setFiles($adherent)
     {
-        if (!$adherent->getMedicalCertificateFile() && !$adherent->getMedicalCertificateFile() instanceof Document) {
+        if ($adherent->getMedicalCertificateFile() && !$adherent->getMedicalCertificateFile() instanceof Document) {
             $adherent->setMedicalCertificateFile(new Document($this->addFile($adherent->getMedicalCertificateFile()), $adherent->getMedicalCertificateFile()->getClientOriginalName()));
         }
 
-        if (!$adherent->getBulletinN2AllianzFile() && !$adherent->getBulletinN2AllianzFile() instanceof Document) {
+        if ($adherent->getBulletinN2AllianzFile() && !$adherent->getBulletinN2AllianzFile() instanceof Document) {
             $adherent->setBulletinN2AllianzFile(new Document($this->addFile($adherent->getBulletinN2AllianzFile()), $adherent->getBulletinN2AllianzFile()->getClientOriginalName()));
         }
 
-        if (!$adherent->getHealthQuestionnaireFile() && !$adherent->getHealthQuestionnaireFile() instanceof Document) {
+        if ($adherent->getHealthQuestionnaireFile() && !$adherent->getHealthQuestionnaireFile() instanceof Document) {
             $adherent->setHealthQuestionnaireFile(new Document($this->addFile($adherent->getHealthQuestionnaireFile()), $adherent->getHealthQuestionnaireFile()->getClientOriginalName()));
         }
 

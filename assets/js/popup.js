@@ -42,6 +42,7 @@ $(function () {
     $('.tool').tooltip();
 });
 
+// This function print a notification. This method is used in the event part in the calendar
 $.notification = function (icon, title, msg, type) {
     $.notify({
         // options

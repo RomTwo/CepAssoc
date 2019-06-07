@@ -12,6 +12,13 @@ use Symfony\Component\HttpFoundation\Request;
 class AdminEventsController extends AbstractController
 {
 
+    /**
+     * Return all events and add an event when the form add event is submit
+     *
+     * @param Request $request
+     * @param Utilitaires $utilitaires
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     */
     public function index(Request $request, Utilitaires $utilitaires)
     {
         $events = $this->getDoctrine()->getRepository(Event::class)->findAll();
@@ -24,6 +31,7 @@ class AdminEventsController extends AbstractController
             $files = $event->getDocuments()->toArray();
             $event->clearDocuments();
 
+            // Check if there is a upload files
             if (count($files['name']) > 0) {
                 for ($i = 0; $i < count($files['name']); $i++) {
                     $doc = new Document($utilitaires->addFile($files['name'][$i]), $files['name'][$i]->getClientOriginalName());
@@ -44,6 +52,14 @@ class AdminEventsController extends AbstractController
         );
     }
 
+    /**
+     * Modify an event
+     *
+     * @param Request $request
+     * @param $id
+     * @param Utilitaires $utilitaires
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     */
     public function update(Request $request, $id, Utilitaires $utilitaires)
     {
         $manager = $this->getDoctrine()->getManager();
@@ -57,6 +73,7 @@ class AdminEventsController extends AbstractController
                 $files = $event->getDocuments()->toArray();
                 $event->clearDocuments();
 
+                // Check if there is a upload files
                 if (count($files['name']) > 0) {
                     for ($i = 0; $i < count($files['name']); $i++) {
                         $doc = new Document($utilitaires->addFile($files['name'][$i]), $files['name'][$i]->getClientOriginalName());
@@ -78,6 +95,11 @@ class AdminEventsController extends AbstractController
         ));
     }
 
+    /**
+     * Delete an event
+     * @param $id
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     */
     public function delete($id)
     {
         $manager = $this->getDoctrine()->getManager();
