@@ -35,7 +35,7 @@ $('#account_zipCode').focusout(function () {
         },
         success: function (data) {
             $('#account_city option').remove();
-            for (var i in data["records"]) {
+            for (let i in data["records"]) {
                 commune = data["records"][i]["fields"]["nom_de_la_commune"];
                 $('#account_city').append(new Option(commune, commune));
             }
@@ -48,6 +48,6 @@ $(function () {
 });
 
 $(".custom-file-input").on("change", function () {
-    var fileName = $(this).val().split("\\").pop();
+    let fileName = $(this).val().split("\\").pop();
     $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
 });

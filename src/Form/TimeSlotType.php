@@ -3,6 +3,7 @@
 namespace App\Form;
 
 use App\Entity\TimeSlot;
+use App\Transformer\TimeToStringTransformer;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -30,10 +31,9 @@ class TimeSlotType extends AbstractType
             ->add('startTime')
             ->add('endTime')
             ->add('city', TextType::class, [
-                'required'=>false,
+                'required' => false,
                 'empty_data' => '',
-            ])
-        ;
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver)

@@ -2,7 +2,6 @@
 
 namespace App\Services;
 
-use App\Entity\Account;
 use Firebase\JWT\JWT;
 
 class GenerateToken

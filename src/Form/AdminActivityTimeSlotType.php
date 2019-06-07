@@ -1,12 +1,9 @@
 <?php
 
-
 namespace App\Form;
-
 
 use App\Entity\Activity;
 use App\Entity\Category;
-use App\Repository\CategoryRepository;
 use App\Transformer\DateToStringTransformer;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
@@ -31,34 +28,37 @@ class AdminActivityTimeSlotType extends AbstractType
                     )
                 )
             )
-            ->add('type', ChoiceType::class, [
-                'choices' => [
-                    'SECTEUR LOISIRS' => 'SECTEUR LOISIRS',
-                    'SECTEUR COMPETITIF' => 'SECTEUR COMPETITIF',
+            ->add('type', ChoiceType::class, array(
+                    'choices' => array(
+                        'SECTEUR LOISIRS' => 'SECTEUR LOISIRS',
+                        'SECTEUR COMPETITIF' => 'SECTEUR COMPETITIF',
 
-                ],
-                'multiple' => false,
-            ])
-
-            ->add('category', EntityType::class, [
-                'class' => Category::class,
-                'choice_label' => 'name',
-                "multiple" => false
-            ])
-            ->add('timeSlot', CollectionType::class, [
-                'entry_type' => TimeSlotType::class,
-                'allow_add' => true,
-                'allow_delete' => true
-            ]);
+                    ),
+                    'multiple' => false,
+                )
+            )
+            ->add('category', EntityType::class, array(
+                    'class' => Category::class,
+                    'choice_label' => 'name',
+                    "multiple" => false
+                )
+            )
+            ->add('timeSlot', CollectionType::class, array(
+                    'entry_type' => TimeSlotType::class,
+                    'allow_add' => true,
+                    'allow_delete' => true
+                )
+            );
         $builder->get('startDate')->addModelTransformer(new DateToStringTransformer());
 
     }
 
     public function configureOptions(OptionsResolver $resolver)
     {
-        $resolver->setDefaults([
-            'data_class' => Activity::class
-        ]);
+        $resolver->setDefaults(array(
+                'data_class' => Activity::class
+            )
+        );
     }
 
 }

@@ -35,7 +35,10 @@ class JobController extends AbstractController
         $job = $this->getDoctrine()->getRepository(Job::class)->findOneBy(array('name' => $name));
         $data = $this->get('serializer')->serialize($job, 'json');
 
-        return new Response($data, 200, array("Content-Type" => "application/json"));
+        return new Response($data, 200, array(
+                "Content-Type" => "application/json"
+            )
+        );
 
     }
 }

@@ -6,31 +6,38 @@
 {% endblock %}
 
 {% block body %}
-    <div class="text-right" style ="margin-bottom : 20px">
-        <button class="btn btn-outline-dark" id="allEmails">Copier mails de tous les participants à cette activité</button>
-         <a href="{{path('admin_activities')}}" class="btn btn-warning">Retour</a>
-    </div>   
+    <div class="text-right mb-4">
+        <button class="btn btn-outline-dark" id="allEmails">Copier mails de tous les participants à cette activité
+        </button>
+        <a href="{{ path('admin_activities') }}" class="btn btn-warning">Retour</a>
+    </div>
+
+    {% if timeSlots | length == 0 %}
+        <p>Aucuns créneaux d'affecté pour cette activité</p>
+    {% endif %}
 
     {% for timeSlot in timeSlots %}
-        <div class="card" style="margin-bottom : 20px;">
+        <div class="card mb-4">
             <div class="card-header">
-                <div style ="display : flex; flex-direction: row;" >
-                    <div style =" width: 100%">
+                <div class="d-flex flex-row">
+                    <div class="w-100">
                         <strong>Créneau du {{ timeSlot.getFullTime }} </strong>
                     </div>
-                    <div class="text-right" style =" width: 100%">
-                         Nombre de particiants : <strong>{{ timeSlot.getAdherentsNumber }}</strong>
+                    <div class="text-right w-100">
+                        Nombre de particiants : <strong>{{ timeSlot.getAdherentsNumber }}</strong>
                     </div>
                 </div>
             </div>
             <div class="card-body">
-                
-                <div class="container" style="margin-bottom: 30px;">
+
+                <div class="container mb-3">
                     <p><strong>Ajouter un adhérent à ce créneau : </strong></p>
-                    <form  method="post" id="form{{ loop.index0 }}" action={{ path('admin_activityAddAdherentToTimeSlot') }}>
+                    <form method="post" id="form{{ loop.index0 }}"
+                          action={{ path('admin_activityAddAdherentToTimeSlot') }}>
                         <div class="row">
                             <div class="col-sm-10">
-                                <select style="width: 100%" class="js-example-basic-multiple" name="states[]" multiple="multiple" hidden>
+                                <select style="width: 100%" class="js-example-basic-multiple" name="states[]"
+                                        multiple="multiple" hidden>
                                     {% for adherent in adherents %}
                                         {% if not timeSlot.contains(adherent) %}
                                             <option value="{{ adherent.id }}">{{ adherent.lastName }} {{ adherent.firstName }}</option>
@@ -42,37 +49,37 @@
                                 <input type="hidden" name="activity" id="activityId" value="{{ activity.id }}"/>
                             </div>
                             <div class="col-sm-2">
-                                <input type="submit" name="submit" class="btn btn-sm btn-outline-success" value="Ajouter" style="width : 100%"/>
+                                <input type="submit" name="submit" class="btn btn-sm btn-outline-success w-100"
+                                       value="Ajouter"/>
 
                             </div>
 
                         </div>
-                    
+
                     </form>
                 </div>
-            <div class="container" >    
+                <div class="container">
                     <p><strong>Adhérents particiants à ce créneau : </strong></p>
-           
-                    <table id="test" class="adherentsTimeSlot table table-striped table-bordered"
-                           style="width: 100%;"
+
+                    <table id="test" class="adherentsTimeSlot table table-striped table-bordered w-100"
                            role="grid"
                            aria-describedby="example_info">
                         <thead>
                         <tr role="row">
                             <th class="sorting_asc" tabindex="0" aria-controls="example" rowspan="1" colspan="1"
-                                style="width: 119px;" aria-sort="ascending"
+                                aria-sort="ascending"
                                 aria-label="lastName: activate to sort column descending">Nom
                             </th>
                             <th class="sorting_asc" tabindex="1" aria-controls="example" rowspan="1" colspan="1"
-                                style="width: 119px;" aria-sort="ascending"
+                                aria-sort="ascending"
                                 aria-label="firstName: activate to sort column descending">Prénom
                             </th>
                             <th class="sorting_asc" tabindex="2" aria-controls="example" rowspan="1" colspan="1"
-                                style="width: 119px;" aria-sort="ascending"
+                                aria-sort="ascending"
                                 aria-label="firstName: activate to sort column descending">Statut de l'inscription
                             </th>
                             <th class="sorting_asc" tabindex="3" aria-controls="example" rowspan="1" colspan="1"
-                                style="width: 119px;" aria-sort="ascending"
+                                aria-sort="ascending"
                                 aria-label="firstName: activate to sort column descending">Actions
                             </th>
                         </tr>
@@ -88,7 +95,7 @@
                                     <td>
                                         {{ adherent.firstName }}
                                     </td>
-                                    <td class= "email">
+                                    <td class="email">
                                         {{ adherent.emailRep1 }}
                                     </td>
                                     <td>
@@ -100,32 +107,31 @@
                         {% endfor %}
                         </tbody>
                     </table>
-            
-            </div>
+
+                </div>
 
             </div>
-            
-            
-
 
 
             <div class="card-footer text-right">
-            
-                <button class="timeSlotAdherentsEmailsButton btn btn-outline-dark btn-sm"> Copier mails des participants à ce créneau</button>
-           
+
+                <button class="timeSlotAdherentsEmailsButton btn btn-outline-dark btn-sm"> Copier mails des participants
+                    à ce créneau
+                </button>
+
             </div>
         </div>
-        
+
     {% endfor %}
 {% endblock %}
 
 
 {% block javascripts %}
-   
+
 
     <script>
         $(document).ready(function () {
-            $( ".adherentsTimeSlot" ).each(function( index ) {
+            $(".adherentsTimeSlot").each(function (index) {
                 console.log($(this));
                 $(this).DataTable({
                     language: window.datatable_french,
@@ -136,58 +142,41 @@
                     bInfo: false,
                     bAutoWidth: false,
                     pageLength: 4
-                    /*
-                    columnDefs: [
-                        {
-                            responsivePriority: 10001,
-                            targets: 4
-                        }, {
-                            responsivePriority: 1,
-                            targets: 5
-                        }, {
-                            responsivePriority: 1,
-                            targets: 0
-                        }, {
-                            responsivePriority: 1,
-                            targets: 1
-                        },
-                    ]
-                    */
                 });
             });
 
 
-            $( ".js-example-basic-multiple" ).each(function( index ) {
+            $(".js-example-basic-multiple").each(function (index) {
                 $(this).select2().change(function (event) {
-                    $(this).siblings( ".hidden_framework" ).val($(this).val());
+                    $(this).siblings(".hidden_framework").val($(this).val());
                 });
                 $(this).show();
             });
 
 
-            $( ".timeSlotAdherentsEmailsButton" ).each(function( index ) {
-                $(this).on('click',function(){
-                    var allEmails = "";
-                    $(this).closest(".card").find(".email").each(function(){
-                        allEmails+= $(this).text().trim() + ";";
+            $(".timeSlotAdherentsEmailsButton").each(function (index) {
+                $(this).on('click', function () {
+                    let allEmails = "";
+                    $(this).closest(".card").find(".email").each(function () {
+                        allEmails += $(this).text().trim() + ";";
                     });
-                copyTextToClipBoard(allEmails);
+                    copyTextToClipBoard(allEmails);
 
                 });
             });
 
             $('#allEmails').on('click', function (event) {
-                var allEmails = "";
-                $(this).closest("main").find(".email").each(function(){
-                    allEmails+= $(this).text().trim() + ";";
+                let allEmails = "";
+                $(this).closest("main").find(".email").each(function () {
+                    allEmails += $(this).text().trim() + ";";
                 });
                 copyTextToClipBoard(allEmails);
             });
 
-            function copyTextToClipBoard(text){
-                navigator.clipboard.writeText(text).then(function() {
+            function copyTextToClipBoard(text) {
+                navigator.clipboard.writeText(text).then(function () {
                     alert("Les emails sont dans votre presse papier.");
-                }, function() {
+                }, function () {
                     alert('Vous ne pouvez pas copier les mails dans votre presse papier(clipboard-write exception)');
                 });
             }

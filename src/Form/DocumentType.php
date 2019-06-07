@@ -23,8 +23,9 @@ class DocumentType extends AbstractType
 
     public function configureOptions(OptionsResolver $resolver)
     {
-        $resolver->setDefaults([
-            'data_class' => Document::class,
-        ]);
+        $resolver->setDefaults(array(
+                'data_class' => Document::class,
+            )
+        );
     }
 }

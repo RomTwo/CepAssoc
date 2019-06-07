@@ -5,8 +5,7 @@
 
 
 {% block body %}
-    <div
-            class="row">
+    <div class="row">
 
         <!-- Blog Entries Column -->
         <div class="col-md-8">
@@ -14,30 +13,30 @@
             <h1 class="my-4">
                 Mes inscriptions
             </h1>
-            {% if adherents | length == 0%}
+            {% if adherents | length == 0 %}
                 <p>Aucune inscription effectuée</p>
             {% endif %}
 
             {% for adherent in adherents %}
-                <div class="card text-left" style="margin-bottom : 20px;">
+                <div class="card text-left mb-3">
                     <div class="card-header">
-                        <div style="display : flex; flex-direction: row;">
-                            <div style=" width: 100%">
+                        <div class="d-flex flex-row">
+                            <div class="w-100">
                                 <strong>
                                     {{ adherent.firstName }}
                                     {{ adherent.lastName }}
                                 </strong>
 
                             </div>
-                            <div class="text-right" style="width: 100%">
+                            <div class="text-right w-100">
                                 Statut :
                                 {% if adherent.isDeleted == true %}
-                                    <span style="color:green">Inscription rejeté !</span>
+                                    <span class="text-success">Inscription rejeté !</span>
                                 {% else %}
                                     {% if adherent.status =="VALIDE" %}
-                                        <span style="color:green">Inscription validée</span>
+                                        <span class="text-success">Inscription validée</span>
                                     {% else %}
-                                        <span style="color:red">Inscription non validée</span>
+                                        <span class="text-danger">Inscription non validée</span>
                                     {% endif %}
                                 {% endif %}
                             </div>
@@ -108,9 +107,8 @@
 
             <!-- Button for add Code -->
             <div class="text-right">
-                <button aria-controls="collapseExample" aria-expanded="false" class="btn btn-primary btn-sm"
-                        data-target="#collapseCode" data-toggle="collapse" style="margin-top:20px; margin-bottom:20px"
-                        type="button">
+                <button aria-controls="collapseExample" aria-expanded="false" class="btn btn-primary btn-sm mt-3 mb-3"
+                        data-target="#collapseCode" data-toggle="collapse" type="button">
                     Ajouter un enfant via un code d'affiliation
                 </button>
             </div>
@@ -171,7 +169,7 @@
 
     <script>
         function myFunction(id) {
-            var copyText = document.getElementById("cible" + id);
+            let copyText = document.getElementById("cible" + id);
             copyText.select();
             document.execCommand("copy");
         }

@@ -16,7 +16,7 @@ class DatetimeToStringTransformer implements DataTransformerInterface
      */
     public function transform($datetime)
     {
-        if (null === $datetime) {
+        if (is_null($datetime)) {
             return '';
         }
 
@@ -37,7 +37,7 @@ class DatetimeToStringTransformer implements DataTransformerInterface
      */
     public function reverseTransform($stringDate)
     {
-        if (null === $stringDate) {
+        if (is_null($stringDate)) {
             return NULL;
         }
 

@@ -2,9 +2,7 @@
 
 namespace App\Controller\administration;
 
-use App\Entity\Account;
 use App\Entity\Adherent;
-use App\Entity\Document;
 use App\Form\AdminAdherentType;
 use Dompdf\Dompdf;
 use Dompdf\Options;
@@ -23,9 +21,10 @@ class AdminAdherentsController extends AbstractController
     {
         $repository = $this->getDoctrine()->getRepository(Adherent::class);
         $adherents = $repository->findAll();
-        return $this->render('administration/adherents/adherents.html.twig', [
-            'adherents' => $adherents,
-        ]);
+        return $this->render('administration/adherents/adherents.html.twig', array(
+                'adherents' => $adherents,
+            )
+        );
     }
 
     /**
@@ -52,10 +51,11 @@ class AdminAdherentsController extends AbstractController
             return $this->redirectToRoute('admin_adherents');
         }
 
-        return $this->render('administration/adherents/adherentsEdit.html.twig', [
-            'adherent' => $adherent,
-            'form' => $form->createView(),
-        ]);
+        return $this->render('administration/adherents/adherentsEdit.html.twig', array(
+                'adherent' => $adherent,
+                'form' => $form->createView(),
+            )
+        );
     }
 
     /**
@@ -69,11 +69,10 @@ class AdminAdherentsController extends AbstractController
         $entityManager = $this->getDoctrine()->getManager();
         $adherent = $repository->findOneById($id);
 
-        if ($adherent != null) {
+        if ($adherent) {
             $adherent->setIsDeleted(true);
             $entityManager->flush();
             $this->addFlash('success', $adherent->getFirstName() . " " . $adherent->getLastName() . " a été supprimé de la liste des adhérents");
-
         } else {
             $this->addFlash('error', "L'adhérent n'existe pas");
         }
@@ -95,7 +94,7 @@ class AdminAdherentsController extends AbstractController
         $adherent = $repository->findOneById($id);
         $new_status = $request->query->get('status');
 
-        if ($adherent != null && $new_status != null) {
+        if ($adherent && $new_status) {
             $adherent->setStatus($new_status);
             $entityManager->flush();
             $this->addFlash('success', "Le statut de " . $adherent->getFirstName() . " " . $adherent->getLastName() . " est maintenant de : " . $new_status);
@@ -119,7 +118,7 @@ class AdminAdherentsController extends AbstractController
         $adherent = $repository->findOneById($id);
         $new_status = $request->query->get('status');
 
-        if ($adherent != null && $new_status != null) {
+        if ($adherent && $new_status) {
             $adherent->setIsRegisteredInGestGym($new_status);
             $entityManager->flush();
             $this->addFlash('success', "Le statut GESTGYM de " . $adherent->getFirstName() . " " . $adherent->getLastName() . " est maintenant de : " . $new_status);
@@ -134,13 +133,14 @@ class AdminAdherentsController extends AbstractController
     /**
      * generate a pdf containing the adherent data
      * @param $id is the id of the adherent whose data we want to print
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
     public function generatePDF($id)
     {
         $repository = $this->getDoctrine()->getRepository(Adherent::class);
         $adherent = $repository->find($id);
 
-        if ($adherent != null) {
+        if ($adherent) {
             $html = $this->render('administration/adherents/generateAdherentsPDF.html.twig', [
                 'adherent' => $adherent,
             ])->getContent();
@@ -153,7 +153,6 @@ class AdminAdherentsController extends AbstractController
                 "Attachment" => true
             ]);
         } else {
-
             $this->addFlash('error', "Erreur dans la requête.");
             return $this->redirectToRoute("admin_adherents");
         }

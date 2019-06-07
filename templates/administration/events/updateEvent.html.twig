@@ -1,8 +1,12 @@
 {% extends 'administration/layout_admin.html.twig' %}
 
-{% block title %}Évènements{% endblock %}
+{% block title %}Mettre à jour l'évènement{% endblock %}
 
 {% block body %}
+    <div class="text-right mb-4">
+        <a href="{{ path('admin_events') }}" class="btn btn-warning">Retour</a>
+    </div>
+
     <div class="container mt-4">
         <div class="form-group pb-3">
             <div class="container-fluid ml-3 pt-2 pb-2">

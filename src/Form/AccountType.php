@@ -3,7 +3,6 @@
 namespace App\Form;
 
 use App\Entity\Account;
-use App\Entity\Adherent;
 use App\Transformer\DateToStringTransformer;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
@@ -86,18 +85,20 @@ class AccountType extends AbstractType
                     )
                 )
             )
-            ->add('addAccountAdherent', null, [
-                'label' => "Je suis gymnaste",
-                'data' => false,
-            ])
-            ->add('children', CollectionType::class, [
-                'entry_type' => AdherentAccountType::class,
-                'delete_empty' => true,
-                'required' => false,
-            ])
+            ->add('addAccountAdherent', null, array(
+                    'label' => "Je suis gymnaste",
+                    'data' => false,
+                )
+            )
+            ->add('children', CollectionType::class, array(
+                    'entry_type' => AdherentAccountType::class,
+                    'delete_empty' => true,
+                    'required' => false,
+                )
+            )
             ->addEventListener(
                 FormEvents::SUBMIT,
-                [$this, 'onSubmit']
+                array($this, 'onSubmit')
             )
             ->add('valid', SubmitType::class, array(
                 'label' => 'S\'inscrire',
@@ -117,47 +118,48 @@ class AccountType extends AbstractType
 
         $children = $data->getChildren();
 
-        if ($data->getFirstName() != null && $children[0]->getFirstNameRep1() == null) {
+        if ($data->getFirstName() && is_null($children[0]->getFirstNameRep1())) {
             $children[0]->setFirstName($data->getFirstName());
             $children[0]->setFirstNameRep1($data->getFirstName());
         }
 
-        if ($data->getLastName() != null && $children[0]->getLastNameRep1() == null) {
+        if ($data->getLastName() && is_null($children[0]->getLastNameRep1())) {
             $children[0]->setLastName($data->getLastName());
             $children[0]->setLastNameRep1($data->getLastName());
         }
 
-        if($children[0]->getBirthDate() == null){
+        if (is_null($children[0]->getBirthDate())) {
             $children[0]->setBirthDate($data->getBirthDate());
         }
 
-        if ($data->getEmail() != null && $children[0]->getEmailRep1() == null) {
+        if ($data->getEmail() && is_null($children[0]->getEmailRep1())) {
             $children[0]->setEmailRep1($data->getEmail());
         }
 
-        if ($data->getAddress() != null && $children[0]->getAddressRep1() == null) {
+        if ($data->getAddress() && is_null($children[0]->getAddressRep1())) {
             $children[0]->setAddressRep1($data->getAddress());
         }
 
-        if ($data->getZipCode() != null && $children[0]->getZipCodeRep1() == null) {
+        if ($data->getZipCode() && is_null($children[0]->getZipCodeRep1())) {
             $children[0]->setZipCodeRep1($data->getZipCode());
         }
 
-        if ($data->getSex() != null && $children[0]->getSex() == null) {
+        if ($data->getSex() && is_null($children[0]->getSex())) {
             $children[0]->setSex($data->getSex());
         }
 
-        if ($data->getCity() != null && $children[0]->getCityRep1() == null) {
+        if ($data->getCity() && is_null($children[0]->getCityRep1())) {
             $children[0]->setCityRep1($data->getCity());
         }
     }
 
     public function configureOptions(OptionsResolver $resolver)
     {
-        $resolver->setDefaults([
-            'data_class' => Account::class,
-            "allow_extra_fields" => true,
-        ]);
+        $resolver->setDefaults(array(
+                'data_class' => Account::class,
+                "allow_extra_fields" => true,
+            )
+        );
     }
 
 }

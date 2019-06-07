@@ -2,14 +2,10 @@
 
 {% block title %}Comptes{% endblock %}
 
-{% block specification %}
-    Gestion des comptes
-{% endblock %}
-
 {% block body %}
 
     <!-- DataTable -->
-    <table id="accounts" class="table table-striped table-bordered" style="width:100%">
+    <table id="accounts" class="table table-striped table-bordered w-100">
         <thead>
         <tr>
             <th>Prénom</th>
@@ -46,6 +42,8 @@
                     </span>
                 </td>
             </tr>
+            <!-- Modal delete -->
+            {% include('administration/accounts/modalAccount.html.twig') %}
         {% endfor %}
         </tbody>
         <tfoot>
@@ -63,11 +61,11 @@
         <tbody>
         <tr>
             <td class="gutter">
-                <div class="line number1 index0 alt2" style="display: none;">1</div>
+                <div class="line number1 index0 alt2 d-none">1</div>
             </td>
             <td class="code">
-                <div class="container" style="display: none;">
-                    <div class="line number1 index0 alt2" style="display: none;">&nbsp;</div>
+                <div class="container d-none">
+                    <div class="line number1 index0 alt2 d-none">&nbsp;</div>
                 </div>
             </td>
         </tr>
@@ -75,15 +73,8 @@
     </table>
 
 
-    <!-- Modal -->
-    {% for account in accounts %}
-        {% include('administration/accounts/modalAccount.html.twig') %}
-    {% endfor %}
 
 {% endblock %}
-
-
-
 
 {% block javascripts %}
     <script type="text/javascript">

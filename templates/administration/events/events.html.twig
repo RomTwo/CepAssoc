@@ -1,11 +1,11 @@
 {% extends 'administration/layout_admin.html.twig' %}
 
-{% block title %}Évènement{% endblock %}
+{% block title %}Évènements{% endblock %}
 
 {% block body %}
     <!-- Button who print the event form -->
-    <div class="row justify-content-center mb-2">
-        <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#addEvent"
+    <div class="text-right mb-4">
+        <button class="btn btn-outline-dark" type="button" data-toggle="collapse" data-target="#addEvent"
                 aria-expanded="false" aria-controls="addEvent">
             Ajouter un évènement
         </button>
@@ -21,7 +21,7 @@
     </div>
 
     <!-- DataTable -->
-    <table id="events" class="table table-striped table-bordered" style="width:100%">
+    <table id="events" class="table table-striped table-bordered w-100">
         <thead>
         <tr>
             <th>Nom</th>
@@ -53,6 +53,8 @@
                     </button>
                 </td>
             </tr>
+            <!-- Modal delete event -->
+            {% include('administration/events/modalDeleteEvent.html.twig') %}
         {% endfor %}
         </tbody>
         <tfoot>
@@ -71,23 +73,16 @@
         <tbody>
         <tr>
             <td class="gutter">
-                <div class="line number1 index0 alt2" style="display: none;">1</div>
+                <div class="line number1 index0 alt2 d-none">1</div>
             </td>
             <td class="code">
-                <div class="container" style="display: none;">
-                    <div class="line number1 index0 alt2" style="display: none;">&nbsp;</div>
+                <div class="container d-none">
+                    <div class="line number1 index0 alt2 d-none">&nbsp;</div>
                 </div>
             </td>
         </tr>
         </tbody>
     </table>
-
-    <!-- Modal -->
-    {% for event in events %}
-        {% include('administration/events/modalDeleteEvent.html.twig') %}
-    {% endfor %}
-
-
 
 {% endblock %}
 

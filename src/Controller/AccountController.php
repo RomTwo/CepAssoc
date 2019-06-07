@@ -6,7 +6,6 @@ use App\Entity\Account;
 use App\Entity\Activity;
 use App\Entity\Adherent;
 use App\Entity\Document;
-use App\Entity\HealthQuestionnaire;
 use App\Entity\TimeSlot;
 use App\Form\AccountType;
 use App\Services\CaptchaCheck;
@@ -16,7 +15,6 @@ use App\Services\Utilitaires;
 use Dompdf\Dompdf;
 use Dompdf\Options;
 use Firebase\JWT\JWT;
-use http\Header;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\HttpFoundation\Request;
@@ -69,7 +67,7 @@ class AccountController extends AbstractController
                     } else {
                         $account->removeChild($adherent);
                     }
-                    if (!$this->isValidateHealthQuestionnaire($adherent->getHealthQuestionnaire())) {
+                    if (!$utilitaires->isValidateHealthQuestionnaire($adherent->getHealthQuestionnaire())) {
                         $adherent->setHealthQuestionnaire(null);
                     } else {
                         $this->generatePDF($adherent);
@@ -92,13 +90,14 @@ class AccountController extends AbstractController
         }
 
         return $this->render('account/index.html.twig', array(
-            "form" => $form->createView(),
-            "errorMail" => $msg,
-            'activities' => $this->getDoctrine()
-                ->getRepository(Activity::class)
-                ->findAll(),
-            'days' => array('Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi')
-        ));
+                "form" => $form->createView(),
+                "errorMail" => $msg,
+                'activities' => $this->getDoctrine()
+                    ->getRepository(Activity::class)
+                    ->findAll(),
+                'days' => array('Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi')
+            )
+        );
     }
 
     /**
@@ -166,7 +165,12 @@ class AccountController extends AbstractController
             $this->addFlash('success', "Votre compte a été modifié");
             return $this->redirectToRoute('home');
         }
-        return $this->render('account/update.html.twig', array("form" => $form->createView(), "error" => $msg, "city" => $account->getCity()));
+        return $this->render('account/update.html.twig', array(
+                "form" => $form->createView(),
+                "error" => $msg,
+                "city" => $account->getCity()
+            )
+        );
     }
 
     /**
@@ -227,7 +231,7 @@ class AccountController extends AbstractController
             $manager = $this->getDoctrine()->getManager();
             $account = $manager->getRepository(Account::class)->findOneBy(['tokenForgetPass' => $token]);
 
-            if ($account !== null) {
+            if ($account) {
                 if ($request->isMethod('POST')) {
                     if ($request->request->get('password1') === $request->request->get('password2')
                         && preg_match('/^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[-+!*$@%_])([-+!*$@%_\w]{8,15})$/', $request->request->get('password1'))) {
@@ -247,7 +251,10 @@ class AccountController extends AbstractController
                         )
                     );
                 }
-                return $this->render('account/resetPassword.html.twig', array('token' => $token));
+                return $this->render('account/resetPassword.html.twig', array(
+                        'token' => $token
+                    )
+                );
             }
             return $this->redirectToRoute('error_404');
         } catch (\Exception $e) {
@@ -278,53 +285,12 @@ class AccountController extends AbstractController
     private
     function isValidate($adherent)
     {
-        if ($adherent->getSex() == null) {
+        if (is_null($adherent->getSex())) {
             return false;
         }
         return true;
     }
 
-    private
-    function isValidateHealthQuestionnaire($healthQuestionnaire)
-    {
-        if ($healthQuestionnaire->getHasMemberOfFamilyDiedHeartAttack() === null) {
-            return false;
-        }
-
-        if ($healthQuestionnaire->getHasPainChest() === null) {
-            return false;
-        }
-
-        if ($healthQuestionnaire->getHasAsthma() === null) {
-            return false;
-        }
-
-        if ($healthQuestionnaire->getHasLossOfConsciousness() === null) {
-            return false;
-        }
-
-        if ($healthQuestionnaire->getHasResumptionOfSportWithoutDoctorConsent() === null) {
-            return false;
-        }
-
-        if ($healthQuestionnaire->getHasMedicalTreatment() === null) {
-            return false;
-        }
-
-        if ($healthQuestionnaire->getHasBoneProblem() === null) {
-            return false;
-        }
-
-        if ($healthQuestionnaire->getHasHealthProblem() === null) {
-            return false;
-        }
-
-        if ($healthQuestionnaire->getHasNeedMedicalAdvice() === null) {
-            return false;
-        }
-
-        return true;
-    }
 
     private
     function generatePDF($adherent)
@@ -347,7 +313,7 @@ class AccountController extends AbstractController
     private
     function setPrice($adherent, $idsOfTimeSlot)
     {
-        if ($idsOfTimeSlot != null) {
+        if ($idsOfTimeSlot) {
             $activities = array();
             foreach ($idsOfTimeSlot as $value) {
                 $timeSlot = $this->getDoctrine()->getRepository(TimeSlot::class)->find($value);

@@ -24,6 +24,7 @@ class Document
      *     mimeTypes = {"application/pdf", "application/x-pdf"},
      *     mimeTypesMessage = "Le fichier doit être sous format PDF"
      * )
+     * @Assert\NotNull(message="Veuiller renseigner le nom du document")
      */
     private $name;
 
@@ -32,7 +33,6 @@ class Document
      * @ORM\JoinColumn(nullable=true)
      */
     private $event;
-
 
 
     /**
