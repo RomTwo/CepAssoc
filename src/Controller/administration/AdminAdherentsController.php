@@ -94,7 +94,7 @@ class AdminAdherentsController extends AbstractController
         $adherent = $repository->findOneById($id);
         $new_status = $request->query->get('status');
 
-        if ($adherent && $new_status) {
+        if ($adherent != null && $new_status != null) {
             $adherent->setStatus($new_status);
             $entityManager->flush();
             $this->addFlash('success', "Le statut de " . $adherent->getFirstName() . " " . $adherent->getLastName() . " est maintenant de : " . $new_status);
@@ -118,7 +118,7 @@ class AdminAdherentsController extends AbstractController
         $adherent = $repository->findOneById($id);
         $new_status = $request->query->get('status');
 
-        if ($adherent && $new_status) {
+        if ($adherent != null && $new_status != null) {
             $adherent->setIsRegisteredInGestGym($new_status);
             $entityManager->flush();
             $this->addFlash('success', "Le statut GESTGYM de " . $adherent->getFirstName() . " " . $adherent->getLastName() . " est maintenant de : " . $new_status);
