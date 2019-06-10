@@ -70,7 +70,7 @@ class AccountController extends AbstractController
                     if (!$utilitaires->isValidateHealthQuestionnaire($adherent->getHealthQuestionnaire())) {
                         $adherent->setHealthQuestionnaire(null);
                     } else {
-                        $this->generatePDF($adherent);
+                        $this->downloadPDF($adherent);
                     }
 
                     $manager = $this->getDoctrine()->getManager();
@@ -293,7 +293,7 @@ class AccountController extends AbstractController
 
 
     private
-    function generatePDF($adherent)
+    function downloadPDF($adherent)
     {
         $html = $this->render('account/generateHealthQuestionnairePDF.html.twig', [
             'adherent' => $adherent,
@@ -308,6 +308,31 @@ class AccountController extends AbstractController
         $fileId = md5(uniqid());
         file_put_contents('uploads/' . $fileId, $dompdf->output());
         $adherent->setHealthQuestionnaireFile(new Document($fileId, $adherent->getFirstName() . "_" . $adherent->getLastName() . "_QuestionnaireDeSante_CEPPoitiers.pdf"));
+    }
+
+    public
+    function generatePDF($id)
+    {
+
+        $repository = $this->getDoctrine()->getRepository(Adherent::class);
+        $adherent = $repository->find($id);
+
+        if ($adherent) {
+            $html = $this->render('account/generateHealthQuestionnairePDF.html.twig', [
+                'adherent' => $adherent,
+            ])->getContent();
+            $pdfOptions = new Options();
+            $dompdf = new Dompdf($pdfOptions);
+            $dompdf->loadHtml($html);
+            $dompdf->setPaper('A4', 'portrait');
+            $dompdf->render();
+            $dompdf->stream($adherent->getFirstName() . "_" . $adherent->getLastName() . "_QuestionnaireDeSante_CEPPoitiers.pdf", [
+                "Attachment" => true
+            ]);
+        } else {
+            $this->addFlash('error', "Erreur dans la requête.");
+            return $this->redirectToRoute("home");
+        }
     }
 
     private

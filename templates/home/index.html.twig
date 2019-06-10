@@ -47,10 +47,9 @@
                         <div class="text-right">
                             {% if adherent.healthQuestionnaireFile is not null %}
                                 <a class="btn btn-success"
-                                   href="{{ asset('uploads/' ~ adherent.healthQuestionnaireFile.id) }}"
+                                   href="{{ path('account_healthQuestionnairePDF', {id: adherent.id}) }}"
                                    data-toggle="tooltip" data-placement="top"
-                                   title="Télécharger le questionnaire de santé de l'adhérent"
-                                   download="{{ adherent.healthQuestionnaireFile.name }}">
+                                   title="Télécharger le questionnaire de santé de l'adhérent">
                                     <i class="far fa-file-pdf"></i>
                                 </a>
                             {% endif %}

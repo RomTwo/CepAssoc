@@ -67,9 +67,7 @@
 
                 {% else %}
                     <div class="col-sm-3">
-                        <a target="_blank" rel="noopener noreferrer"
-                           href="{{ asset('uploads/' ~ adherent.healthQuestionnaireFile.id) }}" class="btn btn-success"
-                           download="{{ adherent.healthQuestionnaireFile.name }}">Télécharger le document</a>
+                        <a href="{{ path('account_healthQuestionnairePDF', {id: adherent.id}) }}" class="btn btn-success">Télécharger le document</a>
                     </div>
                     <div class="col-sm-9">
                         {{ form_widget(form.healthQuestionnaireFile) }}
