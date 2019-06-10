@@ -104,7 +104,7 @@ class Utilitaires
     public
     function delimiter($data)
     {
-        if (!$data) {
+        if ($data) {
             $idsOfTimeSlot = explode("/", $data, -1);
             return $idsOfTimeSlot;
         }
