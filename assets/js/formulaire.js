@@ -2,15 +2,16 @@ require('../css/app.scss');
 
 $ = require('jquery');
 
+/*This part allows you to perform actions when the page is ready to use. In our case, there is a
+initialization of several items such as checkboxes that go back to "false"...*/
 $(window).ready(function () {
-    $("#accountStep").val(1);
+    $("#accountStep").val(1);//
     $('#account_addAccountAdherent').is(':checked') ? ($("#next").show(), $("#account_valid").hide()) : ($("#next").hide(), $("#account_valid").show());
-    $('input[name=\'selection\']').prop('checked', false);
+    $('input[name=\'selection[]\']').prop('checked', false);
     if (final()) {
         $(".buttonSubmit").removeAttr("disabled");
     } else {
         $(".buttonSubmit").attr("disabled", true);
-
     }
     $.ajax({
         url: 'https://datanova.legroupe.laposte.fr/api/records/1.0/search/',
@@ -124,6 +125,7 @@ $(window).ready(function () {
 
 });
 
+/*This function makes it possible to control the various regulations to accept to validate the registration.*/
 $('#acceptRules, #acceptRGPD').on('change', function () {
     if (final()) {
         $(".buttonSubmit").removeAttr("disabled");
@@ -132,10 +134,15 @@ $('#acceptRules, #acceptRGPD').on('change', function () {
     }
 });
 
+/*This function allows to know if the user to select the option which allows to register also as "gymnast".*/
 $('#account_addAccountAdherent').on('change', function () {
     $(this).is(':checked') ? ($("#next").show(), $("#account_valid").hide()) : ($("#next").hide(), $("#account_valid").show());
 });
 
+/*This function is important because it is the function that allows you to manage the steps of the form. This action is
+done on the "next" button. We define the number of steps that compose our form and update the number corresponding to
+the current step in the form. We do a "client" level check on the different steps to ensure that the user has all
+the input ...*/
 $('#next').click(function () {
     let numberOfStep = 6;
     let value = parseInt($("#accountStep").val());
@@ -163,6 +170,7 @@ $('#next').click(function () {
     }
 });
 
+/*When to that one, it's the same function but the "previous" button.*/
 $('#previous').click(function () {
     let value = parseInt($("#accountStep").val());
     if (value > 1) {
@@ -185,18 +193,21 @@ $('#previous').click(function () {
     }
 });
 
+/*This part corresponds to displaying the health questionnaires.*/
 $('#healthQuestionnaire').click(function () {
     $("#accountStep7").show();
     $("#accountStep6").hide();
     $("#buttonBottom").hide();
 });
 
+/*This part corresponds to displaying the health questionnaires.*/
 $('#healthQuestionnaireModificate').click(function () {
     $("#accountStep7").show();
     $("#accountStep6").hide();
     $("#buttonBottom").hide();
 });
 
+/*This one does a check and a display when pressing the "cancel" button.*/
 $('#cancelQuestionnaire').click(function () {
     $('div #healthQuestionnaireQuestion > div > div > input').each(function () {
         $('input[name="' + $(this).attr('name') + '"]').prop('checked', false);
@@ -209,49 +220,55 @@ $('#cancelQuestionnaire').click(function () {
     $(".healthQuestionnaireValidated").hide();
 });
 
+/*This one does a check and a display when pressing the "valid" button.*/
 $('#validQuestionnaire').click(function () {
-        let bool = true;
-        $('div #healthQuestionnaireQuestion > div > div > input').each(function () {
-            if (isValidationRadio($(this).attr('name'))) {
-                bool = false;
-            }
-            ;
-        });
-        if (bool) {
-            $("#accountStep7").hide();
-            $("#accountStep6").show();
-            $("#buttonBottom").show();
-            $("#healthQuestionnaireQuestionHelp").hide();
-            $(".healthQuestionnaireEmpty").hide();
-            $(".healthQuestionnaireValidated").show();
-        } else {
-            window.scrollTo(0, 0);
-            $("#healthQuestionnaireQuestionHelp").show();
+    let bool = true;
+    $('div #healthQuestionnaireQuestion > div > div > input').each(function () {
+        if (isValidationRadio($(this).attr('name'))) {
+            bool = false;
         }
+        ;
+    });
+    if (bool) {
+        $("#accountStep7").hide();
+        $("#accountStep6").show();
+        $("#buttonBottom").show();
+        $("#healthQuestionnaireQuestionHelp").hide();
+        $(".healthQuestionnaireEmpty").hide();
+        $(".healthQuestionnaireValidated").show();
+    } else {
+        window.scrollTo(0, 0);
+        $("#healthQuestionnaireQuestionHelp").show();
+    }
 });
 
-
+/*This function displays the "judge" step when the option has been validated.*/
 $('#juge').on('change', function () {
     $(this).is(':checked') ? $("#judgeDiv").show() : $("#judgeDiv").hide();
 });
 
+/*This function displays the "volontaire" step when the option has been validated.*/
 $('#volontaire').on('change', function () {
     $(this).is(':checked') ? $("#volunteerDiv").show() : $("#volunteerDiv").hide();
 });
 
-let $activity = new Map();
-let $timeSlot = new Map();
+let $activity = new Map();//Definition of a table to store activity ids and their prices.
+let $timeSlot = new Map();//Definition of a table to store timeSlot ids and their id's activity.
 
+/*This function makes it possible to manage the different activities selected with the datatables and makes it possible
+to display the price according to the clipped boxes.*/
 $("input[name='selection[]']").on('change', function () {
-    if($(this).is(':checked')){
-        $activity.set($(this).parent().parent().attr('value'), parseInt($("#price"+$(this).parent().parent().attr('value')).attr('value')));
-        $timeSlot.set($(this).parent().parent().attr('id'),$(this).parent().parent().attr('value'));
-    }else{
-        $activity.delete($(this).parent().parent().attr('value'));
-        $timeSlot.delete($(this).parent().parent().attr('id'));
+    if ($(this).is(':checked')) {
+        $activity.set($(this).parent().parent().attr('value'), parseInt($("#price" + $(this).parent().parent().attr('value')).attr('value')));//Put the id of activity and their price.
+        $timeSlot.set($(this).parent().parent().attr('id'), $(this).parent().parent().attr('value'));//Put the id of timeSlot and their id's activity.
+    } else {
+        $activity.delete($(this).parent().parent().attr('value'));//Remove the id of activity and their price.
+        $timeSlot.delete($(this).parent().parent().attr('id'));//Remove the id of timeSlot and their id's activity.
     }
 });
 
+/*This function is based on the switch-case because it allows to call the different functions that performs
+the verification of steps directly.*/
 function stepChoice(step) {
     switch (step) {
         case 'accountStep1':
@@ -275,6 +292,7 @@ function stepChoice(step) {
     }
 }
 
+/*This function corresponds to the verification of step 1.*/
 function step1() {
     let bool = true;
     (isEmpty('account[firstName]') ? ($("#firstNameHelp").show(), bool = false) : $("#firstNameHelp").hide());
@@ -287,28 +305,31 @@ function step1() {
     return bool;
 }
 
+/*This function corresponds to the verification of step 2.*/
 function step2() {
     let bool = true;
     (isEmpty('account[children][0][phoneRep1]') ? ($("#phoneRep1Help").show(), bool = false) : ((isValidationPhoneNumber('account[children][0][phoneRep1]')) ? ($("#phoneRep1Help").show(), bool = false) : $("#phoneRep1Help").hide()));
     (isEmpty('account[children][0][professionRep1]') ? ($("#professionRep1Help").show(), bool = false) : $("#professionRep1Help").hide())
-    //(isValidationList('account[children][0][nationality]') ? ($("#nationalityHelp").show(), bool = false) : $("#nationalityHelp").hide())
     return bool;
 }
 
-function step5(){
+/*This function corresponds to the verification of step 5. It allows to put the price according to the activities
+ choosen by the user.*/
+function step5() {
     let $idsOfTimeSlots = "";
     let $prix = 0;
-    for (let [key, value] of $timeSlot){
+    for (let [key, value] of $timeSlot) {
         $idsOfTimeSlots += key + "/";
     }
     for (let [key, value] of $activity) {
         $prix = $prix + value;
     }
-    $("#idsOfTimeSlots").val($idsOfTimeSlots);
-    $("#prix").text($prix);
+    $("#idsOfTimeSlots").val($idsOfTimeSlots);//Put the value of id.
+    $("#prix").text($prix);//Display the final price.
     return true;
 }
 
+/*This function corresponds to the verification of step 7.*/
 function step7() {
     let bool = true;
     (isValidationList('account[children][0][paymentType]') ? ($("#paymentTypeHelp").show(), bool = false) : $("#paymentTypeHelp").hide());
@@ -316,6 +337,7 @@ function step7() {
     return bool;
 }
 
+/*This function corresponds to the verification of final step with the verrification of checked rules.*/
 function final() {
     let bool = true;
     if (isValidationRadio('acceptRules')) {
@@ -329,14 +351,17 @@ function final() {
     return bool;
 }
 
+/*This function makes it possible to check that the input is not empty.*/
 function isEmpty(nameInput) {
     return !$('input[name="' + nameInput + '"]').val();
 }
 
+/*This function makes it possible to check that there is a radio button that has been selected.*/
 function isValidationRadio(nameRadio) {
     return !$('input[name="' + nameRadio + '"]:checked').val();
 }
 
+/*This function makes it possible to check that the input respects the regex corresponding to an email address.*/
 function isValidationEmail(nameEmail) {
     let pattern = new RegExp(/^[+a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/i);
     if (pattern.test($('input[name="' + nameEmail + '"]').val())) {
@@ -346,6 +371,7 @@ function isValidationEmail(nameEmail) {
     }
 }
 
+/*This function makes it possible to check that there is a element in list that has been selected.*/
 function isValidationList(nameList) {
     let bool = true;
     $.each($(nameList + ' option:selected'), function () {
@@ -354,6 +380,7 @@ function isValidationList(nameList) {
     return bool;
 }
 
+/*This function makes it possible to check that the input respects the regex corresponding to a ZipCode.*/
 function isValidationZipCode(nameZipCode) {
     let pattern = new RegExp(/^([0-9]{2}|(2A)|2B)[[0-9]{3}$/);
     if (pattern.test($('input[name="' + nameZipCode + '"]').val())) {
@@ -363,6 +390,7 @@ function isValidationZipCode(nameZipCode) {
     }
 }
 
+/*This function makes it possible to check that the input respects the regex corresponding to a phone number.*/
 function isValidationPhoneNumber(nameZipCode) {
     let pattern = new RegExp(/^(?:(?:\+)33|0)\s*[1-9](?:[\s.-]*\d{2}){4}$/);
     if (pattern.test($('input[name="' + nameZipCode + '"]').val())) {
@@ -372,6 +400,8 @@ function isValidationPhoneNumber(nameZipCode) {
     }
 }
 
+
+/*This function makes it possible to check that the input respects the regex corresponding to a password.*/
 function isValidationPassword(namePassword) {
     let pattern = new RegExp(/^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[-+!*$@%_])([-+!*$@%_\w]{8,15})$/);
     if (pattern.test($('input[name="' + namePassword + '"]').val())) {
@@ -381,6 +411,7 @@ function isValidationPassword(namePassword) {
     }
 }
 
+/*This function allows to recover all the cities corresponds to the zip code entered by the user.*/
 $('#account_zipCode').focusout(function () {
     $.ajax({
         url: 'https://datanova.legroupe.laposte.fr/api/records/1.0/search/',
@@ -402,8 +433,4 @@ $('#account_zipCode').focusout(function () {
             }
         }
     })
-});
-
-$(function () {
-    $('[data-toggle="tooltip"]').tooltip()
 });

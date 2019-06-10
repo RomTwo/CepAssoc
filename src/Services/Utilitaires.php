@@ -16,6 +16,7 @@ class Utilitaires
         $this->params = $params;
     }
 
+    /*This function is used to add the default fields for a member.*/
     public function setOtherFields($adherent)
     {
         $adherent->setRegistrationDate(new \DateTime());
@@ -50,6 +51,7 @@ class Utilitaires
         return $adherent;
     }
 
+    /*This function is used when adding new files for a member.*/
     public function setFiles($adherent)
     {
         if ($adherent->getMedicalCertificateFile() && !$adherent->getMedicalCertificateFile() instanceof Document) {
@@ -67,6 +69,7 @@ class Utilitaires
         return $adherent;
     }
 
+    /*This function validates the city field.*/
     public function isValidateCity($name)
     {
         if ($name == null) {
@@ -76,6 +79,7 @@ class Utilitaires
         return true;
     }
 
+    /*This function validates the health questionnaire.*/
     public function isValidateHealthQuestionnaire($healthQuestionnaire)
     {
         if (is_null($healthQuestionnaire->getHasMemberOfFamilyDiedHeartAttack()) ||
@@ -94,6 +98,7 @@ class Utilitaires
         return true;
     }
 
+    /*This function archives a file internally.*/
     public function addFile($file)
     {
         $fileId = md5(uniqid());
@@ -101,6 +106,7 @@ class Utilitaires
         return $fileId;
     }
 
+    /*This function makes it possible to separate the different ids during the selection of the slots.*/
     public
     function delimiter($data)
     {
