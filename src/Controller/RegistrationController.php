@@ -13,6 +13,7 @@ use Dompdf\Dompdf;
 use Dompdf\Options;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 class RegistrationController extends AbstractController
 {
@@ -51,7 +52,7 @@ class RegistrationController extends AbstractController
             if (!$utilitaires->isValidateHealthQuestionnaire($adherent->getHealthQuestionnaire())) {
                 $adherent->setHealthQuestionnaire(null);
             } else {
-                $this->generatePDF($adherent);
+                $this->downloadPDF($adherent);//Store the PDF.
             }
             $this->setPrice($adherent, $utilitaires->delimiter($request->request->get("idsOfTimeSlots")));
             $entityManager = $this->getDoctrine()->getManager();
@@ -74,8 +75,13 @@ class RegistrationController extends AbstractController
         );
     }
 
-
-    private function generatePDF($adherent)
+    /**
+     * Storage of the PDF.
+     *
+     * @param $adherent
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|Response
+     */
+    private function downloadPDF($adherent)
     {
         $html = $this->render('account/generateHealthQuestionnairePDF.html.twig', [
             'adherent' => $adherent,
@@ -92,6 +98,12 @@ class RegistrationController extends AbstractController
         $adherent->setHealthQuestionnaireFile(new Document($fileId, $adherent->getFirstName() . "_" . $adherent->getLastName() . "_QuestionnaireDeSante_CEPPoitiers.pdf"));
     }
 
+    /**
+     * Fix the price of the contribution according to the id of the timeSlot chosen by the member.
+     *
+     * @param $adherent
+     * @param $idsOfTimeSlot
+     */
     private function setPrice($adherent, $data)
     {
         if ($data) {

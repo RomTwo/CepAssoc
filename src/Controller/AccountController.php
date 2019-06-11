@@ -51,9 +51,9 @@ class AccountController extends AbstractController
                 if (!$this->findByEmail($account->getEmail())) {
                     if ($account->getAddAccountAdherent()) {
                         if ($this->isValidate($adherent)) {
-                            $utilitaires->setOtherFields($adherent);
+                            $utilitaires->setOtherFields($adherent);//Add the other fields dor the registration
                             $adherent->setRegistrationType("nouveau");
-                            $this->setPrice($adherent, $utilitaires->delimiter($request->request->get("idsOfTimeSlots")));
+                            $this->setPrice($adherent, $utilitaires->delimiter($request->request->get("idsOfTimeSlots")));//Set price with the differents choices of licence-holder
                         } else {
                             $msg = "Attention, il manque des informations pour devenir adhérent";
                             return $this->render('account/index.html.twig', array(
@@ -65,12 +65,12 @@ class AccountController extends AbstractController
                             ));
                         }
                     } else {
-                        $account->removeChild($adherent);
+                        $account->removeChild($adherent);//Remove child if the option "addChild" is not selected
                     }
                     if (!$utilitaires->isValidateHealthQuestionnaire($adherent->getHealthQuestionnaire())) {
                         $adherent->setHealthQuestionnaire(null);
                     } else {
-                        $this->downloadPDF($adherent);
+                        $this->downloadPDF($adherent);//Store the PDF.
                     }
 
                     $manager = $this->getDoctrine()->getManager();
@@ -282,6 +282,12 @@ class AccountController extends AbstractController
         return $account != null ? true : false;
     }
 
+    /**
+     * Server-side verification of the data entered by the member on the form.
+     *
+     * @param $adherent
+     * @return boolean
+     */
     private
     function isValidate($adherent)
     {
@@ -292,6 +298,12 @@ class AccountController extends AbstractController
     }
 
 
+    /**
+     * Storage of the PDF.
+     *
+     * @param $adherent
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|Response
+     */
     private
     function downloadPDF($adherent)
     {
@@ -310,6 +322,12 @@ class AccountController extends AbstractController
         $adherent->setHealthQuestionnaireFile(new Document($fileId, $adherent->getFirstName() . "_" . $adherent->getLastName() . "_QuestionnaireDeSante_CEPPoitiers.pdf"));
     }
 
+    /**
+     * Generation of the PDF that downloaded directly if the user has the rights.
+     *
+     * @param $id
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|Response
+     */
     public
     function generatePDF($id)
     {
@@ -334,6 +352,13 @@ class AccountController extends AbstractController
         }
     }
 
+    /**
+     * Search in an adherent array, belonging to an account, if there is the id passed in parameter.
+     *
+     * @param $adherents
+     * @param $id
+     * @return boolean
+     */
     private
     function searchChildren($adherents, $id){
         foreach($adherents as $struct) {
@@ -344,6 +369,12 @@ class AccountController extends AbstractController
         return false;
     }
 
+    /**
+     * Fix the price of the contribution according to the id of the timeSlot chosen by the member.
+     *
+     * @param $adherent
+     * @param $idsOfTimeSlot
+     */
     private
     function setPrice($adherent, $idsOfTimeSlot)
     {
