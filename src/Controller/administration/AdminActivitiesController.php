@@ -68,37 +68,46 @@ class AdminActivitiesController extends AbstractController
     }
 
     /**
-     * Update $activity
-     * @param Activity $activity
+     * Update the activity having $id as ID
+     * @param $id
      * @param Request $request
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
-    public function editActivity(Activity $activity, Request $request)
+    public function editActivity($id, Request $request)
     {
+        $entityManager = $this->getDoctrine()->getManager();
+        $activity = $entityManager->getRepository(Activity::class)->find($id);
+
         $form = $this->createForm(AdminActivityTimeSlotType::class, $activity);
         $form->handleRequest($request);
-        $entityManager = $this->getDoctrine()->getManager();
 
-        if ($form->isSubmitted() && $form->isValid()) {
+        // if the activit exists
+        if($activity) {
+            // if the form is valid
+            if ($form->isSubmitted() && $form->isValid()) {
 
-            $timeSlotsArray = $activity->getTimeSlot()->toArray();
+                $timeSlotsArray = $activity->getTimeSlot()->toArray();
+                foreach ($timeSlotsArray as $timeSlot) {
+                    $timeSlot->setActivity($activity);
+                    $entityManager->persist($timeSlot);
+                }
 
-            foreach ($timeSlotsArray as $timeSlot) {
-                $timeSlot->setActivity($activity);
-                $entityManager->persist($timeSlot);
+                $entityManager->flush();
+                $this->addFlash('success', "L'activité viens d'être modifiée");
+                return $this->redirectToRoute('admin_activities');
             }
 
-            $entityManager->flush();
-            $this->addFlash('success', "L'activité viens d'être modifiée");
+            return $this->render('administration/activities/activityAddOrEdit.html.twig', array(
+                    'activity' => $activity,
+                    'form' => $form->createView(),
+                    'isEdition' => true
+                )
+            );
+        }
+        else{
+            $this->addFlash('error', "L'activité n'existe pas");
             return $this->redirectToRoute('admin_activities');
         }
-
-        return $this->render('administration/activities/activityAddOrEdit.html.twig', array(
-                'activity' => $activity,
-                'form' => $form->createView(),
-                'isEdition' => true
-            )
-        );
 
     }
 

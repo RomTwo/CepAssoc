@@ -42,33 +42,38 @@ class AdminActivitiesCategoryController extends AbstractController
     }
 
     /**
-     * Update a category
-     * @param Category $category
+     * Update the category having $id as ID
+     * @param $id
      * @param Request $request
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
-    public function edit(Category $category, Request $request)
+    public function edit($id, Request $request)
     {
-        $form = $this->createForm(AdminCategoryType::class, $category);
+        $entityManager = $this->getDoctrine()->getManager();
+        $category = $entityManager->getRepository(Category::class)->find($id);
 
-        $form->handleRequest($request);
+        // if the category exists
+        if($category) {
+            $form = $this->createForm(AdminCategoryType::class, $category);
+            $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
+            // if the form is valid
+            if ($form->isSubmitted() && $form->isValid()) {
+                $entityManager->flush();
+                $this->addFlash('success', "La catégorie " . $category->getName() . "a été modifiée.");
+                return $this->redirectToRoute('admin_categories');
+            }
 
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->flush();
-            $this->addFlash('success', "La catégorie " . $category->getName() . "a été modifiée.");
-
+            return $this->render('administration/category/categoryEdit.html.twig', array(
+                    'category' => $category,
+                    'form' => $form->createView()
+                )
+            );
+        }
+        else{
+            $this->addFlash('error', "La catégorie n'existe pas");
             return $this->redirectToRoute('admin_categories');
         }
-
-
-        return $this->render('administration/category/categoryEdit.html.twig', array(
-                'category' => $category,
-                'form' => $form->createView()
-            )
-        );
-
 
     }
 
