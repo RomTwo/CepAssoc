@@ -1,39 +1,28 @@
 {% extends 'administration/basePDF.html.twig' %}
 {% block body %}
     <div class="center">
-        <h1>Récapitulatif de l'adhérent</h1>
-        <h2><u>{{ adherent.firstName }} {{ adherent.lastName }}</u></h2>
+        <h1>Récapitulatif de l'adhérent - <u>{{ adherent.firstName }} {{ adherent.lastName }}</u></h1>
     </div>
 
-    <p>TYPE D'INSCRIPTION : <b>{{ adherent.registrationType }}</b></p>
-    <p>DATE DE DEPOT DU DOSSIER : <b>{{ adherent.registrationDate|date('d-m-Y') }}</b></p>
+    <p>Type d'inscription : <b>{{ adherent.registrationType }}</b></p>
+    <p>Date du dépôt du dossier : <b>{{ adherent.registrationDate|date('d-m-Y') }}</b></p>
 
-    <hr/>
 
-    <div class="alert alert-secondary" role="alert">
-        <div class="row">
-            <div class="col">
-                Nom : {{ adherent.lastName }}
-            </div>
-            <div class="col">
-                Prénom : {{ adherent.firstName }}
-            </div>
-        </div>
-        <div class="row">
-            <div class="col">
-                Sexe : {{ adherent.sex }}
-            </div>
-            <div class="col">
-                Date de naissance : {{ adherent.birthDate|date('d-m-Y') }}
-            </div>
-        </div>
-    </div>
+    <p class="blue"><b>INFORMATIONS GÉNÉRALES</b></p>
+    <hr class="blue">
+    <p>Nom : <b>{{ adherent.lastName }}</b></p>
+    <p>Prénom : <b>{{ adherent.firstName }}</b></p>
+    <p>Sexe : <b>{{ adherent.sex }}</b></p>
+    <p>Date de naissance : <b>{{ adherent.birthDate|date('d-m-Y') }}</b></p>
+
+    <p class="blue"><b>REPRÉSENTANT LÉGAUX</b></p>
+    <hr class="blue">
     <div class="alert alert-secondary" role="alert">
         <table>
             <thead>
             <tr>
                 <th></th>
-                <th>Adhérent ou représentant légal</th>
+                <th>Adhérent ou représentant légal 1</th>
                 <th>Représentant légal 2</th>
             </tr>
             </thead>
@@ -71,140 +60,110 @@
             </tbody>
         </table>
     </div>
-    <hr/>
-    <h6>JUGES</h6>
-    <div class="alert alert-secondary" role="alert">
-        <div class="row">
-            <div class="col">
-                Juge GAF
-                {% if adherent.isGAFJudge %}
-                    <i class="fas fa-check"></i>
-                    Niveau : {{ adherent.GAFJudgeLevel }}
-                {% else %}
-                    <i class="fas fa-times"></i>
-                {% endif %}
 
-            </div>
-            <div class="col">
-                Juge GAM
-                {% if adherent.isGAMJudge %}
-                    <i class="fas fa-check"></i>
-                    Niveau : {{ adherent.GAMJudgeLevel }}
-                {% else %}
-                    <i class="fas fa-times"></i>
-                {% endif %}
-            </div>
-            <div class="col">
-                Juge TEAMGYM
-                {% if adherent.isTEAMGYMJudge %}
-                    <i class="fas fa-check"></i>
-                    Niveau : {{ adherent.TEAMGYMJudgeLevel }}
-                {% else %}
-                    <i class="fas fa-times"></i>
-                {% endif %}
-            </div>
+    <p class="blue"><b>JUGES</b></p>
+    <hr class="blue">
+
+    <p>Juge GAF :
+        {% if adherent.isGAFJudge %}
+            <span class="green">OUI</span> /
+            Niveau : {{ adherent.GAFJudgeLevel }}
+        {% else %}
+            <span class="red">NON</span>
+        {% endif %}</p>
+
+    <p>Juge GAM :
+        {% if adherent.isGAMJudge %}
+            <span class="green">OUI</span> /
+            Niveau : {{ adherent.GAMJudgeLevel }}
+        {% else %}
+            <span class="red">NON</span>
+        {% endif %}</p>
+
+    <p>Juge TEAMGYM :
+        {% if adherent.isTEAMGYMJudge %}
+            <span class="green">OUI</span> /
+            Niveau : {{ adherent.TEAMGYMJudgeLevel }}
+        {% else %}
+            <span class="red">NON</span>
+        {% endif %}</p>
+
+
+    <p>Je souhaite suivre une formation de juge :
+        {% if adherent.wantsAJudgeTraining %}
+            <span class="green">OUI</span>
+        {% else %}
+            <span class="red">NON</span>
+        {% endif %}</p>
+
+    <p class="blue"><b>BÉNÉVOLES</b></p>
+    <hr class="blue">
+    <p>Aide à l'entraînement : <b>{{ adherent.volunteerForTrainingHelp }}</b></p>
+
+    <p>Aide à la vie du club : <b>{{ adherent.volunteerForClubLife }}</b></p>
+
+    <p class="blue"><b>ADHÉSION</b></p>
+    <hr class="blue">
+    <p>Montant du réglement : <b>{{ adherent.registrationCost }} €</b></p>
+
+    <p>Mode de règlement : <b>{{ adherent.paymentType }}</b></p>
+
+    <p class="blue"><b>DROIT À L'IMAGE</b></p>
+    <hr class="blue">
+    <p>J'autorise le club à prendre et à diffuser des photos me concernant pour enrichir la
+        photothèque et le site internet du club :
+        {% if adherent.imageRight %}
+            <span class="green">OUI</span>
+        {% else %}
+            <span class="red">NON</span>
+        {% endif %}
+    </p>
+
+    {% if app.user.getRoles()[0] == "ROLE_SUPER_ADMIN" or app.user.getRoles()[0] == "ROLE_ADMIN" %}
+        <div class="page_break"></div>
+        <div class="center">
+            <h1>PARTIE RÉSERVÉE À L'ADMINISTRATION</h1>
         </div>
-        <div class="row">
-            <div class="col">
-                Je souhaite suivre une formation de juge :
-                {% if adherent.wantsAJudgeTraining %}
-                    <i class="fas fa-check"></i>
-                {% else %}
-                    <i class="fas fa-times"></i>
-                {% endif %}
-            </div>
-        </div>
-    </div>
-    <hr/>
-    <br>
-    <h6>BENEVOLES</h6>
-    <div class="alert alert-secondary" role="alert">
-        <div class="row">
-            <div class="col">
-                Aide à l'entraînement : {{ adherent.volunteerForTrainingHelp }}
-            </div>
-        </div>
-        <div class="row">
-            <div class="col">
-                Aide à la vie du club : {{ adherent.volunteerForClubLife }}
-            </div>
-        </div>
-    </div>
-    <hr/>
-    <h6>MONTANT DE LA COTISATION : <span class="text-danger"> {{ adherent.registrationCost }} €</span></h6>
-    <div class="alert alert-secondary" role="alert">
-        <div class="row">
-            <div class="col">
-                Mode de règlement : {{ adherent.paymentType }}
-            </div>
-        </div>
-        <div class="row">
-            <div class="col">
-                Engagement compétition :
-            </div>
-        </div>
-    </div>
-    <hr/>
-    <h6>DROIT A L'IMAGE</h6>
-    <div class="alert alert-secondary" role="alert">
-        <div class="row">
-            <div class="col">
-                J'autorise le club à prendre et à diffuser des photos me concernant pour enrichir la
-                photothèque et le site internet du club :
-                {% if adherent.imageRight %}
-                    <i class="fas fa-check"></i>
-                {% else %}
-                    <i class="fas fa-times"></i>
-                {% endif %}
-            </div>
-        </div>
-    </div>
-    <hr/>
-    <h6>PARTIE RESERVE A L'ADMINISTRATION</h6>
-    <div class="alert alert-secondary" role="alert">
-        <div class="row">
-            <div class="col">
-                Bulletin N°2 Allianz :
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-5">
-                Règlement cotisation :
-            </div>
-        </div>
-        <div class="row">
-            <div class="col">
-                Engagement compétition :
-            </div>
-        </div>
-        <div class="row">
-            <div class="col">
-                Mutation :
-            </div>
-        </div>
-        <div class="row">
-            <div class="col">
-                Dossier traité par :
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-5">
-                Saisie dans Gest'Gym :
-            </div>
-            <div class="col">
-                {% if adherent.isRegisteredInGestGym %}
-                    <i class="fas fa-check"></i>
-                {% else %}
-                    <i class="fas fa-times"></i>
-                {% endif %}
-            </div>
-        </div>
-        <div class="row">
-            <div class="col">
-                Licence 2019 :
-            </div>
-        </div>
-    </div>
-    </div>
-    </div>
+        <p class="blue"><b>STATUT</b></p>
+        <hr class="blue">
+        <p>Statut actuel : <b>{{ adherent.status }}</b></p>
+        <p> Saisie dans Gest'Gym :
+            {% if adherent.isRegisteredInGestGym %}
+                <span class="green">OUI</span>
+            {% else %}
+                <span class="red">NON</span>
+            {% endif %}
+        </p>
+
+        <p class="blue"><b>DOCUMENTS FOURNIS</b></p>
+        <hr class="blue">
+        <p>Certificat médical :
+            {% if adherent.hasMedicalCertificate %}
+                <span class="green">OUI</span>
+            {% else %}
+                <span class="red">NON</span>
+            {% endif %}</p>
+        <p>Bulletin N°2 Allianz :
+            {% if adherent.hasBulletinN2Allianz %}
+                <span class="green">OUI</span>
+            {% else %}
+                <span class="red">NON</span>
+            {% endif %}</p>
+        <p>Questionnaire de santé :
+            {% if adherent.hasHealthQuestionnaire %}
+                <span class="green">OUI</span>
+            {% else %}
+                <span class="red">NON</span>
+            {% endif %}</p>
+
+        <p class="blue"><b>AUTRES INFORMATIONS</b></p>
+        <hr class="blue">
+        <p>Licencié dans un autre club :
+            {% if adherent.isRegisteredInGestGym %}
+                <span class="green">OUI</span>
+            {% else %}
+                <span class="red">NON</span>
+            {% endif %}
+        </p>
+    {% endif %}
 {% endblock %}

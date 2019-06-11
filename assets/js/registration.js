@@ -1,3 +1,5 @@
+/*This part allows you to perform actions when the page is ready to use. In our case, there is a
+initialization of several items such as checkboxes that go back to "false"...*/
 $(window).ready(function () {
 
     if (final()) {
@@ -144,6 +146,7 @@ $(window).ready(function () {
     });
 });
 
+/*This function makes it possible to control the various regulations to accept to validate the registration.*/
 $('#acceptRules, #acceptRGPD').on('change', function () {
     if (final()) {
         $(".buttonSubmit").removeAttr("disabled");
@@ -152,11 +155,16 @@ $('#acceptRules, #acceptRGPD').on('change', function () {
     }
 });
 
+/*This function is important because it is the function that allows you to manage the steps of the form. This action is
+done on the "next" button. We define the number of steps that compose our form and update the number corresponding to
+the current step in the form. We do a "client" level check on the different steps to ensure that the user has all
+the input ...*/
 $('#nextRegistration').click(function () {
+    let numberOfStep = 5;
     let value = parseInt(document.getElementById('step').value);
-    if (value < 5) {
+    if (value < numberOfStep) {
         if (stepChoice("step" + value)) {
-            if (value == 4) {
+            if (value == numberOfStep - 1) {
                 $("#nextRegistration").hide();
             }
             $("#previousRegistration").show();
@@ -172,6 +180,7 @@ $('#nextRegistration').click(function () {
     $('#example').DataTable();
 });
 
+/*When to that one, it's the same function but the "previous" button.*/
 $('#previousRegistration').click(function () {
     let value = parseInt(document.getElementById('step').value);
     if (value > 1) {
@@ -187,28 +196,33 @@ $('#previousRegistration').click(function () {
     }
 });
 
-
+/*This function displays the "judge" step when the option has been validated.*/
 $('#juge').on('change', function () {
     let val = $(this).is(':checked') ? $("#judgeDiv").show() : $("#judgeDiv").hide();
 });
 
+/*This function displays the "volontaire" step when the option has been validated.*/
 $('#volontaire').on('change', function () {
     let val = $(this).is(':checked') ? $("#volunteerDiv").show() : $("#volunteerDiv").hide();
 });
 
-let $activity = new Map();
-let $timeSlot = new Map();
+let $activity = new Map();//Definition of a table to store activity ids and their prices.
+let $timeSlot = new Map();//Definition of a table to store timeSlot ids and their id's activity.
 
+/*This function makes it possible to manage the different activities selected with the datatables and makes it possible
+to display the price according to the clipped boxes.*/
 $("input[name='selection[]']").on('change', function () {
     if ($(this).is(':checked')) {
-        $activity.set($(this).parent().parent().attr('value'), parseInt($("#price" + $(this).parent().parent().attr('value')).attr('value')));
-        $timeSlot.set($(this).parent().parent().attr('id'), $(this).parent().parent().attr('value'));
+        $activity.set($(this).parent().parent().attr('value'), parseInt($("#price" + $(this).parent().parent().attr('value')).attr('value')));//Put the id of activity and their price.
+        $timeSlot.set($(this).parent().parent().attr('id'), $(this).parent().parent().attr('value'));//Put the id of timeSlot and their id's activity.
     } else {
-        $activity.delete($(this).parent().parent().attr('value'));
-        $timeSlot.delete($(this).parent().parent().attr('id'));
+        $activity.delete($(this).parent().parent().attr('value'));//Remove the id of activity and their price.
+        $timeSlot.delete($(this).parent().parent().attr('id'));//Remove the id of timeSlot and their id's activity.
     }
 });
 
+/*This function is based on the switch-case because it allows to call the different functions that performs
+the verification of steps directly.*/
 function stepChoice(step) {
     switch (step) {
         case 'step1':
@@ -224,6 +238,7 @@ function stepChoice(step) {
     }
 }
 
+/*This function corresponds to the verification of step 1.*/
 function step1() {
     let bool = true;
 
@@ -251,6 +266,7 @@ function step1() {
     return bool;
 }
 
+/*This function corresponds to the verification of step 3.*/
 function step3() {
     let bool = true;
 
@@ -306,6 +322,8 @@ function step3() {
     return bool;
 }
 
+/*This function corresponds to the verification of step 4. It allows to put the price according to the activities
+ choosen by the user.*/
 function step4() {
     let $idsOfTimeSlots = "";
     let $prix = 0;
@@ -320,6 +338,7 @@ function step4() {
     return true;
 }
 
+/*This function corresponds to the verification of final step with the verrification of checked rules.*/
 function final() {
     let bool = true;
     if (isValidationRadio('acceptRules')) {
@@ -333,14 +352,17 @@ function final() {
     return bool;
 }
 
+/*This function makes it possible to check that the input is not empty.*/
 function isEmpty(nameInput) {
     return !$('input[name="' + nameInput + '"]').val();
 }
 
+/*This function makes it possible to check that there is a radio button that has been selected.*/
 function isValidationRadio(nameRadio) {
     return !$('input[name="' + nameRadio + '"]:checked').val();
 }
 
+/*This function makes it possible to check that the input respects the regex corresponding to an email address.*/
 function isValidationList(nameList) {
     let bool = true;
     $.each($(nameList + ' option:selected'), function () {
@@ -349,6 +371,7 @@ function isValidationList(nameList) {
     return bool;
 }
 
+/*This function makes it possible to check that the input respects the regex corresponding to an email address.*/
 function isValidationEmail(nameEmail) {
     let pattern = new RegExp(/^[+a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/i);
     if (pattern.test($('input[name="' + nameEmail + '"]').val())) {
@@ -358,6 +381,7 @@ function isValidationEmail(nameEmail) {
     }
 }
 
+/*This function makes it possible to check that the input respects the regex corresponding to a ZipCode.*/
 function isValidationZipCode(nameZipCode) {
     let pattern = new RegExp(/^([0-9]{2}|(2A)|2B)[[0-9]{3}$/);
     if (pattern.test($('input[name="' + nameZipCode + '"]').val())) {
@@ -367,6 +391,7 @@ function isValidationZipCode(nameZipCode) {
     }
 }
 
+/*This function makes it possible to check that the input respects the regex corresponding to a phone number.*/
 function isValidationPhoneNumber(nameZipCode) {
     let pattern = new RegExp(/^(?:(?:\+)33|0)\s*[1-9](?:[\s.-]*\d{2}){4}$/);
     if (pattern.test($('input[name="' + nameZipCode + '"]').val())) {
@@ -376,6 +401,7 @@ function isValidationPhoneNumber(nameZipCode) {
     }
 }
 
+/*This function allows to recover all the cities corresponds to the zip code entered by the user.*/
 $('#adherent_zipCodeRep1').focusout(function () {
     $.ajax({
         url: 'https://datanova.legroupe.laposte.fr/api/records/1.0/search/',
@@ -395,6 +421,7 @@ $('#adherent_zipCodeRep1').focusout(function () {
     })
 });
 
+/*This function allows to recover all the cities corresponds to the zip code entered by the user.*/
 $('#adherent_zipCodeRep2').focusout(function () {
     $.ajax({
         url: 'https://datanova.legroupe.laposte.fr/api/records/1.0/search/',
@@ -419,19 +446,21 @@ $(".custom-file-input").on("change", function () {
     $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
 });
 
+/*This part corresponds to displaying the health questionnaires.*/
 $('#healthQuestionnaire').click(function () {
     $("#registrationStep6").show();
     $("#registrationStep5").hide();
     $("#buttonBottom").hide();
 });
 
+/*This part corresponds to displaying the health questionnaires.*/
 $('#healthQuestionnaireModificate').click(function () {
     $("#registrationStep6").show();
     $("#registrationStep5").hide();
     $("#buttonBottom").hide();
 });
 
-
+/*This one does a check and a display when pressing the "cancel" button.*/
 $('#cancelQuestionnaire').click(function () {
     $('div #healthQuestionnaireQuestion > div > div > input').each(function () {
         $('input[name="' + $(this).attr('name') + '"]').prop('checked', false);
@@ -444,6 +473,7 @@ $('#cancelQuestionnaire').click(function () {
     $(".healthQuestionnaireValidated").hide();
 });
 
+/*This one does a check and a display when pressing the "valid" button.*/
 $('#validQuestionnaire').click(function () {
     let bool = true;
     $('div #healthQuestionnaireQuestion > div > div > input').each(function () {

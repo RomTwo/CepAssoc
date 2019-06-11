@@ -2,9 +2,75 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"
-          integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
-    {{ encore_entry_link_tags('basePDF') }}
+    <style>
+        .center {
+            text-align: center;
+        }
+
+        .blue {
+            color: #1986AF;
+        }
+
+        .red {
+            color: red;
+        }
+
+        .green {
+            color: green;
+        }
+
+        .inline {
+            display: inline;
+        }
+
+        .center-div {
+            margin: auto;
+            width: 60%;
+            border: 2px solid black;
+            padding: 10px;
+        }
+
+        .mt-15 {
+            margin-top: 15px;
+        }
+
+        .mb-50 {
+            margin-bottom: 50px;
+        }
+
+        .page_break {
+            page-break-before: always;
+        }
+
+        h1, h4 {
+            font-family: arial, sans-serif;
+        }
+
+        p {
+            font-family: arial, sans-serif;
+            font-size: 11px;
+        }
+
+        li {
+            font-family: arial, sans-serif;
+            font-size: 11px;
+            margin-bottom: 15px;
+        }
+
+        table {
+            font-family: arial, sans-serif;
+            font-size: 11px;
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        td, th {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+
+    </style>
     {% block stylesheets %}
     {% endblock %}
 

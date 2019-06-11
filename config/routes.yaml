@@ -24,6 +24,12 @@ account_reset_password:
     path: /resetmotdepasse/{token}
     controller: App\Controller\AccountController::resetPassword
 
+account_healthQuestionnairePDF:
+      path: /profile/pdf/{id}
+      controller: App\Controller\AccountController::generatePDF
+      requirements:
+        id: ([0-9]*)
+
 ### Event routing ###
 event_index:
     path: /evenements
