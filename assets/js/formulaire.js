@@ -5,7 +5,7 @@ $ = require('jquery');
 /*This part allows you to perform actions when the page is ready to use. In our case, there is a
 initialization of several items such as checkboxes that go back to "false"...*/
 $(window).ready(function () {
-    $("#accountStep").val(1);//
+    $("#accountStep").val(1);
     $('#account_addAccountAdherent').is(':checked') ? ($("#next").show(), $("#account_valid").hide()) : ($("#next").hide(), $("#account_valid").show());
     $('input[name=\'selection[]\']').prop('checked', false);
     if (final()) {
@@ -139,12 +139,16 @@ $('#account_addAccountAdherent').on('change', function () {
     $(this).is(':checked') ? ($("#next").show(), $("#account_valid").hide()) : ($("#next").hide(), $("#account_valid").show());
 });
 
+
+
 /*This function is important because it is the function that allows you to manage the steps of the form. This action is
 done on the "next" button. We define the number of steps that compose our form and update the number corresponding to
 the current step in the form. We do a "client" level check on the different steps to ensure that the user has all
 the input ...*/
+
+let numberOfStep = 6;
+
 $('#next').click(function () {
-    let numberOfStep = 6;
     let value = parseInt($("#accountStep").val());
     if (value < numberOfStep) {
         if (stepChoice("accountStep" + value)) {
@@ -161,7 +165,7 @@ $('#next').click(function () {
                 $("#accountStep" + (value + 1)).show();
                 $("#accountStep").val(value + 1);
             }
-            $("#accountStep" + (value)).hide();
+           $("#accountStep" + (value)).hide();
             window.scrollTo(0, 0);
 
         }
@@ -192,6 +196,13 @@ $('#previous').click(function () {
         $("#previous").hide();
     }
 });
+
+/*To add a step in the form, you must add a div in the html by following the name "accountStep" and the number of
+the step. Then, it is necessary to modify the value of the number of step for the variable "numberOfStep" and it
+is necessary to add a new case for the switch-case of the function "stepChoice" which makes it possible to make checks.
+If the new step is in the middle of the form, it will be necessary to pay attention to the two conditions which make
+it possible to control the display of the form "judges" and "volunteers", it is enough to modify the number of step
+for these two forms.*/
 
 /*This part corresponds to displaying the health questionnaires.*/
 $('#healthQuestionnaire').click(function () {
