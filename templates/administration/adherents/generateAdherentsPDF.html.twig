@@ -119,6 +119,35 @@
         {% endif %}
     </p>
 
+    <div class="page_break"></div>
+
+    <div class="center">
+        <h1>ACTIVITÉS</h1>
+    </div>
+
+    <p class="blue"><b>ACTIVITÉS CHOISIES PAR L'ADHÉRENT</b></p>
+    <hr class="blue">
+    <table>
+        <thead>
+        <tr>
+            <th>Catégories</th>
+            <th>Activités</th>
+            <th>Créneaux</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for creneau in adherent.timeSlots %}
+            <tr>
+                <td>{{ creneau.activity.category.name }}</td>
+                <td>{{ creneau.activity.name }}</td>
+                <td>
+                    {{ creneau.getFullTime() }}
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
     {% if app.user.getRoles()[0] == "ROLE_SUPER_ADMIN" or app.user.getRoles()[0] == "ROLE_ADMIN" %}
         <div class="page_break"></div>
         <div class="center">
