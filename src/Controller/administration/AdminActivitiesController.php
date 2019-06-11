@@ -13,6 +13,10 @@ use Symfony\Component\HttpFoundation\Request;
 class AdminActivitiesController extends AbstractController
 {
 
+    /**
+     * Return all categories and activities
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
     public function index()
     {
         $repositoryActivity = $this->getDoctrine()->getRepository(Activity::class);
@@ -29,6 +33,11 @@ class AdminActivitiesController extends AbstractController
 
     }
 
+    /**
+     * Creates a new activity
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     */
     public function addActivity(Request $request)
     {
         $activity = new Activity();
@@ -38,7 +47,6 @@ class AdminActivitiesController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
-
 
             $timeSlotsArray = $activity->getTimeSlot()->toArray();
             $em->persist($activity);
@@ -59,6 +67,12 @@ class AdminActivitiesController extends AbstractController
         );
     }
 
+    /**
+     * Update $activity
+     * @param Activity $activity
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     */
     public function editActivity(Activity $activity, Request $request)
     {
         $form = $this->createForm(AdminActivityTimeSlotType::class, $activity);
@@ -88,6 +102,11 @@ class AdminActivitiesController extends AbstractController
 
     }
 
+    /**
+     * Delete the activity having $id as ID
+     * @param $id
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     */
     public function deleteActivity($id)
     {
         $repositoryActivity = $this->getDoctrine()->getRepository(Activity::class);
@@ -102,6 +121,11 @@ class AdminActivitiesController extends AbstractController
 
     }
 
+    /**
+     * Return the timeslots and adherents of the activity having $id as ID
+     * @param $id
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
     public function details($id)
     {
         $repositoryAdherant = $this->getDoctrine()->getRepository(Adherent::class);
@@ -119,6 +143,11 @@ class AdminActivitiesController extends AbstractController
         );
     }
 
+    /**
+     * Adding some adherents to the timeSlot using form parameters
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     */
     public function addToTimeSlot(Request $request)
     {
         $repositoryAdherant = $this->getDoctrine()->getRepository(Adherent::class);
@@ -126,12 +155,16 @@ class AdminActivitiesController extends AbstractController
         // get activity Id
         $activityId = $request->get("activity");
 
+        // $adherentsInOneLine contains all the ids of adherents selected
         $adherentsInOneLine = $request->get("hidden_framework");
+
+        // if it's empty
         if ($adherentsInOneLine === "") {
             $this->addFlash("error", "Rien a été rajouté");
             return $this->redirectToRoute('admin_activityDetails', ["id" => $activityId]);
         }
 
+        // putting each id in an array
         $adherents = explode(',', $adherentsInOneLine);
 
         //getting the timeSlot
@@ -141,6 +174,7 @@ class AdminActivitiesController extends AbstractController
 
         $em = $this->getDoctrine()->getManager();
 
+        // get the adherents and adding them to the timeSlot
         foreach ($adherents as $adherentName) {
             $adherent = $repositoryAdherant->findOneBy(['id' => $adherentName]);
             $adherent->addTimeSlot($timeSlot);
@@ -154,6 +188,14 @@ class AdminActivitiesController extends AbstractController
         );
     }
 
+    /**
+     * Delete the adherent having $adherentId as ID form the timeSlot having $timeSlotId as ID
+     * of the activity having $activityId as ID
+     * @param $activityId
+     * @param $timeSlotId
+     * @param $adherentId
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     */
     public function deleteFromTimeSlot($activityId, $timeSlotId, $adherentId)
     {
         $repositoryTimeSlot = $this->getDoctrine()->getRepository(TimeSlot::class);

@@ -11,6 +11,11 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 class HomeController extends AbstractController
 {
 
+    /**
+     * Return adherents followed
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
     public function index(Request $request)
     {
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');

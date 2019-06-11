@@ -10,6 +10,11 @@ use Symfony\Component\HttpFoundation\Request;
 class AdminActivitiesCategoryController extends AbstractController
 {
 
+    /**
+     * Return all the categories
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     */
     public function index(Request $request)
     {
 
@@ -36,6 +41,12 @@ class AdminActivitiesCategoryController extends AbstractController
 
     }
 
+    /**
+     * Update a category
+     * @param Category $category
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     */
     public function edit(Category $category, Request $request)
     {
         $form = $this->createForm(AdminCategoryType::class, $category);
@@ -61,7 +72,13 @@ class AdminActivitiesCategoryController extends AbstractController
 
     }
 
-    public function delete(Request $request, $id)
+    /**
+     * Delete a category thanks to its id
+     * @param Request $request
+     * @param $id
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     */
+    public function delete($id)
     {
         $repository = $this->getDoctrine()->getRepository(Category::class);
         $category = $repository->find($id);
