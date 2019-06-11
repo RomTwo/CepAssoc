@@ -46,12 +46,10 @@
                         <p>Date d'inscription :{{ adherent.registrationDate|date('d-m-Y') }}</p>
                         <div class="text-right">
                             {% if adherent.healthQuestionnaireFile is not null %}
-                                <a class="btn btn-success"
-                                   href="{{ path('account_healthQuestionnairePDF', {id: adherent.id}) }}"
-                                   data-toggle="tooltip" data-placement="top"
-                                   title="Télécharger le questionnaire de santé de l'adhérent">
-                                    <i class="far fa-file-pdf"></i>
-                                </a>
+                                <a data-toggle="tooltip" data-placement="top"
+                                   title="Télécharger le questionnaire de santé de l'adhérent"
+                                   href="{{ asset('uploads/' ~ adherent.healthQuestionnaireFile.id) }}" class="btn btn-success"
+                                   download="{{ adherent.healthQuestionnaireFile.name }}"><i class="far fa-file-pdf"></i></a>
                             {% endif %}
                             <button class="btn btn-primary btn-sm" data-toggle="modal"
                                     data-target="#exampleModal{{ adherent.id }}">Voir plus
