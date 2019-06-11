@@ -28,34 +28,40 @@ class AdminAdherentsController extends AbstractController
     }
 
     /**
-     *
-     * @param Adherent $adherent who is being modified
+     * @param $id
      * @param Request $request
      * @param Utilitaires $utilitaires
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
-    public function edit(Adherent $adherent, Request $request, Utilitaires $utilitaires)
+    public function edit($id, Request $request, Utilitaires $utilitaires)
     {
         $entityManager = $this->getDoctrine()->getManager();
-        $oldAdherent = $entityManager->getRepository(Adherent::class)->find($adherent->getId());
+        $adherent = $entityManager->getRepository(Adherent::class)->find($id);
 
-        $form = $this->createForm(AdminAdherentType::class, $adherent);
-        $form->handleRequest($request);
+        // if the adherent exists
+        if($adherent) {
+            $form = $this->createForm(AdminAdherentType::class, $adherent);
+            $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid() && $utilitaires->isValidateCity($request->request->get("admin_adherent_cityRep1"))) {
-            $adherent->setCityRep1($request->request->get("admin_adherent_cityRep1"));
-            $utilitaires->setFiles($oldAdherent, $adherent);
-            $entityManager->flush();
-            $this->addFlash('success', $adherent->getFirstName() . " " . $adherent->getLastName() . " a été modifié avec succès");
+            if ($form->isSubmitted() && $form->isValid() && $utilitaires->isValidateCity($request->request->get("admin_adherent_cityRep1"))) {
+                $adherent->setCityRep1($request->request->get("admin_adherent_cityRep1"));
+                $utilitaires->setFiles($adherent);
+                $entityManager->flush();
+                $this->addFlash('success', $adherent->getFirstName() . " " . $adherent->getLastName() . " a été modifié avec succès");
 
+                return $this->redirectToRoute('admin_adherents');
+            }
+
+            return $this->render('administration/adherents/adherentsEdit.html.twig', array(
+                    'adherent' => $adherent,
+                    'form' => $form->createView(),
+                )
+            );
+        }
+        else{
+            $this->addFlash('error', "L'adhérent n'existe pas");
             return $this->redirectToRoute('admin_adherents');
         }
-
-        return $this->render('administration/adherents/adherentsEdit.html.twig', array(
-                'adherent' => $adherent,
-                'form' => $form->createView(),
-            )
-        );
     }
 
     /**
