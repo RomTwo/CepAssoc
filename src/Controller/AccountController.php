@@ -313,11 +313,10 @@ class AccountController extends AbstractController
     public
     function generatePDF($id)
     {
-
-        $repository = $this->getDoctrine()->getRepository(Adherent::class);
-        $adherent = $repository->find($id);
-
-        if ($adherent) {
+        $user = $this->getUser();
+        $adherent = $this->getDoctrine()->getRepository(Adherent::class)->find($id);
+        $account = $this->getDoctrine()->getRepository(Account::class)->find($user->getId());
+        if ($adherent && ($this->searchChildren($account->getChildren(), $id) || (($user->getRoles()[0] == "ROLE_ADMIN") || ($user->getRoles()[0] == "ROLE_SUPER_ADMIN")))) {
             $html = $this->render('account/generateHealthQuestionnairePDF.html.twig', [
                 'adherent' => $adherent,
             ])->getContent();
@@ -333,6 +332,16 @@ class AccountController extends AbstractController
             $this->addFlash('error', "Erreur dans la requête.");
             return $this->redirectToRoute("home");
         }
+    }
+
+    private
+    function searchChildren($adherents, $id){
+        foreach($adherents as $struct) {
+            if ($id == $struct->getId()) {
+                return true;
+            }
+        }
+        return false;
     }
 
     private

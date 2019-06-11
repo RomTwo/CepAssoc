@@ -137,10 +137,11 @@ class AdminAdherentsController extends AbstractController
      */
     public function generatePDF($id)
     {
+        $user = $this->getUser();
         $repository = $this->getDoctrine()->getRepository(Adherent::class);
         $adherent = $repository->find($id);
 
-        if ($adherent) {
+        if ($adherent || (($user->getRoles()[0] == "ROLE_ADMIN") || ($user->getRoles()[0] == "ROLE_SUPER_ADMIN"))) {
             $html = $this->render('administration/adherents/generateAdherentsPDF.html.twig', [
                 'adherent' => $adherent,
             ])->getContent();
