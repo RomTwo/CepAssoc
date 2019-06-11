@@ -1,49 +1,49 @@
 home:
-    path: /profile/Accueil
+    path: /
     controller: App\Controller\HomeController::index
 
 registration:
-    path: /profile/Inscription
+    path: /inscription
     controller: App\Controller\RegistrationController::index
 
 
 ### Account routing ###
 account_add:
-    path: /profile/siteInscription
+    path: /siteinscription
     controller: App\Controller\AccountController::add
 
 account_update:
-    path: /profile/update
+    path: /compte/miseajour
     controller: App\Controller\AccountController::update
 
 account_forgot_password:
-    path: /profile/forgotPassword
+    path: /motdepasseoublie
     controller: App\Controller\AccountController::forgotPassword
 
 account_reset_password:
-    path: /profile/resetPassword/{token}
+    path: /resetmotdepasse/{token}
     controller: App\Controller\AccountController::resetPassword
 
 ### Event routing ###
 event_index:
-    path: /profile/events
+    path: /evenements
     controller: App\Controller\EventController::index
 
 event_participate:
-    path: /profile/participate/{id}
+    path: /evenements/participation/{id}
     controller: App\Controller\EventController::participate
 
 event_participate_infos:
-    path: /profile/participate/infos/{id}
+    path: /evenements/participations/infos/{id}
     controller: App\Controller\EventController::participateInfo
 
 ### Authentication routing ###
 security_connexion:
-    path: /profile/login
+    path: /connexion
     controller: App\Controller\SecurityController::login
 
 security_deconnexion:
-    path: /profile/logout
+    path: /deconnexion
 
 ### Administration routing ###
 admin_home:
